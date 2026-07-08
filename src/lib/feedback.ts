@@ -60,22 +60,22 @@ function buildSubmission(formData: FormData): FeedbackSubmission {
 }
 
 function validateSubmission(submission: FeedbackSubmission) {
-  if (submission.title.length < 3) return "Add a short title so this can be tracked.";
-  if (submission.description.length < 10) return "Add a little more detail about what happened.";
+  if (submission.title.length < 3) return "请添加一个简短标题，方便后续跟进。";
+  if (submission.description.length < 10) return "请补充一点发生经过，方便复核。";
   return null;
 }
 
 function buildDailyWorkItem(submission: FeedbackSubmission) {
   const lines = [
     `- [ ] ${submission.id} ${submission.title}`,
-    `  - Type: ${submission.kind}`,
-    `  - Source: Website feedback form`,
-    `  - Created: ${submission.createdAt}`,
-    `  - Device: ${submission.device || "Not specified"}`,
-    `  - Customer words: ${submission.customerWords || "Not specified"}`,
-    `  - Contact: ${submission.contact || "Not specified"}`,
-    `  - Next: Review sources, dedupe against cookbook articles, then create or update a Markdown recipe.`,
-    `  - Notes: ${submission.description.replace(/\n/g, " ")}`
+    `  - 类型: ${submission.kind}`,
+    `  - 来源: 网站反馈表单`,
+    `  - 创建时间: ${submission.createdAt}`,
+    `  - 设备: ${submission.device || "未填写"}`,
+    `  - 顾客原话: ${submission.customerWords || "未填写"}`,
+    `  - 联系方式: ${submission.contact || "未填写"}`,
+    `  - 下一步: 复核来源，与现有知识库条目去重，然后新增或更新 Markdown 条目。`,
+    `  - 备注: ${submission.description.replace(/\n/g, " ")}`
   ];
 
   return `${lines.join("\n")}\n`;
@@ -94,7 +94,7 @@ async function ensureStore() {
   } catch {
     await fs.writeFile(
       dailyWorkPath,
-      "# Daily Work Intake\n\nOpen items collected from the Apple Cookbook website. Review these during daily work automation and turn accepted items into cookbook articles or article updates.\n\n",
+      "# 每日工作收集\n\n这里记录从 Apple Cookbook 网站收集到的待处理事项。请在每日复核中整理，并将确认有效的内容转成知识库新条目或文章更新。\n\n",
       "utf8"
     );
   }

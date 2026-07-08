@@ -20,7 +20,7 @@ function SubmitButton() {
       className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-zinc-950 px-4 py-2 text-sm font-semibold text-white transition hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200"
     >
       <SendHorizonal className="h-4 w-4" />
-      {pending ? "Recording" : "Submit"}
+      {pending ? "正在记录" : "提交"}
     </button>
   );
 }
@@ -32,7 +32,7 @@ export function FeedbackForm({ initialTitle = "" }: { initialTitle?: string }) {
     <form action={formAction} className="space-y-5 rounded-lg border border-zinc-200 bg-white p-5 shadow-soft dark:border-zinc-800 dark:bg-zinc-950">
       <div>
         <label htmlFor="kind" className="text-sm font-medium text-zinc-950 dark:text-zinc-50">
-          Type
+          类型
         </label>
         <select
           id="kind"
@@ -40,15 +40,15 @@ export function FeedbackForm({ initialTitle = "" }: { initialTitle?: string }) {
           className="mt-2 w-full rounded-md border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm outline-none transition focus:border-zinc-500 dark:border-zinc-800 dark:bg-zinc-900"
           defaultValue="missing_problem"
         >
-          <option value="missing_problem">Need a new troubleshooting recipe</option>
-          <option value="article_feedback">Feedback on an existing recipe</option>
-          <option value="workflow_request">Retail workflow or escalation request</option>
+          <option value="missing_problem">需要新增故障排查条目</option>
+          <option value="article_feedback">反馈现有条目</option>
+          <option value="workflow_request">零售流程或升级处理请求</option>
         </select>
       </div>
 
       <div>
         <label htmlFor="title" className="text-sm font-medium text-zinc-950 dark:text-zinc-50">
-          Short title
+          简短标题
         </label>
         <input
           id="title"
@@ -56,7 +56,7 @@ export function FeedbackForm({ initialTitle = "" }: { initialTitle?: string }) {
           required
           minLength={3}
           defaultValue={initialTitle}
-          placeholder="Example: Apple Watch will not unlock Mac"
+          placeholder="例如：Apple Watch 无法解锁 Mac"
           className="mt-2 w-full rounded-md border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm outline-none transition placeholder:text-zinc-500 focus:border-zinc-500 dark:border-zinc-800 dark:bg-zinc-900"
         />
       </div>
@@ -64,19 +64,19 @@ export function FeedbackForm({ initialTitle = "" }: { initialTitle?: string }) {
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="customerWords" className="text-sm font-medium text-zinc-950 dark:text-zinc-50">
-            Customer wording
+            顾客原话
           </label>
           <input
             id="customerWords"
             name="customerWords"
-            placeholder="Example: 我的 Mac 解锁不了"
+            placeholder="例如：我的 Mac 解锁不了"
             className="mt-2 w-full rounded-md border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm outline-none transition placeholder:text-zinc-500 focus:border-zinc-500 dark:border-zinc-800 dark:bg-zinc-900"
           />
         </div>
 
         <div>
           <label htmlFor="device" className="text-sm font-medium text-zinc-950 dark:text-zinc-50">
-            Device or service
+            设备或服务
           </label>
           <input
             id="device"
@@ -89,7 +89,7 @@ export function FeedbackForm({ initialTitle = "" }: { initialTitle?: string }) {
 
       <div>
         <label htmlFor="description" className="text-sm font-medium text-zinc-950 dark:text-zinc-50">
-          Details
+            详细情况
         </label>
         <textarea
           id="description"
@@ -97,19 +97,19 @@ export function FeedbackForm({ initialTitle = "" }: { initialTitle?: string }) {
           required
           minLength={10}
           rows={6}
-          placeholder="What happened, what the customer expected, what has already been tried, and any exact error messages."
+          placeholder="发生了什么、顾客期望什么、已经尝试过哪些步骤，以及看到的完整报错信息。"
           className="mt-2 w-full resize-y rounded-md border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm leading-6 outline-none transition placeholder:text-zinc-500 focus:border-zinc-500 dark:border-zinc-800 dark:bg-zinc-900"
         />
       </div>
 
       <div>
         <label htmlFor="contact" className="text-sm font-medium text-zinc-950 dark:text-zinc-50">
-          Optional contact or note
+          可选联系方式或备注
         </label>
         <input
           id="contact"
           name="contact"
-          placeholder="Name, store, or where to follow up"
+          placeholder="姓名、门店，或后续跟进方式"
           className="mt-2 w-full rounded-md border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm outline-none transition placeholder:text-zinc-500 focus:border-zinc-500 dark:border-zinc-800 dark:bg-zinc-900"
         />
       </div>
@@ -125,7 +125,7 @@ export function FeedbackForm({ initialTitle = "" }: { initialTitle?: string }) {
               : "text-zinc-500 dark:text-zinc-400"
           }`}
         >
-          {state.message || "Submissions are recorded for daily review."}
+          {state.message || "提交内容会记录到每日复核清单。"}
         </p>
         <SubmitButton />
       </div>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Article } from "@/lib/cookbook";
+import { verificationLabels } from "@/lib/labels";
 
 export function ArticleCard({ article }: { article: Article }) {
   return (
@@ -10,7 +11,7 @@ export function ArticleCard({ article }: { article: Article }) {
       <div className="flex flex-wrap items-center gap-2">
         <span className="text-sm font-semibold text-zinc-950 dark:text-zinc-50">{article.title}</span>
         <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-xs text-zinc-600 dark:bg-zinc-900 dark:text-zinc-300">
-          {article.verification}
+          {verificationLabels[article.verification]}
         </span>
       </div>
       <p className="mt-2 line-clamp-3 text-sm text-zinc-600 dark:text-zinc-400">{article.excerpt}</p>
@@ -24,4 +25,3 @@ export function ArticleCard({ article }: { article: Article }) {
     </Link>
   );
 }
-

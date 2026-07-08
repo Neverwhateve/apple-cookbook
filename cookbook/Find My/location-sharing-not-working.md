@@ -1,17 +1,17 @@
 ---
-title: Location Sharing Not Working in Find My
+title: “查找”中的位置共享不可用
 slug: location-sharing-not-working
 device:
   - iPhone
   - iPad
   - Apple Watch
-category: Find My
+category: 查找
 tags:
-  - Find My
-  - Location Sharing
-  - Family Sharing
+  - 查找
+  - 位置共享
+  - 家人共享
   - Apple ID
-  - Privacy
+  - 隐私
 aliases:
   - My wife's location cannot be seen
   - Find My not updating
@@ -33,140 +33,139 @@ status: seed
 popular: true
 ---
 
-# Location Sharing Not Working in Find My
+# “查找”中的位置共享不可用
 
-Customer expects to see another person's live or recent location, but Find My shows no location, old location, "Location Not Available," or the wrong device.
-
----
-
-## Symptoms
-
-- "My wife's location cannot be seen."
-- "Find My says no location found."
-- "It only updates when they open the app."
-- "It shows their iPad at home, not their iPhone."
-- "Family Sharing is on but location is not showing."
-- "查找里面看不到家人的位置。"
+顾客希望看到另一位成员的实时或最近位置，但“查找”显示没有位置、位置很久不更新、提示“位置不可用”，或显示了错误设备的位置。
 
 ---
 
-## Possible Causes
+## 症状
 
-1. **The person is not sharing location with this Apple Account**
-   - Family Sharing does not always mean active location sharing to every family member.
-2. **Wrong device is set as the sharing device**
-   - Common when a customer owns both iPhone and iPad; Find My may share from the device selected as My Location.
-3. **Location Services, Find My, or Share My Location is off**
-   - Privacy settings can stop the location from being sent.
-4. **Network, power, or device state prevents update**
-   - Offline devices, low power, no cellular/Wi-Fi, or powered-off devices cannot report current location.
-5. **Apple Account or Family Sharing relationship changed**
-   - Sign-out, account changes, or family membership changes can break expectations.
+- “老婆位置看不到。”
+- “查找里显示找不到位置。”
+- “只有对方打开 App 才会更新。”
+- “显示的是家里的 iPad，不是对方的 iPhone。”
+- “家人共享开着，但位置没有显示。”
+- “查找里面看不到家人的位置。”
 
 ---
 
-## Official Apple Solution
+## 可能原因
 
-Verification: Official
-
-Steps:
-
-1. On the person who should be visible, open **Find My > Me** and turn on **Share My Location**.
-2. Confirm the device listed under **Sharing From** is the intended iPhone.
-3. If needed, tap **Use This iPhone as My Location**.
-4. To share directly, open **Find My > People > Add > Share My Location**, choose the contact, and choose the duration.
-5. For Family Sharing, go to **Settings > Family > Location Sharing** and confirm location sharing is enabled for the correct family member.
-6. Confirm Location Services are enabled and the device has network access.
-7. If the customer cannot access the Apple Account or trusted device, resolve account access before troubleshooting Find My.
-
-References:
-
-- Apple Support: Share your location in Find My on iPhone
-- Apple Support: Share your location with your Family Sharing group
-- Apple Support: Share your location with iPhone
-- Apple Personal Safety User Guide: Find My and location sharing
+1. **对方并没有向这个 Apple 账户共享位置**
+   - 加入家人共享并不等于自动向每位家庭成员共享位置。
+2. **共享位置的设备选错了**
+   - 顾客同时拥有 iPhone 和 iPad 时很常见，“查找”可能正在共享“我的位置”中选择的那台设备。
+3. **定位服务、“查找”或“共享我的位置”已关闭**
+   - 隐私设置会直接阻止设备发送位置。
+4. **网络、电量或设备状态导致无法更新**
+   - 离线、低电量、无蜂窝网络或 Wi-Fi、关机等状态都无法报告当前位置。
+5. **Apple 账户或家人共享关系发生变化**
+   - 退出登录、切换账户，或家庭成员关系变化，都可能打破原有共享预期。
 
 ---
 
-## Community Verified Workarounds
+## Apple 官方方案
 
-Unofficial
+验证级别：Apple 官方
 
-### Stop sharing, then share again from the correct device
+步骤：
 
-- Source: Repeated community and Retail troubleshooting pattern.
-- Success probability: Medium to high when the relationship exists but the People tab is stale.
-- Risks: The other person may receive a new sharing notification.
-- Notes: Do this only after confirming the correct Apple Account and sharing device.
-- Verification: Verified
+1. 在应该被看到位置的那台设备上，打开**查找 > 我**，开启**共享我的位置**。
+2. 确认**共享位置来自**下面显示的是预期的 iPhone。
+3. 如有需要，点按**使用这台 iPhone 作为我的位置**。
+4. 若要直接共享，打开**查找 > 联系人 > 添加 > 共享我的位置**，选择联系人和共享时长。
+5. 对于家人共享，进入**设置 > 家人 > 位置共享**，确认已为正确的家庭成员开启位置共享。
+6. 确认定位服务已开启，并且设备可以连接网络。
+7. 如果顾客无法访问 Apple 账户或可信设备，先解决账户访问问题，再继续排查“查找”。
 
-### Switch My Location to the iPhone
+参考来源：
 
-- Source: Official Apple setting plus repeated real-world issue pattern.
-- Success probability: High when Find My shows an iPad, old phone, or home location.
-- Risks: Low.
-- Notes: This is often the fastest fix when the customer says the location is "wrong" rather than missing.
-- Verification: Official
-
----
-
-## Retail Troubleshooting Flow
-
-1. Clarify whether the issue is **missing person**, **stale location**, or **wrong device location**.
-2. Check the sharing person's device first, not the viewer's device.
-3. Open **Find My > Me** and verify **Share My Location** and **Sharing From**.
-4. If the wrong device is listed, select **Use This iPhone as My Location**.
-5. Confirm the viewer is listed under People or Family Location Sharing.
-6. Check network and Location Services only after sharing relationship and device selection are confirmed.
-7. If account access is broken, move to Apple Account recovery guidance instead of continuing Find My steps.
+- Apple 支持：在 iPhone 上的“查找”中共享位置
+- Apple 支持：与家人共享群组共享位置
+- Apple 支持：通过 iPhone 共享位置
+- Apple 个人安全使用手册：“查找”和位置共享
 
 ---
 
-## Escalation
+## 已验证的非官方处理思路
 
-Contact Apple Support when:
+非官方
 
-- Apple Account sign-in, trusted number, or Family Sharing membership cannot be resolved in store.
-- The customer reports possible unwanted tracking, coercion, or safety concerns.
+### 停止共享后，从正确设备重新共享
 
-Visit Apple Store or repair provider when:
+- 来源：社区和零售场景中反复出现的排查模式。
+- 成功概率：当共享关系存在但“联系人”页面状态异常时，中到高。
+- 风险：对方可能收到新的共享通知。
+- 备注：先确认 Apple 账户和共享设备正确，再执行这一步。
+- 验证级别：已验证
 
-- GPS, cellular, or Wi-Fi symptoms affect Maps, Find My, and other location-based apps.
+### 将“我的位置”切换到 iPhone
 
-Repair or replace hardware when:
-
-- Diagnostics or repeated cross-app failures indicate location, cellular, or Wi-Fi hardware failure.
-
----
-
-## Related Problems
-
-- Family Sharing not working
-- Apple ID verification failed
-- Find My not updating
-- Screen Time family controls not working
+- 来源：Apple 官方设置说明，以及真实场景中反复出现的问题模式。
+- 成功概率：当“查找”显示 iPad、旧手机或家中位置时较高。
+- 风险：低。
+- 备注：当顾客说“位置不对”而不是“完全没有位置”时，这通常是最快的修复方向。
+- 验证级别：Apple 官方
 
 ---
 
-## Tags
+## 零售排查流程
 
-- Device: iPhone, iPad, Apple Watch
-- System: iOS, iPadOS, watchOS
-- Feature: Find My, Location Sharing, Family Sharing
-- Network: Wi-Fi, Cellular
-- Apple ID: Required
-- Continuity: Not applicable
-- Privacy: Location Services, sharing consent
-- Repair: Possible location or network hardware issue
-- Accessory: Not applicable
+1. 先区分问题是**看不到这个人**、**位置很久不更新**，还是**显示了错误设备的位置**。
+2. 优先检查共享者的设备，而不是查看者的设备。
+3. 打开**查找 > 我**，确认**共享我的位置**和**共享位置来自**。
+4. 如果显示了错误设备，选择**使用这台 iPhone 作为我的位置**。
+5. 确认查看者已出现在“联系人”或家人共享的位置共享设置中。
+6. 只有在共享关系和设备选择确认无误后，再检查网络和定位服务。
+7. 如果账户访问本身异常，转到 Apple 账户恢复流程，不要继续在“查找”里反复排查。
 
 ---
 
-## Metadata
+## 升级处理
 
-- Last Updated: 2026-07-08
-- Source Count: 4
-- Verification Level: Official
-- Supported Systems: Current iOS, iPadOS, watchOS versions that support Find My
-- Confidence Score: High
+联系 Apple 支持：
 
+- Apple 账户登录、可信号码或家人共享成员关系无法在店内解决。
+- 顾客提到可能存在被跟踪、胁迫或人身安全担忧。
+
+前往 Apple Store 或授权维修点：
+
+- 地图、“查找”和其他定位 App 都受到 GPS、蜂窝或 Wi-Fi 问题影响。
+
+维修或更换硬件：
+
+- 诊断或多个 App 的反复失败指向定位、蜂窝或 Wi-Fi 硬件故障。
+
+---
+
+## 相关问题
+
+- 家人共享不可用
+- Apple ID 验证失败
+- 查找位置不更新
+- 屏幕使用时间的家庭控制不可用
+
+---
+
+## 标签
+
+- 设备：iPhone、iPad、Apple Watch
+- 系统：iOS、iPadOS、watchOS
+- 功能：查找、位置共享、家人共享
+- 网络：Wi-Fi、蜂窝网络
+- Apple ID：必需
+- 连续互通：不适用
+- 隐私：定位服务、共享同意
+- 维修：可能涉及定位或网络硬件问题
+- 配件：不适用
+
+---
+
+## 元信息
+
+- 最后更新：2026-07-08
+- 来源数量：4
+- 验证级别：Apple 官方
+- 支持系统：当前支持“查找”的 iOS、iPadOS、watchOS 版本
+- 可信度：高

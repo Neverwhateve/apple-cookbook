@@ -22,7 +22,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
     <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
       <nav className="text-sm text-zinc-500">
         <Link href="/categories" className="hover:text-zinc-950 dark:hover:text-zinc-50">
-          Categories
+          分类
         </Link>
         <span className="mx-2">/</span>
         <span>{category.name}</span>

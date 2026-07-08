@@ -10,9 +10,9 @@ export default function TagsPage() {
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
-      <h1 className="text-3xl font-semibold text-zinc-950 dark:text-zinc-50">Tags</h1>
+      <h1 className="text-3xl font-semibold text-zinc-950 dark:text-zinc-50">标签</h1>
       <p className="mt-3 max-w-2xl text-zinc-600 dark:text-zinc-400">
-        Tags connect symptoms, features, systems, accounts, networks, privacy, repair, and accessory issues across categories.
+        标签用于串联不同分类下的症状、功能、系统、账号、网络、隐私、维修和配件问题。
       </p>
       <div className="mt-8 flex flex-wrap gap-2">
         {tags.map((tag) => (
@@ -29,4 +29,3 @@ export default function TagsPage() {
     </main>
   );
 }
-

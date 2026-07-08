@@ -65,10 +65,16 @@ function buildExcerpt(body: string) {
     .replace(/^# .+$/m, "")
     .replace(/^---$/gm, "")
     .replace(/^#+\s+/gm, "")
-    .replace(/[-*]\s+/g, "")
+    .replace(/^\s*[-*]\s+/gm, "")
+    .replace(/\*\*/g, "")
     .replace(/\n+/g, " ")
     .trim()
     .slice(0, 220);
+}
+
+function formatDateValue(value: unknown) {
+  if (value instanceof Date) return value.toISOString().slice(0, 10);
+  return String(value ?? "未复核");
 }
 
 export function getAllArticles(): Article[] {
@@ -84,12 +90,12 @@ export function getAllArticles(): Article[] {
         title: String(data.title ?? path.basename(filePath, path.extname(filePath))),
         slug: String(data.slug ?? slugParts.at(-1)),
         device: ensureArray(data.device),
-        category: String(data.category ?? slugParts.at(0) ?? "Uncategorized"),
+        category: String(data.category ?? slugParts.at(0) ?? "未分类"),
         tags: ensureArray(data.tags),
         aliases: ensureArray(data.aliases),
         verification: String(data.verification ?? "Unknown") as VerificationLevel,
         difficulty: String(data.difficulty ?? "Moderate") as Article["difficulty"],
-        updated: String(data.updated ?? "Unreviewed"),
+        updated: formatDateValue(data.updated),
         official_sources: ensureArray(data.official_sources),
         community_sources: ensureArray(data.community_sources),
         status: String(data.status ?? "draft") as Article["status"],
