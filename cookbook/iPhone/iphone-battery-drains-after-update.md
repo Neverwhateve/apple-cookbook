@@ -25,10 +25,10 @@ verification: Official
 difficulty: Moderate
 updated: 2026-07-09
 official_sources:
-  - https://support.apple.com/en-us/120745
-  - https://support.apple.com/en-us/102432
-  - https://support.apple.com/en-us/101575
-  - https://support.apple.com/en-us/123075
+  - https://support.apple.com/zh-cn/120745
+  - https://support.apple.com/zh-cn/102432
+  - https://support.apple.com/zh-cn/101575
+  - https://support.apple.com/zh-cn/123075
 community_sources:
   - https://discussions.apple.com/thread/256320852
   - https://www.reddit.com/r/iphone/comments/1no3phg/psa_for_anyone_having_performance_issues_or/
@@ -84,10 +84,10 @@ popular: true
 
 参考来源：
 
-- [Apple 支持：如果 iPhone 或 iPad 电池耗电过快](https://support.apple.com/en-us/120745)
-- [Apple 支持：检查 iPhone 电池用量](https://support.apple.com/en-us/102432)
-- [Apple 支持：iPhone 电池和性能](https://support.apple.com/en-us/101575)
-- [Apple 支持：关于 iOS 26 更新](https://support.apple.com/en-us/123075)
+- [Apple 支持：如果 iPhone 或 iPad 电池耗电过快](https://support.apple.com/zh-cn/120745)
+- [Apple 支持：检查 iPhone 电池用量](https://support.apple.com/zh-cn/102432)
+- [Apple 支持：iPhone 电池和性能](https://support.apple.com/zh-cn/101575)
+- [Apple 支持：关于 iOS 26 更新](https://support.apple.com/zh-cn/123075)
 
 ---
 

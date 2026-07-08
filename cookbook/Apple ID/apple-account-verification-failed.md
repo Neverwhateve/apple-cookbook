@@ -24,10 +24,10 @@ verification: Official
 difficulty: Moderate
 updated: 2026-07-08
 official_sources:
-  - https://support.apple.com/en-us/102606
-  - https://support.apple.com/en-us/102409
-  - https://support.apple.com/en-us/118446
-  - https://support.apple.com/en-us/118574
+  - https://support.apple.com/zh-cn/102606
+  - https://support.apple.com/zh-cn/102409
+  - https://support.apple.com/zh-cn/118446
+  - https://support.apple.com/zh-cn/118574
 community_sources: []
 status: seed
 popular: true
@@ -80,10 +80,10 @@ popular: true
 
 参考来源：
 
-- [Apple 支持：获取验证码并通过双重认证登录](https://support.apple.com/en-us/102606)
-- [Apple 支持：没有收到 Apple 账户验证邮件或密码重置邮件](https://support.apple.com/en-us/102409)
-- [Apple 支持：无法连接或登录 iCloud](https://support.apple.com/en-us/118446)
-- [Apple 支持：无法重设 Apple 账户密码时如何使用账户恢复](https://support.apple.com/en-us/118574)
+- [Apple 支持：获取验证码并通过双重认证登录](https://support.apple.com/zh-cn/102606)
+- [Apple 支持：没有收到 Apple 账户验证邮件或密码重置邮件](https://support.apple.com/zh-cn/102409)
+- [Apple 支持：无法连接或登录 iCloud](https://support.apple.com/zh-cn/118446)
+- [Apple 支持：无法重设 Apple 账户密码时如何使用账户恢复](https://support.apple.com/zh-cn/118574)
 
 ---
 

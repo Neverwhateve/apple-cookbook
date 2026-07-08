@@ -24,10 +24,10 @@ verification: Official
 difficulty: Moderate
 updated: 2026-07-08
 official_sources:
-  - https://support.apple.com/guide/iphone/share-your-location-iph01954dc44/ios
-  - https://support.apple.com/en-us/105107
-  - https://support.apple.com/en-us/105104
-  - https://support.apple.com/guide/personal-safety/find-my-and-location-sharing-ips05ede4573/web
+  - https://support.apple.com/zh-cn/guide/iphone/share-your-location-iph01954dc44/ios
+  - https://support.apple.com/zh-cn/105107
+  - https://support.apple.com/zh-cn/105104
+  - https://support.apple.com/zh-cn/guide/personal-safety/find-my-and-location-sharing-ips05ede4573/web
 community_sources:
   - https://www.reddit.com/r/applehelp/comments/1rfki1z/solution_no_location_found_in_find_my/
   - https://discussions.apple.com/thread/256141224
@@ -83,10 +83,10 @@ popular: true
 
 参考来源：
 
-- [Apple 支持：在 iPhone 上的“查找”中共享位置](https://support.apple.com/guide/iphone/share-your-location-iph01954dc44/ios)
-- [Apple 支持：与家人共享群组共享位置](https://support.apple.com/en-us/105107)
-- [Apple 支持：通过 iPhone 共享位置](https://support.apple.com/en-us/105104)
-- [Apple 个人安全使用手册：“查找”和位置共享](https://support.apple.com/guide/personal-safety/find-my-and-location-sharing-ips05ede4573/web)
+- [Apple 支持：在 iPhone 上的“查找”中共享位置](https://support.apple.com/zh-cn/guide/iphone/share-your-location-iph01954dc44/ios)
+- [Apple 支持：与家人共享群组共享位置](https://support.apple.com/zh-cn/105107)
+- [Apple 支持：通过 iPhone 共享位置](https://support.apple.com/zh-cn/105104)
+- [Apple 个人安全使用手册：“查找”和位置共享](https://support.apple.com/zh-cn/guide/personal-safety/find-my-and-location-sharing-ips05ede4573/web)
 
 ---
 

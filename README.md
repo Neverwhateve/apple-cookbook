@@ -16,7 +16,7 @@ The goal is to create a practical troubleshooting encyclopedia that helps Apple 
 
 ## Source Priority
 
-1. Apple Support
+1. Apple Support China (`support.apple.com/zh-cn`)
 2. Apple Support Community
 3. Apple Platform Security Documentation
 4. Apple Developer Documentation
@@ -38,7 +38,7 @@ The goal is to create a practical troubleshooting encyclopedia that helps Apple 
 ## Article Workflow
 
 1. Start from customer symptoms and exact user language.
-2. Check official Apple sources first.
+2. Check official Apple China sources first.
 3. Compare multiple independent community reports before accepting a workaround.
 4. Label every solution by verification level.
 5. Include when not to use a workaround.

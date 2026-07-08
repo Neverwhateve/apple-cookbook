@@ -24,9 +24,9 @@ verification: Official
 difficulty: Quick
 updated: 2026-07-08
 official_sources:
-  - https://support.apple.com/en-us/119857
-  - https://support.apple.com/guide/mac-help/use-airdrop-to-send-items-to-nearby-devices-mh35868/mac
-  - https://support.apple.com/guide/personal-safety/secure-airdrop-ips7d84d2cdc/web
+  - https://support.apple.com/zh-cn/119857
+  - https://support.apple.com/zh-cn/guide/mac-help/use-airdrop-to-send-items-to-nearby-devices-mh35868/mac
+  - https://support.apple.com/zh-cn/guide/personal-safety/secure-airdrop-ips7d84d2cdc/web
 community_sources: []
 status: seed
 popular: true
@@ -80,9 +80,9 @@ popular: true
 
 参考来源：
 
-- [Apple 支持：在 iPhone 和 iPad 上使用隔空投送](https://support.apple.com/en-us/119857)
-- [Apple 支持：在 Mac 上使用隔空投送向附近 Apple 设备发送项目](https://support.apple.com/guide/mac-help/use-airdrop-to-send-items-to-nearby-devices-mh35868/mac)
-- [Apple 个人安全使用手册：安全使用隔空投送](https://support.apple.com/guide/personal-safety/secure-airdrop-ips7d84d2cdc/web)
+- [Apple 支持：在 iPhone 和 iPad 上使用隔空投送](https://support.apple.com/zh-cn/119857)
+- [Apple 支持：在 Mac 上使用隔空投送向附近 Apple 设备发送项目](https://support.apple.com/zh-cn/guide/mac-help/use-airdrop-to-send-items-to-nearby-devices-mh35868/mac)
+- [Apple 个人安全使用手册：安全使用隔空投送](https://support.apple.com/zh-cn/guide/personal-safety/secure-airdrop-ips7d84d2cdc/web)
 
 ---
 

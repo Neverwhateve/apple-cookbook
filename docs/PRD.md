@@ -160,7 +160,7 @@ Verification levels:
 
 Source priority:
 
-1. Apple Support
+1. Apple Support China (`support.apple.com/zh-cn`)
 2. Apple Support Community
 3. Apple Platform Security Documentation
 4. Apple Developer Documentation
@@ -174,6 +174,7 @@ Source priority:
 Knowledge quality rules:
 
 - Official Apple guidance is preferred.
+- Official Apple Support citations should use Apple China pages when available.
 - Community workarounds are always labeled unofficial.
 - Community reports require repeated independent confirmation before being marked Verified.
 - Unsafe or obsolete suggestions should be documented as rejected, not silently ignored.
@@ -402,6 +403,7 @@ AI safety rules:
 Ingestion workflow concept:
 
 1. Collect source URL.
+   - Prefer Apple China URLs (`support.apple.com/zh-cn`) for official Apple Support sources.
 2. Extract article title, symptoms, steps, supported systems, and date.
 3. Create or update a draft Markdown file.
 4. Compare with existing articles for duplicates.
@@ -560,4 +562,3 @@ Scope:
 Exit criteria:
 
 - Users can describe a customer issue naturally and receive relevant, source-grounded troubleshooting guidance.
-
