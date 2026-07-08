@@ -28,7 +28,9 @@ official_sources:
   - https://support.apple.com/en-us/105107
   - https://support.apple.com/en-us/105104
   - https://support.apple.com/guide/personal-safety/find-my-and-location-sharing-ips05ede4573/web
-community_sources: []
+community_sources:
+  - https://www.reddit.com/r/applehelp/comments/1rfki1z/solution_no_location_found_in_find_my/
+  - https://discussions.apple.com/thread/256141224
 status: seed
 popular: true
 ---
@@ -92,6 +94,14 @@ popular: true
 
 非官方
 
+### 重置“位置与隐私”，再重新允许“查找”定位
+
+- 来源：Reddit r/applehelp 与 Apple Support Community 中 2026 年反复出现的“No Location Found / Off Network”讨论；多名用户反馈在官方共享设置正确但仍无位置时有效。
+- 成功概率：中等。适合共享关系、共享设备、网络和定位服务都已确认无误后使用。
+- 风险：会重置 App 的位置和隐私授权，之后其他 App 可能需要重新授权定位、相机、照片等权限。
+- 备注：这不是 Apple Support 文章中的首选官方步骤，不能替代先检查共享对象、共享设备和定位服务。路径：**设置 > 通用 > 传输或还原 iPhone > 还原 > 还原位置与隐私**。
+- 验证级别：较可能
+
 ### 停止共享后，从正确设备重新共享
 
 - 来源：社区和零售场景中反复出现的排查模式。
@@ -117,8 +127,9 @@ popular: true
 3. 打开**查找 > 我**，确认**共享我的位置**和**共享位置来自**。
 4. 如果显示了错误设备，选择**使用这台 iPhone 作为我的位置**。
 5. 确认查看者已出现在“联系人”或家人共享的位置共享设置中。
-6. 只有在共享关系和设备选择确认无误后，再检查网络和定位服务。
-7. 如果账户访问本身异常，转到 Apple 账户恢复流程，不要继续在“查找”里反复排查。
+6. 检查网络、低电量状态、定位服务和 VPN/过滤配置，确认设备能稳定向 Apple 服务报告位置。
+7. 如果以上都正确但仍显示“No Location Found / Off Network”，可在说明风险后尝试重置“位置与隐私”，再打开“查找”重新授权定位。
+8. 如果账户访问本身异常，转到 Apple 账户恢复流程，不要继续在“查找”里反复排查。
 
 ---
 
@@ -143,6 +154,7 @@ popular: true
 
 - 家人共享不可用
 - [Apple ID 验证失败](/recipes/Apple%20ID/apple-account-verification-failed)
+- iPhone 更新后掉电快或发热
 - 查找位置不更新
 - 屏幕使用时间的家庭控制不可用
 
@@ -164,8 +176,8 @@ popular: true
 
 ## 元信息
 
-- 最后更新：2026-07-08
-- 来源数量：4
+- 最后更新：2026-07-09
+- 来源数量：6
 - 验证级别：Apple 官方
 - 支持系统：当前支持“查找”的 iOS、iPadOS、watchOS 版本
 - 可信度：高
