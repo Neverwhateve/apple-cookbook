@@ -40,9 +40,10 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
   const related = getRelatedArticles(article);
 
   return (
-    <main className="mx-auto grid max-w-7xl gap-8 px-4 py-8 sm:px-6 lg:grid-cols-[minmax(0,760px)_minmax(280px,1fr)]">
-      <article className="min-w-0 rounded-lg border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950 sm:p-8">
-        <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400">
+    <main className="bg-white px-4 py-10 dark:bg-zinc-950 sm:px-6 sm:py-14">
+      <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[minmax(0,780px)_260px]">
+      <article className="min-w-0">
+        <nav className="mb-12 flex flex-wrap items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400">
           <Link href="/" className="inline-flex items-center gap-1 hover:text-zinc-950 dark:hover:text-zinc-50">
             <ArrowLeft className="h-4 w-4" />
             搜索
@@ -68,18 +69,27 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
           </span>
         </div>
 
-        <h1 className="mt-4 text-3xl font-semibold tracking-normal text-zinc-950 dark:text-zinc-50 sm:text-4xl">
+        <h1 className="mt-5 max-w-4xl text-4xl font-semibold leading-tight tracking-normal text-zinc-950 dark:text-zinc-50 sm:text-5xl">
           {article.title}
         </h1>
-        <p className="mt-4 max-w-3xl border-l-4 border-zinc-300 pl-4 text-base leading-7 text-zinc-600 dark:border-zinc-700 dark:text-zinc-300">
+        <p className="mt-5 max-w-3xl text-xl leading-8 text-zinc-700 dark:text-zinc-300">
           {article.excerpt}
         </p>
 
-        <div className="article-body mt-10">
+        <div className="article-body mt-12">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
-              h1: () => null
+              h1: () => null,
+              a: ({ href, children }) => {
+                const external = href?.startsWith("http");
+
+                return (
+                  <a href={href} target={external ? "_blank" : undefined} rel={external ? "noreferrer" : undefined}>
+                    {children}
+                  </a>
+                );
+              }
             }}
           >
             {article.body}
@@ -87,8 +97,8 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
         </div>
       </article>
 
-      <aside className="space-y-6">
-        <section className="rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
+      <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
+        <section className="border-t border-zinc-200 pt-4 dark:border-zinc-800">
           <h2 className="text-base font-semibold text-zinc-950 dark:text-zinc-50">元信息</h2>
           <dl className="mt-4 space-y-3 text-sm">
             <div>
@@ -108,7 +118,7 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
           </dl>
         </section>
 
-        <section className="rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
+        <section className="border-t border-zinc-200 pt-4 dark:border-zinc-800">
           <h2 className="text-base font-semibold text-zinc-950 dark:text-zinc-50">标签</h2>
           <div className="mt-4 flex flex-wrap gap-2">
             {article.tags.map((tag) => (
@@ -119,10 +129,10 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
           </div>
         </section>
 
-        <section className="rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
+        <section className="border-t border-zinc-200 pt-4 dark:border-zinc-800">
           <h2 className="text-base font-semibold text-zinc-950 dark:text-zinc-50">来源</h2>
           <div className="mt-4 space-y-3 text-sm">
-            {article.official_sources.map((source) => (
+            {article.official_sources.map((source, index) => (
               <a
                 key={source}
                 href={source}
@@ -131,14 +141,14 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
                 className="flex items-start gap-2 text-zinc-700 hover:text-zinc-950 dark:text-zinc-300 dark:hover:text-white"
               >
                 <ExternalLink className="mt-0.5 h-3.5 w-3.5 flex-none" />
-                <span className="break-all">{source}</span>
+                <span>Apple 官方来源 {index + 1}</span>
               </a>
             ))}
           </div>
         </section>
 
         {related.length > 0 ? (
-          <section>
+          <section className="border-t border-zinc-200 pt-4 dark:border-zinc-800">
             <h2 className="mb-3 text-base font-semibold text-zinc-950 dark:text-zinc-50">相关文章</h2>
             <div className="space-y-3">
               {related.map((item) => (
@@ -148,6 +158,7 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
           </section>
         ) : null}
       </aside>
+      </div>
     </main>
   );
 }

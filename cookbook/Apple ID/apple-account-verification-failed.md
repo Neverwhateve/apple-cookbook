@@ -80,10 +80,10 @@ popular: true
 
 参考来源：
 
-- Apple 支持：获取验证码并通过双重认证登录
-- Apple 支持：没有收到 Apple 账户验证邮件或密码重置邮件
-- Apple 支持：无法连接或登录 iCloud
-- Apple 支持：无法重设 Apple 账户密码时如何使用账户恢复
+- [Apple 支持：获取验证码并通过双重认证登录](https://support.apple.com/en-us/102606)
+- [Apple 支持：没有收到 Apple 账户验证邮件或密码重置邮件](https://support.apple.com/en-us/102409)
+- [Apple 支持：无法连接或登录 iCloud](https://support.apple.com/en-us/118446)
+- [Apple 支持：无法重设 Apple 账户密码时如何使用账户恢复](https://support.apple.com/en-us/118574)
 
 ---
 
@@ -142,7 +142,7 @@ popular: true
 
 - iCloud 无法登录
 - 家人共享不可用
-- 查找位置不更新
+- [查找位置不更新](/recipes/Find%20My/location-sharing-not-working)
 - App Store 反复要求输入密码
 
 ---

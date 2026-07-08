@@ -81,10 +81,10 @@ popular: true
 
 参考来源：
 
-- Apple 支持：在 iPhone 上的“查找”中共享位置
-- Apple 支持：与家人共享群组共享位置
-- Apple 支持：通过 iPhone 共享位置
-- Apple 个人安全使用手册：“查找”和位置共享
+- [Apple 支持：在 iPhone 上的“查找”中共享位置](https://support.apple.com/guide/iphone/share-your-location-iph01954dc44/ios)
+- [Apple 支持：与家人共享群组共享位置](https://support.apple.com/en-us/105107)
+- [Apple 支持：通过 iPhone 共享位置](https://support.apple.com/en-us/105104)
+- [Apple 个人安全使用手册：“查找”和位置共享](https://support.apple.com/guide/personal-safety/find-my-and-location-sharing-ips05ede4573/web)
 
 ---
 
@@ -142,7 +142,7 @@ popular: true
 ## 相关问题
 
 - 家人共享不可用
-- Apple ID 验证失败
+- [Apple ID 验证失败](/recipes/Apple%20ID/apple-account-verification-failed)
 - 查找位置不更新
 - 屏幕使用时间的家庭控制不可用
 

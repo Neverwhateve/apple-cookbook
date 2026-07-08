@@ -80,9 +80,9 @@ popular: true
 
 参考来源：
 
-- Apple 支持：在 iPhone 和 iPad 上使用隔空投送
-- Apple 支持：在 Mac 上使用隔空投送向附近 Apple 设备发送项目
-- Apple 个人安全使用手册：安全使用隔空投送
+- [Apple 支持：在 iPhone 和 iPad 上使用隔空投送](https://support.apple.com/en-us/119857)
+- [Apple 支持：在 Mac 上使用隔空投送向附近 Apple 设备发送项目](https://support.apple.com/guide/mac-help/use-airdrop-to-send-items-to-nearby-devices-mh35868/mac)
+- [Apple 个人安全使用手册：安全使用隔空投送](https://support.apple.com/guide/personal-safety/secure-airdrop-ips7d84d2cdc/web)
 
 ---
 

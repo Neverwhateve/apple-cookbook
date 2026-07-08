@@ -18,7 +18,7 @@
 
 body {
   margin: 0;
-  background: #f5f5f7;
+  background: #ffffff;
   color: #18181b;
   font-family: var(--font-sans);
 }
@@ -39,8 +39,8 @@ body {
 }
 
 .article-body {
-  color: #27272a;
-  font-size: 1rem;
+  color: #1d1d1f;
+  font-size: 1.0625rem;
 }
 
 .dark .article-body {
@@ -48,45 +48,25 @@ body {
 }
 
 .article-body h2 {
-  position: relative;
-  margin-top: 2.75rem;
-  margin-bottom: 1rem;
-  border-top: 1px solid rgb(212 212 216);
-  padding-top: 1.35rem;
-  padding-left: 0.9rem;
-  font-size: 1.35rem;
-  font-weight: 750;
-  line-height: 1.35;
-  color: #09090b;
+  margin-top: 3.5rem;
+  margin-bottom: 1.1rem;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.18;
+  color: #1d1d1f;
 }
 
 .dark .article-body h2 {
-  border-color: rgb(63 63 70);
   color: #fafafa;
 }
 
-.article-body h2::before {
-  position: absolute;
-  top: 1.42rem;
-  left: 0;
-  height: 1.45rem;
-  width: 4px;
-  border-radius: 999px;
-  background: #18181b;
-  content: "";
-}
-
-.dark .article-body h2::before {
-  background: #f4f4f5;
-}
-
 .article-body h3 {
-  margin-top: 1.75rem;
-  margin-bottom: 0.65rem;
-  font-size: 1.08rem;
+  margin-top: 2rem;
+  margin-bottom: 0.7rem;
+  font-size: 1.35rem;
   font-weight: 700;
-  line-height: 1.45;
-  color: #18181b;
+  line-height: 1.35;
+  color: #1d1d1f;
 }
 
 .dark .article-body h3 {
@@ -94,9 +74,9 @@ body {
 }
 
 .article-body p {
-  margin-top: 0.9rem;
-  line-height: 1.9;
-  color: #3f3f46;
+  margin-top: 0.95rem;
+  line-height: 1.78;
+  color: #1d1d1f;
 }
 
 .dark .article-body p {
@@ -106,8 +86,8 @@ body {
 .article-body ul,
 .article-body ol {
   margin-top: 0.9rem;
-  padding-left: 1.4rem;
-  color: #3f3f46;
+  padding-left: 1.35rem;
+  color: #1d1d1f;
 }
 
 .dark .article-body ul,
@@ -116,9 +96,9 @@ body {
 }
 
 .article-body li {
-  margin-top: 0.55rem;
+  margin-top: 0.45rem;
   padding-left: 0.15rem;
-  line-height: 1.85;
+  line-height: 1.72;
 }
 
 .article-body li::marker {
@@ -131,9 +111,9 @@ body {
 }
 
 .article-body hr {
-  margin: 2.5rem 0 0;
+  margin: 3rem 0 0;
   border: 0;
-  border-top: 1px solid rgb(228 228 231);
+  border-top: 1px solid rgb(210 210 215);
 }
 
 .dark .article-body hr {
@@ -141,7 +121,11 @@ body {
 }
 
 .article-body a {
-  color: #0066cc;
+  color: #06c;
+  text-decoration: none;
+}
+
+.article-body a:hover {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
