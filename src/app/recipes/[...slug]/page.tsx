@@ -71,8 +71,11 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
         <h1 className="mt-4 text-3xl font-semibold tracking-normal text-zinc-950 dark:text-zinc-50 sm:text-4xl">
           {article.title}
         </h1>
+        <p className="mt-4 max-w-3xl border-l-4 border-zinc-300 pl-4 text-base leading-7 text-zinc-600 dark:border-zinc-700 dark:text-zinc-300">
+          {article.excerpt}
+        </p>
 
-        <div className="article-body mt-8">
+        <div className="article-body mt-10">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
