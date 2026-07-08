@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, Sparkles } from "lucide-react";
+import { FilePlus2, Search, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import type { Article } from "@/lib/cookbook";
@@ -106,9 +106,18 @@ export function SearchPanel({ articles }: { articles: SearchArticle[] }) {
         ))}
 
         {results.length === 0 ? (
-          <div className="flex items-center gap-2 rounded-md border border-dashed border-zinc-300 p-4 text-sm text-zinc-600 dark:border-zinc-700 dark:text-zinc-400">
-            <Sparkles className="h-4 w-4" />
-            No match yet. This should become an AI-assisted article creation prompt later.
+          <div className="rounded-md border border-dashed border-zinc-300 p-4 dark:border-zinc-700">
+            <div className="flex items-start gap-2 text-sm text-zinc-600 dark:text-zinc-400">
+              <Sparkles className="mt-0.5 h-4 w-4 flex-none" />
+              <p>No match yet. Submit the symptom so it can be reviewed and added to daily work.</p>
+            </div>
+            <Link
+              href={`/feedback?topic=${encodeURIComponent(query)}`}
+              className="mt-3 inline-flex min-h-9 items-center gap-2 rounded-md bg-zinc-950 px-3 py-2 text-sm font-medium text-white transition hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200"
+            >
+              <FilePlus2 className="h-4 w-4" />
+              Submit this problem
+            </Link>
           </div>
         ) : null}
       </div>

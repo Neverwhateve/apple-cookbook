@@ -35,6 +35,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 Tags
               </Link>
               <Link
+                href="/feedback"
+                className="hidden rounded-full px-3 py-2 text-sm text-zinc-700 transition hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-900 sm:inline-flex"
+              >
+                Feedback
+              </Link>
+              <Link
                 href="/"
                 className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200 bg-white text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-200 dark:hover:bg-zinc-900"
                 aria-label="Search"

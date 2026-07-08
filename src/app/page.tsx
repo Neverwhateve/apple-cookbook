@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Clock, Folder, Layers3, ShieldCheck, Tags } from "lucide-react";
+import { ArrowRight, Clock, FilePlus2, Folder, Layers3, ShieldCheck, Tags } from "lucide-react";
 import { ArticleCard } from "@/components/article-card";
 import { SearchPanel } from "@/components/search-panel";
 import { getAllArticles, getAllCategories, getAllTags } from "@/lib/cookbook";
@@ -42,6 +42,22 @@ export default function HomePage() {
       </section>
 
       <aside className="space-y-6">
+        <section className="rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
+          <h2 className="flex items-center gap-2 text-base font-semibold text-zinc-950 dark:text-zinc-50">
+            <FilePlus2 className="h-4 w-4" />
+            Missing a problem?
+          </h2>
+          <p className="mt-3 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+            Submit customer wording, symptoms, and device context. It will be recorded for daily review.
+          </p>
+          <Link
+            href="/feedback"
+            className="mt-4 inline-flex min-h-10 items-center justify-center rounded-md bg-zinc-950 px-3 py-2 text-sm font-semibold text-white transition hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200"
+          >
+            Submit feedback
+          </Link>
+        </section>
+
         <section className="rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
           <h2 className="flex items-center gap-2 text-base font-semibold text-zinc-950 dark:text-zinc-50">
             <ShieldCheck className="h-4 w-4" />

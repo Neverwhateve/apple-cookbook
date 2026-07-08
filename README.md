@@ -89,6 +89,8 @@ popular:
 - `cookbook/`: Canonical Obsidian-compatible troubleshooting articles.
 - `templates/`: Reusable article templates.
 - `sources/`: Source notes and research logs.
+- `feedback/inbox.jsonl`: Structured website submissions for automation.
+- `todos/daily-work.md`: Human-readable daily review checklist generated from submissions.
 - `indexes/`: Tag, device, feature, and symptom indexes.
 - `src/`: Next.js website and Markdown indexing code.
 - `schemas/`: Machine-readable content contracts.
