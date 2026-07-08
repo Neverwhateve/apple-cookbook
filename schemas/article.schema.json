@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://apple-cookbook.local/schemas/article.schema.json",
+  "title": "Apple Cookbook Article Frontmatter",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "title",
+    "slug",
+    "device",
+    "category",
+    "tags",
+    "aliases",
+    "verification",
+    "difficulty",
+    "updated",
+    "official_sources",
+    "community_sources",
+    "status",
+    "popular"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "device": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "category": {
+      "type": "string",
+      "minLength": 1
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "aliases": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "verification": {
+      "enum": ["Official", "Verified", "Likely", "Experimental", "Unknown"]
+    },
+    "difficulty": {
+      "enum": ["Quick", "Moderate", "Advanced"]
+    },
+    "updated": {
+      "type": "string",
+      "format": "date"
+    },
+    "official_sources": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      },
+      "uniqueItems": true
+    },
+    "community_sources": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uri"
+      },
+      "uniqueItems": true
+    },
+    "status": {
+      "enum": ["seed", "draft", "reviewed", "canonical"]
+    },
+    "popular": {
+      "type": "boolean"
+    }
+  }
+}
+
