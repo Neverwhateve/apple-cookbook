@@ -334,3 +334,85 @@ Timestamp: 2026-07-09 01:40:32 CST
 - Expand the new SOS recipe later with China mainland, Hong Kong, and Macau eSIM/SIM model differences if Retail cases show repeated regional confusion.
 - Continue monitoring Reddit and Apple Community for current iPhone 17 / iOS 26 cellular-drop reports, but keep model-specific claims out of official guidance unless Apple publishes service or support documentation.
 - Continue searching Xiaohongshu from accessible pages or screenshots before adding Chinese social-platform workarounds.
+
+---
+
+## Harvest Run - 2026-07-09 14:56:58 CST
+
+### Search Queries
+
+- `site:support.apple.com/zh-cn Apple 支持 发布日期 2026 年 7 月 AirPods 查找 设置不完整`
+- `site:support.apple.com/zh-cn "AirPods" "查找" "设置不完整" "Apple 支持"`
+- `site:discussions.apple.com AirPods "Setup Incomplete" "Find My" "2026"`
+- `site:reddit.com/r/AirPods "Setup Incomplete" "Find My" "AirPods" "2026"`
+- `site:xiaohongshu.com AirPods 查找 设置未完成`
+- `site:xiaohongshu.com AirPods 设置未完成 查找 网络`
+- `"小红书" "AirPods" "设置未完成" "查找"`
+- `"AirPods" "设置未完成" "小红书"`
+
+### Sources Visited
+
+- Apple Support: [如果你在“查找”App 中收到有关 AirPods 设置未完成的提醒](https://support.apple.com/zh-cn/104960)
+- AirPods User Guide: [查找 AirPods](https://support.apple.com/zh-cn/guide/airpods/dev8e8b93d71/web)
+- Apple Support: [如何在 iPhone、iPad 或 Mac 上打开“查找”](https://support.apple.com/zh-cn/102648)
+- Apple Support: [使用“查找”查找丢失的 AirPods](https://support.apple.com/zh-cn/109020)
+- iCloud User Guide: [在你的所有设备上设置“查找”](https://support.apple.com/zh-cn/guide/icloud/mmfc0f0c67/icloud)
+- Apple Support Community: [AirPods Pro Gen 2 Incomplete Setup in Find my Devices](https://discussions.apple.com/thread/254229614?page=3)
+- Reddit r/AirPods: [Lost AirPods displaying Setup incomplete?](https://www.reddit.com/r/airpods/comments/1s96d46/lost_airpods_displaying_setup_incomplete/)
+- Xiaohongshu searches for `AirPods 查找 设置未完成`; direct pages were not accessible or reliable enough to cite.
+
+### Evidence Collected
+
+- Apple says an AirPods “设置未完成” alert can appear when AirPods cannot pair, only one AirPod pairs, or pairing has not finished; Apple recommends waiting a few minutes and ensuring the latest iOS or iPadOS is installed. Source: [Apple Support 104960](https://support.apple.com/zh-cn/104960).
+- Apple's official AirPods Setup Incomplete troubleshooting checks Find My on the paired iPhone, “查找我的 iPhone,” “查找”网络, Bluetooth, AirPods “查找”网络, two-factor authentication, iCloud Keychain, and any “更新 Apple 账户设置” prompt. Source: [Apple Support 104960](https://support.apple.com/zh-cn/104960).
+- Apple says that if AirPods still cannot pair, users should place them in the case, remove the AirPods from Find My, return to the Home Screen, open the case, and reconnect. Source: [Apple Support 104960](https://support.apple.com/zh-cn/104960).
+- Apple says AirPods must be paired with an iPhone or iPad signed in to an Apple Account to appear in Find My, and that Find My network must be turned on before loss for offline location features. Source: [AirPods User Guide](https://support.apple.com/zh-cn/guide/airpods/dev8e8b93d71/web).
+- Apple says AirPods can show last known location, “离线,” or “找不到位置” when they are out of range or need charging, and some features such as playing sound or nearby finding may be unavailable. Source: [Apple Support 109020](https://support.apple.com/zh-cn/109020).
+- Apple iCloud documentation notes that pairing AirPods or Beats when the iPhone or iPad has no data network can prevent full Find My functionality. Source: [iCloud User Guide](https://support.apple.com/zh-cn/guide/icloud/mmfc0f0c67/icloud).
+- Reddit and Apple Support Community show recurring customer wording around AirPods that are physically nearby or recently lost but show “Setup Incomplete,” cannot be marked lost, or repeatedly revert after resets. These are community signals only, not official fixes.
+- Xiaohongshu-style search snippets surfaced “turn off Find My network” advice for AirPods setup incomplete, but no reliable source page was accessible. This was recorded as an unsafe/unverified suggestion because it may reduce lost-device location capability.
+
+### Customer Wording
+
+- “查找里提示 AirPods 设置未完成。”
+- “AirPods 能连接听歌，但不能定位。”
+- “显示 Some features aren't available。”
+- “找不到位置，也不能播放声音。”
+- “AirPods Setup Incomplete.”
+- “It won't even let me label them lost.”
+- “Each time it will work fine for a few weeks, but will eventually revert to setup incomplete.”
+
+### Cross-source Patterns
+
+- This problem should be treated as a Find My setup and account-state issue before hardware service. Apple’s official sequence is more specific than generic AirPods reset advice.
+- Customers often discover the issue only after losing AirPods, but Apple’s most important preventive condition is that Find My network must have been on before the AirPods were lost.
+- Community workarounds often focus on repeated reset/re-pair loops. The Cookbook now labels this as unofficial and keeps Apple’s remove-and-reconnect flow as the primary path.
+- Chinese social snippets recommending turning off Find My network conflict with the customer’s actual goal of locating AirPods later, so they should not be presented as reliable repair advice.
+
+### Articles Created, Improved, Merged, or Flagged
+
+- Created `cookbook/AirPods/airpods-find-my-setup-incomplete.md` as a canonical Official recipe for AirPods “Setup Incomplete / 设置未完成” in Find My.
+- Updated `cookbook/Find My/location-sharing-not-working.md` with a related link to the new AirPods Find My recipe.
+- No duplicate AirPods Find My recipe was found; no merge was required.
+
+### Verification Changes
+
+- New recipe `AirPods 在“查找”中显示设置未完成` is `Official` because the primary troubleshooting order is directly supported by Apple Support 104960, AirPods User Guide, Apple Find My setup guidance, Apple lost-AirPods guidance, and iCloud Find My setup guidance.
+- Repeating remove/reconnect is labeled `较可能` and unofficial because it appears in community reports but is not an extra Apple recommendation beyond the official single remove-and-reconnect flow.
+- “关闭查找网络” is documented as not recommended / `未知` because it appeared only in unreliable snippets and can reduce lost-AirPods location capability.
+- No existing article verification level was changed.
+
+### Reading/UI and Typography Improvements
+
+- No shared CSS or component styling changed in this run.
+- The new AirPods article follows the Apple Support-style reading flow: symptom-first H1, short intro, concise cause list, official numbered steps, clearly labeled unofficial section, Retail triage flow, escalation criteria, related links, tags, and compact metadata.
+
+### Typography/Layout Improvements
+
+- No article typography tokens were changed. The article uses the existing global Apple-like system font stack, narrow readable article layout, Apple-blue links, and mobile-friendly single-column prose.
+
+### Follow-up Opportunities
+
+- Build a separate recipe for AirPods showing “已与另一个 Apple 账户配对” or AirPods mismatch, using the linked Apple Find My account-pairing guidance before adding any used-device advice.
+- Research AirPods “离线 / 找不到位置 / 不能播放声音” as a separate lost-AirPods recipe because customers often confuse lost-state limits with Setup Incomplete.
+- Continue searching Xiaohongshu through accessible screenshots or direct user-provided links before citing Chinese social-platform AirPods workarounds.

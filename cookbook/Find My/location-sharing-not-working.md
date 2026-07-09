@@ -152,6 +152,7 @@ popular: true
 
 ## 相关问题
 
+- [AirPods 在“查找”中显示设置未完成](/recipes/AirPods/airpods-find-my-setup-incomplete)
 - 家人共享不可用
 - [Apple ID 验证失败](/recipes/Apple%20ID/apple-account-verification-failed)
 - iPhone 更新后掉电快或发热
