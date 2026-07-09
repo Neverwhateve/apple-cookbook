@@ -416,3 +416,93 @@ Timestamp: 2026-07-09 01:40:32 CST
 - Build a separate recipe for AirPods showing “已与另一个 Apple 账户配对” or AirPods mismatch, using the linked Apple Find My account-pairing guidance before adding any used-device advice.
 - Research AirPods “离线 / 找不到位置 / 不能播放声音” as a separate lost-AirPods recipe because customers often confuse lost-state limits with Setup Incomplete.
 - Continue searching Xiaohongshu through accessible screenshots or direct user-provided links before citing Chinese social-platform AirPods workarounds.
+
+---
+
+## Harvest Run - 2026-07-09 17:59:19 CST
+
+### Search Queries
+
+- `site:support.apple.com/zh-cn iPhone 无 SIM SIM 卡无效 Apple 支持`
+- `site:support.apple.com/en-us iPhone No SIM invalid SIM Apple Support`
+- `site:discussions.apple.com/thread iPhone "Invalid SIM" "No SIM" 2026`
+- `site:reddit.com/r/applehelp iPhone "No SIM" "Invalid SIM" 2026`
+- `site:support.apple.com/zh-cn "发布日期：2026 年 7 月" Apple 支持 iPhone`
+- `site:support.apple.com/zh-cn "Published Date: July" "2026" "support.apple.com/zh-cn"`
+- `site:xiaohongshu.com iPhone 无 SIM 卡 无效 SIM 苹果`
+- `site:xiaohongshu.com 苹果 无SIM卡 无效SIM iPhone`
+- `"小红书" "无 SIM 卡" "iPhone"`
+- `"小红书" "无效 SIM" "iPhone"`
+
+### Sources Visited
+
+- Apple Support: [如果你在 iPhone 或 iPad 上看到“无效 SIM 卡”或“无 SIM 卡”](https://support.apple.com/zh-cn/108914)
+- Apple Support: [了解你的 iPhone 或 iPad 使用哪种类型的 SIM 卡](https://support.apple.com/zh-cn/118569)
+- Apple Support: [如何解锁 iPhone 以使用其他运营商](https://support.apple.com/zh-cn/109316)
+- Apple Support: [如果无法激活 iPhone 或 iPad（无线局域网 + 蜂窝网络）](https://support.apple.com/zh-cn/109326)
+- Apple Support: [如果你在 iPhone 或 iPad 上看到“SOS”、“无服务”或“正在搜索”](https://support.apple.com/zh-cn/120000)
+- Apple Support Community: [IOS26.1 Upgrade - No Sim is detected](https://discussions.apple.com/thread/256207821)
+- Apple Support Community: [No sim Error on iPhone 14 Pro Max](https://discussions.apple.com/thread/255917033)
+- Apple Support Community: [iPhone 15 Max eSIM "Invalid SIM" Issues After iOS 26 Update](https://discussions.apple.com/thread/256147014)
+- Xiaohongshu searches for `iPhone 无 SIM 卡 无效 SIM`; direct pages were not accessible or reliable enough to cite.
+
+### Evidence Collected
+
+- Apple says the official first step for “无效 SIM 卡” or “无 SIM 卡” alerts is to confirm the wireless carrier plan is active. Source: [Apple Support 108914](https://support.apple.com/zh-cn/108914).
+- Apple says carrier-locked iPhone models can be used only with the locked carrier, and customers can check carrier lock status in Settings > General > About. Sources: [Apple Support 108914](https://support.apple.com/zh-cn/108914), [Apple Support 109316](https://support.apple.com/zh-cn/109316).
+- Apple says users should restart iPhone or iPad and check for carrier settings updates in Settings > General > About. Source: [Apple Support 108914](https://support.apple.com/zh-cn/108914).
+- Apple says eSIM cases should be handled with the carrier when a device shows invalid SIM or no SIM. Source: [Apple Support 108914](https://support.apple.com/zh-cn/108914).
+- Apple says physical SIM users should remove and reinsert the SIM, confirm the SIM tray closes fully and is not loose, and avoid using a SIM tray from another iPhone, iPad, or phone maker because it might not fit properly. Source: [Apple Support 108914](https://support.apple.com/zh-cn/108914).
+- Apple updated SIM type guidance on 2026-07-02 and warns that cut or modified SIM cards can prevent cellular access or certain features and can damage the SIM tray or device; damage from modified SIM cards is not covered by Apple hardware warranty. Source: [Apple Support 118569](https://support.apple.com/zh-cn/118569).
+- Apple activation guidance says “No SIM,” “Invalid SIM,” and unsupported SIM/eSIM errors should be handled before continuing activation, and customers should also check Apple System Status for iOS Device Activation when activation fails. Source: [Apple Support 109326](https://support.apple.com/zh-cn/109326).
+- Apple Community shows current customer wording around update-adjacent “No SIM” and eSIM “Invalid SIM / SIM Failure” reports. These are community signals only and do not prove an Apple-recognized update bug. Sources: [Apple Community 256207821](https://discussions.apple.com/thread/256207821), [Apple Community 255917033](https://discussions.apple.com/thread/255917033), [Apple Community 256147014](https://discussions.apple.com/thread/256147014).
+- Apple also updated the SOS / No Service article on 2026-07-07. The new No SIM recipe links to the SOS recipe because customers often describe SIM detection, carrier registration, and no-service states interchangeably. Source: [Apple Support 120000](https://support.apple.com/zh-cn/120000).
+
+### Customer Wording
+
+- “手机突然提示无 SIM 卡。”
+- “更新后显示 No SIM / Invalid SIM。”
+- “插了卡还是说未安装 SIM 卡。”
+- “换了一张卡以后提示无效 SIM 卡。”
+- “控制中心运营商位置显示 No SIM。”
+- “实体卡能放进去，但没有蜂窝网络。”
+- “eSIM 掉了，提示 SIM Failure。”
+
+### Cross-source Patterns
+
+- “无 SIM 卡 / 无效 SIM 卡” should be a separate canonical recipe from “SOS / 无服务 / 正在搜索.” The first is SIM/eSIM detection or compatibility; the second is carrier network registration after a line is present.
+- Customers often jump to hardware conclusions after an update, but Apple’s official order is still carrier plan, carrier lock, restart, carrier settings, eSIM carrier handling, physical SIM reseat, SIM tray fit, then Apple Support.
+- Carrier lock and used/overseas-device scenarios are a high Retail-value branch because Apple explicitly says only the carrier can unlock an iPhone.
+- Community workarounds like resetting network settings and repeated eSIM deletion should not be presented as Apple guidance. eSIM deletion is especially risky unless the carrier can reissue the line.
+
+### Articles Created, Improved, Merged, or Flagged
+
+- Created `cookbook/iPhone/iphone-invalid-sim-no-sim.md` as a canonical Official recipe for No SIM / Invalid SIM alerts on iPhone and cellular iPad.
+- Updated `cookbook/iPhone/iphone-sos-no-service-searching.md` with a related link to the new No SIM / Invalid SIM article and removed the plain duplicate related-item text.
+- No duplicate recipe existed, so no merge was required.
+
+### Verification Changes
+
+- New recipe `iPhone 显示无 SIM 卡或无效 SIM 卡` is `Official` because the primary troubleshooting order is directly supported by Apple Support 108914, SIM handling by Apple Support 118569, carrier lock handling by Apple Support 109316, activation context by Apple Support 109326, and adjacent no-service differentiation by Apple Support 120000.
+- Carrier eSIM reissue / SIM replacement is labeled `较可能` and unofficial because it is supported by Apple’s carrier-contact direction plus community patterns, but exact carrier-side handling is not an Apple step-by-step recommendation.
+- Reset Network Settings is labeled `较可能` and unofficial because it appears in community handling but is not listed in Apple’s current No SIM / Invalid SIM article.
+- No existing article verification level was changed.
+
+### Reading/UI and Typography Improvements
+
+- No shared CSS or component styling changed in this run.
+- The new article follows the current Apple Support-inspired reading flow: symptom-focused H1, short explanation, concise symptom list, official ordered troubleshooting, clearly separated unofficial methods, Retail flow, escalation criteria, related links, tags, and compact metadata.
+
+### Typography/Layout Improvements
+
+- No typography tokens were changed. The recipe uses the existing global Apple-like system font stack, narrow readable article column, Apple-blue links, and mobile-friendly single-column article structure.
+
+### Blocked Sources
+
+- Xiaohongshu searches returned inaccessible shells, unrelated reposts, or low-confidence third-party pages rather than reliable viewable troubleshooting posts. No Xiaohongshu workaround was added.
+
+### Follow-up Opportunities
+
+- Build a separate eSIM setup or eSIM transfer recipe using Apple’s current eSIM setup guidance, especially for “新机转移 eSIM 失败” and “蜂窝号码看得到但无法启用.”
+- Review Mac “which macOS version” / compatibility guidance updated on 2026-07-02 for a future customer-facing recipe about “这台 Mac 能不能升级 Tahoe.”
+- Research activation-specific errors separately because “SIM 不受支持,” Activation Lock, Apple System Status, and carrier lock are often mixed into one customer story.
