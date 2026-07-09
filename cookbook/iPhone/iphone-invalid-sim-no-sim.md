@@ -157,6 +157,7 @@ iPhone 或蜂窝版 iPad 弹出“无 SIM 卡”“未安装 SIM 卡”“无效
 
 ## 相关问题
 
+- [iPhone 无法设置或转移 eSIM](/recipes/iPhone/iphone-esim-setup-transfer-fails)
 - [iPhone 显示 SOS、无服务或正在搜索](/recipes/iPhone/iphone-sos-no-service-searching)
 - iPhone 无法激活
 - iPhone 无法设置 eSIM

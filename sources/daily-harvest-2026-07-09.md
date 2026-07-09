@@ -506,3 +506,98 @@ Timestamp: 2026-07-09 01:40:32 CST
 - Build a separate eSIM setup or eSIM transfer recipe using Apple’s current eSIM setup guidance, especially for “新机转移 eSIM 失败” and “蜂窝号码看得到但无法启用.”
 - Review Mac “which macOS version” / compatibility guidance updated on 2026-07-02 for a future customer-facing recipe about “这台 Mac 能不能升级 Tahoe.”
 - Research activation-specific errors separately because “SIM 不受支持,” Activation Lock, Apple System Status, and carrier lock are often mixed into one customer story.
+
+---
+
+## Harvest Run - 2026-07-09 21:00:21 CST
+
+### Search Queries
+
+- `site:support.apple.com/zh-cn eSIM iPhone 转移 失败 Apple 支持`
+- `site:support.apple.com/zh-cn iPhone eSIM 设置 转移 Apple 支持`
+- `site:discussions.apple.com/thread iPhone "eSIM transfer failed" 2026`
+- `site:reddit.com/r/applehelp iPhone "eSIM transfer failed" 2026`
+- `site:xiaohongshu.com iPhone eSIM 转移 失败 苹果`
+- `site:xiaohongshu.com 苹果 eSIM 无法激活 转移 iPhone`
+- `"小红书" "eSIM" "转移" "iPhone"`
+- `"小红书" "eSIM" "无法激活" "iPhone"`
+
+### Sources Visited
+
+- Apple Support: [在 iPhone 上设置 eSIM](https://support.apple.com/zh-cn/118669)
+- Apple Support: [如果你无法在 iPhone 上设置 eSIM](https://support.apple.com/zh-cn/102478)
+- Apple Support: [在中国大陆将 eSIM 与 iPhone 搭配使用](https://support.apple.com/zh-cn/123879)
+- Apple Support: [将 eSIM 从安卓设备转移到 iPhone](https://support.apple.com/zh-cn/123878)
+- Apple Support: [查找在 iPhone 上提供 eSIM 服务的无线运营商和全球服务提供商](https://support.apple.com/zh-cn/101569)
+- iPhone User Guide: [抹掉 iPhone](https://support.apple.com/zh-cn/guide/iphone/iph7a2a9399b/ios)
+- Apple Support Community: [Unable to transfer eSIM from iPhone 13 Pro](https://discussions.apple.com/thread/255768471)
+- Apple Support Community: [Unable to transfer eSIM profile](https://discussions.apple.com/thread/255207618)
+- Apple Support Community: [iPhone eSIM transfer fails with "Connection Failed" error](https://discussions.apple.com/thread/256210119)
+- Reddit r/applehelp: [Cellular Data option is greyed out saying “NO SIM” so I can't add an eSIM](https://www.reddit.com/r/applehelp/comments/1oee9kg/cellular_data_option_is_greyed_out_saying_no_sim/)
+- Tencent News: [iPhone Air 正式开售，在办理 eSIM 前你需要知道的 9 件事](https://news.qq.com/rain/a/20251023A02WO300)
+
+### Evidence Collected
+
+- Apple says iPhone-to-iPhone eSIM Quick Transfer requires carrier support, the same Apple Account on both devices, the old iPhone unlocked with its passcode, both devices nearby with Bluetooth on, and both devices running iOS 18.4 or later. Source: [Apple Support 118669](https://support.apple.com/zh-cn/118669).
+- Apple says the new iPhone should use Settings > Cellular > Set Up Cellular / Add eSIM, select a number from another iPhone or choose nearby transfer, confirm on the old iPhone, and wait for activation; when the new iPhone activates the line, the previous SIM is deactivated. Source: [Apple Support 118669](https://support.apple.com/zh-cn/118669).
+- Apple documents alternate eSIM setup routes: carrier activation, QR code, carrier link, carrier app, manual entry, and transfer from a non-Apple device. Source: [Apple Support 118669](https://support.apple.com/zh-cn/118669).
+- Apple says failed eSIM setup should be handled by toggling Airplane Mode, checking whether the activating number appears under Cellular and turning it off/on if present, restarting, checking carrier settings under the eSIM section in Settings > General > About, and then contacting the carrier with phone number, carrier PIN, IMEI, and EID. Source: [Apple Support 102478](https://support.apple.com/zh-cn/102478).
+- Apple says iOS 18 or later iPhone models can use the latest Apple Support app to run additional diagnostics when eSIM setup cannot be completed. Source: [Apple Support 102478](https://support.apple.com/zh-cn/102478).
+- Apple says in mainland China, only specific iPhone models support mainland carrier eSIM profiles, currently iPhone 17e model A3635 and iPhone Air model A3518; other iPhone models, including devices purchased outside mainland China, cannot install eSIM profiles from mainland China carriers. Source: [Apple Support 123879](https://support.apple.com/zh-cn/123879).
+- Apple says mainland China eSIM activation requires visiting the carrier's offline store for ID checks and activation, and that the same supported mainland-purchased iPhone can activate and store up to two eSIMs. Source: [Apple Support 123879](https://support.apple.com/zh-cn/123879).
+- Apple says mainland-purchased iPhone Air / iPhone 17e can activate local carrier eSIMs while traveling outside mainland China only with Location Services enabled; while in mainland China, users cannot install eSIMs provided by carriers outside mainland China. Source: [Apple Support 123879](https://support.apple.com/zh-cn/123879).
+- Apple says if an eSIM is erased during iPhone erase, the customer must contact the carrier to reactivate the cellular number. Source: [iPhone User Guide](https://support.apple.com/zh-cn/guide/iphone/iph7a2a9399b/ios).
+- Apple Community threads repeatedly route eSIM transfer failures back to carrier support, carrier-settings checks, and re-provisioning. These are community signals only and do not prove a general Apple-side outage.
+- Reddit search surfaced adjacent customer wording where Cellular settings are unavailable or "NO SIM" blocks eSIM addition. This supports cross-linking eSIM setup with the existing No SIM recipe.
+- Xiaohongshu direct searches were again not reliably accessible. Third-party Chinese tech coverage cited Xiaohongshu reports about mainland eSIM complexity, but this was treated as secondary context only and not used as official guidance.
+
+### Customer Wording
+
+- “新机转移 eSIM 失败。”
+- “添加 eSIM 时一直转圈。”
+- “旧 iPhone 上点了转移，新 iPhone 没激活。”
+- “扫描二维码以后没有蜂窝网络。”
+- “显示完成运营商蜂窝套餐设置，但点进去失败。”
+- “国行 iPhone Air / iPhone 17e 不能写入 eSIM。”
+- “删除 eSIM 后号码回不来了。”
+- “Cellular Data option is greyed out saying NO SIM.”
+
+### Cross-source Patterns
+
+- eSIM setup failure is distinct from No SIM and SOS/No Service. The key first split is whether the phone can see a cellular plan, whether the carrier supports the requested activation method, and whether the region/model supports that eSIM profile.
+- Community discussions often jump to deleting eSIMs, wiping devices, or assuming a motherboard issue. Apple’s official guidance points first to activation method, carrier settings, carrier account identifiers, and carrier contact.
+- Mainland China eSIM cases need their own branch inside the recipe because Apple’s official rules require supported mainland models and offline carrier-store handling.
+- Reddit and Apple Community show enough recurring wording to justify a canonical recipe, but not enough to present carrier re-provisioning or network reset as official Apple steps.
+
+### Articles Created, Improved, Merged, or Flagged
+
+- Created `cookbook/iPhone/iphone-esim-setup-transfer-fails.md` as a canonical Official recipe for failed eSIM setup, transfer, QR activation, Android-to-iPhone transfer, and mainland China eSIM model/store routing.
+- Updated `cookbook/iPhone/iphone-invalid-sim-no-sim.md` with a related link to the new eSIM setup/transfer recipe.
+- Updated `cookbook/iPhone/iphone-sos-no-service-searching.md` with a related link to the new eSIM setup/transfer recipe.
+- No duplicate eSIM setup recipe existed, so no merge was required.
+
+### Verification Changes
+
+- New recipe `iPhone 无法设置或转移 eSIM` is `Official` because the primary troubleshooting order is supported by Apple Support 118669, 102478, 123879, 123878, 101569, and iPhone User Guide erase/eSIM warnings.
+- Carrier re-provisioning is labeled `较可能` and unofficial because it is supported by Apple’s carrier-contact step and community patterns, but exact carrier-side handling is not Apple step-by-step guidance.
+- Avoiding erase/delete-first behavior is supported by Apple’s eSIM reactivation warning in the iPhone User Guide.
+- No existing article verification level was changed.
+
+### Reading/UI and Typography Improvements
+
+- No shared CSS or component styling changed in this run.
+- The new eSIM recipe follows the Apple Support-inspired reading flow: symptom-focused H1, short explanation, official ordered steps, separate mainland China branch, clearly labeled unofficial methods, Retail flow, escalation criteria, related links, tags, and compact metadata.
+
+### Typography/Layout Improvements
+
+- No typography tokens were changed. The article uses the existing global Apple-like system font stack, narrow article column, Apple-blue links, and mobile-friendly single-column content.
+
+### Blocked Sources
+
+- Xiaohongshu searches returned inaccessible pages, snippets, or third-party summaries rather than reliable viewable posts. No Xiaohongshu workaround was added.
+
+### Follow-up Opportunities
+
+- Build a separate activation-error recipe that distinguishes "SIM 不受支持," Apple activation server availability, Activation Lock, carrier lock, and eSIM setup failure.
+- Review mainland China eSIM official guidance again next harvest because Apple and carriers may update supported models, store requirements, and travel eSIM behavior.
+- Search carrier official pages for China Mobile, China Telecom, and China Unicom eSIM handling before adding any mainland-specific unofficial branch.
