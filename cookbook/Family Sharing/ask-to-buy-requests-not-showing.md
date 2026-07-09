@@ -145,6 +145,7 @@ popular: true
 
 ## 相关问题
 
+- [屏幕使用时间请求收不到或批准后不生效](/recipes/Family%20Sharing/screen-time-requests-not-working)
 - [家长看不到儿童账号屏幕使用时间明细](/recipes/Family%20Sharing/screen-time-child-usage-not-showing)
 - [Apple 账户验证失败](/recipes/Apple%20ID/apple-account-verification-failed)
 - 儿童账号无法移出家人共享

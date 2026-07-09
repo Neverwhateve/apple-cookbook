@@ -149,6 +149,7 @@ popular: true
 
 - [Apple 账户验证失败](/recipes/Apple%20ID/apple-account-verification-failed)
 - [购买前询问请求不显示](/recipes/Family%20Sharing/ask-to-buy-requests-not-showing)
+- [屏幕使用时间请求收不到或批准后不生效](/recipes/Family%20Sharing/screen-time-requests-not-working)
 - 儿童账号无法移出家人共享
 - 家长控制无法修改
 

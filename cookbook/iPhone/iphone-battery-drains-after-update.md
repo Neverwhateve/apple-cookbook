@@ -143,6 +143,7 @@ popular: true
 
 ## 相关问题
 
+- [iPhone 显示 SOS、无服务或正在搜索](/recipes/iPhone/iphone-sos-no-service-searching)
 - iPhone 无法开机或黑屏
 - iPhone 无法充电
 - Apple 账户验证失败
