@@ -6,6 +6,8 @@ Last researched:
 
 ## Official Sources
 
+Prefer Apple China URLs (`support.apple.com/zh-cn`) for official Apple Support sources.
+
 - 
 
 ## Community Sources
@@ -23,4 +25,3 @@ Last researched:
 ## Rejected or Unsafe Suggestions
 
 - 
-

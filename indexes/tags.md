@@ -35,6 +35,10 @@ Use these tags consistently across articles.
 - Continuity Camera
 - iPhone Mirroring
 - Apple Intelligence
+- Battery
+- Software Update
+- 电池
+- 软件更新
 
 ## Troubleshooting Areas
 
@@ -48,4 +52,5 @@ Use these tags consistently across articles.
 - Education
 - Repair
 - Accessory
-
+- Heat
+- 发热

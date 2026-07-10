@@ -21,7 +21,7 @@ verification: Official
 difficulty: Moderate
 updated: 2026-07-08
 official_sources:
-  - https://support.apple.com/example
+  - https://support.apple.com/zh-cn/example
 community_sources: []
 status: seed
 popular: true
@@ -40,7 +40,7 @@ The machine-readable schema lives at `schemas/article.schema.json`.
 - `verification`: One of `Official`, `Verified`, `Likely`, `Experimental`, `Unknown`.
 - `difficulty`: One of `Quick`, `Moderate`, `Advanced`.
 - `updated`: ISO date.
-- `official_sources`: Official Apple URLs.
+- `official_sources`: Official Apple URLs. Prefer Apple China URLs (`support.apple.com/zh-cn`) for support articles and localized Apple guides.
 - `community_sources`: Community URLs. These must never be presented as official.
 - `status`: One of `seed`, `draft`, `reviewed`, `canonical`.
 - `popular`: Boolean used for homepage highlighting.

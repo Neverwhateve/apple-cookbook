@@ -21,6 +21,6 @@ export async function submitFeedback(_state: FeedbackState, formData: FormData):
   return {
     ok: true,
     id: result.id,
-    message: `Recorded as ${result.id}. It is now in the daily work intake.`
+    message: `已记录为 ${result.id}，并加入每日工作收集。`
   };
 }

@@ -4,6 +4,7 @@ import { FilePlus2, Search, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import type { Article } from "@/lib/cookbook";
+import { difficultyLabels, verificationLabels } from "@/lib/labels";
 
 type SearchArticle = Pick<
   Article,
@@ -65,13 +66,13 @@ export function SearchPanel({ articles }: { articles: SearchArticle[] }) {
         <input
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="Search like a customer: My wife's location cannot be seen"
+          placeholder="像顾客描述那样搜索：老婆位置看不到"
           className="min-w-0 flex-1 bg-transparent text-base outline-none placeholder:text-zinc-500"
         />
       </div>
 
       <div className="mt-3 flex flex-wrap gap-2 text-xs text-zinc-600 dark:text-zinc-400">
-        {["AirDrop keeps waiting", "老婆位置看不到", "verification failed", "Find My not updating"].map(
+        {["隔空投送一直等待", "老婆位置看不到", "Apple ID 验证失败", "查找位置不更新"].map(
           (item) => (
             <button
               type="button"
@@ -95,10 +96,10 @@ export function SearchPanel({ articles }: { articles: SearchArticle[] }) {
             <div className="flex flex-wrap items-center gap-2">
               <span className="text-sm font-semibold text-zinc-950 dark:text-zinc-50">{article.title}</span>
               <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-xs text-zinc-600 dark:bg-zinc-900 dark:text-zinc-300">
-                {article.verification}
+                {verificationLabels[article.verification]}
               </span>
               <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-xs text-zinc-600 dark:bg-zinc-900 dark:text-zinc-300">
-                {article.difficulty}
+                {difficultyLabels[article.difficulty]}
               </span>
             </div>
             <p className="mt-2 line-clamp-2 text-sm text-zinc-600 dark:text-zinc-400">{article.excerpt}</p>
@@ -109,14 +110,14 @@ export function SearchPanel({ articles }: { articles: SearchArticle[] }) {
           <div className="rounded-md border border-dashed border-zinc-300 p-4 dark:border-zinc-700">
             <div className="flex items-start gap-2 text-sm text-zinc-600 dark:text-zinc-400">
               <Sparkles className="mt-0.5 h-4 w-4 flex-none" />
-              <p>No match yet. Submit the symptom so it can be reviewed and added to daily work.</p>
+              <p>暂时没有匹配结果。提交这个现象后，可以进入每日复核并补充到知识库。</p>
             </div>
             <Link
               href={`/feedback?topic=${encodeURIComponent(query)}`}
               className="mt-3 inline-flex min-h-9 items-center gap-2 rounded-md bg-zinc-950 px-3 py-2 text-sm font-medium text-white transition hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200"
             >
               <FilePlus2 className="h-4 w-4" />
-              Submit this problem
+              提交这个问题
             </Link>
           </div>
         ) : null}

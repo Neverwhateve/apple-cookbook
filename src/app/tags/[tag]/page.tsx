@@ -22,7 +22,7 @@ export default async function TagPage({ params }: { params: Promise<{ tag: strin
     <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
       <nav className="text-sm text-zinc-500">
         <Link href="/tags" className="hover:text-zinc-950 dark:hover:text-zinc-50">
-          Tags
+          标签
         </Link>
         <span className="mx-2">/</span>
         <span>{tag}</span>
@@ -36,4 +36,3 @@ export default async function TagPage({ params }: { params: Promise<{ tag: strin
     </main>
   );
 }
-
