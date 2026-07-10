@@ -93,3 +93,196 @@
 - Build a separate "Apple 服务在 Wi-Fi 下打不开" recipe if future Apple Community/Xiaohongshu evidence keeps separating Apple-service-only failures from full internet failure.
 - Add a HomeKit / Apple TV network recipe using Apple’s current "网络问题 / 无互联网连接" home hub guidance.
 - Review the existing AirDrop article against Apple’s router Location Services and network settings guidance because Wi-Fi/Bluetooth routing overlaps with AirDrop discovery failures.
+
+## Harvest Run - 2026-07-10 03:00:34 CST
+
+### Search Queries
+
+- `site:support.apple.com/zh-cn HomeKit 家庭 App 无响应 配件 无响应 Apple 支持`
+- `site:support.apple.com/zh-cn HomePod 无响应 家庭 中枢 Apple 支持`
+- `site:support.apple.com/zh-cn "家庭" "无响应" "Apple 支持" "配件"`
+- `site:support.apple.com/zh-cn AirDrop 隔空投送 找不到 等待 Apple 支持 2026`
+- `site:reddit.com/r/HomeKit Home app accessories not responding HomeKit Matter Thread 2026`
+- `site:reddit.com/r/HomeKit "No Response" "Home app" HomeKit "Thread"`
+- `site:discussions.apple.com/thread HomeKit accessories not responding Home app Matter Thread`
+- `site:discussionschinese.apple.com 家庭 App 配件 无响应 HomeKit Matter`
+- `小红书 HomeKit 无响应 家庭 App 配件 无响应`
+- `小红书 Apple 家庭 配件 无响应 HomePod Apple TV 中枢`
+- `小红书 Matter 配件 无法添加 家庭 App iPhone 2.4G`
+- `小红书 HomeKit Thread 无响应 HomePod mini`
+
+### Sources Visited
+
+- Apple Support: [如果 HomeKit 或 Matter 配件在“家庭”App 中没有响应](https://support.apple.com/zh-cn/102056)
+- Apple Support: [将 HomePod、HomePod mini 或 Apple TV 设置为家居中枢](https://support.apple.com/zh-cn/102557)
+- Apple Support: [如果无法将智能家居配件添加到“家庭”App 中](https://support.apple.com/zh-cn/126198)
+- Apple Support: [如果 HomePod 或 HomePod mini 没有响应](https://support.apple.com/zh-cn/105031)
+- Apple Support: [在 iPhone 和 iPad 上隔空投送的使用方法](https://support.apple.com/zh-cn/119857)
+- Apple Support Guide: [使用隔空投送向附近 Apple 设备发送项目](https://support.apple.com/zh-cn/guide/iphone/iphcd8b9f0af/ios)
+- Reddit r/HomeKit: [All my hue devices suddenly stopped responding overnight](https://www.reddit.com/r/HomeKit/comments/1rb4r2i/all_my_hue_devices_suddenly_stopped_responding/)
+- Reddit r/HomeKit: [All Devices Show "No Response"](https://www.reddit.com/r/HomeKit/comments/191sioc/all_devices_show_no_response/)
+- Apple Support Community: [Thread devices show no response](https://discussions.apple.com/thread/254933864)
+- Apple 支持社区中文: [Homekit 提示我升级新的底层架构后，设备全部变得不可用](https://discussionschinese.apple.com/thread/255057541)
+- Apple 支持社区中文: [homekit 家居中枢未响应 HOMEPOD MINI 无线 / APPLE TV 有线](https://discussionschinese.apple.com/thread/255013516)
+- Search result snippets from Xiaohongshu-style Chinese symptom searches; direct Xiaohongshu posts were not reliably accessible.
+
+### Evidence Collected
+
+- Apple separates HomeKit/Matter "无响应" troubleshooting by scope: one manufacturer's accessories versus multiple manufacturers' accessories. Source: [Apple Support 102056](https://support.apple.com/zh-cn/102056).
+- For same-manufacturer failures, Apple says to turn on Bluetooth, restart the unresponsive accessories, check the manufacturer app and firmware, restart third-party bridges and all home hubs, power-cycle third-party Thread accessories for 5 minutes, wait 10 minutes for Thread to stabilize, and remove/re-add accessories only after earlier steps. Source: [Apple Support 102056](https://support.apple.com/zh-cn/102056).
+- For multi-manufacturer failures, Apple says to update iPhone/iPad/Mac software, close and reopen Home, confirm the control device is on the same Wi-Fi as the accessories, turn on Bluetooth, restart accessories, check manufacturer firmware, power-cycle Thread accessories, then restart modem/router, bridges, home hubs, accessories, and the control device. Source: [Apple Support 102056](https://support.apple.com/zh-cn/102056).
+- Apple says VPN and third-party security software should be checked as potential network connection causes before escalating persistent Home app no-response issues. Source: [Apple Support 102056](https://support.apple.com/zh-cn/102056).
+- Apple says HomePod/HomePod mini automatically become home hubs after setup, Apple TV can become a home hub when added to a room in Home, and the Home app can show active home hubs and allow manual preferred home hub selection. Source: [Apple Support 102557](https://support.apple.com/zh-cn/102557).
+- Apple says a nonworking home hub should be checked for owner permissions, Apple TV default user, current software, restart state, staying at home, home Wi-Fi, iCloud Keychain, and two-factor authentication. Source: [Apple Support 102557](https://support.apple.com/zh-cn/102557).
+- Apple says adding accessories requires iPhone or iPad, current software, Bluetooth, manufacturer requirements/firmware, compatible Apple Home/HomeKit/Matter accessory support, and iPhone/iPad, existing accessories, and home hubs on the same Wi-Fi. Source: [Apple Support 126198](https://support.apple.com/zh-cn/126198).
+- Apple says a "网络不兼容" accessory alert can mean the iPhone/iPad must be connected to a Wi-Fi network supporting 2.4 GHz because some accessories do not support 5 GHz. Source: [Apple Support 126198](https://support.apple.com/zh-cn/126198).
+- Apple says iOS 26.2/iPadOS 26.2/macOS 26.2 or later can require an AirDrop code when someone not in Contacts tries to send an item, and that the code path can allow sharing for 30 days unless the person is removed from "其他已知联系人". Sources: [Apple Support 119857](https://support.apple.com/zh-cn/119857), [iPhone User Guide AirDrop](https://support.apple.com/zh-cn/guide/iphone/iphcd8b9f0af/ios).
+- Reddit and Apple Community repeatedly show customer language around "No Response", all accessories failing after updates, Thread devices dropping, Home app failing while manufacturer apps still work, and restarting HomePods/Apple TVs/bridges/routers. These are community signals, not official Apple recommendations.
+
+### Customer Wording
+
+- “家庭 App 里灯全都显示无响应。”
+- “厂商 App 能控制，HomeKit 里不行。”
+- “更新后所有 Matter 配件无响应。”
+- “HomePod 可以播音乐，但不能控制灯。”
+- “家居中枢未响应，出门以后控制不了。”
+- “Thread 设备正在更新/无响应来回跳。”
+- “添加 Matter 配件提示网络不兼容。”
+- “隔空投送突然让我输入代码。”
+
+### Cross-source Patterns
+
+- Home app "No Response" is frequently misread as an Apple device hardware issue. Apple’s official structure is scope-based: one manufacturer points toward that accessory family, firmware, bridge, or Thread path; multiple manufacturers points toward the control device, Wi-Fi, home hubs, router, VPN/security software, and broader Home sync path.
+- Community advice often jumps to resetting the whole home, resetting all accessories, DHCP reservations, or router segmentation. The new recipe keeps those network-heavy steps unofficial and pushes lower-risk official checks first.
+- Thread/Matter confusion is high Retail value because customers often see intermittent "正在更新" or "无响应" and repeatedly delete/re-add accessories before letting the Thread network stabilize.
+- AirDrop search showed Apple’s May 2026 guidance now includes AirDrop codes for non-contacts on iOS/iPadOS/macOS 26.2 or later, so the existing AirDrop recipe needed an official update to avoid treating the code prompt as a failure.
+
+### Articles Created, Improved, Merged, or Flagged
+
+- Created `cookbook/HomePod/homekit-matter-accessories-no-response.md` as a canonical Official recipe for HomeKit/Matter accessories showing "无响应", including scope triage, Thread wait timing, home hub checks, router/VPN/security software checks, manufacturer escalation, and clearly labeled unofficial network/router workarounds.
+- Improved `cookbook/Continuity/airdrop-keeps-waiting.md` with Apple’s current AirDrop-code behavior for non-contacts on iOS 26.2, iPadOS 26.2, and macOS 26.2 or later, plus a new customer wording example and Retail flow note.
+- No duplicate HomeKit/Matter recipe existed, so no merge was required.
+
+### Verification Changes
+
+- New recipe `家庭 App 中 HomeKit 或 Matter 配件显示无响应` is `Official` because the primary troubleshooting order is supported by Apple Support 102056, 102557, 126198, and 105031.
+- AirDrop article remains `Official`; its new code guidance is supported by Apple Support 119857 and the iPhone User Guide AirDrop page.
+- DHCP reservation and router advanced setting changes were recorded as `未知` and unofficial because they appear in community patterns but are not Apple’s official HomeKit/Matter first-line recommendation.
+
+### Reading/UI and Typography Improvements
+
+- No shared CSS or component styling changed in this run.
+- The new HomeKit/Matter recipe follows the Apple Support-inspired flow: symptom-first title, short intro, scan-friendly symptoms, official ordered steps, separate unofficial section, Retail decision flow, escalation split between Apple and manufacturer, related links, tags, and compact metadata.
+- The AirDrop article was updated in place rather than duplicated, preserving its clean Support-style structure.
+
+### Typography/Layout Improvements
+
+- No typography tokens were changed. Article readability was improved through short paragraphs, concise numbered steps, restrained headings, and avoiding dense community workaround text.
+
+### Blocked Sources
+
+- Xiaohongshu direct posts were not reliably accessible from search results. Chinese search snippets and adjacent repost/translation results were used only for customer wording; no factual recommendation was based on inaccessible Xiaohongshu content.
+
+### Follow-up Opportunities
+
+- Build a dedicated `HomePod 没有响应` recipe using Apple Support 105031 and 108389, separate from third-party HomeKit/Matter accessory failures.
+- Build a `Matter 配件无法添加到家庭 App` recipe using Apple Support 126198 if future searches show recurring "无法添加到家庭" and "网络不兼容" customer wording.
+- Review existing Wi-Fi and AirDrop recipes for shared router/VPN/security software language so the Cookbook uses one consistent escalation vocabulary across network-related issues.
+
+## Harvest Run - 2026-07-10 06:03:00 CST
+
+### Search Queries
+
+- `site:support.apple.com/zh-cn HomePod 没有响应 108389 105031 Apple 支持`
+- `site:support.apple.com/zh-cn HomePod 无法连接 Wi-Fi 感叹号 Apple 支持`
+- `site:support.apple.com/zh-cn Matter 配件 无法添加 家庭 App 网络不兼容 Apple 支持`
+- `site:discussions.apple.com/thread HomePod not responding Home app Wi-Fi network 2026`
+- `site:reddit.com/r/HomePod HomePod not responding Home app Wi-Fi exclamation 2026`
+- `site:reddit.com/r/HomeKit HomePod not responding Home app plays music 2026`
+- `site:discussionschinese.apple.com HomePod 没有响应 无线局域网 感叹号 家庭 App`
+- `小红书 HomePod 未响应 家庭 App WiFi 感叹号`
+- `site:support.apple.com/zh-cn HomePod Siri 无法连接 互联网 Apple 支持`
+- `site:support.apple.com/zh-cn HomePod 感叹号 无线局域网 Apple 支持`
+
+### Sources Visited
+
+- Apple Support: [如果 HomePod 或 HomePod mini 没有响应](https://support.apple.com/zh-cn/105031)
+- Apple Support: [如果 HomePod 上的 Siri 提示 HomePod 无法连接到互联网](https://support.apple.com/zh-cn/105043)
+- Apple Support: [如果 HomePod 存在“网络问题”或“无互联网”](https://support.apple.com/zh-cn/122539)
+- Apple Support: [还原 HomePod 或 HomePod mini](https://support.apple.com/zh-cn/108389)
+- Apple Support: [如果你无法设置 HomePod 或 HomePod mini](https://support.apple.com/zh-cn/111109)
+- Apple Support: [设置 HomePod 或 HomePod mini](https://support.apple.com/zh-cn/111110)
+- Apple Support: [将 HomePod、HomePod mini 或 Apple TV 设置为家居中枢](https://support.apple.com/zh-cn/102557)
+- Apple Support: [配对和管理 Matter 配件](https://support.apple.com/zh-cn/102135)
+- Apple Support: [如果无法将智能家居配件添加到“家庭”App 中](https://support.apple.com/zh-cn/126198)
+- Apple Support Community: [homepod no response in home ap](https://discussions.apple.com/thread/254669625)
+- Apple Support Community: [HomeKit stopped working - but works for 1 minute after restarting iPhone?](https://discussions.apple.com/thread/255509299)
+- Apple 支持社区中文: [家庭应用出bug，无法移除homepod](https://discussionschinese.apple.com/thread/255530131)
+- Reddit r/HomeKit: [HomePod Mini cannot handle any siri requests but has no issues playing music](https://www.reddit.com/r/HomeKit/comments/1uhqo6e/homepod_mini_cannot_handle_any_siri_requests_but/)
+- Search result snippets from Xiaohongshu-style Chinese symptom searches; direct Xiaohongshu posts were not reliably accessible.
+
+### Evidence Collected
+
+- Apple says that when HomePod or HomePod mini shows "未响应" in Home, customers should first check Home app alerts, then Wi-Fi connection, then restart HomePod, and seek service if problems continue. Source: [Apple Support 105031](https://support.apple.com/zh-cn/105031).
+- Apple says Home app alerts can identify HomePod Wi-Fi, Apple Account, or other issues, and that HomePod Wi-Fi signal strength is visible in HomePod settings. Source: [Apple Support 105031](https://support.apple.com/zh-cn/105031).
+- Apple says two Wi-Fi signal bars or fewer indicate weak signal; users should move HomePod closer to the router and remove wireless interference sources. Source: [Apple Support 105031](https://support.apple.com/zh-cn/105031).
+- Apple says a Wi-Fi exclamation mark means HomePod cannot join Wi-Fi; Siri saying it cannot connect to the network should be handled by checking network mismatch and signal strength in Home. Sources: [Apple Support 105031](https://support.apple.com/zh-cn/105031), [Apple Support 105043](https://support.apple.com/zh-cn/105043).
+- Apple says "HomePod 网络不匹配" should be resolved by choosing "将 HomePod 移到 [无线局域网]" from the Home app alert details. Source: [Apple Support 105043](https://support.apple.com/zh-cn/105043).
+- Apple says HomePod "网络问题" or "无互联网" can prevent audio handoff, AirPlay, Siri requests, and Home app accessory control; first steps are restarting HomePod, restarting modem/router, and confirming HomePod and iPhone use the same preferred Wi-Fi. Source: [Apple Support 122539](https://support.apple.com/zh-cn/122539).
+- Apple lists router-level causes for HomePod network issues, including home hub reachability, DHCP, DNS, blocked peer-to-peer traffic, and double NAT. Source: [Apple Support 122539](https://support.apple.com/zh-cn/122539).
+- Apple says HomePod reset should come after restarting from Home, unplugging/replugging if restart is unavailable, and then factory reset if still unresponsive; stereo pairs must be ungrouped before reset. Source: [Apple Support 108389](https://support.apple.com/zh-cn/108389).
+- Apple says HomePod mini can be restored from Mac or PC over USB-C if it cannot be reset, and that restore also updates to the latest software. Source: [Apple Support 108389](https://support.apple.com/zh-cn/108389).
+- Apple says HomePod setup requires iPhone or iPad, not Mac; HomePod uses the Wi-Fi network from the iPhone or iPad, and Personal Hotspot is not recommended. Sources: [Apple Support 111109](https://support.apple.com/zh-cn/111109), [Apple Support 111110](https://support.apple.com/zh-cn/111110).
+- Apple says a 6 GHz setup warning should be handled by making every router band use the same network name, and Home app "正在载入配件和场景" for more than 30 minutes may show an option to restore the home. Source: [Apple Support 111109](https://support.apple.com/zh-cn/111109).
+- Apple says HomePod and HomePod mini automatically become home hubs after setup. Source: [Apple Support 102557](https://support.apple.com/zh-cn/102557).
+- Community signals repeatedly include HomePod playing audio while Home shows no response, HomePod / iPhone not on the same network, HomePod stuck configuring, and users jumping directly to resets or router changes. These are symptom and prioritization signals, not official recommendations.
+
+### Customer Wording
+
+- “家庭 App 里 HomePod 显示未响应。”
+- “HomePod 可以播放音乐，但家庭 App 里显示离线。”
+- “Siri 说无法连接到互联网。”
+- “HomePod 设置里 Wi-Fi 旁边有感叹号。”
+- “提示 HomePod 和 iPhone 不在同一个无线局域网。”
+- “HomePod mini 一直正在配置。”
+- “更新后 HomePod 不能控制灯，也不能作为家居中枢。”
+- “HomePod 和 iPhone/iPad 不在同一网络。”
+
+### Cross-source Patterns
+
+- HomePod "not responding" overlaps with HomeKit accessory failures but deserves a separate canonical recipe because Apple’s official path focuses on HomePod alerts, Wi-Fi signal, network mismatch, router communication, restart, reset, and HomePod mini restore.
+- Customers often misread "HomePod can play music but Home says no response" as proof the device is healthy. Apple’s network article clarifies HomePod may still fail to communicate with Wi-Fi or the active home hub, which can affect Siri, AirPlay, handoff, and accessory control.
+- Community advice often jumps to factory reset, home reset, private Wi-Fi address changes, or router surgery. The new article keeps those clearly separated from Apple’s official sequence and frames private Wi-Fi address changes as non-official and situational.
+- Setup problems need a different branch from runtime "未响应": iPhone/iPad requirement, same Wi-Fi, no Personal Hotspot, 6 GHz same-SSID warning, "正在载入配件和场景", and orange flashing HomePod mini power-adapter state.
+
+### Articles Created, Improved, Merged, or Flagged
+
+- Created `cookbook/HomePod/homepod-not-responding-network-problem.md` as a canonical Official recipe for HomePod / HomePod mini "未响应", network mismatch, Wi-Fi exclamation mark, "网络问题", "无互联网", Siri cannot connect, setup stuck, restart, reset, and HomePod mini restore.
+- Improved `cookbook/HomePod/homekit-matter-accessories-no-response.md` by replacing the plain related item "HomePod 没有响应" with a link to the new canonical HomePod recipe.
+- No duplicate HomePod-specific recipe existed, so no merge was required.
+
+### Verification Changes
+
+- New recipe `HomePod 或 HomePod mini 在家庭 App 中显示未响应` is `Official` because its core troubleshooting order is supported by Apple Support 105031, 105043, 122539, 108389, 111109, 111110, and 102557.
+- The related HomeKit/Matter recipe remains `Official`; only its related-link organization changed.
+- Private Wi-Fi address changes are recorded as `未知` and unofficial for this HomePod path because they appeared in community results but are not Apple’s official HomePod first-line recommendation.
+
+### Reading/UI and Typography Improvements
+
+- No shared CSS or component styling changed in this run.
+- The new HomePod article follows the Apple Support-inspired reading flow: direct symptom title, short intro, customer wording, possible causes, official ordered path, setup branch, separate unofficial section, Retail flow, escalation split, related links, tags, and compact metadata.
+- The HomeKit/Matter article now points readers to the HomePod-specific article instead of leaving "HomePod 没有响应" as an unlinked future topic.
+
+### Typography/Layout Improvements
+
+- No typography tokens were changed. Article readability was improved through short paragraphs, concise numbered steps, restrained H2/H3 headings, and a separate setup branch to avoid dense mixed troubleshooting text.
+
+### Blocked Sources
+
+- Xiaohongshu direct posts were not reliably accessible from search results. Chinese symptom snippets were used only for customer wording and priority signals; no factual recommendation was based on inaccessible Xiaohongshu content.
+
+### Follow-up Opportunities
+
+- Build a dedicated `Matter 配件无法添加到家庭 App` recipe using Apple Support 126198 and 102135 if future runs continue seeing "无法添加到家庭", "网络不兼容", "已添加到其他家庭", and "配件不受支持".
+- Build an `Apple TV 网络问题或无互联网连接 / 无法作为家居中枢` recipe using Apple Support 126311 and 102557, then link it from the HomePod and HomeKit/Matter articles.
+- Review global article rendering for jump-link/table-of-contents support; longer support-style articles now have enough major sections that a compact TOC could improve scanability without adding visual noise.
