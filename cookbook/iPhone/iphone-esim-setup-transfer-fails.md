@@ -185,6 +185,7 @@ popular: true
 
 ## 相关问题
 
+- [iPhone 无法发送或接收信息，iMessage 变绿色或等待激活](/recipes/iPhone/iphone-imessage-messages-not-sending-green-waiting-activation)
 - [iPhone 显示无 SIM 卡或无效 SIM 卡](/recipes/iPhone/iphone-invalid-sim-no-sim)
 - [iPhone 显示 SOS、无服务或正在搜索](/recipes/iPhone/iphone-sos-no-service-searching)
 - iPhone 无法激活
