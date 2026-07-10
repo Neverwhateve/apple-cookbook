@@ -189,6 +189,111 @@
 - Build a `Matter 配件无法添加到家庭 App` recipe using Apple Support 126198 if future searches show recurring "无法添加到家庭" and "网络不兼容" customer wording.
 - Review existing Wi-Fi and AirDrop recipes for shared router/VPN/security software language so the Cookbook uses one consistent escalation vocabulary across network-related issues.
 
+## Harvest Run - 2026-07-10 09:03:20 CST
+
+### Search Queries
+
+- `site:support.apple.com/zh-cn Apple 支持 2026 iOS 26.3 故障 排查 iPhone`
+- `site:support.apple.com/zh-cn Apple 支持 2026 "如果" "iPhone" "无法"`
+- `site:support.apple.com/zh-cn iMessage 无法发送 接收 信息 Apple 支持`
+- `site:support.apple.com/zh-cn iMessage FaceTime 等待激活 Apple 支持`
+- `site:support.apple.com/zh-cn 取消注册 iMessage Apple 支持`
+- `site:support.apple.com/zh-cn RCS 信息 iPhone Apple 支持`
+- `site:support.apple.com/zh-cn 信息 蓝色 绿色 气泡 RCS 短信 Apple 支持`
+- `site:discussions.apple.com/thread iMessage not sending receiving messages iPhone 2026`
+- `site:discussions.apple.com/thread iMessage waiting for activation iPhone 2026`
+- `site:discussionschinese.apple.com iMessage 无法发送 接收 信息 激活`
+- `site:reddit.com/r/iphone iMessage not sending receiving messages waiting for activation 2026`
+- `site:reddit.com/r/iphone RCS won't activate iPhone`
+- `小红书 iMessage 等待激活 信息发不出去 绿色气泡`
+- `小红书 iPhone RCS 激活不了 短信 收不到`
+
+### Sources Visited
+
+- Apple Support: [如果你无法在 iPhone 或 iPad 上发送或接收信息](https://support.apple.com/zh-cn/118433)
+- Apple Support: [如果你无法在 iPhone 上打开或登录 iMessage 信息或 FaceTime 通话](https://support.apple.com/zh-cn/119859)
+- Apple Support: [如果 iPhone 上的信息显示为绿色](https://support.apple.com/zh-cn/105087)
+- Apple Support: [iMessage 信息、RCS 和短信/彩信有什么区别？](https://support.apple.com/zh-cn/104972)
+- Apple Support: [在“信息”或 FaceTime 通话中添加或移除你的电话号码](https://support.apple.com/zh-cn/108758)
+- Apple Support: [在 iPhone 上或在线注销 iMessage 信息](https://support.apple.com/zh-cn/102455)
+- Apple Support Guide: [在 iPhone 上设置信息](https://support.apple.com/zh-cn/guide/iphone/iph3d039b67/ios)
+- Apple Support Community: [iMessage not receiving messages on iPhone](https://discussions.apple.com/thread/255954997)
+- Apple Support Community: [iMessage / Messages setup and activation search result patterns](https://discussions.apple.com/)
+- Apple 支持社区中文: [iMessage 激活与收发异常搜索结果](https://discussionschinese.apple.com/)
+- Reddit r/iPhone: [Got new phones for me and my wife. iMessage isn't working only between us?](https://www.reddit.com/r/iphone/comments/1swc6ny/got_new_phones_for_me_and_my_wife_imessage_isnt/)
+- Reddit r/iPhone: [RCS Messaging won't activate on my iPhone what is going on?](https://www.reddit.com/r/iphone/comments/1tes8ma/rcs_messaging_wont_activate_on_my_iphone_what_is/)
+- Reddit r/iPhone: [RCS Messaging stuck on Waiting for Activation after upgrade](https://www.reddit.com/r/iphone/comments/1pbvvbf/rcs_messaging_stuck_on_waiting_for_activation/)
+- Search result snippets from Xiaohongshu-style Chinese symptom searches; direct Xiaohongshu posts were not reliably accessible.
+
+### Evidence Collected
+
+- Apple’s Messages article, published 2026-06-23, says new-device Messages problems can appear as separate threads or green bubbles, and the official fix path is update iOS/iPadOS if needed, confirm the cellular number is enabled, toggle iMessage, then select the desired phone number in Send & Receive. Source: [Apple Support 118433](https://support.apple.com/zh-cn/118433).
+- Apple says a red exclamation mark / "尚未送达" should start with network checking, retry, then "用短信发送"; iMessage uses Wi-Fi or cellular data and blue bubbles, while other text messages use RCS/SMS/MMS and require a carrier texting plan. Source: [Apple Support 118433](https://support.apple.com/zh-cn/118433).
+- Apple says if Messages arrive on one device but not another, check whether iMessage is using the Apple Account email instead of the phone number under Settings > Apps > Messages > Send & Receive. Source: [Apple Support 118433](https://support.apple.com/zh-cn/118433).
+- Apple says SMS/MMS/RCS failures should be escalated to the wireless carrier, while persistent iMessage failures after Apple steps should go to Apple Support. Source: [Apple Support 118433](https://support.apple.com/zh-cn/118433).
+- Apple’s iMessage/FaceTime activation article says activation requires cellular data or Wi-Fi, correct date/time zone, and current iOS; iPhone phone-number activation may use carrier SMS and can take up to 24 hours for carrier verification. Source: [Apple Support 119859](https://support.apple.com/zh-cn/119859).
+- Apple says if a new iPhone running iOS 26 is set up before iMessage or eSIM activation, iMessage may not auto-activate after eSIM setup; messages may show "尚未送达", fall back to green SMS/RCS, or send from email instead of the phone number. Source: [Apple Support 119859](https://support.apple.com/zh-cn/119859).
+- Apple says green bubbles mean RCS or SMS/MMS rather than iMessage, and common causes include non-Apple recipient device, iMessage disabled on either side, temporary iMessage unavailability, or new-device Messages settings needing an update. Source: [Apple Support 105087](https://support.apple.com/zh-cn/105087).
+- Apple says RCS requires iOS 18 and a carrier texting plan that supports iPhone RCS; RCS activation can be delayed by several hours. Apple also says end-to-end encrypted RCS requires iOS 26.5 and carrier support. Source: [Apple Support 104972](https://support.apple.com/zh-cn/104972).
+- Apple says using an iPhone phone number with Messages/FaceTime on Mac or iPad requires an active SIM or eSIM associated with that number, and the number plus Apple Account should be selected under Send & Receive. Source: [Apple Support 108758](https://support.apple.com/zh-cn/108758).
+- Apple says customers who switched to a non-Apple phone and cannot receive RCS/SMS/MMS may need to deregister iMessage, either on the iPhone with cellular data or through Apple’s online deregistration tool. Source: [Apple Support 102455](https://support.apple.com/zh-cn/102455).
+- Reddit and Apple Community signals repeatedly mention "new phones", "switched carriers", "iMessage isn't working", "RCS won't activate", "waiting for activation", and "shortcode / 2FA messages not coming through". These are customer wording and prioritization signals, not official recommendations.
+
+### Customer Wording
+
+- “iMessage 一直正在等待激活。”
+- “蓝色气泡突然变绿色。”
+- “换新机以后信息只从邮箱发出，不显示手机号。”
+- “发出去显示尚未送达。”
+- “别人能收到我的短信，但我收不到验证码。”
+- “RCS 一直激活不了。”
+- “换运营商以后 iMessage 不能用手机号。”
+- “换到安卓后收不到 iPhone 朋友发来的短信。”
+
+### Cross-source Patterns
+
+- Many customers describe "green bubbles" as a bug, but Apple’s current guidance treats green bubbles as a symptom that must be split into RCS/SMS/MMS fallback, recipient device type, iMessage disabled, temporary iMessage unavailability, or new-device Send & Receive setup.
+- New-device and carrier-switch cases overlap heavily with eSIM/SIM activation. Apple’s December 2025 iMessage/FaceTime article explicitly calls out iOS 26 setup where eSIM is completed later and iMessage does not auto-activate.
+- Community threads often jump to resetting network settings, deleting eSIM, or asking the carrier to re-provision. The new recipe keeps carrier refresh as an unofficial but plausible later step and makes Apple’s official checks first.
+- RCS confusion is now high Retail value because Apple’s RCS support depends on iOS version, carrier support, activation delay, and encryption support; it should not be mixed with iMessage-only failures.
+
+### Articles Created, Improved, Merged, or Flagged
+
+- Improved existing canonical recipe `cookbook/iPhone/iphone-imessage-messages-not-sending-green-waiting-activation.md` with stronger Apple-official handling for red exclamation / "尚未送达", clearer Retail triage before resetting network settings, and added shortcode/verification-code customer wording.
+- Confirmed existing related links from eSIM, invalid SIM, and SOS/no-service recipes already point to the Messages recipe, so no duplicate link work was needed.
+- No duplicate Messages/iMessage recipe existed, so no merge was required.
+
+### Verification Changes
+
+- Existing recipe `iPhone 无法发送或接收信息，iMessage 变绿色或等待激活` remains `Official` because its primary troubleshooting order is supported by Apple Support 118433, 119859, 105087, 104972, 108758, 102455, and the iPhone User Guide.
+- Carrier refresh/re-provisioning is labeled `较可能` and unofficial because Apple tells users to contact the carrier for SMS/MMS/RCS and phone-number verification issues, while the exact "refresh" operation appears mainly in community patterns.
+- Reset Network Settings remains `较可能` / late-stage unofficial because it appears in community discussions but is not Apple’s current first-line Messages/iMessage guidance.
+
+### Reading/UI and Typography Improvements
+
+- No shared CSS or component styling changed in this run.
+- The Messages article continues to follow the Apple Support-inspired reading flow: symptom-first title, short intro, symptom bullets, official ordered steps, separate RCS/SMS/MMS branch, clearly labeled unofficial section, Retail flow, escalation split by Apple vs carrier, related links, tags, and compact metadata.
+
+### Typography/Layout Improvements
+
+- No typography tokens were changed. The article uses short sections, concise numbered steps, Apple-like link text, and whitespace-based separation rather than cards or dense community-workaround blocks.
+
+### Blocked Sources
+
+- Xiaohongshu direct posts were not reliably accessible. Search snippets were used only to collect Chinese customer wording; no factual recommendation was based on inaccessible Xiaohongshu content.
+
+### Verification Run
+
+- `PATH="/Users/calvinchen/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin:$PATH" pnpm lint` passed.
+- `PATH="/Users/calvinchen/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin:$PATH" pnpm build` passed and generated 86 static pages.
+- Initial `pnpm lint` and `pnpm build` attempts failed before project execution because the default shell PATH could not find `node`; rerunning with the bundled Node path resolved it.
+
+### Follow-up Opportunities
+
+- Build a small carrier/RCS support reference note if future runs find repeated "RCS waiting for activation" cases by carrier.
+- Review Family Sharing and Apple Account recipes for the new Settings > Apps wording so navigation stays current with iOS 26 support articles.
+- Consider a separate `换到安卓后收不到短信` recipe only if deregister-iMessage searches keep showing strong standalone demand.
+
 ## Harvest Run - 2026-07-10 06:03:00 CST
 
 ### Search Queries
