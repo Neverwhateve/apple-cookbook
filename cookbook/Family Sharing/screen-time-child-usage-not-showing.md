@@ -18,15 +18,16 @@ aliases:
   - 家长端看不到孩子使用明细
   - Screen Time child activity not showing
   - Family Sharing Screen Time not showing child usage
-verification: Likely
+verification: Official
 difficulty: Moderate
-updated: 2026-07-09
+updated: 2026-07-10
 official_sources:
   - https://support.apple.com/zh-cn/108806
   - https://support.apple.com/zh-cn/118233
+  - https://support.apple.com/zh-cn/105121
 community_sources:
   - https://www.xiaohongshu.com/discovery/item/680d8999000000001c01d41f
-status: draft
+status: canonical
 popular: true
 ---
 
@@ -56,9 +57,11 @@ popular: true
    - Apple 建议在打开或更改“屏幕时间”设置前，将家人共享群组中的所有设备更新到最新软件版本。
 4. **使用摘要还没有生成**
    - Apple 说明，如果看不到孩子的活动摘要，可能需要孩子继续使用设备一段时间后才会显示报告。
-5. **Apple 账户资料或购买账户不一致**
+5. **内容与隐私限制或家长控制同步异常**
+   - Apple 说明，关闭“内容与隐私限制”会暂停其中的家长控制；更改家长控制前应先更新家人共享群组中的所有设备。
+6. **Apple 账户资料或购买账户不一致**
    - “购买前询问”文档中提到，家人共享设置、登录的 Apple 账户、孩子联系人名片里的 Apple 账户邮箱或手机号，都可能影响家庭功能通知和识别。
-6. **儿童账号创建资料存在社区报告的兼容性问题**
+7. **儿童账号创建资料存在社区报告的兼容性问题**
    - 有小红书用户报告，儿童账号使用手机号注册、用户名使用中文等情况，可能导致家长端无法看到明细。这个说法属于社区经验，尚未找到 Apple 官方确认。
 
 ---
@@ -74,12 +77,14 @@ popular: true
 3. 在家长设备上进入“设置” > “屏幕时间”，在“家人”下轻点孩子姓名，并按屏幕提示打开和管理“屏幕时间”。
 4. 如果需要在孩子设备上设置，进入孩子设备的“设置” > “屏幕时间”，打开“App 与网站活动”，这样系统才会生成活动摘要。
 5. 等孩子正常使用设备一段时间后，再回到家长设备查看摘要。
-6. 如果同时收不到“购买前询问”请求，检查家人共享设置、专注模式通知、设备名称、孩子联系人名片，以及 App Store/购买项目使用的 Apple 账户是否与家人共享关联。
+6. 如果家长还需要管理购买、下载、网页内容、隐私或 App 设置，确认**内容与隐私限制**已打开；关闭它会暂停其中的家长控制。
+7. 如果同时收不到“购买前询问”请求，检查家人共享设置、专注模式通知、设备名称、孩子联系人名片，以及 App Store/购买项目使用的 Apple 账户是否与家人共享关联。
 
 参考来源：
 
 - [Apple 支持：使用“屏幕时间”来管理孩子的 iPhone 或 iPad](https://support.apple.com/zh-cn/108806)
 - [Apple 支持：如果“购买前询问”无法正常使用](https://support.apple.com/zh-cn/118233)
+- [Apple 支持：使用家长控制来管理你孩子的 iPhone 或 iPad](https://support.apple.com/zh-cn/105121)
 
 ---
 
@@ -150,6 +155,7 @@ popular: true
 - [Apple 账户验证失败](/recipes/Apple%20ID/apple-account-verification-failed)
 - [购买前询问请求不显示](/recipes/Family%20Sharing/ask-to-buy-requests-not-showing)
 - [屏幕使用时间请求收不到或批准后不生效](/recipes/Family%20Sharing/screen-time-requests-not-working)
+- [屏幕使用时间限额到时仍能继续使用](/recipes/Family%20Sharing/screen-time-limits-not-blocking)
 - 儿童账号无法移出家人共享
 - 家长控制无法修改
 
@@ -171,8 +177,8 @@ popular: true
 
 ## 元信息
 
-- 最后更新：2026-07-09
-- 来源数量：3
-- 验证级别：较可能
+- 最后更新：2026-07-10
+- 来源数量：4
+- 验证级别：Apple 官方
 - 支持系统：当前 iOS、iPadOS、macOS 版本
-- 可信度：中
+- 可信度：高

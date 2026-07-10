@@ -25,7 +25,7 @@ aliases:
   - 孩子请求更多时间家长收不到
 verification: Official
 difficulty: Moderate
-updated: 2026-07-09
+updated: 2026-07-10
 official_sources:
   - https://support.apple.com/zh-cn/125399
   - https://support.apple.com/zh-cn/108806
@@ -86,7 +86,8 @@ popular: true
 6. 打开“信息”的通知，避免请求到了但没有提醒。
 7. 确认 iCloud 通讯录已经同步到家长想接收请求的设备。
 8. 如果孩子在身边，可在孩子设备上打开 App Store 或对应请求页面，使用“亲自批准”完成 App 例外请求。
-9. 如果问题其实是购买或下载 App 请求收不到，改按“购买前询问”流程检查家人共享、专注模式、设备名称、联系人名片和购买账户。
+9. 如果批准后 App 仍被限制，打开**设置 > 屏幕时间 > 内容与隐私限制 > App Store、媒体、网页与游戏 > App**，查看已批准的 App 例外是否仍在列表中；必要时移除后让孩子重新请求。
+10. 如果问题其实是购买或下载 App 请求收不到，改按“购买前询问”流程检查家人共享、专注模式、设备名称、联系人名片和购买账户。
 
 参考来源：
 
@@ -153,6 +154,7 @@ popular: true
 
 - [购买前询问请求不显示](/recipes/Family%20Sharing/ask-to-buy-requests-not-showing)
 - [家长看不到儿童账号屏幕使用时间明细](/recipes/Family%20Sharing/screen-time-child-usage-not-showing)
+- [屏幕使用时间限额到时仍能继续使用](/recipes/Family%20Sharing/screen-time-limits-not-blocking)
 - App 限额到时间但没有阻止
 - 儿童账号无法移出家人共享
 
@@ -174,7 +176,7 @@ popular: true
 
 ## 元信息
 
-- 最后更新：2026-07-09
+- 最后更新：2026-07-10
 - 来源数量：6
 - 验证级别：Apple 官方
 - 支持系统：当前 iOS、iPadOS、macOS、watchOS 版本

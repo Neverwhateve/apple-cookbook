@@ -1,5 +1,98 @@
 # Daily Harvest - 2026-07-10
 
+## Harvest Run - 2026-07-10 12:04:50 CST
+
+### Search Queries
+
+- `site:support.apple.com/zh-cn 屏幕使用时间 管理孩子 iPhone iPad App 与网站活动 Apple 支持 2026`
+- `site:support.apple.com/zh-cn 家人共享 屏幕使用时间 请求 更多时间 信息 Apple 支持`
+- `site:support.apple.com/zh-cn 购买前询问 无法正常使用 信息 Apple 支持`
+- `site:support.apple.com/zh-cn/guide/iphone 设置 App 使用限额 限制结束时阻止 屏幕时间`
+- `site:support.apple.com/zh-cn 屏幕使用时间 App 限额 限制结束时阻止 Apple 支持`
+- `site:reddit.com/r/applehelp "Screen Time" "child" "not showing" "Family Sharing"`
+- `site:reddit.com/r/iphone "Screen Time" "Ask for More Time" "not working"`
+- `site:discussions.apple.com/thread "Screen Time" "child" "not showing" "Family Sharing"`
+- `site:discussions.apple.com/thread "Ask to Buy" "not receiving" "Messages"`
+- `小红书 屏幕使用时间 家长 看不到 孩子 明细 iPhone`
+- `小红书 苹果 屏幕使用时间 请求更多时间 收不到 家长`
+- `小红书 购买前询问 收不到 请求 苹果 家人共享`
+- `小红书 孩子 iPhone 屏幕时间 限额 不生效 删除重装`
+
+### Sources Visited
+
+- Apple Support: [使用“屏幕时间”来管理孩子的 iPhone 或 iPad](https://support.apple.com/zh-cn/108806)
+- Apple Support: [如何管理孩子的 App 例外请求](https://support.apple.com/zh-cn/125399)
+- Apple Support: [使用家长控制来管理你孩子的 iPhone 或 iPad](https://support.apple.com/zh-cn/105121)
+- Apple Support Guide: [在 iPhone 上通过“屏幕时间”设置定时](https://support.apple.com/zh-cn/guide/iphone/iphb0c7313c9/ios)
+- Apple Support Guide: [Get started with Screen Time on iPhone](https://support.apple.com/guide/iphone/get-started-with-screen-time-iphbfa595995/ios)
+- Apple Support Community: [Apple Screen Time app limits not working](https://discussions.apple.com/thread/254480754)
+- Apple Support Community: [App Limits and Always Allowed for Messages](https://discussions.apple.com/thread/255716772)
+- Apple Support Community: [Communication Limits Not Working](https://discussions.apple.com/thread/255044171)
+- Apple Support Community: [Child's screen time not updating on my phone](https://discussions.apple.com/thread/255081344)
+- Search result snippets from Reddit and Xiaohongshu-style Chinese symptom searches; direct Xiaohongshu posts were not reliably accessible.
+
+### Evidence Collected
+
+- Apple says parents can manage a child's Screen Time through Family Sharing when the child's Apple Account is in the family group, and should update all family devices before opening or changing Screen Time settings so they sync as expected. Source: [Apple Support 108806](https://support.apple.com/zh-cn/108806).
+- Apple says a child-device setup path must turn on "App 与网站活动"; this enables the parent to see the child's usage summary. Apple also says if a summary is missing, the child may need to use the device longer before the report appears. Source: [Apple Support 108806](https://support.apple.com/zh-cn/108806).
+- Apple says Screen Time can set Downtime, App Limits, Always Allowed apps/contacts, Communication Limits, Communication Safety, and Content & Privacy Restrictions. Source: [Apple Support 108806](https://support.apple.com/zh-cn/108806).
+- Apple says Screen Time limits are ignored by default when reached unless blocking behavior is enabled for scheduled Downtime; with "停用期间阻止使用设备" on, restricted apps cannot open during Downtime and show as gray with an hourglass icon. Source: [iPhone User Guide](https://support.apple.com/zh-cn/guide/iphone/iphb0c7313c9/ios).
+- Apple says App Limits can be set for categories or individual apps by expanding a category and choosing specific apps; Always Allowed apps and contacts remain available during Downtime or after limits. Source: [iPhone User Guide](https://support.apple.com/zh-cn/guide/iphone/iphb0c7313c9/ios).
+- Apple says Content & Privacy Restrictions must be opened to manage many child controls, and closing it pauses the parental controls configured in that section until it is opened again. Source: [Apple Support 105121](https://support.apple.com/zh-cn/105121).
+- Apple says App exception requests arrive in Messages, can be approved or denied from notification/Messages, and can be approved on the child's device with "亲自批准"; approved exceptions can later be viewed and removed from Screen Time > Content & Privacy Restrictions > App Store, Media, Web & Games > App. Source: [Apple Support 125399](https://support.apple.com/zh-cn/125399).
+- Apple says if a parent cannot receive exception requests, they should update devices, add the Apple Account email address to iMessage, use iMessage within the last 30 days, enable Messages notifications, and sync iCloud Contacts. Source: [Apple Support 125399](https://support.apple.com/zh-cn/125399).
+- Apple Community signals repeatedly mention App Limits not blocking, Always Allowed causing confusion, missing child Screen Time activity, and parents attempting risky full resets or iCloud sign-out. These are community signals, not official Apple recommendations.
+
+### Customer Wording
+
+- “屏幕使用时间限额到了还能继续用。”
+- “停用时间只是变灰，孩子点忽略就进去了。”
+- “我设置了 App 限额，但某个 App 没有被限制。”
+- “家长端看不到孩子的屏幕时间明细。”
+- “孩子请求更多时间，信息里批准了但还是打不开。”
+- “删除重装 App 后限制好像失效。”
+- “信息、FaceTime、电话为什么不受 App 限额影响？”
+
+### Cross-source Patterns
+
+- Families often mix three different problems: missing usage summaries, approval/request delivery failures, and limits that do not actually block. Splitting these into separate canonical recipes improves Retail triage.
+- Apple's official path starts with Family Sharing membership, App & Website Activity, Screen Time passcode, the exact limit target, Downtime blocking, Always Allowed, Content & Privacy Restrictions, and current software. Community threads often jump to resets, iCloud sign-out, or recreating accounts; those remain unofficial and high-risk.
+- The "孩子绕过限制" customer wording often means the parent did not turn on a blocking behavior, selected the wrong app/category, left the app in Always Allowed, or approved an exception earlier.
+- Missing child usage summaries are now better supported by Apple official documentation, so the Cookbook can treat the primary recipe as Official while still isolating Xiaohongshu-style account-creation anecdotes as unofficial.
+
+### Articles Created, Improved, Merged, or Flagged
+
+- Created `cookbook/Family Sharing/screen-time-limits-not-blocking.md` as the canonical Official recipe for App Limits or Downtime not blocking, including App & Website Activity, Screen Time passcode, Downtime blocking, App Limit target selection, Always Allowed, Content & Privacy Restrictions, family-device updates, and clearly labeled unofficial reset/rebuild ideas.
+- Improved `cookbook/Family Sharing/screen-time-requests-not-working.md` with Apple's App exception list path for reviewing/removing approved exceptions when approval or access state is confusing.
+- Improved `cookbook/Family Sharing/screen-time-child-usage-not-showing.md` by adding Apple Support 105121, adding Content & Privacy Restrictions sync/pause context, linking to the new limits article, and promoting the article from draft/Likely to canonical/Official for its primary official troubleshooting path.
+- No duplicate Family Sharing recipe was merged in this run.
+
+### Verification Changes
+
+- `家长看不到儿童账号屏幕使用时间明细` changed from `Likely` to `Official`. Evidence: Apple Support 108806 supports Family Sharing setup, App & Website Activity, usage summaries, and delayed report generation; Apple Support 105121 supports current software and Content & Privacy Restrictions behavior. Community-only account-creation anecdotes remain isolated as unofficial and are not used to justify the Official verification.
+- New recipe `屏幕使用时间限额到时仍能继续使用` is `Official` because its primary troubleshooting order is supported by Apple Support 108806, 105121, 125399, and the iPhone User Guide Screen Time scheduling page.
+- Community suggestions such as toggling App & Website Activity or rebuilding individual limits remain `较可能` and explicitly unofficial because Apple does not present them as first-line repair steps.
+
+### Reading/UI and Typography Improvements
+
+- No shared CSS or component styling changed in this run.
+- The new Screen Time limits article follows the Apple Support-inspired structure: symptom-focused title, short intro, concise symptom list, root-cause bullets, official ordered steps, separate unofficial section, Retail flow, escalation, related links, and compact metadata.
+- The Family Sharing cluster now has cleaner internal navigation between requests, missing usage summaries, Ask to Buy, and limits-not-blocking problems.
+
+### Typography/Layout Improvements
+
+- No typography tokens changed. Article readability was improved through short paragraphs, direct H2/H3 sections, restrained numbered steps, and avoiding dense community workaround blocks.
+
+### Blocked Sources
+
+- Xiaohongshu direct posts were not reliably accessible. Search snippets were used only for customer wording and issue prioritization; no factual recommendation was based on inaccessible Xiaohongshu content.
+
+### Follow-up Opportunities
+
+- Build a dedicated `儿童账号无法移出家人共享` recipe if account-age and family membership questions continue to appear across Apple Community and Xiaohongshu searches.
+- Review Apple Watch approval flows for Screen Time requests if more current sources show watchOS-specific failures.
+- Consider a small internal style improvement for article jump links if the Cookbook grows long Family Sharing articles with more than three major sections.
+
 ## Harvest Run - 2026-07-10 00:00:31 CST
 
 ### Search Queries
