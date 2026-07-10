@@ -44,6 +44,13 @@ The goal is to create a practical troubleshooting encyclopedia that helps Apple 
 5. Include when not to use a workaround.
 6. Include clear escalation criteria.
 
+## Operating Cadence
+
+- Source harvest and article review work should continue every 3 hours.
+- GitHub publication is batched once per week on Wednesday.
+- Wednesday source harvests still follow the 3-hour cadence; they do not each trigger a GitHub publication.
+- Between Wednesday releases, keep harvested notes, drafts, and updates local and reviewable.
+
 ## Architecture
 
 Apple Cookbook has three layers:

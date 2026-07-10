@@ -16,12 +16,16 @@ aliases:
   - iPhone eSIM transfer failed
   - iPhone add eSIM not working
   - iPhone cannot activate eSIM
+  - eSIM iMessage uses email
+  - duplicate SIM phone number iMessage
   - iPhone eSIM 无法激活
   - iPhone eSIM 转移失败
   - iPhone 添加 eSIM 失败
+  - eSIM 后 iMessage 用邮箱发送
+  - iMessage 同一个手机号显示两次
 verification: Official
 difficulty: Moderate
-updated: 2026-07-09
+updated: 2026-07-10
 official_sources:
   - https://support.apple.com/zh-cn/118669
   - https://support.apple.com/zh-cn/102478
@@ -29,6 +33,7 @@ official_sources:
   - https://support.apple.com/zh-cn/123878
   - https://support.apple.com/zh-cn/101569
   - https://support.apple.com/zh-cn/guide/iphone/iph7a2a9399b/ios
+  - https://support.apple.com/zh-cn/125367
 community_sources:
   - https://discussions.apple.com/thread/255768471
   - https://discussions.apple.com/thread/255207618
@@ -52,6 +57,8 @@ popular: true
 - “扫描二维码以后没有蜂窝网络。”
 - “显示完成运营商蜂窝套餐设置，但点进去失败。”
 - “国行 iPhone Air / iPhone 17e 不能写入 eSIM。”
+- “换 eSIM 后 iMessage 只能用邮箱发。”
+- “发送与接收里同一个手机号出现两次。”
 - “删除 eSIM 后号码回不来了。”
 
 ---
@@ -70,6 +77,8 @@ popular: true
    - Apple 说明，中国大陆只有特定机型支持中国大陆运营商 eSIM，并且必须前往运营商线下营业厅办理。
 6. **误删 eSIM 后需要重新激活**
    - Apple 说明，抹掉 iPhone 时如果抹掉 eSIM，需要联系运营商才能重新激活蜂窝号码。
+7. **已失效的同号 SIM 影响 iMessage 电话号码激活**
+   - Apple 说明，更新至 iOS 26 后，如果已激活 SIM 卡号码与已失效 SIM 卡相同，可能导致 iMessage 不能用电话号码激活，信息改用邮箱发送，或同一号码在“发送与接收”中显示两次。
 
 ---
 
@@ -95,6 +104,7 @@ popular: true
 14. 打开**设置 > 通用 > 关于本机**，在 eSIM 部分检查运营商设置版本；如果出现运营商设置更新，选择“好”或“更新”。
 15. 如果仍无法设置 eSIM，联系运营商，并准备电话号码、运营商账户密码或 PIN、iPhone 的 IMEI 和 EID。
 16. 在 iOS 18 或更高版本上，可以使用最新版 Apple 支持 App 运行其他诊断，帮助区分设备问题和运营商配置问题。
+17. 如果 eSIM 设置后蜂窝网络可用，但 iMessage 只能用邮箱发送，或同一电话号码在**设置 > App > 信息 > 发送与接收**中显示两次，按 Apple 的 iOS 26 同号已失效 SIM 流程处理：更新到 iOS 26.1 或更高版本，或移除/删除已失效的同号 SIM。
 
 参考来源：
 
@@ -103,6 +113,26 @@ popular: true
 - [Apple 支持：在中国大陆将 eSIM 与 iPhone 搭配使用](https://support.apple.com/zh-cn/123879)
 - [Apple 支持：将 eSIM 从安卓设备转移到 iPhone](https://support.apple.com/zh-cn/123878)
 - [Apple 支持：查找在 iPhone 上提供 eSIM 服务的无线运营商和全球服务提供商](https://support.apple.com/zh-cn/101569)
+- [Apple 支持：如果无法在 iOS 26 中用你的电话号码激活 iMessage 信息](https://support.apple.com/zh-cn/125367)
+
+---
+
+## eSIM 设置后 iMessage 只能用邮箱发送
+
+验证级别：Apple 官方
+
+1. 先区分问题范围：如果电话、蜂窝数据和普通短信都不可用，回到 eSIM 激活和运营商排查；如果只有 iMessage 电话号码不可用，继续检查信息设置。
+2. 打开**设置 > App > 信息 > 发送与接收**，查看同一电话号码是否显示两次，或电话号码是否无法被选中。
+3. 如果设备已更新到 iOS 26，先更新到 iOS 26.1 或更高版本。
+4. 打开**设置 > 蜂窝网络**，检查是否存在同一电话号码的两张 SIM。
+5. 如果其中一张已经失效，实体 SIM 直接取出；已失效 eSIM 则轻点并删除 eSIM。
+6. 回到**设置 > App > 信息 > 发送与接收**，选择要用于 iMessage 的电话号码。
+7. 如果 iMessage 仍无法激活，转到 iMessage 激活文章继续检查网络、日期时间、运营商短信服务和 24 小时等待条件。
+
+参考来源：
+
+- [Apple 支持：如果无法在 iOS 26 中用你的电话号码激活 iMessage 信息](https://support.apple.com/zh-cn/125367)
+- [Apple 支持：如果你无法在 iPhone 上打开或登录 iMessage 信息或 FaceTime 通话](https://support.apple.com/zh-cn/119859)
 
 ---
 
@@ -154,9 +184,10 @@ popular: true
 3. 先判断地区和机型。中国大陆 eSIM 场景优先确认 iPhone Air / iPhone 17e 型号和线下营业厅要求。
 4. 快速转移失败时，检查同一 Apple 账户、设备密码、蓝牙、距离、iOS 版本和运营商是否支持快速转移。
 5. 如果号码已经在新 iPhone 上出现，按 Apple 步骤关闭再打开该号码、飞行模式、重启、检查运营商设置。
-6. 如果号码没有出现，或出现运营商网页/二维码/确认码错误，优先转运营商处理，不要猜测为 Apple ID 或硬件问题。
-7. 不建议顾客删除 eSIM、抹掉设备、反复还原网络设置或使用第三方 eSIM 工具来“抢救”号码。
-8. 如果运营商确认账户和 eSIM 配置正常，但 iPhone 仍无法识别或激活，再用 Apple 支持 App 诊断并评估服务路径。
+6. 如果蜂窝号码已可用但 iMessage 用邮箱发送，检查**发送与接收**是否有同号重复；这属于 iMessage 电话号码激活分支，不一定代表 eSIM 激活失败。
+7. 如果号码没有出现，或出现运营商网页/二维码/确认码错误，优先转运营商处理，不要猜测为 Apple ID 或硬件问题。
+8. 不建议顾客删除正在使用的 eSIM、抹掉设备、反复还原网络设置或使用第三方 eSIM 工具来“抢救”号码。
+9. 如果运营商确认账户和 eSIM 配置正常，但 iPhone 仍无法识别或激活，再用 Apple 支持 App 诊断并评估服务路径。
 
 ---
 
@@ -207,8 +238,8 @@ popular: true
 
 ## 元信息
 
-- 最后更新：2026-07-09
-- 来源数量：10
+- 最后更新：2026-07-10
+- 来源数量：11
 - 验证级别：Apple 官方
 - 支持系统：当前 iOS；eSIM 功能取决于机型、地区、运营商和 iOS 版本
 - 可信度：高

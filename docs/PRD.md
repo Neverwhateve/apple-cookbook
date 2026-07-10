@@ -411,6 +411,13 @@ Ingestion workflow concept:
 6. Mark verification level.
 7. Submit as a pull request for review.
 
+Operational cadence:
+
+- Run source harvest and article review work every 3 hours.
+- Batch GitHub publication once per week on Wednesday.
+- Wednesday source harvests still follow the 3-hour cadence; they do not each trigger a GitHub publication.
+- Keep interim source notes, drafts, and article updates local until the weekly GitHub publication window.
+
 ## Technology Stack
 
 Foundation stack:

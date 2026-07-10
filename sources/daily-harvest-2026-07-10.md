@@ -1,5 +1,258 @@
 # Daily Harvest - 2026-07-10
 
+## Harvest Run - 2026-07-10 21:03:40 CST
+
+### Search Queries
+
+- `site:support.apple.com/zh-cn/125498 Apple 支持 iOS 26 家庭 App Matter Thread 无响应`
+- `site:support.apple.com/zh-cn Apple 支持 HomeKit Matter 无响应 Thread 2026`
+- `site:discussions.apple.com Home app accessories no response Matter Thread July 2026`
+- `site:reddit.com/r/HomeKit HomeKit no response Matter Thread iOS 26 2026`
+- `小红书 HomeKit 无响应 Matter 配件 无响应 iOS 26`
+- `小红书 iMessage 只能用邮箱 手机号 显示两次 iOS 26`
+- `小红书 eSIM 转移后 iMessage 手机号 激活不了`
+
+### Sources Visited
+
+- Apple Support: [如果 HomeKit 或 Matter 配件在“家庭”App 中没有响应](https://support.apple.com/zh-cn/102056)
+- Apple Support: [将 HomePod、HomePod mini 或 Apple TV 设置为家居中枢](https://support.apple.com/zh-cn/102557)
+- Apple Support: [如果无法在 iOS 26 中用你的电话号码激活 iMessage 信息](https://support.apple.com/zh-cn/125367)
+- Apple Support: [如果你无法在 iPhone 上打开或登录 iMessage 信息或 FaceTime 通话](https://support.apple.com/zh-cn/119859)
+- Reddit r/HomeKit: [After iOS 26 update everything is No Response. Help?](https://www.reddit.com/r/HomeKit/comments/1noqe9o/after_ios26_update_everything_is_no_response_help/)
+- Reddit r/HomeKit: [Home app is barely working after iOS 26 update](https://www.reddit.com/r/HomeKit/comments/1nia2m1/home_app_is_barely_working_after_ios_26_update/)
+- Reddit r/applehelp: [升级到 iOS 26 后 iMessage 不再工作](https://www.reddit.com/r/applehelp/comments/1niwtr5/imessage_no_longer_working_after_upgrading_to_ios/?tl=zh-hans)
+- Apple Support Community: [HomeKit access fails after changing Apple Account password](https://discussions.apple.com/thread/256256497)
+- Apple Support Community: [Apple Home sync error when connecting to Philips Hue Hub](https://discussions.apple.com/thread/254847128)
+
+### Evidence Collected
+
+- Apple says that for multiple unresponsive accessories from the same manufacturer, users should turn on Bluetooth, restart accessories, check the manufacturer's app and firmware, restart third-party bridges and all home hubs, power-cycle third-party Thread accessories for 5 minutes, wait 10 minutes for Thread to stabilize, and then remove/reset/re-add the accessory if it is still unresponsive. Source: [Apple Support 102056](https://support.apple.com/zh-cn/102056).
+- Apple says that for multiple unresponsive accessories from several manufacturers, users should update iPhone/iPad/Mac, reopen Home, use the same Wi-Fi, turn on Bluetooth, restart accessories, check manufacturer apps, stabilize Thread devices, restart modem/router/bridges/home hubs/accessories/control devices, and check VPN or third-party security software. Source: [Apple Support 102056](https://support.apple.com/zh-cn/102056).
+- Apple says Matter accessories require a home hub, and Thread Matter accessories require a Thread-capable home hub such as HomePod mini, Apple TV 4K (3rd generation) Wi-Fi + Ethernet, or a supported third-party border router. Source: [Apple Support 102557](https://support.apple.com/zh-cn/102557).
+- Apple says iOS 26 iMessage phone-number activation can fail when an active SIM and inactive SIM share the same phone number; symptoms include green SMS/RCS fallback, sending from email, and duplicate phone numbers under **Settings > Apps > Messages > Send & Receive**. Source: [Apple Support 125367](https://support.apple.com/zh-cn/125367).
+- Apple says the iOS 26 duplicate-number fix is to update to iOS 26.1 or later, or remove/delete the inactive same-number SIM, then select the phone number again in Messages Send & Receive. Source: [Apple Support 125367](https://support.apple.com/zh-cn/125367).
+- Apple says that if iMessage was not activated during iOS 26 new-iPhone setup and eSIM was set up later in Settings, iMessage may need to be toggled off and on from **Settings > Apps > Messages**. Source: [Apple Support 119859](https://support.apple.com/zh-cn/119859).
+- Reddit HomeKit threads continue to show customer language around "all devices no response after iOS 26," home hub selection, IP reservation, and vendor bridges. These are community signals only; DHCP/IP reservations and hub switching remain unofficial.
+- Reddit applehelp discussion around iOS 26 iMessage repeatedly mentions old physical SIMs, duplicate phone numbers, eSIM re-registration by carriers, and Messages sending from email. Apple 125367 now provides the official branch for the same-number inactive-SIM subset.
+
+### Customer Wording
+
+- “iOS 26 后家庭 App 全部无响应。”
+- “厂商 App 能控制，Apple 家庭里不行。”
+- “Matter 配件一会儿正在更新，一会儿无响应。”
+- “HomePod 能播音乐，但家居中枢不工作。”
+- “换 eSIM 后 iMessage 只能用邮箱发。”
+- “发送与接收里同一个手机号出现两次。”
+- “旧实体卡拔掉后 iMessage 才恢复。”
+
+### Cross-source Patterns
+
+- HomeKit complaints still split into two different Retail paths: same-manufacturer/bridge issues versus multi-manufacturer whole-home failures. The existing HomeKit recipe already separated these paths, but it was missing Apple's official late-stage remove/reset/re-add step for same-manufacturer failures.
+- Reddit users frequently jump to IP reservations, manual hub selection, or router tuning. Those can be useful diagnostic signals in advanced HomeKit households, but Apple 102056 still supports a cleaner official order before router-level changes.
+- The iOS 26 iMessage/eSIM pattern now crosses Apple Support and Reddit: customers describe email sending, duplicate phone numbers, old physical SIMs, and carrier eSIM refreshes. The official recommendation is narrower than the community thread: update to iOS 26.1 or remove/delete the inactive same-number SIM first.
+
+### Articles Created, Improved, Merged, or Flagged
+
+- Improved `cookbook/iPhone/iphone-esim-setup-transfer-fails.md` with a linked official branch for eSIM customers whose cellular service works but iMessage sends from email or shows a duplicate phone number after iOS 26.
+- Improved `cookbook/HomePod/homekit-matter-accessories-no-response.md` by adding Apple Support 102056's official remove/reset/re-add step for same-manufacturer accessories that remain unresponsive after restart, bridge, hub, and Thread stabilization checks.
+- No new article was created. The researched issues fit existing canonical recipes.
+- No duplicate recipes were found or merged.
+
+### Verification Changes
+
+- No verification level changed.
+- The eSIM article remains `Official`; the new iMessage-after-eSIM branch is supported by Apple Support 125367 and 119859.
+- The HomeKit article remains `Official`; the added remove/reset/re-add step is directly supported by Apple Support 102056.
+- DHCP reservations, router advanced tuning, manual hub switching, and carrier eSIM re-registration remain community signals or escalation context, not Apple official recommendations in the edited recipes.
+
+### Reading/UI and Typography Improvements
+
+- No shared CSS or component styling changed in this run.
+- The eSIM recipe now separates "eSIM activation failed" from "cellular works but iMessage phone number does not activate," which gives Retail readers a faster decision point.
+- The HomeKit recipe now places destructive accessory removal later in the same-manufacturer path, after lower-cost checks, matching Apple Support-style ordered troubleshooting.
+
+### Typography/Layout Improvements
+
+- No typography tokens changed. Article readability was improved through short symptom wording, a separate H2 for the iMessage-after-eSIM branch, and clean numbered steps.
+
+### Blocked Sources
+
+- Direct Xiaohongshu posts were not reliably accessible from search results. The Chinese symptom searches surfaced Apple Support, Reddit translation pages, and unrelated results; no factual recommendation was based on inaccessible Xiaohongshu content.
+
+### Follow-up Opportunities
+
+- Continue monitoring HomeKit Reddit and Apple Community for whether "preferred home hub" confusion deserves a separate article if Apple changes hub-selection guidance.
+- Search Apple Support for a dedicated "Matter accessory cannot be added" update and consider splitting add-failure from no-response if customer wording keeps diverging.
+- In a future run, review whether `iphone-imessage-messages-not-sending-green-waiting-activation.md` and `iphone-esim-setup-transfer-fails.md` need reciprocal anchors or a compact jump-link table if the iOS 26 branches keep growing.
+
+## Harvest Run - 2026-07-10 18:02:36 CST
+
+### Search Queries
+
+- `site:support.apple.com/en-us Apple Support July 2026 iPhone troubleshooting update release notes`
+- `site:support.apple.com/en-us HT iOS 26 support update Apple Support July 2026`
+- `site:support.apple.com/en-us AirPods won't connect reset Apple Support`
+- `site:discussions.apple.com AirPods won't connect reset July 2026 Apple Support Community`
+- `site:support.apple.com/zh-cn/125367 iOS 26 iMessage 电话号码 SIM Apple 支持`
+- `support.apple.com/zh-cn/125367 iMessage iOS 26 号码 SIM`
+- `site:support.apple.com/zh-cn iOS 26 无法激活 iMessage 电话号码 inactive SIM`
+
+### Sources Visited
+
+- Apple Support: [如果无法在 iOS 26 中用你的电话号码激活 iMessage 信息](https://support.apple.com/zh-cn/125367)
+- Apple Support: [If you can't activate iMessage with your phone number in iOS 26](https://support.apple.com/en-us/125367)
+- Apple Support: [如果你无法在 iPhone 上打开或登录 iMessage 信息或 FaceTime 通话](https://support.apple.com/zh-cn/119859)
+- Apple Support: [iMessage 信息、RCS 和短信/彩信有什么区别？](https://support.apple.com/zh-cn/104972)
+- Apple Support: [关于 iOS 26 更新](https://support.apple.com/en-us/123075)
+- Apple Support: [Apple 安全性发布](https://support.apple.com/en-us/100100)
+- Apple Support: [如果 AirPods 或 AirPods Pro 无法连接](https://support.apple.com/en-us/118576)
+- Apple Support: [如何重置 AirPods 和 AirPods Pro](https://support.apple.com/en-us/118531)
+- Apple Support Community: [AirPods connection issues after iOS 18 Update](https://discussions.apple.com/thread/255758915)
+- Apple Support Community: [AirPods Pro 3 not connecting to iMac running macOS Big Sur](https://discussions.apple.com/thread/256154383)
+
+### Evidence Collected
+
+- Apple says that after updating to iOS 26, a phone number used by an active SIM can fail to activate iMessage if an inactive SIM has the same number. Source: [Apple Support 125367](https://support.apple.com/zh-cn/125367).
+- Apple lists the matching symptoms: iMessage shows "尚未送达", messages fall back to green SMS/RCS bubbles, Messages sends from email instead of the phone number, or the same phone number appears twice under **设置 > App > 信息 > 发送与接收**. Source: [Apple Support 125367](https://support.apple.com/zh-cn/125367).
+- Apple says the fix is to update to iOS 26.1 or later, or remove/delete the inactive SIM; if two SIMs show the same number in Cellular settings, remove the inactive physical SIM or delete the inactive eSIM, then return to Messages > Send & Receive and select the phone number. Source: [Apple Support 125367](https://support.apple.com/zh-cn/125367).
+- Apple's broader iMessage/FaceTime activation article already covers iOS 26 setup cases where iMessage does not activate automatically after eSIM setup later in Settings; the inactive-SIM article is a more specific branch for duplicate same-number SIM records. Source: [Apple Support 119859](https://support.apple.com/zh-cn/119859).
+- Apple says RCS and SMS/MMS are carrier texting services and can explain green bubbles separately from iMessage phone-number activation failure. Source: [Apple Support 104972](https://support.apple.com/zh-cn/104972).
+- Current AirPods searches found no better canonical change than the 15:02 run's new AirPods pairing/reset article; Apple Support 118576 and 118531 still support that article's official troubleshooting order.
+
+### Customer Wording
+
+- “更新 iOS 26 后 iMessage 只能用邮箱发。”
+- “手机号激活不了 iMessage。”
+- “发送与接收里同一个手机号出现两次。”
+- “蓝色气泡变绿色，但只有我的手机号不行。”
+- “换 eSIM 后 iMessage 不自动激活。”
+- “明明有手机号，信息还是从邮箱发出去。”
+
+### Cross-source Patterns
+
+- New-device, eSIM-transfer, and duplicate-SIM complaints look similar to ordinary iMessage activation failure, but Apple now documents a specific iOS 26 same-number inactive-SIM cause. Retail triage should check the exact **发送与接收** screen before recommending broad resets.
+- Green bubbles can mean carrier SMS/RCS fallback, recipient iMessage state, or the iOS 26 inactive-SIM phone-number activation issue. The updated recipe now separates these paths earlier.
+- Community advice often jumps to signing out of Apple Account, resetting network settings, or reissuing eSIM. Apple 125367 gives a narrower official path when duplicate same-number SIM records are visible.
+- AirPods support results reinforced the previous run's decision to keep AirPods connection/reset separate from Find My setup-incomplete issues; no merge was needed.
+
+### Articles Created, Improved, Merged, or Flagged
+
+- Improved `cookbook/iPhone/iphone-imessage-messages-not-sending-green-waiting-activation.md` with Apple Support 125367, new customer wording for duplicate phone number / email sending after iOS 26, an official inactive-SIM branch, updated Retail flow, escalation criteria, aliases, and source count.
+- No new article was created in this run because the iOS 26 inactive-SIM problem fits the existing canonical Messages/iMessage article.
+- No duplicate recipe was found or merged.
+
+### Verification Changes
+
+- No verification level changed. The Messages recipe remains `Official`; the new inactive-SIM branch is official because it is directly supported by Apple Support 125367.
+- The existing nonofficial carrier refresh and reset-network guidance remains labeled unofficial; Apple 125367 does not make those workarounds official for duplicate same-number SIM cases.
+
+### Reading/UI and Typography Improvements
+
+- No shared CSS or component styling changed in this run.
+- The Messages article gained a separate H2 for the iOS 26 duplicate-SIM scenario so readers do not have to infer this specific fix from the longer general activation flow.
+- The new branch keeps the Apple Support-style reading order: symptom recognition, official fix, then fallback to the broader iMessage activation path.
+
+### Typography/Layout Improvements
+
+- No typography tokens changed. The article readability improvement is structural: short symptom text, numbered official steps, concise source section, and a clearly separated branch for a specific iOS 26 root cause.
+
+### Blocked Sources
+
+- Xiaohongshu was not directly queried in this focused run. The high-value change came from current official Apple Support search results, so no social workaround was added.
+
+### Follow-up Opportunities
+
+- In a later run, search Chinese social sources for “发送与接收 同一个手机号 两次” and “iMessage 只能用邮箱发” to validate customer wording, while keeping Apple 125367 as the only factual basis for the official fix.
+- Review `iphone-esim-setup-transfer-fails.md` for a related link back to the Messages article if same-number inactive eSIM issues recur.
+- Continue monitoring Apple Support 119859 and 125367 for changed iOS 26 navigation labels or post-26.1 behavior.
+
+## Harvest Run - 2026-07-10 15:02:31 CST
+
+### Search Queries
+
+- `site:support.apple.com/zh-cn Apple 支持 2026 iPhone 故障 排查 7 月`
+- `site:support.apple.com/zh-cn 如果 AirPods 无法连接 iPhone Apple 支持`
+- `site:support.apple.com/zh-cn iPhone 发热 过热 温度 Apple 支持`
+- `site:support.apple.com/zh-cn Apple Account 验证失败 无法连接服务器 Apple 支持`
+- `site:reddit.com/r/airpods AirPods won't connect iPhone reset white light amber 2026`
+- `site:reddit.com/r/applehelp AirPods won't connect to iPhone reset not working`
+- `site:discussions.apple.com/thread AirPods won't connect to iPhone reset not working`
+- `site:discussionschinese.apple.com AirPods 无法连接 iPhone 重置 不成功`
+
+### Sources Visited
+
+- Apple Support: [如果 AirPods 或 AirPods Pro 无法连接](https://support.apple.com/zh-cn/118576)
+- Apple Support: [将 AirPods 和 AirPods Pro 连接到 iPhone](https://support.apple.com/zh-cn/104989)
+- Apple Support: [如何重置 AirPods 和 AirPods Pro](https://support.apple.com/zh-cn/118531)
+- Apple Support: [如果某个物品或设备已关联到另一个 Apple 账户](https://support.apple.com/zh-cn/102620)
+- Apple Support: [设置 AirPods 更换件或充电盒更换件](https://support.apple.com/zh-cn/102520)
+- Apple 支持社区中文: [AirPods 2代有弹窗但蓝牙连接不成功](https://discussionschinese.apple.com/thread/254751817)
+- Apple 支持社区中文: [AirPods连接后显示不是你的AirPods](https://discussionschinese.apple.com/thread/255726508)
+- Apple Support Community: [AirPods Pro won't connect after reset](https://discussions.apple.com/thread/252396052)
+- Reddit r/AirPods: [airpod pros won't show up in any of my devices' bluetooth settings](https://www.reddit.com/r/airpods/comments/t0ahse/airpod_pros_wont_show_up_in_any_of_my_devices/)
+- Search result snippets from Reddit and Xiaohongshu-style Chinese symptom searches; direct Xiaohongshu posts were not reliably accessible.
+
+### Evidence Collected
+
+- Apple says AirPods connection troubleshooting should start by updating iPhone, iPad, or Mac, placing both AirPods in the case and confirming they are charging, turning on Bluetooth, checking audio output, closing the lid for 15 seconds, entering pairing mode, and resetting AirPods if still unable to connect. Source: [Apple Support 118576](https://support.apple.com/zh-cn/118576).
+- Apple now distinguishes AirPods 4 and AirPods Pro 3 pairing behavior from earlier models: AirPods 4 and AirPods Pro 3 use double taps on the front of the case to make the status light flash white, while earlier models use the rear setup button. Sources: [Apple Support 118576](https://support.apple.com/zh-cn/118576), [Apple Support 104989](https://support.apple.com/zh-cn/104989).
+- Apple says different AirPods models require different minimum iOS versions; AirPods 4 requires iOS 18 or later, AirPods Pro 3 requires iOS 26 or later, and AirPods Pro 2 USB-C requires iOS 17 or later. Source: [Apple Support 104989](https://support.apple.com/zh-cn/104989).
+- Apple says resetting AirPods 1/2/3 and AirPods Pro 1/2 requires placing them in the case, waiting 30 seconds, forgetting the Bluetooth device, opening the lid, and holding the rear setup button about 15 seconds until the light flashes amber then white. Source: [Apple Support 118531](https://support.apple.com/zh-cn/118531).
+- Apple says resetting AirPods 4 and AirPods Pro 3 uses a front-case tap sequence, not the rear button flow. Apple also documents a retry path if the status light does not flash white. Source: [Apple Support 118531](https://support.apple.com/zh-cn/118531).
+- Apple says AirPods can be associated with one Apple Account for automatic switching and Find My. If someone wants to use previously owned AirPods, the previous owner must remove them from their Apple Account first. Source: [Apple Support 104989](https://support.apple.com/zh-cn/104989).
+- Apple says a device or item paired with another Apple Account must be removed by the previous owner before it can pair with a new account, and Apple cannot remove Find My Lock for the user. Source: [Apple Support 102620](https://support.apple.com/zh-cn/102620).
+- Apple says replacement AirPods or replacement cases should be placed together in the case, connected to power, and left closed for 20 minutes before completing the replacement pairing flow. Source: [Apple Support 102520](https://support.apple.com/zh-cn/102520).
+- Apple Community and Reddit repeatedly show customer wording around no setup animation, white flashing light without pairing, no amber reset light, "not your AirPods", and repeated forget/reset loops. These are community signals, not official recommendations.
+
+### Customer Wording
+
+- “打开盒盖没有弹窗。”
+- “蓝牙里找不到 AirPods。”
+- “点连接后提示连接不成功 / 不在范围内。”
+- “AirPods 一直闪白灯，但手机连不上。”
+- “按住按钮没有琥珀色灯。”
+- “重置以后还是配对失败。”
+- “提示不是你的 AirPods。”
+- “换了单只耳机或充电盒以后无法配对。”
+
+### Cross-source Patterns
+
+- Customers often mix three different AirPods issues: ordinary Bluetooth pairing failure, incorrect reset gesture for the newer case design, and Apple Account ownership/Find My Lock. The fastest Retail path must identify the message first before repeating resets.
+- Apple's current official guidance makes model identification more important than older recipes: AirPods 4 and AirPods Pro 3 no longer follow the same rear-button instructions as earlier AirPods models.
+- Community suggestions often jump to repeated resets, cleaning contacts, disabling other devices, or third-party firmware tools. Cleaning and environment checks can be useful later, but third-party firmware tools remain unsupported and high risk.
+- The existing AirPods Find My article covered "setup incomplete" but not the basic "cannot connect / cannot pair / reset does not work" customer problem, so a separate canonical recipe was warranted.
+
+### Articles Created, Improved, Merged, or Flagged
+
+- Created `cookbook/AirPods/airpods-wont-connect-pair-reset.md` as the canonical Official recipe for AirPods not connecting, no setup animation, Bluetooth pairing failure, reset flow differences, "not your AirPods", and replacement AirPods/case setup.
+- Improved `cookbook/AirPods/airpods-find-my-setup-incomplete.md` by linking to the new pairing/reset recipe and removing the plain-text placeholder related problem.
+- No duplicate AirPods connection article existed, so no merge was required.
+
+### Verification Changes
+
+- New recipe `AirPods 无法连接或重新配对` is `Official` because the primary troubleshooting order is supported by Apple Support 118576, 104989, 118531, 102620, and 102520.
+- Cleaning contacts, taking off cases, wireless interference checks, and trying another iPhone are labeled unofficial/community-backed. They can help isolate charge or environment issues but are not presented as Apple official primary steps in the cited AirPods connection articles.
+- Third-party firmware or forced-upgrade tooling is labeled `Unknown` and discouraged because it appeared in community-style discussion but is not part of Apple official AirPods connection, reset, or replacement setup guidance.
+
+### Reading/UI and Typography Improvements
+
+- No shared CSS or component styling changed in this run.
+- The new AirPods article follows the Apple Support-inspired reading flow: symptom-focused title, short summary, symptoms, root causes, official ordered steps, separate sections for ownership lock and replacement parts, clearly labeled unofficial methods, Retail flow, escalation, related links, and compact metadata.
+
+### Typography/Layout Improvements
+
+- No typography tokens changed. The new article uses short paragraphs, direct H2/H3 headings, clean ordered steps, and separated unofficial guidance to preserve the calm Apple Support-like reading experience.
+
+### Blocked Sources
+
+- Xiaohongshu direct posts were not reliably accessible. Search snippets were used only for customer wording and prioritization; no factual recommendation was based on inaccessible Xiaohongshu content.
+
+### Follow-up Opportunities
+
+- Build a separate AirPods charging recipe if future sources continue to show "no amber light" or "single AirPod not recognized" as a charging/contact problem rather than a pairing problem.
+- Review whether the AirPods Find My article should add a short ownership-lock branch now that the new pairing recipe covers the same Apple Account association issue in more detail.
+- Consider a dedicated AirPods automatic switching recipe if "connects to the wrong device" appears repeatedly in Reddit, Apple Community, or Xiaohongshu searches.
+
 ## Harvest Run - 2026-07-10 12:04:50 CST
 
 ### Search Queries

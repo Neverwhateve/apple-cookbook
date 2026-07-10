@@ -152,8 +152,8 @@ popular: true
 
 ## 相关问题
 
+- [AirPods 无法连接或重新配对](/recipes/AirPods/airpods-wont-connect-pair-reset)
 - [“查找”中的位置共享不可用](/recipes/Find%20My/location-sharing-not-working)
-- AirPods 无法连接到 iPhone
 - AirPods 丢失后显示离线或找不到位置
 - AirPods 提示与另一个 Apple 账户配对
 
