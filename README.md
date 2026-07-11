@@ -39,14 +39,17 @@ The goal is to create a practical troubleshooting encyclopedia that helps Apple 
 
 1. Start from customer symptoms and exact user language.
 2. Check official Apple China sources first.
-3. Compare multiple independent community reports before accepting a workaround.
-4. Label every solution by verification level.
-5. Include when not to use a workaround.
-6. Include clear escalation criteria.
+3. Search Xiaohongshu and other community sources for high-frequency causes that official articles may omit or underweight.
+4. Compare multiple independent community reports before accepting a workaround.
+5. Label every solution by verification level.
+6. Include when not to use a workaround.
+7. Include clear escalation criteria.
 
 ## Operating Cadence
 
 - Source harvest and article review work should continue every 3 hours.
+- Every 3-hour loop must include a community reality check, especially Xiaohongshu searches in customer language, to catch practical causes that official Apple articles do not make obvious. Example: when researching "Find My cannot see someone else's location", also check whether Messages/iMessage setup, Send & Receive identity, or contact/account mismatch appears repeatedly as a cause.
+- Treat Xiaohongshu findings as discovery and prioritization signals unless the post body is accessible and corroborated. Keep official Apple guidance first, but add well-supported community causes as clearly labeled unofficial or likely branches.
 - GitHub publication is batched once per week on Wednesday.
 - Wednesday source harvests still follow the 3-hour cadence; they do not each trigger a GitHub publication.
 - Between Wednesday releases, keep harvested notes, drafts, and updates local and reviewable.

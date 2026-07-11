@@ -60,16 +60,22 @@ function walkMarkdownFiles(dir: string): string[] {
   });
 }
 
-function buildExcerpt(body: string) {
-  return body
-    .replace(/^# .+$/m, "")
-    .replace(/^---$/gm, "")
+function buildExcerpt(body: string, title: string) {
+  const lead = body
+    .replace(/^#\s+.+\r?\n+/, "")
+    .split(/^---$/m)[0]
+    .trim();
+
+  const cleaned = lead
     .replace(/^#+\s+/gm, "")
     .replace(/^\s*[-*]\s+/gm, "")
     .replace(/\*\*/g, "")
     .replace(/\n+/g, " ")
-    .trim()
-    .slice(0, 220);
+    .replace(new RegExp(`^${title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*`), "")
+    .trim();
+  const firstSentence = cleaned.match(/^.+?[。！？]/)?.[0];
+
+  return (firstSentence && firstSentence.length >= 24 ? firstSentence : cleaned).slice(0, 180);
 }
 
 function formatDateValue(value: unknown) {
@@ -85,9 +91,10 @@ export function getAllArticles(): Article[] {
       const relativeFilePath = path.relative(cookbookRoot, filePath);
       const slugParts = normalizeSlugParts(relativeFilePath);
       const data = parsed.data;
+      const title = String(data.title ?? path.basename(filePath, path.extname(filePath)));
 
       return {
-        title: String(data.title ?? path.basename(filePath, path.extname(filePath))),
+        title,
         slug: String(data.slug ?? slugParts.at(-1)),
         device: ensureArray(data.device),
         category: String(data.category ?? slugParts.at(0) ?? "未分类"),
@@ -101,7 +108,7 @@ export function getAllArticles(): Article[] {
         status: String(data.status ?? "draft") as Article["status"],
         popular: Boolean(data.popular),
         body: parsed.content.trim(),
-        excerpt: buildExcerpt(parsed.content),
+        excerpt: buildExcerpt(parsed.content, title),
         filePath: relativeFilePath,
         route: `/recipes/${slugParts.join("/")}`
       };

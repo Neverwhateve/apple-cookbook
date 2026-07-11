@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { BookOpen, Search } from "lucide-react";
+import { Apple, Menu, Search } from "lucide-react";
 import "./globals.css";
 import { ThemeToggle } from "@/components/theme-toggle";
 
@@ -13,42 +13,47 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="zh-CN" suppressHydrationWarning>
       <body>
-        <header className="sticky top-0 z-20 border-b border-zinc-200 bg-white/85 backdrop-blur dark:border-zinc-800 dark:bg-zinc-950/85">
-          <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6">
-            <Link href="/" className="flex items-center gap-2 text-sm font-semibold text-zinc-950 dark:text-zinc-50">
-              <span className="inline-flex h-8 w-8 items-center justify-center rounded-md bg-zinc-950 text-white dark:bg-zinc-50 dark:text-zinc-950">
-                <BookOpen className="h-4 w-4" />
-              </span>
-              Apple Cookbook
+        <header className="sticky top-0 z-20 bg-white/92 backdrop-blur-xl dark:bg-zinc-950/92">
+          <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-8 sm:px-10">
+            <Link href="/" className="inline-flex h-10 w-10 items-center justify-start text-zinc-950 dark:text-zinc-50" aria-label="Apple Cookbook 首页">
+              <Apple className="h-5 w-5 fill-current" />
             </Link>
-            <nav className="flex items-center gap-2">
+            <nav className="flex items-center gap-3">
               <Link
                 href="/categories"
-                className="hidden rounded-full px-3 py-2 text-sm text-zinc-700 transition hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-900 sm:inline-flex"
+                className="hidden px-2 py-2 text-sm text-zinc-700 transition hover:text-zinc-950 dark:text-zinc-300 dark:hover:text-zinc-50 sm:inline-flex"
               >
                 分类
               </Link>
               <Link
                 href="/tags"
-                className="hidden rounded-full px-3 py-2 text-sm text-zinc-700 transition hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-900 sm:inline-flex"
+                className="hidden px-2 py-2 text-sm text-zinc-700 transition hover:text-zinc-950 dark:text-zinc-300 dark:hover:text-zinc-50 sm:inline-flex"
               >
                 标签
               </Link>
               <Link
                 href="/feedback"
-                className="hidden rounded-full px-3 py-2 text-sm text-zinc-700 transition hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-900 sm:inline-flex"
+                className="hidden px-2 py-2 text-sm text-zinc-700 transition hover:text-zinc-950 dark:text-zinc-300 dark:hover:text-zinc-50 sm:inline-flex"
               >
                 反馈
               </Link>
               <Link
                 href="/"
-                className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200 bg-white text-zinc-700 transition hover:bg-zinc-100 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-200 dark:hover:bg-zinc-900"
+                className="inline-flex h-10 w-10 items-center justify-center text-zinc-800 transition hover:text-zinc-950 dark:text-zinc-200 dark:hover:text-zinc-50"
                 aria-label="搜索"
                 title="搜索"
               >
-                <Search className="h-4 w-4" />
+                <Search className="h-5 w-5" />
               </Link>
               <ThemeToggle />
+              <Link
+                href="/categories"
+                className="inline-flex h-10 w-10 items-center justify-center text-zinc-800 transition hover:text-zinc-950 dark:text-zinc-200 dark:hover:text-zinc-50 sm:hidden"
+                aria-label="菜单"
+                title="菜单"
+              >
+                <Menu className="h-5 w-5" />
+              </Link>
             </nav>
           </div>
         </header>

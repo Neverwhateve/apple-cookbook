@@ -48,13 +48,13 @@ export default function HomePage() {
             没找到问题？
           </h2>
           <p className="mt-3 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
-            提交顾客原话、现象和设备背景，系统会记录到每日待复核清单。
+            提交一个问题或粘贴一个链接，系统会记录到待复核清单。
           </p>
           <Link
             href="/feedback"
             className="mt-4 inline-flex min-h-10 items-center justify-center rounded-md bg-zinc-950 px-3 py-2 text-sm font-semibold text-white transition hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200"
           >
-            提交反馈
+            提交问题
           </Link>
         </section>
 

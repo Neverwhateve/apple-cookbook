@@ -405,15 +405,19 @@ Ingestion workflow concept:
 1. Collect source URL.
    - Prefer Apple China URLs (`support.apple.com/zh-cn`) for official Apple Support sources.
 2. Extract article title, symptoms, steps, supported systems, and date.
-3. Create or update a draft Markdown file.
-4. Compare with existing articles for duplicates.
-5. Add aliases based on customer wording.
-6. Mark verification level.
-7. Submit as a pull request for review.
+3. Search Xiaohongshu and other community sources using customer wording to identify practical causes that official Apple articles may omit or underweight.
+4. Create or update a draft Markdown file.
+5. Compare with existing articles for duplicates.
+6. Add aliases based on customer wording.
+7. Mark verification level.
+8. Submit as a pull request for review.
 
 Operational cadence:
 
 - Run source harvest and article review work every 3 hours.
+- Each 3-hour loop must include a Xiaohongshu/community reality check before closing the harvest. The goal is to discover high-frequency real-world causes beyond the official answer, not to replace official guidance.
+- For example, if researching "Find My cannot see someone else's location", the loop should also search for Messages/iMessage-related causes such as Send & Receive identity mismatch, phone number/email mismatch, contact card mismatch, or iMessage activation problems, then label any supported branch by its actual evidence level.
+- If Xiaohongshu pages are inaccessible, record the attempted queries and use only accessible snippets as customer-language or prioritization signals, not as factual proof.
 - Batch GitHub publication once per week on Wednesday.
 - Wednesday source harvests still follow the 3-hour cadence; they do not each trigger a GitHub publication.
 - Keep interim source notes, drafts, and article updates local until the weekly GitHub publication window.

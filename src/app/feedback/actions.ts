@@ -1,5 +1,6 @@
 "use server";
 
+import { redirect } from "next/navigation";
 import { saveFeedback } from "@/lib/feedback";
 
 export type FeedbackState = {
@@ -23,4 +24,14 @@ export async function submitFeedback(_state: FeedbackState, formData: FormData):
     id: result.id,
     message: `已记录为 ${result.id}，并加入每日工作收集。`
   };
+}
+
+export async function submitQuickFeedback(formData: FormData) {
+  const result = await saveFeedback(formData);
+
+  if (!result.ok) {
+    redirect(`/feedback?error=${encodeURIComponent(result.error)}`);
+  }
+
+  redirect(`/feedback?submitted=${encodeURIComponent(result.id)}`);
 }

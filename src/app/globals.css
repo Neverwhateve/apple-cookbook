@@ -41,8 +41,9 @@ body {
 
 .article-body {
   color: #1d1d1f;
-  font-size: 1.0625rem;
-  line-height: 1.55;
+  font-size: 1.125rem;
+  line-height: 1.62;
+  scroll-margin-top: 5rem;
 }
 
 .dark .article-body {
@@ -50,12 +51,17 @@ body {
 }
 
 .article-body h2 {
-  margin-top: 3.5rem;
-  margin-bottom: 1.1rem;
-  font-size: 2rem;
-  font-weight: 600;
-  line-height: 1.18;
+  scroll-margin-top: 5rem;
+  margin-top: 4.25rem;
+  margin-bottom: 1.15rem;
+  font-size: 2.15rem;
+  font-weight: 750;
+  line-height: 1.15;
   color: #1d1d1f;
+}
+
+.article-body h2:first-child {
+  margin-top: 0;
 }
 
 .dark .article-body h2 {
@@ -63,11 +69,11 @@ body {
 }
 
 .article-body h3 {
-  margin-top: 2rem;
-  margin-bottom: 0.7rem;
+  margin-top: 2.35rem;
+  margin-bottom: 0.75rem;
   font-size: 1.35rem;
-  font-weight: 600;
-  line-height: 1.3;
+  font-weight: 700;
+  line-height: 1.28;
   color: #1d1d1f;
 }
 
@@ -76,8 +82,8 @@ body {
 }
 
 .article-body p {
-  margin-top: 0.95rem;
-  line-height: 1.58;
+  margin-top: 1rem;
+  line-height: 1.62;
   color: #1d1d1f;
 }
 
@@ -87,8 +93,8 @@ body {
 
 .article-body ul,
 .article-body ol {
-  margin-top: 0.9rem;
-  padding-left: 1.35rem;
+  margin-top: 1rem;
+  padding-left: 1.45rem;
   color: #1d1d1f;
 }
 
@@ -98,9 +104,14 @@ body {
 }
 
 .article-body li {
-  margin-top: 0.55rem;
+  margin-top: 0.75rem;
   padding-left: 0.15rem;
-  line-height: 1.58;
+  line-height: 1.62;
+}
+
+.article-body li > ul,
+.article-body li > ol {
+  margin-top: 0.55rem;
 }
 
 .article-body li::marker {
@@ -113,7 +124,7 @@ body {
 }
 
 .article-body hr {
-  margin: 3rem 0 0;
+  margin: 3.5rem 0 0;
   border: 0;
   border-top: 1px solid rgb(210 210 215);
 }
@@ -138,24 +149,36 @@ body {
 
 .article-body strong {
   color: #09090b;
-  font-weight: 600;
+  font-weight: 700;
+}
+
+.article-body blockquote {
+  margin: 1.5rem 0;
+  border-left: 3px solid #d2d2d7;
+  padding-left: 1rem;
+  color: #515154;
+}
+
+.dark .article-body blockquote {
+  border-color: #3f3f46;
+  color: #d4d4d8;
 }
 
 @media (max-width: 640px) {
   .article-body {
-    font-size: 1rem;
-    line-height: 1.55;
+    font-size: 1.0625rem;
+    line-height: 1.6;
   }
 
   .article-body h2 {
-    margin-top: 3rem;
-    font-size: 1.65rem;
-    line-height: 1.2;
+    margin-top: 3.75rem;
+    font-size: 2rem;
+    line-height: 1.16;
   }
 
   .article-body h3 {
-    font-size: 1.2rem;
-    line-height: 1.3;
+    font-size: 1.25rem;
+    line-height: 1.28;
   }
 }
 
