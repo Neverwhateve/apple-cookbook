@@ -64,7 +64,24 @@ jobs:
           ALIYUN_ECS_USER: ${{ secrets.ALIYUN_ECS_USER }}
           APP_DIR: ${{ vars.APP_DIR || '/opt/apple-cookbook' }}
           SERVICE_NAME: ${{ vars.SERVICE_NAME || 'apple-cookbook' }}
+          LOCAL_HEALTH_URL: ${{ vars.LOCAL_HEALTH_URL || 'http://127.0.0.1:3000' }}
         run: |
           test -n "$ALIYUN_ECS_USER"
           ssh -i ~/.ssh/aliyun_ecs -p "$ALIYUN_ECS_PORT" "$ALIYUN_ECS_USER@$ALIYUN_ECS_HOST" \
-            "APP_DIR='$APP_DIR' SERVICE_NAME='$SERVICE_NAME' BRANCH='main' GITHUB_SHA='$GITHUB_SHA' bash -lc 'cd \"\$APP_DIR\" && if [[ -n \$(git status --porcelain) ]]; then git stash push --include-untracked -m \"pre-deploy-\$GITHUB_SHA\"; fi && git pull --ff-only origin \"\$BRANCH\" && bash scripts/deploy-ecs.sh --skip-pull'"
+            "APP_DIR='$APP_DIR' SERVICE_NAME='$SERVICE_NAME' LOCAL_HEALTH_URL='$LOCAL_HEALTH_URL' BRANCH='main' GITHUB_SHA='$GITHUB_SHA' bash -lc 'cd \"\$APP_DIR\" && if [[ -n \$(git status --porcelain) ]]; then git stash push --include-untracked -m \"pre-deploy-\$GITHUB_SHA\"; fi && git pull --ff-only origin \"\$BRANCH\" && bash scripts/deploy-ecs.sh --skip-pull'"
+
+      - name: Verify production URL
+        env:
+          PRODUCTION_URL: ${{ vars.PRODUCTION_URL || 'https://cookbook.wuxiela.fun' }}
+        run: |
+          for attempt in {1..10}; do
+            if curl --fail --silent --show-error --max-time 10 "$PRODUCTION_URL" | grep -q "Apple Cookbook"; then
+              echo "Production health check passed: $PRODUCTION_URL"
+              exit 0
+            fi
+
+            sleep 3
+          done
+
+          echo "Production health check failed: $PRODUCTION_URL" >&2
+          exit 1

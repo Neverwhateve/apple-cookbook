@@ -129,8 +129,10 @@ The repository includes `.github/workflows/deploy-aliyun-ecs.yml`. It runs on ev
 
 1. Validate the project on GitHub Actions with `pnpm lint` and `pnpm build`.
 2. SSH into ECS.
-3. Pull `main` in `/opt/apple-cookbook`.
-4. Run `scripts/deploy-ecs.sh --skip-pull`.
+3. Stash local changes in `/opt/apple-cookbook` so server-side edits cannot block deploys.
+4. Pull `main` in `/opt/apple-cookbook`.
+5. Run `scripts/deploy-ecs.sh --skip-pull`.
+6. Verify the local ECS service and public production URL respond successfully.
 
 Add these repository secrets in GitHub:
 
@@ -146,6 +148,8 @@ Optional repository variables:
 ```text
 APP_DIR=/opt/apple-cookbook
 SERVICE_NAME=apple-cookbook
+LOCAL_HEALTH_URL=http://127.0.0.1:3000
+PRODUCTION_URL=https://cookbook.wuxiela.fun
 ```
 
 The ECS deploy user must be able to update the checkout and restart the service. One practical setup is:
