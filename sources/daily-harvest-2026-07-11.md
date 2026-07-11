@@ -407,3 +407,102 @@
 - Search for a dedicated AirPods “only one side has sound” recipe; Apple Support 100494 covers charging/audio/balance and may deserve its own customer-facing article.
 - Monitor whether AirPods Pro 3 optimized charging limit causes more “cannot fully charge” complaints, especially in Chinese customer wording.
 - Review AirPods pairing article later to remove or shorten remaining contact-cleaning discussion now that a canonical charging article exists.
+
+## Harvest Run - 2026-07-11 15:11:46 CST
+
+### Search Queries
+
+- `site:support.apple.com/en-us Apple Support July 2026 iPhone Apple Watch AirPods troubleshooting`
+- `site:support.apple.com/zh-cn Apple 支持 2026 Apple Watch 无法 配对 iPhone iOS 26`
+- `site:support.apple.com/zh-cn/108360 Apple Watch 无法 与 iPhone 连接 配对 iOS 26`
+- `site:discussions.apple.com Apple Watch won't pair new iPhone iOS 26 watchOS 26 2026`
+- `site:reddit.com/r/AppleWatch "won't pair" "iOS 26" "Apple Watch"`
+- `site:reddit.com/r/AppleWatch "older watch" "iOS 26" "pair"`
+- `site:reddit.com/r/applehelp "Apple Watch" "won't pair" "new iPhone" "iOS 26"`
+- `site:xiaohongshu.com Apple Watch 无法 配对 iPhone iOS 26 手表`
+- `https://support.apple.com/zh-cn/120000`
+- `https://support.apple.com/en-us/120000`
+
+### Sources Visited
+
+- Apple Support: [如果 Apple Watch 无法与 iPhone 连接或配对](https://support.apple.com/zh-cn/108360)
+- Apple Support: [如果你无法将 Apple Watch 与 iPhone 配对](https://support.apple.com/zh-cn/111821)
+- Apple Support: [将 Apple Watch 与新 iPhone 配对](https://support.apple.com/zh-cn/104956)
+- Apple Support: [设置你的 Apple Watch](https://support.apple.com/zh-cn/109015)
+- Apple Support: [Apple Watch 和 iPhone 兼容性](https://support.apple.com/zh-cn/118490)
+- Apple Support: [更新 Apple Watch](https://support.apple.com/zh-cn/108926)
+- Apple Support: [如果你在 iPhone 或 iPad 上看到“SOS”、“无服务”或“正在搜索”](https://support.apple.com/zh-cn/120000)
+- Apple Support: [If you see SOS, No Service, or Searching on your iPhone or iPad](https://support.apple.com/en-us/120000)
+- Apple Support Community: [Cannot pair Apple Watch Series 3/5](https://discussions.apple.com/thread/256187585)
+- Apple Support Community: [unable to update Apple Watch series 8 to WatchOS 26 after updating iPhone 16 to iOS26](https://discussions.apple.com/thread/256138586)
+- Reddit r/AppleWatch: [Older watch won't sync with iOS 26](https://www.reddit.com/r/AppleWatch/comments/1tr0nix/older_watch_wont_sync_with_ios_26/)
+- Reddit r/AppleWatch: [Apple Watch SE won't pair with new iPhone](https://www.reddit.com/r/AppleWatch/comments/1qz1pqh/apple_watch_se_wont_pair_with_new_iphone_stuck_in/)
+- Reddit r/AppleWatch: [Pairing Watch S7 with iPhone 15 Pro Max 18.6](https://www.reddit.com/r/AppleWatch/comments/1qd6b7x/pairing_watch_s7_with_iphone_15_pro_max_186/)
+
+### Evidence Collected
+
+- Apple Support 108360 says Apple Watch disconnection can show a red iPhone icon or red X, and the official first path is to keep Apple Watch and iPhone near each other, check Airplane Mode, Wi-Fi, and Bluetooth, restart both devices, then unpair and pair again if needed.
+- Apple Support 111821 says that if iPhone reports it cannot connect to Apple Watch or the watch already shows a clock face, the customer should make sure the watch is not already paired, then use the appropriate unpair, erase, password-reset, or pairing-mode restore path.
+- Apple Support 104956 says when moving Apple Watch to a new iPhone, the customer should prepare Apple Account password, Apple Watch passcode, Wi-Fi, sufficient charge, and use the Apple Watch app on the new iPhone; if the new iPhone says "Start Pairing," Apple says to unpair and set up again.
+- Apple Support 109015 says Apple Watch Ultra 3, Apple Watch Series 11, and Apple Watch SE 3 require iPhone 11 or later with iOS 26 or later, and that older Apple Watch models can use other iPhone models with earlier operating systems.
+- Apple Support 118490 provides the clearer compatibility table by Apple Watch model, iPhone model, iOS range, and watchOS range. This supports making compatibility a first-class branch before repeated resets or hardware assumptions.
+- Apple Support 108926 says Apple Watch update troubleshooting includes ensuring the watch is correctly on the charger, restarting Apple Watch and iPhone, retrying, and deleting the update file from Watch app storage if the update still cannot start.
+- Apple Support 120000 China was published 2026-07-07 and now includes iOS 18-or-later Apple Support app diagnostics, carrier IMEI registration questions for iPhones purchased in other countries or regions, and carrier settings guidance for new SIM cards.
+- Apple Support 120000 US adds an explicit SOS / SOS only explanation: the device is not connected to its own cellular network, but in Australia, Canada, and the United States it can still place emergency calls through other carrier networks.
+- Reddit and Apple Support Community repeatedly show customers mixing three separate Apple Watch problems: new-phone transfer, version compatibility, and update-stuck pairing. Community comments were treated as wording and frequency signals, not as official guidance.
+
+### Customer Wording
+
+- “Apple Watch 换新 iPhone 后配不上。”
+- “手表要求更新，但一直卡在连接 Apple Watch。”
+- “iPhone 说需要更新到 iOS 26 才能配对。”
+- “旧款 Apple Watch 升级 iOS 26 后还能不能用？”
+- “手表显示红色 iPhone 图标 / 红色 X。”
+- “旧手机丢了，Apple Watch 还能转到新手机吗？”
+- “iPhone 右上角显示 SOS only。”
+- “SOS 是不是还能打紧急电话？”
+- “无服务旁边没有提醒，但手机就是没信号。”
+
+### Cross-source Patterns
+
+- Apple Watch pairing failures need a faster fork: connection state, already-paired state, new-iPhone transfer, update failure, activation lock, and compatibility. Treating all of them as "reset and pair again" can waste time or preserve activation-lock problems.
+- Compatibility language is especially important with iOS 26 and current Apple Watch models. Customer threads often infer Bluetooth failure when the real blocker is iPhone/iOS/watchOS compatibility.
+- "Older watch with newer iPhone" and "newer watchOS with older iPhone" are different situations. The Cookbook now asks Retail specialists to record the exact iPhone model, iOS version, Apple Watch model, and watchOS version before recommending a reset or service.
+- SOS / SOS only needs clearer expectation-setting. For customers in Australia, Canada, and the United States, SOS does not mean normal cellular service works; it means emergency calling may still work through another carrier network.
+- Xiaohongshu direct access remained unreliable. Search was still useful for Chinese symptom wording, but no factual recommendations were based on inaccessible posts.
+
+### Articles Created, Improved, Merged, or Flagged
+
+- Improved `cookbook/Apple Watch/apple-watch-wont-connect-pair-iphone.md` by adding Apple Support 118490 as an official source, adding compatibility as a likely cause, adding a compatibility-check step before repeated reset attempts, and improving the Retail flow for "requires newer iOS" / incompatible watchOS messages.
+- Improved `cookbook/iPhone/iphone-sos-no-service-searching.md` by adding the current US Apple Support SOS-only emergency-calling explanation, updating the article date, adding the English Apple Support 120000 source, and making Retail intake distinguish SOS only from No Service / Searching / No SIM.
+- No duplicate recipes were merged in this pass.
+- Flagged a future missing or expansion article: Apple Watch cannot update during pairing / "Unable to Verify Update" / "Update iPhone First." Current evidence suggests it may deserve its own canonical update-focused article rather than being buried inside general pairing.
+
+### Verification Changes
+
+- `Apple Watch 无法连接或无法与 iPhone 配对` remains `Official`; compatibility guidance is now backed by Apple Support 118490 in addition to setup and pairing articles.
+- `iPhone 显示 SOS、无服务或正在搜索` remains `Official`; the SOS-only emergency-calling caveat is backed by Apple Support 120000 US, while the core Chinese troubleshooting flow remains backed by Apple Support 120000 China.
+- No article verification level changed.
+
+### Reading/UI and Typography Improvements
+
+- No shared CSS or component styling changed in this run.
+- The Apple Watch article was improved for Apple Support-style reading flow by moving compatibility into the cause list and official sequence, reducing the chance that a customer-facing flow jumps straight to destructive reset steps.
+- The SOS article now has a more precise first decision point for support staff: SOS / SOS only, No Service, Searching, No SIM, or a disabled cellular line.
+
+### Typography/Layout Improvements
+
+- No typography tokens changed.
+- Article readability was improved through shorter, clearer decision branches and numbered steps. No cards, gradients, dense sidebars, or non-Apple-like visual elements were introduced.
+
+### Blocked Sources
+
+- Direct Xiaohongshu posts were not reliably accessible from this environment. No factual claims were based on blocked or snippet-only Xiaohongshu content.
+- Some Reddit pages were accessible mainly as search snippets or comment excerpts; they were used only as customer wording and frequency signals.
+
+### Follow-up Opportunities
+
+- Build or split a dedicated Apple Watch update recipe for "无法验证更新," "无法安装更新," "Update iPhone First," and pairing-time update loops using Apple Support 108926 and 111816.
+- Revisit Apple Watch compatibility after the next iOS / watchOS release cycle to ensure Series 11, Ultra 3, SE 3, and older-model ranges are still current.
+- Monitor Apple Support 120000 China and US for differences around SOS-only wording; the English page currently has clearer emergency-calling language than the Chinese page.
+- Search Apple Support Community and Reddit for "No Service alert" and the linked Apple alert page from Support 120000 to see whether a separate cellular alert recipe is warranted.
