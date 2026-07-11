@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import type { ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArrowLeft, ArrowRight, ExternalLink, ListChecks } from "lucide-react";
 import { ArticleFeedbackWidget } from "@/components/article-feedback-widget";
 import { ArticleCard } from "@/components/article-card";
 import { getAllArticles, getArticleBySlug, getRelatedArticles } from "@/lib/cookbook";
@@ -11,8 +12,39 @@ import { difficultyLabels, statusLabels, verificationLabels } from "@/lib/labels
 function formatArticleBody(body: string) {
   const firstSectionIndex = body.search(/^##\s+症状\s*$/m);
   const content = firstSectionIndex >= 0 ? body.slice(firstSectionIndex) : body;
+  const endMatterIndex = content.search(/^##\s+(相关问题|标签|元信息)\s*$/m);
+  const articleContent = endMatterIndex >= 0 ? content.slice(0, endMatterIndex).trim() : content;
 
-  return content.replace(/^##\s+零售排查流程\s*$/m, "## 排查流程");
+  return articleContent.replace(/^##\s+零售排查流程\s*$/m, "## 排查流程");
+}
+
+function getLeadParagraph(body: string) {
+  return body
+    .replace(/^# .+$/m, "")
+    .split("\n")
+    .map((line) => line.trim())
+    .find((line) => line && line !== "---" && !line.startsWith("#") && !line.startsWith("-"));
+}
+
+function getTextFromChildren(children: ReactNode): string {
+  if (typeof children === "string" || typeof children === "number") return String(children);
+  if (Array.isArray(children)) return children.map(getTextFromChildren).join("");
+  return "";
+}
+
+function headingId(text: string) {
+  return encodeURIComponent(text.trim().replace(/\s+/g, "-"));
+}
+
+function getArticleHeadings(body: string) {
+  return Array.from(body.matchAll(/^##\s+(.+)$/gm)).map((match) => {
+    const title = match[1].trim();
+
+    return {
+      title,
+      id: headingId(title)
+    };
+  });
 }
 
 export function generateStaticParams() {
@@ -47,6 +79,9 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
 
   const related = getRelatedArticles(article);
   const articleBody = formatArticleBody(article.body);
+  const lead = getLeadParagraph(article.body) ?? article.excerpt;
+  const headings = getArticleHeadings(articleBody);
+  const primaryRelated = related.slice(0, 3);
 
   return (
     <main className="bg-white px-4 py-10 dark:bg-zinc-950 sm:px-6 sm:py-14">
@@ -82,11 +117,53 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
           {article.title}
         </h1>
 
+        <p className="mt-5 max-w-3xl text-lg leading-8 text-zinc-600 dark:text-zinc-400">{lead}</p>
+
+        <dl className="mt-8 grid gap-3 border-y border-zinc-200 py-4 text-sm dark:border-zinc-800 sm:grid-cols-3">
+          <div>
+            <dt className="text-zinc-500">适用范围</dt>
+            <dd className="mt-1 font-medium text-zinc-950 dark:text-zinc-50">{article.device.join(", ")}</dd>
+          </div>
+          <div>
+            <dt className="text-zinc-500">建议路径</dt>
+            <dd className="mt-1 font-medium text-zinc-950 dark:text-zinc-50">{difficultyLabels[article.difficulty]}</dd>
+          </div>
+          <div>
+            <dt className="text-zinc-500">最后更新</dt>
+            <dd className="mt-1 font-medium text-zinc-950 dark:text-zinc-50">{article.updated}</dd>
+          </div>
+        </dl>
+
+        {headings.length > 0 ? (
+          <nav aria-labelledby="article-jump-title" className="mt-8 rounded-lg border border-zinc-200 bg-zinc-50 p-4 dark:border-zinc-800 dark:bg-zinc-900/50">
+            <h2 id="article-jump-title" className="flex items-center gap-2 text-base font-semibold text-zinc-950 dark:text-zinc-50">
+              <ListChecks className="h-4 w-4" />
+              快速定位
+            </h2>
+            <div className="mt-3 grid gap-2 sm:grid-cols-2">
+              {headings.map((heading) => (
+                <a
+                  key={heading.id}
+                  href={`#${heading.id}`}
+                  className="rounded-md px-2 py-1.5 text-sm text-zinc-700 transition hover:bg-white hover:text-zinc-950 dark:text-zinc-300 dark:hover:bg-zinc-950 dark:hover:text-white"
+                >
+                  {heading.title}
+                </a>
+              ))}
+            </div>
+          </nav>
+        ) : null}
+
         <div className="article-body mt-10">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
               h1: () => null,
+              h2: ({ children }) => {
+                const text = getTextFromChildren(children);
+
+                return <h2 id={headingId(text)}>{children}</h2>;
+              },
               a: ({ href, children }) => {
                 const external = href?.startsWith("http");
 
@@ -101,9 +178,48 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
             {articleBody}
           </ReactMarkdown>
         </div>
+
+        {primaryRelated.length > 0 ? (
+          <section className="mt-14 border-t border-zinc-200 pt-8 dark:border-zinc-800" aria-labelledby="next-title">
+            <div className="flex items-center justify-between gap-4">
+              <h2 id="next-title" className="text-2xl font-semibold text-zinc-950 dark:text-zinc-50">
+                继续排查
+              </h2>
+              <Link
+                href={`/categories/${encodeURIComponent(article.category)}`}
+                className="inline-flex items-center gap-1 text-sm text-zinc-500 hover:text-zinc-950 dark:hover:text-zinc-50"
+              >
+                查看 {article.category}
+                <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              {primaryRelated.map((item) => (
+                <ArticleCard key={item.route} article={item} />
+              ))}
+            </div>
+          </section>
+        ) : null}
       </article>
 
       <aside className="space-y-6 lg:sticky lg:top-24 lg:self-start">
+        {headings.length > 0 ? (
+          <section className="hidden border-t border-zinc-200 pt-4 dark:border-zinc-800 lg:block">
+            <h2 className="text-base font-semibold text-zinc-950 dark:text-zinc-50">本文目录</h2>
+            <nav className="mt-3 space-y-2" aria-label="本文目录">
+              {headings.map((heading) => (
+                <a
+                  key={heading.id}
+                  href={`#${heading.id}`}
+                  className="block text-sm leading-5 text-zinc-600 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-50"
+                >
+                  {heading.title}
+                </a>
+              ))}
+            </nav>
+          </section>
+        ) : null}
+
         <section className="border-t border-zinc-200 pt-4 dark:border-zinc-800">
           <h2 className="text-base font-semibold text-zinc-950 dark:text-zinc-50">元信息</h2>
           <dl className="mt-4 space-y-3 text-sm">
@@ -157,7 +273,7 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
           <section className="border-t border-zinc-200 pt-4 dark:border-zinc-800">
             <h2 className="mb-3 text-base font-semibold text-zinc-950 dark:text-zinc-50">相关文章</h2>
             <div className="space-y-3">
-              {related.map((item) => (
+              {related.slice(0, 3).map((item) => (
                 <ArticleCard key={item.route} article={item} />
               ))}
             </div>

@@ -48,14 +48,14 @@ export function SearchPanel({ articles }: { articles: SearchArticle[] }) {
 
   const results = useMemo(() => {
     if (!query.trim()) {
-      return articles.filter((article) => article.verification !== "Unknown").slice(0, 5);
+      return articles.filter((article) => article.verification !== "Unknown").slice(0, 3);
     }
 
     return articles
       .map((article) => ({ article, score: scoreArticle(article, query) }))
       .filter((item) => item.score > 0)
       .sort((a, b) => b.score - a.score)
-      .slice(0, 8)
+      .slice(0, 6)
       .map((item) => item.article);
   }, [articles, query]);
 
@@ -67,6 +67,7 @@ export function SearchPanel({ articles }: { articles: SearchArticle[] }) {
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           placeholder="像顾客描述那样搜索：老婆位置看不到"
+          aria-label="搜索故障排查文章"
           className="min-w-0 flex-1 bg-transparent text-base outline-none placeholder:text-zinc-500"
         />
       </div>
@@ -86,7 +87,7 @@ export function SearchPanel({ articles }: { articles: SearchArticle[] }) {
         )}
       </div>
 
-      <div className="mt-5 space-y-3">
+      <div className="mt-5 space-y-3" aria-live="polite">
         {results.map((article) => (
           <Link
             key={article.route}
