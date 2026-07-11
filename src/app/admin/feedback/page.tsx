@@ -1,6 +1,7 @@
-import { CheckCircle2, CircleDot, ExternalLink, Inbox, RotateCcw, ShieldAlert, XCircle } from "lucide-react";
-import { updateFeedbackQueueItem } from "@/app/admin/feedback/actions";
-import { canUseAdmin, getAdminFeedbackItems, type FeedbackStatus } from "@/lib/feedback-admin";
+import { cookies } from "next/headers";
+import { CheckCircle2, CircleDot, ExternalLink, Inbox, LogOut, RotateCcw, ShieldAlert, XCircle } from "lucide-react";
+import { loginAdmin, logoutAdmin, updateFeedbackQueueItem } from "@/app/admin/feedback/actions";
+import { canUseAdminSession, getAdminFeedbackItems, type FeedbackStatus } from "@/lib/feedback-admin";
 
 export const dynamic = "force-dynamic";
 
@@ -25,18 +26,15 @@ const statusClasses: Record<FeedbackStatus, string> = {
 
 function StatusButton({
   id,
-  token,
   status,
   children
 }: {
   id: string;
-  token: string;
   status: FeedbackStatus;
   children: React.ReactNode;
 }) {
   return (
     <form action={updateFeedbackQueueItem}>
-      <input type="hidden" name="token" value={token} />
       <input type="hidden" name="id" value={id} />
       <input type="hidden" name="status" value={status} />
       <button
@@ -49,31 +47,64 @@ function StatusButton({
   );
 }
 
-export default async function AdminFeedbackPage({
-  searchParams
-}: {
-  searchParams?: Promise<{ token?: string }>;
-}) {
-  const token = (await searchParams)?.token ?? "";
-  const allowed = canUseAdmin(token);
-
-  if (!allowed) {
-    return (
-      <main className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-        <div className="rounded-lg border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-950">
-          <div className="flex items-start gap-3">
-            <ShieldAlert className="mt-1 h-5 w-5 flex-none text-red-600" />
-            <div>
-              <h1 className="text-2xl font-semibold text-zinc-950 dark:text-zinc-50">需要管理员访问令牌</h1>
-              <p className="mt-3 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
-                生产环境请设置 <code className="rounded bg-zinc-100 px-1.5 py-0.5 dark:bg-zinc-900">APPLE_COOKBOOK_ADMIN_TOKEN</code>
-                ，然后访问 <code className="rounded bg-zinc-100 px-1.5 py-0.5 dark:bg-zinc-900">/admin/feedback?token=你的令牌</code>。
-              </p>
-            </div>
+function LoginPanel() {
+  return (
+    <main className="mx-auto max-w-md px-4 py-10 sm:px-6">
+      <form action={loginAdmin} className="rounded-lg border border-zinc-200 bg-white p-6 dark:border-zinc-800 dark:bg-zinc-950">
+        <div className="flex items-start gap-3">
+          <ShieldAlert className="mt-1 h-5 w-5 flex-none text-zinc-600 dark:text-zinc-300" />
+          <div>
+            <h1 className="text-2xl font-semibold text-zinc-950 dark:text-zinc-50">管理员登录</h1>
+            <p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">输入用户名和密码查看 P0 反馈队列。</p>
           </div>
         </div>
-      </main>
-    );
+
+        <div className="mt-6 space-y-4">
+          <div>
+            <label htmlFor="admin-username" className="text-sm font-medium text-zinc-950 dark:text-zinc-50">
+              用户名
+            </label>
+            <input
+              id="admin-username"
+              name="username"
+              autoComplete="username"
+              required
+              className="mt-2 w-full rounded-md border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm outline-none transition focus:border-zinc-500 dark:border-zinc-800 dark:bg-zinc-900"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="admin-password" className="text-sm font-medium text-zinc-950 dark:text-zinc-50">
+              密码
+            </label>
+            <input
+              id="admin-password"
+              name="password"
+              type="password"
+              autoComplete="current-password"
+              required
+              className="mt-2 w-full rounded-md border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm outline-none transition focus:border-zinc-500 dark:border-zinc-800 dark:bg-zinc-900"
+            />
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          className="mt-6 inline-flex min-h-10 w-full items-center justify-center rounded-md bg-zinc-950 px-4 py-2 text-sm font-semibold text-white transition hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200"
+        >
+          登录
+        </button>
+      </form>
+    </main>
+  );
+}
+
+export default async function AdminFeedbackPage() {
+  const cookieStore = await cookies();
+  const allowed = canUseAdminSession(cookieStore.get("apple-cookbook-admin")?.value);
+
+  if (!allowed) {
+    return <LoginPanel />;
   }
 
   const items = await getAdminFeedbackItems();
@@ -90,15 +121,26 @@ export default async function AdminFeedbackPage({
             查看网站提交的问题和链接，决定是否进入处理、关闭或重新打开。待处理项会被 3 小时 harvest 自动化优先消费。
           </p>
         </div>
-        <div className="grid grid-cols-2 gap-3 text-sm sm:w-64">
-          <div className="rounded-md border border-zinc-200 p-3 dark:border-zinc-800">
-            <p className="text-zinc-500 dark:text-zinc-400">待处理</p>
-            <p className="mt-1 text-2xl font-semibold text-zinc-950 dark:text-zinc-50">{openCount}</p>
+        <div className="flex flex-col gap-3 sm:w-80">
+          <div className="grid grid-cols-2 gap-3 text-sm">
+            <div className="rounded-md border border-zinc-200 p-3 dark:border-zinc-800">
+              <p className="text-zinc-500 dark:text-zinc-400">待处理</p>
+              <p className="mt-1 text-2xl font-semibold text-zinc-950 dark:text-zinc-50">{openCount}</p>
+            </div>
+            <div className="rounded-md border border-zinc-200 p-3 dark:border-zinc-800">
+              <p className="text-zinc-500 dark:text-zinc-400">活跃</p>
+              <p className="mt-1 text-2xl font-semibold text-zinc-950 dark:text-zinc-50">{activeCount}</p>
+            </div>
           </div>
-          <div className="rounded-md border border-zinc-200 p-3 dark:border-zinc-800">
-            <p className="text-zinc-500 dark:text-zinc-400">活跃</p>
-            <p className="mt-1 text-2xl font-semibold text-zinc-950 dark:text-zinc-50">{activeCount}</p>
-          </div>
+          <form action={logoutAdmin}>
+            <button
+              type="submit"
+              className="inline-flex h-9 w-full items-center justify-center gap-2 rounded-md border border-zinc-200 bg-white px-3 text-sm font-medium text-zinc-700 transition hover:border-zinc-400 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-200 dark:hover:border-zinc-600 dark:hover:bg-zinc-900"
+            >
+              <LogOut className="h-4 w-4" />
+              退出登录
+            </button>
+          </form>
         </div>
       </div>
 
@@ -144,19 +186,19 @@ export default async function AdminFeedbackPage({
                 </div>
 
                 <div className="flex flex-wrap gap-2 lg:w-80 lg:justify-end">
-                  <StatusButton id={item.id} token={token} status="in_progress">
+                  <StatusButton id={item.id} status="in_progress">
                     <CircleDot className="h-4 w-4" />
                     处理中
                   </StatusButton>
-                  <StatusButton id={item.id} token={token} status="resolved">
+                  <StatusButton id={item.id} status="resolved">
                     <CheckCircle2 className="h-4 w-4" />
                     已解决
                   </StatusButton>
-                  <StatusButton id={item.id} token={token} status="dismissed">
+                  <StatusButton id={item.id} status="dismissed">
                     <XCircle className="h-4 w-4" />
                     忽略
                   </StatusButton>
-                  <StatusButton id={item.id} token={token} status="open">
+                  <StatusButton id={item.id} status="open">
                     <RotateCcw className="h-4 w-4" />
                     重开
                   </StatusButton>

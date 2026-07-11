@@ -66,6 +66,8 @@ Environment=PORT=3000
 Environment=HOSTNAME=127.0.0.1
 Environment=APPLE_COOKBOOK_DATA_DIR=/var/lib/apple-cookbook
 Environment=APPLE_COOKBOOK_ADMIN_TOKEN=replace-with-a-long-random-token
+Environment=APPLE_COOKBOOK_ADMIN_USERNAME=admin
+Environment=APPLE_COOKBOOK_ADMIN_PASSWORD=replace-with-a-long-random-password
 ExecStart=/usr/bin/node server.js
 Restart=always
 RestartSec=5
@@ -182,7 +184,7 @@ Back up `/var/lib/apple-cookbook` regularly. It is intentionally outside the Git
 The P0 feedback review page is available at:
 
 ```text
-https://cookbook.wuxiela.fun/admin/feedback?token=replace-with-a-long-random-token
+https://cookbook.wuxiela.fun/admin/feedback
 ```
 
-Set `APPLE_COOKBOOK_ADMIN_TOKEN` in the systemd service before using this page in production. Without this token, production admin access is blocked.
+Set `APPLE_COOKBOOK_ADMIN_USERNAME`, `APPLE_COOKBOOK_ADMIN_PASSWORD`, and `APPLE_COOKBOOK_ADMIN_TOKEN` in the systemd service before using this page in production. `APPLE_COOKBOOK_ADMIN_TOKEN` is used as the cookie session secret.

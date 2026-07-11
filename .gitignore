@@ -3,6 +3,7 @@
 .env.*
 !.env.example
 .admin-token
+.admin-password
 
 node_modules/
 .next/

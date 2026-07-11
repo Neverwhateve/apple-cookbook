@@ -1,4 +1,5 @@
 import fs from "node:fs/promises";
+import crypto from "node:crypto";
 import path from "node:path";
 import { feedbackDataRoot, type FeedbackSubmission } from "@/lib/feedback";
 
@@ -94,8 +95,44 @@ export async function updateFeedbackStatus(id: string, status: FeedbackStatus, a
   await fs.writeFile(inboxPath, `${nextSubmissions.map((submission) => JSON.stringify(submission)).join("\n")}\n`, "utf8");
 }
 
-export function canUseAdmin(token: string) {
-  const configuredToken = process.env.APPLE_COOKBOOK_ADMIN_TOKEN;
-  if (!configuredToken) return process.env.NODE_ENV !== "production";
-  return token === configuredToken;
+function getAdminUsername() {
+  return process.env.APPLE_COOKBOOK_ADMIN_USERNAME || "admin";
+}
+
+function getAdminPassword() {
+  return process.env.APPLE_COOKBOOK_ADMIN_PASSWORD || "";
+}
+
+function getSessionSecret() {
+  return process.env.APPLE_COOKBOOK_ADMIN_TOKEN || getAdminPassword() || "local-admin-session";
+}
+
+function safeEqual(left: string, right: string) {
+  const leftBuffer = Buffer.from(left);
+  const rightBuffer = Buffer.from(right);
+
+  return leftBuffer.length === rightBuffer.length && crypto.timingSafeEqual(leftBuffer, rightBuffer);
+}
+
+export function canUseAdminCredentials(username: string, password: string) {
+  const configuredPassword = getAdminPassword();
+
+  if (!configuredPassword && process.env.NODE_ENV === "production") {
+    return false;
+  }
+
+  if (!configuredPassword) {
+    return username === getAdminUsername();
+  }
+
+  return safeEqual(username, getAdminUsername()) && safeEqual(password, configuredPassword);
+}
+
+export function createAdminSessionToken() {
+  return crypto.createHmac("sha256", getSessionSecret()).update("apple-cookbook-admin").digest("hex");
+}
+
+export function canUseAdminSession(value: string | undefined) {
+  if (!value) return false;
+  return safeEqual(value, createAdminSessionToken());
 }
