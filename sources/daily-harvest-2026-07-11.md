@@ -506,3 +506,205 @@
 - Revisit Apple Watch compatibility after the next iOS / watchOS release cycle to ensure Series 11, Ultra 3, SE 3, and older-model ranges are still current.
 - Monitor Apple Support 120000 China and US for differences around SOS-only wording; the English page currently has clearer emergency-calling language than the Chinese page.
 - Search Apple Support Community and Reddit for "No Service alert" and the linked Apple alert page from Support 120000 to see whether a separate cellular alert recipe is warranted.
+
+## Harvest Run - 2026-07-11 18:11:25 CST
+
+### Search Queries
+
+- `site:support.apple.com/en-us Apple Support updated July 2026 iPhone AirPods HomeKit troubleshooting`
+- `site:support.apple.com/en-us "Published Date: July" "2026" "Apple Support" "If" "iPhone"`
+- `site:support.apple.com/zh-cn "发布日期" "2026" "如果" "iPhone" "Apple 支持"`
+- `site:discussions.apple.com "iOS 26" "Personal Hotspot" "not working" "iPhone"`
+- `Apple Support If Personal Hotspot is not working on your iPhone or iPad Wi-Fi + Cellular`
+- `site:support.apple.com/zh-cn 个人热点 无法使用 iPhone iPad Apple 支持`
+- `site:reddit.com/r/iphone "Personal Hotspot" "greyed out" "iOS 26" iPhone`
+- `site:reddit.com/r/applehelp "Personal Hotspot" "greyed out" iPhone`
+- `小红书 iPhone 个人热点 灰色 点不了 iOS 26`
+- `小红书 iPhone 个人热点 不能用 最大兼容性`
+- `site:xiaohongshu.com iPhone 个人热点 灰色`
+- `site:discussions.apple.com "Personal Hotspot" "greyed out" "iOS 26"`
+
+### Sources Visited
+
+- Apple Support: [如果无法在 iPhone 或 iPad（无线局域网 + 蜂窝网络）上正常使用“个人热点”](https://support.apple.com/zh-cn/119837)
+- Apple Support: [If Personal Hotspot is not working on your iPhone or iPad](https://support.apple.com/en-us/119837)
+- Apple Support: [连接到 iPhone 或 iPad 的个人热点](https://support.apple.com/zh-cn/111785)
+- Apple Support: [使用智能热点连接到你的个人热点](https://support.apple.com/zh-cn/109321)
+- Apple Support: [Use Instant Hotspot to connect to your Personal Hotspot](https://support.apple.com/en-us/109321)
+- iPhone User Guide: [共享 iPhone 的互联网连接](https://support.apple.com/zh-cn/guide/iphone/iph45447ca6/ios)
+- Apple Support Community: [Personal Hotspot – Off & it is grayed out](https://discussions.apple.com/thread/256254848)
+- Apple Support Community: [How can I fix the greyed-out Personal Hotspot on my iPhone 17 Pro running iOS 26?](https://discussions.apple.com/thread/256144998)
+- Apple Support Community Chinese: [iPhone 个人热点按钮灰色，点击没有反应，无法开启](https://discussionschinese.apple.com/thread/256200432)
+- Reddit r/iPhone: [Personal Hotspot not working after updating to iOS 26](https://www.reddit.com/r/iphone/comments/1nji5go/personal_hotspot_not_working_after_updating_to/)
+- Reddit r/applehelp: [Control center greyed out hotspot after iOS update 26](https://www.reddit.com/r/applehelp/comments/1p6j3b6/control_center_greyed_out_hotspot_after_ios/)
+
+### Evidence Collected
+
+- Apple says that if Personal Hotspot cannot be found or turned on, the customer should check whether the wireless carrier enabled Personal Hotspot and whether the wireless plan supports it. Source: [Apple Support 119837](https://support.apple.com/zh-cn/119837).
+- Apple says the first official Personal Hotspot troubleshooting sequence is to turn on Personal Hotspot / Allow Others to Join, restart both devices, update iOS or iPadOS, then reset network settings on the device providing the hotspot if needed. Source: [Apple Support 119837](https://support.apple.com/zh-cn/119837).
+- Apple warns that resetting network settings also resets saved Wi-Fi networks and passwords, cellular settings, and previously used VPN and APN settings. Source: [Apple Support 119837](https://support.apple.com/zh-cn/119837).
+- Apple says Wi-Fi hotspot troubleshooting includes keeping the provider device on the Personal Hotspot screen, checking the Wi-Fi name and password, toggling Wi-Fi on the joining device, and using Maximize Compatibility on supported iPhone / iPad models when needed. Source: [Apple Support 119837](https://support.apple.com/zh-cn/119837).
+- Apple says turning on Maximize Compatibility may reduce internet performance and Wi-Fi security for connected devices. Sources: [Apple Support 119837](https://support.apple.com/zh-cn/119837), [iPhone User Guide](https://support.apple.com/zh-cn/guide/iphone/iph45447ca6/ios).
+- Apple says Instant Hotspot requires an activated carrier plan that includes Personal Hotspot service; if Personal Hotspot is dimmed or unavailable, cellular data should be turned on. Source: [Apple Support 109321](https://support.apple.com/en-us/109321).
+- Apple says Instant Hotspot / Auto-Join Hotspot require nearby devices with Wi-Fi and Bluetooth on, the same Apple Account or Family Sharing permission, and the correct Auto-Join Hotspot setting on Mac, iPhone, iPad, Apple Vision Pro, Apple Watch, or Apple TV. Sources: [Apple Support 109321](https://support.apple.com/zh-cn/109321), [Apple Support 109321 EN](https://support.apple.com/en-us/109321).
+- Apple says iPhone can only share its cellular data connection through Personal Hotspot; it cannot share the Wi-Fi network that iPhone itself is using. Source: [iPhone User Guide](https://support.apple.com/zh-cn/guide/iphone/iph45447ca6/ios).
+- Apple says VPN configurations can interfere with local networking and Continuity-style behavior, so VPN rules should be checked when Apple devices cannot use nearby-device features. Source: [iPhone User Guide](https://support.apple.com/zh-cn/guide/iphone/iph45447ca6/ios).
+- Apple Support Community, Reddit, and Chinese community search results repeatedly show customer wording around "Personal Hotspot greyed out," "after iOS 26 update," "control center hotspot disabled," and APN / carrier configuration. These were used as frequency and wording signals only.
+
+### Customer Wording
+
+- “个人热点是灰色，点不了。”
+- “更新到 iOS 26 后热点不能用。”
+- “允许其他人加入打不开。”
+- “控制中心热点按钮灰色。”
+- “电脑搜不到 iPhone 热点。”
+- “连热点提示密码错误。”
+- “Mac 自动热点不出现。”
+- “安卓能开热点，iPhone 这张卡不行。”
+- “是不是要填 APN 才能开热点？”
+
+### Cross-source Patterns
+
+- The strongest pattern is a carrier-permission / cellular-data fork before generic Wi-Fi troubleshooting. If the Personal Hotspot entry is dimmed, missing, or cannot be opened, Apple points to carrier enablement and plan support before connection-method steps.
+- Customers often mix three different features: ordinary Personal Hotspot for non-Apple devices, Instant Hotspot for the same Apple Account, and Family Sharing hotspot access. The new recipe separates those flows so "Allow Others to Join" is not over-applied to Instant Hotspot.
+- Maximize Compatibility is useful for older or non-Apple joining devices, but it has an Apple-documented tradeoff. It should be framed as a compatibility test, not a permanent universal optimization.
+- APN advice appears often in Reddit and Apple Community threads. Because Apple frames carrier enablement and plan support as the official path, APN editing is recorded as a carrier-configuration clue, not an Apple official recommendation.
+- Community posts repeatedly mention iOS 26, but current evidence does not prove a universal iOS defect. The Retail flow should capture device model, iOS version, carrier, plan, APN/carrier profile, and whether the hotspot entry is greyed out before attributing the issue to software.
+
+### Articles Created, Improved, Merged, or Flagged
+
+- Created `cookbook/Networking/iphone-personal-hotspot-not-working-greyed-out.md` as the canonical Official recipe for Personal Hotspot greyed out, disabled, missing, Wi-Fi connection failure, password errors, USB connection failure, Instant Hotspot, Family Sharing hotspot access, and Maximize Compatibility tradeoffs.
+- Improved `cookbook/Networking/iphone-ipad-wifi-no-internet-unable-to-join.md` by replacing the plain "iPhone 个人热点无法使用" related item with a link to the new canonical Personal Hotspot recipe.
+- Improved `indexes/tags.md` by adding the `Personal Hotspot` feature tag for consistent future tagging.
+- No duplicate recipes were found or merged in this pass.
+- Flagged a possible future article: "Mac cannot connect through iPhone USB hotspot / iPhone USB network service missing" if Mac-specific USB hotspot complaints become frequent enough.
+
+### Verification Changes
+
+- New recipe `iPhone 个人热点无法使用、变灰或连不上` is `Official` because its core troubleshooting order is supported by Apple Support 119837, Apple Support 111785, Apple Support 109321, and the iPhone User Guide.
+- APN editing, control-center toggle rituals, third-party repair tools, force-restart scripts, and erase-device suggestions remain nonofficial or unverified. The new article labels APN as carrier-configuration escalation and avoids presenting forum APN values as Apple guidance.
+- No existing article verification level changed.
+
+### Reading/UI and Typography Improvements
+
+- No shared CSS or component styling changed in this run.
+- The new Personal Hotspot article follows the Apple Support-inspired reading flow: direct symptom title, concise intro, symptom wording, likely causes, official ordered steps, connection-method sections, clearly labeled unofficial methods, Retail flow, escalation, related links, tags, and compact metadata.
+- Official Apple guidance and community APN/control-center workarounds are visually and textually separated so community workarounds do not look like Apple recommendations.
+
+### Typography/Layout Improvements
+
+- No typography tokens changed.
+- Article readability was improved through short paragraphs, direct H2/H3 sections, numbered action steps, and restrained source lists. No cards, gradients, dense sidebars, or decorative layout changes were introduced.
+
+### Blocked Sources
+
+- Direct Xiaohongshu post pages were not reliably accessible. Xiaohongshu searches did not provide verifiable post bodies that could support factual claims, so no recommendation was based on blocked Xiaohongshu content.
+- Reddit and Apple Support Community material was used for customer wording and frequency only; official recommendations came from Apple Support and the iPhone User Guide.
+
+### Follow-up Opportunities
+
+- Monitor Apple Support Community and Reddit for iOS 26.4 / 26.4.1 Personal Hotspot regression language to see whether Apple publishes a newer support note or release-note fix.
+- Search carrier support pages for APN / Personal Hotspot entitlement language by region; use only carrier-owned pages if adding carrier-specific APN guidance later.
+- Review the new recipe after more Mac-specific complaints to decide whether USB hotspot deserves a standalone Mac networking article.
+- Cross-link this recipe from future cellular, eSIM, and Mac networking articles when hotspot is a likely branch.
+
+## Harvest Run - 2026-07-11 21:10:15 CST
+
+### Search Queries
+
+- `site:support.apple.com/en-us "How to revive or restore Mac firmware" "Published" "2026"`
+- `site:support.apple.com/en-us "DFU" "Mac" "restore" "revive" "Apple Configurator" Apple Support`
+- `site:support.apple.com/zh-cn/108900 如何 恢复 Mac 固件 Apple 支持`
+- `site:support.apple.com/zh-cn Mac 固件 恢复 DFU 另一台 Mac Apple 支持`
+- `site:support.apple.com/zh-cn Mac 状态指示灯 固件恢复 模式 琥珀色 Apple 支持`
+- `site:discussions.apple.com Mac revive restore firmware DFU Apple Configurator 2026`
+- `site:reddit.com/r/mac "DFU" "revive" "restore" Mac firmware 2026`
+- `site:reddit.com/r/mac "can't get into DFU" Mac Apple silicon`
+- `小红书 Mac 固件 恢复 DFU 黑屏 另一台 Mac`
+- `小红书 Mac 更新 后 黑屏 感叹号 圆圈`
+
+### Sources Visited
+
+- Apple Support: [如何修复或恢复 Mac 固件](https://support.apple.com/zh-cn/108900)
+- Apple Support: [How to revive or restore Mac firmware](https://support.apple.com/en-us/108900)
+- Apple Support: [如果你的 Mac 无法顺利完成启动](https://support.apple.com/zh-cn/102675)
+- Apple Support: [Mac computer status indicator light behavior](https://support.apple.com/en-us/102768)
+- Apple Support: [Mac 激活锁](https://support.apple.com/zh-cn/102541)
+- Apple Support Community: [Unable to revive MacBook's firmware using Apple Configurator](https://discussions.apple.com/thread/255460941)
+- Apple Support Community: [DFU Revive and Restore Error](https://discussions.apple.com/thread/255062128)
+- Apple Support Community: [does not restore in DFU mode](https://discussions.apple.com/thread/256101935)
+- Reddit r/mac: [MacBookAir will not enter DFU mode](https://www.reddit.com/r/mac/comments/1rgfu3l/macbookair_will_not_enter_dfu_mode_what_am_i/)
+- Reddit r/mac: [Can't get into DFU mode but still this shows](https://www.reddit.com/r/mac/comments/1twjjxs/cant_get_into_dfu_mode_but_still_this_shows/)
+
+### Evidence Collected
+
+- Apple says a Mac with Apple silicon or the Apple T2 Security Chip may rarely need firmware revive or restore, such as after power failure interrupts macOS installation. Source: [Apple Support 108900](https://support.apple.com/zh-cn/108900).
+- Apple lists qualifying symptoms: startup to an exclamation point in a circle, blank screen not resolved by other blank-screen solutions, firmware recovery status light behavior, or macOS installation problems not resolved by other installation-error solutions. Source: [Apple Support 108900](https://support.apple.com/zh-cn/108900).
+- Apple says the host Mac can be any Mac model running macOS 14 or later, connected to the internet, with enough storage to download repair/restore data; the affected Mac must be Apple silicon or T2. Source: [Apple Support 108900](https://support.apple.com/zh-cn/108900).
+- Apple requires a USB-C to USB-C cable that supports both data transfer and charging, and specifically says not to use a Thunderbolt 3 charging cable. Source: [Apple Support 108900](https://support.apple.com/zh-cn/108900).
+- Apple says laptops and desktops use different DFU preparation steps, the affected Mac should use its DFU port, and other USB ports should be empty except where power is required. Source: [Apple Support 108900](https://support.apple.com/zh-cn/108900).
+- Apple says to try Revive first; revive is usually faster and does not erase the Mac. Restore should be used if revive cannot fix the Mac, and restore erases the Mac and returns it to factory settings. Source: [Apple Support 108900](https://support.apple.com/zh-cn/108900).
+- Apple says if Finder does not show the DFU window, check Finder sidebar settings, reconnect to the DFU port, retry timing, and use another compliant USB-C cable directly connected without a hub. Source: [Apple Support 108900](https://support.apple.com/zh-cn/108900).
+- Apple says proxy/firewall environments must allow traffic from the Mac to Apple network 17.0.0.0/8, and VPN/security software may need to be disabled on the host Mac. Source: [Apple Support 108900](https://support.apple.com/zh-cn/108900).
+- Apple's startup-screen article separates question mark, prohibited symbol, globe warning, Apple-logo progress bar, blank screen, startup options, exclamation point in a circle, Recovery Assistant, lock icon, Activation Lock, and target disk mode. Source: [Apple Support 102675](https://support.apple.com/zh-cn/102675).
+- Apple says firmware recovery mode can show a rapidly flashing amber or solid amber status indicator light and a blank display, and may require firmware revive on a Mac with Apple silicon or T2. Source: [Apple Support 102768](https://support.apple.com/en-us/102768).
+- Apple says Mac Activation Lock can require the Apple Account password or device passcode to erase, reactivate, or use a Mac; remote erase does not remove Activation Lock. Source: [Apple Support 102541](https://support.apple.com/zh-cn/102541).
+- Apple Support Community and Reddit repeatedly show customer confusion around "DFU vs Recovery," wrong USB-C/Thunderbolt cable, wrong port, Finder not showing DFU, repeated key-timing failures, and whether restore erases data. These were used as frequency and wording signals only.
+
+### Customer Wording
+
+- “Mac 更新断电后开不了机。”
+- “Mac 开机只有圆圈感叹号。”
+- “Mac 黑屏但好像有通电。”
+- “Mac Studio 指示灯琥珀色闪。”
+- “Finder 看不到 DFU 模式。”
+- “Apple Configurator 一直恢复失败。”
+- “修复和恢复有什么区别？”
+- “恢复会不会抹掉资料？”
+- “没有第二台 Mac 怎么办？”
+- “是不是线不对，雷雳线为什么不行？”
+
+### Cross-source Patterns
+
+- Mac firmware revive/restore is rare but high-risk because the customer problem often arrives after a failed update, failed erase, or blank-screen startup where data anxiety is high.
+- The fastest Retail branch is to identify the exact startup screen or status light before recommending DFU. Many Mac startup screens look serious but are not firmware-recovery cases.
+- The most common operational blockers are not root-cause diagnosis but setup details: host Mac version, correct DFU port, compliant USB-C data/charging cable, direct connection, Finder sidebar visibility, and key timing.
+- "Revive first, restore only if needed" is the key customer-protection message because revive does not erase the Mac while restore does.
+- Activation Lock needs to be explained before restore. Restoring a Mac does not remove the requirement for the Apple Account previously used with that Mac.
+- Community suggestions to use non-Apple hosts or third-party DFU tooling should stay outside official guidance; Apple documents another Mac running macOS 14 or later as the supported path.
+
+### Articles Created, Improved, Merged, or Flagged
+
+- Created `cookbook/Mac/mac-dfu-firmware-revive-restore.md` as the canonical Official recipe for Mac firmware revive/restore, DFU mode setup, Finder not showing DFU, data-loss distinction between revive and restore, Activation Lock risk, and service escalation.
+- Improved `indexes/tags.md` by adding `Firmware`, `DFU`, and `Startup` tags for Mac startup and firmware articles.
+- No duplicate Mac recipe existed, so nothing was merged.
+- Flagged future Mac recipes: question-mark folder startup, prohibited symbol startup, blank screen, and Activation Lock after erase.
+
+### Verification Changes
+
+- New recipe `Mac 需要修复或恢复固件` is `Official` because its core troubleshooting order is supported by Apple Support 108900, 102675, 102768, and 102541.
+- Community reports about repeated key timing, wrong cables, wrong ports, and DFU confusion were recorded as frequency signals only.
+- Non-Apple host DFU methods remain `Unknown` and are explicitly discouraged for Retail/customer support workflows.
+- No existing article verification level changed.
+
+### Reading/UI and Typography Improvements
+
+- No shared CSS or component styling changed in this run.
+- The new Mac DFU article follows the Apple Support-inspired reading flow: direct symptom title, short intro, customer wording, likely causes, ordered official steps, a focused Finder-DFU troubleshooting section, clearly labeled unofficial methods, Retail flow, escalation, related links, and compact metadata.
+- Official revive/restore guidance is textually separated from community timing and third-party host suggestions so destructive restore and unofficial methods do not look like first-line advice.
+
+### Typography/Layout Improvements
+
+- No typography tokens changed.
+- Article readability was improved through short sections, numbered official steps, compact source lists, and a clear H2/H3 hierarchy. No cards, gradients, sidebars, or decorative layout changes were introduced.
+
+### Blocked Sources
+
+- Direct Xiaohongshu post pages were not reliably accessible. Searches were useful for Chinese wording around Mac black screen, circular exclamation mark, and DFU, but no factual guidance was based on inaccessible Xiaohongshu content.
+- Reddit and Apple Support Community material was used only for symptom wording and frequency. Official facts came from Apple Support pages.
+
+### Follow-up Opportunities
+
+- Build separate Mac startup recipes for question-mark folder, prohibited symbol, blank screen, and Recovery Assistant so the DFU article can stay focused on rare firmware cases.
+- Monitor Apple Support 108900 for further changes to host Mac requirements, Finder behavior, and cable wording.
+- Research Mac Activation Lock and Repair Assistant articles as a future Retail-focused article for secondhand or recently repaired Macs.

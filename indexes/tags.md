@@ -37,6 +37,10 @@ Use these tags consistently across articles.
 - Apple Intelligence
 - Battery
 - Software Update
+- Personal Hotspot
+- Firmware
+- DFU
+- Startup
 - 电池
 - 软件更新
 
