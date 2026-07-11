@@ -1,0 +1,158 @@
+name: Sync Feedback Intake
+
+on:
+  schedule:
+    - cron: "12 */3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: feedback-intake-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Sync ECS feedback to GitHub issues
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure SSH
+        env:
+          ALIYUN_ECS_HOST: ${{ secrets.ALIYUN_ECS_HOST }}
+          ALIYUN_ECS_PORT: ${{ secrets.ALIYUN_ECS_PORT || '22' }}
+          ALIYUN_ECS_SSH_KEY: ${{ secrets.ALIYUN_ECS_SSH_KEY }}
+        run: |
+          test -n "$ALIYUN_ECS_HOST"
+          test -n "$ALIYUN_ECS_SSH_KEY"
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$ALIYUN_ECS_SSH_KEY" > ~/.ssh/aliyun_ecs
+          chmod 600 ~/.ssh/aliyun_ecs
+          ssh-keyscan -p "$ALIYUN_ECS_PORT" "$ALIYUN_ECS_HOST" >> ~/.ssh/known_hosts
+
+      - name: Download feedback queue
+        env:
+          ALIYUN_ECS_HOST: ${{ secrets.ALIYUN_ECS_HOST }}
+          ALIYUN_ECS_PORT: ${{ secrets.ALIYUN_ECS_PORT || '22' }}
+          ALIYUN_ECS_USER: ${{ secrets.ALIYUN_ECS_USER }}
+          FEEDBACK_DATA_DIR: ${{ vars.FEEDBACK_DATA_DIR || '/var/lib/apple-cookbook' }}
+        run: |
+          test -n "$ALIYUN_ECS_USER"
+          mkdir -p intake
+          ssh -i ~/.ssh/aliyun_ecs -p "$ALIYUN_ECS_PORT" "$ALIYUN_ECS_USER@$ALIYUN_ECS_HOST" \
+            "FEEDBACK_DATA_DIR='$FEEDBACK_DATA_DIR' bash -s" > intake/remote-feedback.tar <<'REMOTE'
+          set -euo pipefail
+          mkdir -p "$FEEDBACK_DATA_DIR/feedback"
+          cd "$FEEDBACK_DATA_DIR"
+          touch feedback/inbox.jsonl feedback/synced-github-issues.txt
+          tar -cf - feedback/inbox.jsonl feedback/synced-github-issues.txt
+          REMOTE
+          tar -xf intake/remote-feedback.tar -C intake
+
+      - name: Ensure labels
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh label create P0 --color B60205 --description "Highest priority feedback intake" || true
+          gh label create feedback-intake --color 1D76DB --description "Submitted through Apple Cookbook feedback" || true
+
+      - name: Create issues for new P0 feedback
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          : > intake/newly-synced-ids.txt
+
+          if [[ ! -s intake/feedback/inbox.jsonl ]]; then
+            echo "No feedback submissions found."
+            exit 0
+          fi
+
+          while IFS= read -r submission; do
+            id=$(jq -r '.id // empty' <<<"$submission")
+            [[ -n "$id" ]] || continue
+            status=$(jq -r '.status // "open"' <<<"$submission")
+            [[ "$status" == "open" ]] || continue
+
+            if grep -Fxq "$id" intake/feedback/synced-github-issues.txt; then
+              continue
+            fi
+
+            title=$(jq -r '.title // "Untitled feedback"' <<<"$submission")
+            kind=$(jq -r '.kind // "unknown"' <<<"$submission")
+            created_at=$(jq -r '.createdAt // "unknown"' <<<"$submission")
+            description=$(jq -r '.description // ""' <<<"$submission")
+            customer_words=$(jq -r '.customerWords // ""' <<<"$submission")
+            device=$(jq -r '.device // ""' <<<"$submission")
+            contact=$(jq -r '.contact // ""' <<<"$submission")
+            source_title=$(jq -r '.sourceTitle // ""' <<<"$submission")
+            source_url=$(jq -r '.sourceUrl // ""' <<<"$submission")
+
+            issue_title="P0 feedback: ${title}"
+            issue_title="${issue_title:0:220}"
+
+            cat > intake/issue-body.md <<BODY
+          Feedback ID: \`$id\`
+
+          Priority: P0
+          Type: \`$kind\`
+          Created: \`$created_at\`
+          Device: ${device:-未填写}
+
+          ## Submitted Content
+
+          $description
+
+          ## Customer Words
+
+          ${customer_words:-未填写}
+
+          ## Related Source
+
+          - Title: ${source_title:-未填写}
+          - URL: ${source_url:-未填写}
+
+          ## Contact
+
+          ${contact:-未填写}
+
+          ## Handling Rule
+
+          This item came from website feedback and must be handled before routine source harvest work. Research official Apple sources first, then compare community reports, update or create Cookbook content, record sources, and close this issue with the resolution summary.
+          BODY
+
+            gh issue create \
+              --title "$issue_title" \
+              --label P0 \
+              --label feedback-intake \
+              --body-file intake/issue-body.md
+
+            echo "$id" >> intake/newly-synced-ids.txt
+          done < intake/feedback/inbox.jsonl
+
+      - name: Mark synced feedback on ECS
+        if: success()
+        env:
+          ALIYUN_ECS_HOST: ${{ secrets.ALIYUN_ECS_HOST }}
+          ALIYUN_ECS_PORT: ${{ secrets.ALIYUN_ECS_PORT || '22' }}
+          ALIYUN_ECS_USER: ${{ secrets.ALIYUN_ECS_USER }}
+          FEEDBACK_DATA_DIR: ${{ vars.FEEDBACK_DATA_DIR || '/var/lib/apple-cookbook' }}
+        run: |
+          if [[ ! -s intake/newly-synced-ids.txt ]]; then
+            echo "No new feedback IDs synced."
+            exit 0
+          fi
+
+          scp -i ~/.ssh/aliyun_ecs -P "$ALIYUN_ECS_PORT" \
+            intake/newly-synced-ids.txt "$ALIYUN_ECS_USER@$ALIYUN_ECS_HOST:/tmp/apple-cookbook-newly-synced-ids.txt"
+
+          ssh -i ~/.ssh/aliyun_ecs -p "$ALIYUN_ECS_PORT" "$ALIYUN_ECS_USER@$ALIYUN_ECS_HOST" \
+            "FEEDBACK_DATA_DIR='$FEEDBACK_DATA_DIR' bash -s" <<'REMOTE'
+          set -euo pipefail
+          mkdir -p "$FEEDBACK_DATA_DIR/feedback"
+          cat /tmp/apple-cookbook-newly-synced-ids.txt >> "$FEEDBACK_DATA_DIR/feedback/synced-github-issues.txt"
+          sort -u "$FEEDBACK_DATA_DIR/feedback/synced-github-issues.txt" -o "$FEEDBACK_DATA_DIR/feedback/synced-github-issues.txt"
+          rm -f /tmp/apple-cookbook-newly-synced-ids.txt
+          REMOTE
