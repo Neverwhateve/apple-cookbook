@@ -3,9 +3,17 @@ import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { ArrowLeft, ExternalLink } from "lucide-react";
+import { ArticleFeedbackWidget } from "@/components/article-feedback-widget";
 import { ArticleCard } from "@/components/article-card";
 import { getAllArticles, getArticleBySlug, getRelatedArticles } from "@/lib/cookbook";
 import { difficultyLabels, statusLabels, verificationLabels } from "@/lib/labels";
+
+function formatArticleBody(body: string) {
+  const firstSectionIndex = body.search(/^##\s+症状\s*$/m);
+  const content = firstSectionIndex >= 0 ? body.slice(firstSectionIndex) : body;
+
+  return content.replace(/^##\s+零售排查流程\s*$/m, "## 排查流程");
+}
 
 export function generateStaticParams() {
   return getAllArticles().map((article) => ({
@@ -38,6 +46,7 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
   }
 
   const related = getRelatedArticles(article);
+  const articleBody = formatArticleBody(article.body);
 
   return (
     <main className="bg-white px-4 py-10 dark:bg-zinc-950 sm:px-6 sm:py-14">
@@ -72,11 +81,8 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
         <h1 className="mt-5 max-w-4xl text-4xl font-semibold leading-tight tracking-normal text-zinc-950 dark:text-zinc-50 sm:text-5xl">
           {article.title}
         </h1>
-        <p className="mt-5 max-w-3xl text-xl leading-8 text-zinc-700 dark:text-zinc-300">
-          {article.excerpt}
-        </p>
 
-        <div className="article-body mt-12">
+        <div className="article-body mt-10">
           <ReactMarkdown
             remarkPlugins={[remarkGfm]}
             components={{
@@ -92,7 +98,7 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
               }
             }}
           >
-            {article.body}
+            {articleBody}
           </ReactMarkdown>
         </div>
       </article>
@@ -159,6 +165,7 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
         ) : null}
       </aside>
       </div>
+      <ArticleFeedbackWidget articleTitle={article.title} articleUrl={article.route} />
     </main>
   );
 }

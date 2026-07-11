@@ -12,6 +12,8 @@ export type FeedbackSubmission = {
   customerWords: string;
   device: string;
   contact: string;
+  sourceTitle: string;
+  sourceUrl: string;
   status: "open";
   source: "website";
 };
@@ -54,6 +56,8 @@ function buildSubmission(formData: FormData): FeedbackSubmission {
     customerWords: normalizeSingleLine(formData.get("customerWords")),
     device: normalizeSingleLine(formData.get("device")),
     contact: normalizeSingleLine(formData.get("contact")),
+    sourceTitle: normalizeSingleLine(formData.get("sourceTitle")),
+    sourceUrl: normalizeSingleLine(formData.get("sourceUrl")),
     status: "open",
     source: "website"
   };
@@ -71,6 +75,12 @@ function buildDailyWorkItem(submission: FeedbackSubmission) {
     `  - 类型: ${submission.kind}`,
     `  - 来源: 网站反馈表单`,
     `  - 创建时间: ${submission.createdAt}`,
+    ...(submission.sourceTitle || submission.sourceUrl
+      ? [
+          `  - 关联内容: ${submission.sourceTitle || "未填写"}`,
+          `  - 关联链接: ${submission.sourceUrl || "未填写"}`
+        ]
+      : []),
     `  - 设备: ${submission.device || "未填写"}`,
     `  - 顾客原话: ${submission.customerWords || "未填写"}`,
     `  - 联系方式: ${submission.contact || "未填写"}`,
