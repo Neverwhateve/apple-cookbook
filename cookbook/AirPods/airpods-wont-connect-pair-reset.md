@@ -202,11 +202,11 @@ AirPods 没有弹出设置动画、蓝牙列表里找不到、显示“连接不
 
 ## 相关问题
 
+- [AirPods 无法充电或充电盒没有反应](/recipes/AirPods/airpods-wont-charge-case-not-working)
 - [AirPods 固件无法更新](/recipes/AirPods/airpods-firmware-wont-update)
 - [AirPods 在“查找”中显示设置未完成](/recipes/AirPods/airpods-find-my-setup-incomplete)
 - [“查找”中的位置共享不可用](/recipes/Find%20My/location-sharing-not-working)
 - AirPods 只有一只耳机有声音
-- AirPods 无法充电或充电盒没有反应
 - AirPods 自动切换到错误设备
 
 ---

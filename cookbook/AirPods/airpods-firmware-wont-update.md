@@ -169,9 +169,9 @@ AirPods 固件不是手动点按安装的更新。先确认固件是否真的落
 
 ## 相关问题
 
+- [AirPods 无法充电或充电盒没有反应](/recipes/AirPods/airpods-wont-charge-case-not-working)
 - [AirPods 无法连接或重新配对](/recipes/AirPods/airpods-wont-connect-pair-reset)
 - [AirPods 在“查找”中显示设置未完成](/recipes/AirPods/airpods-find-my-setup-incomplete)
-- AirPods 无法充电或充电盒没有反应
 - AirPods 自动切换到错误设备
 - AirPods 降噪、通透模式或助听功能不可用
 

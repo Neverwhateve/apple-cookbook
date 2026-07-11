@@ -144,6 +144,7 @@ popular: true
 ## 相关问题
 
 - [iPhone 显示 SOS、无服务或正在搜索](/recipes/iPhone/iphone-sos-no-service-searching)
+- [iPhone 设置或更新时卡在正在准备更新、正在验证更新](/recipes/iPhone/iphone-stuck-preparing-verifying-software-update)
 - iPhone 无法开机或黑屏
 - iPhone 无法充电
 - Apple 账户验证失败

@@ -202,3 +202,208 @@
 - Search for official Apple updates around AirPods automatic switching after firmware changes; community complaints may justify a separate automatic-switching recipe.
 - Review `cookbook/AirPods/airpods-wont-connect-pair-reset.md` in a later run for whether charging/contact symptoms should split into a dedicated "AirPods won't charge" recipe now that firmware and pairing are separate.
 - Monitor eSIM travel-return and failed-conversion symptoms for official Apple guidance; current evidence is mostly community experience and carrier-dependent.
+
+## Harvest Run - 2026-07-11 06:10:47 CST
+
+### Search Queries
+
+- `site:support.apple.com/zh-cn iPhone 设置 软件更新 卡住 准备更新 验证更新`
+- `site:support.apple.com/zh-cn 如果 iPhone 更新或恢复时出现错误 Apple 支持`
+- `site:support.apple.com/zh-cn iPhone 无法更新 iOS 无法安装更新`
+- `site:discussions.apple.com iPhone stuck preparing update setup iOS 26`
+- `site:reddit.com/r/iphone "stuck" "Preparing Update" "iOS 26" "setup"`
+- `site:reddit.com/r/applehelp "new iPhone" "software update" "stuck" "setup"`
+- `site:reddit.com/r/iphone "Verifying Update" "iOS 26" "stuck"`
+- `小红书 iPhone 新机 设置 软件更新 卡住 准备更新`
+- `小红书 iPhone 传输数据 卡在 软件更新 正在准备更新`
+- `小红书 iPhone 验证更新 卡住 iOS 26`
+- `site:support.apple.com/zh-cn 使用快速开始 将数据传输到新 iPhone Apple 支持`
+- `site:support.apple.com/zh-cn 从 iPhone 或 iPad 传输数据到新 iPhone 快速开始`
+
+### Sources Visited
+
+- Apple Support: [如果 iPhone 或 iPad 无法更新](https://support.apple.com/zh-cn/108905)
+- Apple Support: [更新你的 iPhone 或 iPad](https://support.apple.com/zh-cn/118575)
+- Apple Support: [如果你无法更新或恢复 iPhone 或 iPod touch](https://support.apple.com/zh-cn/118106)
+- Apple Support: [如果 iPhone、iPad 或 iPod touch 上出现恢复屏幕](https://support.apple.com/zh-cn/108969)
+- Apple Support: [如果你在更新或恢复 iPhone、iPad 或 iPod 时看到一条错误信息](https://support.apple.com/zh-cn/109057)
+- Apple Support: [更新或恢复 iPhone、iPad 或 iPod touch 后出现 Apple 标志和一个进度条](https://support.apple.com/zh-cn/102317)
+- Apple Support: [使用“访达”更新 iPhone、iPad 或 iPod touch](https://support.apple.com/zh-cn/109046)
+- Apple Support: [使用“快速开始”将数据传输到新的 iPhone 或 iPad](https://support.apple.com/zh-cn/102659)
+- Apple Support: [将数据从原来的 iOS 或 iPadOS 设备传输到新 iPhone 或 iPad](https://support.apple.com/zh-cn/119967)
+- Apple Support: [使用“访达”、Apple 设备 App 或 iTunes 将数据从旧 iOS 设备传输到新 iPhone 或 iPad](https://support.apple.com/zh-cn/120001)
+- Apple Support: [如何抹掉 iPhone 或 iPad 上的 eSIM](https://support.apple.com/zh-cn/102421)
+- Apple Support Community: [Stuck on preparing iOS 26 update during iPhone setup](https://discussions.apple.com/thread/256189818)
+- Apple Support Community: [iPhone stuck on preparing update screen](https://discussions.apple.com/thread/255571796)
+- Apple Support Community: [iPhone stuck on "Preparing Update" for hours](https://discussions.apple.com/thread/255531482)
+- Reddit r/iPhone: [Stuck on Verifying update screen (Upgrading to IOS26)](https://www.reddit.com/r/iphone/comments/1nj8v4t/stuck_on_verifying_update_screen_upgrading_to/)
+- Reddit r/applehelp: [New iPhone 16 Plus stuck in the software update with 0%](https://www.reddit.com/r/applehelp/comments/1kzc9rm/new_iphone_16_plus_stuck_in_the_software_update/)
+- Reddit r/iPhone Chinese translation: [新 iPhone 设置过程中卡在 iOS 更新的解决方法](https://www.reddit.com/r/iphone/comments/1c2f2an/solution_for_new_iphone_stuck_updating_ios_during/?tl=zh-hans)
+
+### Evidence Collected
+
+- Apple says unsupported devices cannot install newer software, and compatible devices that cannot update should first address storage, then delete the downloaded update and download it again. Source: [Apple Support 108905](https://support.apple.com/zh-cn/108905).
+- Apple says if the update is not visible in storage or the issue returns, users should update with a Mac or iTunes. Source: [Apple Support 108905](https://support.apple.com/zh-cn/108905).
+- Apple says users may need recovery mode when the device stays on the Apple logo for minutes with no progress bar, shows the connect-to-computer screen, is not recognized by the computer, or Recovery Assistant keeps failing. Source: [Apple Support 118106](https://support.apple.com/zh-cn/118106).
+- Apple says an Apple-logo progress bar after update, restore, or erase can move slowly or appear still; users should wait, keep wireless updates connected to power, and note that an "Updating" message means the update is still happening. Source: [Apple Support 102317](https://support.apple.com/zh-cn/102317).
+- Apple says update/restore error triage should include updating the Mac or Apple Devices app/iTunes, connecting directly to the computer USB port, checking the cable, changing USB ports, restarting the computer and device, and checking security software or connection to Apple's update servers. Sources: [Apple Support 109057](https://support.apple.com/zh-cn/109057), [Apple Support 108308](https://support.apple.com/zh-cn/108308).
+- Apple says Quick Start requires Wi-Fi and Bluetooth on the old device, Wi-Fi or cellular on the new device, and keeping devices near each other and connected to power until migration completes; duration depends on network conditions and transfer size. Source: [Apple Support 102659](https://support.apple.com/zh-cn/102659).
+- Apple says if a new device has already been set up, it must be erased before restoring a backup; erasing removes all data and returns the device to the Hello screen. Source: [Apple Support 120001](https://support.apple.com/zh-cn/120001).
+- Apple says not to erase eSIM during troubleshooting unless the carrier instructs it, because deleting an eSIM requires contacting the carrier for a new eSIM. Source: [Apple Support 102421](https://support.apple.com/zh-cn/102421).
+- Apple Support Community and Reddit show repeated customer wording around new iPhone setup stuck on software update, preparing update with no skip option, verifying update for an hour, and eSIM already transferred while setup is stuck. These are frequency and language signals only.
+
+### Customer Wording
+
+- “新 iPhone 设置到软件更新就不动了。”
+- “设置助理没有跳过更新的按钮。”
+- “快速开始传输数据卡在正在准备更新。”
+- “iOS 26 正在验证更新一个小时。”
+- “进度条一直 0%。”
+- “旧手机 eSIM 转过去了，新手机还卡住。”
+- “能不能强制重启？”
+- “是不是要刷机？会不会丢资料？”
+
+### Cross-source Patterns
+
+- The official Apple support path is fragmented across update, recovery mode, progress bar, computer-update, Quick Start, backup restore, and eSIM articles. A canonical Cookbook recipe is useful because Retail triage must choose the correct branch by screen state.
+- Community threads repeatedly describe a setup-assistant loop where the customer cannot reach Settings to delete the update. The common workaround is to set the new device up as new, update iOS, erase the new device, then restart migration. This uses Apple-supported primitives but is not a dedicated Apple recommendation for the symptom, so it was labeled unofficial.
+- eSIM is a high-risk branch. Several customer reports mention service moving to the new iPhone before setup completes, so the article now warns not to delete eSIM without a carrier reactivation path.
+- “Stuck” can mean normal slow progress, a bad downloaded update, a network/storage problem, a setup migration issue, or a recovery-mode failure. The Retail flow now starts by reading the exact screen instead of jumping straight to force restart.
+
+### Articles Created, Improved, Merged, or Flagged
+
+- Created `cookbook/iPhone/iphone-stuck-preparing-verifying-software-update.md` as the canonical Official recipe for iPhone/iPad stuck on preparing update, verifying update, setup-assistant software update, Apple-logo progress bar, computer update, recovery-mode update, and eSIM precautions.
+- Improved `cookbook/iPhone/iphone-battery-drains-after-update.md` by adding a related link to the new update-stuck article.
+- Improved `cookbook/iPhone/iphone-unavailable-security-lockout-forgot-passcode.md` by adding a related link to the new update-stuck article for customers moving between restore/update/erase flows.
+- No duplicate recipe was found or merged.
+
+### Verification Changes
+
+- New recipe `iPhone 设置或更新时卡在正在准备更新、正在验证更新` is `Official` because the main steps are supported by Apple Support 108905, 118575, 118106, 102317, 108969, 109057, 109046, 102659, 120001, and 102421.
+- The "set up as new, update, erase, then migrate again" path is labeled unofficial / likely because it is a recurring Apple Community and Reddit workaround, not a single Apple-published troubleshooting order for this symptom.
+- No existing article verification level changed.
+
+### Reading/UI and Typography Improvements
+
+- No shared CSS, layout component, or typography token changed in this run.
+- The new update-stuck article follows the Apple Support-inspired reading flow: symptom-focused H1, short intro, customer wording, cause explanation, ordered official troubleshooting, a separate new-iPhone setup branch, clearly labeled unofficial methods, Retail flow, escalation, related links, and compact metadata.
+- Official recommendations and community workarounds are textually separated so community setup-loop tactics do not look like Apple guidance.
+
+### Typography/Layout Improvements
+
+- No typography/layout files changed.
+- Article readability was improved through short paragraphs, section-specific H2/H3 headings, numbered actions, descriptive Apple Support links, and no card-like or marketing-style formatting.
+
+### Blocked Sources
+
+- Direct Xiaohongshu posts were not reliably accessible. Search results mainly surfaced Reddit translations, older Apple Community Chinese posts, carrier blogs, Zhihu posts, YouTube videos, and third-party repair-tool pages.
+- Third-party repair-tool pages and YouTube tutorials were not used as factual support because they often promote nonofficial firmware/repair utilities.
+
+### Follow-up Opportunities
+
+- Monitor whether Apple publishes a dedicated setup-assistant software update support article; if so, replace the community-labeled setup workaround with official wording.
+- Research update/restore error codes 9, 75, 4013, and network-server errors as a possible separate advanced recipe.
+- Review whether `iphone-unavailable-security-lockout-forgot-passcode.md` should add a deeper recovery-mode cross-link section after more update/restore evidence is collected.
+
+## Harvest Run - 2026-07-11 09:09:41 CST
+
+### Search Queries
+
+- `site:support.apple.com/zh-cn AirPods 无法充电 充电盒 Apple 支持`
+- `site:support.apple.com/zh-cn 清洁 AirPods 充电盒 触点 Apple 支持`
+- `site:support.apple.com/zh-cn 如何清洁 AirPods 充电盒 Apple 支持 AirPods`
+- `site:support.apple.com/zh-cn 清洁 AirPods 充电盒 柔软干燥无绒布`
+- `site:discussions.apple.com AirPods one AirPod not charging case light no charge 2026`
+- `site:reddit.com/r/airpods AirPods one side not charging case not charging 2026`
+- `小红书 AirPods 一只 不充电 充电盒 没反应`
+- `小红书 AirPods 充不进电 充电盒 指示灯 不亮`
+- `site:xiaohongshu.com AirPods 一只 不充电`
+- `site:discussionschinese.apple.com AirPods 一只 不充电`
+
+### Sources Visited
+
+- Apple Support: [如果你的 AirPods 无法充电](https://support.apple.com/zh-cn/102593)
+- Apple Support: [为 AirPods 充电](https://support.apple.com/zh-cn/119912)
+- Apple Support: [如何清洁 AirPods](https://support.apple.com/zh-cn/102672)
+- Apple Support: [如何清洁 AirPods Pro](https://support.apple.com/zh-cn/120409)
+- Apple Support: [关于 AirPods Pro、AirPods 3 和 AirPods 4 的抗汗抗水性能](https://support.apple.com/zh-cn/105046)
+- Apple Support: [如果左侧或右侧 AirPod 无法正常使用](https://support.apple.com/zh-cn/100494)
+- Apple Support: [如何重置 AirPods 和 AirPods Pro](https://support.apple.com/zh-cn/118531)
+- Apple Support: [如何重新启动或重置 AirPods Max](https://support.apple.com/zh-cn/119838)
+- Apple Support Community: [One AirPod not charging](https://discussions.apple.com/thread/7794211)
+- Apple Support Community: [AirPods Case not charging](https://discussions.apple.com/thread/7948985)
+- Apple Support Community: [No light from AirPod Pro case neither during charging or when opening it](https://discussions.apple.com/thread/254905911)
+- Apple 社区: [AirPods 右耳电用完以后充不进电，连接不上](https://discussionschinese.apple.com/thread/250491235)
+- Apple 社区: [AirPods2单侧耳机不能充电](https://discussionschinese.apple.com/thread/250757465)
+- Apple 社区: [AirPods Pro 充电仓满电打开仓盖无反应耳机不充电](https://discussionschinese.apple.com/thread/254537361)
+- Reddit r/AirPods: [If your AirPods won't charge on one side, it's probably not software](https://www.reddit.com/r/airpods/comments/1mmo0hk/if_your_airpods_wont_charge_on_one_side_its/)
+- Reddit r/AirPods: [Charging issues](https://www.reddit.com/r/airpods/comments/1qf52x9/charging_issues/)
+- Reddit r/AirPods: [AirPod Pros 3 Case No Longer Charging At All](https://www.reddit.com/r/airpods/comments/1py6vpf/airpod_pros_3_case_no_longer_charging_at_all/)
+
+### Evidence Collected
+
+- Apple says AirPods or AirPods Pro should be placed in the charging case, the lid closed, and the case connected by Lightning or USB-C for at least 15 minutes; AirPods Max should use the included charging cable for at least 5 minutes. Source: [Apple Support 102593](https://support.apple.com/zh-cn/102593).
+- Apple says wireless charging cases should be placed with the status light facing up, and if the light does not come on, users should reposition the case or use a compatible cable and USB power adapter. Source: [Apple Support 102593](https://support.apple.com/zh-cn/102593).
+- Apple says to check charging cable connections, USB power adapter seating, and a working outlet before escalating charging failures. Source: [Apple Support 102593](https://support.apple.com/zh-cn/102593).
+- Apple says AirPods charging status can be checked from iPhone, iPad, Mac, or the charging case, and AirPods Pro 3 users can turn off Optimized Charge Limit to fully charge. Sources: [Apple Support 102593](https://support.apple.com/zh-cn/102593), [Apple Support 119912](https://support.apple.com/zh-cn/119912).
+- Apple says AirPods charging case ports can be cleaned by removing debris with a clean, dry, soft-bristled brush; users should not insert objects into the charging port or let liquid enter it. Source: [Apple Support 102672](https://support.apple.com/zh-cn/102672).
+- Apple says AirPods Pro charging cases should be cleaned with a soft, dry, lint-free cloth, may be lightly dampened with isopropyl alcohol if needed, and must air dry. Source: [Apple Support 120409](https://support.apple.com/zh-cn/120409).
+- Apple says AirPods Pro, AirPods 3, and AirPods 4 sweat/water resistance is not permanent, wet AirPods should be dried with a soft lint-free cloth, and users should wait at least two hours before using them or putting them into the charging case. Source: [Apple Support 105046](https://support.apple.com/zh-cn/105046).
+- Apple says if one AirPod is not working, users should put both AirPods into the charging case for 30 seconds, open the case near iPhone or iPad, and test again; debris should lead to cleaning. Source: [Apple Support 100494](https://support.apple.com/zh-cn/100494).
+- Apple says AirPods may need to be reset to resolve charging problems and other issues; reset instructions now differ for AirPods 4 / AirPods Pro 3 versus earlier AirPods models. Source: [Apple Support 118531](https://support.apple.com/zh-cn/118531).
+- Apple Support Community, Chinese Apple Community, Reddit, and Xiaohongshu-language search results repeatedly show customer wording around one AirPod not charging, case no light, charging pins/contacts, sweat/oxidation, and “works if I reseat it.” These were used as frequency and language signals only.
+
+### Customer Wording
+
+- “AirPods 一只不充电。”
+- “右耳放进盒子没反应。”
+- “充电盒插线不亮灯。”
+- “无线充电放上去没有反应。”
+- “要重新放好几次才开始充。”
+- “运动出汗以后充不上。”
+- “电量一直 0%。”
+- “是不是电池坏了？”
+- “能不能清理触点？”
+
+### Cross-source Patterns
+
+- The customer symptom is often described as a pairing or firmware problem, but the fastest Retail branch is physical charging: power path, charge status, port debris, moisture, and contact seating.
+- Official Apple guidance is split across charging, cleaning, water-resistance, one-side AirPod, and reset articles. A canonical Cookbook article improves the triage order by putting those official steps into one flow.
+- Community posts often jump straight to oxidation, charging pins, deep discharge, or replacement. The article keeps contact/cleaning observations as frequency signals while preserving Apple-safe cleaning language and service escalation.
+- AirPods Pro 3 adds a specific “Optimized Charge Limit” branch, which can look like a charging failure if the customer expects 100%.
+- The previous pairing article already mentioned contact cleaning as unofficial. This run split charging/contact failures into their own canonical article so pairing, firmware, and charging symptoms are easier to route.
+
+### Articles Created, Improved, Merged, or Flagged
+
+- Created `cookbook/AirPods/airpods-wont-charge-case-not-working.md` as the canonical Official recipe for AirPods not charging, one AirPod not charging, charging case no light, wireless charging position, AirPods Max charging, cleaning/drying, reset, and service escalation.
+- Improved `cookbook/AirPods/airpods-wont-connect-pair-reset.md` by converting the plain related-problem entry for AirPods charging into a link to the new canonical article.
+- Improved `cookbook/AirPods/airpods-firmware-wont-update.md` by converting the plain related-problem entry for AirPods charging into a link to the new canonical article.
+- No duplicate recipe was merged; the new article separates charging/contact failures from pairing/reset and firmware update failures.
+
+### Verification Changes
+
+- New recipe `AirPods 无法充电或充电盒没有反应` is `Official` because its core steps are supported by Apple Support 102593, 119912, 102672, 120409, 105046, 100494, 118531, and 119838.
+- Community observations about contact seating, oxidation, charging pins, and reseating were labeled as unofficial frequency signals, not Apple official recommendations.
+- No existing article verification level changed.
+
+### Reading/UI and Typography Improvements
+
+- No shared CSS, layout component, or typography token changed in this run.
+- The new AirPods charging article follows the Apple Support-inspired reading flow: symptom-focused title, concise intro, symptom wording, likely causes, official ordered steps, a single-AirPod branch, clearly labeled nonofficial methods, Retail flow, escalation, related links, and compact metadata.
+- The article avoids dense prose and keeps official charging/cleaning instructions visually separate from community contact/oxidation discussion.
+
+### Typography/Layout Improvements
+
+- No typography/layout files changed.
+- Article readability was improved through short paragraphs, H2 sections with one purpose each, ordered official steps, and descriptive Apple Support links.
+
+### Blocked Sources
+
+- Direct Xiaohongshu posts were not reliably accessible. Search results surfaced Apple Support, Chinese Apple Community, Reddit translations, YouTube, Zhihu, and repair-shop pages.
+- Third-party repair pages about AirPods charging case no-light behavior were not used as factual support because Apple Support provided safer charging, cleaning, and service guidance.
+
+### Follow-up Opportunities
+
+- Search for a dedicated AirPods “only one side has sound” recipe; Apple Support 100494 covers charging/audio/balance and may deserve its own customer-facing article.
+- Monitor whether AirPods Pro 3 optimized charging limit causes more “cannot fully charge” complaints, especially in Chinese customer wording.
+- Review AirPods pairing article later to remove or shorten remaining contact-cleaning discussion now that a canonical charging article exists.

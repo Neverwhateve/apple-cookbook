@@ -202,6 +202,7 @@ popular: true
 
 - [iPhone 无法设置或转移 eSIM](/recipes/iPhone/iphone-esim-setup-transfer-fails)
 - [iPhone 显示 SOS、无服务或正在搜索](/recipes/iPhone/iphone-sos-no-service-searching)
+- [iPhone 设置或更新时卡在正在准备更新、正在验证更新](/recipes/iPhone/iphone-stuck-preparing-verifying-software-update)
 - [Apple 账户显示验证失败或连接服务器出错](/recipes/Apple%20ID/apple-account-verification-failed)
 - iPhone 无法开机或卡在 Apple 标志
 - iPhone 换机后无法从备份恢复
