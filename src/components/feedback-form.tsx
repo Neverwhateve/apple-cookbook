@@ -1,7 +1,7 @@
 "use client";
 
 import { SendHorizonal } from "lucide-react";
-import { useActionState } from "react";
+import { useActionState, useId, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { submitFeedback, type FeedbackState } from "@/app/feedback/actions";
 
@@ -26,91 +26,63 @@ function SubmitButton() {
 }
 
 export function FeedbackForm({ initialTitle = "" }: { initialTitle?: string }) {
+  const contentId = useId();
+  const [kind, setKind] = useState<"link_submission" | "question_submission">("question_submission");
   const [state, formAction] = useActionState(submitFeedback, initialState);
+  const contentLabel = kind === "link_submission" ? "链接" : "问题";
+  const placeholder =
+    kind === "link_submission"
+      ? "粘贴 Apple 支持、社区讨论、新闻、论坛或其他参考链接。"
+      : "写下遇到的问题、顾客问法，或你觉得知识库缺少的主题。";
 
   return (
     <form action={formAction} className="space-y-5 rounded-lg border border-zinc-200 bg-white p-5 shadow-soft dark:border-zinc-800 dark:bg-zinc-950">
+      <input type="hidden" name="kind" value={kind} />
+      {initialTitle ? <input type="hidden" name="title" value={initialTitle} /> : null}
       <div>
-        <label htmlFor="kind" className="text-sm font-medium text-zinc-950 dark:text-zinc-50">
-          类型
-        </label>
-        <select
-          id="kind"
-          name="kind"
-          className="mt-2 w-full rounded-md border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm outline-none transition focus:border-zinc-500 dark:border-zinc-800 dark:bg-zinc-900"
-          defaultValue="missing_problem"
-        >
-          <option value="missing_problem">需要新增故障排查条目</option>
-          <option value="article_feedback">反馈现有条目</option>
-          <option value="workflow_request">零售流程或升级处理请求</option>
-        </select>
-      </div>
-
-      <div>
-        <label htmlFor="title" className="text-sm font-medium text-zinc-950 dark:text-zinc-50">
-          简短标题
-        </label>
-        <input
-          id="title"
-          name="title"
-          required
-          minLength={3}
-          defaultValue={initialTitle}
-          placeholder="例如：Apple Watch 无法解锁 Mac"
-          className="mt-2 w-full rounded-md border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm outline-none transition placeholder:text-zinc-500 focus:border-zinc-500 dark:border-zinc-800 dark:bg-zinc-900"
-        />
-      </div>
-
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div>
-          <label htmlFor="customerWords" className="text-sm font-medium text-zinc-950 dark:text-zinc-50">
-            顾客原话
-          </label>
-          <input
-            id="customerWords"
-            name="customerWords"
-            placeholder="例如：我的 Mac 解锁不了"
-            className="mt-2 w-full rounded-md border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm outline-none transition placeholder:text-zinc-500 focus:border-zinc-500 dark:border-zinc-800 dark:bg-zinc-900"
-          />
-        </div>
-
-        <div>
-          <label htmlFor="device" className="text-sm font-medium text-zinc-950 dark:text-zinc-50">
-            设备或服务
-          </label>
-          <input
-            id="device"
-            name="device"
-            placeholder="iPhone, Mac, iCloud, AirPods"
-            className="mt-2 w-full rounded-md border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm outline-none transition placeholder:text-zinc-500 focus:border-zinc-500 dark:border-zinc-800 dark:bg-zinc-900"
-          />
+        <p className="text-sm font-medium text-zinc-950 dark:text-zinc-50">提交类型</p>
+        <div className="mt-2 grid gap-3 sm:grid-cols-2">
+          <button
+            type="button"
+            onClick={() => setKind("question_submission")}
+            className={`rounded-md border p-4 text-left transition ${
+              kind === "question_submission"
+                ? "border-zinc-950 bg-zinc-100 dark:border-zinc-50 dark:bg-zinc-900"
+                : "border-zinc-200 bg-white hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:bg-zinc-900"
+            }`}
+            aria-pressed={kind === "question_submission"}
+          >
+            <span className="block text-sm font-semibold text-zinc-950 dark:text-zinc-50">问题</span>
+            <span className="mt-1 block text-sm leading-5 text-zinc-600 dark:text-zinc-400">一句话也可以，我之后分析整理。</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setKind("link_submission")}
+            className={`rounded-md border p-4 text-left transition ${
+              kind === "link_submission"
+                ? "border-zinc-950 bg-zinc-100 dark:border-zinc-50 dark:bg-zinc-900"
+                : "border-zinc-200 bg-white hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:bg-zinc-900"
+            }`}
+            aria-pressed={kind === "link_submission"}
+          >
+            <span className="block text-sm font-semibold text-zinc-950 dark:text-zinc-50">链接</span>
+            <span className="mt-1 block text-sm leading-5 text-zinc-600 dark:text-zinc-400">发来源链接，我之后分析整理。</span>
+          </button>
         </div>
       </div>
 
       <div>
-        <label htmlFor="description" className="text-sm font-medium text-zinc-950 dark:text-zinc-50">
-            详细情况
+        <label htmlFor={contentId} className="text-sm font-medium text-zinc-950 dark:text-zinc-50">
+          {contentLabel}
         </label>
         <textarea
-          id="description"
-          name="description"
+          id={contentId}
+          name="content"
           required
-          minLength={10}
-          rows={6}
-          placeholder="发生了什么、顾客期望什么、已经尝试过哪些步骤，以及看到的完整报错信息。"
+          minLength={3}
+          rows={kind === "link_submission" ? 3 : 5}
+          placeholder={placeholder}
           className="mt-2 w-full resize-y rounded-md border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm leading-6 outline-none transition placeholder:text-zinc-500 focus:border-zinc-500 dark:border-zinc-800 dark:bg-zinc-900"
-        />
-      </div>
-
-      <div>
-        <label htmlFor="contact" className="text-sm font-medium text-zinc-950 dark:text-zinc-50">
-          可选联系方式或备注
-        </label>
-        <input
-          id="contact"
-          name="contact"
-          placeholder="姓名、门店，或后续跟进方式"
-          className="mt-2 w-full rounded-md border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm outline-none transition placeholder:text-zinc-500 focus:border-zinc-500 dark:border-zinc-800 dark:bg-zinc-900"
         />
       </div>
 
@@ -125,7 +97,7 @@ export function FeedbackForm({ initialTitle = "" }: { initialTitle?: string }) {
               : "text-zinc-500 dark:text-zinc-400"
           }`}
         >
-          {state.message || "提交内容会记录到每日复核清单。"}
+          {state.message || "提交后会加入待办事项，由我后续分析整理。"}
         </p>
         <SubmitButton />
       </div>

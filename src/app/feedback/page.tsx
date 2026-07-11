@@ -20,10 +20,10 @@ export default async function FeedbackPage({
         <div className="mb-6">
           <p className="text-sm font-semibold text-zinc-500 dark:text-zinc-400">每日工作收集</p>
           <h1 className="mt-2 max-w-3xl text-4xl font-semibold tracking-normal text-zinc-950 dark:text-zinc-50 sm:text-5xl">
-            提交缺失问题或条目更新。
+            提交链接或问题。
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-7 text-zinc-600 dark:text-zinc-400">
-            发送顾客原话、现象和背景信息，方便后续复核、去重，并整理成知识库条目。
+            不需要整理格式。发一个链接或一句问题，先进入待办，我之后负责分析、查证和整理成知识库条目。
           </p>
         </div>
 
@@ -37,9 +37,9 @@ export default async function FeedbackPage({
             会记录什么
           </h2>
           <ul className="mt-4 space-y-3 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
-            <li>一条结构化反馈记录，供后续自动化处理。</li>
-            <li>一项每日待复核工作清单。</li>
-            <li>可用于优化搜索别名的顾客原话。</li>
+            <li>链接或问题原文。</li>
+            <li>一项每日待办事项。</li>
+            <li>后续分析整理所需的来源线索。</li>
           </ul>
         </section>
 
@@ -49,9 +49,9 @@ export default async function FeedbackPage({
             复核路径
           </h2>
           <ol className="mt-4 space-y-3 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
-            <li>先确认现有条目是否已经覆盖。</li>
-            <li>优先查证 Apple 官方来源。</li>
-            <li>在知识库中新增或更新 Markdown 条目。</li>
+            <li>先判断链接或问题属于哪个场景。</li>
+            <li>查证来源并和现有条目去重。</li>
+            <li>整理成新增条目或文章更新。</li>
           </ol>
         </section>
 
