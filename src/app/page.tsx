@@ -4,7 +4,6 @@ import {
   BatteryCharging,
   Cable,
   Clock,
-  FilePlus2,
   Folder,
   Laptop,
   Layers3,
@@ -189,22 +188,6 @@ export default function HomePage() {
           </div>
 
           <aside className="space-y-6">
-            <section className="rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
-              <h2 className="flex items-center gap-2 text-base font-semibold text-zinc-950 dark:text-zinc-50">
-                <FilePlus2 className="h-4 w-4" />
-                没找到问题？
-              </h2>
-              <p className="mt-3 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
-                提交顾客原话、现象和设备背景，系统会记录到每日待复核清单。
-              </p>
-              <Link
-                href="/feedback"
-                className="mt-4 inline-flex min-h-10 items-center justify-center rounded-md bg-zinc-950 px-3 py-2 text-sm font-semibold text-white transition hover:bg-zinc-800 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200"
-              >
-                提交反馈
-              </Link>
-            </section>
-
             <section className="rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
               <h2 className="flex items-center gap-2 text-base font-semibold text-zinc-950 dark:text-zinc-50">
                 <ShieldCheck className="h-4 w-4" />

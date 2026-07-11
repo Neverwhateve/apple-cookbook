@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { BookOpen, Search } from "lucide-react";
 import "./globals.css";
+import { GlobalFeedbackWidget } from "@/components/global-feedback-widget";
 import { ThemeToggle } from "@/components/theme-toggle";
 
 export const metadata: Metadata = {
@@ -53,6 +54,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           </div>
         </header>
         {children}
+        <GlobalFeedbackWidget />
       </body>
     </html>
   );

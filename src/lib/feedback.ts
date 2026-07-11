@@ -19,11 +19,14 @@ export type FeedbackSubmission = {
   contact: string;
   sourceTitle: string;
   sourceUrl: string;
-  status: "open";
+  status: "open" | "in_progress" | "resolved" | "dismissed";
   source: "website";
+  adminNote?: string;
+  updatedAt?: string;
 };
 
-const dataRoot = process.env.APPLE_COOKBOOK_DATA_DIR ?? process.cwd();
+export const feedbackDataRoot = process.env.APPLE_COOKBOOK_DATA_DIR ?? process.cwd();
+const dataRoot = feedbackDataRoot;
 const feedbackRoot = path.join(dataRoot, "feedback");
 const todoRoot = path.join(dataRoot, "todos");
 const inboxPath = path.join(feedbackRoot, "inbox.jsonl");
