@@ -67,4 +67,4 @@ jobs:
         run: |
           test -n "$ALIYUN_ECS_USER"
           ssh -i ~/.ssh/aliyun_ecs -p "$ALIYUN_ECS_PORT" "$ALIYUN_ECS_USER@$ALIYUN_ECS_HOST" \
-            "APP_DIR='$APP_DIR' SERVICE_NAME='$SERVICE_NAME' BRANCH='main' bash -lc 'cd \"\$APP_DIR\" && git pull --ff-only origin \"\$BRANCH\" && bash scripts/deploy-ecs.sh --skip-pull'"
+            "APP_DIR='$APP_DIR' SERVICE_NAME='$SERVICE_NAME' BRANCH='main' GITHUB_SHA='$GITHUB_SHA' bash -lc 'cd \"\$APP_DIR\" && if [[ -n \$(git status --porcelain) ]]; then git stash push --include-untracked -m \"pre-deploy-\$GITHUB_SHA\"; fi && git pull --ff-only origin \"\$BRANCH\" && bash scripts/deploy-ecs.sh --skip-pull'"
