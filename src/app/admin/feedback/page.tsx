@@ -1,6 +1,17 @@
 import { cookies } from "next/headers";
-import { CheckCircle2, CircleDot, ExternalLink, Inbox, LogOut, RotateCcw, ShieldAlert, XCircle } from "lucide-react";
-import { loginAdmin, logoutAdmin, updateFeedbackQueueItem } from "@/app/admin/feedback/actions";
+import {
+  CheckCircle2,
+  ChevronsDown,
+  ChevronsUp,
+  CircleDot,
+  ExternalLink,
+  Inbox,
+  LogOut,
+  RotateCcw,
+  ShieldAlert,
+  XCircle
+} from "lucide-react";
+import { loginAdmin, logoutAdmin, moveFeedbackQueueItem, updateFeedbackQueueItem } from "@/app/admin/feedback/actions";
 import { canUseAdminSession, getAdminFeedbackItems, type FeedbackStatus } from "@/lib/feedback-admin";
 
 export const dynamic = "force-dynamic";
@@ -37,6 +48,29 @@ function StatusButton({
     <form action={updateFeedbackQueueItem}>
       <input type="hidden" name="id" value={id} />
       <input type="hidden" name="status" value={status} />
+      <button
+        type="submit"
+        className="inline-flex h-9 items-center justify-center gap-1.5 rounded-md border border-zinc-200 bg-white px-3 text-xs font-medium text-zinc-800 transition hover:border-zinc-400 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:hover:border-zinc-600 dark:hover:bg-zinc-900"
+      >
+        {children}
+      </button>
+    </form>
+  );
+}
+
+function MoveButton({
+  id,
+  direction,
+  children
+}: {
+  id: string;
+  direction: "first" | "last";
+  children: React.ReactNode;
+}) {
+  return (
+    <form action={moveFeedbackQueueItem}>
+      <input type="hidden" name="id" value={id} />
+      <input type="hidden" name="direction" value={direction} />
       <button
         type="submit"
         className="inline-flex h-9 items-center justify-center gap-1.5 rounded-md border border-zinc-200 bg-white px-3 text-xs font-medium text-zinc-800 transition hover:border-zinc-400 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:hover:border-zinc-600 dark:hover:bg-zinc-900"
@@ -158,6 +192,7 @@ export default async function AdminFeedbackPage() {
                     <span className={`rounded-full px-2 py-0.5 text-xs font-medium ring-1 ${statusClasses[item.status]}`}>
                       {statusLabels[item.status]}
                     </span>
+                    <span className="text-xs text-zinc-500">队列 #{item.queuePosition}</span>
                     <span className="text-xs text-zinc-500">{item.syncedToGithub ? "已同步 GitHub" : "未同步 GitHub"}</span>
                   </div>
                   <h2 className="mt-2 text-lg font-semibold text-zinc-950 dark:text-zinc-50">{item.title}</h2>
@@ -186,6 +221,14 @@ export default async function AdminFeedbackPage() {
                 </div>
 
                 <div className="flex flex-wrap gap-2 lg:w-80 lg:justify-end">
+                  <MoveButton id={item.id} direction="first">
+                    <ChevronsUp className="h-4 w-4" />
+                    最前
+                  </MoveButton>
+                  <MoveButton id={item.id} direction="last">
+                    <ChevronsDown className="h-4 w-4" />
+                    最后
+                  </MoveButton>
                   <StatusButton id={item.id} status="in_progress">
                     <CircleDot className="h-4 w-4" />
                     处理中

@@ -8,6 +8,7 @@ export type FeedbackStatus = FeedbackSubmission["status"];
 export type AdminFeedbackItem = FeedbackSubmission & {
   priority: "P0";
   syncedToGithub: boolean;
+  queuePosition: number;
 };
 
 const feedbackRoot = path.join(feedbackDataRoot, "feedback");
@@ -55,10 +56,11 @@ export async function getAdminFeedbackItems(): Promise<AdminFeedbackItem[]> {
   const [submissions, syncedIds] = await Promise.all([readSubmissions(), readSyncedIds()]);
 
   return submissions
-    .map((submission) => ({
+    .map((submission, index) => ({
       ...submission,
       priority: "P0" as const,
-      syncedToGithub: syncedIds.has(submission.id)
+      syncedToGithub: syncedIds.has(submission.id),
+      queuePosition: index + 1
     }))
     .sort((a, b) => {
       const statusRank: Record<FeedbackStatus, number> = {
@@ -68,8 +70,13 @@ export async function getAdminFeedbackItems(): Promise<AdminFeedbackItem[]> {
         dismissed: 3
       };
 
-      return statusRank[a.status] - statusRank[b.status] || b.createdAt.localeCompare(a.createdAt);
+      return statusRank[a.status] - statusRank[b.status] || a.queuePosition - b.queuePosition;
     });
+}
+
+async function writeSubmissions(submissions: FeedbackSubmission[]) {
+  await fs.mkdir(feedbackRoot, { recursive: true });
+  await fs.writeFile(inboxPath, `${submissions.map((submission) => JSON.stringify(submission)).join("\n")}\n`, "utf8");
 }
 
 export async function updateFeedbackStatus(id: string, status: FeedbackStatus, adminNote = "") {
@@ -92,7 +99,28 @@ export async function updateFeedbackStatus(id: string, status: FeedbackStatus, a
     throw new Error(`Feedback item not found: ${id}`);
   }
 
-  await fs.writeFile(inboxPath, `${nextSubmissions.map((submission) => JSON.stringify(submission)).join("\n")}\n`, "utf8");
+  await writeSubmissions(nextSubmissions);
+}
+
+export async function moveFeedbackItem(id: string, direction: "first" | "last") {
+  if (!id) throw new Error("Missing feedback id.");
+
+  const submissions = await readSubmissions();
+  const currentIndex = submissions.findIndex((submission) => submission.id === id);
+
+  if (currentIndex === -1) {
+    throw new Error(`Feedback item not found: ${id}`);
+  }
+
+  const [item] = submissions.splice(currentIndex, 1);
+
+  if (direction === "first") {
+    submissions.unshift(item);
+  } else {
+    submissions.push(item);
+  }
+
+  await writeSubmissions(submissions);
 }
 
 function getAdminUsername() {

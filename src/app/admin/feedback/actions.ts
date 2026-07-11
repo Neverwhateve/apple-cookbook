@@ -6,6 +6,7 @@ import {
   canUseAdminCredentials,
   canUseAdminSession,
   createAdminSessionToken,
+  moveFeedbackItem,
   updateFeedbackStatus,
   type FeedbackStatus
 } from "@/lib/feedback-admin";
@@ -55,5 +56,23 @@ export async function updateFeedbackQueueItem(formData: FormData) {
   }
 
   await updateFeedbackStatus(id, status, adminNote);
+  revalidatePath("/admin/feedback");
+}
+
+export async function moveFeedbackQueueItem(formData: FormData) {
+  const cookieStore = await cookies();
+
+  if (!canUseAdminSession(cookieStore.get(cookieName)?.value)) {
+    throw new Error("管理员会话已失效，请重新登录。");
+  }
+
+  const id = String(formData.get("id") ?? "");
+  const direction = String(formData.get("direction") ?? "");
+
+  if (direction !== "first" && direction !== "last") {
+    throw new Error("Invalid queue move direction.");
+  }
+
+  await moveFeedbackItem(id, direction);
   revalidatePath("/admin/feedback");
 }
