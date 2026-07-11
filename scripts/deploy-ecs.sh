@@ -28,8 +28,9 @@ if [[ ! -d .next/standalone ]]; then
   exit 1
 fi
 
-rm -rf .next/standalone/public .next/standalone/.next/static
+rm -rf .next/standalone/public .next/standalone/.next/static .next/standalone/cookbook
 cp -R public .next/standalone/public
+cp -R cookbook .next/standalone/cookbook
 mkdir -p .next/standalone/.next
 cp -R .next/static .next/standalone/.next/static
 

@@ -47,9 +47,9 @@ The goal is to create a practical troubleshooting encyclopedia that helps Apple 
 ## Operating Cadence
 
 - Source harvest and article review work should continue every 3 hours.
-- GitHub publication is batched once per week on Wednesday.
-- Wednesday source harvests still follow the 3-hour cadence; they do not each trigger a GitHub publication.
-- Between Wednesday releases, keep harvested notes, drafts, and updates local and reviewable.
+- Publish to GitHub after every completed work cycle.
+- Feedback questions and submitted links are P0 intake and must be handled before routine source harvest work.
+- When multiple priority levels exist, resolve items in priority order before moving to the next level.
 
 ## Architecture
 

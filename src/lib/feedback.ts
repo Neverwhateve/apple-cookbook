@@ -23,8 +23,9 @@ export type FeedbackSubmission = {
   source: "website";
 };
 
-const feedbackRoot = path.join(process.cwd(), "feedback");
-const todoRoot = path.join(process.cwd(), "todos");
+const dataRoot = process.env.APPLE_COOKBOOK_DATA_DIR ?? process.cwd();
+const feedbackRoot = path.join(dataRoot, "feedback");
+const todoRoot = path.join(dataRoot, "todos");
 const inboxPath = path.join(feedbackRoot, "inbox.jsonl");
 const dailyWorkPath = path.join(todoRoot, "daily-work.md");
 const runtimeFeedbackRoot = path.join("/tmp", "apple-cookbook-feedback");
@@ -109,7 +110,8 @@ function buildDailyWorkItem(submission: FeedbackSubmission) {
         : "复核来源，与现有知识库条目去重，然后新增或更新 Markdown 条目。";
 
   const lines = [
-    `- [ ] ${submission.id} ${submission.title}`,
+    `- [ ] [P0] ${submission.id} ${submission.title}`,
+    `  - 优先级: P0 - 用户反馈问题或链接，优先处理`,
     `  - 类型: ${submission.kind}`,
     `  - 来源: 网站反馈表单`,
     `  - 创建时间: ${submission.createdAt}`,
@@ -127,6 +129,20 @@ function buildDailyWorkItem(submission: FeedbackSubmission) {
   ];
 
   return `${lines.join("\n")}\n`;
+}
+
+async function prependDailyWorkItem(filePath: string, item: string) {
+  let existing = "";
+
+  try {
+    existing = await fs.readFile(filePath, "utf8");
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") {
+      throw error;
+    }
+  }
+
+  await fs.writeFile(filePath, `${item}\n${existing}`.trimEnd() + "\n", "utf8");
 }
 
 async function ensureStore() {
@@ -160,11 +176,11 @@ export async function saveFeedback(formData: FormData) {
 
   if (process.env.VERCEL) {
     await fs.appendFile(runtimeInboxPath, `${JSON.stringify(submission)}\n`, "utf8");
-    await fs.appendFile(runtimeDailyWorkPath, buildDailyWorkItem(submission), "utf8");
+    await prependDailyWorkItem(runtimeDailyWorkPath, buildDailyWorkItem(submission));
     console.log("APPLE_COOKBOOK_FEEDBACK", JSON.stringify(submission));
   } else {
     await fs.appendFile(inboxPath, `${JSON.stringify(submission)}\n`, "utf8");
-    await fs.appendFile(dailyWorkPath, buildDailyWorkItem(submission), "utf8");
+    await prependDailyWorkItem(dailyWorkPath, buildDailyWorkItem(submission));
   }
 
   return { ok: true as const, id: submission.id };
