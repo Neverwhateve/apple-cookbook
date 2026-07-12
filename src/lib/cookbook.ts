@@ -28,6 +28,7 @@ export type Article = ArticleMeta & {
 };
 
 const cookbookRoot = path.join(process.cwd(), "cookbook");
+const emptyProductCategories = ["iPad", "Vision Pro"];
 
 function ensureArray(value: unknown): string[] {
   if (!value) return [];
@@ -58,6 +59,12 @@ function walkMarkdownFiles(dir: string): string[] {
 
     return [];
   });
+}
+
+function getCategoryDirectories() {
+  if (!fs.existsSync(cookbookRoot)) return [];
+
+  return emptyProductCategories.filter((category) => fs.existsSync(path.join(cookbookRoot, category)));
 }
 
 function buildExcerpt(body: string) {
@@ -117,6 +124,10 @@ export function getArticleBySlug(slug: string[]) {
 export function getAllCategories() {
   const articles = getAllArticles();
   const categories = new Map<string, Article[]>();
+
+  for (const category of getCategoryDirectories()) {
+    categories.set(category, []);
+  }
 
   for (const article of articles) {
     const current = categories.get(article.category) ?? [];

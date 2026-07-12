@@ -28,11 +28,17 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
         <span>{category.name}</span>
       </nav>
       <h1 className="mt-4 text-3xl font-semibold text-zinc-950 dark:text-zinc-50">{category.name}</h1>
-      <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {category.items.map((article) => (
-          <ArticleCard key={article.route} article={article} />
-        ))}
-      </div>
+      {category.items.length > 0 ? (
+        <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {category.items.map((article) => (
+            <ArticleCard key={article.route} article={article} />
+          ))}
+        </div>
+      ) : (
+        <div className="mt-8 rounded-lg border border-zinc-200 bg-white p-6 text-sm text-zinc-600 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-400">
+          这个分类的文章正在整理中。
+        </div>
+      )}
     </main>
   );
 }

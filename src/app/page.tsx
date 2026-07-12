@@ -29,12 +29,12 @@ function AppleWatchIcon({ className }: { className?: string }) {
       strokeWidth="2.2"
       aria-hidden="true"
     >
-      <path d="M12.5 5.5h7l1 4h-9z" />
-      <rect x="9" y="9" width="14" height="14" rx="4" />
-      <path d="M11.5 23h9l-1 4h-7z" />
-      <path d="M23.5 14.5h1.5v3h-1.5" />
-      <path d="M14 13.5h4" />
-      <path d="M14 18.5h4" />
+      <path d="M12.5 4.5h7l1 5h-9z" />
+      <rect x="8.75" y="9" width="14.5" height="14.5" rx="4.25" />
+      <path d="M11.5 23.5h9l-1 4h-7z" />
+      <path d="M23.5 14.25h1.75v3.5H23.5" />
+      <path d="M14.25 13.75h3.5" />
+      <path d="M14.25 18.75h3.5" />
     </svg>
   );
 }
@@ -51,13 +51,62 @@ function AirPodsIcon({ className }: { className?: string }) {
       strokeWidth="2.2"
       aria-hidden="true"
     >
-      <path d="M9.5 7.5a4 4 0 0 0-4 4v1.25a3.25 3.25 0 0 0 6.5 0v-1.5a3.75 3.75 0 0 0-2.5-3.75Z" />
-      <path d="M9 15.5v9a2 2 0 0 0 4 0v-9.75" />
-      <path d="M22.5 7.5a4 4 0 0 1 4 4v1.25a3.25 3.25 0 0 1-6.5 0v-1.5a3.75 3.75 0 0 1 2.5-3.75Z" />
-      <path d="M23 15.5v9a2 2 0 0 1-4 0v-9.75" />
+      <path d="M9.5 6.5a4.25 4.25 0 0 0-4.25 4.25v1.5a3.25 3.25 0 0 0 6.5 0v-1.75A4 4 0 0 0 9.5 6.5Z" />
+      <path d="M9.5 15.5v9.25a2.25 2.25 0 0 0 4.5 0v-8" />
+      <path d="M22.5 6.5a4.25 4.25 0 0 1 4.25 4.25v1.5a3.25 3.25 0 0 1-6.5 0v-1.75a4 4 0 0 1 2.25-4Z" />
+      <path d="M22.5 15.5v9.25a2.25 2.25 0 0 1-4.5 0v-8" />
     </svg>
   );
 }
+
+function IPadIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 32 32"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2.2"
+      aria-hidden="true"
+    >
+      <rect x="6.5" y="8" width="19" height="16" rx="2.75" />
+      <path d="M10 12h12" />
+      <path d="M10 16h12" />
+      <path d="M10 20h12" />
+    </svg>
+  );
+}
+
+function VisionIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 32 32"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2.2"
+      aria-hidden="true"
+    >
+      <path d="M5 15.5c1.2-4.2 4.4-6.5 8.6-6.5h4.8c4.2 0 7.4 2.3 8.6 6.5" />
+      <path d="M5 15.5v3.25A4.25 4.25 0 0 0 9.25 23h3.1a4.2 4.2 0 0 0 3.65-2.1A4.2 4.2 0 0 0 19.65 23h3.1A4.25 4.25 0 0 0 27 18.75V15.5" />
+      <path d="M8.75 17.5h4.5" />
+      <path d="M18.75 17.5h4.5" />
+    </svg>
+  );
+}
+
+const productItems = [
+  { label: "iPhone", category: "iPhone", icon: Smartphone },
+  { label: "Mac", category: "Mac", icon: Laptop },
+  { label: "iPad", category: "iPad", icon: IPadIcon },
+  { label: "Watch", category: "Apple Watch", icon: AppleWatchIcon },
+  { label: "Vision", category: "Vision Pro", icon: VisionIcon },
+  { label: "AirPods", category: "AirPods", icon: AirPodsIcon }
+];
 
 const topicGroups = [
   {
@@ -96,17 +145,6 @@ export default function HomePage() {
   const tags = getAllTags();
   const recentlyUpdated = [...articles].sort((a, b) => b.updated.localeCompare(a.updated)).slice(0, 6);
   const popular = articles.filter((article) => article.popular).slice(0, 6);
-  const productOrder = ["iPhone", "Mac", "Apple Watch", "AirPods", "HomePod"];
-  const productCategories = productOrder
-    .map((name) => categories.find((category) => category.name === name))
-    .filter((category): category is NonNullable<typeof category> => Boolean(category));
-  const categoryIcons = new Map([
-    ["iPhone", Smartphone],
-    ["Mac", Laptop],
-    ["AirPods", AirPodsIcon],
-    ["Apple Watch", AppleWatchIcon],
-    ["HomePod", Router]
-  ]);
   const quickActions = [
     {
       title: "查看全部分类",
@@ -142,20 +180,20 @@ export default function HomePage() {
             需要协助？从这里开始。
           </p>
 
-          <nav aria-label="产品支持" className="mx-auto mt-10 grid max-w-4xl grid-cols-2 gap-x-4 gap-y-7 sm:grid-cols-5">
-            {productCategories.map((category) => {
-              const Icon = categoryIcons.get(category.name) ?? Folder;
+          <nav aria-label="产品支持" className="mx-auto mt-10 grid max-w-4xl grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3">
+            {productItems.map((product) => {
+              const Icon = product.icon;
 
               return (
                 <Link
-                  key={category.name}
-                  href={`/categories/${encodeURIComponent(category.name)}`}
+                  key={product.category}
+                  href={`/categories/${encodeURIComponent(product.category)}`}
                   className="group flex flex-col items-center gap-3 text-sm font-medium text-zinc-800 transition hover:text-zinc-950 dark:text-zinc-200 dark:hover:text-white"
                 >
                   <span className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-zinc-100 text-zinc-700 transition group-hover:bg-zinc-200 dark:bg-zinc-900 dark:text-zinc-200 dark:group-hover:bg-zinc-800">
                     <Icon className="h-8 w-8" />
                   </span>
-                  <span>{category.name}</span>
+                  <span>{product.label}</span>
                 </Link>
               );
             })}
