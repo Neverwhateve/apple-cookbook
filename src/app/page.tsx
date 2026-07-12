@@ -5,12 +5,14 @@ import {
   Cable,
   FilePlus2,
   Folder,
+  Headphones,
   Laptop,
   Layers3,
   LockKeyhole,
   Router,
   ShieldCheck,
   Smartphone,
+  Tablet,
   Tags
 } from "lucide-react";
 import { ArticleCard } from "@/components/article-card";
@@ -39,46 +41,6 @@ function AppleWatchIcon({ className }: { className?: string }) {
   );
 }
 
-function AirPodsIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 32 32"
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2.2"
-      aria-hidden="true"
-    >
-      <path d="M9.5 6.5a4.25 4.25 0 0 0-4.25 4.25v1.5a3.25 3.25 0 0 0 6.5 0v-1.75A4 4 0 0 0 9.5 6.5Z" />
-      <path d="M9.5 15.5v9.25a2.25 2.25 0 0 0 4.5 0v-8" />
-      <path d="M22.5 6.5a4.25 4.25 0 0 1 4.25 4.25v1.5a3.25 3.25 0 0 1-6.5 0v-1.75a4 4 0 0 1 2.25-4Z" />
-      <path d="M22.5 15.5v9.25a2.25 2.25 0 0 1-4.5 0v-8" />
-    </svg>
-  );
-}
-
-function IPadIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 32 32"
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2.2"
-      aria-hidden="true"
-    >
-      <rect x="6.5" y="8" width="19" height="16" rx="2.75" />
-      <path d="M10 12h12" />
-      <path d="M10 16h12" />
-      <path d="M10 20h12" />
-    </svg>
-  );
-}
-
 function VisionIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -102,10 +64,10 @@ function VisionIcon({ className }: { className?: string }) {
 const productItems = [
   { label: "iPhone", category: "iPhone", icon: Smartphone },
   { label: "Mac", category: "Mac", icon: Laptop },
-  { label: "iPad", category: "iPad", icon: IPadIcon },
+  { label: "iPad", category: "iPad", icon: Tablet },
   { label: "Watch", category: "Apple Watch", icon: AppleWatchIcon },
   { label: "Vision", category: "Vision Pro", icon: VisionIcon },
-  { label: "AirPods", category: "AirPods", icon: AirPodsIcon }
+  { label: "AirPods", category: "AirPods", icon: Headphones }
 ];
 
 const topicGroups = [
