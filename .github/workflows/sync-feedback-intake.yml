@@ -46,8 +46,8 @@ jobs:
           set -euo pipefail
           mkdir -p "$FEEDBACK_DATA_DIR/feedback"
           cd "$FEEDBACK_DATA_DIR"
-          touch feedback/inbox.jsonl feedback/synced-github-issues.txt
-          tar -cf - feedback/inbox.jsonl feedback/synced-github-issues.txt
+          touch feedback/inbox.jsonl feedback/archive.jsonl feedback/synced-github-issues.txt
+          tar -cf - feedback/inbox.jsonl feedback/archive.jsonl feedback/synced-github-issues.txt
           REMOTE
           tar -xf intake/remote-feedback.tar -C intake
 
@@ -58,6 +58,42 @@ jobs:
         run: |
           gh label create P0 --color B60205 --description "Highest priority feedback intake" || true
           gh label create feedback-intake --color 1D76DB --description "Submitted through Apple Cookbook feedback" || true
+
+      - name: Close archived P0 feedback issues
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          if [[ ! -s intake/feedback/archive.jsonl ]]; then
+            echo "No archived feedback submissions found."
+            exit 0
+          fi
+
+          while IFS= read -r submission; do
+            id=$(jq -r '.id // empty' <<<"$submission")
+            [[ -n "$id" ]] || continue
+            status=$(jq -r '.status // "open"' <<<"$submission")
+            [[ "$status" == "resolved" || "$status" == "dismissed" ]] || continue
+
+            issue_number=$(
+              gh issue list \
+                --state open \
+                --label P0 \
+                --label feedback-intake \
+                --limit 200 \
+                --json number,body \
+                --jq ".[] | select(.body | contains(\"Feedback ID: \`$id\`\")) | .number" \
+                | head -n 1
+            )
+
+            if [[ -z "$issue_number" ]]; then
+              continue
+            fi
+
+            gh issue close "$issue_number" --comment "Archived from the admin feedback queue as \`$status\`; removed from active P0 harvest intake."
+          done < intake/feedback/archive.jsonl
 
       - name: Create issues for new P0 feedback
         env:

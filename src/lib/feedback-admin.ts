@@ -11,8 +11,14 @@ export type AdminFeedbackItem = FeedbackSubmission & {
   queuePosition: number;
 };
 
+export type AdminFeedbackQueues = {
+  active: AdminFeedbackItem[];
+  archived: AdminFeedbackItem[];
+};
+
 const feedbackRoot = path.join(feedbackDataRoot, "feedback");
 const inboxPath = path.join(feedbackRoot, "inbox.jsonl");
+const archivePath = path.join(feedbackRoot, "archive.jsonl");
 const syncedGithubIssuesPath = path.join(feedbackRoot, "synced-github-issues.txt");
 
 function parseSubmission(line: string): FeedbackSubmission | null {
@@ -38,9 +44,9 @@ async function readSyncedIds() {
   }
 }
 
-async function readSubmissions() {
+async function readSubmissions(filePath = inboxPath) {
   try {
-    const raw = await fs.readFile(inboxPath, "utf8");
+    const raw = await fs.readFile(filePath, "utf8");
     return raw
       .split(/\r?\n/)
       .filter(Boolean)
@@ -53,8 +59,11 @@ async function readSubmissions() {
 }
 
 export async function getAdminFeedbackItems(): Promise<AdminFeedbackItem[]> {
-  const [submissions, syncedIds] = await Promise.all([readSubmissions(), readSyncedIds()]);
+  const queues = await getAdminFeedbackQueues();
+  return [...queues.active, ...queues.archived];
+}
 
+function toAdminItems(submissions: FeedbackSubmission[], syncedIds: Set<string>) {
   return submissions
     .map((submission, index) => ({
       ...submission,
@@ -74,38 +83,65 @@ export async function getAdminFeedbackItems(): Promise<AdminFeedbackItem[]> {
     });
 }
 
-async function writeSubmissions(submissions: FeedbackSubmission[]) {
+export async function getAdminFeedbackQueues(): Promise<AdminFeedbackQueues> {
+  const [activeSubmissions, archivedSubmissions, syncedIds] = await Promise.all([
+    readSubmissions(inboxPath),
+    readSubmissions(archivePath),
+    readSyncedIds()
+  ]);
+
+  return {
+    active: toAdminItems(activeSubmissions, syncedIds),
+    archived: toAdminItems(archivedSubmissions, syncedIds)
+  };
+}
+
+async function writeSubmissions(filePath: string, submissions: FeedbackSubmission[]) {
   await fs.mkdir(feedbackRoot, { recursive: true });
-  await fs.writeFile(inboxPath, `${submissions.map((submission) => JSON.stringify(submission)).join("\n")}\n`, "utf8");
+  const body = submissions.length ? `${submissions.map((submission) => JSON.stringify(submission)).join("\n")}\n` : "";
+  await fs.writeFile(filePath, body, "utf8");
 }
 
 export async function updateFeedbackStatus(id: string, status: FeedbackStatus, adminNote = "") {
   if (!id) throw new Error("Missing feedback id.");
 
   await fs.mkdir(feedbackRoot, { recursive: true });
-  const submissions = await readSubmissions();
-  const nextSubmissions = submissions.map((submission) =>
-    submission.id === id
-      ? {
-          ...submission,
-          status,
-          adminNote: adminNote.trim(),
-          updatedAt: new Date().toISOString()
-        }
-      : submission
-  );
+  const [activeSubmissions, archivedSubmissions] = await Promise.all([readSubmissions(inboxPath), readSubmissions(archivePath)]);
+  const activeIndex = activeSubmissions.findIndex((submission) => submission.id === id);
+  const archivedIndex = archivedSubmissions.findIndex((submission) => submission.id === id);
 
-  if (!submissions.some((submission) => submission.id === id)) {
+  if (activeIndex === -1 && archivedIndex === -1) {
     throw new Error(`Feedback item not found: ${id}`);
   }
 
-  await writeSubmissions(nextSubmissions);
+  const source = activeIndex === -1 ? archivedSubmissions : activeSubmissions;
+  const sourceIndex = activeIndex === -1 ? archivedIndex : activeIndex;
+  const nextItem = {
+    ...source[sourceIndex],
+    status,
+    adminNote: adminNote.trim(),
+    updatedAt: new Date().toISOString()
+  };
+
+  if (activeIndex !== -1) {
+    activeSubmissions.splice(activeIndex, 1);
+  } else {
+    archivedSubmissions.splice(archivedIndex, 1);
+  }
+
+  if (status === "resolved" || status === "dismissed") {
+    archivedSubmissions.unshift(nextItem);
+  } else {
+    activeSubmissions.unshift(nextItem);
+  }
+
+  await Promise.all([writeSubmissions(inboxPath, activeSubmissions), writeSubmissions(archivePath, archivedSubmissions)]);
 }
 
 export async function moveFeedbackItem(id: string, direction: "first" | "last") {
   if (!id) throw new Error("Missing feedback id.");
 
-  const submissions = await readSubmissions();
+  const submissions = await readSubmissions(inboxPath);
   const currentIndex = submissions.findIndex((submission) => submission.id === id);
 
   if (currentIndex === -1) {
@@ -120,7 +156,7 @@ export async function moveFeedbackItem(id: string, direction: "first" | "last") 
     submissions.push(item);
   }
 
-  await writeSubmissions(submissions);
+  await writeSubmissions(inboxPath, submissions);
 }
 
 function getAdminUsername() {

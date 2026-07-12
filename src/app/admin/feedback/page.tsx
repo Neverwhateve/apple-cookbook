@@ -12,7 +12,7 @@ import {
   XCircle
 } from "lucide-react";
 import { loginAdmin, logoutAdmin, moveFeedbackQueueItem, updateFeedbackQueueItem } from "@/app/admin/feedback/actions";
-import { canUseAdminSession, getAdminFeedbackItems, type FeedbackStatus } from "@/lib/feedback-admin";
+import { canUseAdminSession, getAdminFeedbackQueues, type AdminFeedbackItem, type FeedbackStatus } from "@/lib/feedback-admin";
 
 export const dynamic = "force-dynamic";
 
@@ -133,6 +133,79 @@ function LoginPanel() {
   );
 }
 
+function FeedbackCard({ item, archived = false }: { item: AdminFeedbackItem; archived?: boolean }) {
+  return (
+    <article key={item.id} className="rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="rounded-full bg-red-600 px-2 py-0.5 text-xs font-semibold text-white">P0</span>
+            <span className={`rounded-full px-2 py-0.5 text-xs font-medium ring-1 ${statusClasses[item.status]}`}>
+              {statusLabels[item.status]}
+            </span>
+            <span className="text-xs text-zinc-500">{archived ? `归档 #${item.queuePosition}` : `队列 #${item.queuePosition}`}</span>
+            <span className="text-xs text-zinc-500">{item.syncedToGithub ? "已同步 GitHub" : "未同步 GitHub"}</span>
+          </div>
+          <h2 className="mt-2 text-lg font-semibold text-zinc-950 dark:text-zinc-50">{item.title}</h2>
+          <p className="mt-1 text-xs text-zinc-500">
+            {item.id} · {item.kind} · {new Date(item.createdAt).toLocaleString("zh-CN", { hour12: false })}
+          </p>
+          <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-zinc-700 dark:text-zinc-300">{item.description}</p>
+          <div className="mt-3 grid gap-2 text-xs text-zinc-500 sm:grid-cols-2">
+            <p>设备：{item.device || "未填写"}</p>
+            <p>顾客原话：{item.customerWords || "未填写"}</p>
+            <p>联系方式：{item.contact || "未填写"}</p>
+            <p>更新时间：{item.updatedAt ? new Date(item.updatedAt).toLocaleString("zh-CN", { hour12: false }) : "未更新"}</p>
+          </div>
+          {item.sourceUrl ? (
+            <a
+              href={item.sourceUrl}
+              className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <ExternalLink className="h-4 w-4" />
+              {item.sourceTitle || item.sourceUrl}
+            </a>
+          ) : null}
+          {item.adminNote ? <p className="mt-3 text-sm text-zinc-500">管理员备注：{item.adminNote}</p> : null}
+        </div>
+
+        <div className="flex flex-wrap gap-2 lg:w-80 lg:justify-end">
+          {!archived ? (
+            <>
+              <MoveButton id={item.id} direction="first">
+                <ChevronsUp className="h-4 w-4" />
+                最前
+              </MoveButton>
+              <MoveButton id={item.id} direction="last">
+                <ChevronsDown className="h-4 w-4" />
+                最后
+              </MoveButton>
+              <StatusButton id={item.id} status="in_progress">
+                <CircleDot className="h-4 w-4" />
+                处理中
+              </StatusButton>
+            </>
+          ) : null}
+          <StatusButton id={item.id} status="resolved">
+            <CheckCircle2 className="h-4 w-4" />
+            已解决
+          </StatusButton>
+          <StatusButton id={item.id} status="dismissed">
+            <XCircle className="h-4 w-4" />
+            忽略
+          </StatusButton>
+          <StatusButton id={item.id} status="open">
+            <RotateCcw className="h-4 w-4" />
+            重开
+          </StatusButton>
+        </div>
+      </div>
+    </article>
+  );
+}
+
 export default async function AdminFeedbackPage() {
   const cookieStore = await cookies();
   const allowed = canUseAdminSession(cookieStore.get("apple-cookbook-admin")?.value);
@@ -141,9 +214,9 @@ export default async function AdminFeedbackPage() {
     return <LoginPanel />;
   }
 
-  const items = await getAdminFeedbackItems();
-  const openCount = items.filter((item) => item.status === "open").length;
-  const activeCount = items.filter((item) => item.status === "open" || item.status === "in_progress").length;
+  const queues = await getAdminFeedbackQueues();
+  const openCount = queues.active.filter((item) => item.status === "open").length;
+  const activeCount = queues.active.length;
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
@@ -178,76 +251,10 @@ export default async function AdminFeedbackPage() {
         </div>
       </div>
 
-      {items.length ? (
+      {queues.active.length ? (
         <div className="space-y-3">
-          {items.map((item) => (
-            <article
-              key={item.id}
-              className="rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950"
-            >
-              <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-                <div className="min-w-0">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="rounded-full bg-red-600 px-2 py-0.5 text-xs font-semibold text-white">P0</span>
-                    <span className={`rounded-full px-2 py-0.5 text-xs font-medium ring-1 ${statusClasses[item.status]}`}>
-                      {statusLabels[item.status]}
-                    </span>
-                    <span className="text-xs text-zinc-500">队列 #{item.queuePosition}</span>
-                    <span className="text-xs text-zinc-500">{item.syncedToGithub ? "已同步 GitHub" : "未同步 GitHub"}</span>
-                  </div>
-                  <h2 className="mt-2 text-lg font-semibold text-zinc-950 dark:text-zinc-50">{item.title}</h2>
-                  <p className="mt-1 text-xs text-zinc-500">
-                    {item.id} · {item.kind} · {new Date(item.createdAt).toLocaleString("zh-CN", { hour12: false })}
-                  </p>
-                  <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-zinc-700 dark:text-zinc-300">{item.description}</p>
-                  <div className="mt-3 grid gap-2 text-xs text-zinc-500 sm:grid-cols-2">
-                    <p>设备：{item.device || "未填写"}</p>
-                    <p>顾客原话：{item.customerWords || "未填写"}</p>
-                    <p>联系方式：{item.contact || "未填写"}</p>
-                    <p>更新时间：{item.updatedAt ? new Date(item.updatedAt).toLocaleString("zh-CN", { hour12: false }) : "未更新"}</p>
-                  </div>
-                  {item.sourceUrl ? (
-                    <a
-                      href={item.sourceUrl}
-                      className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400"
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      <ExternalLink className="h-4 w-4" />
-                      {item.sourceTitle || item.sourceUrl}
-                    </a>
-                  ) : null}
-                  {item.adminNote ? <p className="mt-3 text-sm text-zinc-500">管理员备注：{item.adminNote}</p> : null}
-                </div>
-
-                <div className="flex flex-wrap gap-2 lg:w-80 lg:justify-end">
-                  <MoveButton id={item.id} direction="first">
-                    <ChevronsUp className="h-4 w-4" />
-                    最前
-                  </MoveButton>
-                  <MoveButton id={item.id} direction="last">
-                    <ChevronsDown className="h-4 w-4" />
-                    最后
-                  </MoveButton>
-                  <StatusButton id={item.id} status="in_progress">
-                    <CircleDot className="h-4 w-4" />
-                    处理中
-                  </StatusButton>
-                  <StatusButton id={item.id} status="resolved">
-                    <CheckCircle2 className="h-4 w-4" />
-                    已解决
-                  </StatusButton>
-                  <StatusButton id={item.id} status="dismissed">
-                    <XCircle className="h-4 w-4" />
-                    忽略
-                  </StatusButton>
-                  <StatusButton id={item.id} status="open">
-                    <RotateCcw className="h-4 w-4" />
-                    重开
-                  </StatusButton>
-                </div>
-              </div>
-            </article>
+          {queues.active.map((item) => (
+            <FeedbackCard key={item.id} item={item} />
           ))}
         </div>
       ) : (
@@ -257,6 +264,20 @@ export default async function AdminFeedbackPage() {
           <p className="mt-2 text-sm text-zinc-500">线上提交后会出现在这里。</p>
         </section>
       )}
+
+      {queues.archived.length ? (
+        <section className="mt-10 border-t border-zinc-200 pt-6 dark:border-zinc-800">
+          <div className="mb-4">
+            <h2 className="text-xl font-semibold text-zinc-950 dark:text-zinc-50">归档队列</h2>
+            <p className="mt-2 text-sm text-zinc-500">已解决和已忽略的项目会移到这里，不再作为活跃 P0 队列处理。</p>
+          </div>
+          <div className="space-y-3">
+            {queues.archived.map((item) => (
+              <FeedbackCard key={item.id} item={item} archived />
+            ))}
+          </div>
+        </section>
+      ) : null}
     </main>
   );
 }
