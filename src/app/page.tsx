@@ -11,12 +11,53 @@ import {
   Router,
   ShieldCheck,
   Smartphone,
-  Tags,
-  Users
+  Tags
 } from "lucide-react";
 import { ArticleCard } from "@/components/article-card";
 import { SearchPanel } from "@/components/search-panel";
 import { getAllArticles, getAllCategories, getAllTags } from "@/lib/cookbook";
+
+function AppleWatchIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 32 32"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2.2"
+      aria-hidden="true"
+    >
+      <path d="M12.5 5.5h7l1 4h-9z" />
+      <rect x="9" y="9" width="14" height="14" rx="4" />
+      <path d="M11.5 23h9l-1 4h-7z" />
+      <path d="M23.5 14.5h1.5v3h-1.5" />
+      <path d="M14 13.5h4" />
+      <path d="M14 18.5h4" />
+    </svg>
+  );
+}
+
+function AirPodsIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 32 32"
+      fill="none"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2.2"
+      aria-hidden="true"
+    >
+      <path d="M9.5 7.5a4 4 0 0 0-4 4v1.25a3.25 3.25 0 0 0 6.5 0v-1.5a3.75 3.75 0 0 0-2.5-3.75Z" />
+      <path d="M9 15.5v9a2 2 0 0 0 4 0v-9.75" />
+      <path d="M22.5 7.5a4 4 0 0 1 4 4v1.25a3.25 3.25 0 0 1-6.5 0v-1.5a3.75 3.75 0 0 1 2.5-3.75Z" />
+      <path d="M23 15.5v9a2 2 0 0 1-4 0v-9.75" />
+    </svg>
+  );
+}
 
 const topicGroups = [
   {
@@ -62,8 +103,8 @@ export default function HomePage() {
   const categoryIcons = new Map([
     ["iPhone", Smartphone],
     ["Mac", Laptop],
-    ["AirPods", Cable],
-    ["Apple Watch", Users],
+    ["AirPods", AirPodsIcon],
+    ["Apple Watch", AppleWatchIcon],
     ["HomePod", Router]
   ]);
   const quickActions = [
