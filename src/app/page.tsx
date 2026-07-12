@@ -3,7 +3,6 @@ import {
   ArrowRight,
   BatteryCharging,
   Cable,
-  CheckCircle2,
   FilePlus2,
   Folder,
   Laptop,
@@ -148,29 +147,6 @@ export default function HomePage() {
           <div className="mx-auto mt-7 max-w-4xl">
             <SearchPanel articles={articles} />
           </div>
-        </div>
-      </section>
-
-      <section aria-labelledby="principles-title" className="bg-white dark:bg-zinc-950">
-        <div className="mx-auto grid max-w-6xl gap-4 px-4 py-10 sm:px-6 lg:grid-cols-3">
-          <div className="lg:pr-8">
-            <h2 id="principles-title" className="text-2xl font-semibold text-zinc-950 dark:text-zinc-50">
-              适合零售现场的答案
-            </h2>
-            <p className="mt-3 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
-              每篇内容都按顾客说法、官方步骤、已验证思路和升级路径整理，方便快速判断下一步。
-            </p>
-          </div>
-          {[
-            "Apple 官方方案与非官方临时处理方法始终明确区分。",
-            "文章说明问题原因，也说明什么时候应停止继续排查。",
-            "搜索优先匹配顾客原话、别名、中文和英文关键词。"
-          ].map((item) => (
-            <div key={item} className="flex gap-3 rounded-lg bg-zinc-50 p-4 dark:bg-zinc-900">
-              <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none text-zinc-500 dark:text-zinc-300" />
-              <p className="text-sm leading-6 text-zinc-700 dark:text-zinc-300">{item}</p>
-            </div>
-          ))}
         </div>
       </section>
 
