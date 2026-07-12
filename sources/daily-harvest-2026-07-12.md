@@ -319,3 +319,104 @@
 - Add a broader canonical article for `iPhone 相机黑屏或闪光灯无法使用` so hardware-facing camera issues have a dedicated page separate from third-party App failures.
 - If future feedback mentions WeChat data loss or migration, add a dedicated WeChat chat-history backup article and cross-link it before any delete/reinstall step.
 - Monitor Apple Support Community for iOS 26 camera black-screen recurrence and whether Apple updates the camera or App troubleshooting articles with version-specific guidance.
+
+## Harvest Run - 2026-07-12 16:30 CST
+
+### P0 Feedback Intake
+
+- Checked GitHub issues in `Neverwhateve/apple-cookbook` with labels `P0` and `feedback-intake`.
+- No open P0 feedback-intake issues were found, so this run proceeded to normal source harvest.
+
+### Search Queries
+
+- `site:support.apple.com/en-us Apple Support iPhone support article updated July 2026 troubleshooting`
+- `site:support.apple.com/zh-cn Apple 支持 iPhone 无法 蓝牙 AirDrop 更新 2026`
+- `site:support.apple.com/en-us AirPods won't connect reset firmware support Apple updated 2026`
+- `site:support.apple.com/zh-cn Apple 支持 AirPods 无法连接 重置 固件`
+- `site:discussions.apple.com AirDrop waiting not showing iPhone Mac 2026`
+- `site:reddit.com/r/iphone AirDrop waiting not showing everyone 10 minutes code iOS 26`
+- `site:reddit.com/r/applehelp AirDrop keeps waiting not showing iPhone Mac`
+- `site:xiaohongshu.com 隔空投送 一直等待 找不到 对方 iPhone`
+- `site:support.apple.com/zh-cn Mac 防火墙 阻止所有传入连接 AirDrop Apple 支持`
+- `site:support.apple.com/en-us Mac firewall block all incoming connections AirDrop Apple Support`
+
+### Sources Visited
+
+- Apple Support: [在 iPhone 和 iPad 上隔空投送的使用方法](https://support.apple.com/zh-cn/119857)
+- iPhone User Guide: [使用隔空投送向附近 Apple 设备发送项目](https://support.apple.com/zh-cn/guide/iphone/iphcd8b9f0af/ios)
+- Mac User Guide: [使用隔空投送向附近 Apple 设备发送项目](https://support.apple.com/zh-cn/guide/mac-help/mh35868/mac)
+- Apple Personal Safety User Guide: [安全使用隔空投送](https://support.apple.com/zh-cn/guide/personal-safety/secure-airdrop-ips7d84d2cdc/web)
+- Apple Support: [iPhone 镜像：通过 Mac 使用 iPhone](https://support.apple.com/zh-cn/120421)
+- Apple Support: [关于 AirPods 固件更新](https://support.apple.com/zh-cn/106340)
+- Apple Support: [如何重置 AirPods 和 AirPods Pro](https://support.apple.com/zh-cn/118531)
+- Apple Support: [如何重新启动或重置 AirPods Max](https://support.apple.com/zh-cn/119838)
+- Apple Support Community: [AirDrop not working from iPhone to Mac](https://discussions.apple.com/thread/256209185)
+- Apple Support Community: [AirDrop says "waiting" but never connects](https://discussions.apple.com/thread/252044315)
+- Apple Support Community: [AirDrop continually failing between iPhone and MacBook](https://discussions.apple.com/thread/255160349)
+- Reddit r/iPhone: [AirDrop no longer works after the iOS 26.2 update](https://www.reddit.com/r/iphone/comments/1ppd6u7/air_drop_no_longer_works_after_the_ios_262_update/)
+- Reddit r/applehelp: [iPhone to Mac AirDrop "No People Found"](https://www.reddit.com/r/applehelp/comments/1erllle/iphone_to_mac_airdrop_no_people_found/)
+- Reddit r/applehelp: [AirDrop not working? Make sure to have their email set in contact card](https://www.reddit.com/r/applehelp/comments/v0h2w4/airdrop_not_working_make_sure_to_have_their_email/)
+
+### Evidence Collected
+
+- Apple's current iPhone/iPad AirDrop support article says both devices must be nearby with Wi-Fi and Bluetooth on, and either device's Personal Hotspot should be disconnected. Source: [Apple Support 119857](https://support.apple.com/zh-cn/119857).
+- Apple says if both devices use iOS 17 or later, users can try holding them together to share via AirDrop. Source: [Apple Support 119857](https://support.apple.com/zh-cn/119857).
+- Apple says non-contact AirDrop sharing on iOS 26.2, iPadOS 26.2, macOS 26.2 or later may require an AirDrop code; after the code is accepted, the sender can remain available for AirDrop sharing for 30 days and can be removed from “其他已知联系人.” Sources: [Apple Support 119857](https://support.apple.com/zh-cn/119857), [iPhone User Guide](https://support.apple.com/zh-cn/guide/iphone/iphcd8b9f0af/ios), [Mac User Guide](https://support.apple.com/zh-cn/guide/mac-help/mh35868/mac).
+- Apple says “所有人（10 分钟）” changes back after 10 minutes: to “仅限联系人” when signed in to an Apple Account, or “接收关闭” when not signed in. Source: [Apple Support 119857](https://support.apple.com/zh-cn/119857).
+- Apple says Mac AirDrop requires both devices to have Wi-Fi and Bluetooth on and be within 10 meters (30 feet). Source: [Mac User Guide](https://support.apple.com/zh-cn/guide/mac-help/mh35868/mac).
+- Apple says same-Apple-Account AirDrop transfers are automatically accepted, and AirDrop transfers are encrypted. Source: [Mac User Guide](https://support.apple.com/zh-cn/guide/mac-help/mh35868/mac).
+- Apple says if a transfer has started and the devices leave Bluetooth or Wi-Fi range, the transfer continues over the internet; iPhone users can turn off AirDrop cellular data in `设置 > 通用 > 隔空投送`. Sources: [Mac User Guide](https://support.apple.com/zh-cn/guide/mac-help/mh35868/mac), [iPhone User Guide](https://support.apple.com/zh-cn/guide/iphone/iphcd8b9f0af/ios).
+- Apple says VPN and other third-party security software can interfere with Continuity-style nearby device workflows, and Mac firewall settings should not block all incoming connections. Source: [Apple Support 120421](https://support.apple.com/zh-cn/120421). This was applied cautiously as a Mac-direction AirDrop branch, not as a first-line AirDrop requirement.
+- Apple Support Community and Reddit repeatedly show customer wording around “waiting,” “No People Found,” one-way iPhone-to-Mac failure, `Everyone for 10 minutes`, contact-card Apple Account email mismatch, restart/toggle recovery, and Mac firewall/security software checks. These were used for customer wording and branch prioritization only.
+
+### Customer Wording
+
+- “隔空投送一直等待。”
+- “对方手机不显示。”
+- “显示 No People Found。”
+- “iPhone 到 Mac 一直卡在 Waiting。”
+- “Mac 能发给 iPhone，但 iPhone 找不到 Mac。”
+- “换成所有人 10 分钟才偶尔能传。”
+- “对方让我输入隔空投送代码。”
+- “离开 Wi-Fi 后担心会不会走蜂窝数据。”
+
+### Cross-source Patterns
+
+- Official Apple guidance and community reports both point to the same first branch: discovery settings, Wi-Fi/Bluetooth, nearby distance, personal hotspot, and contact identity matching.
+- iOS 26.2 / macOS 26.2 AirDrop code behavior can look like a new error to customers. The article now explains the code, 30-day continuation, and removal path so Retail does not treat it as a fault.
+- Mac-direction failures show more VPN, security software, firewall, and one-way-transfer language than phone-to-phone cases. The article now keeps that as a later branch after official AirDrop checks.
+- Reddit and Apple Community suggestions around toggling settings, restarting, or turning off “Bring Devices Together” were not elevated to official Apple recommendations. The article keeps restart as a safe later step and treats other toggles as context only.
+- Xiaohongshu search was attempted for Chinese wording around “隔空投送一直等待/找不到,” but direct result access was not reliable enough to support factual recommendations.
+
+### Articles Created, Improved, Merged, or Flagged
+
+- Improved `cookbook/Continuity/airdrop-keeps-waiting.md` as the canonical Official AirDrop recipe.
+- Promoted the article status from `seed` to `canonical` because the updated flow now covers current Apple guidance, iOS/macOS 26.2 AirDrop code behavior, Mac/iPhone directionality, community wording, Retail triage, and escalation.
+- No new recipe was created. No duplicate recipe was found or merged.
+
+### Verification Changes
+
+- `隔空投送一直等待或找不到设备` remains `Official`; the verification is stronger because the factual flow is now backed by Apple Support 119857, iPhone User Guide AirDrop guidance, Mac User Guide AirDrop guidance, Personal Safety AirDrop guidance, and Apple continuity troubleshooting guidance around VPN/firewall boundaries.
+- Community and Reddit sources were used only for customer wording, recurrence, and prioritizing Mac-specific branches. They were not presented as Apple recommendations.
+
+### Reading/UI and Typography Improvements
+
+- No shared CSS or component styling changed in this run.
+- The AirDrop article was reorganized into a clearer Apple Support-like flow: direct symptom intro, symptoms, root causes, ordered official steps, clearly labeled unofficial branches, Retail flow, escalation, related problems, and compact metadata.
+- Official recommendations are visually and textually separated from community-derived ideas such as restart, firewall review, or security software checks.
+
+### Typography/Layout Improvements
+
+- No typography tokens changed in this run.
+- The improved article keeps short paragraphs, numbered official steps, compact source lists, and scannable H3 sub-sections to preserve the current Apple Support-like reading rhythm.
+
+### Blocked Sources
+
+- Direct Xiaohongshu pages were not reliably accessible from this environment. No factual update was based on inaccessible Xiaohongshu content.
+- No Apple Support article dedicated specifically to “AirDrop stuck waiting” was found; the canonical recipe synthesizes current Apple AirDrop setup, iPhone/Mac user-guide behavior, and safe continuity-network boundaries.
+
+### Follow-up Opportunities
+
+- Add a separate recipe for large iPhone-to-Mac photo/video migration so customers do not overuse AirDrop for multi-gigabyte transfers.
+- Monitor Apple Support 119857 and the iPhone/Mac User Guides for changes to AirDrop code behavior, 30-day known-contact handling, and cellular-data continuation.
+- Consider adding a related article for Universal Clipboard / Handoff not working, since the same Wi-Fi, Bluetooth, Apple Account, VPN, and firewall branches recur across Continuity issues.
