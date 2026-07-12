@@ -223,3 +223,99 @@
 - Add a related article for iCloud Photos not syncing, photos missing after enabling iCloud Photos, or “Optimize iPhone Storage” confusion.
 - Add a related article for iPhone migration stuck on “Preparing to Transfer” or temporary iCloud backup restore expiration.
 - Consider cross-linking future repair-intake articles to this backup article before erase, restore, or device replacement steps.
+
+## Harvest Run - 2026-07-12 19:15 CST
+
+### P0 Feedback Intake
+
+- GitHub issue #7: `P0 feedback: 待分析问题: 微信拍照会黑屏卡顿`
+  - Customer wording: “微信拍照会黑屏卡顿”.
+  - Decision: Created a new canonical iPhone recipe because no existing article covered WeChat-only or third-party-App camera black screen, the split between App-level failure and system Camera failure, and the safe order before deleting WeChat.
+
+### Search Queries
+
+- `site:support.apple.com/zh-cn iPhone App 相机 黑屏 权限 麦克风 相机 Apple 支持`
+- `site:support.apple.com/zh-cn iPhone 相机 无法正常工作 黑屏 Apple 支持`
+- `site:support.apple.com/zh-cn iPhone App 卡死 无响应 更新 App Apple 支持`
+- `site:support.apple.com/zh-cn iPhone 储存空间 已满 App 卡顿 Apple 支持`
+- `site:support.apple.com/zh-cn iPhone 控制 App 访问 相机 麦克风 照片 权限 Apple 支持`
+- `site:discussions.apple.com iPhone app camera black screen WeChat camera freezes`
+- `site:discussions.apple.com iPhone camera black screen only in app permission restart update app`
+- `site:reddit.com/r/iphone WeChat camera black screen iPhone`
+- `site:reddit.com/r/applehelp iPhone camera black screen only third party apps`
+- `site:xiaohongshu.com 微信 拍照 黑屏 卡顿 iPhone`
+- `site:xiaohongshu.com iPhone 微信 拍照 黑屏`
+- `微信 iPhone 拍照 黑屏 卡顿 官方 帮助`
+
+### Sources Visited
+
+- Apple Support: [在 iPhone 上控制硬件功能使用权限](https://support.apple.com/zh-cn/guide/iphone/iph168c4bbd5/ios)
+- Apple Support: [如果 iPhone、iPad 或 iPod touch 上的相机或闪光灯无法正常工作](https://support.apple.com/zh-cn/102514)
+- Apple Support: [如果 iPhone 或 iPad 上的某个 App 停止响应、意外关闭或无法打开](https://support.apple.com/zh-cn/119876)
+- Apple Support: [如果你的 iPhone 或 iPad 运行缓慢](https://support.apple.com/zh-cn/102598)
+- Apple Support: [如何检查 iPhone 和 iPad 上的储存空间](https://support.apple.com/zh-cn/108429)
+- Apple Support: [如何联系 App 开发者](https://support.apple.com/zh-cn/102435)
+- Apple Support Community Chinese: [微信拍照卡顿，黑屏闪退，画面模糊](https://discussionschinese.apple.com/thread/256216511)
+- Apple Support Community: [Camera displays a black screen on iOS 26.2](https://discussions.apple.com/thread/256222848)
+- Apple Support Community: [Camera won't work in Apps](https://discussions.apple.com/thread/252226379)
+- Reddit r/applehelp: [Camera is not working on any apps](https://www.reddit.com/r/applehelp/comments/1ffd8sn/camera_is_not_working_on_any_apps/)
+- Reddit r/applehelp: [Camera doesn't work in multiple apps](https://www.reddit.com/r/applehelp/comments/1l83hp8/camera_doesnt_work_in_multiple_apps/)
+
+### Evidence Collected
+
+- Apple says iPhone users can check or change Camera, Microphone, Bluetooth, Local Network, and other hardware permissions in `设置 > 隐私与安全性`, and each App can be allowed or denied. Source: [iPhone User Guide](https://support.apple.com/zh-cn/guide/iphone/iph168c4bbd5/ios).
+- Apple lists black camera screen as one symptom of iPhone/iPad/iPod touch camera or flash not working and recommends removing cases, films, magnetic accessories, lens accessories, and other items that may block or affect the camera before testing. Source: [Apple Support 102514](https://support.apple.com/zh-cn/102514).
+- Apple's App troubleshooting order is close/reopen the App, restart the device, check for App updates and system updates, then delete and redownload the App if needed. Source: [Apple Support 119876](https://support.apple.com/zh-cn/119876).
+- Apple says slow iPhone/iPad troubleshooting includes checking network conditions, closing unresponsive Apps, checking available storage, turning off Low Power Mode when normal performance is needed, and avoiding extreme temperature. Source: [Apple Support 102598](https://support.apple.com/zh-cn/102598).
+- Apple says `设置 > 通用 > iPhone 储存空间` shows available storage and App storage usage; users can offload or delete Apps and remove content when storage is nearly full. Source: [Apple Support 108429](https://support.apple.com/zh-cn/108429).
+- Apple provides an App Store path to contact an iOS/iPadOS/watchOS App developer through the App product page's `App 支持` link. Source: [Apple Support 102435](https://support.apple.com/zh-cn/102435).
+- Apple Support Community Chinese has a closely matching customer report: WeChat photo capture is blurry, black-screening, freezing, and hard to exit, requiring closing WeChat from the app switcher. This was used as customer-language and prioritization evidence only.
+- Apple Support Community and Reddit threads show repeated patterns around third-party camera calls going black, temporary recovery after restart, permissions being enabled, and the need to distinguish a single-App problem from all-camera failure.
+
+### Customer Wording
+
+- “微信拍照会黑屏卡顿。”
+- “微信拍照卡顿，黑屏闪退，画面模糊。”
+- “微信相机一打开就是黑的。”
+- “扫码的时候卡住，只能杀后台。”
+- “系统相机正常，只有微信拍照黑屏。”
+- “多个 App 调用相机都黑屏，重启后暂时恢复。”
+
+### Cross-source Patterns
+
+- The fastest Retail branch is not “delete WeChat first”; it is to open Apple Camera immediately and classify the issue as WeChat-only, multiple third-party Apps, or system Camera failure.
+- Customer reports often blame the iPhone system when the observed failure is inside WeChat. The recipe now separates App permission/update/developer-support paths from Apple Camera hardware/service paths.
+- Community posts repeatedly mention restarting as a temporary recovery. The new article labels this as a nonofficial temporary workaround and keeps Apple-supported update, permission, storage, accessory, and service checks ahead of speculative fixes.
+- Short-video and forum posts mention toggling Camera Control or lock-screen camera settings. The article records this only as an Experimental nonofficial idea, not Apple guidance.
+
+### Articles Created, Improved, Merged, or Flagged
+
+- Created `cookbook/iPhone/iphone-wechat-camera-black-screen-lag.md` as the canonical Official recipe for WeChat photo black screen, third-party App camera freezes, App permissions, App update/reinstall boundaries, storage/performance checks, Apple Camera hardware separation, developer escalation, and Retail triage.
+- No duplicate recipe was found or merged.
+
+### Verification Changes
+
+- New recipe `iPhone 微信拍照黑屏或卡顿` is `Official` because the troubleshooting order is supported by Apple documentation for hardware permissions, iPhone camera/flash failures, App responsiveness, iPhone performance, storage checks, and contacting App developers.
+- Community and Reddit sources were used for customer wording, recurrence, and unofficial temporary workarounds only.
+
+### Reading/UI and Typography Improvements
+
+- No shared CSS or component styling changed in this run.
+- The new article follows the Apple Support-inspired reading order: direct symptom title, short intro, symptoms, likely causes, Apple official ordered solution, key branch decisions, clearly labeled unofficial methods, Retail flow, escalation, related problems, tags, and compact metadata.
+- Official recommendations are separated from unofficial community suggestions so toggling camera shortcut settings does not appear as Apple guidance.
+
+### Typography/Layout Improvements
+
+- No typography tokens changed in this run.
+- The new article uses short paragraphs, numbered official steps, H3 decision branches, and compact source lists to match the existing Apple Support-like article rhythm.
+
+### Blocked Sources
+
+- Direct Xiaohongshu pages were not reliably accessible from search results for this topic. Search snippets and short-video/forum signals showed repeated Chinese wording around “微信拍照黑屏/卡顿,” but no factual recommendation was based on inaccessible Xiaohongshu content.
+- No official Tencent/WeChat help article for the exact iPhone camera black-screen symptom was found during this run.
+
+### Follow-up Opportunities
+
+- Add a broader canonical article for `iPhone 相机黑屏或闪光灯无法使用` so hardware-facing camera issues have a dedicated page separate from third-party App failures.
+- If future feedback mentions WeChat data loss or migration, add a dedicated WeChat chat-history backup article and cross-link it before any delete/reinstall step.
+- Monitor Apple Support Community for iOS 26 camera black-screen recurrence and whether Apple updates the camera or App troubleshooting articles with version-specific guidance.
