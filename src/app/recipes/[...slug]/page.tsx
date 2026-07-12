@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import type { ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { ArrowRight, ExternalLink, ListChecks } from "lucide-react";
+import { ArrowRight, ListChecks } from "lucide-react";
 import { ArticleFeedbackWidget } from "@/components/article-feedback-widget";
 import { ArticleCard } from "@/components/article-card";
 import { getAllArticles, getArticleBySlug, getRelatedArticles } from "@/lib/cookbook";
@@ -194,28 +194,6 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
             ))}
           </div>
         </section>
-
-        {article.official_sources.length > 0 ? (
-          <section className="mt-10 border-t border-zinc-200 pt-8 dark:border-zinc-800" aria-labelledby="sources-title">
-            <h2 id="sources-title" className="text-2xl font-semibold text-zinc-950 dark:text-zinc-50">
-              来源
-            </h2>
-            <div className="mt-4 space-y-3 text-sm">
-              {article.official_sources.map((source, index) => (
-                <a
-                  key={source}
-                  href={source}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-start gap-2 text-blue-600 hover:underline dark:text-blue-400"
-                >
-                  <ExternalLink className="mt-0.5 h-3.5 w-3.5 flex-none" />
-                  <span>Apple 官方来源 {index + 1}</span>
-                </a>
-              ))}
-            </div>
-          </section>
-        ) : null}
 
         {primaryRelated.length > 0 ? (
           <section className="mt-10 border-t border-zinc-200 pt-8 dark:border-zinc-800" aria-labelledby="next-title">
