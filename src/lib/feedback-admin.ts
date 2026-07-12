@@ -84,11 +84,26 @@ function toAdminItems(submissions: FeedbackSubmission[], syncedIds: Set<string>)
 }
 
 export async function getAdminFeedbackQueues(): Promise<AdminFeedbackQueues> {
-  const [activeSubmissions, archivedSubmissions, syncedIds] = await Promise.all([
+  let [activeSubmissions, archivedSubmissions] = await Promise.all([
     readSubmissions(inboxPath),
-    readSubmissions(archivePath),
-    readSyncedIds()
+    readSubmissions(archivePath)
   ]);
+  const syncedIds = await readSyncedIds();
+  const shouldArchive = activeSubmissions.filter(
+    (submission) => submission.status === "resolved" || submission.status === "dismissed"
+  );
+
+  if (shouldArchive.length) {
+    const archivedIds = new Set(archivedSubmissions.map((submission) => submission.id));
+    activeSubmissions = activeSubmissions.filter(
+      (submission) => submission.status !== "resolved" && submission.status !== "dismissed"
+    );
+    archivedSubmissions = [
+      ...shouldArchive.filter((submission) => !archivedIds.has(submission.id)),
+      ...archivedSubmissions
+    ];
+    await Promise.all([writeSubmissions(inboxPath, activeSubmissions), writeSubmissions(archivePath, archivedSubmissions)]);
+  }
 
   return {
     active: toAdminItems(activeSubmissions, syncedIds),
