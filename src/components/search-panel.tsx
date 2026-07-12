@@ -84,21 +84,6 @@ export function SearchPanel({ articles }: { articles: SearchArticle[] }) {
         />
       </div>
 
-      <div className="mt-3 flex flex-wrap gap-2 text-xs text-zinc-600 dark:text-zinc-400">
-        {["隔空投送一直等待", "老婆位置看不到", "Apple ID 验证失败", "查找位置不更新"].map(
-          (item) => (
-            <button
-              type="button"
-              key={item}
-              onClick={() => setQuery(item)}
-              className="rounded-full border border-zinc-200 px-3 py-1 transition hover:bg-zinc-100 dark:border-zinc-800 dark:hover:bg-zinc-900"
-            >
-              {item}
-            </button>
-          )
-        )}
-      </div>
-
       <div className="mt-5 space-y-3" aria-live="polite">
         {!query.trim() ? (
           <div className="flex items-center justify-between gap-3 text-xs font-semibold uppercase tracking-normal text-zinc-500 dark:text-zinc-400">
