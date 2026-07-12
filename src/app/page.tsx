@@ -3,7 +3,8 @@ import {
   ArrowRight,
   BatteryCharging,
   Cable,
-  Clock,
+  CheckCircle2,
+  FilePlus2,
   Folder,
   Laptop,
   Layers3,
@@ -55,9 +56,10 @@ export default function HomePage() {
   const tags = getAllTags();
   const recentlyUpdated = [...articles].sort((a, b) => b.updated.localeCompare(a.updated)).slice(0, 6);
   const popular = articles.filter((article) => article.popular).slice(0, 6);
-  const productCategories = categories.filter((category) =>
-    ["iPhone", "AirPods", "Apple Watch", "Mac", "HomePod"].includes(category.name)
-  );
+  const productOrder = ["iPhone", "Mac", "Apple Watch", "AirPods", "HomePod"];
+  const productCategories = productOrder
+    .map((name) => categories.find((category) => category.name === name))
+    .filter((category): category is NonNullable<typeof category> => Boolean(category));
   const categoryIcons = new Map([
     ["iPhone", Smartphone],
     ["Mac", Laptop],
@@ -65,6 +67,23 @@ export default function HomePage() {
     ["Apple Watch", Users],
     ["HomePod", Router]
   ]);
+  const quickActions = [
+    {
+      title: "查看全部分类",
+      href: "/categories",
+      icon: Folder
+    },
+    {
+      title: "浏览热门标签",
+      href: "/tags",
+      icon: Tags
+    },
+    {
+      title: "提交新问题",
+      href: "/feedback",
+      icon: FilePlus2
+    }
+  ];
   const topicCounts = topicGroups.map((topic) => ({
     ...topic,
     count: articles.filter((article) =>
@@ -73,199 +92,200 @@ export default function HomePage() {
   }));
 
   return (
-    <main className="bg-white dark:bg-zinc-950">
-      <section className="mx-auto max-w-5xl px-4 pb-8 pt-10 text-center sm:px-6 sm:pb-12 sm:pt-16">
-        <p className="text-sm font-semibold text-zinc-500 dark:text-zinc-400">Apple Cookbook 知识库</p>
-        <h1 className="mx-auto mt-3 max-w-3xl text-4xl font-semibold leading-tight tracking-normal text-zinc-950 dark:text-zinc-50 sm:text-5xl">
-          快速查找 Apple 零售故障排查答案
-        </h1>
-        <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-zinc-600 dark:text-zinc-400">
-          按顾客原话、产品或问题类型定位文章。每篇内容区分官方步骤、已验证思路和升级处理路径。
-        </p>
-        <div className="mx-auto mt-8 max-w-4xl text-left">
-          <SearchPanel articles={articles} />
+    <main className="bg-zinc-50 dark:bg-zinc-950">
+      <section className="bg-white dark:bg-zinc-950">
+        <div className="mx-auto max-w-6xl px-4 pb-10 pt-12 text-center sm:px-6 sm:pb-14 sm:pt-20">
+          <h1 className="text-4xl font-semibold leading-tight tracking-normal text-zinc-950 dark:text-zinc-50 sm:text-6xl">
+            Apple Cookbook 支持
+          </h1>
+          <p className="mx-auto mt-4 max-w-xl text-xl leading-8 text-zinc-700 dark:text-zinc-300">
+            需要协助？从这里开始。
+          </p>
+
+          <nav aria-label="产品支持" className="mx-auto mt-10 grid max-w-4xl grid-cols-2 gap-x-4 gap-y-7 sm:grid-cols-5">
+            {productCategories.map((category) => {
+              const Icon = categoryIcons.get(category.name) ?? Folder;
+
+              return (
+                <Link
+                  key={category.name}
+                  href={`/categories/${encodeURIComponent(category.name)}`}
+                  className="group flex flex-col items-center gap-3 text-sm font-medium text-zinc-800 transition hover:text-zinc-950 dark:text-zinc-200 dark:hover:text-white"
+                >
+                  <span className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-zinc-100 text-zinc-700 transition group-hover:bg-zinc-200 dark:bg-zinc-900 dark:text-zinc-200 dark:group-hover:bg-zinc-800">
+                    <Icon className="h-8 w-8" />
+                  </span>
+                  <span>{category.name}</span>
+                </Link>
+              );
+            })}
+          </nav>
+
+          <div className="mx-auto mt-10 grid max-w-3xl gap-3 text-left sm:grid-cols-3">
+            {quickActions.map((action) => {
+              const Icon = action.icon;
+
+              return (
+                <Link
+                  key={action.title}
+                  href={action.href}
+                  className="group flex items-center gap-3 rounded-lg bg-zinc-50 px-4 py-4 text-sm font-medium text-zinc-800 transition hover:bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
+                >
+                  <Icon className="h-5 w-5 flex-none text-zinc-500 transition group-hover:text-zinc-950 dark:group-hover:text-white" />
+                  <span>{action.title}</span>
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </section>
 
-      <div className="border-t border-zinc-200 dark:border-zinc-800">
-        <div className="mx-auto grid max-w-7xl gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[minmax(0,1fr)_340px]">
-          <div className="min-w-0 space-y-12">
-            <section aria-labelledby="products-title">
-              <div className="flex items-end justify-between gap-4">
-                <div>
-                  <h2 id="products-title" className="text-2xl font-semibold text-zinc-950 dark:text-zinc-50">
-                    按产品浏览
-                  </h2>
-                  <p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
-                    先选设备或服务，再进入对应的问题清单。
-                  </p>
-                </div>
-                <Link href="/categories" className="hidden text-sm text-zinc-500 hover:text-zinc-950 dark:hover:text-zinc-50 sm:inline">
-                  全部分类
-                </Link>
-              </div>
-              <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {productCategories.map((category) => {
-                  const Icon = categoryIcons.get(category.name) ?? Folder;
-
-                  return (
-                    <Link
-                      key={category.name}
-                      href={`/categories/${encodeURIComponent(category.name)}`}
-                      className="group rounded-lg border border-zinc-200 bg-white p-5 transition hover:border-zinc-400 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-zinc-600 dark:hover:bg-zinc-900"
-                    >
-                      <Icon className="h-5 w-5 text-zinc-500 transition group-hover:text-zinc-950 dark:group-hover:text-zinc-50" />
-                      <div className="mt-4 flex items-center justify-between gap-3">
-                        <h3 className="text-base font-semibold text-zinc-950 dark:text-zinc-50">{category.name}</h3>
-                        <span className="text-sm text-zinc-500">{category.items.length} 篇</span>
-                      </div>
-                      <p className="mt-2 line-clamp-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
-                        {category.items.slice(0, 2).map((item) => item.title).join("、")}
-                      </p>
-                    </Link>
-                  );
-                })}
-              </div>
-            </section>
-
-            <section aria-labelledby="topics-title">
-              <h2 id="topics-title" className="text-2xl font-semibold text-zinc-950 dark:text-zinc-50">
-                按问题类型浏览
-              </h2>
-              <div className="mt-5 grid gap-3 sm:grid-cols-2">
-                {topicCounts.map((topic) => {
-                  const Icon = topic.icon;
-
-                  return (
-                    <Link
-                      key={topic.name}
-                      href={topic.href}
-                      className="group flex items-start gap-4 rounded-lg border border-zinc-200 bg-white p-5 transition hover:border-zinc-400 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-zinc-600 dark:hover:bg-zinc-900"
-                    >
-                      <span className="inline-flex h-10 w-10 flex-none items-center justify-center rounded-md bg-zinc-100 text-zinc-600 dark:bg-zinc-900 dark:text-zinc-300">
-                        <Icon className="h-5 w-5" />
-                      </span>
-                      <span className="min-w-0">
-                        <span className="flex items-center justify-between gap-3">
-                          <span className="font-semibold text-zinc-950 dark:text-zinc-50">{topic.name}</span>
-                          <span className="text-sm text-zinc-500">{topic.count} 篇</span>
-                        </span>
-                        <span className="mt-1 block text-sm leading-6 text-zinc-600 dark:text-zinc-400">{topic.description}</span>
-                      </span>
-                    </Link>
-                  );
-                })}
-              </div>
-            </section>
-
-            <section aria-labelledby="popular-title">
-              <div className="mb-4 flex items-center justify-between gap-4">
-                <h2 id="popular-title" className="flex items-center gap-2 text-2xl font-semibold text-zinc-950 dark:text-zinc-50">
-                  <Layers3 className="h-5 w-5" />
-                  常见问题
-                </h2>
-              </div>
-              <div className="grid gap-3 sm:grid-cols-2">
-                {popular.map((article) => (
-                  <ArticleCard key={article.route} article={article} />
-                ))}
-              </div>
-            </section>
-
-            <section aria-labelledby="recent-title">
-              <div className="mb-4 flex items-center justify-between gap-4">
-                <h2 id="recent-title" className="flex items-center gap-2 text-2xl font-semibold text-zinc-950 dark:text-zinc-50">
-                  <Clock className="h-5 w-5" />
-                  最近更新
-                </h2>
-              </div>
-              <div className="grid gap-3 sm:grid-cols-2">
-                {recentlyUpdated.map((article) => (
-                  <ArticleCard key={article.route} article={article} />
-                ))}
-              </div>
-            </section>
+      <section aria-labelledby="search-title" className="border-t border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950">
+        <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
+          <h2 id="search-title" className="text-center text-3xl font-semibold tracking-normal text-zinc-950 dark:text-zinc-50">
+            搜索更多主题
+          </h2>
+          <div className="mx-auto mt-7 max-w-4xl">
+            <SearchPanel articles={articles} />
           </div>
+        </div>
+      </section>
 
-          <aside className="space-y-6">
-            <section className="rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
-              <h2 className="flex items-center gap-2 text-base font-semibold text-zinc-950 dark:text-zinc-50">
-                <ShieldCheck className="h-4 w-4" />
-                内容原则
-              </h2>
-              <ul className="mt-4 space-y-3 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
-                <li>Apple 官方方案与非官方临时处理方法始终明确区分。</li>
-                <li>文章说明问题原因，也说明什么时候应停止继续排查。</li>
-                <li>搜索优先匹配顾客原话、别名、中文和英文关键词。</li>
-              </ul>
-            </section>
+      <section aria-labelledby="principles-title" className="bg-white dark:bg-zinc-950">
+        <div className="mx-auto grid max-w-6xl gap-4 px-4 py-10 sm:px-6 lg:grid-cols-3">
+          <div className="lg:pr-8">
+            <h2 id="principles-title" className="text-2xl font-semibold text-zinc-950 dark:text-zinc-50">
+              适合零售现场的答案
+            </h2>
+            <p className="mt-3 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+              每篇内容都按顾客说法、官方步骤、已验证思路和升级路径整理，方便快速判断下一步。
+            </p>
+          </div>
+          {[
+            "Apple 官方方案与非官方临时处理方法始终明确区分。",
+            "文章说明问题原因，也说明什么时候应停止继续排查。",
+            "搜索优先匹配顾客原话、别名、中文和英文关键词。"
+          ].map((item) => (
+            <div key={item} className="flex gap-3 rounded-lg bg-zinc-50 p-4 dark:bg-zinc-900">
+              <CheckCircle2 className="mt-0.5 h-5 w-5 flex-none text-zinc-500 dark:text-zinc-300" />
+              <p className="text-sm leading-6 text-zinc-700 dark:text-zinc-300">{item}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
-            <section className="rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
-              <div className="mb-3 flex items-center justify-between">
-                <h2 className="flex items-center gap-2 text-base font-semibold text-zinc-950 dark:text-zinc-50">
-                  <Tags className="h-4 w-4" />
-                  热门标签
-                </h2>
-                <Link href="/tags" className="text-sm text-zinc-500 hover:text-zinc-950 dark:hover:text-zinc-50">
-                  查看全部
+      <section aria-labelledby="topics-title" className="border-t border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950">
+        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+          <h2 id="topics-title" className="text-center text-3xl font-semibold tracking-normal text-zinc-950 dark:text-zinc-50">
+            按问题类型浏览
+          </h2>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {topicCounts.map((topic) => {
+              const Icon = topic.icon;
+
+              return (
+                <Link
+                  key={topic.name}
+                  href={topic.href}
+                  className="group rounded-lg bg-white p-5 transition hover:bg-zinc-100 dark:bg-zinc-900 dark:hover:bg-zinc-800"
+                >
+                  <Icon className="h-6 w-6 text-zinc-500 transition group-hover:text-zinc-950 dark:group-hover:text-white" />
+                  <h3 className="mt-4 text-base font-semibold text-zinc-950 dark:text-zinc-50">{topic.name}</h3>
+                  <p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">{topic.description}</p>
+                  <p className="mt-4 text-sm text-zinc-500">{topic.count} 篇文章</p>
                 </Link>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {tags.slice(0, 14).map((tag) => (
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="popular-title" className="bg-white dark:bg-zinc-950">
+        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+          <div className="flex items-center justify-between gap-4">
+            <h2 id="popular-title" className="flex items-center gap-2 text-3xl font-semibold tracking-normal text-zinc-950 dark:text-zinc-50">
+              <Layers3 className="h-6 w-6" />
+              常见问题
+            </h2>
+            <Link href="/categories" className="hidden text-sm text-zinc-500 hover:text-zinc-950 dark:hover:text-zinc-50 sm:inline-flex">
+              查看全部
+            </Link>
+          </div>
+          <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {popular.map((article) => (
+              <ArticleCard key={article.route} article={article} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="recent-title" className="border-t border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950">
+        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+          <div className="flex items-center justify-between gap-4">
+            <h2 id="recent-title" className="flex items-center gap-2 text-3xl font-semibold tracking-normal text-zinc-950 dark:text-zinc-50">
+              <ShieldCheck className="h-6 w-6" />
+              最近更新
+            </h2>
+            <Link href="/tags" className="hidden text-sm text-zinc-500 hover:text-zinc-950 dark:hover:text-zinc-50 sm:inline-flex">
+              浏览标签
+            </Link>
+          </div>
+          <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {recentlyUpdated.map((article) => (
+              <ArticleCard key={article.route} article={article} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="explore-title" className="bg-white dark:bg-zinc-950">
+        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+          <h2 id="explore-title" className="text-center text-3xl font-semibold tracking-normal text-zinc-950 dark:text-zinc-50">
+            探索更多内容
+          </h2>
+          <div className="mt-8 grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+            <div className="rounded-lg bg-zinc-50 p-6 dark:bg-zinc-900">
+              <h3 className="flex items-center gap-2 text-lg font-semibold text-zinc-950 dark:text-zinc-50">
+                <Tags className="h-5 w-5" />
+                热门标签
+              </h3>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {tags.slice(0, 16).map((tag) => (
                   <Link
                     key={tag}
                     href={`/tags/${encodeURIComponent(tag)}`}
-                    className="rounded-full bg-zinc-100 px-2.5 py-1 text-xs text-zinc-700 transition hover:bg-zinc-200 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800"
+                    className="rounded-full bg-white px-3 py-1.5 text-xs text-zinc-700 transition hover:bg-zinc-100 dark:bg-zinc-950 dark:text-zinc-300 dark:hover:bg-zinc-800"
                   >
                     {tag}
                   </Link>
                 ))}
               </div>
-            </section>
+            </div>
 
-            <section className="rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
-              <div className="mb-3 flex items-center justify-between">
-                <h2 className="flex items-center gap-2 text-base font-semibold text-zinc-950 dark:text-zinc-50">
-                  <Folder className="h-4 w-4" />
-                  全部分类
-                </h2>
-                <Link href="/categories" className="text-sm text-zinc-500 hover:text-zinc-950 dark:hover:text-zinc-50">
-                  查看全部
-                </Link>
-              </div>
-              <div className="space-y-2">
+            <div className="rounded-lg bg-zinc-50 p-6 dark:bg-zinc-900">
+              <h3 className="flex items-center gap-2 text-lg font-semibold text-zinc-950 dark:text-zinc-50">
+                <Folder className="h-5 w-5" />
+                全部分类
+              </h3>
+              <div className="mt-4 grid gap-2 sm:grid-cols-2">
                 {categories.slice(0, 8).map((category) => (
                   <Link
                     key={category.name}
                     href={`/categories/${encodeURIComponent(category.name)}`}
-                    className="flex items-center justify-between rounded-md border border-zinc-200 px-3 py-2 text-sm transition hover:bg-zinc-50 dark:border-zinc-800 dark:hover:bg-zinc-900"
+                    className="group flex items-center justify-between rounded-md bg-white px-3 py-2 text-sm transition hover:bg-zinc-100 dark:bg-zinc-950 dark:hover:bg-zinc-800"
                   >
                     <span>{category.name}</span>
-                    <span className="text-zinc-500">{category.items.length}</span>
-                  </Link>
-                ))}
-              </div>
-            </section>
-
-            <section className="rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950">
-              <h2 className="flex items-center gap-2 text-base font-semibold text-zinc-950 dark:text-zinc-50">
-                <Layers3 className="h-4 w-4" />
-                快速入口
-              </h2>
-              <div className="mt-4 space-y-3">
-                {popular.slice(0, 4).map((article) => (
-                  <Link key={article.route} href={article.route} className="group block text-sm">
-                    <span className="font-medium text-zinc-800 group-hover:text-zinc-950 dark:text-zinc-200 dark:group-hover:text-white">
-                      {article.title}
+                    <span className="inline-flex items-center gap-1 text-zinc-500">
+                      {category.items.length}
+                      <ArrowRight className="h-3.5 w-3.5 opacity-0 transition group-hover:opacity-100" />
                     </span>
-                    <ArrowRight className="ml-1 inline h-3 w-3" />
                   </Link>
                 ))}
               </div>
-            </section>
-          </aside>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
     </main>
   );
 }

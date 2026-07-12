@@ -8,7 +8,16 @@ import { difficultyLabels, verificationLabels } from "@/lib/labels";
 
 type SearchArticle = Pick<
   Article,
-  "title" | "route" | "category" | "tags" | "aliases" | "excerpt" | "body" | "verification" | "difficulty"
+  | "title"
+  | "route"
+  | "category"
+  | "tags"
+  | "aliases"
+  | "excerpt"
+  | "body"
+  | "verification"
+  | "difficulty"
+  | "updated"
 >;
 
 function normalize(value: string) {
@@ -48,7 +57,10 @@ export function SearchPanel({ articles }: { articles: SearchArticle[] }) {
 
   const results = useMemo(() => {
     if (!query.trim()) {
-      return articles.filter((article) => article.verification !== "Unknown").slice(0, 3);
+      return [...articles]
+        .filter((article) => article.verification !== "Unknown")
+        .sort((a, b) => b.updated.localeCompare(a.updated))
+        .slice(0, 3);
     }
 
     return articles
@@ -66,7 +78,7 @@ export function SearchPanel({ articles }: { articles: SearchArticle[] }) {
         <input
           value={query}
           onChange={(event) => setQuery(event.target.value)}
-          placeholder="像顾客描述那样搜索：老婆位置看不到"
+          placeholder="We are Genius"
           aria-label="搜索故障排查文章"
           className="min-w-0 flex-1 bg-transparent text-base outline-none placeholder:text-zinc-500"
         />
@@ -88,6 +100,12 @@ export function SearchPanel({ articles }: { articles: SearchArticle[] }) {
       </div>
 
       <div className="mt-5 space-y-3" aria-live="polite">
+        {!query.trim() ? (
+          <div className="flex items-center justify-between gap-3 text-xs font-semibold uppercase tracking-normal text-zinc-500 dark:text-zinc-400">
+            <span>最近更新</span>
+            <span>{results.length} 篇</span>
+          </div>
+        ) : null}
         {results.map((article) => (
           <Link
             key={article.route}
