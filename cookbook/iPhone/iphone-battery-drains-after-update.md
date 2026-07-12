@@ -146,7 +146,7 @@ popular: true
 - [iPhone 显示 SOS、无服务或正在搜索](/recipes/iPhone/iphone-sos-no-service-searching)
 - [iPhone 设置或更新时卡在正在准备更新、正在验证更新](/recipes/iPhone/iphone-stuck-preparing-verifying-software-update)
 - iPhone 无法开机或黑屏
-- iPhone 无法充电
+- [iPhone 无法充电、有线充电没反应或提示液体检测](/recipes/iPhone/iphone-wont-charge-wired-liquid-detected)
 - Apple 账户验证失败
 - 更新后 App 卡顿或闪退
 
