@@ -28,11 +28,11 @@ if [[ ! -d .next/standalone ]]; then
   exit 1
 fi
 
-rm -rf .next/standalone/public .next/standalone/.next/static .next/standalone/cookbook
+rm -rf .next/standalone/public .next/standalone/cookbook
 cp -R public .next/standalone/public
 cp -R cookbook .next/standalone/cookbook
-mkdir -p .next/standalone/.next
-cp -R .next/static .next/standalone/.next/static
+mkdir -p .next/standalone/.next/static
+cp -R .next/static/. .next/standalone/.next/static/
 
 sudo systemctl restart "$SERVICE_NAME"
 sudo systemctl --no-pager --full status "$SERVICE_NAME"
