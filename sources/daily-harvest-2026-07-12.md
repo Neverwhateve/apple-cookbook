@@ -420,3 +420,200 @@
 - Add a separate recipe for large iPhone-to-Mac photo/video migration so customers do not overuse AirDrop for multi-gigabyte transfers.
 - Monitor Apple Support 119857 and the iPhone/Mac User Guides for changes to AirDrop code behavior, 30-day known-contact handling, and cellular-data continuation.
 - Consider adding a related article for Universal Clipboard / Handoff not working, since the same Wi-Fi, Bluetooth, Apple Account, VPN, and firewall branches recur across Continuity issues.
+
+## Harvest Run - 2026-07-12 17:03 CST
+
+### P0 Feedback Intake
+
+- Checked GitHub issues in `Neverwhateve/apple-cookbook` with labels `P0` and `feedback-intake`.
+- No open P0 feedback-intake issues were found, so this run proceeded to normal source harvest.
+
+### Search Queries
+
+- `site:support.apple.com/zh-cn Apple Watch 无法 与 iPhone 连接 或 配对 Apple 支持 108360`
+- `site:support.apple.com/zh-cn Apple Watch 与 iPhone 兼容性 118490`
+- `site:support.apple.com/zh-cn Apple Watch 更新 软件 配对 需要更新 iPhone`
+- `site:discussions.apple.com Apple Watch won't pair with new iPhone update stuck 2026`
+- `site:reddit.com/r/AppleWatch Apple Watch won't pair new iPhone update stuck iOS 26 watchOS 26`
+- `site:discussions.apple.com Apple Watch unable to pair requires update old watch new iPhone`
+- `site:reddit.com/r/applehelp Apple Watch won't connect red iPhone icon`
+- `site:xiaohongshu.com Apple Watch 无法 配对 iPhone 卡在 更新`
+- `site:xiaohongshu.com Apple Watch 配对失败 新 iPhone 激活锁`
+- `site:xiaohongshu.com Apple Watch 红色 iPhone 图标 连接不上`
+
+### Sources Visited
+
+- Apple Support: [如果 Apple Watch 无法与 iPhone 连接或配对](https://support.apple.com/zh-cn/108360)
+- Apple Support: [如果你无法将 Apple Watch 与 iPhone 配对](https://support.apple.com/zh-cn/111821)
+- Apple Support: [将 Apple Watch 与新 iPhone 配对](https://support.apple.com/zh-cn/104956)
+- Apple Support: [取消配对并抹掉 Apple Watch](https://support.apple.com/zh-cn/108372)
+- Apple Support: [设置你的 Apple Watch](https://support.apple.com/zh-cn/109015)
+- Apple Support: [Apple Watch 和 iPhone 兼容性](https://support.apple.com/zh-cn/118490)
+- Apple Support: [更新 Apple Watch](https://support.apple.com/zh-cn/108926)
+- Apple Support: [如果在更新 Apple Watch 时显示“无法验证更新”](https://support.apple.com/zh-cn/111816)
+- Apple Watch User Guide: [设置 Apple Watch 并与 iPhone 配对](https://support.apple.com/zh-cn/guide/watch/apdde4d6f98e/watchos)
+- Apple Watch User Guide: [更新 Apple Watch 软件](https://support.apple.com/zh-cn/guide/watch/apd105341ac3/watchos)
+- Apple Support Community: [Apple Watch won't update/pair](https://discussions.apple.com/thread/254433831)
+- Apple Support Community: [Why is my Apple Watch app update stuck on verifying?](https://discussions.apple.com/thread/255889406)
+- Apple Support Community: [Existing watch won't pair to new phone](https://discussions.apple.com/thread/254645261)
+- Apple Support Community: [Can I pair my Apple Watch to a new iPhone without backup?](https://discussions.apple.com/thread/256124607)
+- Reddit r/AppleWatch: [WatchOS 26 doesn't pair with iOS 18](https://www.reddit.com/r/AppleWatch/comments/1ll2ylp/watchos_26_doesnt_pair_with_ios_18/)
+- Reddit r/AppleWatch: [“iPhone Out of Date” can't pair brand new Apple Watch S9](https://www.reddit.com/r/AppleWatch/comments/1ne2v40/iphone_out_of_date_cant_pair_brand_new_apple/)
+- Reddit r/AppleWatch: [Older watch won't sync with iOS 26](https://www.reddit.com/r/AppleWatch/comments/1tr0nix/older_watch_wont_sync_with_ios_26/)
+
+### Evidence Collected
+
+- Apple says disconnected Apple Watch and iPhone can show a red iPhone icon or red X; Apple recommends placing the devices close together, checking Airplane Mode, Wi-Fi, Bluetooth, and restarting both devices before deeper repair paths. Source: [Apple Support 108360](https://support.apple.com/zh-cn/108360).
+- Apple says if iPhone says it cannot connect to Apple Watch, or the watch already shows a clock face, users should confirm the watch is not still paired with another iPhone; erasing on the watch without the paired iPhone does not remove Activation Lock. Source: [Apple Support 111821](https://support.apple.com/zh-cn/111821).
+- Apple says moving Apple Watch to a new iPhone requires Apple Account password, Apple Watch passcode, Wi-Fi, and at least 50% battery on Apple Watch and new iPhone; iPhone backup includes Apple Watch backup. Source: [Apple Support 104956](https://support.apple.com/zh-cn/104956).
+- Apple says unpairing from the Apple Watch App erases Apple Watch, creates a backup, and removes Activation Lock after Apple Account authentication. Source: [Apple Support 108372](https://support.apple.com/zh-cn/108372).
+- Apple says setting up Apple Watch can require an iPhone iOS update before continuing. Source: [Apple Support 109015](https://support.apple.com/zh-cn/109015).
+- Apple's compatibility table confirms that current Apple Watch models and watchOS versions have specific iPhone and iOS minimums; Series 11, SE 3, and Ultra 3 require iPhone 11 or later with iOS 26 or later. Source: [Apple Support 118490](https://support.apple.com/zh-cn/118490).
+- Apple says Apple Watch updates require the iPhone to be updated, Apple Watch battery at least 50%, and Apple Watch connected to its charger; if updating will not start, Apple recommends restarting both devices and deleting the downloaded update file from Apple Watch App storage before trying again. Source: [Apple Support 108926](https://support.apple.com/zh-cn/108926).
+- Apple says “Unable to Verify Update” on Apple Watch can require unpairing and updating again; for Beta or developer seed software, Apple instructs users to remove Beta profiles, restart both devices, and check for updates again. Source: [Apple Support 111816](https://support.apple.com/zh-cn/111816).
+- Apple Support Community and Reddit repeatedly show pairing complaints that are actually watchOS update loops, “iPhone out of date” version mismatches, old Watch/new iPhone transitions, and Beta/cross-version compatibility confusion. These were used as customer wording and prioritization signals only.
+
+### Customer Wording
+
+- “Apple Watch 配对时一直要求更新。”
+- “Apple Watch 更新卡在正在验证。”
+- “显示无法验证更新。”
+- “新 iPhone 提示 iPhone out of date。”
+- “手表已经是新版 watchOS，旧 iOS 手机配不上。”
+- “换新手机后旧 Apple Watch 不能同步。”
+- “没有旧 iPhone，手表还能不能重新配对？”
+- “抹掉 Apple Watch 后会不会还有激活锁？”
+
+### Cross-source Patterns
+
+- Pairing issues often need an early split between ordinary disconnection, new-iPhone transfer, Activation Lock, and watchOS update failure. The article now moves update-loop triage earlier.
+- Community threads frequently recommend resets, network resets, or beta downgrade ideas. The recipe keeps Apple-supported update checks, charger/battery requirements, update-file deletion, and official unpair/update paths ahead of those suggestions.
+- Version mismatch is a Retail-critical branch: if the watchOS version is newer than the iPhone supports, repeated Bluetooth troubleshooting wastes time. The article now explicitly records iPhone model, iOS version, Apple Watch model, and watchOS version before escalation.
+- Xiaohongshu direct pages were not accessible enough to support factual recommendations; Chinese search wording still aligned with “配对失败,” “卡在更新,” and “连接不上.”
+
+### Articles Created, Improved, Merged, or Flagged
+
+- Improved `cookbook/Apple Watch/apple-watch-wont-connect-pair-iphone.md` as the canonical Official Apple Watch pairing and connection recipe.
+- Added official watchOS update-failure handling for battery, charger, iPhone update, restart, deleting update files, “无法验证更新,” and Beta/developer seed profile handling.
+- Expanded customer wording and Retail flow around old Watch/new iPhone, iPhone out-of-date prompts, cross-version watchOS/iOS mismatch, Activation Lock, and update loops.
+- No new recipe was created. No duplicate recipe was found or merged.
+
+### Verification Changes
+
+- `Apple Watch 无法连接或无法与 iPhone 配对` remains `Official`; verification is stronger because update-loop branches are now backed by Apple Support 108926 and 111816 in addition to the existing pairing, unpairing, setup, new-iPhone transfer, and compatibility sources.
+- Reddit and Apple Support Community links were used only for customer language and recurrence patterns. No community workaround was presented as Apple official guidance.
+
+### Reading/UI and Typography Improvements
+
+- No shared CSS or component styling changed in this run.
+- The Apple Watch recipe keeps the Apple Support-inspired structure and now has a clearer fast path: identify the visible state, handle basic reconnect checks, then branch into update, compatibility, new-iPhone transfer, Activation Lock, or cellular-plan decisions.
+- Official recommendations remain visually and textually separate from nonofficial community patterns, especially beta downgrade and cross-version troubleshooting claims.
+
+### Typography/Layout Improvements
+
+- No typography tokens changed in this run.
+- The article remains narrow, sectioned, and step-led. The new material was added as short symptom bullets, concise cause sections, numbered official steps, and one compact nonofficial note to avoid dense walls of text.
+
+### Blocked Sources
+
+- Direct Xiaohongshu content was not reliably accessible from this environment. No factual update was based on inaccessible Xiaohongshu pages.
+
+### Follow-up Opportunities
+
+- Add a dedicated Apple Watch update article if future feedback focuses on “无法验证更新,” “正在准备,” storage space, or Beta removal without pairing failure.
+- Add a separate Apple Watch Activation Lock article if second-hand watch questions increase.
+- Monitor Apple Support 118490, 108926, and 111816 for model/version changes and update-flow changes after future iOS/watchOS releases.
+
+## Harvest Run - 2026-07-12 18:03 CST
+
+### P0 Feedback Intake
+
+- Checked GitHub issues in `Neverwhateve/apple-cookbook` with labels `P0` and `feedback-intake`.
+- No open P0 feedback-intake issues were found, so this run proceeded to normal source harvest.
+
+### Search Queries
+
+- `site:support.apple.com/zh-cn iPhone 无法充电 Apple 支持`
+- `site:support.apple.com/zh-cn iPhone Air iPhone 17 有线充电 电量 几乎耗尽 26.5.1`
+- `site:support.apple.com/en-us If your iPhone or iPod touch won't charge Apple Support`
+- `site:discussions.apple.com iPhone Air iPhone 17 wired charging nearly drained 26.5.1`
+- `site:reddit.com/r/iphone iPhone won't charge iPhone 17 iPhone Air 26.5.1 wired charging`
+- `site:reddit.com/r/applehelp iPhone won't charge liquid detected USB-C port debris`
+- `site:discussions.apple.com iPhone won't charge liquid detected accessory not supported USB-C port debris`
+- `site:xiaohongshu.com iPhone 充不进电 液体检测 接口 充电慢`
+
+### Sources Visited
+
+- Apple Support: [如果 iPhone 或 iPod touch 无法充电](https://support.apple.com/zh-cn/108805)
+- Apple Support: [如果 iPhone 上出现液体检测提醒](https://support.apple.com/zh-cn/102643)
+- iPhone User Guide: [给 iPhone 电池充电](https://support.apple.com/zh-cn/guide/iphone/iph63eecc618/ios)
+- Apple Support: [如果 iPhone 无法开机或黑屏](https://support.apple.com/zh-cn/116940)
+- Apple Support: [关于 iOS 26 更新](https://support.apple.com/zh-cn/123075)
+- Apple Support: [Apple 安全性发布](https://support.apple.com/zh-cn/100100)
+- Apple Support Community: [iPhone 17 Pro won't turn on after battery drained](https://discussions.apple.com/thread/256308911)
+- Apple Support Community: [How to resolve 'Liquid Detected in USB-C'](https://discussions.apple.com/thread/256191213)
+- Apple Support Community: [How to fix 'Liquid Has Been Detected' and charging issue on iPhone](https://discussions.apple.com/thread/256296619)
+- Reddit r/iPhone: [iOS 26.5.1 out](https://www.reddit.com/r/iphone/comments/1ttyzdk/ios_2651_out/)
+- Reddit r/iPhone: [iOS 26.5.1 stopped my charging](https://www.reddit.com/r/iphone/comments/1tvcnrt/ios_2651_stopped_my_charging/)
+- Reddit r/applehelp: [There is no liquid in my phone and it's saying this](https://www.reddit.com/r/applehelp/comments/1h2bnpr/there_is_no_liquid_in_my_phone_and_its_saying_this/)
+
+### Evidence Collected
+
+- Apple says iPhone charging troubleshooting should start with power source checks, restart, inspection of charging cable and USB adapter for damage, removing debris from the charging port, trying another cable or charger, and making sure iOS is current. Source: [Apple Support 108805](https://support.apple.com/zh-cn/108805).
+- Apple says an accessory warning can appear when the iOS device charging port is dirty or damaged, the charging accessory is defective or damaged, or the USB charger is not designed to charge the device. Source: [Apple Support 108805](https://support.apple.com/zh-cn/108805).
+- Apple says if a liquid detection alert appears, disconnect the cable, let iPhone and cable dry, tap the iPhone connector-down to remove excess liquid, try again after at least 30 minutes, and allow up to 24 hours for complete drying if the alert returns. Source: [Apple Support 102643](https://support.apple.com/zh-cn/102643).
+- Apple specifically says not to use an external heat source, compressed air, cotton swab, paper towel, foreign object, or rice bag to dry iPhone. Source: [Apple Support 102643](https://support.apple.com/zh-cn/102643).
+- Apple says low-power wired or wireless chargers may cause slower-than-expected charging and can show “Slow Charger” information in Settings > Battery. Source: [iPhone User Guide](https://support.apple.com/zh-cn/guide/iphone/iph63eecc618/ios).
+- Apple says iOS 26.5.1 addressed an issue for a small number of iPhone Air and iPhone 17 models that could prevent wired charging when the battery was nearly drained. Source: [Apple Support 123075](https://support.apple.com/zh-cn/123075).
+- Apple Security Releases lists iOS 26.5.1 for iPhone 17 models and iPhone Air, released 2026-06-01, with no published CVE entries. Source: [Apple Support 100100](https://support.apple.com/zh-cn/100100).
+- Apple Community and Reddit repeatedly show customer wording around “wired charging not working,” “only wireless charging works,” “liquid detected but phone is dry,” “iPhone 17 battery drained and will not turn on,” and “iOS 26.5.1 charging fix.” These were used as customer language and prioritization signals only.
+
+### Customer Wording
+
+- “iPhone 插线不充电。”
+- “无线充可以，有线充没反应。”
+- “提示 USB-C 接口检测到液体，但手机没进水。”
+- “这个配件可能不受支持。”
+- “iPhone 17 没电后插线充不起来。”
+- “iPhone Air 电量耗尽后有线充电没反应。”
+- “电池里显示慢充。”
+- “换了线和充电头还是不行。”
+
+### Cross-source Patterns
+
+- Charging complaints split into several different Retail branches: power source, cable/adapter, dirty or damaged port, liquid detection, slow charging, system-version fix, and black-screen/no-power service escalation.
+- iOS 26.5.1 is important but narrow: Apple limits the fix to a small number of iPhone Air and iPhone 17 models when the battery is nearly drained. The new recipe warns not to treat every iPhone charging case as that bug.
+- Community advice often recommends toothpicks, compressed air, rice bags, forced cleaning, or repeated emergency override. The recipe rejects those as official guidance because Apple explicitly warns against several of those actions in liquid-detection scenarios.
+- Xiaohongshu direct pages were not reliably accessible; Chinese query language still showed the expected wording around “充不进电,” “液体检测,” “接口,” and “充电慢.”
+
+### Articles Created, Improved, Merged, or Flagged
+
+- Created `cookbook/iPhone/iphone-wont-charge-wired-liquid-detected.md` as the canonical Official iPhone charging recipe.
+- Improved `cookbook/iPhone/iphone-battery-drains-after-update.md` by replacing the placeholder charging related link with the new canonical charging recipe.
+- No duplicate recipe was found or merged.
+
+### Verification Changes
+
+- New recipe `iPhone 无法充电、有线充电没反应或提示液体检测` is `Official` because its primary flow is supported by Apple charging, liquid-detection, iPhone battery charging, black-screen/no-power, iOS 26 update, and Apple security-release documentation.
+- Community and Reddit sources were used only for customer wording, recurrence patterns, and risk awareness around unsafe cleaning suggestions.
+
+### Reading/UI and Typography Improvements
+
+- No shared CSS or component styling changed in this run.
+- The new recipe follows the Apple Support-inspired structure: direct symptom title, short intro, symptoms, root causes, ordered official steps, one focused model/version branch, clearly separated nonofficial notes, Retail flow, escalation, related links, and compact metadata.
+- Official Apple recommendations are textually separated from community cleaning and emergency-override suggestions, especially where Apple warns against heat, compressed air, foreign objects, and rice bags.
+
+### Typography/Layout Improvements
+
+- No typography tokens changed in this run.
+- The article uses short paragraphs, scannable H2/H3 sections, numbered action steps, compact bullets, and a narrow support-article rhythm consistent with the existing Cookbook style.
+
+### Blocked Sources
+
+- Direct Xiaohongshu content was not reliably accessible from this environment. No factual recommendation was based on inaccessible Xiaohongshu pages.
+
+### Follow-up Opportunities
+
+- Add a separate canonical article for iPhone black screen / cannot power on if future feedback mentions dead devices more than charging accessories.
+- Monitor Apple Support 123075 and 100100 for follow-up iOS releases that expand or supersede the iPhone Air / iPhone 17 wired-charging fix.
+- Consider adding a repair-intake checklist for liquid exposure, port damage, and backup status before service.
