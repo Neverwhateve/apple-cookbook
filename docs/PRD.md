@@ -413,7 +413,7 @@ Ingestion workflow concept:
 
 Operational cadence:
 
-- Run source harvest and article review work every 3 hours.
+- Run source harvest and article review work every 1 hour.
 - Publish every completed work cycle to GitHub.
 - Treat submitted feedback questions and links as P0 intake ahead of routine source harvest work.
 - If multiple priority levels are present, complete each priority level in order before moving to the next.

@@ -225,7 +225,7 @@ export default async function AdminFeedbackPage() {
           <p className="text-sm font-semibold text-zinc-500 dark:text-zinc-400">Admin</p>
           <h1 className="mt-2 text-3xl font-semibold tracking-normal text-zinc-950 dark:text-zinc-50">P0 反馈队列</h1>
           <p className="mt-3 max-w-2xl text-sm leading-6 text-zinc-600 dark:text-zinc-400">
-            查看网站提交的问题和链接，决定是否进入处理、关闭或重新打开。待处理项会被 3 小时 harvest 自动化优先消费。
+            查看网站提交的问题和链接，决定是否进入处理、关闭或重新打开。待处理项会被 1 小时 harvest 自动化优先消费。
           </p>
         </div>
         <div className="flex flex-col gap-3 sm:w-80">
