@@ -95,6 +95,85 @@ jobs:
             gh issue close "$issue_number" --comment "Archived from the admin feedback queue as \`$status\`; removed from active P0 harvest intake."
           done < intake/feedback/archive.jsonl
 
+      - name: Archive active feedback with closed GitHub issues
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          ALIYUN_ECS_HOST: ${{ secrets.ALIYUN_ECS_HOST }}
+          ALIYUN_ECS_PORT: ${{ secrets.ALIYUN_ECS_PORT || '22' }}
+          ALIYUN_ECS_USER: ${{ secrets.ALIYUN_ECS_USER }}
+          FEEDBACK_DATA_DIR: ${{ vars.FEEDBACK_DATA_DIR || '/var/lib/apple-cookbook' }}
+        run: |
+          set -euo pipefail
+          : > intake/closed-feedback-ids.txt
+
+          if [[ ! -s intake/feedback/inbox.jsonl ]]; then
+            echo "No active feedback submissions found."
+            exit 0
+          fi
+
+          while IFS= read -r submission; do
+            id=$(jq -r '.id // empty' <<<"$submission")
+            [[ -n "$id" ]] || continue
+            status=$(jq -r '.status // "open"' <<<"$submission")
+            [[ "$status" == "open" || "$status" == "in_progress" ]] || continue
+
+            issue_state=$(
+              gh issue list \
+                --state all \
+                --label P0 \
+                --label feedback-intake \
+                --limit 200 \
+                --json body,state \
+                --jq ".[] | select(.body | contains(\"Feedback ID: \`$id\`\")) | .state" \
+                | head -n 1
+            )
+
+            if [[ "$issue_state" == "CLOSED" ]]; then
+              echo "$id" >> intake/closed-feedback-ids.txt
+            fi
+          done < intake/feedback/inbox.jsonl
+
+          if [[ ! -s intake/closed-feedback-ids.txt ]]; then
+            echo "No active feedback has closed GitHub issues."
+            exit 0
+          fi
+
+          scp -i ~/.ssh/aliyun_ecs -P "$ALIYUN_ECS_PORT" \
+            intake/closed-feedback-ids.txt "$ALIYUN_ECS_USER@$ALIYUN_ECS_HOST:/tmp/apple-cookbook-closed-feedback-ids.txt"
+
+          ssh -i ~/.ssh/aliyun_ecs -p "$ALIYUN_ECS_PORT" "$ALIYUN_ECS_USER@$ALIYUN_ECS_HOST" \
+            "FEEDBACK_DATA_DIR='$FEEDBACK_DATA_DIR' bash -s" <<'REMOTE'
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require('fs');
+          const dir = `${process.env.FEEDBACK_DATA_DIR}/feedback`;
+          const inbox = `${dir}/inbox.jsonl`;
+          const archive = `${dir}/archive.jsonl`;
+          const closedIds = new Set(fs.readFileSync('/tmp/apple-cookbook-closed-feedback-ids.txt', 'utf8').split(/\r?\n/).filter(Boolean));
+          const read = (file) => fs.existsSync(file) ? fs.readFileSync(file, 'utf8').split(/\r?\n/).filter(Boolean).map((line) => JSON.parse(line)) : [];
+          const active = read(inbox);
+          const archived = read(archive);
+          const archivedIds = new Set(archived.map((item) => item.id));
+          const now = new Date().toISOString();
+          const toArchive = [];
+          const nextActive = [];
+
+          for (const item of active) {
+            if (closedIds.has(item.id)) {
+              toArchive.push({ ...item, status: 'resolved', updatedAt: now, adminNote: 'GitHub P0 issue 已关闭，自动归档。' });
+            } else {
+              nextActive.push(item);
+            }
+          }
+
+          const nextArchive = [...toArchive.filter((item) => !archivedIds.has(item.id)), ...archived];
+          fs.writeFileSync(inbox, nextActive.map((item) => JSON.stringify(item)).join('\n') + (nextActive.length ? '\n' : ''));
+          fs.writeFileSync(archive, nextArchive.map((item) => JSON.stringify(item)).join('\n') + (nextArchive.length ? '\n' : ''));
+          NODE
+          rm -f /tmp/apple-cookbook-closed-feedback-ids.txt
+          REMOTE
+
       - name: Create issues for new P0 feedback
         env:
           GH_TOKEN: ${{ github.token }}
