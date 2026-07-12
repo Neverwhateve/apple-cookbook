@@ -119,3 +119,107 @@
 - Review whether a Face ID / Touch ID repair article should cross-link to the Stolen Device Protection security delay recipe.
 - Monitor Apple Support 120340 and 109511 for changes around trade-in workflows and default Stolen Device Protection behavior.
 - Consider adding a short FAQ component for “Apple 账户密码能不能代替设备密码？” across Mac and iPhone password articles.
+
+## Harvest Run - 2026-07-12 16:00 CST
+
+### P0 Feedback Intake
+
+- Checked GitHub issues in `Neverwhateve/apple-cookbook` with labels `P0` and `feedback-intake`.
+- No open P0 feedback-intake issues were found, so this run proceeded to normal source harvest.
+
+### Search Queries
+
+- `site:support.apple.com/zh-cn iCloud 储存空间 已满 无法备份 iPhone Apple 支持`
+- `site:support.apple.com/en-us iCloud storage full iPhone backup not enough storage Apple Support`
+- `site:discussions.apple.com iCloud storage full iPhone not backing up not enough storage Apple Community`
+- `site:reddit.com/r/iphone iCloud storage full iPhone backup not enough storage`
+- `site:support.apple.com/zh-cn 备份 iPhone iPad 使用 iCloud 电脑 Apple 支持`
+- `site:support.apple.com/zh-cn iCloud 云备份 包含 哪些内容 Apple 支持`
+- `site:support.apple.com/zh-cn 使用 Mac 备份 iPhone Apple 支持`
+- `site:support.apple.com/zh-cn Windows 备份 iPhone Apple 设备 Apple 支持`
+- `site:xiaohongshu.com iCloud 空间满了 备份失败 iPhone`
+- `site:xiaohongshu.com iPhone iCloud 储存空间已满 备份不了`
+- `site:xiaohongshu.com iCloud 云备份失败 空间不足 iPhone`
+
+### Sources Visited
+
+- Apple Support: [如果你无法备份到 iCloud](https://support.apple.com/zh-cn/102563)
+- Apple Support: [在 Apple 设备上管理 iCloud 储存空间](https://support.apple.com/zh-cn/108922)
+- Apple Support: [iCloud 储存空间与 iPhone 或 iPad 上的设备储存空间有什么区别？](https://support.apple.com/zh-cn/102670)
+- Apple Support: [如何通过 iCloud 备份 iPhone 或 iPad](https://support.apple.com/zh-cn/108366)
+- Apple Support: [iCloud 会备份哪些内容？](https://support.apple.com/zh-cn/108770)
+- Apple Support: [如何备份你的 iPhone、iPad 和 iPod touch](https://support.apple.com/zh-cn/118426)
+- Apple Support: [如何通过 Mac 备份 iPhone 或 iPad](https://support.apple.com/zh-cn/108796)
+- Apple Support: [如何在 Windows 中备份 iPhone、iPad 或 iPod touch](https://support.apple.com/zh-cn/108967)
+- Apple Support: [在购买新 iPhone 或 iPad 时获取临时 iCloud 储存空间](https://support.apple.com/zh-cn/104980)
+- Apple Support: [将照片和视频从 iPhone 或 iPad 传输到 Mac 或 PC](https://support.apple.com/zh-cn/120267)
+- Apple Support Community: [iphone icloud backup not enough storage](https://discussions.apple.com/thread/256178444)
+- Apple Support Community: [This iPhone cannot be backed up because there is not enough iCloud storage](https://discussions.apple.com/thread/253971444)
+- Apple Support Community: [Why can't I backup my iPhone data to iCloud?](https://discussions.apple.com/thread/256071902)
+- Apple Support Community: [Why is my iPhone storage full when I have iCloud](https://discussions.apple.com/thread/253852269)
+- Reddit r/iPhone: [How do you backup iPhone if you have no storage on iCloud?](https://www.reddit.com/r/iphone/comments/za6nta/how_do_you_backup_iphone_if_you_have_no_storage/)
+- Reddit r/iPhone: [iCloud backup failing even though I have 50GB plan and my data is not much](https://www.reddit.com/r/iphone/comments/1pwqfjf/icloud_backup_failing_even_though_i_have_50gb/)
+- Reddit r/iPhone: [why can't I backup my phone i have enough storage?](https://www.reddit.com/r/iphone/comments/1dfishv/why_cant_i_backup_my_phone_i_have_enough_storage/)
+
+### Evidence Collected
+
+- Apple says iCloud storage is used for iCloud Backup, iCloud Photos, iCloud Drive, and other iCloud data, while device storage is the physical capacity on the iPhone or iPad. Source: [Apple Support 102670](https://support.apple.com/zh-cn/102670).
+- Apple's iCloud backup failure guidance tells customers to inspect iCloud usage, open Backups, select the current device, and compare available iCloud storage with “Next Backup Size.” Source: [Apple Support 102563](https://support.apple.com/zh-cn/102563).
+- Apple says iCloud storage can be freed by reviewing Recommended for You, deleting old backups, managing iCloud Photos, deleting iCloud Drive files, and reducing Messages attachments. Source: [Apple Support 108922](https://support.apple.com/zh-cn/108922).
+- Apple says if iCloud Photos is off, photos and videos can be included in iCloud Backup; if iCloud Photos is on, photos and videos sync to iCloud and are not included in the daily backup. Source: [Apple Support 108770](https://support.apple.com/zh-cn/108770).
+- Apple says automatic iCloud Backup requires iCloud Backup to be on, the device connected to power, connected to Wi-Fi, and locked. Source: [Apple Support 108366](https://support.apple.com/zh-cn/108366).
+- Apple says iCloud Backup can appear gray when restore is still in progress or a configuration profile restricts iCloud Backup. Source: [Apple Support 102563](https://support.apple.com/zh-cn/102563).
+- Apple says customers buying a new iPhone or iPad may qualify for temporary iCloud storage when current iCloud storage is insufficient to back up the current device. Source: [Apple Support 104980](https://support.apple.com/zh-cn/104980).
+- Apple's Mac and Windows backup articles support computer backup as an official alternative, and Apple specifically notes encrypted local backup for Health and Fitness data. Sources: [Apple Support 108796](https://support.apple.com/zh-cn/108796), [Apple Support 108967](https://support.apple.com/zh-cn/108967).
+- Apple has a separate photo/video import flow, which supports explaining why copying DCIM or importing photos is not equivalent to a complete device backup. Source: [Apple Support 120267](https://support.apple.com/zh-cn/120267).
+
+### Customer Wording
+
+- “iCloud 空间满了，手机一直提示备份失败。”
+- “明明买了 50GB，还是说无法备份。”
+- “iPhone 储存空间还有很多，为什么 iCloud 备份空间不足？”
+- “iCloud 满了是不是手机内存也满了？”
+- “换新 iPhone 前没有足够 iCloud 空间备份。”
+- “备份大小一直在计算，或者下一次备份比剩余空间大。”
+- “照片删了，iCloud 空间还是没立刻回来。”
+- “插电脑只看到 DCIM，算不算已经备份了？”
+
+### Cross-source Patterns
+
+- Customers frequently confuse device storage with iCloud storage. The new recipe makes that distinction before any delete or upgrade recommendation.
+- Apple Support Community and Reddit threads repeatedly show customers checking only remaining iCloud storage instead of the current device's “Next Backup Size.” The article elevates this as the first sizing decision.
+- Photo handling is a major source of confusion: if iCloud Photos is off, photos may be in iCloud Backup; if iCloud Photos is on, they sync separately and consume iCloud storage outside the backup.
+- Community advice often suggests copying DCIM to a computer. The article treats photo import as a partial risk-reduction step, not a complete device backup.
+- For Retail, the fastest path depends on intent: upgrade/manage iCloud for long-term backups, temporary iCloud storage for new-device transfer, or encrypted computer backup before repair/erase.
+
+### Articles Created, Improved, Merged, or Flagged
+
+- Created `cookbook/iCloud/icloud-storage-full-iphone-backup-fails.md` as the canonical Official recipe for iCloud storage full, iCloud Backup failure, Next Backup Size, iCloud vs device storage confusion, temporary iCloud storage for new-device migration, and computer-backup alternatives.
+- No duplicate recipe was found or merged.
+- No existing recipe was modified; related links point back to existing iPhone passcode, update, and eSIM recipes where the backup decision often matters.
+
+### Verification Changes
+
+- New recipe `iCloud 储存空间已满，iPhone 或 iPad 无法备份` is `Official` because the troubleshooting flow is supported by Apple Support articles for iCloud backup failure, iCloud storage management, iCloud vs device storage, iCloud Backup contents, iCloud backup setup, Mac backup, Windows backup, temporary iCloud storage, and photo import boundaries.
+- Community and Reddit sources were used only for customer wording and repeated confusion patterns. No community workaround was presented as Apple guidance.
+
+### Reading/UI and Typography Improvements
+
+- No shared CSS or component styling changed in this run.
+- The new article follows the Apple Support-inspired reading order: symptom title, short intro, symptoms, root causes, official solution, focused decision sections, clearly labeled unofficial notes, Retail flow, escalation, related links, and compact metadata.
+- Official recommendations are separated from unofficial community patterns so photo-import and DCIM-copy advice is not mistaken for a complete Apple backup recommendation.
+
+### Typography/Layout Improvements
+
+- No typography tokens changed in this run.
+- The new article uses short paragraphs, scannable H2/H3 sections, numbered steps for actions, compact source lists, and a narrow support-article rhythm consistent with the existing Cookbook style.
+
+### Blocked Sources
+
+- Xiaohongshu search results were not reliably accessible from this environment for this topic. No factual recommendation was based on inaccessible Xiaohongshu content.
+
+### Follow-up Opportunities
+
+- Add a related article for iCloud Photos not syncing, photos missing after enabling iCloud Photos, or “Optimize iPhone Storage” confusion.
+- Add a related article for iPhone migration stuck on “Preparing to Transfer” or temporary iCloud backup restore expiration.
+- Consider cross-linking future repair-intake articles to this backup article before erase, restore, or device replacement steps.
