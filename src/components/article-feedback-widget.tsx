@@ -98,7 +98,7 @@ export function ArticleFeedbackWidget({
               />
               <p className="mt-1.5 text-xs leading-5 text-zinc-500">
                 {reporterVerified
-                  ? "你的名字会作为这条实测经验的验证者显示在公开文章中。"
+                  ? "这条经验会在公开文章中显示为“你的名字 分享”。"
                   : "名字只保存在处理记录中，不在公开页面展示。"}
               </p>
             </div>
@@ -114,10 +114,10 @@ export function ArticleFeedbackWidget({
               />
               <span>
                 <span className="block text-sm font-medium text-zinc-950 dark:text-zinc-50">
-                  我已亲自验证这个方法有效
+                  我已亲自验证，愿意署名分享
                 </span>
                 <span className="mt-1 block text-xs leading-5 text-zinc-500">
-                  勾选后，这个方法会作为读者验证的非官方经验加入相关内容，并显示你的名字。
+                  勾选后，这个方法会以“你的名字 分享”的形式加入相关内容，并与 Apple 官方方案分开显示。
                 </span>
               </span>
             </label>
