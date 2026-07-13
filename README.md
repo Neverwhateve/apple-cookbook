@@ -51,7 +51,7 @@ The goal is to create a practical troubleshooting encyclopedia that helps Apple 
 - Each Harvest proposal must include the base commit and full-file content hashes described in `docs/HARVEST_WORKFLOW.md`.
 - Feedback questions and submitted links are P0 intake and must be handled before routine source harvest work.
 - When multiple priority levels exist, resolve items in priority order before moving to the next level.
-- The expected final `main` ruleset is versioned in `.github/rulesets/main.json`; Phase 1 is active remotely (PR required, deletion/force-push blocked, no bypass). `pnpm audit:github-governance` remains read-only and reports drift until the content-quality check is safely added. See `docs/GITHUB_GOVERNANCE.md`.
+- The expected `main` ruleset is versioned in `.github/rulesets/main.json` and is active remotely: PRs plus the strict `Validate pull request` check are required, deletion/force-push are blocked, and no bypass actors exist. `pnpm audit:github-governance` remains read-only. See `docs/GITHUB_GOVERNANCE.md`.
 
 ## Architecture
 
@@ -122,7 +122,7 @@ pnpm feedback:verify -- --snapshot /path/to/feedback-snapshot
 pnpm audit:github-governance
 ```
 
-The GitHub governance audit currently exits with drift because the active Phase-1 ruleset intentionally omits the not-yet-registered `Validate pull request` check. Publish the workflow and its complete dependency closure in a PR; after that PR's check succeeds, add the required context to ruleset ID `18863035` before merging. Feedback backups are deliberately opt-in; follow `docs/FEEDBACK_RECOVERY.md` and store snapshots outside both the checkout and live data directory.
+The GitHub governance audit currently exits `0`: Draft PR #12 registered and passed `Validate pull request`, after which existing ruleset ID `18863035` was updated in place with that exact strict check and an empty bypass list. The workflow source still needs the explicitly approved PR merge to reach `main`. Feedback backups are deliberately opt-in; follow `docs/FEEDBACK_RECOVERY.md` and store snapshots outside both the checkout and live data directory.
 
 In this Codex workspace, Node is available at:
 

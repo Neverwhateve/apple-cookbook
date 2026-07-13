@@ -80,7 +80,7 @@ If a base hash differs, treat it as a human-edit conflict. Preserve the current 
 
 ## Repository Settings Required Outside Git
 
-The workflow can detect unsafe proposals, but it cannot stop a token with unrestricted rights from pushing to `main`. Phase 1 of `Protect main` is active remotely and already requires PRs, blocks deletion/force pushes, and has no bypass actors. Phase 2 must publish the workflow and its dependencies in a PR, let the exact content-quality check succeed, then require it before merging:
+The workflow can detect unsafe proposals, but it cannot stop a token with unrestricted rights from pushing to `main`. `Protect main` is now active remotely and requires PRs plus the exact strict content-quality check, blocks deletion/force pushes, and has no bypass actors. The check was added only after Draft PR #12 registered and passed it:
 
 - require pull requests and the exact `Validate pull request` check context (the GitHub Actions job name; `Content quality / Validate pull request` is only a possible UI display label);
 - disallow force pushes and branch deletion;
@@ -88,4 +88,4 @@ The workflow can detect unsafe proposals, but it cannot stop a token with unrest
 - do not grant the Harvest credential bypass permission;
 - scope the Harvest credential to creating branches and pull requests only where possible.
 
-The PR/deletion/force-push boundary is active. The required status-check portion remains mandatory and intentionally pending; enabling an unregistered check early would lock every pull request.
+All listed rules are active. Draft PR #12 still needs an explicitly approved merge so the workflow source reaches `main`; until then, unrelated branches that do not contain the workflow may be unable to produce the required check.

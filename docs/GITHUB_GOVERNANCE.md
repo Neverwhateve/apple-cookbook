@@ -4,18 +4,19 @@ Apple Cookbook keeps its expected `main`-branch controls in `.github/rulesets/ma
 
 ## Current Remote State
 
-The initial read-only inspection on 2026-07-13 found no remote protection. Phase 1 was then activated by an administrator at 2026-07-13 15:40 +08:00:
+The initial read-only inspection on 2026-07-13 found no remote protection. Phase 1 was activated at 15:40 +08:00. After Draft PR #12 successfully ran the candidate check, Phase 2 updated the same ruleset at 16:02 +08:00:
 
 - repository: `Neverwhateve/apple-cookbook`;
 - default branch: `main`;
 - legacy branch protection: absent (`404 Branch not protected`);
 - active repository ruleset: `Protect main` (ID `18863035`), targeting only `refs/heads/main`;
-- enforced now: pull requests, branch-deletion protection, and non-fast-forward/force-push protection;
+- enforced now: pull requests, branch-deletion protection, non-fast-forward/force-push protection, and the strict `Validate pull request` status check;
 - bypass list: empty; the API reports `current_user_can_bypass: never`;
-- remote workflows: only Alibaba Cloud deployment and feedback intake sync;
-- `.github/workflows/content-quality.yml`: present in this optimization branch, but not yet in the remote default branch.
+- workflow registry: content quality, Alibaba Cloud deployment, and feedback intake sync;
+- `.github/workflows/content-quality.yml`: registered by the successful PR run, but its source still awaits the explicitly approved merge into the default branch;
+- read-only governance audit: exit `0`, with no findings.
 
-`main` is no longer directly writable or deletable, but the final content-quality boundary is intentionally incomplete. The ruleset does **not** yet require `Validate pull request`: GitHub requires a candidate check to have completed successfully in the repository within the previous seven days, and that workflow has never run. Adding the missing check now would leave every pull request waiting for a job that cannot run.
+The ruleset now matches `.github/rulesets/main.json`. No duplicate ruleset was created, strict/up-to-date checking is enabled, and automation has no bypass path. Draft PR #12 remains unmerged by design; merging it is the final code-publication step and requires explicit approval.
 
 ## Read-only Check
 
@@ -59,16 +60,16 @@ Phase 1 is complete:
 2. Pull requests are required; deletion and force pushes are blocked.
 3. The unregistered status check was deliberately omitted to avoid locking the repository.
 
-Complete Phase 2 through a reviewed code change:
+Phase 2 is also complete at the repository-settings layer:
 
-1. Create a focused pull request containing `.github/workflows/content-quality.yml` and its complete dependency closure: package scripts, validators, schemas, tests, and referenced implementation. Do not publish the YAML alone.
-2. Confirm that the PR's `Validate pull request` job completes successfully. GitHub requires the check to have succeeded in this repository within the preceding seven days; it does not need to have run on the default branch.
-3. Update existing ruleset ID `18863035`; do not create a second overlapping `Protect main` ruleset.
-4. Add the exact check context `Validate pull request` and require branches to be up to date before merging.
-5. Keep the bypass list empty for automation. In particular, never give Daily Harvest or other content collectors a bypass path.
-6. Save only after comparing every setting with `.github/rulesets/main.json`, then read the ruleset back through the API. Before merge, the checker is expected to report only `REMOTE_WORKFLOW_MISSING`, because GitHub's workflow listing is sourced from the default branch.
-7. Merge only after explicit approval, while the branch is up to date and `Validate pull request` is still successful.
-8. After the workflow reaches the default branch, rerun the read-only checker and require exit `0`.
+1. Draft PR #12 contains `.github/workflows/content-quality.yml` and its complete dependency closure: package scripts, validators, schemas, tests, and referenced implementation.
+2. Its `Validate pull request` job completed successfully before the required check was enabled.
+3. Existing ruleset ID `18863035` was updated in place; no second overlapping `Protect main` ruleset exists.
+4. The exact check context `Validate pull request` is required with strict/up-to-date checking.
+5. The bypass list remains empty for automation.
+6. API readback and the read-only checker both match policy; the checker exits `0`.
+
+The remaining handoff is code publication: merge only after explicit approval, while the branch is up to date and `Validate pull request` is still successful. After the workflow reaches the default branch, rerun the read-only checker and continue to require exit `0`.
 
 The baseline uses zero mandatory approvals so a single-maintainer repository can still merge its own pull requests after CI. If an independent reviewer is consistently available, raising `required_approving_review_count` to `1` is the recommended next tightening step and should be reflected in the policy file at the same time.
 

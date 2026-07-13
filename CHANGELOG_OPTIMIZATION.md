@@ -3,6 +3,15 @@
 日期：2026-07-13
 分支：`codex/cookbook-project-optimization`
 
+## 第八轮：治理 PR 发布与 ruleset 第二阶段启用
+
+- 精确发布：74 个优化/治理文件提交为 `173f7d7` 并推送到专用分支；9 个并发 Harvest/用户路径全部保持在提交之外。
+- Draft PR：创建 [#12](https://github.com/Neverwhateve/apple-cookbook/pull/12)，目标为 `main`，未自动标记 Ready 或合并。
+- 远端前置检查：`Validate pull request` 依次通过依赖安装、Harvest manifest、内容校验、lint、TypeScript、112 项测试和 production build。
+- ruleset 更新：只对现有 ID `18863035` 做 PUT，加入精确 context `Validate pull request` 和 strict/up-to-date；没有 POST 重复 ruleset，bypass 仍为空。
+- 回读与审计：effective main rules 包含 deletion、non-fast-forward、pull-request、required-status-checks；只读治理 checker 返回 exit 0、0 findings。
+- 剩余边界：workflow 源文件尚未进入 `main`；必须在明确批准后合并 PR #12，并在合并后再次要求治理审计 exit 0。剩余 32 篇 v1 迁移继续暂停。
+
 ## 第七轮：远端 `main` ruleset 第一阶段启用
 
 - 远端写入：在 `Neverwhateve/apple-cookbook` 创建并启用 `Protect main`（ruleset ID `18863035`），仅目标 `refs/heads/main`。
@@ -99,7 +108,7 @@
 
 - 原问题：仓库内已有 PR workflow，但远端 `main` 是否保护、必需检查的精确 context、bypass 和参数漂移都只能靠人工记忆。
 - 修改：新增 `.github/rulesets/main.json`、只读 GitHub checker、12 个治理测试和操作文档。检查器核对 main target、PR、deletion/force-push、required check、workflow 状态、参数和空 bypass；GitHub 信息不足时 fail closed，绝不自动修改远端。
-- 真实结论：2026-07-13 只读审计确认远端 rulesets 为空、`main` 未保护、Content quality workflow 尚未合并；当前 drift exit 1 是正确结果。
+- 当时结论：2026-07-13 初次只读审计确认远端 rulesets 为空、`main` 未保护、Content quality workflow 尚未合并；该阶段 drift exit 1 是正确结果。
 - 兼容影响：必须先合并 workflow 并让 job `Validate pull request` 成功运行，再由管理员显式启用规则集。机器 context 是 job name，不是 UI 可能显示的 `Content quality / Validate pull request`。
 
 ### 反馈队列 doctor 与原子快照
@@ -123,7 +132,7 @@
 - 原问题：仓库虽要求 AI 先生成 draft/PR，但没有实际生成器或机器门禁；历史 Harvest 可直接创建 canonical 内容并写 main。
 - 修改：新增 run manifest Schema、校验器、8 个行为测试、PR-only Content quality workflow 和操作文档。门禁核对 PR base SHA、整文件 base/proposed SHA-256、manifest 与实际 Cookbook diff、create/update/redirect、draft、Official 来源、重复/no-op、path traversal 和 symlink。
 - 用户收益：main 前进或人工修改文章后，旧自动提案会明确失败，不再静默覆盖；自动新文不能直接变为已发布内容。
-- 兼容影响：普通人工 PR 没有 manifest 时跳过专用门禁；`harvest/*` 与 `automation/harvest/*` 分支必须提交一个 manifest。GitHub main ruleset 仍需在仓库设置中启用。
+- 兼容影响：普通人工 PR 没有 manifest 时跳过专用门禁；`harvest/*` 与 `automation/harvest/*` 分支必须提交一个 manifest。该轮实施时 GitHub main ruleset 尚待在仓库设置中启用。
 
 ### 反馈队列单 ECS 并发加固
 
@@ -290,7 +299,7 @@
 
 ## 暂未处理
 
-- `Protect main` 第一阶段已在远端启用；仍需发布 Content quality workflow 及完整依赖闭包的 PR，让检查成功后先向现有 ruleset 加入 `Validate pull request`，再合并。真实 Harvest 生成器接入仍待处理。
+- Draft PR #12 已发布完整 Content quality workflow 依赖并成功运行检查，现有 ruleset 已加入严格 `Validate pull request`；PR 的明确审核/合并和真实 Harvest 生成器接入仍待处理。
 - 反馈数据库迁移、跨主机事务、幂等/rate limit、生产备份/恢复演练；单 ECS 并发、doctor/backup/offline verify 和 Vercel fail closed 已处理。Snapshot manifest 尚无签名、大小上限或流式哈希。
 - 剩余 32 篇 v1 内容的逐篇 v2 人工迁移、verificationHistory 和稳定 URL redirect；双读/Schema/预览与三篇试点已完成。
 - popular 的真实精选或匿名统计。
@@ -313,7 +322,7 @@
 - `pnpm preview:content-v2`（完整工作区 32 篇 v1、4 篇 v2、只读；旧文剩余 337 个待人工判断项；三篇迁移试点和一篇原生 v2 均 0 review issue）
 - `pnpm feedback:doctor -- --json`（本地真实队列 0 error、0 warning）
 - `pnpm feedback:verify -- --snapshot <path>`（有效、篡改、路径、symlink、布局和权限黑盒用例）
-- `node scripts/check-github-governance.mjs --json`（Phase 1 后仍按设计返回 exit 1；已观察 Active `Protect main`，只报告 required check/rule 与远端 workflow 尚缺）
+- `node scripts/check-github-governance.mjs --json`（ruleset 第二阶段后返回 exit 0、0 findings；观察到 Active `Protect main`、精确 required check 和三条 workflow 路径）
 - `git diff --check`、规则集/Schema JSON、GitHub workflow YAML 解析。
 - 前一轮视觉回归：桌面首页与自然语言搜索、v2 文章、390×844 来源卡/无横向溢出、404、错误覆盖层与控制台均通过。
 - 最终 production server HTTP 回归：首页、seed、Mac Mail、sitemap 均 200；未知与畸形 slug 均 404；seed 标题先于提示且为 noindex、seed 不在 sitemap、canonical/source/date/可信修正均存在。

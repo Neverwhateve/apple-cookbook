@@ -9,12 +9,12 @@
 | 管理员认证 | 生产缺密码或高熵 token 时 fail closed | `src/lib/feedback-admin.ts`、部署 secrets | 运维未补 token 会无法登录；这是预期安全变化 | 生产/开发配置矩阵测试、登录页验证 | 已完成 |
 | 公开反馈脱敏 | contact 不进入公开 Issue | `sync-feedback-intake.yml` | Issue 少了联系方式，管理员需在私有队列查看 | workflow YAML、搜索 workflow 中 contact | 已完成 |
 | 内容校验 | v1/v2 枚举、来源、日期、slug、方案引用、章节和链接错误阻断 CI | validator、测试、package、workflows | 历史内容可能暴露 warning/error | `pnpm validate:content`、v2 validator/Schema 负向测试 | 已完成 v1/v2 分流与 Official host 精确 allowlist |
-| Harvest 发布门禁 | 自动新文只能 draft PR，人工批准才 canonical | Harvest manifest、PR checks、Schema、ruleset policy/checker、流程文档 | 会降低自动发布速度，但保护正确性 | create/update/redirect/hash/path/no-op + GitHub drift tests | 远端 ruleset 第一阶段已 Active；required check 待 workflow 合并/成功运行 |
+| Harvest 发布门禁 | 自动新文只能 draft PR，人工批准才 canonical | Harvest manifest、PR checks、Schema、ruleset policy/checker、流程文档 | 会降低自动发布速度，但保护正确性 | create/update/redirect/hash/path/no-op + GitHub drift tests | ruleset 与 strict required check 已 Active、checker exit 0；PR #12 合并待明确批准 |
 | 并发与持久化 | 消除 JSONL 覆盖；可对账、可做一致快照；明确 ECS/Vercel 数据架构 | `file-store.ts`、feedback libs、recovery CLI、GitHub sync、部署文档 | 文件锁只适用单一共享目录，数据库迁移仍需备份/双写 | 并发/stale lock/GET 纯读/Vercel fail closed + 14 个恢复测试 | 单 ECS 加固、snapshot 与离线 verify 已完成；生产演练/事务存储待做 |
 
 ### P0 推荐执行顺序
 
-1. `Protect main` 第一阶段已启用 PR、删除/force-push 防护与空 bypass。下一步发布包含 Content quality workflow 完整依赖闭包的 PR；该 PR 的 `Validate pull request` 成功后，更新现有 ruleset 补 required check，再合并 PR。不能提前要求尚不存在的 check。
+1. `Protect main` 已启用 PR、严格 `Validate pull request`、删除/force-push 防护与空 bypass；Draft PR #12 的完整依赖闭包和远端检查已通过，现有 ruleset 已原位更新。下一步只在明确批准后合并 PR，并在 workflow 进入 `main` 后复跑治理审计。
 2. 让真实 Harvest 生成器采用 `harvest/<run-id>`、单一 manifest 和 draft PR；不得再直写 main/canonical。
 3. 在 ECS 对现有反馈运行 doctor，生成加密的原子快照，以离线 `verify` 核对 manifest，并确认异地保存和保留期。
 4. 选择 ECS SQLite 或外部数据库；先双写、对账，再切读。
@@ -82,6 +82,6 @@
 
 ## 下一阶段最推荐三项
 
-1. P0：在已启用的 Phase-1 ruleset 下发布 Content quality workflow 完整依赖 PR；检查成功后更新同一 ruleset加入 `Validate pull request`，再合并，并让真实 Harvest 接入 manifest/draft PR 门禁。
+1. P0：审核并明确批准 Draft PR #12 的合并；合并后复跑治理审计并继续要求 exit 0，再让真实 Harvest 接入 manifest/draft PR 门禁。
 2. P0：在 ECS 实际执行 doctor、加密快照和离线 verify，再做异地保存/恢复前演练，并设计 SQLite/外部数据库双写迁移，同时处理仍被跟踪的 inbox 隐私边界。
-3. P1：剩余 32 篇 v1 迁移按用户优先级暂停；远端治理第二阶段完成后再逐篇恢复，不批量转换。
+3. P1：剩余 32 篇 v1 迁移继续按用户指示暂停；只有收到单独授权后才逐篇恢复，不批量转换。
