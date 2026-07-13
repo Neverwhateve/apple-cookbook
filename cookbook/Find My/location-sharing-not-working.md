@@ -22,12 +22,15 @@ aliases:
   - 查找位置不更新
 verification: Official
 difficulty: Moderate
-updated: 2026-07-08
+updated: 2026-07-12
 official_sources:
   - https://support.apple.com/zh-cn/guide/iphone/share-your-location-iph01954dc44/ios
   - https://support.apple.com/zh-cn/105107
   - https://support.apple.com/zh-cn/105104
   - https://support.apple.com/zh-cn/guide/personal-safety/find-my-and-location-sharing-ips05ede4573/web
+  - https://support.apple.com/zh-cn/guide/iphone/iph69b192bc2/ios
+  - https://support.apple.com/zh-cn/118433
+  - https://support.apple.com/zh-cn/119859
 community_sources:
   - https://www.reddit.com/r/applehelp/comments/1rfki1z/solution_no_location_found_in_find_my/
   - https://discussions.apple.com/thread/256141224
@@ -49,6 +52,8 @@ popular: true
 - “显示的是家里的 iPad，不是对方的 iPhone。”
 - “家人共享开着，但位置没有显示。”
 - “查找里面看不到家人的位置。”
+- “信息里看不到共享位置。”
+- “iMessage 也有问题，查找共享是不是就不会正常？”
 
 ---
 
@@ -64,6 +69,8 @@ popular: true
    - 离线、低电量、无蜂窝网络或 Wi-Fi、关机等状态都无法报告当前位置。
 5. **Apple 账户或家人共享关系发生变化**
    - 退出登录、切换账户，或家庭成员关系变化，都可能打破原有共享预期。
+6. **通过“信息”共享时，iMessage 身份或发送接收设置不一致**
+   - Apple 说明家庭成员可在“查找”和“信息”中看到位置，也可以在“信息”中共享位置。若顾客的问题发生在“信息”对话里，或共享邀请/对话身份异常，应检查 iMessage 是否已开启、电话号码或 Apple 账户邮箱是否被选为发送与接收地址。
 
 ---
 
@@ -78,8 +85,10 @@ popular: true
 3. 如有需要，点按**使用这台 iPhone 作为我的位置**。
 4. 若要直接共享，打开**查找 > 联系人 > 添加 > 共享我的位置**，选择联系人和共享时长。
 5. 对于家人共享，进入**设置 > 家人 > 位置共享**，确认已为正确的家庭成员开启位置共享。
-6. 确认定位服务已开启，并且设备可以连接网络。
-7. 如果顾客无法访问 Apple 账户或可信设备，先解决账户访问问题，再继续排查“查找”。
+6. 如果顾客是从**信息**对话里共享或查看位置，打开**设置 > App > 信息 > 发送与接收**，确认用于 iMessage 的电话号码或 Apple 账户邮箱正确；如果 iMessage 无法激活或无法收发，先按 iMessage 官方流程排查。
+7. 确认**设置 > 隐私与安全性 > 定位服务 > 查找**允许访问位置。
+8. 确认设备可以连接网络。
+9. 如果顾客无法访问 Apple 账户或可信设备，先解决账户访问问题，再继续排查“查找”。
 
 参考来源：
 
@@ -87,6 +96,9 @@ popular: true
 - [Apple 支持：与家人共享群组共享位置](https://support.apple.com/zh-cn/105107)
 - [Apple 支持：通过 iPhone 共享位置](https://support.apple.com/zh-cn/105104)
 - [Apple 个人安全使用手册：“查找”和位置共享](https://support.apple.com/zh-cn/guide/personal-safety/find-my-and-location-sharing-ips05ede4573/web)
+- [iPhone 使用手册：在“信息”中共享你的位置](https://support.apple.com/zh-cn/guide/iphone/iph69b192bc2/ios)
+- [Apple 支持：如果你无法在 iPhone 或 iPad 上发送或接收信息](https://support.apple.com/zh-cn/118433)
+- [Apple 支持：如果你无法在 iPhone 上打开或登录 iMessage 信息或 FaceTime 通话](https://support.apple.com/zh-cn/119859)
 
 ---
 
@@ -127,9 +139,10 @@ popular: true
 3. 打开**查找 > 我**，确认**共享我的位置**和**共享位置来自**。
 4. 如果显示了错误设备，选择**使用这台 iPhone 作为我的位置**。
 5. 确认查看者已出现在“联系人”或家人共享的位置共享设置中。
-6. 检查网络、低电量状态、定位服务和 VPN/过滤配置，确认设备能稳定向 Apple 服务报告位置。
-7. 如果以上都正确但仍显示“No Location Found / Off Network”，可在说明风险后尝试重置“位置与隐私”，再打开“查找”重新授权定位。
-8. 如果账户访问本身异常，转到 Apple 账户恢复流程，不要继续在“查找”里反复排查。
+6. 如果顾客反馈集中在“信息”对话里，先确认 iMessage 已启用，并且电话号码/邮箱与对方联系人里保存的身份一致；不要把所有“查找”共享问题都归因于 iMessage。
+7. 检查网络、低电量状态、定位服务和 VPN/过滤配置，确认设备能稳定向 Apple 服务报告位置。
+8. 如果以上都正确但仍显示“No Location Found / Off Network”，可在说明风险后尝试重置“位置与隐私”，再打开“查找”重新授权定位。
+9. 如果账户访问本身异常，转到 Apple 账户恢复流程，不要继续在“查找”里反复排查。
 
 ---
 
@@ -177,8 +190,8 @@ popular: true
 
 ## 元信息
 
-- 最后更新：2026-07-09
-- 来源数量：6
+- 最后更新：2026-07-12
+- 来源数量：9
 - 验证级别：Apple 官方
 - 支持系统：当前支持“查找”的 iOS、iPadOS、watchOS 版本
 - 可信度：高

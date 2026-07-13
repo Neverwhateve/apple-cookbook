@@ -617,3 +617,242 @@
 - Add a separate canonical article for iPhone black screen / cannot power on if future feedback mentions dead devices more than charging accessories.
 - Monitor Apple Support 123075 and 100100 for follow-up iOS releases that expand or supersede the iPhone Air / iPhone 17 wired-charging fix.
 - Consider adding a repair-intake checklist for liquid exposure, port damage, and backup status before service.
+
+## Harvest Run - 2026-07-12 20:48 CST
+
+### P0 Feedback Intake
+
+- GitHub issue #8: `P0 feedback: 关于《“查找”中的位置共享不可用》的反馈`
+  - Feedback ID: `AC-20260712-964E6FF0`.
+  - Submitted content: “iMessage 也是需要排查的一个问题，因为查找网络的共享，应该是基于 iMessage 来实现的”.
+  - Decision: Updated the existing canonical Find My location-sharing recipe rather than creating a duplicate. The feedback was partly correct for the `信息` sharing path, but the article now avoids saying all Find My location sharing is simply “based on iMessage.” Apple documents location visibility in both Find My and Messages, and iMessage troubleshooting is now a branch when the customer is sharing/viewing through Messages or when contact identity is inconsistent.
+
+### Search Queries
+
+- `site:support.apple.com/en-us Apple Support new updated July 2026 iOS 26.6 support article troubleshooting`
+- `site:support.apple.com/en-us iOS 26.6 update Apple Support July 2026 release notes`
+- `site:support.apple.com/zh-cn iOS 26.6 更新 Apple 支持 2026`
+- `site:support.apple.com/en-us Apple Support AirPods firmware 2026 updated`
+- `site:reddit.com/r/iphone iOS 26.5.2 battery drain overheating update July 2026`
+- `site:reddit.com/r/applehelp iOS 26.5.2 update problem iPhone July 2026`
+- `site:discussions.apple.com iOS 26.5.2 battery drain overheating not charging July 2026`
+- `site:discussions.apple.com iPhone update iOS 26.5.2 web attacks protect data support article`
+- `site:xiaohongshu.com iOS 26.5.2 发热 掉电 充电 暂停`
+- `site:xiaohongshu.com iPhone 更新后 发热 掉电 iOS 26.5`
+- `site:xiaohongshu.com iPhone 充电暂停 温度 恢复正常后继续充电`
+- `site:xiaohongshu.com iPhone 网页攻击 更新 iOS 保护 数据`
+- `site:support.apple.com/zh-cn Find My share location Messages iMessage Apple Support`
+- `site:support.apple.com/zh-cn 在信息中共享位置 查找 iPhone Apple 支持`
+- `site:support.apple.com/zh-cn 如果无法在信息中发送或接收信息 iMessage Apple 支持`
+- `site:support.apple.com/zh-cn 查找 共享位置 信息 Apple 支持`
+
+### Sources Visited
+
+- Apple Support: [Update iOS to protect your iPhone from web attacks](https://support.apple.com/en-us/126776)
+- Apple Support: [About the security content of iOS 26.5.2 and iPadOS 26.5.2](https://support.apple.com/en-us/127594)
+- Apple Support China: [关于 iOS 26 更新](https://support.apple.com/zh-cn/123075)
+- Apple Support: [Apple security releases](https://support.apple.com/en-us/100100)
+- Apple Support China: [如果 iPhone 或 iPad 温度过高或过低](https://support.apple.com/zh-cn/118431)
+- Apple Support China: [与“家人共享”群组共享你的位置](https://support.apple.com/zh-cn/105107)
+- iPhone User Guide: [在 iPhone 上的“信息”中共享你的位置](https://support.apple.com/zh-cn/guide/iphone/iph69b192bc2/ios)
+- Apple Support China: [如果你无法在 iPhone 或 iPad 上发送或接收信息](https://support.apple.com/zh-cn/118433)
+- iPhone User Guide: [在 iPhone 上设置信息](https://support.apple.com/zh-cn/guide/iphone/iph3d039b67/ios)
+- Apple Support China: [如果你无法在 iPhone 上打开或登录 iMessage 信息或 FaceTime 通话](https://support.apple.com/zh-cn/119859)
+- Apple Support Community: [Battery drain on iOS 26.5](https://discussions.apple.com/thread/256316863)
+- Apple Support Community: [iPhone iOS 26.5.2: Battery drain, overheating, audio bug](https://discussions.apple.com/thread/256320221)
+- Reddit r/iPhone: [Anybody else's iPhone 13 running poorly after the recent update?](https://www.reddit.com/r/iphone/comments/1tzlvzz/anybody_elses_iphone_13_running_like_absolute_dog/)
+- Reddit r/iPhone: [iOS 26.5.1 out](https://www.reddit.com/r/iphone/comments/1ttyzdk/ios_2651_out/)
+- Apple Support Community: [iPhone 16 Pro Max battery drain & overheating after iOS 26.5](https://discussions.apple.com/thread/256305536)
+- Xiaohongshu searches for `iOS 26.5.2 发热`, `iPhone 更新后发热掉电`, and `充电暂停温度恢复`.
+
+### Evidence Collected
+
+- Apple published iOS/iPadOS 26.5.2 security content, released 2026-06-29, for iPhone 11 and later and supported iPad models. The release addresses multiple security issues and is listed on Apple Security Releases.
+- Apple Security Releases currently lists iOS/iPadOS 26.5.2 and macOS 26.5.2 as current versions, and states that downgrading after iOS/iPadOS/tvOS/watchOS/visionOS updates is not supported.
+- Apple's web-attack support article says keeping software up to date is one of the most important ways to maintain Apple product security, recommends the latest iOS 26 when possible, and says updated versions of iOS 15 through iOS 26 are protected for the described attacks.
+- Apple China's iOS 26 update page now lists iOS 26.5.2 as a security-fix update and keeps iOS 26.5.1 as the narrow wired-charging fix for a small number of iPhone Air and iPhone 17 models when the battery is nearly drained.
+- Apple's temperature article says iPhone/iPad can temporarily stop charging when too hot or too cold, and the lock screen may show a charging-paused message until the device returns to normal temperature.
+- Apple documents that Family Sharing location can appear in Find My and Messages. Apple also separately documents sharing location from the Messages app and says that if location is shared but others cannot see it, users should ensure Find My has location access.
+- Apple Messages/iMessage support documents provide the correct branch when the issue is actually an iMessage identity or activation problem: check internet/service status, iMessage activation, and `发送与接收` phone number or Apple Account email choices.
+- Apple Community and Reddit showed recurring customer wording around iOS 26.5/26.5.2 battery drain, heat, charging pause at 80%, and performance complaints. These were used as customer-language and priority signals only.
+
+### Customer Wording
+
+- “iMessage 也是需要排查的一个问题。”
+- “查找网络的共享是不是基于 iMessage？”
+- “信息里看不到共享位置。”
+- “iMessage 有问题，查找共享也不正常。”
+- “iOS 26.5.2 后充到 80% 就暂停。”
+- “更新后手机发热、掉电快。”
+- “为了安全更新了系统，但续航变差。”
+- “网上都说这个版本耗电，还要不要更新？”
+
+### Cross-source Observations
+
+- The Find My feedback exposed a useful missing branch: Messages/iMessage can matter when the customer shares or views location through a Messages conversation, but it should not replace the core Find My checks: shared person, selected location device, location services, network, and Family Sharing settings.
+- For iOS update battery complaints, official Apple security guidance and community sentiment can conflict in a customer conversation. The Retail answer should not dismiss reported heat/drain, but it should keep security updates and evidence-based battery review ahead of version fear.
+- “Paused charging at 80%” is often interpreted as overheating or battery failure. Apple documents it as a temperature protection state, so the article now routes those customers to cooling and environment checks before battery service.
+- iOS 26.5.1 and iOS 26.5.2 should not be conflated: 26.5.1 was a narrow wired-charging fix for iPhone Air/iPhone 17 near-depleted batteries; 26.5.2 is a security update.
+
+### Verification Reasoning
+
+- `“查找”中的位置共享不可用` remains `Official`. The new iMessage branch is supported by Apple Family Sharing location documentation, Messages location-sharing documentation, Messages send/receive guidance, and iMessage activation guidance.
+- `iPhone 更新后掉电快或发热` remains `Official`. The new temperature and update-security branches are supported by Apple battery, temperature, iOS 26 update, iOS 26.5.2 security content, web-attack update guidance, and Apple Security Releases.
+- No community workaround was promoted to official guidance. Community sources only informed customer wording and branch prioritization.
+
+### Unsafe or Rejected Suggestions
+
+- Rejected: “Find My sharing is based on iMessage, so always fix iMessage first.” Corrected to: check iMessage when the failure is in Messages, invite delivery, or contact identity, but start with Find My location-sharing settings for Find My symptoms.
+- Rejected: delaying security updates solely because Reddit or Xiaohongshu reports battery drain. Correct Retail framing is backup, update safely, then evaluate battery evidence after update.
+- Rejected: treating every “paused charging” case as a defective battery. Apple documents temperature-based charging pause.
+- Rejected: forced downgrades to an older iOS version. Apple Security Releases states downgrades are not supported after iOS/iPadOS updates.
+
+### Articles Created, Improved, Merged, or Flagged
+
+- Improved `cookbook/Find My/location-sharing-not-working.md`
+  - Added Messages/iMessage customer wording, possible cause, official source links, and Retail branch.
+  - Clarified that iMessage is a branch for Messages-based location sharing or identity problems, not the universal root cause for Find My sharing.
+- Improved `cookbook/iPhone/iphone-battery-drains-after-update.md`
+  - Added iOS 26.5.2 security-update evidence, Apple web-attack update guidance, temperature/paused-charging branch, and updated community signals.
+  - Strengthened Retail flow for safety update conversations and “charging paused at 80%” confusion.
+- No new recipe was created.
+- No duplicate recipe was found or merged.
+
+### Verification Changes
+
+- No verification level changed.
+- Both improved recipes remain `Official`; evidence was strengthened with additional Apple sources.
+
+### Blocked Sources
+
+- Xiaohongshu direct troubleshooting posts were not reliably accessible. Search attempts returned unrelated profiles or platform/legal pages rather than stable high-engagement troubleshooting posts. No factual recommendation was based on Xiaohongshu content.
+- The GitHub issue body was available through `gh issue view --json`; the earlier plain `gh issue view --comments` call returned no visible body, so the JSON result was used as the intake record.
+
+### Notes for Future Research
+
+- Add a broader recipe for iMessage activation/send-receive failure if future feedback links Messages identity to multiple features: Find My location sharing, FaceTime, SMS forwarding, and Apple Watch messages.
+- Monitor Apple Security Releases and iOS 26 update notes for any iOS 26.5.3/26.6 release that changes the battery, charging, or security-update customer conversation.
+- Consider a dedicated `iPhone 充电暂停在 80%` recipe if charging-pause complaints become frequent enough to deserve a separate customer-facing canonical page.
+
+## Harvest Run - 2026-07-12 22:08 CST
+
+### P0 Feedback Intake
+
+- No new P0 intake was processed in this run. The pass focused on current Apple Support changes and cross-source customer wording.
+
+### Search Queries
+
+- `site:support.apple.com/en-us Apple Support new articles iPhone AirPods troubleshooting July 2026`
+- `site:support.apple.com/en-us Apple Support iMessage activation waiting activation iPhone Messages not sent`
+- `site:support.apple.com/zh-cn 101744 iPhone 信息 邮箱 手机号 发送`
+- `site:support.apple.com/zh-cn 108758 信息 FaceTime 添加 移除 电话号码`
+- `site:support.apple.com/zh-cn 104972 iMessage RCS 短信 彩信 区别`
+- `site:support.apple.com/zh-cn 119859 iMessage FaceTime 等待激活 iPhone`
+- `site:support.apple.com/en-us Apple Support "Published: last week" "iPhone" troubleshooting`
+- `site:support.apple.com/zh-cn 108792 无法 添加 卡 Apple Wallet Apple Pay`
+- `site:support.apple.com/zh-cn 108398 设置 Apple Pay 添加 卡`
+- `site:support.apple.com/zh-cn 101554 Apple Pay 安全 隐私 概览`
+- `site:support.apple.com/zh-cn Apple Pay 可用 国家 地区 Apple Wallet`
+- `site:discussions.apple.com iMessage waiting for activation iPhone phone number email green bubbles 2026`
+- `site:reddit.com/r/iphone iMessage waiting for activation phone number email green bubbles 2026`
+- `site:reddit.com/r/applehelp iMessage waiting for activation phone number email green bubbles 2026`
+- `site:xiaohongshu.com iMessage 正在等待激活 绿气泡 手机号 邮箱 iPhone`
+- `site:discussions.apple.com can't add card to Apple Wallet Apple Pay contact card issuer verification failed 2026`
+- `site:reddit.com/r/iphone can't add card to Apple Wallet Apple Pay contact card issuer verification failed 2026`
+- `site:reddit.com/r/applehelp Apple Pay can't add card Wallet contact issuer 2026`
+- `site:xiaohongshu.com Apple Pay 添加银行卡失败 钱包 无法添加卡`
+
+### Sources Visited
+
+- Apple Support China: [如果你的 iPhone 使用你的电子邮件地址发送短信](https://support.apple.com/zh-cn/101744)
+- Apple Support China: [在“信息”或 FaceTime 通话中添加或移除你的电话号码](https://support.apple.com/zh-cn/108758)
+- Apple Support China: [iMessage 信息、RCS 和短信/彩信有什么区别？](https://support.apple.com/zh-cn/104972)
+- Apple Support China: [如果你无法在 iPhone 上打开或登录 iMessage 信息或 FaceTime 通话](https://support.apple.com/zh-cn/119859)
+- Apple Support China: [如果你无法在 iPhone 或 iPad 上发送或接收信息](https://support.apple.com/zh-cn/118433)
+- Apple Support China: [如果无法在 iOS 26 中用你的电话号码激活 iMessage 信息](https://support.apple.com/zh-cn/125367)
+- Apple Support: [Set up Apple Pay](https://support.apple.com/en-us/108398)
+- Apple Support: [If you can't add a card to Apple Wallet to use with Apple Pay](https://support.apple.com/en-us/108792)
+- Apple Support China: [设置 Apple Pay](https://support.apple.com/zh-cn/108398)
+- Apple Support China: [如果你无法向 Apple 钱包中添加卡片以与 Apple Pay 搭配使用](https://support.apple.com/zh-cn/108792)
+- iPhone User Guide: [在 iPhone 上的“钱包”中设置 Apple Pay](https://support.apple.com/zh-cn/guide/iphone/iph9b7f53382/ios)
+- Apple Support China: [支持 Apple Pay 的国家和地区](https://support.apple.com/zh-cn/102775)
+- Apple Support China: [与 Apple Pay 兼容的设备](https://support.apple.com/zh-cn/102896)
+- Apple Support China: [Apple Pay 安全性与隐私政策概览](https://support.apple.com/zh-cn/101554)
+- Apple Support Community: [Card not added contact card issuer](https://discussions.apple.com/thread/255504499)
+- Apple Support Community: [My card can't be added on my Apple Wallet](https://discussions.apple.com/thread/255058994)
+- Apple Support Community: [Apple Wallet: unable to verify card](https://discussions.apple.com/thread/254157665)
+- Reddit r/applehelp: [Apple Pay won't let me add my debit card](https://www.reddit.com/r/applehelp/comments/1lu75h4/apple_pay_wont_let_me_add_my_debit_card/)
+- Reddit r/iPhone: [New iPhone card cannot be added discussion](https://www.reddit.com/r/iphone/comments/1hslx1j/hi_guys_ive_just_got_an_iphone_14_pro_and_ive/)
+- Reddit r/applehelp: [iMessage no longer working after upgrading to iOS 26](https://www.reddit.com/r/applehelp/comments/1niwtr5/imessage_no_longer_working_after_upgrading_to_ios/)
+- Reddit r/applehelp: [Fix: iOS 26 all messages sending as green](https://www.reddit.com/r/applehelp/comments/1nsqfq5/helped_me_fix_ios_26_all_messages_sending_as/)
+- Reddit r/applehelp: [New iPhone 17 Pro can send messages but only receiving](https://www.reddit.com/r/applehelp/comments/1noywgw/new_iphone_17_pro_can_send_messages_but_only/)
+
+### Evidence Collected
+
+- Apple says if iPhone sends new Messages conversations from an email address, the customer can choose a phone number under `设置 > App > 信息 > 发送与接收 > 开始新对话时使用`; existing conversations started from an email address need a new conversation to switch to the phone number. Source: [Apple Support 101744](https://support.apple.com/zh-cn/101744).
+- Apple says setting up a phone number for Messages or FaceTime requires an active SIM or eSIM associated with that number, and the number plus Apple Account should be selected under send/receive settings. Source: [Apple Support 108758](https://support.apple.com/zh-cn/108758).
+- Apple says if an iOS 26 new iPhone was set up without activating iMessage or eSIM, later eSIM setup may not automatically activate iMessage; the fix is to turn iMessage off and back on. Source: [Apple Support 119859](https://support.apple.com/zh-cn/119859).
+- Apple says if a phone number still has no checkmark after 24 hours, the carrier may still be verifying the number, and the customer should confirm international SMS capability with the carrier. Source: [Apple Support 119859](https://support.apple.com/zh-cn/119859).
+- Apple updated Apple Pay setup guidance recently; setup requires a compatible device, latest OS, supported card issuer, Apple Account, and Face ID / Touch ID / Optic ID or a passcode. Source: [Apple Support 108398](https://support.apple.com/en-us/108398).
+- Apple says customers unable to add a card to Apple Wallet should check card issuer support, update software, confirm security authentication or passcode, and contact the card issuer when the card is declined. Source: [Apple Support 108792](https://support.apple.com/zh-cn/108792).
+- Apple says Apple Pay availability depends on supported countries/regions, compatible devices, and participating banks or card issuers. Sources: [Apple Support 102775](https://support.apple.com/zh-cn/102775), [Apple Support 102896](https://support.apple.com/zh-cn/102896).
+- Apple Pay security documentation explains device-specific device account numbers and that original card numbers are not stored by Apple or backed up to iCloud. This supports explaining why card approval may need to happen again after device changes. Source: [Apple Support 101554](https://support.apple.com/zh-cn/101554).
+- Apple Support Community and Reddit repeatedly frame Apple Wallet failures as “contact card issuer,” “bank says card is fine,” “old iPhone worked but new iPhone cannot add,” “verification failed,” and “region mismatch.” These were used as customer wording and priority evidence only.
+
+### Customer Wording
+
+- “新信息总是从邮箱发出去，不是手机号。”
+- “iMessage 等待激活，只有邮箱能用。”
+- “新 iPhone 先跳过 eSIM，后来信息都是绿色。”
+- “手机号旁边一直转圈，没有勾。”
+- “Apple Pay 添加银行卡失败。”
+- “钱包提示请联系发卡机构。”
+- “银行说卡没问题，但 iPhone 还是加不上。”
+- “旧手机 Apple Pay 能用，新手机加不上。”
+- “卡片无效。”
+- “Apple Watch 不能添加同一张卡。”
+
+### Cross-source Observations
+
+- iMessage complaints around email-vs-phone identity are common enough to deserve a dedicated branch inside the existing canonical Messages recipe, not a duplicate article.
+- Apple’s newer iOS 26 eSIM/iMessage note gives Retail a faster path for customers who set up the new phone first and activated eSIM later: toggle iMessage after eSIM setup before escalating.
+- Apple Pay card-add failures are often issuer provisioning problems, but customers present them as iPhone, Apple ID, Wallet, or region problems. A canonical recipe helps specialists avoid high-cost steps like erase, reset all settings, or repeated Apple Account sign-out before issuer verification is checked.
+- Community suggestions often include region changes, deleting all cards, iCloud sign-out, or reset all settings. The new recipe labels these as unofficial or higher-risk and keeps Apple’s compatibility/security/issuer order first.
+
+### Verification Reasoning
+
+- `iPhone 无法发送或接收信息，iMessage 变绿色或等待激活` remains `Official`; the new branches are supported by Apple Support articles for email-vs-phone sending, phone number setup, iMessage/FaceTime activation, iOS 26 eSIM behavior, and Messages send/receive.
+- New recipe `Apple 钱包无法添加银行卡或 Apple Pay 卡片` is `Official` because its troubleshooting order is supported by Apple Support articles for Wallet card-add failure, Apple Pay setup, iPhone Wallet setup, Apple Pay country/region availability, compatible devices, and Apple Pay security architecture.
+- Community and Reddit sources were used only for customer wording, recurring failure patterns, and rejected workaround review.
+
+### Unsafe or Rejected Suggestions
+
+- Rejected: “Apple Pay 添加失败就退出 iCloud / 重置所有设置.” These are higher-impact community suggestions and not Apple’s first-line Wallet card-add guidance.
+- Rejected: “银行说实体卡能刷，所以一定是 Apple 的问题.” Apple Pay card provisioning is separate from normal card spending, and issuer approval can still be required.
+- Rejected: “为了添加卡片随便更改 Apple 账户地区.” Region mismatches matter, but changing account country/region can affect payments, balances, subscriptions, and content access.
+- Rejected: “iMessage 只有邮箱发送就反复注销 Apple ID.” Apple’s direct path is `发送与接收` and `开始新对话时使用`, then activation/carrier checks if the phone number cannot be selected.
+
+### Articles Created, Improved, Merged, or Flagged
+
+- Created `cookbook/iPhone/apple-wallet-cant-add-card-apple-pay.md`
+  - New canonical Official recipe for Apple Wallet / Apple Pay card-add failure, issuer verification, supported regions/devices/cards, device-specific card numbers, and Retail escalation.
+- Improved `cookbook/iPhone/iphone-imessage-messages-not-sending-green-waiting-activation.md`
+  - Added Apple’s email-vs-phone sending article, iOS 26 new-iPhone/eSIM activation branch, 24-hour carrier verification detail, and stronger Retail handling for “messages come from email.”
+- Updated `indexes/tags.md`
+  - Added `Wallet`, `Apple Pay`, and `Payments` tags for the new canonical recipe.
+- No recipes were merged.
+
+### Verification Changes
+
+- New recipe `Apple 钱包无法添加银行卡或 Apple Pay 卡片` is `Official`.
+- `iPhone 无法发送或接收信息，iMessage 变绿色或等待激活` remains `Official`; verification evidence was strengthened.
+
+### Blocked Sources
+
+- Xiaohongshu search was attempted for iMessage activation and Apple Pay add-card language, but stable high-engagement troubleshooting posts were not accessible through this environment. No factual recommendation was based on Xiaohongshu.
+
+### Notes for Future Research
+
+- Add a separate Apple Pay payment-fails-at-terminal recipe only if evidence shows enough cases distinct from card-add failure.
+- Monitor Apple Pay support articles 108398 and 108792 for further changes around tap-to-add cards, issuer verification, and Vision Pro support.
+- Monitor iMessage article 119859 for additional iOS 26 activation edge cases tied to eSIM setup.

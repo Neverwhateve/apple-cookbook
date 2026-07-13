@@ -34,11 +34,12 @@ aliases:
   - iMessage 用邮箱发送不是手机号
 verification: Official
 difficulty: Moderate
-updated: 2026-07-10
+updated: 2026-07-12
 official_sources:
   - https://support.apple.com/zh-cn/118433
   - https://support.apple.com/zh-cn/119859
   - https://support.apple.com/zh-cn/125367
+  - https://support.apple.com/zh-cn/101744
   - https://support.apple.com/zh-cn/105087
   - https://support.apple.com/zh-cn/104972
   - https://support.apple.com/zh-cn/108758
@@ -57,7 +58,7 @@ popular: true
 
 # iPhone 无法发送或接收信息，iMessage 变绿色或等待激活
 
-顾客看到“尚未送达”、收不到短信、iMessage 变成绿色气泡，或“信息”一直显示正在等待激活时，先分清楚是 iMessage、RCS、短信/彩信，还是电话号码激活问题。最快路径是先保证网络和运营商短信服务可用，再检查 iMessage 登录、发送与接收地址和新机号码激活。
+顾客看到“尚未送达”、收不到短信、iMessage 变成绿色气泡，或“信息”一直显示正在等待激活时，先分清楚是 iMessage、RCS、短信/彩信，还是电话号码激活问题。最快路径是先保证网络和运营商短信服务可用，再检查 iMessage 登录、发送与接收地址、“开始新对话时使用”的号码选择和新机号码激活。
 
 ---
 
@@ -72,6 +73,8 @@ popular: true
 - “验证码短信收不到。”
 - “RCS 一直激活不了。”
 - “换到安卓后收不到 iPhone 朋友发来的短信。”
+- “新信息总是从邮箱发出去，不是手机号。”
+- “设置新 iPhone 时 eSIM 没激活，后来信息一直是绿色。”
 
 ---
 
@@ -89,7 +92,11 @@ popular: true
    - Apple 说明，激活可能需要蜂窝数据或 Wi-Fi，iPhone 使用电话号码激活 iMessage/FaceTime 时可能会通过短信完成，且可能产生运营商费用。
 6. **iOS 26 中存在同号的已失效 SIM 卡**
    - Apple 说明，更新至 iOS 26 后，如果已激活 SIM 卡号码与一张已失效 SIM 卡相同，可能无法用电话号码激活 iMessage，表现为绿色气泡、用邮箱发送或同一号码在“发送与接收”中显示两次。
-7. **电话号码仍注册在旧 iPhone 的 iMessage 上**
+7. **新对话默认从 Apple 账户邮箱发出**
+   - Apple 说明，可以在“开始新对话时使用”中选择电话号码；如果现有对话是用邮箱开始的，想改用电话号码需要开始新对话。
+8. **设置 iOS 26 新 iPhone 时 eSIM 或 iMessage 没有完成激活**
+   - Apple 说明，稍后在“设置”中设置 eSIM 后，iMessage 可能不会自动激活，可能显示“尚未送达”、绿色短信/RCS，或来自邮箱而不是电话号码。
+9. **电话号码仍注册在旧 iPhone 的 iMessage 上**
    - Apple 提供了在 iPhone 上或在线注销 iMessage 的流程，用于换到非 Apple 手机后仍收不到短信的场景。
 
 ---
@@ -110,17 +117,21 @@ popular: true
 8. 如果 iMessage 不可用时需要自动改发短信，打开**设置 > App > 信息 > 用短信发送**。
 9. 如果看到“正在等待激活”，关闭 iMessage 和 FaceTime，重新启动设备，再重新打开 iMessage 和 FaceTime。
 10. 确认**设置 > 通用 > 日期与时间**中的时区正确。
-11. 如果更新至 iOS 26 后电话号码无法激活、信息改用邮箱发送，或同一号码在**设置 > App > 信息 > 发送与接收**中显示两次，先更新到 iOS 26.1 或更高版本。
-12. 如果更新后仍看到同号重复，打开**设置 > 蜂窝网络**，找到已失效的同号 SIM；实体 SIM 直接取出，eSIM 则删除已失效 eSIM，再回到**设置 > App > 信息 > 发送与接收**选择电话号码。
-13. 如果仍无法激活，确认设备系统已更新，并等待最长 24 小时；超过 24 小时仍失败时联系 Apple 支持。
-14. 如果某个联系人一直显示绿色，确认对方是否使用 Apple 设备、是否打开 iMessage，以及你发送到的电话号码或邮箱是否在对方 iMessage“发送与接收”中可用。
-15. 如果顾客已经换到非 Apple 手机，把 SIM 卡装回原 iPhone 并连接蜂窝数据，在**设置 > App > 信息**关闭 iMessage，再关闭 FaceTime；如果 iPhone 不在身边，使用 Apple 的在线注销 iMessage 工具。
+11. 如果新信息总是从 Apple 账户邮箱发出，打开**设置 > App > 信息 > 发送与接收**，在**开始新对话时使用**下选择电话号码；如果旧对话最初由邮箱开始，需要开始一条新对话才能改用号码。
+12. 如果设置装有 iOS 26 的新 iPhone 时 eSIM 或 iMessage 没有激活，稍后完成 eSIM 设置后，回到**设置 > App > 信息**，关闭再打开 **iMessage 信息**。
+13. 如果更新至 iOS 26 后电话号码无法激活、信息改用邮箱发送，或同一号码在**设置 > App > 信息 > 发送与接收**中显示两次，先更新到 iOS 26.1 或更高版本。
+14. 如果更新后仍看到同号重复，打开**设置 > 蜂窝网络**，找到已失效的同号 SIM；实体 SIM 直接取出，eSIM 则删除已失效 eSIM，再回到**设置 > App > 信息 > 发送与接收**选择电话号码。
+15. 如果 24 小时后电话号码旁边仍没有勾号，联系运营商确认可以发送和接收国际短信；Apple 说明运营商最长可能需要 24 小时验证电话号码。
+16. 如果 Apple 账户或邮箱登录 iMessage / FaceTime 也失败，按 Apple 的在线激活流程尝试启用账户，或改用已验证的电子邮件地址登录。
+17. 如果某个联系人一直显示绿色，确认对方是否使用 Apple 设备、是否打开 iMessage，以及你发送到的电话号码或邮箱是否在对方 iMessage“发送与接收”中可用。
+18. 如果顾客已经换到非 Apple 手机，把 SIM 卡装回原 iPhone 并连接蜂窝数据，在**设置 > App > 信息**关闭 iMessage，再关闭 FaceTime；如果 iPhone 不在身边，使用 Apple 的在线注销 iMessage 工具。
 
 参考来源：
 
 - [Apple 支持：如果你无法在 iPhone 或 iPad 上发送或接收信息](https://support.apple.com/zh-cn/118433)
 - [Apple 支持：如果你无法在 iPhone 上打开或登录 iMessage 信息或 FaceTime 通话](https://support.apple.com/zh-cn/119859)
 - [Apple 支持：如果无法在 iOS 26 中用你的电话号码激活 iMessage 信息](https://support.apple.com/zh-cn/125367)
+- [Apple 支持：如果你的 iPhone 使用你的电子邮件地址发送短信](https://support.apple.com/zh-cn/101744)
 - [Apple 支持：如果 iPhone 上的信息显示为绿色](https://support.apple.com/zh-cn/105087)
 - [Apple 支持：iMessage 信息、RCS 和短信/彩信有什么区别？](https://support.apple.com/zh-cn/104972)
 - [Apple 支持：在“信息”或 FaceTime 通话中添加或移除你的电话号码](https://support.apple.com/zh-cn/108758)
@@ -162,6 +173,40 @@ popular: true
 
 ---
 
+## 新信息从邮箱发送，不是手机号
+
+验证级别：Apple 官方
+
+1. 打开**设置 > App > 信息 > 发送与接收**。
+2. 在**开始新对话时使用**下选择顾客想使用的电话号码。
+3. 确认电话号码也在“通过下列方式收发 iMessage 信息”中被选中。
+4. 如果电话号码无法选择，回到 iMessage 激活分支，确认 SIM/eSIM、运营商短信、日期时间、系统更新和 24 小时等待条件。
+5. 如果现有对话是用邮箱地址开始的，Apple 说明需要开始新的对话，之后新信息才会从电话号码发出。
+
+参考来源：
+
+- [Apple 支持：如果你的 iPhone 使用你的电子邮件地址发送短信](https://support.apple.com/zh-cn/101744)
+- [Apple 支持：在“信息”或 FaceTime 通话中添加或移除你的电话号码](https://support.apple.com/zh-cn/108758)
+
+---
+
+## iOS 26 新机先跳过 eSIM，后来 iMessage 没有自动激活
+
+验证级别：Apple 官方
+
+1. 先确认是否符合这个特定场景：设置装有 iOS 26 的新 iPhone 时，eSIM 或 iMessage 没有完成激活；稍后设置 eSIM 后，信息显示“尚未送达”、绿色短信/RCS，或来自邮箱而不是电话号码。
+2. 打开**设置 > App > 信息**。
+3. 关闭 **iMessage 信息**。
+4. 等待片刻后重新打开 **iMessage 信息**。
+5. 回到**发送与接收**，确认电话号码被选中。
+6. 如果电话号码仍无法激活，按通用 iMessage 激活流程处理，并联系运营商确认国际短信能力。
+
+参考来源：
+
+- [Apple 支持：如果你无法在 iPhone 上打开或登录 iMessage 信息或 FaceTime 通话](https://support.apple.com/zh-cn/119859)
+
+---
+
 ## 已验证的非官方处理思路
 
 非官方
@@ -192,10 +237,12 @@ popular: true
 4. 同时测试三件事：互联网是否可用、普通短信能否发给非 Apple 手机、iMessage 能否发给已确认打开 iMessage 的 Apple 设备。
 5. 打开**设置 > App > 信息 > 发送与接收**，确认电话号码和 Apple 账户是否被选中；不要只看 Apple ID 已登录。
 6. 新机或 eSIM 转移后，优先解释号码激活和运营商短信路径，避免把绿色气泡直接说成 Apple ID 故障。
-7. iOS 26 后如果同一手机号在“发送与接收”中显示两次，先检查同号的已失效 SIM 或 eSIM；这比反复退出 Apple 账户更快。
-8. 如果普通短信、验证码、彩信或 RCS 都异常，优先转运营商；如果只有 iMessage 异常，再按 Apple 的 iMessage / FaceTime 激活步骤处理。
-9. 如果顾客换到安卓后收不到短信，走注销 iMessage，不要让顾客抹掉旧 iPhone 作为第一步。
-10. 把 Reddit 或社区里的“强制重启、重置网络、重新下发 eSIM”记录为非官方经验，不要包装成 Apple 官方建议。
+7. 如果顾客说“别人看到的是我的邮箱”，先看**开始新对话时使用**，并解释旧对话可能要新开一条才会改用手机号。
+8. 设置 iOS 26 新机时如果先跳过 eSIM，稍后完成 eSIM 后要检查 iMessage 是否需要关闭再打开。
+9. iOS 26 后如果同一手机号在“发送与接收”中显示两次，先检查同号的已失效 SIM 或 eSIM；这比反复退出 Apple 账户更快。
+10. 如果普通短信、验证码、彩信或 RCS 都异常，优先转运营商；如果只有 iMessage 异常，再按 Apple 的 iMessage / FaceTime 激活步骤处理。
+11. 如果顾客换到安卓后收不到短信，走注销 iMessage，不要让顾客抹掉旧 iPhone 作为第一步。
+12. 把 Reddit 或社区里的“强制重启、重置网络、重新下发 eSIM”记录为非官方经验，不要包装成 Apple 官方建议。
 
 ---
 
@@ -250,8 +297,8 @@ popular: true
 
 ## 元信息
 
-- 最后更新：2026-07-10
-- 来源数量：14
+- 最后更新：2026-07-12
+- 来源数量：15
 - 验证级别：Apple 官方
 - 支持系统：当前 iOS、iPadOS、macOS；RCS 取决于 iOS 版本、地区和运营商支持
 - 可信度：高

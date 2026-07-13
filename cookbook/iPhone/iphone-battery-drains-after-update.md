@@ -23,15 +23,22 @@ aliases:
   - 手机更新后发热
 verification: Official
 difficulty: Moderate
-updated: 2026-07-09
+updated: 2026-07-12
 official_sources:
   - https://support.apple.com/zh-cn/120745
   - https://support.apple.com/zh-cn/102432
   - https://support.apple.com/zh-cn/101575
   - https://support.apple.com/zh-cn/123075
+  - https://support.apple.com/zh-cn/118431
+  - https://support.apple.com/en-us/126776
+  - https://support.apple.com/en-us/127594
+  - https://support.apple.com/en-us/100100
 community_sources:
   - https://discussions.apple.com/thread/256320852
+  - https://discussions.apple.com/thread/256316863
+  - https://discussions.apple.com/thread/256320221
   - https://www.reddit.com/r/iphone/comments/1no3phg/psa_for_anyone_having_performance_issues_or/
+  - https://www.reddit.com/r/iphone/comments/1tzlvzz/anybody_elses_iphone_13_running_like_absolute_dog/
 status: canonical
 popular: true
 ---
@@ -50,6 +57,9 @@ popular: true
 - “刚升级完是不是要换电池？”
 - “iOS 26 更新后发热、卡顿、耗电。”
 - “以前一天一充，现在半天就没电。”
+- “iOS 26.5.2 后充到 80% 就暂停，说温度恢复后继续。”
+- “为了安全更新 iOS，但更新后手机变热。”
+- “是不是 iOS 26.5.2 有问题，还是电池坏了？”
 
 ---
 
@@ -65,6 +75,10 @@ popular: true
    - 老化电池可能在更新后更容易暴露续航、性能或意外关机问题。
 5. **亮度、自动锁定、5G、后台刷新等设置变化**
    - 这些设置会改变日常耗电，但不一定代表硬件故障。
+6. **温度保护导致暂停充电或性能变化**
+   - Apple 说明，如果设备温度过高或过低，iPhone/iPad 可能暂时停止充电，并显示“暂停充电”提示；这和电池故障不是同一个分支。
+7. **安全更新与性能抱怨同时出现**
+   - Apple 已发布 iOS/iPadOS 26.5.2 安全更新，并强调保持软件最新是保护 Apple 产品安全的重要措施。不要因为社区抱怨发热或掉电就建议顾客长期停留在旧系统。
 
 ---
 
@@ -79,8 +93,10 @@ popular: true
 3. 查看**日用量**和**查看所有电池用量**，找出今天明显高于过去 7 天的 App 或系统活动。
 4. 如果处在弱信号环境，优先测试 Wi-Fi、强蜂窝信号位置，或短时间启用飞行模式验证是否与网络搜索有关。
 5. 在支持的机型上，考虑使用**自适应电量**；需要临时延长续航时，开启**低电量模式**。
-6. 检查**电池健康**。如果显示“维修”或电池健康显著下降，引导顾客考虑电池服务。
-7. 如果出现无法开机、异常重启、充电异常或电池鼓包等安全/硬件症状，停止软件层面反复排查并转入服务路径。
+6. 如果看到**暂停充电**或设备明显发烫，先移除保护壳、停止高负载使用、让设备远离阳光直射并冷却。Apple 说明温度恢复正常后充电会继续。
+7. 检查**设置 > 通用 > 软件更新**。如果设备没有最新安全更新，解释安全更新的重要性并按正常更新流程处理；不要把“等待后台整理”解释为拒绝安全更新的理由。
+8. 检查**电池健康**。如果显示“维修”或电池健康显著下降，引导顾客考虑电池服务。
+9. 如果出现无法开机、异常重启、充电异常或电池鼓包等安全/硬件症状，停止软件层面反复排查并转入服务路径。
 
 参考来源：
 
@@ -88,6 +104,10 @@ popular: true
 - [Apple 支持：检查 iPhone 电池用量](https://support.apple.com/zh-cn/102432)
 - [Apple 支持：iPhone 电池和性能](https://support.apple.com/zh-cn/101575)
 - [Apple 支持：关于 iOS 26 更新](https://support.apple.com/zh-cn/123075)
+- [Apple 支持：如果 iPhone 或 iPad 温度过高或过低](https://support.apple.com/zh-cn/118431)
+- [Apple Support: Update iOS to protect your iPhone from web attacks](https://support.apple.com/en-us/126776)
+- [Apple Support: About the security content of iOS 26.5.2 and iPadOS 26.5.2](https://support.apple.com/en-us/127594)
+- [Apple Support: Apple security releases](https://support.apple.com/en-us/100100)
 
 ---
 
@@ -109,6 +129,22 @@ popular: true
 - 备注：优先看“今天”和“过去 7 天”的差异，而不是只看电池百分比主观感受。
 - 验证级别：Apple 官方
 
+### 把“暂停充电”当作温度保护分支处理
+
+- 来源：Apple 官方温度文章，以及 Apple Community 中 iOS 26.5/26.5.2 后“充到 80% 暂停”“设备发热”的重复表述。
+- 成功概率：当锁定屏幕或电池设置显示温度相关暂停时较高。
+- 风险：低。
+- 备注：先让设备冷却、移除外壳、停止充电时高负载使用。不要把温度暂停直接解释为电池坏，也不要反复强制充电。
+- 验证级别：Apple 官方
+
+### 安全更新优先于社区版本恐慌
+
+- 来源：Apple 安全发布页、iOS 26.5.2 安全内容、以及 Apple 针对网页攻击的 iOS 更新说明。
+- 成功概率：适合顾客因 Reddit、小红书或朋友圈抱怨而犹豫是否安装安全更新的场景。
+- 风险：低到中等。更新后短期可能出现后台整理、耗电感知变化或 App 兼容问题。
+- 备注：解释“先备份、接电、联网、更新；更新后用电池页面复查”，不要建议长期停留在没有安全修复的版本。
+- 验证级别：Apple 官方
+
 ---
 
 ## 零售排查流程
@@ -118,8 +154,10 @@ popular: true
 3. 同时检查蜂窝信号、电池健康和顾客实际使用变化。
 4. 如果是更新后短期后台活动，解释原因并设置复查时间。
 5. 如果某个 App 明显异常，先更新 App、调整通知/后台刷新，必要时卸载重装该 App。
-6. 如果电池健康提示维修、设备意外关机、只能插电使用或电量跳变，转入电池服务判断。
-7. 如果顾客只说“网上都说这个版本耗电”，回到设备证据：电池页面、信号环境、电池健康和复现时间。
+6. 如果出现“暂停充电”或温度警告，先进入温度分支：移开热源、取下保护壳、停止高负载使用、冷却后再评估。
+7. 如果设备没有最新安全更新，优先说明安全更新价值，再选择合适时间更新并复查电池页面。
+8. 如果电池健康提示维修、设备意外关机、只能插电使用或电量跳变，转入电池服务判断。
+9. 如果顾客只说“网上都说这个版本耗电”，回到设备证据：电池页面、信号环境、电池健康、温度提示、系统版本和复现时间。
 
 ---
 
@@ -168,8 +206,8 @@ popular: true
 
 ## 元信息
 
-- 最后更新：2026-07-09
-- 来源数量：6
+- 最后更新：2026-07-12
+- 来源数量：12
 - 验证级别：Apple 官方
 - 支持系统：iOS 18 或更新版本；iOS 26/iPadOS 26 可显示更多电池用量和自适应电量相关信息
 - 可信度：高
