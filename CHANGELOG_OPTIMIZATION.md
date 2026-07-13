@@ -234,6 +234,7 @@
 - 新增 metadataBase、title template、Open Graph、robots、sitemap、分类/标签 metadata 和 noindex 管理页/反馈页。
 - 新增全局 error boundary。
 - 新增 skip link、focus-visible、search landmark、独立 aria-live、动态主题 label。
+- 两个浮动反馈面板改为原生 modal dialog：背景 inert、打开后聚焦首个输入、关闭后返回触发按钮，并用 route-keyed session 隔离文章切换与异步结果。面板补齐 safe-area、动态视口滚动、44px 触控目标和移动端 16px 输入字号。
 - 404 和反馈页返回链接直接指向首页搜索。
 - 涉及：`src/app` metadata/robots/sitemap/error、layout、globals、not-found。
 
@@ -274,7 +275,10 @@
 - `src/lib/article-schema.test.ts`
 - `src/lib/file-store.ts`
 - `src/lib/feedback.test.ts`
+- `src/lib/feedback-ui.ts`
+- `src/lib/feedback-ui.test.ts`
 - `src/components/article-actions.tsx`
+- `src/components/use-feedback-dialog.ts`
 - `src/components/verification-badge.tsx`
 - `src/app/error.tsx`
 - `src/app/robots.ts`
@@ -290,6 +294,7 @@
 - `package.json`、`pnpm-lock.yaml`、`pnpm-workspace.yaml`、`tsconfig.json`、`next.config.ts`
 - 首页、布局、文章、分类、标签、反馈、404 和管理员页面
 - 搜索、卡片、主题、反馈组件
+- `src/components/global-feedback-widget.tsx`、`src/components/article-feedback-widget.tsx`
 - cookbook/feedback/labels 相关 lib
 - `cookbook/Networking/iphone-ipad-wifi-no-internet-unable-to-join.md`（只迁移 frontmatter；正文不变）
 - `cookbook/Mac/mac-mail-cant-send-receive-email.md`（frontmatter 等价迁移后，另行修正 3 处可信表达）
@@ -318,7 +323,7 @@
 - 反馈数据库迁移、跨主机事务、幂等/rate limit、生产备份/恢复演练；单 ECS 并发、doctor/backup/offline verify 和 Vercel fail closed 已处理。Snapshot manifest 尚无签名、大小上限或流式哈希。
 - 剩余 32 篇 v1 内容的逐篇 v2 人工迁移、verificationHistory 和稳定 URL redirect；双读/Schema/预览与三篇试点已完成。
 - popular 的真实精选或匿名统计。
-- 浮动反馈 dialog 的完整焦点管理。
+- 浮动反馈 dialog 的代码、语义、焦点返回、路由隔离与响应式布局已完成；真实 Tab/Shift+Tab 与 Escape 注入受当前浏览器控制能力限制，PR 标记 Ready 前仍需一次人工键盘/VoiceOver 复核。
 - redirect aliases、OG 图片和 JSON-LD；article canonical URL 已完成。
 - 拼音、最近搜索、可分享搜索筛选和千篇级索引。
 - 继续用脱敏真实零结果/点击数据扩充 query benchmark；当前已有 17 个稳定映射与 4 个 canonical/tag 边界用例。
@@ -344,3 +349,4 @@
 - 最终 production server HTTP 回归：首页、seed、Mac Mail、sitemap 均 200；未知与畸形 slug 均 404；seed 标题先于提示且为 noindex、seed 不在 sitemap、canonical/source/date/可信修正均存在。
 - 第五轮 production Browser 回归：in-app Browser 已实际检查“Mac 系统数据很大”文章的桌面与 390×844 移动端布局，可信等级、系统版本、日期和 10 张来源卡均正常，无错误覆盖层或横向溢出；首页搜索 `系统数据很大` 返回唯一且正确的 canonical 结果。新文章 HTTP 为 200 并已进入 sitemap。当前环境仍缺 `agent-browser` CLI，但不再影响本轮可视验证结论。
 - 第六轮 production Browser 回归：AirPods 充电盒、Screen Time 限额、Apple Pay 付款、Wallet 加卡、Apple 账户密码中英文查询均返回唯一且正确的首条结果；无结果提示和 404 正常。iPad 键盘文章桌面与 390×844 移动端均显示 Official 主方案、Quick、系统版本、验证日期、4 张官方与 2 张社区来源卡，社区补充排查明确为 `Likely`；无控制台错误、错误覆盖层或横向溢出，复制/分享按钮均为 44px。文章 HTTP 为 200 并已进入 sitemap。
+- 反馈 dialog Browser 回归：桌面和 390×844 均打开即聚焦文本框；X 关闭返回原触发按钮并恢复页面滚动；重新打开清空旧 session；排除路由不渲染全局入口。390×844 无横向溢出且输入字号为 16px，844×390 面板保持在视口内并可内部滚动；文章反馈隐藏来源与当前文章一致，控制台 0 error、无 Next.js 错误覆盖层。当前浏览器无法注入 Tab/Escape，未把该工具限制伪装成通过。

@@ -54,7 +54,7 @@
 | 文章操作 | 官方来源、复制、分享、来源分组 | article page、actions、badge | 来源在正文和详情可能重复 | 浏览器与屏幕阅读器检查 | 已完成 |
 | 结构化正文渲染 | 让 v2 solutions/warnings/limitations 成为公开步骤真源 | article page、Schema、Markdown 兼容层 | 与旧正文双重展示或漂移 | 两种 schema 页面快照、正文/solution 对照 | 未开始 |
 | 基础 a11y | skip link、focus-visible、44px、搜索状态 | layout、CSS、SearchPanel、ThemeToggle | 全局 focus 样式可能影响视觉 | 键盘遍历、390px 视口、axe 后续 | 已完成第一版 |
-| 反馈 dialog | Escape、初始焦点、焦点返回、safe area | 两个 feedback widget | 焦点管理改动需全面测试 | 键盘/VoiceOver/手机 | 未开始 |
+| 反馈 dialog | Escape、初始焦点、焦点返回、safe area | 两个 feedback widget、共享 dialog hook | 原生 dialog 仍需人工 VoiceOver 复核 | lint/typecheck/test/build、桌面/手机 Browser、人工 Tab/Escape/VoiceOver | 代码与响应式 Browser 验证已完成；人工键盘/VoiceOver 待验收 |
 | SEO | metadata、robots、sitemap、canonical、OG、结构化数据 | `src/app` metadata files | canonical 配错会影响收录 | 生成 HTML、robots/sitemap 检查 | 基础、article canonical、seed noindex/draft 隔离已完成；JSON-LD 待做 |
 | 错误与健康 | error boundary、可重试反馈、storage readiness | `error.tsx`、actions、health route | 过度吞错会隐藏数据问题 | 故障注入、日志检查 | error boundary/反馈错误已完成；health route 待做 |
 | 原子部署 | release 目录、symlink、rollback、深度健康检查 | deploy script、systemd、workflow | 部署脚本改造需服务器演练 | staging 部署、回滚演练 | 未开始 |
