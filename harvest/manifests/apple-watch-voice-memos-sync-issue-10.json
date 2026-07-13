@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-watch-voice-memos-sync-issue-10",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-14T00:00:00.000Z",
+  "baseCommit": "286a929ecbead58b3ad49175e72cd2bac48b2b1a",
+  "changes": [
+    {
+      "path": "cookbook/Apple Watch/apple-watch-voice-memos-not-syncing-iphone.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:2222b13a956d20d83eae64292f9d2e96b746899125fdd85865baa0329a4dfe88",
+      "reason": "P0 website feedback AC-20260712-5B8BD5B7 reports Apple Watch Voice Memos not syncing to iPhone; no existing canonical covers Voice Memos iCloud sync and backup boundaries.",
+      "canonicalReview": {
+        "queries": [
+          "Apple Watch 语音备忘录没有同步到 iPhone",
+          "Apple Watch Voice Memos not syncing to iPhone",
+          "Voice Memos Watch Recordings missing",
+          "语音备忘录 iCloud Apple Watch 录音"
+        ],
+        "matchedArticleIds": [
+          "apple-watch-wont-connect-pair-iphone"
+        ],
+        "decision": "create-new",
+        "notes": "Existing Apple Watch canonical covers connection, pairing, update, compatibility, and Activation Lock, but not Voice Memos iCloud sync, Watch Recordings, restore, or backup boundaries. Repository search found no Voice Memos canonical, so this is a distinct create."
+      }
+    }
+  ]
+}
