@@ -33,6 +33,7 @@ function makeSubmission(index: number, status: FeedbackSubmission["status"] = "o
     customerWords: "",
     device: "iPhone",
     reporterName: "测试用户",
+    reporterVerified: false,
     contact: "",
     sourceTitle: "",
     sourceUrl: "",
@@ -67,8 +68,17 @@ describe("feedback file store", () => {
     assert.match(missingName.error, /名字/);
 
     formData.set("reporterName", "小陈");
+    formData.set("reporterVerified", "true");
     const accepted = await saveFeedback(formData, root);
     assert.equal(accepted.ok, true);
+
+    const inbox = await fs.readFile(path.join(root, "feedback", "inbox.jsonl"), "utf8");
+    const saved = JSON.parse(inbox.trim()) as FeedbackSubmission;
+    assert.equal(saved.reporterVerified, true);
+    assert.equal(saved.reporterName, "小陈");
+
+    const dailyWork = await fs.readFile(path.join(root, "todos", "daily-work.md"), "utf8");
+    assert.match(dailyWork, /提交人亲自验证: 是/);
   });
 
   it("recovers an abandoned stale directory lock", async () => {

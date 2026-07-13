@@ -126,6 +126,25 @@ solutions:
       - 取消配对、抹掉和恢复不能保证找回未同步的语音备忘录；这些操作还可能改变当前可用证据。
     limitations:
       - Apple 文档没有提供从已抹掉 Apple Watch 单独恢复未同步语音备忘录的步骤。
+  - id: reader-verified-copy-watch-analytics-sync
+    title: 读者验证：临时关闭手表蓝牙并拷贝手表分析
+    summary: Apple Cookbook 读者 Calvin 亲自验证，在确认 iCloud“语音备忘录”已开启后，临时关闭 Apple Watch 蓝牙，并从 iPhone 的 Watch App 拷贝手表分析，可触发此前卡住的语音备忘录同步。
+    kind: alternative
+    steps:
+      - 在 iPhone 上打开“设置 > [你的姓名] > iCloud > 查看全部”，确认“语音备忘录”已经开启。
+      - 在 Apple Watch 上打开“设置 > 蓝牙”，临时关闭蓝牙。
+      - 在 iPhone 上打开 Watch App，进入“通用”，向下滚动并轻点“拷贝手表分析”。
+      - 等待“拷贝手表分析”的状态由黄色恢复为灰色，再继续耐心等待语音备忘录同步。
+      - 重新打开 Apple Watch 蓝牙，然后在 iPhone“语音备忘录”的“Apple Watch 录音”中检查目标录音。
+    verificationLevel: Verified
+    sourceIds:
+      - reader-calvin-feedback-28
+    warnings:
+      - 这是读者亲自验证的非官方方法，不是 Apple 发布的语音备忘录同步步骤。
+      - 临时关闭蓝牙会中断 Apple Watch 与 iPhone 的部分连接功能；完成操作后应重新打开蓝牙。
+      - 不要为了尝试此方法取消配对、抹掉 Apple Watch，或删除仍保留在手表上的唯一录音。
+    limitations:
+      - 当前证据是一位读者的成功案例，尚无 Apple 官方说明或更大样本能够确认适用机型、系统版本和成功率。
   - id: escalate-if-recording-remains-missing
     title: 官方条件满足后仍缺失时升级处理
     summary: 保留设备、账户、网络和录音状态证据，再联系 Apple 支持或到店检查。
@@ -192,6 +211,14 @@ sources:
     accessedAt: 2026-07-14
     publishedAt: 2025-12-09
     official: true
+  - id: reader-calvin-feedback-28
+    title: 读者 Calvin 对 Apple Watch 语音备忘录同步方法的实测反馈
+    url: https://github.com/Neverwhateve/apple-cookbook/issues/28
+    publisher: Apple Cookbook 读者反馈
+    sourceType: test
+    accessedAt: 2026-07-14
+    publishedAt: 2026-07-14
+    official: false
 lastVerifiedAt: 2026-07-14
 lastUpdatedAt: 2026-07-14
 createdAt: 2026-07-14
@@ -252,6 +279,23 @@ Apple Watch 上录的“语音备忘录”没有出现在 iPhone 时，先不要
 - [Apple 支持：在 Apple Watch 上录制和播放语音备忘录](https://support.apple.com/zh-cn/guide/watch/apd441786282/watchos)
 - [Apple 支持：在所有 Apple 设备上查看录音](https://support.apple.com/zh-cn/guide/voice-memos/vma6cc4d0571/mac)
 - [Apple 支持：在 iPhone 上的“语音备忘录”中让录音保持最新](https://support.apple.com/zh-cn/guide/iphone/iph38b91c7af/ios)
+
+---
+
+## 读者验证的非官方方法
+
+验证级别：读者亲自验证，非 Apple 官方方案
+验证者：Calvin（[Apple Cookbook 反馈 #28](https://github.com/Neverwhateve/apple-cookbook/issues/28)）
+
+Calvin 反馈，在官方 iCloud 开关路径仍未让录音出现时，下面的方法成功触发了同步：
+
+1. 在 iPhone 上打开**设置 > [你的姓名] > iCloud > 查看全部**，确认**语音备忘录**已经开启。
+2. 在 Apple Watch 上打开**设置 > 蓝牙**，临时关闭蓝牙。
+3. 在 iPhone 上打开 **Watch App > 通用**，向下滚动并轻点**拷贝手表分析**。
+4. 等待该项目的状态由黄色恢复为灰色，再继续耐心等待录音同步。
+5. 重新打开 Apple Watch 蓝牙，然后在 iPhone“语音备忘录”的“Apple Watch 录音”中检查目标录音。
+
+这个方法来自一位读者的成功案例，Apple 没有把它列为语音备忘录同步步骤，因此不能保证所有机型和系统版本都有效。临时关闭蓝牙会中断部分手表连接功能；操作完成后应重新打开蓝牙。不要取消配对、抹掉手表或删除唯一录音来测试。
 
 ---
 

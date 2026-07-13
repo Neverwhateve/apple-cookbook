@@ -33,6 +33,7 @@ function parseSubmission(line: string): FeedbackSubmission | null {
     return {
       ...value,
       reporterName: value.reporterName ?? "",
+      reporterVerified: value.reporterVerified === true,
       status: value.status ?? "open"
     };
   } catch {

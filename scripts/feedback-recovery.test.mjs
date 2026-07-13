@@ -25,6 +25,8 @@ function makeSubmission(id, status = "open") {
     description: "测试内容",
     customerWords: "",
     device: "iPhone",
+    reporterName: "测试用户",
+    reporterVerified: false,
     contact: "",
     sourceTitle: "",
     sourceUrl: "",
@@ -135,6 +137,18 @@ describe("feedback recovery CLI", () => {
     assert.ok(report.issues.some((issue) => issue.code === "INVALID_JSONL"));
     assert.equal(result.stdout.includes(privateMarker), false);
     assert.equal(result.stderr.includes(privateMarker), false);
+  });
+
+  it("rejects a non-boolean reporter verification marker", async () => {
+    const root = await makeTemporaryRoot("apple-cookbook-feedback-invalid-verification-");
+    const submission = { ...makeSubmission("AC-INVALID-VERIFICATION"), reporterVerified: "yes" };
+    await writeJsonl(path.join(root, "feedback/inbox.jsonl"), [submission]);
+
+    const result = await runCli(["doctor", "--data-dir", root, "--json"]);
+    assert.equal(result.code, 1);
+    const report = JSON.parse(result.stdout);
+
+    assert.ok(report.issues.some((issue) => issue.code === "INVALID_REPORTER_VERIFIED"));
   });
 
   it("detects duplicate ids and inbox/archive partition conflicts", async () => {

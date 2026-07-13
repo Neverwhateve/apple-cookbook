@@ -225,6 +225,13 @@ function parseQueueFile(file: SnapshotFile, issues: FeedbackRecoveryIssue[]) {
       });
     }
 
+    if (record.reporterVerified !== undefined && typeof record.reporterVerified !== "boolean") {
+      addIssue(issues, "error", "INVALID_REPORTER_VERIFIED", "提交人亲自验证标记必须是 boolean。", {
+        file: file.relativePath,
+        line: lineNumber
+      });
+    }
+
     const firstLine = seen.get(id);
     if (firstLine !== undefined) {
       addIssue(
