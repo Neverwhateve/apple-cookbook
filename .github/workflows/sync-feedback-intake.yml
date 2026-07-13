@@ -90,6 +90,7 @@ jobs:
           gh label create P0 --color B60205 --description "Highest priority feedback intake" || true
           gh label create feedback-intake --color 1D76DB --description "Submitted through Apple Cookbook feedback" || true
           gh label create content-bug --color D93F0B --description "Content accuracy or troubleshooting bug" || true
+          gh label create reporter-verified --color 5319E7 --description "Reporter personally verified this method" || true
 
       - name: Close archived P0 feedback issues
         env:
@@ -275,6 +276,12 @@ jobs:
             description=$(jq -r '.description // ""' <<<"$submission")
             customer_words=$(jq -r '.customerWords // ""' <<<"$submission")
             device=$(jq -r '.device // ""' <<<"$submission")
+            reporter_name=$(jq -r '.reporterName // ""' <<<"$submission")
+            reporter_verified=$(jq -r '.reporterVerified // false' <<<"$submission")
+            reporter_attribution="未公开"
+            if [[ "$reporter_verified" == "true" ]]; then
+              reporter_attribution="${reporter_name:-未填写}"
+            fi
             source_title=$(jq -r '.sourceTitle // ""' <<<"$submission")
             source_url=$(jq -r '.sourceUrl // ""' <<<"$submission")
 
@@ -288,6 +295,8 @@ jobs:
           Type: \`$kind\`
           Created: \`$created_at\`
           Device: ${device:-未填写}
+          Reporter attribution: $reporter_attribution
+          Personally verified by reporter: $reporter_verified
 
           ## Submitted Content
 
@@ -310,6 +319,9 @@ jobs:
             labels=(--label P0 --label feedback-intake)
             if [[ "$kind" == "content_bug" ]]; then
               labels+=(--label content-bug)
+            fi
+            if [[ "$reporter_verified" == "true" ]]; then
+              labels+=(--label reporter-verified)
             fi
 
             gh issue create \
