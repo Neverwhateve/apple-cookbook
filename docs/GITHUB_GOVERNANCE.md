@@ -4,7 +4,7 @@ Apple Cookbook keeps its expected `main`-branch controls in `.github/rulesets/ma
 
 ## Current Remote State
 
-The initial read-only inspection on 2026-07-13 found no remote protection. Phase 1 was activated at 15:40 +08:00. After Draft PR #12 successfully ran the candidate check, Phase 2 updated the same ruleset at 16:02 +08:00:
+The initial read-only inspection on 2026-07-13 found no remote protection. Phase 1 was activated at 15:40 +08:00. After PR #12 successfully ran the candidate check, Phase 2 updated the same ruleset at 16:02 +08:00:
 
 - repository: `Neverwhateve/apple-cookbook`;
 - default branch: `main`;
@@ -13,10 +13,10 @@ The initial read-only inspection on 2026-07-13 found no remote protection. Phase
 - enforced now: pull requests, branch-deletion protection, non-fast-forward/force-push protection, and the strict `Validate pull request` status check;
 - bypass list: empty; the API reports `current_user_can_bypass: never`;
 - workflow registry: content quality, Alibaba Cloud deployment, and feedback intake sync;
-- `.github/workflows/content-quality.yml`: registered by the successful PR run, but its source still awaits the explicitly approved merge into the default branch;
+- `.github/workflows/content-quality.yml`: registered by the successful PR run and published to the default branch by PR #12;
 - read-only governance audit: exit `0`, with no findings.
 
-The ruleset now matches `.github/rulesets/main.json`. No duplicate ruleset was created, strict/up-to-date checking is enabled, and automation has no bypass path. Draft PR #12 remains unmerged by design; merging it is the final code-publication step and requires explicit approval.
+The ruleset matches `.github/rulesets/main.json`. No duplicate ruleset was created, strict/up-to-date checking is enabled, and automation has no bypass path. PR #12 was explicitly authorized and merged only after its latest required check succeeded.
 
 ## Read-only Check
 
@@ -62,14 +62,14 @@ Phase 1 is complete:
 
 Phase 2 is also complete at the repository-settings layer:
 
-1. Draft PR #12 contains `.github/workflows/content-quality.yml` and its complete dependency closure: package scripts, validators, schemas, tests, and referenced implementation.
+1. PR #12 delivered `.github/workflows/content-quality.yml` and its complete dependency closure: package scripts, validators, schemas, tests, and referenced implementation.
 2. Its `Validate pull request` job completed successfully before the required check was enabled.
 3. Existing ruleset ID `18863035` was updated in place; no second overlapping `Protect main` ruleset exists.
 4. The exact check context `Validate pull request` is required with strict/up-to-date checking.
 5. The bypass list remains empty for automation.
 6. API readback and the read-only checker both match policy; the checker exits `0`.
 
-The remaining handoff is code publication: merge only after explicit approval, while the branch is up to date and `Validate pull request` is still successful. After the workflow reaches the default branch, rerun the read-only checker and continue to require exit `0`.
+After any ruleset or workflow change, rerun the read-only checker and continue to require exit `0`. Future pull requests must remain up to date and pass `Validate pull request`; the check and policy file must be changed together if the job is ever renamed.
 
 The baseline uses zero mandatory approvals so a single-maintainer repository can still merge its own pull requests after CI. If an independent reviewer is consistently available, raising `required_approving_review_count` to `1` is the recommended next tightening step and should be reflected in the policy file at the same time.
 

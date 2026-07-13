@@ -80,7 +80,7 @@ If a base hash differs, treat it as a human-edit conflict. Preserve the current 
 
 ## Repository Settings Required Outside Git
 
-The workflow can detect unsafe proposals, but it cannot stop a token with unrestricted rights from pushing to `main`. `Protect main` is now active remotely and requires PRs plus the exact strict content-quality check, blocks deletion/force pushes, and has no bypass actors. The check was added only after Draft PR #12 registered and passed it:
+The workflow can detect unsafe proposals, but it cannot stop a token with unrestricted rights from pushing to `main`. `Protect main` is now active remotely and requires PRs plus the exact strict content-quality check, blocks deletion/force pushes, and has no bypass actors. The check was added only after PR #12 registered and passed it:
 
 - require pull requests and the exact `Validate pull request` check context (the GitHub Actions job name; `Content quality / Validate pull request` is only a possible UI display label);
 - disallow force pushes and branch deletion;
@@ -88,4 +88,4 @@ The workflow can detect unsafe proposals, but it cannot stop a token with unrest
 - do not grant the Harvest credential bypass permission;
 - scope the Harvest credential to creating branches and pull requests only where possible.
 
-All listed rules are active. Draft PR #12 still needs an explicitly approved merge so the workflow source reaches `main`; until then, unrelated branches that do not contain the workflow may be unable to produce the required check.
+All listed rules are active, and PR #12 published the workflow source to `main`. New pull requests therefore receive the required check without carrying their own copy of the workflow.

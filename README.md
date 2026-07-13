@@ -122,7 +122,7 @@ pnpm feedback:verify -- --snapshot /path/to/feedback-snapshot
 pnpm audit:github-governance
 ```
 
-The GitHub governance audit currently exits `0`: Draft PR #12 registered and passed `Validate pull request`, after which existing ruleset ID `18863035` was updated in place with that exact strict check and an empty bypass list. The workflow source still needs the explicitly approved PR merge to reach `main`. Feedback backups are deliberately opt-in; follow `docs/FEEDBACK_RECOVERY.md` and store snapshots outside both the checkout and live data directory.
+The GitHub governance audit exits `0`: PR #12 registered and passed `Validate pull request`, after which existing ruleset ID `18863035` was updated in place with that exact strict check and an empty bypass list. PR #12 then published the workflow source and its complete dependency closure to `main`. Feedback backups are deliberately opt-in; follow `docs/FEEDBACK_RECOVERY.md` and store snapshots outside both the checkout and live data directory.
 
 In this Codex workspace, Node is available at:
 

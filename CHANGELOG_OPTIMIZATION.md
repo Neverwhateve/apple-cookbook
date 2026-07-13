@@ -6,11 +6,11 @@
 ## 第八轮：治理 PR 发布与 ruleset 第二阶段启用
 
 - 精确发布：74 个优化/治理文件提交为 `173f7d7` 并推送到专用分支；9 个并发 Harvest/用户路径全部保持在提交之外。
-- Draft PR：创建 [#12](https://github.com/Neverwhateve/apple-cookbook/pull/12)，目标为 `main`，未自动标记 Ready 或合并。
+- PR 发布：先创建 [#12](https://github.com/Neverwhateve/apple-cookbook/pull/12) 为 Draft；收到明确授权后才标记 Ready，并在最新 required check 成功时 squash 合并到 `main`。
 - 远端前置检查：`Validate pull request` 依次通过依赖安装、Harvest manifest、内容校验、lint、TypeScript、112 项测试和 production build。
 - ruleset 更新：只对现有 ID `18863035` 做 PUT，加入精确 context `Validate pull request` 和 strict/up-to-date；没有 POST 重复 ruleset，bypass 仍为空。
 - 回读与审计：effective main rules 包含 deletion、non-fast-forward、pull-request、required-status-checks；只读治理 checker 返回 exit 0、0 findings。
-- 剩余边界：workflow 源文件尚未进入 `main`；必须在明确批准后合并 PR #12，并在合并后再次要求治理审计 exit 0。剩余 32 篇 v1 迁移继续暂停。
+- 最终回读：workflow 已进入 `main`，合并后治理审计继续 exit 0；剩余 32 篇 v1 迁移继续暂停。
 
 ## 第七轮：远端 `main` ruleset 第一阶段启用
 
@@ -299,7 +299,7 @@
 
 ## 暂未处理
 
-- Draft PR #12 已发布完整 Content quality workflow 依赖并成功运行检查，现有 ruleset 已加入严格 `Validate pull request`；PR 的明确审核/合并和真实 Harvest 生成器接入仍待处理。
+- PR #12 已发布完整 Content quality workflow 依赖并成功合并，现有 ruleset 已加入严格 `Validate pull request`；真实 Harvest 生成器接入仍待处理。
 - 反馈数据库迁移、跨主机事务、幂等/rate limit、生产备份/恢复演练；单 ECS 并发、doctor/backup/offline verify 和 Vercel fail closed 已处理。Snapshot manifest 尚无签名、大小上限或流式哈希。
 - 剩余 32 篇 v1 内容的逐篇 v2 人工迁移、verificationHistory 和稳定 URL redirect；双读/Schema/预览与三篇试点已完成。
 - popular 的真实精选或匿名统计。
