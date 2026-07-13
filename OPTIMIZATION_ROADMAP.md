@@ -55,7 +55,7 @@
 | 结构化正文渲染 | 让 v2 solutions/warnings/limitations 成为公开步骤真源 | article page、Schema、Markdown 兼容层 | 与旧正文双重展示或漂移 | 两种 schema 页面快照、正文/solution 对照 | 未开始 |
 | 基础 a11y | skip link、focus-visible、44px、搜索状态 | layout、CSS、SearchPanel、ThemeToggle | 全局 focus 样式可能影响视觉 | 键盘遍历、390px 视口、axe 后续 | 已完成第一版 |
 | 反馈 dialog | Escape、初始焦点、焦点返回、safe area | 两个 feedback widget | 焦点管理改动需全面测试 | 键盘/VoiceOver/手机 | 未开始 |
-| SEO | metadata、robots、sitemap、canonical、OG、结构化数据 | `src/app` metadata files | canonical 配错会影响收录 | 生成 HTML、robots/sitemap 检查 | 基础、article canonical、seed noindex/draft 隔离已完成；JSON-LD 待做 |
+| SEO | metadata、robots、sitemap、canonical、OG、结构化数据 | `src/app` metadata files | canonical 配错会影响收录 | 生成 HTML、robots/sitemap 检查 | 基础、article canonical、seed noindex/draft 隔离与 TechArticle JSON-LD 已完成；OG 图片待做，HowTo 等正文结构化后再评估 |
 | 错误与健康 | error boundary、可重试反馈、storage readiness | `error.tsx`、actions、health route | 过度吞错会隐藏数据问题 | 故障注入、日志检查 | error boundary/反馈错误已完成；health route 待做 |
 | 原子部署 | release 目录、symlink、rollback、深度健康检查 | deploy script、systemd、workflow | 部署脚本改造需服务器演练 | staging 部署、回滚演练 | 未开始 |
 | 热门/最近 | 真实精选、匿名统计、今日新增 | metadata/analytics/home | 搜索词可能含敏感信息 | 匿名化、保留期、事件测试 | 未开始 |
