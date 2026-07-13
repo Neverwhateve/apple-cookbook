@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-issue-23",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-14T00:00:00.000Z",
+  "baseCommit": "0c12a6244449aa9c325f3db6d5c2cf581f001e4e",
+  "changes": [
+    {
+      "path": "cookbook/iCloud/locked-notes-forgot-password.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:41322f1fe2eaab7e68bfeda4111ddb8598741d837d06b7ab3c88ccc7b5cf974e",
+      "reason": "P0 website feedback asked what to do when Notes has locked content and the password is forgotten; no current canonical covers locked Notes password boundaries.",
+      "canonicalReview": {
+        "queries": [
+          "备忘录 app 有上锁的内容 密码忘记了",
+          "locked Notes forgot password",
+          "Notes custom password reset old locked notes",
+          "iCloud locked notes device passcode login password"
+        ],
+        "matchedArticleIds": [
+          "iphone-unavailable-security-lockout-forgot-passcode",
+          "mac-forgot-login-password-reset",
+          "icloud-storage-full-iphone-backup-fails",
+          "apple-account-verification-failed"
+        ],
+        "decision": "create-new",
+        "notes": "Existing password articles cover device passcode, Mac login password, iCloud storage, and Apple Account verification. None cover Notes-specific locked-note encryption, custom Notes password reset limits, or iCloud.com locked-note viewing limits."
+      }
+    }
+  ]
+}
