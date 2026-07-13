@@ -9,13 +9,13 @@
 | 管理员认证 | 生产缺密码或高熵 token 时 fail closed | `src/lib/feedback-admin.ts`、部署 secrets | 运维未补 token 会无法登录；这是预期安全变化 | 生产/开发配置矩阵测试、登录页验证 | 已完成 |
 | 公开反馈脱敏 | contact 不进入公开 Issue | `sync-feedback-intake.yml` | Issue 少了联系方式，管理员需在私有队列查看 | workflow YAML、搜索 workflow 中 contact | 已完成 |
 | 内容校验 | v1/v2 枚举、来源、日期、slug、方案引用、章节和链接错误阻断 CI | validator、测试、package、workflows | 历史内容可能暴露 warning/error | `pnpm validate:content`、v2 validator/Schema 负向测试 | 已完成 v1/v2 分流与 Official host 精确 allowlist |
-| Harvest 发布门禁 | 自动新文只能 draft PR，人工批准才 canonical | Harvest manifest、PR checks、Schema、ruleset policy/checker、流程文档 | 会降低自动发布速度，但保护正确性 | create/update/redirect/hash/path/no-op + GitHub drift tests | ruleset、strict required check 与 workflow 均已进入生效状态，checker exit 0 |
+| Harvest 发布门禁 | 自动新文只能 draft PR，人工批准才 canonical | proposal materializer、manifest、PR checks、Schema、ruleset policy/checker、流程文档 | 会降低自动发布速度，但保护正确性 | dry-run/idempotency/conflict/canonical review/diff allowlist + GitHub drift tests | 本地确定性物化器、manifest v2、严格 A/M diff guard 与远端门禁已完成；上游采集、Draft PR 编排和 canary 待完成 |
 | 并发与持久化 | 消除 JSONL 覆盖；可对账、可做一致快照；明确 ECS/Vercel 数据架构 | `file-store.ts`、feedback libs、recovery CLI、GitHub sync、部署文档 | 文件锁只适用单一共享目录，数据库迁移仍需备份/双写 | 并发/stale lock/GET 纯读/Vercel fail closed + 14 个恢复测试 | 单 ECS 加固、snapshot 与离线 verify 已完成；生产演练/事务存储待做 |
 
 ### P0 推荐执行顺序
 
 1. `Protect main` 已启用 PR、严格 `Validate pull request`、删除/force-push 防护与空 bypass；PR #12 的完整依赖闭包已通过检查并发布到 `main`，现有 ruleset 已原位更新，合并后治理审计继续为 exit 0。
-2. 让真实 Harvest 生成器采用 `harvest/<run-id>`、单一 manifest 和 draft PR；不得再直写 main/canonical。
+2. 让真实上游输出 proposal input v1，在隔离 `harvest/<run-id>` 完成 2–3 次 dry-run/显式 `--write`/人工 Draft PR canary；远端保持只读，不得直写 main/canonical。
 3. 在 ECS 对现有反馈运行 doctor，生成加密的原子快照，以离线 `verify` 核对 manifest，并确认异地保存和保留期。
 4. 选择 ECS SQLite 或外部数据库；先双写、对账，再切读。
 5. managed-fields 三方合并只在整文件 hash 门禁运行稳定后设计；当前任何人工改动都会更严格地停止提案。
@@ -82,6 +82,6 @@
 
 ## 下一阶段最推荐三项
 
-1. P0：让真实 Harvest 生成器正式接入已经生效的 manifest/draft PR 门禁，并用一次无破坏的试运行验证完整链路。
+1. P0：让真实上游接入 proposal input v1，用 2–3 次低风险单篇 canary 验证 dry-run、显式物化、人工 Draft PR、冲突停止和 no-op 零 diff；暂不增加可写 Action。
 2. P0：在 ECS 实际执行 doctor、加密快照和离线 verify，再做异地保存/恢复前演练，并设计 SQLite/外部数据库双写迁移，同时处理仍被跟踪的 inbox 隐私边界。
 3. P1：剩余 32 篇 v1 迁移继续按用户指示暂停；只有收到单独授权后才逐篇恢复，不批量转换。

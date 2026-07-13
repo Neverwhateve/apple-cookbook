@@ -15,6 +15,7 @@
     "typecheck": "tsc --noEmit --incremental false",
     "validate:content": "node scripts/validate-content.mjs",
     "validate:harvest": "node scripts/validate-harvest-run.mjs",
+    "generate:harvest": "node scripts/generate-harvest-proposal.mjs",
     "preview:content-v2": "node scripts/preview-content-migration.mjs",
     "audit:github-governance": "node scripts/check-github-governance.mjs",
     "feedback:doctor": "node --experimental-strip-types scripts/feedback-recovery.ts doctor",

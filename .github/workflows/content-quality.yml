@@ -39,7 +39,7 @@ jobs:
           BASE_SHA: ${{ github.event.pull_request.base.sha }}
           HEAD_REF: ${{ github.head_ref }}
         run: |
-          args=(--changed-since "$BASE_SHA" --expected-base "$BASE_SHA")
+          args=(--changed-since "$BASE_SHA" --expected-base "$BASE_SHA" --expected-branch "$HEAD_REF")
           if [[ "$HEAD_REF" == harvest/* || "$HEAD_REF" == automation/harvest/* ]]; then
             args+=(--require)
           fi
