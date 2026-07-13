@@ -3,6 +3,16 @@
 日期：2026-07-13
 主优化分支：`codex/cookbook-project-optimization`
 第九轮发布分支：`codex/harvest-draft-pr-integration`
+第十轮维护分支：`codex/actions-node24-hardening`
+
+## 第十轮：GitHub Actions Node 24 运行时与最小权限
+
+- 原问题：PR 校验和 ECS 部署虽均成功，但 `actions/checkout@v4`、`actions/setup-node@v4` 仍以 Node 20 构建，GitHub runner 已强制切换到 Node 24 并持续产生弃用告警。
+- 不可变依赖：两个 workflow 分别固定到官方 `actions/checkout` v7.0.0 与 `actions/setup-node` v6.4.0 的完整提交 SHA；版本注释保留可审阅性，避免可移动 major tag 带来的供应链漂移。
+- 最小权限：两处 checkout 均关闭无后续用途的凭据持久化；ECS 部署显式声明 `contents: read`，防止仓库默认权限未来变化时扩大 `GITHUB_TOKEN` 权限。
+- 兼容影响：Node 应用版本仍为 24，Corepack 与 `pnpm@11.7.0` 安装流程、Harvest 校验、构建及 ECS SSH 部署命令均未改变；反馈同步 workflow 不使用这些 JavaScript Action，因此不受影响。
+- 验证：两份 workflow 可被 YAML 解析；完整 SHA 与官方 v7.0.0/v6.4.0 tag 一致；`pnpm verify` 通过，34 篇内容 0 error（3 个既有 warning）、64/64 unit + 75/75 automation = 139/139 tests，production build 生成 164 个页面。
+- 后续边界：生产环境部署分支限制、固定 SSH 主机指纹、按触发时 `GITHUB_SHA` 精确部署和远端强制 Action SHA pinning 需要单独运维设计与授权，不在本轮小改动中假装完成。
 
 ## 第九轮：Harvest 确定性物化器与 P0 diff 边界
 
