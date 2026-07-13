@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-issue-24",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-13T22:09:37.000Z",
+  "baseCommit": "a55124354fbd6a48465f77d15e66729513509490",
+  "changes": [
+    {
+      "path": "cookbook/Family Sharing/screen-time-passcode-forgot-reset.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:4cf58acbdc182b1eca328158f78cab9a9526bdf9d248d6cb76319a172507b551",
+      "reason": "P0 website feedback asked how to handle a forgotten Screen Time passcode; existing Screen Time canonical articles cover limits and approval requests, not passcode recovery.",
+      "canonicalReview": {
+        "queries": [
+          "屏幕使用时间密码忘记了",
+          "忘记屏幕时间密码",
+          "Forgot Screen Time passcode",
+          "Reset Screen Time passcode",
+          "家长控制密码忘记"
+        ],
+        "matchedArticleIds": [
+          "screen-time-limits-not-blocking",
+          "screen-time-requests-not-working",
+          "screen-time-child-usage-not-showing",
+          "iphone-unavailable-security-lockout-forgot-passcode",
+          "apple-account-verification-failed"
+        ],
+        "decision": "create-new",
+        "notes": "The matched articles cover Screen Time limits, Screen Time approval requests, usage reporting, device lock passcodes, and Apple Account sign-in problems. None provide the Apple-documented Screen Time passcode reset flow for self-managed and child devices."
+      }
+    }
+  ]
+}
