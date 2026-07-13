@@ -46,8 +46,8 @@ The goal is to create a practical troubleshooting encyclopedia that helps Apple 
 
 ## Operating Cadence
 
-- Source harvest and article review work should continue every 1 hour.
-- Every completed automated cycle should become a new immutable `harvest/<run-id>` draft pull request; automation must not push content directly to `main`.
+- The 2-hour maintenance cycle must process open P0 feedback before routine source harvest or article review work.
+- A content Harvest cycle with material changes should become a new immutable `harvest/<run-id>` draft pull request. No-op cycles create no diff, while code or UI maintenance uses a scoped `codex/*` branch; automation must not push directly to `main`.
 - Each Harvest proposal must include the base commit, full-file content hashes, and recorded canonical-match decision described in `docs/HARVEST_WORKFLOW.md`.
 - The local materializer defaults to dry-run and never creates branches, commits, pushes, or pull requests. The repository intentionally has no write-enabled Harvest GitHub Action.
 - Feedback questions and submitted links are P0 intake and must be handled before routine source harvest work.

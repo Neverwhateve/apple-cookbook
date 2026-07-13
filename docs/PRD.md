@@ -413,8 +413,8 @@ Ingestion workflow concept:
 
 Operational cadence:
 
-- Run source harvest and article review work every 1 hour.
-- Publish every completed work cycle to GitHub.
+- Run the maintenance cycle every 2 hours, always processing open P0 feedback before routine source harvest or article review work.
+- Publish only material changes to GitHub; no-op cycles should not manufacture commits, reports, or pull requests.
 - Treat submitted feedback questions and links as P0 intake ahead of routine source harvest work.
 - If multiple priority levels are present, complete each priority level in order before moving to the next.
 
@@ -429,7 +429,8 @@ Foundation stack:
 - Next.js App Router for the website
 - TypeScript for maintainability
 - Tailwind CSS for styling
-- Vercel for deployment
+- Alibaba Cloud ECS for the current production deployment
+- Platform-neutral static pages that remain Vercel-compatible where practical
 
 Design constraints:
 
@@ -472,7 +473,7 @@ Exit criteria:
 - The app can render Markdown articles from `cookbook/`.
 - Search works across metadata and article content.
 - Categories and tags are navigable.
-- The product can be deployed to Vercel.
+- The product can be built and deployed on Alibaba Cloud ECS with persistent feedback storage.
 - The repository is clean and maintainable.
 
 ### Phase 2: Knowledge Management

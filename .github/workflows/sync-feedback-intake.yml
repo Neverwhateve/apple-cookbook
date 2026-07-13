@@ -2,7 +2,8 @@ name: Sync Feedback Intake
 
 on:
   schedule:
-    - cron: "12 */3 * * *"
+    # Feed the every-2-hour maintenance cycle before its next :05 run.
+    - cron: "35 * * * *"
   workflow_dispatch:
 
 permissions:
