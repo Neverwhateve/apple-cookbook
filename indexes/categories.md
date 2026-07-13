@@ -9,11 +9,11 @@ Use categories for the primary customer entry point. Use tags for secondary devi
 - Apple Watch: 1 recipe
 - Family Sharing: 4 recipes
 - HomePod: 2 recipes
-- iPad: 1 recipe
+- iPad: 2 recipes
 - Mac: 3 recipes
 - Networking: 2 recipes
 - iCloud: 1 recipe
-- iPhone: 12 recipes
+- iPhone: 14 recipes
 - 查找: 1 recipe
 - 连续互通: 1 recipe
 

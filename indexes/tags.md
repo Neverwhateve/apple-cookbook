@@ -49,6 +49,8 @@ Use these tags consistently across articles.
 - Mail
 - Email
 - Keyboard
+- VoiceOver
+- AssistiveTouch
 - Battery
 - Software Update
 - Personal Hotspot

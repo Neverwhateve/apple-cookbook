@@ -25,7 +25,7 @@ aliases:
   - iPhone 17 不能有线充电
 verification: Official
 difficulty: Moderate
-updated: 2026-07-12
+updated: 2026-07-13
 official_sources:
   - https://support.apple.com/zh-cn/108805
   - https://support.apple.com/zh-cn/102643
@@ -207,6 +207,8 @@ Apple 在 iOS 26.5.1 说明中把这个问题限定为少数 iPhone Air 和 iPho
 
 ## 相关问题
 
+- [iPhone 充电停在 80% 或显示充电暂停](/recipes/iPhone/iphone-charging-paused-80-temperature-charge-limit)
+- [iPhone 黑屏、无法开机或电量耗尽后没反应](/recipes/iPhone/iphone-black-screen-wont-turn-on-after-battery-drained)
 - [iPhone 更新后掉电快或发热](/recipes/iPhone/iphone-battery-drains-after-update)
 - [iPhone 设置或更新时卡在正在准备更新、正在验证更新](/recipes/iPhone/iphone-stuck-preparing-verifying-software-update)
 - [iPhone 显示 SOS、无服务或正在搜索](/recipes/iPhone/iphone-sos-no-service-searching)
@@ -230,7 +232,7 @@ Apple 在 iOS 26.5.1 说明中把这个问题限定为少数 iPhone Air 和 iPho
 
 ## 元信息
 
-- 最后更新：2026-07-12
+- 最后更新：2026-07-13
 - 来源数量：12
 - 验证级别：Apple 官方
 - 支持系统：当前 iOS；iPhone Air 和 iPhone 17 机型应关注 iOS 26.5.1 或更新版本
