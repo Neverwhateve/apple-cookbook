@@ -9,6 +9,7 @@ import { ArticleFeedbackWidget } from "@/components/article-feedback-widget";
 import { ArticleCard } from "@/components/article-card";
 import { VerificationBadge } from "@/components/verification-badge";
 import type { ArticleSource } from "@/lib/article-schema";
+import { buildArticleStructuredData, serializeJsonLd } from "@/lib/article-structured-data";
 import {
   getPublishedArticles,
   getPublishedArticleBySlug,
@@ -147,9 +148,17 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
   const officialSources = article.sources.filter((source) => source.official);
   const communitySources = article.sources.filter((source) => !source.official);
   const primaryOfficialSource = officialSources[0];
+  const structuredData = buildArticleStructuredData(article);
 
   return (
     <main className="bg-white px-4 py-8 dark:bg-zinc-950 sm:px-6 sm:py-12">
+      {structuredData ? (
+        <script
+          id="article-structured-data"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(structuredData) }}
+        />
+      ) : null}
       <article className="mx-auto max-w-[692px]">
         <nav aria-label="文章路径" className="mb-10 flex flex-wrap items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400">
           <Link href="/" className="hover:text-zinc-950 dark:hover:text-zinc-50">

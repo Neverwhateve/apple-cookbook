@@ -4,6 +4,16 @@
 主优化分支：`codex/cookbook-project-optimization`
 第九轮发布分支：`codex/harvest-draft-pr-integration`
 第十轮维护分支：`codex/actions-node24-hardening`
+第十一轮 SEO 分支：`codex/article-json-ld`
+
+## 第十一轮：文章 TechArticle JSON-LD
+
+- 原问题：文章已有 canonical、Open Graph、robots 和 sitemap，但页面没有机器可读的文章实体；搜索引擎和其他结构化数据消费者只能从可见 HTML 推断标题、日期、发布者与来源关系。
+- 修改：新增纯服务端 `TechArticle` builder 和安全序列化器，只为 `reviewed/canonical` 输出 JSON-LD；canonical URL、修改日期、真实存在的创建日期、设备/系统主题和去重来源均由当前标准化文章模型派生，不改正文或公开路由。
+- 可信边界：`author` 与 `publisher` 固定为 Apple Cookbook；Apple 官方与社区页面都只作为 citation，不会把 Apple 写成本站作者，也不会借结构化数据提升社区来源等级。暂不输出 `HowTo`，因为 v2 solutions 尚未成为全部公开正文的单一真源。
+- 安全边界：按 Next.js 官方模式使用原生 `application/ld+json` 脚本，并转义 `<`、U+2028 和 U+2029；测试覆盖 `</script>` 注入、seed/draft 隔离、缺失创建日期不推测、绝对 canonical 和来源去重。
+- 兼容影响：没有新增依赖或客户端 JavaScript；页面视觉、hydration、搜索、内容生命周期和反馈流程均不改变。
+- 验证：`pnpm verify` 通过，34 篇内容 0 error（3 个既有 warning）、68/68 unit + 75/75 automation = 143/143 tests、production build 生成 164 个页面。逐个解析 34 份文章 HTML：32 篇 indexable 均有且仅有一个有效 TechArticle，2 篇 seed 均无 JSON-LD 且保持 noindex。standalone server 的首页、canonical、seed 与 CSS 均返回 200；桌面和 390×844 浏览器检查无错误覆盖层、console error 或横向溢出。
 
 ## 第十轮：GitHub Actions Node 24 运行时与最小权限
 
@@ -282,6 +292,8 @@
 - `src/lib/cookbook.test.ts`
 - `src/lib/article-schema.ts`
 - `src/lib/article-schema.test.ts`
+- `src/lib/article-structured-data.ts`
+- `src/lib/article-structured-data.test.ts`
 - `src/lib/file-store.ts`
 - `src/lib/feedback.test.ts`
 - `src/components/article-actions.tsx`
@@ -329,13 +341,14 @@
 - 剩余 32 篇 v1 内容的逐篇 v2 人工迁移、verificationHistory 和稳定 URL redirect；双读/Schema/预览与三篇试点已完成。
 - popular 的真实精选或匿名统计。
 - 浮动反馈 dialog 的完整焦点管理。
-- redirect aliases、OG 图片和 JSON-LD；article canonical URL 已完成。
+- redirect aliases 与 OG 图片；article canonical URL 和 TechArticle JSON-LD 已完成。`HowTo` 要等结构化 solutions 成为公开正文真源后再评估。
 - 拼音、最近搜索、可分享搜索筛选和千篇级索引。
 - 继续用脱敏真实零结果/点击数据扩充 query benchmark；当前已有 17 个稳定映射与 4 个 canonical/tag 边界用例。
 - v2 `solutions/warnings/limitations` 尚未直接驱动公开正文，仍需迁移时做人工一致性对照。
 
 ## 验证方式
 
+- 第十一轮独立干净 worktree：`pnpm verify` 为 34 篇（30 v1 + 4 v2）、0 errors、3 个既有 warning、68 个 unit + 75 个 automation = 143/143 tests、164 个页面；32/32 indexable HTML 的 TechArticle 可解析，2/2 seed 无 JSON-LD 且 noindex，standalone 与浏览器回归通过。
 - 第九轮独立干净 worktree：`pnpm verify` 为 34 篇（30 v1 + 4 v2）、0 errors、3 个既有 warning、64 个 unit + 75 个 automation = 139/139 tests、164 个页面；未接触原工作区并发 Harvest 内容。
 - `pnpm validate:content`
 - `pnpm lint`
