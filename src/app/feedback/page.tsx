@@ -3,8 +3,12 @@ import { ClipboardList, FilePlus2, Inbox, Search } from "lucide-react";
 import { FeedbackForm } from "@/components/feedback-form";
 
 export const metadata = {
-  title: "提交反馈 | Apple Cookbook",
-  description: "提交缺失的 Apple 故障排查主题或文章反馈。"
+  title: "提交问题或来源",
+  description: "向 Apple Cookbook 提交尚未收录的问题、真实症状或参考来源。",
+  robots: {
+    index: false,
+    follow: true
+  }
 };
 
 export default async function FeedbackPage({
@@ -56,7 +60,7 @@ export default async function FeedbackPage({
         </section>
 
         <Link
-          href="/"
+          href="/#site-search"
           className="flex items-center justify-between rounded-lg border border-zinc-200 bg-white p-4 text-sm font-medium transition hover:border-zinc-400 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:hover:border-zinc-600 dark:hover:bg-zinc-900"
         >
           <span className="flex items-center gap-2">

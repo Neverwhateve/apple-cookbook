@@ -174,10 +174,18 @@ Feedback submissions are written to:
 
 ```text
 /var/lib/apple-cookbook/feedback/inbox.jsonl
+/var/lib/apple-cookbook/feedback/archive.jsonl
+/var/lib/apple-cookbook/feedback/synced-github-issues.txt
 /var/lib/apple-cookbook/todos/daily-work.md
 ```
 
-Back up `/var/lib/apple-cookbook` regularly. It is intentionally outside the Git checkout so deploys do not overwrite submissions.
+`inbox.jsonl` is the source of truth. `daily-work.md` is a rebuildable projection for human review; losing that projection must not be treated as losing the original submission.
+
+All writers, including `.github/workflows/sync-feedback-intake.yml`, acquire the mkdir-style lock at `/var/lib/apple-cookbook/feedback/.queue.lock`. Do not add a maintenance script that edits inbox, archive, or synced IDs without the same lock. Individual replacements use a same-directory temporary file followed by atomic `rename`.
+
+Back up `/var/lib/apple-cookbook` regularly. Take a queue snapshot under the shared lock so inbox and archive are from the same logical point in time. The data directory is intentionally outside the Git checkout so deploys do not overwrite submissions.
+
+The current design serializes a single ECS data directory; it is not a multi-host transaction store. Move to SQLite on one host or an external database before running multiple writable application hosts. On Vercel, the file-backed form returns an explicit not-saved error rather than writing to ephemeral `/tmp`.
 
 ## Admin Feedback Queue
 
@@ -187,4 +195,4 @@ The P0 feedback review page is available at:
 https://cookbook.wuxiela.fun/admin/feedback
 ```
 
-Set `APPLE_COOKBOOK_ADMIN_USERNAME`, `APPLE_COOKBOOK_ADMIN_PASSWORD`, and `APPLE_COOKBOOK_ADMIN_TOKEN` in the systemd service before using this page in production. `APPLE_COOKBOOK_ADMIN_TOKEN` is used as the cookie session secret.
+Set `APPLE_COOKBOOK_ADMIN_USERNAME`, `APPLE_COOKBOOK_ADMIN_PASSWORD`, and `APPLE_COOKBOOK_ADMIN_TOKEN` in the systemd service before using this page in production. The token is the cookie session secret and must be a unique high-entropy value of at least 43 characters; production authentication fails closed when the password or token is missing.

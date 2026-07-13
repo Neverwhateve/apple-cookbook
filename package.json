@@ -2,11 +2,28 @@
   "name": "apple-cookbook",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.7.0",
+  "engines": {
+    "node": ">=22.0.0"
+  },
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit --incremental false",
+    "validate:content": "node scripts/validate-content.mjs",
+    "validate:harvest": "node scripts/validate-harvest-run.mjs",
+    "preview:content-v2": "node scripts/preview-content-migration.mjs",
+    "audit:github-governance": "node scripts/check-github-governance.mjs",
+    "feedback:doctor": "node --experimental-strip-types scripts/feedback-recovery.ts doctor",
+    "feedback:backup": "node --experimental-strip-types scripts/feedback-recovery.ts backup",
+    "feedback:verify": "node --experimental-strip-types scripts/feedback-recovery.ts verify",
+    "test:unit": "node --experimental-strip-types --test src/lib/*.test.ts",
+    "test:automation": "node --test scripts/*.test.mjs",
+    "test": "pnpm test:unit && pnpm test:automation",
+    "verify": "pnpm validate:content && pnpm lint && pnpm typecheck && pnpm test && pnpm build"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",

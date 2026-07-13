@@ -74,6 +74,7 @@ export function ArticleFeedbackWidget({
                 name="description"
                 required
                 minLength={10}
+                maxLength={4000}
                 rows={4}
                 placeholder="哪里不准确、缺了什么步骤，或有什么更好的处理思路。"
                 className="mt-2 w-full resize-y rounded-md border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm leading-6 outline-none transition placeholder:text-zinc-500 focus:border-zinc-500 dark:border-zinc-800 dark:bg-zinc-900"
@@ -90,6 +91,7 @@ export function ArticleFeedbackWidget({
                 placeholder="可选：姓名、门店，或后续跟进方式"
                 className="mt-2 w-full rounded-md border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm outline-none transition placeholder:text-zinc-500 focus:border-zinc-500 dark:border-zinc-800 dark:bg-zinc-900"
               />
+              <p className="mt-1.5 text-xs leading-5 text-zinc-500">此项仅保存在私有反馈队列，不会同步到公开 GitHub Issue。</p>
             </div>
 
             <div className="flex flex-col gap-3 border-t border-zinc-200 pt-3 dark:border-zinc-800">

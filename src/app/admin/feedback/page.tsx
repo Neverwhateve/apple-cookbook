@@ -17,8 +17,12 @@ import { canUseAdminSession, getAdminFeedbackQueues, type AdminFeedbackItem, typ
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "反馈队列管理 | Apple Cookbook",
-  description: "查看和管理 Apple Cookbook P0 反馈队列。"
+  title: "反馈队列管理",
+  description: "查看和管理 Apple Cookbook P0 反馈队列。",
+  robots: {
+    index: false,
+    follow: false
+  }
 };
 
 const statusLabels: Record<FeedbackStatus, string> = {

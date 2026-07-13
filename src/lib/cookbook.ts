@@ -1,24 +1,22 @@
 import fs from "node:fs";
 import path from "node:path";
+import { cache } from "react";
 import matter from "gray-matter";
+import {
+  normalizeArticleFrontmatter,
+  type ArticleMeta
+} from "./article-schema.ts";
+import type { SearchDocument } from "./search.ts";
 
-export type VerificationLevel = "Official" | "Verified" | "Likely" | "Experimental" | "Unknown";
-
-export type ArticleMeta = {
-  title: string;
-  slug: string;
-  device: string[];
-  category: string;
-  tags: string[];
-  aliases: string[];
-  verification: VerificationLevel;
-  difficulty: "Quick" | "Moderate" | "Advanced";
-  updated: string;
-  official_sources: string[];
-  community_sources: string[];
-  status: "seed" | "draft" | "reviewed" | "canonical";
-  popular?: boolean;
-};
+export type {
+  ArticleMeta,
+  ArticleSchemaVersion,
+  ArticleSolution,
+  ArticleSource,
+  ArticleStatus,
+  DifficultyLevel,
+  VerificationLevel
+} from "@/lib/article-schema";
 
 export type Article = ArticleMeta & {
   body: string;
@@ -28,13 +26,6 @@ export type Article = ArticleMeta & {
 };
 
 const cookbookRoot = path.join(process.cwd(), "cookbook");
-const emptyProductCategories = ["iPad", "Vision Pro"];
-
-function ensureArray(value: unknown): string[] {
-  if (!value) return [];
-  if (Array.isArray(value)) return value.map(String);
-  return [String(value)];
-}
 
 function normalizeSlugParts(relativeFilePath: string) {
   return relativeFilePath
@@ -61,12 +52,6 @@ function walkMarkdownFiles(dir: string): string[] {
   });
 }
 
-function getCategoryDirectories() {
-  if (!fs.existsSync(cookbookRoot)) return [];
-
-  return emptyProductCategories.filter((category) => fs.existsSync(path.join(cookbookRoot, category)));
-}
-
 function buildExcerpt(body: string) {
   return body
     .replace(/^# .+$/m, "")
@@ -79,55 +64,147 @@ function buildExcerpt(body: string) {
     .slice(0, 220);
 }
 
-function formatDateValue(value: unknown) {
-  if (value instanceof Date) return value.toISOString().slice(0, 10);
-  return String(value ?? "未复核");
+function getSection(body: string, headingPattern: RegExp) {
+  const headings = Array.from(body.matchAll(/^##\s+(.+)$/gm));
+  const headingIndex = headings.findIndex((heading) => headingPattern.test(heading[1].trim()));
+  if (headingIndex < 0) return "";
+
+  const start = (headings[headingIndex].index ?? 0) + headings[headingIndex][0].length;
+  const end = headings[headingIndex + 1]?.index ?? body.length;
+  return body.slice(start, end).trim();
 }
 
-export function getAllArticles(): Article[] {
+function markdownSearchLines(value: string, limit = 24) {
+  return value
+    .split("\n")
+    .map((line) =>
+      line
+        .replace(/^#{1,6}\s+/, "")
+        .replace(/^\s*(?:[-*]|\d+\.)\s+/, "")
+        .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+        .replace(/[*_`>#|]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim()
+    )
+    .filter((line) => line.length >= 2 && !/^---+$/.test(line))
+    .slice(0, limit);
+}
+
+function unique(values: string[]) {
+  return Array.from(new Set(values.filter(Boolean)));
+}
+
+const readAllArticles = cache((): Article[] => {
   return walkMarkdownFiles(cookbookRoot)
     .map((filePath) => {
       const raw = fs.readFileSync(filePath, "utf8");
       const parsed = matter(raw);
       const relativeFilePath = path.relative(cookbookRoot, filePath);
       const slugParts = normalizeSlugParts(relativeFilePath);
-      const data = parsed.data;
+      const metadata = normalizeArticleFrontmatter(parsed.data, {
+        fallbackTitle: path.basename(filePath, path.extname(filePath)),
+        fallbackSlug: decodeURIComponent(slugParts.at(-1) ?? "untitled"),
+        fallbackCategory: decodeURIComponent(slugParts.at(0) ?? "未分类")
+      });
 
       return {
-        title: String(data.title ?? path.basename(filePath, path.extname(filePath))),
-        slug: String(data.slug ?? slugParts.at(-1)),
-        device: ensureArray(data.device),
-        category: String(data.category ?? slugParts.at(0) ?? "未分类"),
-        tags: ensureArray(data.tags),
-        aliases: ensureArray(data.aliases),
-        verification: String(data.verification ?? "Unknown") as VerificationLevel,
-        difficulty: String(data.difficulty ?? "Moderate") as Article["difficulty"],
-        updated: formatDateValue(data.updated),
-        official_sources: ensureArray(data.official_sources),
-        community_sources: ensureArray(data.community_sources),
-        status: String(data.status ?? "draft") as Article["status"],
-        popular: Boolean(data.popular),
+        ...metadata,
         body: parsed.content.trim(),
-        excerpt: buildExcerpt(parsed.content),
+        excerpt: metadata.summary || buildExcerpt(parsed.content),
         filePath: relativeFilePath,
         route: `/recipes/${slugParts.join("/")}`
       };
     })
     .sort((a, b) => a.title.localeCompare(b.title));
+});
+
+export function getAllArticles(): Article[] {
+  return readAllArticles();
 }
 
-export function getArticleBySlug(slug: string[]) {
-  const route = `/recipes/${slug.map((part) => encodeURIComponent(decodeURIComponent(part))).join("/")}`;
-  return getAllArticles().find((article) => article.route === route);
+/**
+ * Public lifecycle boundary for reader-facing routes.
+ *
+ * Seed articles remain available for unresolved or not-yet-reviewed topics.
+ * Drafts are workspace-only and must never be discoverable or addressable by
+ * public pages.
+ */
+export function isPublicArticle(article: Pick<Article, "status">) {
+  return article.status !== "draft";
 }
 
-export function getAllCategories() {
-  const articles = getAllArticles();
-  const categories = new Map<string, Article[]>();
+/** Only reviewed and canonical articles should be offered to search engines. */
+export function isIndexableArticle(article: Pick<Article, "status">) {
+  return article.status === "reviewed" || article.status === "canonical";
+}
 
-  for (const category of getCategoryDirectories()) {
-    categories.set(category, []);
+export function getPublishedArticles(articles = getAllArticles()): Article[] {
+  return articles.filter(isPublicArticle);
+}
+
+export function getIndexableArticles(articles = getAllArticles()): Article[] {
+  return articles.filter(isIndexableArticle);
+}
+
+function getEncodedSlugCandidates(part: string) {
+  const candidates: string[] = [];
+
+  try {
+    candidates.push(encodeURIComponent(decodeURIComponent(part)));
+  } catch {
+    // Route params may already contain a literal `%` or malformed input.
+    // A failed decode must not turn a missing article into a server error.
   }
+
+  try {
+    const encodedLiteral = encodeURIComponent(part);
+    if (!candidates.includes(encodedLiteral)) {
+      candidates.push(encodedLiteral);
+    }
+  } catch {
+    // Invalid Unicode (for example, an unpaired surrogate) is not routable.
+  }
+
+  return candidates;
+}
+
+export function getArticleBySlug(slug: string[], articles = getAllArticles()) {
+  const slugCandidates = slug.map(getEncodedSlugCandidates);
+  if (slugCandidates.some((candidates) => candidates.length === 0)) return undefined;
+
+  let bestMatch: { article: Article; score: number } | undefined;
+
+  for (const article of articles) {
+    const routeParts = article.route.replace(/^\/recipes\//, "").split("/");
+    if (routeParts.length !== slugCandidates.length) continue;
+
+    let score = 0;
+    let matches = true;
+
+    for (let index = 0; index < routeParts.length; index += 1) {
+      const candidateIndex = slugCandidates[index].indexOf(routeParts[index]);
+      if (candidateIndex < 0) {
+        matches = false;
+        break;
+      }
+      score += candidateIndex;
+    }
+
+    if (matches && (!bestMatch || score < bestMatch.score)) {
+      bestMatch = { article, score };
+      if (score === 0) break;
+    }
+  }
+
+  return bestMatch?.article;
+}
+
+export function getPublishedArticleBySlug(slug: string[], articles = getAllArticles()) {
+  return getArticleBySlug(slug, getPublishedArticles(articles));
+}
+
+export function getAllCategories(articles = getAllArticles()) {
+  const categories = new Map<string, Article[]>();
 
   for (const article of articles) {
     const current = categories.get(article.category) ?? [];
@@ -140,16 +217,87 @@ export function getAllCategories() {
     .sort((a, b) => a.name.localeCompare(b.name));
 }
 
-export function getAllTags() {
-  return Array.from(new Set(getAllArticles().flatMap((article) => article.tags))).sort((a, b) =>
+export function getPublishedCategories(articles = getAllArticles()) {
+  return getAllCategories(getPublishedArticles(articles));
+}
+
+export function getAllTags(articles = getAllArticles()) {
+  return Array.from(new Set(articles.flatMap((article) => article.tags))).sort((a, b) =>
     a.localeCompare(b)
   );
 }
 
-export function getRelatedArticles(article: Article, limit = 4) {
+export function getPublishedTags(articles = getAllArticles()) {
+  return getAllTags(getPublishedArticles(articles));
+}
+
+export function getSearchDocuments(articles = getAllArticles()): SearchDocument[] {
+  return articles.map((article) => {
+    const symptoms = unique([
+      ...article.symptoms,
+      ...markdownSearchLines(getSection(article.body, /^症状$/), 20)
+    ]);
+    const officialSolution = unique([
+      ...article.solutionSteps,
+      ...markdownSearchLines(getSection(article.body, /^Apple 官方方案$/), 24)
+    ]);
+    const communityTerms = unique([
+      ...article.communityTerms,
+      ...markdownSearchLines(getSection(article.body, /非官方|补充处理思路|社区/), 20)
+    ]);
+    const intentKeywords = unique(article.keywords);
+    const keywords = unique([...article.tags, ...intentKeywords]);
+    const searchableMetadata = [...keywords, ...article.aliases, ...symptoms, article.summary, article.excerpt];
+    const systemVersions = unique([
+      ...article.systemVersions,
+      searchableMetadata.flatMap((value) =>
+        Array.from(value.matchAll(/\b(?:iOS|iPadOS|macOS|watchOS|visionOS|tvOS)\s*\d+(?:\.\d+)*/gi), (match) => match[0])
+      )
+    ].flat());
+    const platforms = unique([
+      ...article.platforms,
+      article.tags.filter((tag) => /^(?:iOS|iPadOS|macOS|watchOS|visionOS|tvOS|Windows)$/i.test(tag))
+    ].flat());
+    const errorMessages = unique([
+      ...article.errorMessages,
+      [...symptoms, ...article.aliases].filter((value) =>
+        /错误|代码|提示|不可用|未响应|暂停|无服务|sos|error|unable|unavailable|not responding|no service/i.test(value)
+      )
+    ].flat());
+
+    return {
+      id: article.id,
+      title: article.title,
+      route: article.route,
+      summary: article.summary || article.excerpt,
+      symptoms,
+      keywords,
+      intentKeywords,
+      aliases: article.aliases,
+      devices: article.devices,
+      platforms,
+      systemVersions,
+      errorMessages,
+      officialTerms: unique([article.category, ...article.tags, ...article.officialTerms]),
+      communityTerms,
+      solutionSteps: officialSolution,
+      category: article.category,
+      verification: article.verification,
+      difficulty: article.difficulty,
+      updated: article.updated,
+      status: article.status
+    };
+  });
+}
+
+export function getPublishedSearchDocuments(articles = getAllArticles()): SearchDocument[] {
+  return getSearchDocuments(getPublishedArticles(articles));
+}
+
+export function getRelatedArticles(article: Article, limit = 4, articles = getAllArticles()) {
   const tags = new Set(article.tags);
 
-  return getAllArticles()
+  return getPublishedArticles(articles)
     .filter((candidate) => candidate.route !== article.route)
     .map((candidate) => ({
       article: candidate,

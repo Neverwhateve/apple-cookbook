@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { atomicWriteText, withFileLock } from "./file-store.ts";
 
 export type FeedbackKind =
   | "missing_problem"
@@ -26,20 +27,40 @@ export type FeedbackSubmission = {
 };
 
 export const feedbackDataRoot = process.env.APPLE_COOKBOOK_DATA_DIR ?? process.cwd();
-const dataRoot = feedbackDataRoot;
-const feedbackRoot = path.join(dataRoot, "feedback");
-const todoRoot = path.join(dataRoot, "todos");
-const inboxPath = path.join(feedbackRoot, "inbox.jsonl");
-const dailyWorkPath = path.join(todoRoot, "daily-work.md");
-const runtimeFeedbackRoot = path.join("/tmp", "apple-cookbook-feedback");
-const runtimeInboxPath = path.join(runtimeFeedbackRoot, "inbox.jsonl");
-const runtimeDailyWorkPath = path.join(runtimeFeedbackRoot, "daily-work.md");
+const maxMultilineLength = 4000;
+export const feedbackQueueLockName = ".queue.lock";
+
+export function getFeedbackStorageUnavailableReason() {
+  return process.env.VERCEL
+    ? "当前部署环境不提供持久化反馈存储，本次内容未保存。请稍后重试或通过项目维护渠道提交。"
+    : null;
+}
+
+export function getFeedbackQueueLockPath(root = feedbackDataRoot) {
+  // Remote writers must acquire this same mkdir-style directory lock before
+  // changing inbox.jsonl or archive.jsonl.
+  return path.join(root, "feedback", feedbackQueueLockName);
+}
+
+function getFeedbackStorePaths(root: string) {
+  const storeFeedbackRoot = path.join(root, "feedback");
+  const storeTodoRoot = path.join(root, "todos");
+
+  return {
+    feedbackRoot: storeFeedbackRoot,
+    todoRoot: storeTodoRoot,
+    inboxPath: path.join(storeFeedbackRoot, "inbox.jsonl"),
+    dailyWorkPath: path.join(storeTodoRoot, "daily-work.md"),
+    lockPath: getFeedbackQueueLockPath(root)
+  };
+}
 
 function normalizeMultiline(value: FormDataEntryValue | null) {
   return String(value ?? "")
     .replace(/\r\n/g, "\n")
     .replace(/\n{3,}/g, "\n\n")
-    .trim();
+    .trim()
+    .slice(0, maxMultilineLength);
 }
 
 function normalizeSingleLine(value: FormDataEntryValue | null) {
@@ -145,29 +166,25 @@ async function prependDailyWorkItem(filePath: string, item: string) {
     }
   }
 
-  await fs.writeFile(filePath, `${item}\n${existing}`.trimEnd() + "\n", "utf8");
+  await atomicWriteText(filePath, `${item}\n${existing}`.trimEnd() + "\n");
 }
 
-async function ensureStore() {
-  if (process.env.VERCEL) {
-    await fs.mkdir(runtimeFeedbackRoot, { recursive: true });
-    return;
-  }
+async function ensureStore(root = feedbackDataRoot) {
+  const paths = getFeedbackStorePaths(root);
 
-  await fs.mkdir(feedbackRoot, { recursive: true });
-  await fs.mkdir(todoRoot, { recursive: true });
+  await fs.mkdir(paths.feedbackRoot, { recursive: true });
+  await fs.mkdir(paths.todoRoot, { recursive: true });
   try {
-    await fs.access(dailyWorkPath);
+    await fs.access(paths.dailyWorkPath);
   } catch {
-    await fs.writeFile(
-      dailyWorkPath,
-      "# 每日工作收集\n\n这里记录从 Apple Cookbook 网站收集到的待处理事项。请在每日复核中整理，并将确认有效的内容转成知识库新条目或文章更新。\n\n",
-      "utf8"
+    await atomicWriteText(
+      paths.dailyWorkPath,
+      "# 每日工作收集\n\n这里记录从 Apple Cookbook 网站收集到的待处理事项。请在每日复核中整理，并将确认有效的内容转成知识库新条目或文章更新。\n\n"
     );
   }
 }
 
-export async function saveFeedback(formData: FormData) {
+export async function saveFeedback(formData: FormData, root = feedbackDataRoot) {
   const submission = buildSubmission(formData);
   const error = validateSubmission(submission);
 
@@ -175,16 +192,42 @@ export async function saveFeedback(formData: FormData) {
     return { ok: false as const, error };
   }
 
-  await ensureStore();
+  const storageUnavailableReason = getFeedbackStorageUnavailableReason();
 
-  if (process.env.VERCEL) {
-    await fs.appendFile(runtimeInboxPath, `${JSON.stringify(submission)}\n`, "utf8");
-    await prependDailyWorkItem(runtimeDailyWorkPath, buildDailyWorkItem(submission));
-    console.log("APPLE_COOKBOOK_FEEDBACK", JSON.stringify(submission));
-  } else {
-    await fs.appendFile(inboxPath, `${JSON.stringify(submission)}\n`, "utf8");
-    await prependDailyWorkItem(dailyWorkPath, buildDailyWorkItem(submission));
+  if (storageUnavailableReason) {
+    return {
+      ok: false as const,
+      error: storageUnavailableReason
+    };
   }
+
+  const paths = getFeedbackStorePaths(root);
+
+  await withFileLock(paths.lockPath, async () => {
+    await ensureStore(root);
+
+    let existingInbox = "";
+    try {
+      existingInbox = await fs.readFile(paths.inboxPath, "utf8");
+    } catch (readError) {
+      if ((readError as NodeJS.ErrnoException).code !== "ENOENT") throw readError;
+    }
+
+    const separator = existingInbox && !existingInbox.endsWith("\n") ? "\n" : "";
+    await atomicWriteText(paths.inboxPath, `${existingInbox}${separator}${JSON.stringify(submission)}\n`);
+
+    // inbox.jsonl is the durable source of truth. daily-work.md is a
+    // rebuildable projection; the shared lock prevents concurrent loss, but a
+    // process crash between the two atomic replacements is not a transaction.
+    try {
+      await prependDailyWorkItem(paths.dailyWorkPath, buildDailyWorkItem(submission));
+    } catch (dailyWorkError) {
+      console.error("Failed to update the derived feedback daily-work queue.", {
+        feedbackId: submission.id,
+        error: dailyWorkError
+      });
+    }
+  });
 
   return { ok: true as const, id: submission.id };
 }

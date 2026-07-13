@@ -1,10 +1,28 @@
 ---
+schemaVersion: 2
+id: iphone-ipad-wifi-no-internet-unable-to-join
 title: iPhone 或 iPad 无法连接 Wi-Fi 或显示无互联网连接
 slug: iphone-ipad-wifi-no-internet-unable-to-join
-device:
+summary: iPhone 或 iPad 可以看到或已经连接 Wi-Fi，却提示“无互联网连接”“无法加入网络”，或网页和 App 仍然无法联网。
+symptoms:
+  - Wi-Fi 旁边有蓝色勾，但下面显示无互联网连接
+  - 家里其他设备都能上网，只有 iPhone 不行
+  - 输入密码后提示无法加入网络
+  - 更新后连上 Wi-Fi 也打不开 App Store 或 Apple Music
+  - 无线局域网按钮变灰
+  - 同一个路由器下，iPad 能用，iPhone 不能用
+  - Wi-Fi 6E 网络连接不稳定
+devices:
   - iPhone
   - iPad
-category: Networking
+platforms:
+  - iOS
+  - iPadOS
+systemVersions:
+  - iOS 18 或更高版本（私有无线局域网地址设置）
+  - iPadOS 18 或更高版本（私有无线局域网地址设置）
+categories:
+  - Networking
 tags:
   - iPhone
   - iPad
@@ -13,6 +31,19 @@ tags:
   - Router
   - VPN
   - Internet
+keywords:
+  - 无互联网连接
+  - 无法加入网络
+  - 无线局域网
+  - 路由器
+  - DHCP
+  - DNS
+  - NAT
+  - Wi-Fi 6E
+  - 私有无线局域网地址
+  - 受限无线局域网
+  - VPN
+  - ISP
 aliases:
   - iPhone Wi-Fi no internet connection
   - iPhone unable to join network
@@ -21,22 +52,202 @@ aliases:
   - iPhone Wi-Fi 无互联网连接
   - iPhone 无法加入网络
   - iPad 无线局域网无法连接
-verification: Official
+errorMessages:
+  - 无互联网连接
+  - 无法加入网络
+  - 具有有限的兼容性
+officialTerms:
+  - 无线局域网
+  - 无线局域网助理
+  - 私有无线局域网地址
+  - Wi-Fi 6E 模式
+  - 受限无线局域网
+  - 自动加入
+  - 自动登录
+  - 还原网络设置
+communityTerms:
+  - Wi-Fi 连上但没网
+  - 苹果手机连不上 Wi-Fi
+  - 更新后 Wi-Fi 断流
+  - 改 DNS
+  - Wi-Fi 满格但打不开网页
 difficulty: Moderate
-updated: 2026-07-10
-official_sources:
-  - https://support.apple.com/zh-cn/111786
-  - https://support.apple.com/zh-cn/102766
-  - https://support.apple.com/zh-cn/102509
-  - https://support.apple.com/zh-cn/102285
-  - https://support.apple.com/zh-cn/102554
-  - https://support.apple.com/zh-cn/102480
-  - https://support.apple.com/zh-cn/111107
-community_sources:
-  - https://discussions.apple.com/thread/256303742
-  - https://discussionschinese.apple.com/thread/255937775
-  - https://www.reddit.com/r/iphone/comments/1to6ucp/wifi_connectivity_issues_since_the_latest_ios/
+estimatedTime: null
+verificationLevel: Official
 status: canonical
+canonicalArticleId: iphone-ipad-wifi-no-internet-unable-to-join
+solutions:
+  - id: diagnose-device-network-and-vpn
+    title: 先区分设备、网络与 VPN 问题
+    summary: 从连接状态、影响范围和网络侧逐层排查，只有其他方案失败后才还原网络设置。
+    kind: recommended
+    steps:
+      - 打开“设置 > 无线局域网”，确认无线局域网已开启、目标网络旁有蓝色勾，并完成密码或条款页面。
+      - 确认飞行模式和无线局域网助理已关闭；如果无线局域网设置变灰，重新启动设备。
+      - 用同一网络下的其他设备测试互联网，区分是单台设备异常还是整个网络异常。
+      - 如果其他设备也无法上网，重新启动调制解调器和路由器；仍失败时联系 ISP。
+      - 如果只有这台设备异常，卸载 VPN 或安全软件，重启设备后再次测试。
+      - 确认设备在信号范围内；路由器支持多个频段时，尝试另一个频段。
+      - 对受限无线局域网检查自动加入和自动登录；对 Wi-Fi 6E 特定网络异常，可只为该网络关闭 Wi-Fi 6E 模式。
+      - 更新路由器固件，并按照 Apple 推荐设置检查 SSID、安全性、频段、信道、DHCP、NAT 和 WMM。
+      - 只有以上步骤均失败后，才前往“设置 > 通用 > 传输或还原 [设备] > 还原 > 还原网络设置”。
+      - 还原后仍无法上网时，按影响范围联系 ISP、网络管理员或 Apple 支持。
+    verificationLevel: Official
+    sourceIds:
+      - apple-wifi-troubleshooting
+      - apple-router-recommended-settings
+      - apple-private-wifi-address
+      - apple-wifi-6e
+      - apple-captive-wifi
+      - apple-forget-wifi
+      - apple-connect-wifi
+    warnings:
+      - 还原网络设置会移除已保存的 Wi-Fi 网络和密码、蜂窝网络设置、VPN 与 APN 设置。
+      - 学校、企业或受管理设备在还原网络设置前应咨询 IT 或网络管理员。
+    limitations:
+      - Wi-Fi 6E 模式只会在受支持设备已接入 Wi-Fi 6E 网络时显示。
+      - 菜单名称可能随系统版本和地区变化。
+  - id: record-network-details-before-escalation
+    title: 记录网络信息后再分流
+    summary: 官方排查未定位原因时，先记录网络范围和必要设置，再交给正确的支持方。
+    kind: alternative
+    steps:
+      - 在当前网络的更多信息页面记录 IP 地址、路由器、DNS、VPN 与描述文件状态。
+      - 对比同一设备在其他网络、同一网络上的其他设备是否正常。
+      - 根据结果联系 ISP、网络管理员、VPN 提供商或 Apple 支持。
+    verificationLevel: Likely
+    sourceIds:
+      - apple-wifi-troubleshooting
+      - community-apple-dhcp-ip-case
+    warnings:
+      - 不要在公开论坛发布包含 IP 地址、MAC 地址、账号或位置的完整截图。
+    limitations:
+      - IP 和 DNS 信息只能帮助分流，不能单独证明故障根因。
+  - id: change-dns-only-when-directed
+    title: 仅在管理员或 ISP 指示下更改 DNS
+    summary: 手动 DNS 不是所有 Wi-Fi 故障的通用第一步，修改前应记录原设置并准备恢复。
+    kind: alternative
+    steps:
+      - 只有网络管理员或 ISP 明确要求时才更改 DNS。
+      - 修改前记录原始 DNS 设置，修改后分别测试网页、App 和受限网络登录。
+      - 出现企业、校园、本地服务或部分 App 异常时恢复原设置。
+    verificationLevel: Unknown
+    sourceIds:
+      - apple-router-recommended-settings
+    warnings:
+      - 错误 DNS 可能导致部分 App、企业网络、校园认证或本地服务异常。
+    limitations:
+      - Apple 的通用 iPhone 与 iPad Wi-Fi 排查并未把手动 DNS 列为标准第一步。
+  - id: escalate-by-failure-scope
+    title: 按故障范围升级处理
+    summary: 多台设备失败时优先找网络侧，多个独立 Wi-Fi 都失败时再联系 Apple 支持。
+    kind: escalation
+    steps:
+      - 同一 Wi-Fi 下多台设备都无法联网时，联系 ISP 或网络管理员。
+      - 卸载 VPN 或安全软件后恢复时，联系对应提供商。
+      - 这台设备在多个地点、多个独立 Wi-Fi 都无法接入时，联系 Apple 支持。
+    verificationLevel: Official
+    sourceIds:
+      - apple-wifi-troubleshooting
+    warnings: []
+    limitations:
+      - 远程排查不能替代 Apple 的硬件诊断。
+warnings:
+  - 更改路由器设置前应备份现有配置，并确保知道如何恢复。
+  - 不要为了排查而长期关闭网络安全或隐私功能。
+  - 还原网络设置会移除已保存的网络配置，受管理设备应先咨询管理员。
+limitations:
+  - 公共、校园、企业和运营商网络可能需要网络管理员或 ISP 才能完成排查。
+  - Wi-Fi 6E 和私有无线局域网地址选项取决于设备型号、系统版本与地区。
+  - 仅凭网络症状无法确认无线硬件故障，必要时仍需 Apple 支持诊断。
+sources:
+  - id: apple-wifi-troubleshooting
+    title: 如果你无法在 iPhone 或 iPad 上接入无线局域网
+    url: https://support.apple.com/zh-cn/111786
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: 2026-07-13
+    publishedAt: 2026-05-01
+    official: true
+  - id: apple-router-recommended-settings
+    title: 无线局域网路由器和接入点的推荐设置
+    url: https://support.apple.com/zh-cn/102766
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: 2026-07-13
+    publishedAt: 2026-06-04
+    official: true
+  - id: apple-private-wifi-address
+    title: 在 Apple 设备上使用私有无线局域网地址
+    url: https://support.apple.com/zh-cn/102509
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: 2026-07-13
+    publishedAt: 2025-12-10
+    official: true
+  - id: apple-wifi-6e
+    title: 在 Apple 设备上使用 Wi-Fi 6E
+    url: https://support.apple.com/zh-cn/102285
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: 2026-07-13
+    publishedAt: 2026-06-25
+    official: true
+  - id: apple-captive-wifi
+    title: 在 iPhone 或 iPad 上使用受限无线局域网
+    url: https://support.apple.com/zh-cn/102554
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: 2026-07-13
+    publishedAt: 2026-05-07
+    official: true
+  - id: apple-forget-wifi
+    title: 忽略无线局域网或防止设备自动加入无线局域网
+    url: https://support.apple.com/zh-cn/102480
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: 2026-07-13
+    publishedAt: 2026-06-26
+    official: true
+  - id: apple-connect-wifi
+    title: 在 iPhone 或 iPad 上连接到无线局域网
+    url: https://support.apple.com/zh-cn/111107
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: 2026-07-13
+    publishedAt: 2026-02-02
+    official: true
+  - id: community-apple-dhcp-ip-case
+    title: iPhone 12 Pro can't connect to Internet on iOS 26.5
+    url: https://discussions.apple.com/thread/256303742
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: 2026-07-13
+    publishedAt: 2026-05-27
+    official: false
+  - id: community-apple-services-isp-case
+    title: ios18.2.1下Wi-Fi网络无法连接apple服务
+    url: https://discussionschinese.apple.com/thread/255937775
+    publisher: Apple 社区
+    sourceType: community
+    accessedAt: 2026-07-13
+    publishedAt: 2025-01-21
+    official: false
+  - id: community-reddit-ios-wifi-case
+    title: WiFi connectivity issues since the latest IOS version 26.5?
+    url: https://www.reddit.com/r/iphone/comments/1to6ucp/wifi_connectivity_issues_since_the_latest_ios/
+    publisher: Reddit r/iphone
+    sourceType: community
+    accessedAt: 2026-07-13
+    publishedAt: null
+    official: false
+lastVerifiedAt: 2026-07-13
+lastUpdatedAt: 2026-07-10
+createdAt: null
+relatedArticles:
+  - iphone-sos-no-service-searching
+  - iphone-invalid-sim-no-sim
+  - iphone-personal-hotspot-not-working-greyed-out
 popular: true
 ---
 

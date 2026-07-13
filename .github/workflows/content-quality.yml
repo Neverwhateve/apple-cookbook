@@ -1,0 +1,61 @@
+name: Content quality
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: content-quality-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate pull request
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out pull request
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Set up pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@11.7.0 --activate
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Validate Harvest manifest
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_REF: ${{ github.head_ref }}
+        run: |
+          args=(--changed-since "$BASE_SHA" --expected-base "$BASE_SHA")
+          if [[ "$HEAD_REF" == harvest/* || "$HEAD_REF" == automation/harvest/* ]]; then
+            args+=(--require)
+          fi
+          node scripts/validate-harvest-run.mjs "${args[@]}"
+
+      - name: Validate content
+        run: pnpm validate:content
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Test application and automation guards
+        run: pnpm test
+
+      - name: Build
+        run: pnpm build

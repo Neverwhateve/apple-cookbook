@@ -1,9 +1,14 @@
 import Link from "next/link";
-import { getAllArticles, getAllTags } from "@/lib/cookbook";
+import { getPublishedArticles, getPublishedTags } from "@/lib/cookbook";
+
+export const metadata = {
+  title: "症状与功能标签",
+  description: "按症状、系统、功能和关键词浏览 Apple Cookbook。"
+};
 
 export default function TagsPage() {
-  const articles = getAllArticles();
-  const tags = getAllTags().map((tag) => ({
+  const articles = getPublishedArticles();
+  const tags = getPublishedTags(articles).map((tag) => ({
     name: tag,
     count: articles.filter((article) => article.tags.includes(tag)).length
   }));

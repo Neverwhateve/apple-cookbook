@@ -35,7 +35,7 @@ community_sources:
   - https://www.reddit.com/r/applehelp/comments/1rfki1z/solution_no_location_found_in_find_my/
   - https://discussions.apple.com/thread/256141224
 status: seed
-popular: true
+popular: false
 ---
 
 # “查找”中的位置共享不可用

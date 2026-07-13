@@ -1,8 +1,13 @@
 import Link from "next/link";
-import { getAllCategories } from "@/lib/cookbook";
+import { getPublishedCategories } from "@/lib/cookbook";
+
+export const metadata = {
+  title: "按设备与主题浏览",
+  description: "按设备、服务和故障主题浏览 Apple Cookbook 排查文章。"
+};
 
 export default function CategoriesPage() {
-  const categories = getAllCategories();
+  const categories = getPublishedCategories();
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
