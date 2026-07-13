@@ -15,9 +15,10 @@ OpenAI API key.
   remain private unless the reporter explicitly marks a method as personally
   verified and consents to public attribution.
 - A personally verified content Bug receives the `reporter-verified` label.
-  The Mac mini publishes it as an attributed reader-verified, non-official
-  alternative unless the method is unsafe, destructive, or unrelated to the
-  referenced article. Unmarked reports keep the normal evidence-checking path.
+  The Mac mini publishes it under “<name> 分享” as a clearly separated
+  non-official alternative unless the method is unsafe, destructive, or
+  unrelated to the referenced article. Unmarked reports keep the normal
+  evidence-checking path.
 - The watcher invokes `codex exec` only after a new content Bug appears.
 - Codex works in a dedicated clean checkout. The immediate Bug lane can update
   existing `cookbook/*.md` articles only; it cannot create, delete, rename, or
