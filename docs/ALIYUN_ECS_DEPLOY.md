@@ -188,7 +188,7 @@ Feedback submissions are written to:
 
 `inbox.jsonl` is the source of truth. `daily-work.md` is a rebuildable projection for human review; losing that projection must not be treated as losing the original submission.
 
-`solution-votes/votes.json` stores per-solution practice counts. Voter identifiers are hashed before storage; the public page receives counts only. The browser keeps its own anonymous identifier locally so one browser records at most one vote per solution. Include this file in the regular `/var/lib/apple-cookbook` backup.
+`solution-votes/votes.json` stores per-solution practice counts. Voter identifiers are hashed before storage; the public page receives counts only. The browser keeps its own anonymous identifier locally so one browser records at most one vote per solution. A solution explicitly published from a colleague's verified share starts with that author as the first practitioner; browser votes are added to that baseline. Include this file in the regular `/var/lib/apple-cookbook` backup.
 
 All writers, including `.github/workflows/sync-feedback-intake.yml`, acquire the mkdir-style lock at `/var/lib/apple-cookbook/feedback/.queue.lock`. Do not add a maintenance script that edits inbox, archive, or synced IDs without the same lock. Individual replacements use a same-directory temporary file followed by atomic `rename`.
 
