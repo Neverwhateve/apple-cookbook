@@ -63,7 +63,7 @@ communityTerms:
 difficulty: Quick
 estimatedTime: null
 verificationLevel: Official
-status: draft
+status: canonical
 canonicalArticleId: ipad-blue-box-double-tap-voiceover-accessibility
 solutions:
   - id: identify-active-accessibility-feature
