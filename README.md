@@ -46,10 +46,11 @@ The goal is to create a practical troubleshooting encyclopedia that helps Apple 
 
 ## Operating Cadence
 
-- Source harvest and article review work should continue every 1 hour.
-- Every completed automated cycle should open or update a `harvest/<run-id>` draft pull request; automation must not push content directly to `main`.
+- Source harvest and article maintenance work should continue every 2 hours.
+- Every completed automated cycle should open a `harvest/<run-id>` validation pull request; passing checks merge and deploy automatically without waiting for human review.
 - Each Harvest proposal must include the base commit and full-file content hashes described in `docs/HARVEST_WORKFLOW.md`.
-- Feedback questions and submitted links are P0 intake and must be handled before routine source harvest work.
+- Content Bugs, feedback questions, and submitted links are P0 intake. Website submissions are recorded immediately and request an immediate sync; they must be handled before routine source harvest work.
+- Codex runs on the Mac mini using the locally saved ChatGPT/Codex login. ECS remains the website and data host; see `docs/MAC_MINI_AUTOMATION.md`.
 - When multiple priority levels exist, resolve items in priority order before moving to the next level.
 - The expected `main` ruleset is versioned in `.github/rulesets/main.json` and is active remotely: PRs plus the strict `Validate pull request` check are required, deletion/force-push are blocked, and no bypass actors exist. `pnpm audit:github-governance` remains read-only. See `docs/GITHUB_GOVERNANCE.md`.
 

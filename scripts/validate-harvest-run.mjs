@@ -258,8 +258,8 @@ export function validateHarvestManifest(manifest, options = {}) {
         continue;
       }
 
-      if (isCreate && data.status !== "draft") {
-        errors.push(`${change.path}: Harvest-created articles must use status=draft (found ${String(data.status)})`);
+      if (isCreate && data.status !== "canonical") {
+        errors.push(`${change.path}: auto-published Harvest articles must use status=canonical (found ${String(data.status)})`);
       }
 
       const verificationLevel = data.verificationLevel ?? data.verification;

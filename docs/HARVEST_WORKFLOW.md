@@ -1,19 +1,24 @@
 # Harvest Proposal Workflow
 
-Harvest automation proposes content; it does not publish content and must not write directly to `main`.
+Harvest automation publishes validated content without waiting for human review. It still uses an isolated branch, manifest, pull-request checks, and protected `main` so a failed or stale run cannot overwrite production.
 
-The safety boundary is a draft pull request containing one run manifest under `harvest/manifests/`. The manifest records the exact base commit and SHA-256 hashes that the automation read and proposed. CI recomputes those values from Git and the checked-out Markdown before allowing review.
+Routine two-hour work runs through the Codex app automation on the Mac mini.
+Website content Bugs use the event-driven Mac watcher described in
+`docs/MAC_MINI_AUTOMATION.md`; the ECS host does not run Codex and does not hold
+an OpenAI API key.
+
+The safety boundary is an automation pull request containing one run manifest under `harvest/manifests/`. The manifest records the exact base commit and SHA-256 hashes that the automation read and proposed. CI recomputes those values from Git and the checked-out Markdown before allowing publication.
 
 ## Required Flow
 
 1. Fetch the latest protected `main` branch and record its full commit SHA as `baseCommit`.
 2. Create a dedicated branch named `harvest/<run-id>` from that commit.
 3. Match symptoms and aliases against canonical articles before creating a new file.
-4. Make only evidence-backed changes. Every newly created article must use `status: draft`.
+4. Make only evidence-backed changes. Every newly created article intended for automatic publication must use `status: canonical`.
 5. Create exactly one manifest at `harvest/manifests/<run-id>.json`.
 6. Run content validation and the Harvest guard locally.
-7. Push the branch and open a **draft pull request**. Never push Harvest output directly to `main`.
-8. Resolve guard and content-quality failures without weakening the manifest. Human review decides whether content may be promoted from `draft`.
+7. Push the branch and open a ready automation pull request as a technical validation container. Never bypass protected `main`.
+8. When all checks pass, CI merges the automation PR and explicitly starts the `main` deployment workflow for ECS. A failed check stops publication automatically.
 
 Example local checks:
 
@@ -54,7 +59,7 @@ Rules enforced by `scripts/validate-harvest-run.mjs`:
 - `baseCommit` must exist, be an ancestor of the proposal, and match the current PR base when CI supplies it.
 - Each path must be normalized, traversal-safe, below `cookbook/`, and end in `.md`. Symlinks are rejected.
 - A PR has one changed manifest; every changed Cookbook Markdown file must appear exactly once in it, and every manifest path must be changed by the PR.
-- `create` requires a path absent at `baseCommit`, a `null` base hash, and `status: draft` in the proposed frontmatter.
+- `create` requires a path absent at `baseCommit`, a `null` base hash, and `status: canonical` in the proposed frontmatter.
 - `update` and `redirect` require the file to exist at `baseCommit` and require an exact base-content hash.
 - The proposed hash must match the checked-out file. Identical base and proposed hashes are rejected as meaningless changes.
 - `redirect` requires `canonicalArticleId` in both the manifest and article frontmatter.
@@ -71,12 +76,12 @@ If `main` advances after collection, CI reports that `baseCommit` no longer matc
 
 If a base hash differs, treat it as a human-edit conflict. Preserve the current article, reassess the proposed change, and produce a new diff. Never resolve it by forcing an automation version over the repository version.
 
-## Publication and Canonicalization
+## Automatic Publication
 
-- Automation-created articles stay `draft` until a reviewer checks sources, steps, risk wording, duplicates, and canonical mapping.
+- Automation-created articles are canonical only after manifest, content, lint, type, test, and build checks pass.
 - Updates must preserve human-authored content unless the manifest was generated from that exact file version.
 - Duplicate symptoms should update a canonical article or use an explicit redirect proposal; they should not become independent published recipes.
-- Promotion to `reviewed` or `canonical` should be a separate reviewed change, not part of the initial automated create.
+- Human input is corrective: users can report a content Bug, provide ideas, or submit sources without being a publication dependency.
 
 ## Repository Settings Required Outside Git
 

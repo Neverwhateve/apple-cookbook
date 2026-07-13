@@ -1,6 +1,7 @@
 "use server";
 
 import { saveFeedback } from "@/lib/feedback";
+import { triggerFeedbackProcessing } from "@/lib/feedback-trigger";
 
 export type FeedbackState = {
   ok: boolean;
@@ -19,10 +20,15 @@ export async function submitFeedback(_state: FeedbackState, formData: FormData):
       };
     }
 
+    const trigger = await triggerFeedbackProcessing(result.id);
+
     return {
       ok: true,
       id: result.id,
-      message: `已记录为 ${result.id}，并加入每日工作收集。`
+      message:
+        trigger.status === "dispatched"
+          ? `已记录为 ${result.id}，自动验证流程已启动。`
+          : `已记录为 ${result.id}，已进入最高优先级处理队列。`
     };
   } catch (error) {
     console.error("Feedback submission could not be persisted.", { error });

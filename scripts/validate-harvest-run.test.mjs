@@ -105,11 +105,11 @@ test("path validation rejects traversal, absolute paths, and non-Markdown conten
   assert.match(validateCookbookPath("cookbook/iPhone/safe.mdx"), /Markdown/);
 });
 
-test("a valid draft create matches the base and proposed hashes", () => {
+test("a valid canonical create matches the base and proposed hashes", () => {
   const { cwd, baseCommit } = setupRepository();
   const relativePath = "cookbook/iPhone/new-article.md";
   const absolutePath = path.join(cwd, relativePath);
-  fs.writeFileSync(absolutePath, article({ title: "New article", slug: "new-article", status: "draft" }));
+  fs.writeFileSync(absolutePath, article({ title: "New article", slug: "new-article", status: "canonical" }));
 
   const result = validateHarvestManifest(
     manifest(baseCommit, [{
@@ -124,13 +124,13 @@ test("a valid draft create matches the base and proposed hashes", () => {
   assert.deepEqual([...result.paths], [relativePath]);
 });
 
-test("create rejects published status and Official content without an official source", () => {
+test("create rejects non-canonical status and Official content without an official source", () => {
   const { cwd, baseCommit } = setupRepository();
   const relativePath = "cookbook/iPhone/unsafe-create.md";
   const absolutePath = path.join(cwd, relativePath);
   fs.writeFileSync(
     absolutePath,
-    article({ title: "Unsafe create", slug: "unsafe-create", status: "reviewed", officialSources: [] })
+    article({ title: "Unsafe create", slug: "unsafe-create", status: "draft", officialSources: [] })
   );
 
   const details = errorDetails(() => validateHarvestManifest(
@@ -143,7 +143,7 @@ test("create rejects published status and Official content without an official s
     { cwd }
   ));
 
-  assert.match(details, /status=draft/);
+  assert.match(details, /status=canonical/);
   assert.match(details, /verification=Official requires/);
 });
 
@@ -154,7 +154,7 @@ test("v2 verificationLevel Official rejects non-official structured sources", ()
   const v2Article = article({
     title: "V2 unsafe create",
     slug: "v2-unsafe-create",
-    status: "draft",
+    status: "canonical",
     verification: "Unknown",
     officialSources: []
   }).replace(
@@ -260,7 +260,7 @@ test("changed-since validates one complete manifest and skips ordinary PRs", () 
 
   const relativePath = "cookbook/iPhone/new-article.md";
   const absolutePath = path.join(cwd, relativePath);
-  fs.writeFileSync(absolutePath, article({ title: "New article", slug: "new-article", status: "draft" }));
+  fs.writeFileSync(absolutePath, article({ title: "New article", slug: "new-article", status: "canonical" }));
 
   const manifestPath = "harvest/manifests/daily-2026-07-13.json";
   fs.mkdirSync(path.join(cwd, "harvest", "manifests"), { recursive: true });
