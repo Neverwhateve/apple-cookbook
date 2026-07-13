@@ -46,11 +46,12 @@ The goal is to create a practical troubleshooting encyclopedia that helps Apple 
 
 ## Operating Cadence
 
-- The 2-hour maintenance cycle must process open P0 feedback before routine source harvest or article review work.
-- A content Harvest cycle with material changes should become a new immutable `harvest/<run-id>` draft pull request. No-op cycles create no diff, while code or UI maintenance uses a scoped `codex/*` branch; automation must not push directly to `main`.
+- Source harvest and article maintenance work should continue every 2 hours.
+- Every completed automated cycle should open a `harvest/<run-id>` validation pull request; passing checks merge and deploy automatically without waiting for human review.
 - Each Harvest proposal must include the base commit, full-file content hashes, and recorded canonical-match decision described in `docs/HARVEST_WORKFLOW.md`.
-- The local materializer defaults to dry-run and never creates branches, commits, pushes, or pull requests. The repository intentionally has no write-enabled Harvest GitHub Action.
-- Feedback questions and submitted links are P0 intake and must be handled before routine source harvest work.
+- The local materializer defaults to dry-run and never creates branches, commits, pushes, or pull requests by itself.
+- Content Bugs, feedback questions, and submitted links are P0 intake. Website submissions are recorded immediately and request an immediate sync; they must be handled before routine source harvest work.
+- Codex runs on the Mac mini using the locally saved ChatGPT/Codex login. ECS remains the website and data host; see `docs/MAC_MINI_AUTOMATION.md`.
 - When multiple priority levels exist, resolve items in priority order before moving to the next level.
 - The expected `main` ruleset is versioned in `.github/rulesets/main.json` and is active remotely: PRs plus the strict `Validate pull request` check are required, deletion/force-push are blocked, and no bypass actors exist. `pnpm audit:github-governance` remains read-only. See `docs/GITHUB_GOVERNANCE.md`.
 
@@ -125,7 +126,7 @@ pnpm feedback:verify -- --snapshot /path/to/feedback-snapshot
 pnpm audit:github-governance
 ```
 
-The GitHub governance audit exits `0`: PR #12 registered and passed `Validate pull request`, after which existing ruleset ID `18863035` was updated in place with that exact strict check and an empty bypass list. PR #12 then published the workflow source and its complete dependency closure to `main`. Harvest proposal input must stay outside the checkout; follow `docs/HARVEST_WORKFLOW.md` for dry-run, explicit materialization, local validation, and the human-created draft PR. Feedback backups are deliberately opt-in; follow `docs/FEEDBACK_RECOVERY.md` and store snapshots outside both the checkout and live data directory.
+The GitHub governance audit exits `0`: PR #12 registered and passed `Validate pull request`, after which existing ruleset ID `18863035` was updated in place with that exact strict check and an empty bypass list. PR #12 then published the workflow source and its complete dependency closure to `main`. Harvest proposal input must stay outside the checkout; follow `docs/HARVEST_WORKFLOW.md` for dry-run, explicit materialization, local validation, and the ready validation PR. Feedback backups are deliberately opt-in; follow `docs/FEEDBACK_RECOVERY.md` and store snapshots outside both the checkout and live data directory.
 
 In this Codex workspace, Node is available at:
 

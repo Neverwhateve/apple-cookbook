@@ -4,6 +4,7 @@ import { atomicWriteText, withFileLock } from "./file-store.ts";
 
 export type FeedbackKind =
   | "missing_problem"
+  | "content_bug"
   | "article_feedback"
   | "workflow_request"
   | "link_submission"
@@ -17,6 +18,7 @@ export type FeedbackSubmission = {
   description: string;
   customerWords: string;
   device: string;
+  reporterName: string;
   contact: string;
   sourceTitle: string;
   sourceUrl: string;
@@ -70,6 +72,7 @@ function normalizeSingleLine(value: FormDataEntryValue | null) {
 function toFeedbackKind(value: string): FeedbackKind {
   if (
     value === "article_feedback" ||
+    value === "content_bug" ||
     value === "workflow_request" ||
     value === "link_submission" ||
     value === "question_submission"
@@ -106,6 +109,7 @@ function buildSubmission(formData: FormData): FeedbackSubmission {
     description,
     customerWords: normalizeSingleLine(formData.get("customerWords")),
     device: normalizeSingleLine(formData.get("device")),
+    reporterName: normalizeSingleLine(formData.get("reporterName")),
     contact: normalizeSingleLine(formData.get("contact")),
     sourceTitle: normalizeSingleLine(formData.get("sourceTitle")),
     sourceUrl: normalizeSingleLine(formData.get("sourceUrl")),
@@ -116,6 +120,9 @@ function buildSubmission(formData: FormData): FeedbackSubmission {
 
 function validateSubmission(submission: FeedbackSubmission) {
   if (submission.title.length < 3) return "请添加一个简短标题，方便后续跟进。";
+  if (submission.kind === "content_bug" && submission.reporterName.length < 2) {
+    return "请填写你的名字，方便记录是谁发现了这个问题。";
+  }
   if (submission.kind === "link_submission") {
     if (!/^https?:\/\/\S+\.\S+/.test(submission.description)) return "请粘贴一个完整链接。";
   } else if (submission.description.length < 3) {
@@ -146,6 +153,7 @@ function buildDailyWorkItem(submission: FeedbackSubmission) {
         ]
       : []),
     `  - 设备: ${submission.device || "未填写"}`,
+    `  - 提交人: ${submission.reporterName || "未填写"}`,
     `  - 顾客原话: ${submission.customerWords || "未填写"}`,
     `  - 联系方式: ${submission.contact || "未填写"}`,
     `  - 下一步: ${nextStep}`,

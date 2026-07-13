@@ -1,6 +1,6 @@
 "use client";
 
-import { MessageSquarePlus, SendHorizonal, X } from "lucide-react";
+import { Bug, SendHorizonal, X } from "lucide-react";
 import { useActionState, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { submitFeedback, type FeedbackState } from "@/app/feedback/actions";
@@ -41,11 +41,11 @@ export function ArticleFeedbackWidget({
         <section
           id="article-feedback-panel"
           className="w-[min(360px,calc(100vw-2rem))] rounded-lg border border-zinc-200 bg-white p-4 shadow-lg dark:border-zinc-800 dark:bg-zinc-950"
-          aria-label="文章反馈"
+          aria-label="挑 Bug"
         >
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
-              <h2 className="text-base font-semibold text-zinc-950 dark:text-zinc-50">反馈这篇内容</h2>
+              <h2 className="text-base font-semibold text-zinc-950 dark:text-zinc-50">给这篇内容挑 Bug</h2>
               <p className="mt-1 truncate text-xs text-zinc-500 dark:text-zinc-400">{articleTitle}</p>
             </div>
             <button
@@ -60,38 +60,42 @@ export function ArticleFeedbackWidget({
           </div>
 
           <form action={formAction} className="mt-4 space-y-3">
-            <input type="hidden" name="kind" value="article_feedback" />
-            <input type="hidden" name="title" value={`关于《${articleTitle}》的反馈`} />
+            <input type="hidden" name="kind" value="content_bug" />
+            <input type="hidden" name="title" value={`内容 Bug：《${articleTitle}》`} />
             <input type="hidden" name="sourceTitle" value={articleTitle} />
             <input type="hidden" name="sourceUrl" value={articleUrl} />
 
             <div>
               <label htmlFor="article-feedback-description" className="text-sm font-medium text-zinc-950 dark:text-zinc-50">
-                问题或想法
+                Bug 内容
               </label>
               <textarea
                 id="article-feedback-description"
                 name="description"
                 required
-                minLength={10}
+                minLength={3}
                 maxLength={4000}
                 rows={4}
-                placeholder="哪里不准确、缺了什么步骤，或有什么更好的处理思路。"
+                placeholder="哪里不准确、步骤有误、内容过期，或遗漏了什么。"
                 className="mt-2 w-full resize-y rounded-md border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm leading-6 outline-none transition placeholder:text-zinc-500 focus:border-zinc-500 dark:border-zinc-800 dark:bg-zinc-900"
               />
             </div>
 
             <div>
-              <label htmlFor="article-feedback-contact" className="text-sm font-medium text-zinc-950 dark:text-zinc-50">
-                备注
+              <label htmlFor="article-feedback-name" className="text-sm font-medium text-zinc-950 dark:text-zinc-50">
+                你的名字
               </label>
               <input
-                id="article-feedback-contact"
-                name="contact"
-                placeholder="可选：姓名、门店，或后续跟进方式"
+                id="article-feedback-name"
+                name="reporterName"
+                required
+                minLength={2}
+                maxLength={80}
+                autoComplete="name"
+                placeholder="用于记录谁发现了这个 Bug"
                 className="mt-2 w-full rounded-md border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm outline-none transition placeholder:text-zinc-500 focus:border-zinc-500 dark:border-zinc-800 dark:bg-zinc-900"
               />
-              <p className="mt-1.5 text-xs leading-5 text-zinc-500">此项仅保存在私有反馈队列，不会同步到公开 GitHub Issue。</p>
+              <p className="mt-1.5 text-xs leading-5 text-zinc-500">名字会保存在处理记录中，不在公开页面展示。</p>
             </div>
 
             <div className="flex flex-col gap-3 border-t border-zinc-200 pt-3 dark:border-zinc-800">
@@ -105,7 +109,7 @@ export function ArticleFeedbackWidget({
                     : "text-zinc-500 dark:text-zinc-400"
                 }`}
               >
-                {state.message || "会随当前文章一起进入每日复核。"}
+                {state.message || "提交后立即记录，并进入最高优先级验证与调整流程。"}
               </p>
               <SubmitButton />
             </div>
@@ -120,8 +124,8 @@ export function ArticleFeedbackWidget({
         aria-expanded={open}
         aria-controls="article-feedback-panel"
       >
-        <MessageSquarePlus className="h-4 w-4" />
-        反馈
+        <Bug className="h-4 w-4" />
+        挑 Bug
       </button>
     </div>
   );

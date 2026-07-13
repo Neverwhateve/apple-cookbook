@@ -157,6 +157,7 @@ function FeedbackCard({ item, archived = false }: { item: AdminFeedbackItem; arc
           <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-zinc-700 dark:text-zinc-300">{item.description}</p>
           <div className="mt-3 grid gap-2 text-xs text-zinc-500 sm:grid-cols-2">
             <p>设备：{item.device || "未填写"}</p>
+            <p>提交人：{item.reporterName || "未填写"}</p>
             <p>顾客原话：{item.customerWords || "未填写"}</p>
             <p>联系方式：{item.contact || "未填写"}</p>
             <p>更新时间：{item.updatedAt ? new Date(item.updatedAt).toLocaleString("zh-CN", { hour12: false }) : "未更新"}</p>
@@ -229,7 +230,7 @@ export default async function AdminFeedbackPage() {
           <p className="text-sm font-semibold text-zinc-500 dark:text-zinc-400">Admin</p>
           <h1 className="mt-2 text-3xl font-semibold tracking-normal text-zinc-950 dark:text-zinc-50">P0 反馈队列</h1>
           <p className="mt-3 max-w-2xl text-sm leading-6 text-zinc-600 dark:text-zinc-400">
-            查看网站提交的问题和链接，决定是否进入处理、关闭或重新打开。待处理项会由每 2 小时维护任务优先消费。
+            查看网站提交的内容 Bug、问题和链接。内容 Bug 会立即同步，并由自动处理流程优先验证和调整。
           </p>
         </div>
         <div className="flex flex-col gap-3 sm:w-80">

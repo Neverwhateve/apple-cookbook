@@ -230,5 +230,5 @@ Use this equivalence check as the minimum bar for later migrations. A successful
 - Automated updates should modify managed fields only and preserve human-written Markdown.
 - Stable `id`, source IDs, and solution IDs prevent repeated runs from producing meaningless diffs.
 - Content hashes and the Harvest base commit must be checked before applying a proposal.
-- A new automated article starts as `draft`; promotion to `reviewed` or `canonical` requires validation and human review.
+- A new automated article intended for publication uses `canonical` and is published only after the Harvest manifest, content checks, tests, and build all pass. Human feedback remains corrective rather than a publication gate.
 - A missing `official` flag is treated as `false` by the runtime adapter.
