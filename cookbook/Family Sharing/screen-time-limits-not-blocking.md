@@ -23,10 +23,13 @@ aliases:
   - 孩子绕过屏幕时间
 verification: Official
 difficulty: Moderate
-updated: 2026-07-10
+updated: 2026-07-13
 official_sources:
   - https://support.apple.com/zh-cn/108806
+  - https://support.apple.com/en-us/108806
   - https://support.apple.com/zh-cn/105121
+  - https://support.apple.com/en-us/105121
+  - https://support.apple.com/en-us/125666
   - https://support.apple.com/zh-cn/guide/iphone/iphb0c7313c9/ios
   - https://support.apple.com/zh-cn/125399
 community_sources:
@@ -51,6 +54,7 @@ popular: true
 - “我设了 1 小时，孩子说点一下就能继续。”
 - “家长端看起来设置成功，孩子设备没有生效。”
 - “删除重装 App 后好像又能用了。”
+- “某些家长控制默认打开，不能关。”
 
 ---
 
@@ -68,6 +72,8 @@ popular: true
    - Apple 说明，关闭“内容与隐私限制”会暂停其中的家长控制，直到重新打开。
 6. **家人共享设备没有同步到最新系统**
    - Apple 建议在打开或更改家长控制前，将家人共享群组中的所有设备更新到最新软件版本，帮助设置在设备之间同步。
+7. **儿童账户默认规则因地区而异**
+   - Apple 说明，某些家长控制会根据孩子年龄默认开启；在部分州、国家或地区，Screen Time、Ask to Buy 和 App 限制等设置可能无法关闭或调整。这不是“限额失效”，但会让顾客误以为开关异常。
 
 ---
 
@@ -87,11 +93,15 @@ popular: true
 8. 打开**内容与隐私限制**，确认它处于开启状态；如果它关闭，相关家长控制会暂停。
 9. 将家长设备和孩子设备都更新到当前可用的最新系统版本，再重新测试一次限额。
 10. 如果孩子是通过“请求更多时间”或 App 例外获得访问权限，改按请求批准流程检查“信息”、通知和例外列表。
+11. 如果顾客抱怨某些控制不能关闭或会自动打开，先确认孩子生日、Apple 账户国家或地区和家庭组织者地区；按 Apple 地区规则解释，不要建议改生日或改区来绕过限制。
 
 参考来源：
 
 - [Apple 支持：使用“屏幕时间”来管理孩子的 iPhone 或 iPad](https://support.apple.com/zh-cn/108806)
+- [Apple Support: Use Screen Time to manage your child's iPhone or iPad](https://support.apple.com/en-us/108806)
 - [Apple 支持：使用家长控制来管理你孩子的 iPhone 或 iPad](https://support.apple.com/zh-cn/105121)
+- [Apple Support: Use parental controls to manage your child's iPhone or iPad](https://support.apple.com/en-us/105121)
+- [Apple Support: Region-specific rules for managing an Apple Account](https://support.apple.com/en-us/125666)
 - [iPhone 使用手册：在 iPhone 上通过“屏幕时间”设置定时](https://support.apple.com/zh-cn/guide/iphone/iphb0c7313c9/ios)
 - [Apple 支持：如何管理孩子的 App 例外请求](https://support.apple.com/zh-cn/125399)
 
@@ -127,7 +137,8 @@ popular: true
 4. 检查“始终允许”和通信限制。电话、信息、FaceTime 和紧急联系人相关设置要谨慎，不要为了阻止娱乐 App 误伤必要通信。
 5. 检查“内容与隐私限制”是否开启，尤其是顾客同时抱怨孩子能安装、删除 App 或改隐私设置时。
 6. 更新家长和孩子设备后，在孩子设备上现场等待或临时设置一个 1 分钟限额复测。
-7. 如果设置正确但长期不同步，记录家人共享成员、Apple 账户、设备型号、系统版本、限额类型和复现步骤，再升级 Apple 支持。
+7. 如果问题是“不能关”而不是“不能挡”，记录孩子年龄、账户地区和不可调整的控制项，按 Apple 地区规则分流。
+8. 如果设置正确但长期不同步，记录家人共享成员、Apple 账户、设备型号、系统版本、限额类型和复现步骤，再升级 Apple 支持。
 
 ---
 
@@ -137,7 +148,7 @@ popular: true
 
 - App 与网站活动、屏幕时间密码、阻止开关、App 限额、始终允许和内容与隐私限制都正确，但孩子设备仍长期不执行限制。
 - 家长端显示的限制和孩子设备显示的限制不一致。
-- 孩子 Apple 账户年龄、地区、家庭成员状态或屏幕时间密码存在账户级异常。
+- 孩子 Apple 账户年龄、地区、成年确认、家庭成员状态或屏幕时间密码存在账户级异常。
 
 前往 Apple Store 或授权维修点：
 
@@ -175,8 +186,8 @@ popular: true
 
 ## 元信息
 
-- 最后更新：2026-07-10
-- 来源数量：7
+- 最后更新：2026-07-13
+- 来源数量：10
 - 验证级别：Apple 官方
 - 支持系统：当前 iOS、iPadOS、macOS 版本
 - 可信度：高

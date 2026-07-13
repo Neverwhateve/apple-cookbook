@@ -25,10 +25,13 @@ aliases:
   - 孩子请求更多时间家长收不到
 verification: Official
 difficulty: Moderate
-updated: 2026-07-10
+updated: 2026-07-13
 official_sources:
   - https://support.apple.com/zh-cn/125399
+  - https://support.apple.com/en-us/125399
   - https://support.apple.com/zh-cn/108806
+  - https://support.apple.com/en-us/105121
+  - https://support.apple.com/en-us/125666
   - https://support.apple.com/zh-cn/118233
 community_sources:
   - https://discussions.apple.com/thread/254278383
@@ -52,6 +55,8 @@ popular: true
 - “请求只在信息里出现，不再像屏幕时间通知那样弹出。”
 - “App 限额能限制，但批准更多时间不生效。”
 - “孩子那边一直显示等待批准。”
+- “批准过的 App 更新后又要重新批准。”
+- “有些 App 限制或购买前询问开关不能关。”
 
 ---
 
@@ -69,6 +74,8 @@ popular: true
    - 如果“信息”通知关闭，或 iCloud 通讯录没有同步到接收设备，请求可能不会按预期显示。
 6. **顾客把三类请求混在一起**
    - “购买前询问”、App 年龄分级例外和“请求更多时间”都可能表现为家长批准请求，但入口、限制类型和排查重点不同。
+7. **地区或年龄规则要求重新批准**
+   - Apple 说明，根据州、国家或地区，App 如果发生重大变化，例如年龄分级提高或加入新功能，可能需要家长再次批准；部分儿童和青少年账户的 Screen Time、Ask to Buy 或 App 限制可能默认开启且不能关闭。
 
 ---
 
@@ -87,12 +94,16 @@ popular: true
 7. 确认 iCloud 通讯录已经同步到家长想接收请求的设备。
 8. 如果孩子在身边，可在孩子设备上打开 App Store 或对应请求页面，使用“亲自批准”完成 App 例外请求。
 9. 如果批准后 App 仍被限制，打开**设置 > 屏幕时间 > 内容与隐私限制 > App Store、媒体、网页与游戏 > App**，查看已批准的 App 例外是否仍在列表中；必要时移除后让孩子重新请求。
-10. 如果问题其实是购买或下载 App 请求收不到，改按“购买前询问”流程检查家人共享、专注模式、设备名称、联系人名片和购买账户。
+10. 如果同一个 App 已批准后又重新要求批准，检查该 App 是否出现年龄分级或功能变化，并记录孩子账户所在国家或地区；不要把所有重复批准都当作通知故障。
+11. 如果问题其实是购买或下载 App 请求收不到，改按“购买前询问”流程检查家人共享、专注模式、设备名称、联系人名片和购买账户。
 
 参考来源：
 
 - [Apple 支持：如何管理孩子的 App 例外请求](https://support.apple.com/zh-cn/125399)
+- [Apple Support: How to manage app exceptions for your child](https://support.apple.com/en-us/125399)
 - [Apple 支持：使用“屏幕时间”来管理孩子的 iPhone 或 iPad](https://support.apple.com/zh-cn/108806)
+- [Apple Support: Use parental controls to manage your child's iPhone or iPad](https://support.apple.com/en-us/105121)
+- [Apple Support: Region-specific rules for managing an Apple Account](https://support.apple.com/en-us/125666)
 - [Apple 支持：如果“购买前询问”无法正常使用](https://support.apple.com/zh-cn/118233)
 
 ---
@@ -126,8 +137,9 @@ popular: true
 3. 检查双方系统版本，优先更新后再继续测试。
 4. 检查家长设备“信息”App、iMessage 信息收发地址、信息通知和 iCloud 通讯录同步。
 5. 如果 App 例外请求到达但家长设备批准失败，让孩子在现场使用“亲自批准”验证限制本身是否可解除。
-6. 如果只有 Apple Watch 上批准失败，但 iPhone 或 Mac 可以批准，先指导顾客用 iPhone 或 Mac 完成请求，并记录 watchOS、iOS 和现象。
-7. 如果所有设备都无法收到或批准，按 Apple 支持升级处理，不要删除儿童账号或重建家庭群组。
+6. 如果顾客说“同一个 App 又要批一次”或“这个开关不能关”，先查 App 年龄分级/重大变化和儿童账户地区规则，再判断是否异常。
+7. 如果只有 Apple Watch 上批准失败，但 iPhone 或 Mac 可以批准，先指导顾客用 iPhone 或 Mac 完成请求，并记录 watchOS、iOS 和现象。
+8. 如果所有设备都无法收到或批准，按 Apple 支持升级处理，不要删除儿童账号或重建家庭群组。
 
 ---
 
@@ -138,7 +150,7 @@ popular: true
 - 软件、iMessage 信息、通知、通讯录和家人共享都正确，但请求长期收不到。
 - 家长能收到请求，但批准后孩子设备仍不解锁。
 - 请求只在 Apple Watch、Mac 或某一台设备上失败，需要确认具体系统版本行为。
-- 顾客需要处理儿童账户、出生日期、地区规则或家庭成员移除问题。
+- 顾客需要处理儿童账户、出生日期、成年确认、地区规则或家庭成员移除问题。
 
 前往 Apple Store 或授权维修点：
 
@@ -176,8 +188,8 @@ popular: true
 
 ## 元信息
 
-- 最后更新：2026-07-10
-- 来源数量：6
+- 最后更新：2026-07-13
+- 来源数量：9
 - 验证级别：Apple 官方
 - 支持系统：当前 iOS、iPadOS、macOS、watchOS 版本
 - 可信度：高

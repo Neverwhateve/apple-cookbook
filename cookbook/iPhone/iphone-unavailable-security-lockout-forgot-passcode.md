@@ -38,6 +38,10 @@ official_sources:
   - https://support.apple.com/zh-cn/102421
   - https://support.apple.com/zh-cn/guide/iphone/iph3ecf67d29/ios
   - https://support.apple.com/zh-cn/118105
+  - https://support.apple.com/en-us/118106
+  - https://support.apple.com/en-us/121133
+  - https://support.apple.com/en-us/105039
+  - https://support.apple.com/en-us/118107
 community_sources:
   - https://discussions.apple.com/thread/256313485
   - https://discussions.apple.com/thread/253635299
@@ -62,6 +66,10 @@ popular: true
 - “我知道 Apple ID 密码，但忘了锁屏密码。”
 - “抹掉后 eSIM 会不会没了？”
 - “刷机能不能保留数据？”
+- “按键怎么按都进不了恢复模式。”
+- “电脑没有识别 iPhone。”
+- “一直回到输入密码界面，没有出现连接电脑图标。”
+- “手机提示靠近另一台设备恢复。”
 
 ---
 
@@ -79,7 +87,11 @@ popular: true
    - Apple 说明，启用“查找”后，设备重新激活时需要关联的 Apple 账户和密码。抹掉设备不会绕过激活锁。
 6. **恢复方式取决于系统版本、网络和电脑可用性**
    - Apple 当前忘记密码文章把 iOS 15.2 或更高版本的设备端重设作为优先入口；较早系统、无设备端入口或设备无法联网时，再转电脑恢复或 iCloud.com/find 抹掉。
-7. **第三方“解锁不丢资料”说法风险很高**
+7. **恢复模式失败可能是按键顺序、线缆、电脑软件或硬件按钮问题**
+   - Apple 的恢复模式文章要求先更新 Mac，或在 Windows PC 上使用最新 Apple 设备 App / iTunes，再按机型保持连接并持续按住指定按钮直到出现“连接电脑”画面；如果按钮损坏或卡住，可能需要维修服务。
+8. **部分新设备可能出现“靠近另一台设备恢复”流程**
+   - Apple 说明，部分 iPhone 和 iPad 在无线软件更新期间可使用另一台已解锁、已联网且运行 iOS/iPadOS 18 或更高版本的设备进行附近恢复；这不是忘记密码后保留资料解锁的捷径。
+9. **第三方“解锁不丢资料”说法风险很高**
    - Apple 官方路径不提供在忘记设备密码时保留本机数据解锁的步骤。第三方工具若声称绕过密码且保留数据，不应作为官方建议。
 
 ---
@@ -101,8 +113,11 @@ popular: true
 9. 等设备重新启动后，按照屏幕说明重新设置设备。
 10. 如果有备份，从 iCloud 或电脑备份恢复数据和设置；如果没有备份，只能设置为新的 iPhone。
 11. 如果无法在设备上完成还原，预留最多约 60 分钟，使用 Mac 的访达或 Windows 的 Apple 设备 App 通过电脑还原 iPhone；如果下载超过 15 分钟且设备退出恢复模式，等下载完成后再重新进入恢复模式。
-12. 如果电脑还原也无法完成，并且“查找”已开启，可在另一台设备上前往 iCloud.com/find，选择这台 iPhone 并抹掉，然后重新设置。
-13. 重新设置或恢复后，设置一个新的设备密码，并确认 iCloud 云备份已开启。
+12. 如果进入恢复模式失败，按机型重新确认按键顺序：iPhone 8 或更新机型是快速按下调高音量、快速按下调低音量，然后按住侧边按钮直到出现连接电脑画面；iPhone 7 系列按住侧边/顶部按钮和调低音量按钮；iPhone 6s 或更早机型按住主屏幕按钮和顶部/侧边按钮。
+13. 如果电脑没有识别设备，先确认 Mac、Apple 设备 App 或 iTunes 已更新，并更换可靠的 USB 线缆、电脑端口和供电环境；如果按钮损坏、卡住，或恢复模式仍无法使用，按 Apple 指引进入服务路径。
+14. 如果设备在无线更新后显示“靠近另一台设备恢复”的动画，并且属于 Apple 支持的机型，可连接电源，把它靠近另一台已解锁、已连接 Wi-Fi 且运行 iOS/iPadOS 18 或更高版本的 iPhone 或 iPad，按屏幕提示完成附近恢复。不要把这个流程解释为忘记密码时可保留本机数据。
+15. 如果电脑还原也无法完成，并且“查找”已开启，可在另一台设备上前往 iCloud.com/find，选择这台 iPhone 并抹掉，然后重新设置。
+16. 重新设置或恢复后，设置一个新的设备密码，并确认 iCloud 云备份已开启。
 
 参考来源：
 
@@ -113,6 +128,10 @@ popular: true
 - [Apple 支持：如何抹掉 iPhone 或 iPad 上的 eSIM](https://support.apple.com/zh-cn/102421)
 - [iPhone 使用手册：备份 iPhone](https://support.apple.com/zh-cn/guide/iphone/iph3ecf67d29/ios)
 - [Apple 支持：从备份恢复 iPhone、iPad 或 iPod touch](https://support.apple.com/zh-cn/118105)
+- [Apple Support: If you can't update or restore your iPhone or iPod touch](https://support.apple.com/en-us/118106)
+- [Apple Support: Restore your iPhone or iPad with a nearby device](https://support.apple.com/en-us/121133)
+- [Apple Support: Temporarily use your old passcode when you forget your new passcode on iPhone or iPad](https://support.apple.com/en-us/105039)
+- [Apple Support: Restore your iPhone, iPad, or iPod to factory settings using a computer](https://support.apple.com/en-us/118107)
 
 ---
 
@@ -126,6 +145,7 @@ popular: true
 4. Apple 账户密码不能代替设备密码解锁本机数据。Apple 账户密码用于退出登录、关闭激活锁或重新激活设备。
 5. Apple Store 或授权维修点也不能在不知道设备密码的情况下替顾客保留本机数据解锁。
 6. 如果顾客没有电脑，也借不到电脑，Apple 当前指引是前往 Apple Store 或 Apple 授权服务提供商获取协助。
+7. 如果顾客最近 72 小时内刚改过设备密码，并且设备运行 iOS 17 / iPadOS 17 或更高版本且仍有网络，先检查“忘记密码？”里是否可以用旧密码进行 Passcode Reset；超过条件后仍回到抹掉设备路径。
 
 ---
 
@@ -141,6 +161,21 @@ popular: true
 6. 抹掉后如果出现激活锁，输入这台设备原本关联的 Apple 账户和密码。
 7. 如果顾客忘记 Apple 账户或密码，先走 Apple 账户恢复路径；不要把设备反复恢复作为解决激活锁的方法。
 8. 如果设备属于企业或学校，联系 IT 或管理员处理激活锁和管理配置。
+
+---
+
+## 恢复模式和电脑识别分流
+
+验证级别：Apple 官方
+
+1. 先确认顾客是在做**忘记密码抹掉设备**，还是在做**更新/恢复失败修复系统**。忘记密码选择 Restore 会抹掉资料；系统故障但尚未尝试更新时，Apple 的更新/恢复文章允许先尝试 Update。
+2. 确认电脑环境：Mac 先更新系统；Windows PC 使用最新 Apple 设备 App，若没有 Apple 设备 App 或 Mac 使用 macOS Mojave 或更早版本，再使用 iTunes。
+3. 使用可传输数据和充电的 USB 线缆直接连接电脑；不要用只充电线、松动转接头或不稳定扩展坞判断设备故障。
+4. 按机型执行恢复模式按键，并强调**看到 Apple 标志也不要松手**，要等到连接电脑画面出现。
+5. 如果设备回到密码界面，说明没有进入恢复模式；关机后重新执行，而不是继续在锁屏上试大量密码。
+6. 如果软件下载超过 15 分钟，设备可能退出恢复模式。Apple 指引是先让下载完成，再重新进入恢复模式继续恢复。
+7. 如果按钮损坏、卡住，或多次正确操作仍无法使用恢复模式，按 Apple 的服务边界处理，不要继续推荐第三方刷机工具。
+8. 如果看到“Restore Nearby iPhone/iPad”或靠近另一台设备的动画，这是部分新机型在无线更新期间的附近恢复流程；需要另一台已解锁、已连接 Wi-Fi、运行 iOS/iPadOS 18 或更高版本的设备，且不支持需登录网页或 802.1X 的网络。
 
 ---
 
@@ -174,10 +209,12 @@ popular: true
 4. 询问是否使用 eSIM，尤其是旅行 eSIM、运营商 eSIM、无实体 SIM 的机型或中国大陆办理的 eSIM。
 5. 如果屏幕有“忘记密码？”入口，优先用设备端还原，因为这通常比电脑恢复更快。
 6. 如果没有入口或设备无网络，使用电脑恢复；Windows 现场优先使用 Apple 设备 App。电脑也不可用时再考虑 iCloud.com/find 抹掉。
-7. 抹掉前提醒顾客准备 Apple 账户和密码。抹掉后激活锁可能要求原账户登录。
-8. 不承诺 Apple 或第三方可以在忘记设备密码时提取本机数据。
-9. 恢复完成后，帮助顾客检查 iCloud 云备份、重要 App 备份和账户恢复信息，降低下次数据损失风险。
-10. 设定时间预期：电脑恢复可能需要下载系统，Apple 文档提示可能需要最多约 60 分钟；下载超过 15 分钟导致退出恢复模式时，不要重新开始下载，等下载完成后再进恢复模式。
+7. 如果顾客说“进不了恢复模式”，现场按机型重新示范一次，并记录设备是否回到密码界面、连接电脑画面、Apple 标志、恢复助理，还是无反应黑屏。
+8. 如果顾客说“电脑不识别”，先换线缆、端口、电脑和 Apple 设备 App / 访达 / iTunes 环境，再判断设备本体。
+9. 抹掉前提醒顾客准备 Apple 账户和密码。抹掉后激活锁可能要求原账户登录。
+10. 不承诺 Apple 或第三方可以在忘记设备密码时提取本机数据。
+11. 恢复完成后，帮助顾客检查 iCloud 云备份、重要 App 备份和账户恢复信息，降低下次数据损失风险。
+12. 设定时间预期：电脑恢复可能需要下载系统，Apple 文档提示可能需要最多约 60 分钟；下载超过 15 分钟导致退出恢复模式时，不要重新开始下载，等下载完成后再进恢复模式。
 
 ---
 
@@ -210,6 +247,7 @@ popular: true
 - [Apple 账户显示验证失败或连接服务器出错](/recipes/Apple%20ID/apple-account-verification-failed)
 - iPhone 无法开机或卡在 Apple 标志
 - iPhone 换机后无法从备份恢复
+- iPhone 无法进入恢复模式或电脑无法识别
 
 ---
 
@@ -229,7 +267,7 @@ popular: true
 ## 元信息
 
 - 最后更新：2026-07-13
-- 来源数量：10
+- 来源数量：14
 - 验证级别：Apple 官方
 - 支持系统：当前 iOS、iPadOS、visionOS；eSIM 保留选项取决于系统版本和抹掉路径
 - 可信度：高
