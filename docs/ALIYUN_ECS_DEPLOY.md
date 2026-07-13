@@ -187,6 +187,8 @@ Back up `/var/lib/apple-cookbook` regularly. Take a queue snapshot under the sha
 
 The current design serializes a single ECS data directory; it is not a multi-host transaction store. Move to SQLite on one host or an external database before running multiple writable application hosts. On Vercel, the file-backed form returns an explicit not-saved error rather than writing to ephemeral `/tmp`.
 
+To start feedback synchronization immediately after submission, configure `APPLE_COOKBOOK_GITHUB_TOKEN` with a fine-grained GitHub token limited to Actions write access for this repository. The app dispatches `sync-feedback-intake.yml` only after the feedback record is durably stored. If dispatch fails, the record remains safe and the scheduled workflow is the fallback.
+
 ## Admin Feedback Queue
 
 The P0 feedback review page is available at:

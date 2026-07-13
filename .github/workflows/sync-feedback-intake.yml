@@ -5,6 +5,11 @@ on:
     # Feed the every-2-hour maintenance cycle before its next :05 run.
     - cron: "35 * * * *"
   workflow_dispatch:
+    inputs:
+      feedback_id:
+        description: "Feedback ID requesting immediate synchronization"
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -80,6 +85,7 @@ jobs:
         run: |
           gh label create P0 --color B60205 --description "Highest priority feedback intake" || true
           gh label create feedback-intake --color 1D76DB --description "Submitted through Apple Cookbook feedback" || true
+          gh label create content-bug --color D93F0B --description "Content accuracy or troubleshooting bug" || true
 
       - name: Close archived P0 feedback issues
         env:
@@ -292,10 +298,14 @@ jobs:
           This item came from website feedback and must be handled before routine source harvest work. Research official Apple sources first, then compare community reports, update or create Cookbook content, record sources, and close this issue with the resolution summary.
           BODY
 
+            labels=(--label P0 --label feedback-intake)
+            if [[ "$kind" == "content_bug" ]]; then
+              labels+=(--label content-bug)
+            fi
+
             gh issue create \
               --title "$issue_title" \
-              --label P0 \
-              --label feedback-intake \
+              "${labels[@]}" \
               --body-file intake/issue-body.md
 
             echo "$id" >> intake/newly-synced-ids.txt

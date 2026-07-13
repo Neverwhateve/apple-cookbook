@@ -32,6 +32,7 @@ function makeSubmission(index: number, status: FeedbackSubmission["status"] = "o
     description: `测试反馈内容 ${index}`,
     customerWords: "",
     device: "iPhone",
+    reporterName: "测试用户",
     contact: "",
     sourceTitle: "",
     sourceUrl: "",
@@ -54,6 +55,22 @@ afterEach(async () => {
 });
 
 describe("feedback file store", () => {
+  it("requires a reporter name for content Bug submissions", async () => {
+    const root = await makeTemporaryRoot();
+    const formData = new FormData();
+    formData.set("kind", "content_bug");
+    formData.set("title", "内容 Bug：测试文章");
+    formData.set("description", "第二步的设置名称已经过期。");
+
+    const missingName = await saveFeedback(formData, root);
+    assert.equal(missingName.ok, false);
+    assert.match(missingName.error, /名字/);
+
+    formData.set("reporterName", "小陈");
+    const accepted = await saveFeedback(formData, root);
+    assert.equal(accepted.ok, true);
+  });
+
   it("recovers an abandoned stale directory lock", async () => {
     const root = await makeTemporaryRoot();
     const lockPath = getFeedbackQueueLockPath(root);

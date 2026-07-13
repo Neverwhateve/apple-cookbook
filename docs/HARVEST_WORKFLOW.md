@@ -1,22 +1,38 @@
 # Harvest Proposal Workflow
 
-Harvest automation proposes content; it does not publish content and must not write directly to `main`.
+Harvest automation publishes validated content without waiting for human review. It still uses an isolated branch, manifest, pull-request checks, and protected `main` so a failed or stale run cannot overwrite production.
 
-The safety boundary is a draft pull request containing only declared Cookbook Markdown changes and one immutable run manifest under `harvest/manifests/`. The manifest records the exact base commit, SHA-256 hashes, and canonical-match review that the automation used. CI recomputes the hashes, checks action/identity consistency, and validates the recorded review structure before allowing review; it does not repeat the semantic search or prove that its notes are true.
+Routine two-hour work runs through the Codex app automation on the Mac mini.
+Website content Bugs use the event-driven Mac watcher described in
+`docs/MAC_MINI_AUTOMATION.md`; the ECS host does not run Codex and does not hold
+an OpenAI API key.
 
-`scripts/generate-harvest-proposal.mjs` is a deterministic safety materializer, not a content author or publisher. An upstream research process supplies complete Markdown in an explicit JSON input. The materializer validates that input, previews it against the whole content corpus, writes exact bytes only with `--write`, and creates the matching manifest. It never browses, invents claims, changes branches, commits, pushes, opens a pull request, marks a pull request ready, approves, or merges.
+The safety boundary is a ready validation pull request containing only declared
+Cookbook Markdown changes and one immutable run manifest under
+`harvest/manifests/`. The manifest records the exact base commit, SHA-256
+hashes, and canonical-match review that the automation used. CI recomputes the
+hashes, checks action and identity consistency, and validates the review
+structure before allowing publication; it does not repeat the semantic search
+or prove that its notes are true.
+
+`scripts/generate-harvest-proposal.mjs` is a deterministic safety materializer,
+not a content author. An upstream research process supplies complete Markdown
+in an explicit JSON input. The materializer validates that input, previews it
+against the whole content corpus, writes exact bytes only with `--write`, and
+creates the matching manifest. It never browses, invents claims, changes
+branches, commits, pushes, opens a pull request, approves, or merges by itself.
 
 ## Required Flow
 
 1. Fetch the latest protected `main` branch and record its full commit SHA as `baseCommit`.
 2. Create a dedicated branch named exactly `harvest/<run-id>` or `automation/harvest/<run-id>` from that commit.
 3. Match symptom language, aliases, error messages, devices, and system terms against canonical articles. Record the actual queries, matched article IDs, decision, and notes in `canonicalReview`.
-4. Have the research process produce a proposal JSON outside the checkout. It must contain complete, evidence-backed Markdown; every create must use `status: draft`.
+4. Have the research process produce a proposal JSON outside the checkout. It must contain complete, evidence-backed Markdown; every automatically published create must use `status: canonical`.
 5. Run the materializer without `--write`. The default dry-run validates the entire proposed corpus in an isolated temporary directory and makes no repository change.
 6. Review the path/hash-only summary. Run the same command with `--write` to materialize exact Markdown bytes and one manifest at `harvest/manifests/<run-id>.json`.
-7. Run content, Harvest, lint, type, test, and build checks. Inspect the complete diff before committing only the declared articles and manifest.
-8. Push the branch and open a **draft pull request** using a human credential. Never push Harvest output directly to `main`.
-9. Resolve guard and content-quality failures without weakening or replacing the manifest. Human review decides whether content may later be promoted from `draft` in a separate change.
+7. Run content, Harvest, lint, type, test, and build checks. Commit only the declared articles and manifest.
+8. Push the branch and open a ready validation pull request. Never push Harvest output directly to `main`.
+9. When all checks pass, CI merges the automation PR and explicitly starts the `main` deployment workflow for ECS. A failed check stops publication automatically.
 
 Example local flow:
 
@@ -68,7 +84,7 @@ The JSON input contract is `schemas/harvest-proposal-input.schema.json`. A minim
         "decision": "create-new",
         "notes": "No existing canonical article covers the same intent."
       },
-      "content": "---\nschemaVersion: 2\n...\nstatus: draft\n---\n\n# Complete article\n"
+      "content": "---\nschemaVersion: 2\n...\nstatus: canonical\n---\n\n# Complete article\n"
     }
   ]
 }
@@ -111,9 +127,9 @@ Rules enforced by `scripts/validate-harvest-run.mjs`:
 - Each path must be normalized, traversal-safe, below `cookbook/`, and end in `.md`. Target or parent symlinks are rejected by the materializer.
 - A Harvest PR may only add or modify declared `cookbook/**/*.md` files and add one run manifest. Deletes, renames, type changes, extra manifests, workflow/code/config changes, source logs, reports, indexes, and all other paths fail the specialized guard.
 - Every changed Cookbook Markdown file must appear exactly once in the manifest, and every manifest path must be changed by the PR.
-- `create` requires a path absent at `baseCommit`, a `null` base hash, and `status: draft` in the proposed frontmatter.
+- `create` requires a path absent at `baseCommit`, a `null` base hash, and `status: canonical` in the proposed frontmatter.
 - `update` and `redirect` require the file to exist at `baseCommit` and require an exact base-content hash.
-- `update` and `redirect` cannot change `id`, `slug`, or publication `status`; `update` also cannot change `canonicalArticleId`. Identity migration and publication promotion are separate human-reviewed work.
+- `update` and `redirect` cannot change `id`, `slug`, or publication `status`; `update` also cannot change `canonicalArticleId`. Identity migration remains a separate scoped change.
 - The proposed hash must match the checked-out file. Identical base and proposed hashes are rejected as meaningless changes.
 - `redirect` requires `canonicalArticleId` in both the manifest and article frontmatter.
 - Every change requires a reason and canonical review. Its decision must match the action; redirects must record the target among matched IDs.
@@ -136,7 +152,11 @@ An ordinary human pull request without a changed Harvest manifest skips this spe
 - `generatedAt` and `baseCommit` come from input, so output is deterministic. A run ID and manifest are immutable; different content must use a new run ID after re-reading the latest base.
 - The materializer deliberately does not append `sources/daily-harvest-*`, reports, indexes, or summaries. Those cumulative files currently create ordering conflicts and repeated URLs; future run-scoped intelligence artifacts need a separate reviewed contract.
 
-The repository intentionally has no write-enabled Harvest GitHub Action. Remote automation remains read-only until several human-created draft proposals prove this boundary. A future publisher must use a repository-limited short-lived credential and a separately approved write step; it must never auto-ready, approve, or merge.
+The materializer remains write-limited to the local checkout. Publication is a
+separate deterministic step: a repository-limited credential may push only an
+automation branch and open a ready PR. GitHub Actions may merge that PR only
+after the strict content-quality job succeeds; no automation credential may
+bypass the protected `main` ruleset.
 
 Manifest v2 intentionally replaces the pre-generator hash-only v1 contract. v1 manifests are rejected because they do not carry canonical review evidence. No v1 run manifests were persisted in this repository, so there is no data migration; every external producer must update before use.
 
@@ -146,12 +166,12 @@ If `main` advances after collection, CI reports that `baseCommit` no longer matc
 
 If a base hash differs, treat it as a human-edit conflict. Preserve the current article, reassess the proposed change, and produce a new diff. Never resolve it by forcing an automation version over the repository version.
 
-## Publication and Canonicalization
+## Automatic Publication
 
-- Automation-created articles stay `draft` until a reviewer checks sources, steps, risk wording, duplicates, and canonical mapping.
+- Automation-created articles are canonical only after manifest, content, lint, type, test, and build checks pass.
 - Updates must preserve human-authored content unless the manifest was generated from that exact file version.
 - Duplicate symptoms should update a canonical article or use an explicit redirect proposal; they should not become independent published recipes.
-- Promotion to `reviewed` or `canonical` should be a separate reviewed change, not part of the initial automated create.
+- Human input is corrective: users can report a content Bug, provide ideas, or submit sources without being a publication dependency.
 
 ## Repository Settings Required Outside Git
 

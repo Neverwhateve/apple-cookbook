@@ -208,13 +208,13 @@ function inspectHarvestArticleContent(content, change, label) {
     return { data: null, errors };
   }
 
-  if (change.action === "create" && data.status !== "draft") {
-    errors.push(`${label}: Harvest-created articles must use status=draft (found ${String(data.status)})`);
+  if (change.action === "create" && data.status !== "canonical") {
+    errors.push(`${label}: auto-published Harvest articles must use status=canonical (found ${String(data.status)})`);
   }
   if (change.action === "create") {
     const contentCanonicalId = data.canonicalArticleId ?? data.canonical_article_id;
     if (contentCanonicalId !== undefined && contentCanonicalId !== null) {
-      errors.push(`${label}: Harvest create must not assign canonicalArticleId before human review`);
+      errors.push(`${label}: Harvest create must not assign canonicalArticleId`);
     }
   }
 

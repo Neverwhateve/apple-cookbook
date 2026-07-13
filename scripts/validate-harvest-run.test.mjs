@@ -140,11 +140,11 @@ test("CLI options that require values fail closed when their value is missing", 
   }
 });
 
-test("a valid draft create matches the base and proposed hashes", () => {
+test("a valid canonical create matches the base and proposed hashes", () => {
   const { cwd, baseCommit } = setupRepository();
   const relativePath = "cookbook/iPhone/new-article.md";
   const absolutePath = path.join(cwd, relativePath);
-  fs.writeFileSync(absolutePath, article({ title: "New article", slug: "new-article", status: "draft" }));
+  fs.writeFileSync(absolutePath, article({ title: "New article", slug: "new-article", status: "canonical" }));
 
   const result = validateHarvestManifest(
     manifest(baseCommit, [{
@@ -159,13 +159,13 @@ test("a valid draft create matches the base and proposed hashes", () => {
   assert.deepEqual([...result.paths], [relativePath]);
 });
 
-test("create rejects published status and Official content without an official source", () => {
+test("create rejects non-canonical status and Official content without an official source", () => {
   const { cwd, baseCommit } = setupRepository();
   const relativePath = "cookbook/iPhone/unsafe-create.md";
   const absolutePath = path.join(cwd, relativePath);
   fs.writeFileSync(
     absolutePath,
-    article({ title: "Unsafe create", slug: "unsafe-create", status: "reviewed", officialSources: [] })
+    article({ title: "Unsafe create", slug: "unsafe-create", status: "draft", officialSources: [] })
   );
 
   const details = errorDetails(() => validateHarvestManifest(
@@ -178,17 +178,17 @@ test("create rejects published status and Official content without an official s
     { cwd }
   ));
 
-  assert.match(details, /status=draft/);
+  assert.match(details, /status=canonical/);
   assert.match(details, /verification=Official requires/);
 });
 
-test("create cannot pre-assign canonicalArticleId before review", () => {
+test("create cannot pre-assign canonicalArticleId", () => {
   const { cwd, baseCommit } = setupRepository();
   const relativePath = "cookbook/iPhone/unsafe-create.md";
   const absolutePath = path.join(cwd, relativePath);
   fs.writeFileSync(
     absolutePath,
-    article({ title: "Unsafe create", slug: "unsafe-create", status: "draft", canonicalArticleId: "canonical-target" })
+    article({ title: "Unsafe create", slug: "unsafe-create", status: "canonical", canonicalArticleId: "canonical-target" })
   );
 
   const details = errorDetails(() => validateHarvestManifest(
@@ -200,7 +200,7 @@ test("create cannot pre-assign canonicalArticleId before review", () => {
     }]),
     { cwd }
   ));
-  assert.match(details, /must not assign canonicalArticleId before human review/);
+  assert.match(details, /must not assign canonicalArticleId/);
 });
 
 test("v2 verificationLevel Official rejects non-official structured sources", () => {
@@ -210,7 +210,7 @@ test("v2 verificationLevel Official rejects non-official structured sources", ()
   const v2Article = article({
     title: "V2 unsafe create",
     slug: "v2-unsafe-create",
-    status: "draft",
+    status: "canonical",
     verification: "Unknown",
     officialSources: []
   }).replace(
@@ -314,7 +314,7 @@ test("missing or inconsistent canonical review evidence fails", () => {
   const { cwd, baseCommit } = setupRepository();
   const relativePath = "cookbook/iPhone/new-article.md";
   const absolutePath = path.join(cwd, relativePath);
-  fs.writeFileSync(absolutePath, article({ title: "New article", slug: "new-article", status: "draft" }));
+  fs.writeFileSync(absolutePath, article({ title: "New article", slug: "new-article", status: "canonical" }));
 
   const unsafeManifest = manifest(baseCommit, [{
     path: relativePath,
@@ -433,7 +433,7 @@ test("changed-since validates one complete manifest and skips ordinary PRs", () 
 
   const relativePath = "cookbook/iPhone/new-article.md";
   const absolutePath = path.join(cwd, relativePath);
-  fs.writeFileSync(absolutePath, article({ title: "New article", slug: "new-article", status: "draft" }));
+  fs.writeFileSync(absolutePath, article({ title: "New article", slug: "new-article", status: "canonical" }));
 
   const manifestPath = "harvest/manifests/daily-2026-07-13.json";
   fs.mkdirSync(path.join(cwd, "harvest", "manifests"), { recursive: true });
@@ -474,7 +474,7 @@ test("run manifest filename must exactly match its runId", () => {
   const { cwd, baseCommit } = setupRepository();
   const relativePath = "cookbook/iPhone/new-article.md";
   const absolutePath = path.join(cwd, relativePath);
-  fs.writeFileSync(absolutePath, article({ title: "New article", slug: "new-article", status: "draft" }));
+  fs.writeFileSync(absolutePath, article({ title: "New article", slug: "new-article", status: "canonical" }));
   const manifestPath = "harvest/manifests/wrong-run-id.json";
   fs.mkdirSync(path.join(cwd, "harvest", "manifests"), { recursive: true });
   fs.writeFileSync(
@@ -495,7 +495,7 @@ test("run manifest rejects branch mismatches and symlink files", () => {
   const { cwd, baseCommit } = setupRepository();
   const relativePath = "cookbook/iPhone/new-article.md";
   const absolutePath = path.join(cwd, relativePath);
-  fs.writeFileSync(absolutePath, article({ title: "New article", slug: "new-article", status: "draft" }));
+  fs.writeFileSync(absolutePath, article({ title: "New article", slug: "new-article", status: "canonical" }));
   const manifestPath = "harvest/manifests/daily-2026-07-13.json";
   const manifestDirectory = path.join(cwd, "harvest", "manifests");
   fs.mkdirSync(manifestDirectory, { recursive: true });
@@ -547,7 +547,7 @@ test("changed-since rejects files outside the Cookbook and run manifest allowlis
   const { cwd, baseCommit } = setupRepository();
   const relativePath = "cookbook/iPhone/new-article.md";
   const absolutePath = path.join(cwd, relativePath);
-  fs.writeFileSync(absolutePath, article({ title: "New article", slug: "new-article", status: "draft" }));
+  fs.writeFileSync(absolutePath, article({ title: "New article", slug: "new-article", status: "canonical" }));
   fs.mkdirSync(path.join(cwd, ".github", "workflows"), { recursive: true });
   fs.writeFileSync(path.join(cwd, ".github", "workflows", "unsafe.yml"), "name: unsafe\n");
 

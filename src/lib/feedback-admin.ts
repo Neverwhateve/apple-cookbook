@@ -32,6 +32,7 @@ function parseSubmission(line: string): FeedbackSubmission | null {
     if (!value.id || !value.title) return null;
     return {
       ...value,
+      reporterName: value.reporterName ?? "",
       status: value.status ?? "open"
     };
   } catch {

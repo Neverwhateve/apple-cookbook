@@ -34,6 +34,7 @@ function article({
   verificationLevel = "Unknown",
   canonicalArticleId = null
 } = {}) {
+  const published = status === "reviewed" || status === "canonical";
   return `---
 schemaVersion: 2
 id: ${slug}
@@ -71,13 +72,21 @@ solutions:
     steps:
       - 记录当前状态并交由人工复核。
     verificationLevel: Unknown
-    sourceIds: []
+    sourceIds: ${published ? "[apple-support-test]" : "[]"}
     warnings: []
     limitations: []
 warnings: []
 limitations: []
-sources: []
-lastVerifiedAt: null
+sources:${published ? `
+  - id: apple-support-test
+    title: Apple Support test source
+    url: https://support.apple.com/zh-cn/guide/iphone/welcome/ios
+    publisher: Apple
+    sourceType: official-guide
+    accessedAt: 2026-07-13
+    publishedAt: null
+    official: true` : " []"}
+lastVerifiedAt: ${published ? "2026-07-13" : "null"}
 lastUpdatedAt: 2026-07-13
 createdAt: 2026-07-13
 relatedArticles: []
@@ -159,11 +168,11 @@ function proposal(baseCommit, changes) {
   };
 }
 
-function createChange({ slug = "new-article", status = "draft" } = {}) {
+function createChange({ slug = "new-article", status = "canonical" } = {}) {
   return {
     path: `cookbook/iPhone/${slug}.md`,
     action: "create",
-    reason: "A distinct symptom cluster needs human review.",
+    reason: "A distinct symptom cluster is ready for guarded automatic publication.",
     canonicalReview: review("create", slug),
     content: article({ slug, title: "新的测试文章", status })
   };
@@ -329,11 +338,11 @@ test("redirect materializes an existing canonical target without changing source
 test("unsafe create status and invalid corpus fail before any write", () => {
   const { cwd, baseCommit } = setupRepository();
   const details = proposalError(() => generateHarvestProposal(
-    proposal(baseCommit, [createChange({ status: "canonical" })]),
+    proposal(baseCommit, [createChange({ status: "draft" })]),
     { cwd, write: true }
   ));
 
-  assert.match(details, /status=draft/);
+  assert.match(details, /status=canonical/);
   assert.equal(fs.existsSync(path.join(cwd, "cookbook/iPhone/new-article.md")), false);
   assert.equal(fs.existsSync(path.join(cwd, "harvest")), false);
 });
