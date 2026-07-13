@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "runId": "canary-2026-07-13T102000Z",
+  "automationId": "manual-harvest-canary",
+  "generatedAt": "2026-07-13T10:20:00.000Z",
+  "baseCommit": "c12eeb7e2511d4df8a27870258df7209582cf1f9",
+  "changes": [
+    {
+      "path": "cookbook/iPad/ipad-blue-box-double-tap-voiceover-accessibility.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:d480cabe66a8cc58b771899b6e38f3762add2b242841d75a354a621cbd94e22a",
+      "reason": "Create a draft symptom-led accessibility article after verifying Apple guidance and confirming that the existing iPad keyboard canonical does not cover spoken focus, double-tap activation, Switch Control scanning, or AssistiveTouch and Zoom symptoms.",
+      "canonicalReview": {
+        "queries": [
+          "iPad 蓝框 必须双击",
+          "iPad 会朗读 点一下 双击",
+          "iPad 旁白关不掉",
+          "iPad 外接键盘 蓝色边框",
+          "iPad 辅助触控 圆点",
+          "iPad 屏幕放大",
+          "iPad Switch Control 蓝框",
+          "iPad blue box double tap VoiceOver"
+        ],
+        "matchedArticleIds": [
+          "ipad-keyboard-small-floating-split-moving"
+        ],
+        "decision": "create-new",
+        "notes": "现有近邻只解决屏幕键盘形态异常，并未覆盖旁白、全键盘控制或切换控制导致的焦点框、朗读和手势变化；经 Apple 官方资料核验后创建独立 draft，并保留与键盘文章的关联。"
+      }
+    }
+  ]
+}
