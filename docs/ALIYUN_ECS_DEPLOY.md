@@ -65,9 +65,7 @@ Environment=NODE_ENV=production
 Environment=PORT=3000
 Environment=HOSTNAME=127.0.0.1
 Environment=APPLE_COOKBOOK_DATA_DIR=/var/lib/apple-cookbook
-Environment=APPLE_COOKBOOK_ADMIN_TOKEN=replace-with-a-long-random-token
-Environment=APPLE_COOKBOOK_ADMIN_USERNAME=admin
-Environment=APPLE_COOKBOOK_ADMIN_PASSWORD=replace-with-a-long-random-password
+EnvironmentFile=-/etc/apple-cookbook/runtime.env
 ExecStart=/usr/bin/node server.js
 Restart=always
 RestartSec=5
@@ -195,7 +193,15 @@ Back up `/var/lib/apple-cookbook` regularly. Take a queue snapshot under the sha
 
 The current design serializes a single ECS data directory; it is not a multi-host transaction store. Move to SQLite on one host or an external database before running multiple writable application hosts. On Vercel, the file-backed form returns an explicit not-saved error rather than writing to ephemeral `/tmp`.
 
-To start feedback synchronization immediately after submission, configure `APPLE_COOKBOOK_GITHUB_TOKEN` with a fine-grained GitHub token limited to Actions write access for this repository. The app dispatches `sync-feedback-intake.yml` only after the feedback record is durably stored. If dispatch fails, the record remains safe and the scheduled workflow is the fallback.
+To start feedback synchronization immediately after submission, add `APPLE_COOKBOOK_GITHUB_TOKEN` as a GitHub Actions secret. Use a fine-grained token limited to Actions write access for this repository. During deployment, the workflow sends the secret over SSH standard input to `scripts/configure-feedback-dispatch-token.sh`; the script stores it in `/etc/apple-cookbook/runtime.env` with mode `0600` and installs a systemd drop-in that loads the file. The secret is never committed or passed in an SSH command argument. The app dispatches `sync-feedback-intake.yml` only after the feedback record is durably stored. If dispatch fails, the record remains safe and the scheduled workflow is the fallback.
+
+The same runtime file can contain the admin configuration when the feedback review page is enabled:
+
+```text
+APPLE_COOKBOOK_ADMIN_TOKEN=replace-with-a-long-random-token
+APPLE_COOKBOOK_ADMIN_USERNAME=admin
+APPLE_COOKBOOK_ADMIN_PASSWORD=replace-with-a-long-random-password
+```
 
 ## Admin Feedback Queue
 

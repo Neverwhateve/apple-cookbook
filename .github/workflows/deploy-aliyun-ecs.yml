@@ -71,6 +71,31 @@ jobs:
           chmod 600 ~/.ssh/aliyun_ecs
           ssh-keyscan -p "$ALIYUN_ECS_PORT" "$ALIYUN_ECS_HOST" >> ~/.ssh/known_hosts
 
+      - name: Update ECS checkout
+        env:
+          ALIYUN_ECS_HOST: ${{ secrets.ALIYUN_ECS_HOST }}
+          ALIYUN_ECS_PORT: ${{ secrets.ALIYUN_ECS_PORT || '22' }}
+          ALIYUN_ECS_USER: ${{ secrets.ALIYUN_ECS_USER }}
+          APP_DIR: ${{ vars.APP_DIR || '/opt/apple-cookbook' }}
+        run: |
+          test -n "$ALIYUN_ECS_USER"
+          ssh -i ~/.ssh/aliyun_ecs -p "$ALIYUN_ECS_PORT" "$ALIYUN_ECS_USER@$ALIYUN_ECS_HOST" \
+            "APP_DIR='$APP_DIR' BRANCH='main' GITHUB_SHA='$GITHUB_SHA' bash -lc 'cd \"\$APP_DIR\" && if [[ -n \$(git status --porcelain) ]]; then git stash push --include-untracked -m \"pre-deploy-\$GITHUB_SHA\"; fi && git pull --ff-only origin \"\$BRANCH\"'"
+
+      - name: Configure immediate feedback synchronization
+        env:
+          ALIYUN_ECS_HOST: ${{ secrets.ALIYUN_ECS_HOST }}
+          ALIYUN_ECS_PORT: ${{ secrets.ALIYUN_ECS_PORT || '22' }}
+          ALIYUN_ECS_USER: ${{ secrets.ALIYUN_ECS_USER }}
+          APP_DIR: ${{ vars.APP_DIR || '/opt/apple-cookbook' }}
+          SERVICE_NAME: ${{ vars.SERVICE_NAME || 'apple-cookbook' }}
+          APPLE_COOKBOOK_GITHUB_TOKEN: ${{ secrets.APPLE_COOKBOOK_GITHUB_TOKEN }}
+        run: |
+          test -n "$APPLE_COOKBOOK_GITHUB_TOKEN"
+          printf '%s\n' "$APPLE_COOKBOOK_GITHUB_TOKEN" | \
+            ssh -i ~/.ssh/aliyun_ecs -p "$ALIYUN_ECS_PORT" "$ALIYUN_ECS_USER@$ALIYUN_ECS_HOST" \
+              "APP_DIR='$APP_DIR' SERVICE_NAME='$SERVICE_NAME' bash -lc 'cd \"\$APP_DIR\" && SERVICE_NAME=\"\$SERVICE_NAME\" bash scripts/configure-feedback-dispatch-token.sh'"
+
       - name: Deploy on ECS
         env:
           ALIYUN_ECS_HOST: ${{ secrets.ALIYUN_ECS_HOST }}
@@ -83,9 +108,8 @@ jobs:
           FEEDBACK_SERVICE_USER: ${{ vars.FEEDBACK_SERVICE_USER || 'applecookbook' }}
           FEEDBACK_SERVICE_GROUP: ${{ vars.FEEDBACK_SERVICE_GROUP || 'applecookbook' }}
         run: |
-          test -n "$ALIYUN_ECS_USER"
           ssh -i ~/.ssh/aliyun_ecs -p "$ALIYUN_ECS_PORT" "$ALIYUN_ECS_USER@$ALIYUN_ECS_HOST" \
-            "APP_DIR='$APP_DIR' SERVICE_NAME='$SERVICE_NAME' LOCAL_HEALTH_URL='$LOCAL_HEALTH_URL' FEEDBACK_DATA_DIR='$FEEDBACK_DATA_DIR' FEEDBACK_SERVICE_USER='$FEEDBACK_SERVICE_USER' FEEDBACK_SERVICE_GROUP='$FEEDBACK_SERVICE_GROUP' BRANCH='main' GITHUB_SHA='$GITHUB_SHA' bash -lc 'cd \"\$APP_DIR\" && if [[ -n \$(git status --porcelain) ]]; then git stash push --include-untracked -m \"pre-deploy-\$GITHUB_SHA\"; fi && git pull --ff-only origin \"\$BRANCH\" && bash scripts/repair-feedback-storage.sh && bash scripts/deploy-ecs.sh --skip-pull'"
+            "APP_DIR='$APP_DIR' SERVICE_NAME='$SERVICE_NAME' LOCAL_HEALTH_URL='$LOCAL_HEALTH_URL' FEEDBACK_DATA_DIR='$FEEDBACK_DATA_DIR' FEEDBACK_SERVICE_USER='$FEEDBACK_SERVICE_USER' FEEDBACK_SERVICE_GROUP='$FEEDBACK_SERVICE_GROUP' bash -lc 'cd \"\$APP_DIR\" && bash scripts/repair-feedback-storage.sh && bash scripts/deploy-ecs.sh --skip-pull'"
 
       - name: Verify production URL
         env:
