@@ -89,7 +89,7 @@ export function SearchPanel({ articles }: { articles: SearchDocument[] }) {
             placeholder="例如：为什么看不到家人的位置"
             aria-describedby="cookbook-search-help cookbook-search-status"
             autoComplete="off"
-            className="min-w-0 flex-1 bg-transparent py-3 text-base outline-none placeholder:text-zinc-500"
+            className="min-w-0 flex-1 bg-transparent py-3 text-base outline-none placeholder:text-zinc-500 focus-visible:outline-none"
           />
           {query ? (
             <button
