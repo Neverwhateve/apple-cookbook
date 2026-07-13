@@ -10,6 +10,16 @@ node_modules/
 out/
 dist/
 coverage/
+tsconfig.tsbuildinfo
+
+# Runtime feedback state. The legacy empty inbox and daily-work files remain
+# tracked for compatibility, but new private queue artifacts must stay local.
+feedback/archive.jsonl
+feedback/synced-github-issues.txt
+feedback/.queue.lock/
+feedback/.queue.lock.stale-*/
+feedback/.*.tmp
+todos/.*.tmp
 
 *.log
 npm-debug.log*

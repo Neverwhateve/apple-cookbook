@@ -20,6 +20,9 @@ aliases:
   - Apple ID cannot login
   - Apple账号验证失败
   - 收不到验证码
+  - 忘记 Apple 账户密码
+  - Apple ID 密码忘了
+  - Forgot Apple ID password
 verification: Official
 difficulty: Moderate
 updated: 2026-07-08
@@ -30,7 +33,7 @@ official_sources:
   - https://support.apple.com/zh-cn/118574
 community_sources: []
 status: seed
-popular: true
+popular: false
 ---
 
 # Apple 账户验证失败

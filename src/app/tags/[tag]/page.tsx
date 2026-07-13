@@ -1,18 +1,28 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArticleCard } from "@/components/article-card";
-import { getAllArticles, getAllTags } from "@/lib/cookbook";
+import { getPublishedArticles, getPublishedTags } from "@/lib/cookbook";
 
 export function generateStaticParams() {
-  return getAllTags().map((tag) => ({
+  return getPublishedTags().map((tag) => ({
     tag
   }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ tag: string }> }) {
+  const { tag: tagParam } = await params;
+  const tag = decodeURIComponent(tagParam);
+
+  return {
+    title: `${tag} 相关问题`,
+    description: `查找与 ${tag} 有关的 Apple 故障排查文章。`
+  };
 }
 
 export default async function TagPage({ params }: { params: Promise<{ tag: string }> }) {
   const { tag: tagParam } = await params;
   const tag = decodeURIComponent(tagParam);
-  const articles = getAllArticles().filter((article) => article.tags.includes(tag));
+  const articles = getPublishedArticles().filter((article) => article.tags.includes(tag));
 
   if (articles.length === 0) {
     notFound();

@@ -17,7 +17,13 @@ import {
 } from "lucide-react";
 import { ArticleCard } from "@/components/article-card";
 import { SearchPanel } from "@/components/search-panel";
-import { getAllArticles, getAllCategories, getAllTags } from "@/lib/cookbook";
+import {
+  getIndexableArticles,
+  getPublishedArticles,
+  getPublishedCategories,
+  getPublishedSearchDocuments,
+  getPublishedTags
+} from "@/lib/cookbook";
 
 function AppleWatchIcon({ className }: { className?: string }) {
   return (
@@ -72,41 +78,51 @@ const productItems = [
 
 const topicGroups = [
   {
-    name: "账号与家庭",
-    description: "Apple ID、家人共享、屏幕使用时间和购买请求",
-    href: "/categories/Apple%20ID",
-    match: ["Apple ID", "Family Sharing", "Screen Time"],
+    name: "家庭共享",
+    description: "屏幕使用时间、购买前询问和儿童账号",
+    href: "/categories/Family%20Sharing",
+    match: ["Family Sharing"],
+    facet: "category" as const,
     icon: LockKeyhole
   },
   {
-    name: "联网与蜂窝",
-    description: "Wi-Fi、个人热点、SIM、eSIM 和运营商网络",
+    name: "网络与热点",
+    description: "Wi-Fi 无法联网、加入网络和个人热点",
     href: "/categories/Networking",
-    match: ["Networking", "Cellular", "SIM", "eSIM", "Carrier", "Network"],
+    match: ["Networking"],
+    facet: "category" as const,
     icon: Router
   },
   {
-    name: "设备连接",
-    description: "AirDrop、AirPods、Apple Watch 和连续互通",
-    href: "/categories/Continuity",
-    match: ["Continuity", "AirPods", "Apple Watch", "Bluetooth"],
+    name: "连续互通",
+    description: "隔空投送、设备发现和跨设备连接",
+    href: "/categories/%E8%BF%9E%E7%BB%AD%E4%BA%92%E9%80%9A",
+    match: ["连续互通"],
+    facet: "category" as const,
     icon: Cable
   },
   {
-    name: "电池与更新",
-    description: "充电、耗电、系统更新卡住和固件更新",
-    href: "/tags/Battery",
-    match: ["Battery", "Update", "Firmware", "Charging"],
+    name: "电池问题",
+    description: "耗电、发热、电池健康和续航异常",
+    href: "/tags/%E7%94%B5%E6%B1%A0",
+    match: ["电池"],
+    facet: "tag" as const,
     icon: BatteryCharging
   }
 ];
 
 export default function HomePage() {
-  const articles = getAllArticles();
-  const categories = getAllCategories();
-  const tags = getAllTags();
-  const recentlyUpdated = [...articles].sort((a, b) => b.updated.localeCompare(a.updated)).slice(0, 6);
-  const popular = articles.filter((article) => article.popular).slice(0, 6);
+  const articles = getPublishedArticles();
+  const categories = getPublishedCategories(articles);
+  const tags = getPublishedTags(articles);
+  const publishedArticles = getIndexableArticles(articles);
+  const searchDocuments = getPublishedSearchDocuments(articles);
+  const availableCategories = new Set(categories.filter((category) => category.items.length > 0).map((category) => category.name));
+  const recentlyUpdated = [...publishedArticles].sort((a, b) => b.updated.localeCompare(a.updated)).slice(0, 6);
+  const popular = publishedArticles
+    .filter((article) => article.popular)
+    .sort((a, b) => b.updated.localeCompare(a.updated))
+    .slice(0, 6);
   const quickActions = [
     {
       title: "查看全部分类",
@@ -126,8 +142,8 @@ export default function HomePage() {
   ];
   const topicCounts = topicGroups.map((topic) => ({
     ...topic,
-    count: articles.filter((article) =>
-      [article.category, ...article.tags, ...article.device].some((value) => topic.match.includes(value))
+    count: publishedArticles.filter((article) =>
+      topic.facet === "category" ? topic.match.includes(article.category) : article.tags.some((tag) => topic.match.includes(tag))
     ).length
   }));
 
@@ -136,14 +152,19 @@ export default function HomePage() {
       <section className="bg-white dark:bg-zinc-950">
         <div className="mx-auto max-w-6xl px-4 pb-10 pt-12 text-center sm:px-6 sm:pb-14 sm:pt-20">
           <h1 className="text-4xl font-semibold leading-tight tracking-normal text-zinc-950 dark:text-zinc-50 sm:text-6xl">
-            Apple Cookbook 支持
+            用你遇到的现象，找到解决办法
           </h1>
-          <p className="mx-auto mt-4 max-w-xl text-xl leading-8 text-zinc-700 dark:text-zinc-300">
-            需要协助？从这里开始。
+          <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-zinc-700 dark:text-zinc-300 sm:text-xl">
+            搜索症状、错误提示、设备或功能名称。Apple 官方步骤优先，社区经验会明确标注。
           </p>
 
-          <nav aria-label="产品支持" className="mx-auto mt-10 grid max-w-4xl grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3">
-            {productItems.map((product) => {
+          <div id="site-search" className="mx-auto mt-8 max-w-4xl scroll-mt-24 text-left">
+            <SearchPanel articles={searchDocuments} />
+          </div>
+
+          <h2 className="mt-12 text-lg font-semibold text-zinc-950 dark:text-zinc-50">按设备浏览</h2>
+          <nav aria-label="产品支持" className="mx-auto mt-6 grid max-w-4xl grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3">
+            {productItems.filter((product) => availableCategories.has(product.category)).map((product) => {
               const Icon = product.icon;
 
               return (
@@ -176,17 +197,6 @@ export default function HomePage() {
                 </Link>
               );
             })}
-          </div>
-        </div>
-      </section>
-
-      <section aria-labelledby="search-title" className="border-t border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950">
-        <div className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
-          <h2 id="search-title" className="text-center text-3xl font-semibold tracking-normal text-zinc-950 dark:text-zinc-50">
-            搜索更多主题
-          </h2>
-          <div className="mx-auto mt-7 max-w-4xl">
-            <SearchPanel articles={articles} />
           </div>
         </div>
       </section>

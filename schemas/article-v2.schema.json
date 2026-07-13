@@ -1,0 +1,377 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://apple-cookbook.local/schemas/article-v2.schema.json",
+  "title": "Apple Cookbook Article Frontmatter v2",
+  "description": "Structured, CMS-ready metadata for Apple Cookbook Markdown articles.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "title",
+    "slug",
+    "summary",
+    "symptoms",
+    "devices",
+    "platforms",
+    "systemVersions",
+    "categories",
+    "tags",
+    "keywords",
+    "aliases",
+    "errorMessages",
+    "officialTerms",
+    "communityTerms",
+    "difficulty",
+    "estimatedTime",
+    "verificationLevel",
+    "status",
+    "canonicalArticleId",
+    "solutions",
+    "warnings",
+    "limitations",
+    "sources",
+    "lastVerifiedAt",
+    "lastUpdatedAt",
+    "createdAt",
+    "relatedArticles",
+    "popular"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 2
+    },
+    "id": {
+      "$ref": "#/$defs/articleId"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 180
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "summary": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "symptoms": {
+      "$ref": "#/$defs/uniqueStrings"
+    },
+    "devices": {
+      "allOf": [
+        { "$ref": "#/$defs/uniqueStrings" },
+        { "minItems": 1 }
+      ]
+    },
+    "platforms": {
+      "$ref": "#/$defs/uniqueStrings"
+    },
+    "systemVersions": {
+      "$ref": "#/$defs/uniqueStrings"
+    },
+    "categories": {
+      "allOf": [
+        { "$ref": "#/$defs/uniqueStrings" },
+        { "minItems": 1 }
+      ]
+    },
+    "tags": {
+      "$ref": "#/$defs/uniqueStrings"
+    },
+    "keywords": {
+      "$ref": "#/$defs/uniqueStrings"
+    },
+    "aliases": {
+      "$ref": "#/$defs/uniqueStrings"
+    },
+    "errorMessages": {
+      "$ref": "#/$defs/uniqueStrings"
+    },
+    "officialTerms": {
+      "$ref": "#/$defs/uniqueStrings"
+    },
+    "communityTerms": {
+      "$ref": "#/$defs/uniqueStrings"
+    },
+    "difficulty": {
+      "enum": ["Quick", "Moderate", "Advanced"]
+    },
+    "estimatedTime": {
+      "type": ["string", "null"],
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "verificationLevel": {
+      "$ref": "#/$defs/verificationLevel"
+    },
+    "status": {
+      "enum": ["seed", "draft", "reviewed", "canonical"]
+    },
+    "canonicalArticleId": {
+      "oneOf": [
+        { "$ref": "#/$defs/articleId" },
+        { "type": "null" }
+      ]
+    },
+    "solutions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/solution"
+      }
+    },
+    "warnings": {
+      "$ref": "#/$defs/uniqueStrings"
+    },
+    "limitations": {
+      "$ref": "#/$defs/uniqueStrings"
+    },
+    "sources": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/source"
+      }
+    },
+    "lastVerifiedAt": {
+      "$ref": "#/$defs/nullableDate"
+    },
+    "lastUpdatedAt": {
+      "type": "string",
+      "format": "date"
+    },
+    "createdAt": {
+      "$ref": "#/$defs/nullableDate"
+    },
+    "relatedArticles": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/articleId"
+      },
+      "uniqueItems": true
+    },
+    "popular": {
+      "type": "boolean"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "verificationLevel": { "const": "Official" }
+        },
+        "required": ["verificationLevel"]
+      },
+      "then": {
+        "properties": {
+          "sources": {
+            "contains": {
+              "type": "object",
+              "properties": {
+                "official": { "const": true },
+                "url": {
+                  "$ref": "#/$defs/officialAppleContentUrl"
+                }
+              },
+              "required": ["official", "url"]
+            },
+            "minContains": 1
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "verificationLevel": { "const": "Experimental" }
+        },
+        "required": ["verificationLevel"]
+      },
+      "then": {
+        "properties": {
+          "warnings": { "minItems": 1 }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": { "enum": ["reviewed", "canonical"] }
+        },
+        "required": ["status"]
+      },
+      "then": {
+        "properties": {
+          "solutions": { "minItems": 1 },
+          "sources": { "minItems": 1 },
+          "symptoms": { "minItems": 1 },
+          "lastVerifiedAt": { "type": "string", "format": "date" }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "articleId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "minLength": 1,
+      "maxLength": 160
+    },
+    "uniqueStrings": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "nullableDate": {
+      "oneOf": [
+        { "type": "string", "format": "date" },
+        { "type": "null" }
+      ]
+    },
+    "verificationLevel": {
+      "enum": ["Official", "Verified", "Likely", "Experimental", "Unknown"]
+    },
+    "officialAppleContentUrl": {
+      "description": "An HTTPS URL on an explicitly approved Apple official-content host. Apple Support Community hosts are intentionally excluded.",
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://support\\.apple\\.com(?:/|$)"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "url",
+        "publisher",
+        "sourceType",
+        "accessedAt",
+        "publishedAt",
+        "official"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 240
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://"
+        },
+        "publisher": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "sourceType": {
+          "enum": [
+            "official-support",
+            "official-guide",
+            "official-policy",
+            "community",
+            "documentation",
+            "test",
+            "other"
+          ]
+        },
+        "accessedAt": {
+          "type": "string",
+          "format": "date"
+        },
+        "publishedAt": {
+          "$ref": "#/$defs/nullableDate"
+        },
+        "official": {
+          "type": "boolean"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "official": { "const": true }
+            },
+            "required": ["official"]
+          },
+          "then": {
+            "properties": {
+              "url": {
+                "$ref": "#/$defs/officialAppleContentUrl"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "solution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "summary",
+        "kind",
+        "steps",
+        "verificationLevel",
+        "sourceIds",
+        "warnings",
+        "limitations"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 180
+        },
+        "summary": {
+          "type": ["string", "null"],
+          "minLength": 1,
+          "maxLength": 500
+        },
+        "kind": {
+          "enum": ["recommended", "alternative", "escalation"]
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "verificationLevel": {
+          "$ref": "#/$defs/verificationLevel"
+        },
+        "sourceIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9._-]*$"
+          },
+          "uniqueItems": true
+        },
+        "warnings": {
+          "$ref": "#/$defs/uniqueStrings"
+        },
+        "limitations": {
+          "$ref": "#/$defs/uniqueStrings"
+        }
+      }
+    }
+  }
+}

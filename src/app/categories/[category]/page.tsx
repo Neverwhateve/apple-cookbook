@@ -1,18 +1,28 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArticleCard } from "@/components/article-card";
-import { getAllCategories } from "@/lib/cookbook";
+import { getPublishedCategories } from "@/lib/cookbook";
 
 export function generateStaticParams() {
-  return getAllCategories().map((category) => ({
+  return getPublishedCategories().map((category) => ({
     category: category.name
   }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ category: string }> }) {
+  const { category } = await params;
+  const name = decodeURIComponent(category);
+
+  return {
+    title: `${name} 故障排查`,
+    description: `浏览 ${name} 相关的 Apple 故障症状、官方步骤与已标注的社区经验。`
+  };
 }
 
 export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
   const { category: categoryParam } = await params;
   const name = decodeURIComponent(categoryParam);
-  const category = getAllCategories().find((item) => item.name === name);
+  const category = getPublishedCategories().find((item) => item.name === name);
 
   if (!category) {
     notFound();

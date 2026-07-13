@@ -44,7 +44,28 @@ jobs:
           ssh -i ~/.ssh/aliyun_ecs -p "$ALIYUN_ECS_PORT" "$ALIYUN_ECS_USER@$ALIYUN_ECS_HOST" \
             "FEEDBACK_DATA_DIR='$FEEDBACK_DATA_DIR' bash -s" > intake/remote-feedback.tar <<'REMOTE'
           set -euo pipefail
+          umask 077
           mkdir -p "$FEEDBACK_DATA_DIR/feedback"
+
+          lock_path="$FEEDBACK_DATA_DIR/feedback/.queue.lock"
+          lock_token="github-feedback-sync-$(date +%s)-$$-$RANDOM"
+          deadline=$((SECONDS + 15))
+          while ! mkdir -m 700 "$lock_path" 2>/dev/null; do
+            if (( SECONDS >= deadline )); then
+              echo "Timed out waiting for feedback queue lock." >&2
+              exit 1
+            fi
+            sleep 0.1
+          done
+          printf '{"token":"%s","pid":%s,"acquiredAt":"%s"}\n' \
+            "$lock_token" "$$" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$lock_path/owner.json"
+          release_lock() {
+            if grep -Fq "\"token\":\"$lock_token\"" "$lock_path/owner.json" 2>/dev/null; then
+              rm -rf "$lock_path"
+            fi
+          }
+          trap release_lock EXIT
+
           cd "$FEEDBACK_DATA_DIR"
           touch feedback/inbox.jsonl feedback/archive.jsonl feedback/synced-github-issues.txt
           tar -cf - feedback/inbox.jsonl feedback/archive.jsonl feedback/synced-github-issues.txt
@@ -145,8 +166,31 @@ jobs:
           ssh -i ~/.ssh/aliyun_ecs -p "$ALIYUN_ECS_PORT" "$ALIYUN_ECS_USER@$ALIYUN_ECS_HOST" \
             "FEEDBACK_DATA_DIR='$FEEDBACK_DATA_DIR' bash -s" <<'REMOTE'
           set -euo pipefail
+          umask 077
+          mkdir -p "$FEEDBACK_DATA_DIR/feedback"
+
+          lock_path="$FEEDBACK_DATA_DIR/feedback/.queue.lock"
+          lock_token="github-feedback-sync-$(date +%s)-$$-$RANDOM"
+          deadline=$((SECONDS + 15))
+          while ! mkdir -m 700 "$lock_path" 2>/dev/null; do
+            if (( SECONDS >= deadline )); then
+              echo "Timed out waiting for feedback queue lock." >&2
+              exit 1
+            fi
+            sleep 0.1
+          done
+          printf '{"token":"%s","pid":%s,"acquiredAt":"%s"}\n' \
+            "$lock_token" "$$" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$lock_path/owner.json"
+          release_lock() {
+            if grep -Fq "\"token\":\"$lock_token\"" "$lock_path/owner.json" 2>/dev/null; then
+              rm -rf "$lock_path"
+            fi
+          }
+          trap release_lock EXIT
+
           node <<'NODE'
           const fs = require('fs');
+          const crypto = require('crypto');
           const dir = `${process.env.FEEDBACK_DATA_DIR}/feedback`;
           const inbox = `${dir}/inbox.jsonl`;
           const archive = `${dir}/archive.jsonl`;
@@ -168,8 +212,20 @@ jobs:
           }
 
           const nextArchive = [...toArchive.filter((item) => !archivedIds.has(item.id)), ...archived];
-          fs.writeFileSync(inbox, nextActive.map((item) => JSON.stringify(item)).join('\n') + (nextActive.length ? '\n' : ''));
-          fs.writeFileSync(archive, nextArchive.map((item) => JSON.stringify(item)).join('\n') + (nextArchive.length ? '\n' : ''));
+          const writeAtomic = (file, items) => {
+            const temp = `${dir}/.${file.split('/').pop()}.${process.pid}.${crypto.randomUUID()}.tmp`;
+            const body = items.map((item) => JSON.stringify(item)).join('\n') + (items.length ? '\n' : '');
+            const descriptor = fs.openSync(temp, 'wx', 0o600);
+            try {
+              fs.writeFileSync(descriptor, body, 'utf8');
+              fs.fsyncSync(descriptor);
+            } finally {
+              fs.closeSync(descriptor);
+            }
+            fs.renameSync(temp, file);
+          };
+          writeAtomic(inbox, nextActive);
+          writeAtomic(archive, nextArchive);
           NODE
           rm -f /tmp/apple-cookbook-closed-feedback-ids.txt
           REMOTE
@@ -203,7 +259,6 @@ jobs:
             description=$(jq -r '.description // ""' <<<"$submission")
             customer_words=$(jq -r '.customerWords // ""' <<<"$submission")
             device=$(jq -r '.device // ""' <<<"$submission")
-            contact=$(jq -r '.contact // ""' <<<"$submission")
             source_title=$(jq -r '.sourceTitle // ""' <<<"$submission")
             source_url=$(jq -r '.sourceUrl // ""' <<<"$submission")
 
@@ -230,10 +285,6 @@ jobs:
 
           - Title: ${source_title:-未填写}
           - URL: ${source_url:-未填写}
-
-          ## Contact
-
-          ${contact:-未填写}
 
           ## Handling Rule
 
@@ -268,8 +319,33 @@ jobs:
           ssh -i ~/.ssh/aliyun_ecs -p "$ALIYUN_ECS_PORT" "$ALIYUN_ECS_USER@$ALIYUN_ECS_HOST" \
             "FEEDBACK_DATA_DIR='$FEEDBACK_DATA_DIR' bash -s" <<'REMOTE'
           set -euo pipefail
+          umask 077
           mkdir -p "$FEEDBACK_DATA_DIR/feedback"
-          cat /tmp/apple-cookbook-newly-synced-ids.txt >> "$FEEDBACK_DATA_DIR/feedback/synced-github-issues.txt"
-          sort -u "$FEEDBACK_DATA_DIR/feedback/synced-github-issues.txt" -o "$FEEDBACK_DATA_DIR/feedback/synced-github-issues.txt"
+
+          lock_path="$FEEDBACK_DATA_DIR/feedback/.queue.lock"
+          lock_token="github-feedback-sync-$(date +%s)-$$-$RANDOM"
+          deadline=$((SECONDS + 15))
+          while ! mkdir -m 700 "$lock_path" 2>/dev/null; do
+            if (( SECONDS >= deadline )); then
+              echo "Timed out waiting for feedback queue lock." >&2
+              exit 1
+            fi
+            sleep 0.1
+          done
+          printf '{"token":"%s","pid":%s,"acquiredAt":"%s"}\n' \
+            "$lock_token" "$$" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$lock_path/owner.json"
+          release_lock() {
+            if grep -Fq "\"token\":\"$lock_token\"" "$lock_path/owner.json" 2>/dev/null; then
+              rm -rf "$lock_path"
+            fi
+          }
+          trap release_lock EXIT
+
+          synced_path="$FEEDBACK_DATA_DIR/feedback/synced-github-issues.txt"
+          synced_temp=$(mktemp "$FEEDBACK_DATA_DIR/feedback/.synced-github-issues.XXXXXX.tmp")
+          touch "$synced_path"
+          sort -u "$synced_path" /tmp/apple-cookbook-newly-synced-ids.txt > "$synced_temp"
+          chmod 600 "$synced_temp"
+          mv "$synced_temp" "$synced_path"
           rm -f /tmp/apple-cookbook-newly-synced-ids.txt
           REMOTE

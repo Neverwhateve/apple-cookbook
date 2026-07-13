@@ -1,15 +1,42 @@
 ---
+schemaVersion: 2
+id: ipad-keyboard-small-floating-split-moving
 title: iPad 键盘变小、悬浮、分成两半或位置乱跳
 slug: ipad-keyboard-small-floating-split-moving
-device:
+summary: iPad 屏幕键盘突然变小、漂在屏幕中间、分成两半，或更新后位置异常变化时，先识别悬浮或拆分状态并恢复全尺寸，再检查特定 iPadOS 更新、辅助功能和外接键盘影响。
+symptoms:
+  - iPad 键盘突然变得很小
+  - 键盘漂在屏幕中间，不在底部
+  - 键盘分成左右两半
+  - 打字的时候键盘位置自己变
+  - 更新 iPadOS 26 后悬浮键盘会乱跳
+  - 接了键盘保护套以后，屏幕键盘显示不对
+  - 不知道按到哪里，键盘回不去了
+devices:
   - iPad
-category: iPad
+platforms:
+  - iPadOS
+systemVersions:
+  - 当前支持屏幕键盘的 iPadOS
+  - iPadOS 26.0.1 或更高版本（包含悬浮键盘意外改变位置的已知问题修复）
+categories:
+  - iPad
 tags:
   - iPad
   - iPadOS
   - Keyboard
   - Accessibility
   - Software Update
+keywords:
+  - iPad 键盘变小
+  - 悬浮键盘
+  - 拆分键盘
+  - 键盘分成两半
+  - 键盘位置乱跳
+  - 全尺寸键盘
+  - 合并并停靠
+  - Magic Keyboard
+  - 辅助功能快捷键
 aliases:
   - iPad keyboard is small
   - iPad floating keyboard
@@ -21,18 +48,138 @@ aliases:
   - iPad 键盘分成两半
   - iPad 键盘位置乱跳
   - iPad 键盘不在底部
-verification: Official
-difficulty: Easy
-updated: 2026-07-13
-official_sources:
-  - https://support.apple.com/en-us/102513
-  - https://support.apple.com/en-us/111789
-  - https://support.apple.com/en-us/123074
-  - https://support.apple.com/en-us/111771
-community_sources:
-  - https://discussions.apple.com/thread/254588424
-  - https://discussions.apple.com/thread/256240490
+errorMessages: []
+officialTerms:
+  - Floating keyboard
+  - Split keyboard
+  - Full
+  - Merge
+  - Dock and Merge
+  - Accessibility Shortcut
+communityTerms:
+  - 屏幕键盘乱跳
+  - 键盘保护套影响屏幕键盘
+  - 三击按钮后界面变了
+  - 外接键盘时屏幕键盘弹出
+difficulty: Quick
+estimatedTime: null
+verificationLevel: Official
 status: canonical
+canonicalArticleId: ipad-keyboard-small-floating-split-moving
+solutions:
+  - id: restore-default-onscreen-keyboard
+    title: 先把悬浮或拆分键盘恢复为默认键盘
+    summary: 根据当前键盘形态使用 Apple 提供的展开、全尺寸、合并或停靠操作。
+    kind: recommended
+    steps:
+      - 打开一个可以输入文字的 App，先确认键盘是较小的悬浮键盘，还是左右分开的拆分键盘。
+      - 悬浮键盘上用两根手指向外张开，或轻点“更多”后选择“全尺寸”，恢复默认键盘。
+      - 拆分键盘上按住右下角的键盘按钮，再选择“合并”或“停靠并合并”。
+      - 想继续使用悬浮键盘时，可按住“更多”按钮，把键盘拖到需要的位置。
+    verificationLevel: Official
+    sourceIds:
+      - apple-ipad-keyboard-small-split
+      - apple-ipad-floating-keyboard
+    warnings: []
+    limitations:
+      - 拆分键盘仅适用于 iPad mini 和 iPad（第 9 代及更早机型）。
+      - 按钮名称和位置可能随 iPadOS 版本或语言变化。
+  - id: install-specific-ipados-keyboard-fix
+    title: iPadOS 26 的悬浮键盘自行移动时检查更新
+    summary: Apple 在 iPadOS 26.0.1 中明确修复了悬浮键盘可能意外改变位置的问题。
+    kind: alternative
+    steps:
+      - 打开“设置 > 通用 > 软件更新”，确认是否仍停留在 iPadOS 26.0。
+      - 按正常更新流程安装当前可用的 iPadOS 更新，再重新测试悬浮键盘位置。
+      - 更新后仍会自行移动时，记录系统版本、App 和复现步骤后联系 Apple 支持。
+    verificationLevel: Official
+    sourceIds:
+      - apple-ipados-26-updates
+    warnings:
+      - 更新前确认设备有稳定电源、网络和可用储存空间。
+    limitations:
+      - 这个来源只证明 iPadOS 26.0.1 修复了一个特定的悬浮键盘位置问题，不能解释所有键盘异常。
+  - id: separate-accessibility-and-external-keyboard-effects
+    title: 分开检查辅助功能与外接键盘影响
+    summary: 官方文档支持检查辅助功能快捷键，但它与外接键盘是否导致当前症状仍需按个案验证。
+    kind: alternative
+    steps:
+      - 如果三击顶部、侧边或主屏幕按钮后界面改变，打开“设置 > 辅助功能 > 辅助功能快捷键”，确认已选择的功能。
+      - 不要关闭顾客依赖的 VoiceOver、辅助触控、缩放或其他辅助功能，只取消明确不需要的快捷键。
+      - 连接 Magic Keyboard、Smart Keyboard 或第三方键盘时，先取下配件并重新测试屏幕键盘。
+      - 只有问题随配件稳定出现时，才继续检查键盘、保护套或连接触点，并按配件支持流程处理。
+    verificationLevel: Likely
+    sourceIds:
+      - apple-accessibility-shortcut
+      - community-onscreen-keyboard-external
+    warnings:
+      - 不要为了测试而关闭顾客日常依赖的辅助功能。
+      - 不要把删除键盘语言、还原全部设置、退出账户或抹掉 iPad 当作首选步骤。
+    limitations:
+      - Apple 的辅助功能快捷键页面说明了设置和使用路径，但没有证明快捷键是屏幕键盘异常的通用原因。
+      - Community 案例只说明外接键盘连接时可能同时出现屏幕键盘，不能代表所有 iPad，也不能证明配件是通用原因。
+warnings:
+  - 调整辅助功能前先确认顾客是否依赖该功能，不要为了排查而一次性全部关闭。
+  - 不要在没有独立故障证据时还原全部设置、抹掉 iPad 或直接判断键盘硬件损坏。
+limitations:
+  - 拆分键盘只在部分 iPad 型号上可用；不支持该功能的机型不会显示相同操作。
+  - iPadOS 26.0.1 的修复仅适用于 Apple 已记录的悬浮键盘位置问题。
+  - 第三方键盘、保护套、受管理设备和辅助功能工作流可能需要配件厂商、管理员或 Apple 支持进一步检查。
+sources:
+  - id: apple-ipad-keyboard-small-split
+    title: If your iPad keyboard is small or split in half
+    url: https://support.apple.com/en-us/102513
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: 2026-07-13
+    publishedAt: 2025-09-30
+    official: true
+  - id: apple-ipad-floating-keyboard
+    title: Use the floating keyboard on your iPad
+    url: https://support.apple.com/en-us/111789
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: 2026-07-13
+    publishedAt: 2025-09-24
+    official: true
+  - id: apple-ipados-26-updates
+    title: About iPadOS 26 Updates
+    url: https://support.apple.com/en-us/123074
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: 2026-07-13
+    publishedAt: 2026-06-29
+    official: true
+  - id: apple-accessibility-shortcut
+    title: About the Accessibility Shortcut for iPhone, iPad, and iPod touch
+    url: https://support.apple.com/en-us/111771
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: 2026-07-13
+    publishedAt: 2025-03-18
+    official: true
+  - id: community-onscreen-keyboard-external
+    title: HOW TO DISABLE THE ONSCREEN KEYBOARD on iPad Pro while using external keyboard.
+    url: https://discussions.apple.com/thread/254588424
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: 2026-07-13
+    publishedAt: 2023-01-26
+    official: false
+  - id: community-ios-26-accessibility-issues
+    title: iOS 26.2 and Accessibility Issues
+    url: https://discussions.apple.com/thread/256240490
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: 2026-07-13
+    publishedAt: 2026-02-07
+    official: false
+lastVerifiedAt: 2026-07-13
+lastUpdatedAt: 2026-07-13
+createdAt: null
+relatedArticles:
+  - iphone-stuck-preparing-verifying-software-update
+  - iphone-ipad-wifi-no-internet-unable-to-join
 popular: true
 ---
 
@@ -64,8 +211,8 @@ iPad 屏幕键盘突然变小、漂在屏幕中间、分成两半，或更新后
    - Apple 在 iPadOS 26.0.1 更新说明中列出修复项：悬浮键盘可能会意外改变位置。
 4. **误触了键盘手势或键盘按钮**
    - Apple 说明，可以用双指捏合让 iPad 键盘变小，也可以通过键盘按钮切换到悬浮键盘。
-5. **辅助功能快捷键或外接键盘让顾客误以为键盘异常**
-   - Apple 说明，辅助功能快捷键可通过三击顶部按钮、侧边按钮或主屏幕按钮打开所选功能；社区讨论中，顾客常把辅助功能光标、屏幕控制按钮或外接键盘设置误认为键盘故障。
+5. **辅助功能快捷键或外接键盘影响需要分开检查**
+   - Apple 说明，辅助功能快捷键可通过三击顶部按钮、侧边按钮或主屏幕按钮打开所选功能；另有社区案例报告，连接外接键盘时屏幕键盘仍会弹出。这些信息只提供排查入口，不能证明它们是屏幕键盘异常的通用原因。
 
 ---
 
@@ -80,26 +227,35 @@ iPad 屏幕键盘突然变小、漂在屏幕中间、分成两半，或更新后
 3. 如果键盘分成两半，按 Apple 的键盘恢复流程把它合并并停靠回屏幕底部。
 4. 如果顾客想继续使用悬浮键盘，可以长按键盘上的更多按钮并拖动键盘到需要的位置。
 5. 如果键盘位置会自己改变，尤其是 iPadOS 26 后出现，打开**设置 > 通用 > 软件更新**，更新到最新 iPadOS。Apple 在 iPadOS 26.0.1 中列出修复“悬浮键盘可能会意外改变位置”的问题。
-6. 如果顾客说“三击按钮以后界面或输入方式变了”，打开**设置 > 辅助功能 > 辅助功能快捷键**，确认是否选中了 VoiceOver、辅助触控、缩放或其他功能；按顾客需求取消不需要的项目。
-7. 如果连接了 Magic Keyboard、Smart Keyboard 或第三方键盘，先取下外接键盘并重新测试屏幕键盘，再判断是 iPadOS 屏幕键盘、外接键盘连接，还是保护套/触点问题。
 
 参考来源：
 
 - [Apple Support: If your iPad keyboard is small or split in half](https://support.apple.com/en-us/102513)
 - [Apple Support: Use the floating keyboard on your iPad](https://support.apple.com/en-us/111789)
 - [Apple Support: About iPadOS 26 Updates](https://support.apple.com/en-us/123074)
-- [Apple Support: About the Accessibility Shortcut for iPhone, iPad, and iPod touch](https://support.apple.com/en-us/111771)
 
 ---
 
-## 已验证的非官方处理思路
+## 社区经验与补充排查
 
 非官方
 
-### 检查外接键盘、保护套和辅助功能误触
+验证级别：较可能（Likely）
 
-- 来源：Apple Support Community 中，顾客常把外接键盘、屏幕键盘显示、辅助功能控制按钮或窗口化界面变化混在一起描述。
-- 成功概率：中等，尤其适合“接上键盘保护套后才发生”“屏幕上多了按钮/框线”“三击按钮后变了”的情况。
+### 分开检查辅助功能与外接键盘影响
+
+步骤：
+
+1. 如果三击顶部按钮、侧边按钮或主屏幕按钮后界面改变，打开**设置 > 辅助功能 > 辅助功能快捷键**，确认已选择的功能。
+2. 不要关闭顾客依赖的 VoiceOver、辅助触控、缩放或其他辅助功能；只取消明确不需要的快捷键。
+3. 连接 Magic Keyboard、Smart Keyboard 或第三方键盘时，先取下配件并重新测试屏幕键盘。
+4. 只有问题随配件稳定出现时，才继续检查键盘、保护套或连接触点，并按配件支持流程处理。
+
+证据边界：
+
+- [Apple Support: About the Accessibility Shortcut for iPhone, iPad, and iPod touch](https://support.apple.com/en-us/111771) 只说明快捷键的设置和三击使用路径，没有把它列为屏幕键盘异常的通用原因。
+- [Apple Support Community: HOW TO DISABLE THE ONSCREEN KEYBOARD on iPad Pro while using external keyboard.](https://discussions.apple.com/thread/254588424) 是用户报告外接键盘与屏幕键盘同时出现的个案，不能证明适用于其他配件、机型或系统版本。
+- 成功概率：未知。现有来源只支持把它作为低风险隔离检查，不能估计解决当前症状的成功率。
 - 风险：低。只要不删除键盘语言、重置全部设置或移除账户，检查这些开关风险很小。
 - 备注：这不是替代 Apple 键盘恢复步骤；先恢复悬浮/拆分键盘，再排除外接键盘和辅助功能干扰。
 - 验证级别：较可能
