@@ -47,8 +47,9 @@ The goal is to create a practical troubleshooting encyclopedia that helps Apple 
 ## Operating Cadence
 
 - Source harvest and article review work should continue every 1 hour.
-- Every completed automated cycle should open or update a `harvest/<run-id>` draft pull request; automation must not push content directly to `main`.
-- Each Harvest proposal must include the base commit and full-file content hashes described in `docs/HARVEST_WORKFLOW.md`.
+- Every completed automated cycle should become a new immutable `harvest/<run-id>` draft pull request; automation must not push content directly to `main`.
+- Each Harvest proposal must include the base commit, full-file content hashes, and recorded canonical-match decision described in `docs/HARVEST_WORKFLOW.md`.
+- The local materializer defaults to dry-run and never creates branches, commits, pushes, or pull requests. The repository intentionally has no write-enabled Harvest GitHub Action.
 - Feedback questions and submitted links are P0 intake and must be handled before routine source harvest work.
 - When multiple priority levels exist, resolve items in priority order before moving to the next level.
 - The expected `main` ruleset is versioned in `.github/rulesets/main.json` and is active remotely: PRs plus the strict `Validate pull request` check are required, deletion/force-push are blocked, and no bypass actors exist. `pnpm audit:github-governance` remains read-only. See `docs/GITHUB_GOVERNANCE.md`.
@@ -106,6 +107,7 @@ This is the legacy v1 contract. New structured content may use Article Schema v2
 - `indexes/`: Tag, device, feature, and symptom indexes.
 - `src/`: Next.js website and Markdown indexing code.
 - `schemas/`: Machine-readable content contracts.
+- `harvest/manifests/`: Immutable per-run proposal evidence; created only when a Harvest run contains a real change.
 - `.github/rulesets/main.json`: Reviewable expected policy for `main`; it is never applied automatically.
 
 ## Local Development
@@ -116,13 +118,14 @@ Use the bundled Codex Node runtime if system Node is unavailable.
 pnpm install
 pnpm dev
 pnpm verify
+pnpm generate:harvest --help
 pnpm preview:content-v2
 pnpm feedback:doctor
 pnpm feedback:verify -- --snapshot /path/to/feedback-snapshot
 pnpm audit:github-governance
 ```
 
-The GitHub governance audit exits `0`: PR #12 registered and passed `Validate pull request`, after which existing ruleset ID `18863035` was updated in place with that exact strict check and an empty bypass list. PR #12 then published the workflow source and its complete dependency closure to `main`. Feedback backups are deliberately opt-in; follow `docs/FEEDBACK_RECOVERY.md` and store snapshots outside both the checkout and live data directory.
+The GitHub governance audit exits `0`: PR #12 registered and passed `Validate pull request`, after which existing ruleset ID `18863035` was updated in place with that exact strict check and an empty bypass list. PR #12 then published the workflow source and its complete dependency closure to `main`. Harvest proposal input must stay outside the checkout; follow `docs/HARVEST_WORKFLOW.md` for dry-run, explicit materialization, local validation, and the human-created draft PR. Feedback backups are deliberately opt-in; follow `docs/FEEDBACK_RECOVERY.md` and store snapshots outside both the checkout and live data directory.
 
 In this Codex workspace, Node is available at:
 

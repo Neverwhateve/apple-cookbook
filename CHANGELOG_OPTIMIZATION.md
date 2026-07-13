@@ -1,7 +1,19 @@
 # Apple Cookbook 优化变更记录
 
 日期：2026-07-13
-分支：`codex/cookbook-project-optimization`
+主优化分支：`codex/cookbook-project-optimization`
+第九轮发布分支：`codex/harvest-draft-pr-integration`
+
+## 第九轮：Harvest 确定性物化器与 P0 diff 边界
+
+- 原问题：仓库已有 manifest 校验和远端 main 保护，但没有实际把上游研究结果安全变成“文章 + manifest”的入口；历史 Harvest 会直写 canonical。专用 CI 还使用 `--diff-filter=AM`，因此漏掉删除/重命名，并允许 Harvest PR 夹带 workflow、代码、配置或任意其他文件。
+- 本地物化器：新增 `generate:harvest`。输入是 checkout 外的显式 JSON 和完整 Markdown；默认 dry-run 会在临时全库副本运行内容校验，只有 `--write` 才在精确 `harvest/<run-id>` / `automation/harvest/<run-id>` 分支按原字节原子落盘，并把 manifest 最后写入。CLI 不抓取、不改写语义、不切分支、不 commit/push/开 PR，也没有 force/overwrite 参数。
+- 冲突和幂等：base 必须是 HEAD 祖先；create 只能基于不存在的路径且必须 draft，update/redirect 只能从精确 base bytes 或已物化 bytes 前进。人工第三状态、symlink、未声明 tracked/non-ignored untracked 路径、旧 runId、并发变化全部 fail closed。no-op 从 manifest 省略，全 no-op 不创建 manifest；相同输入重跑不改 bytes、mtime 或 diff。
+- canonical 治理：proposal input v1 和 run manifest v2 都保存 `queries`、`matchedArticleIds`、action 对应 decision 与 notes。update 必须匹配文章 id/slug；redirect 目标必须在 base 已存在、被 matched IDs 包含、与 frontmatter 一致且不能自指。
+- CI diff 边界：Harvest PR 现在只能 A/M 声明的 `cookbook/**/*.md` 并新增一个与 runId 同名的 manifest；删除、重命名、类型变化、第二个 manifest、workflow/code/config/source/report/index 等额外路径全部拒绝。普通人工 PR 没有 manifest 且不在 required Harvest branch 时仍正常跳过专用边界，不影响常规代码改动。
+- 兼容影响：run manifest 从 hash-only v1 明确升级为 v2；旧 producer 必须加入 canonicalReview/reason 并升级版本，不能静默绕过新边界。仓库中没有已提交的历史 run manifest，因此无需迁移数据。
+- 远端权限：本轮刻意不新增可写 GitHub Action。Actions 默认权限仍为 read；先用 2–3 次人工 Draft PR canary 验证完整边界，再评估只读调度。任何未来写入必须是独立人工批准步骤、短时仓库限定凭据，且永不自动 ready/approve/merge。
+- 验证：`pnpm verify` 通过；34 篇内容 0 error（3 个既有治理 warning），64/64 unit + 75/75 automation = 139/139 tests，production build 生成 164 个页面。Harvest 定向覆盖 CLI 默认 dry-run、零写入、create/update/redirect、no-op、幂等、人工冲突、身份/状态不变量、symlink、分支/runId、额外路径、删除/重命名和两类 rollback；`git diff --check` 通过。
 
 ## 第八轮：治理 PR 发布与 ruleset 第二阶段启用
 
@@ -237,6 +249,8 @@
 - `scripts/validate-content.test.mjs`
 - `scripts/validate-harvest-run.mjs`
 - `scripts/validate-harvest-run.test.mjs`
+- `scripts/generate-harvest-proposal.mjs`
+- `scripts/generate-harvest-proposal.test.mjs`
 - `scripts/preview-content-migration.mjs`
 - `scripts/preview-content-migration.test.mjs`
 - `scripts/check-github-governance.mjs`
@@ -245,6 +259,7 @@
 - `scripts/feedback-recovery.test.mjs`
 - `schemas/article-v2.schema.json`
 - `schemas/harvest-run.schema.json`
+- `schemas/harvest-proposal-input.schema.json`
 - `docs/ARTICLE_SCHEMA_V2.md`
 - `docs/HARVEST_WORKFLOW.md`
 - `docs/GITHUB_GOVERNANCE.md`
@@ -299,7 +314,7 @@
 
 ## 暂未处理
 
-- PR #12 已发布完整 Content quality workflow 依赖并成功合并，现有 ruleset 已加入严格 `Validate pull request`；真实 Harvest 生成器接入仍待处理。
+- 本地确定性物化器、manifest v2 和严格 diff guard 已完成；真实联网采集上游、远端 Draft PR 编排与 2–3 次 canary 仍待处理，期间保持 Actions 只读。
 - 反馈数据库迁移、跨主机事务、幂等/rate limit、生产备份/恢复演练；单 ECS 并发、doctor/backup/offline verify 和 Vercel fail closed 已处理。Snapshot manifest 尚无签名、大小上限或流式哈希。
 - 剩余 32 篇 v1 内容的逐篇 v2 人工迁移、verificationHistory 和稳定 URL redirect；双读/Schema/预览与三篇试点已完成。
 - popular 的真实精选或匿名统计。
@@ -311,6 +326,7 @@
 
 ## 验证方式
 
+- 第九轮独立干净 worktree：`pnpm verify` 为 34 篇（30 v1 + 4 v2）、0 errors、3 个既有 warning、64 个 unit + 75 个 automation = 139/139 tests、164 个页面；未接触原工作区并发 Harvest 内容。
 - `pnpm validate:content`
 - `pnpm lint`
 - `pnpm typecheck`
