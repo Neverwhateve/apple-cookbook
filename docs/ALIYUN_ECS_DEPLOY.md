@@ -168,6 +168,14 @@ Add a narrow passwordless sudo rule, replacing `deploy` if your user is differen
 deploy ALL=(root) NOPASSWD: /bin/systemctl restart apple-cookbook, /bin/systemctl status apple-cookbook, /usr/bin/systemctl restart apple-cookbook, /usr/bin/systemctl status apple-cookbook
 ```
 
+The feedback sync job and deploy repair also need to run feedback file operations
+as the service account. If the SSH deploy account is not `root`, grant only the
+corresponding non-interactive commands needed by
+`scripts/repair-feedback-storage.sh` and `sudo -u applecookbook ... bash -s`.
+Do not make `/var/lib/apple-cookbook` world-writable. The deploy repair normalizes
+the data tree to owner-only access by `applecookbook`, and every remote feedback
+writer runs as that same account.
+
 ## Feedback Files
 
 Feedback submissions are written to:

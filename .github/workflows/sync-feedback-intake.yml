@@ -44,11 +44,15 @@ jobs:
           ALIYUN_ECS_PORT: ${{ secrets.ALIYUN_ECS_PORT || '22' }}
           ALIYUN_ECS_USER: ${{ secrets.ALIYUN_ECS_USER }}
           FEEDBACK_DATA_DIR: ${{ vars.FEEDBACK_DATA_DIR || '/var/lib/apple-cookbook' }}
+          FEEDBACK_SERVICE_USER: ${{ vars.FEEDBACK_SERVICE_USER || 'applecookbook' }}
         run: |
           test -n "$ALIYUN_ECS_USER"
+          [[ "$FEEDBACK_SERVICE_USER" =~ ^[a-z_][a-z0-9_-]*$ ]]
           mkdir -p intake
+          printf -v remote_data_dir '%q' "$FEEDBACK_DATA_DIR"
+          printf -v remote_service_user '%q' "$FEEDBACK_SERVICE_USER"
           ssh -i ~/.ssh/aliyun_ecs -p "$ALIYUN_ECS_PORT" "$ALIYUN_ECS_USER@$ALIYUN_ECS_HOST" \
-            "FEEDBACK_DATA_DIR='$FEEDBACK_DATA_DIR' bash -s" > intake/remote-feedback.tar <<'REMOTE'
+            "sudo -n -u $remote_service_user env FEEDBACK_DATA_DIR=$remote_data_dir bash -s" > intake/remote-feedback.tar <<'REMOTE'
           set -euo pipefail
           umask 077
           mkdir -p "$FEEDBACK_DATA_DIR/feedback"
@@ -131,8 +135,10 @@ jobs:
           ALIYUN_ECS_PORT: ${{ secrets.ALIYUN_ECS_PORT || '22' }}
           ALIYUN_ECS_USER: ${{ secrets.ALIYUN_ECS_USER }}
           FEEDBACK_DATA_DIR: ${{ vars.FEEDBACK_DATA_DIR || '/var/lib/apple-cookbook' }}
+          FEEDBACK_SERVICE_USER: ${{ vars.FEEDBACK_SERVICE_USER || 'applecookbook' }}
         run: |
           set -euo pipefail
+          [[ "$FEEDBACK_SERVICE_USER" =~ ^[a-z_][a-z0-9_-]*$ ]]
           : > intake/closed-feedback-ids.txt
 
           if [[ ! -s intake/feedback/inbox.jsonl ]]; then
@@ -170,8 +176,10 @@ jobs:
           scp -i ~/.ssh/aliyun_ecs -P "$ALIYUN_ECS_PORT" \
             intake/closed-feedback-ids.txt "$ALIYUN_ECS_USER@$ALIYUN_ECS_HOST:/tmp/apple-cookbook-closed-feedback-ids.txt"
 
+          printf -v remote_data_dir '%q' "$FEEDBACK_DATA_DIR"
+          printf -v remote_service_user '%q' "$FEEDBACK_SERVICE_USER"
           ssh -i ~/.ssh/aliyun_ecs -p "$ALIYUN_ECS_PORT" "$ALIYUN_ECS_USER@$ALIYUN_ECS_HOST" \
-            "FEEDBACK_DATA_DIR='$FEEDBACK_DATA_DIR' bash -s" <<'REMOTE'
+            "sudo -n -u $remote_service_user env FEEDBACK_DATA_DIR=$remote_data_dir bash -s" <<'REMOTE'
           set -euo pipefail
           umask 077
           mkdir -p "$FEEDBACK_DATA_DIR/feedback"
@@ -234,8 +242,9 @@ jobs:
           writeAtomic(inbox, nextActive);
           writeAtomic(archive, nextArchive);
           NODE
-          rm -f /tmp/apple-cookbook-closed-feedback-ids.txt
           REMOTE
+          ssh -i ~/.ssh/aliyun_ecs -p "$ALIYUN_ECS_PORT" "$ALIYUN_ECS_USER@$ALIYUN_ECS_HOST" \
+            "rm -f /tmp/apple-cookbook-closed-feedback-ids.txt"
 
       - name: Create issues for new P0 feedback
         env:
@@ -318,7 +327,9 @@ jobs:
           ALIYUN_ECS_PORT: ${{ secrets.ALIYUN_ECS_PORT || '22' }}
           ALIYUN_ECS_USER: ${{ secrets.ALIYUN_ECS_USER }}
           FEEDBACK_DATA_DIR: ${{ vars.FEEDBACK_DATA_DIR || '/var/lib/apple-cookbook' }}
+          FEEDBACK_SERVICE_USER: ${{ vars.FEEDBACK_SERVICE_USER || 'applecookbook' }}
         run: |
+          [[ "$FEEDBACK_SERVICE_USER" =~ ^[a-z_][a-z0-9_-]*$ ]]
           if [[ ! -s intake/newly-synced-ids.txt ]]; then
             echo "No new feedback IDs synced."
             exit 0
@@ -327,8 +338,10 @@ jobs:
           scp -i ~/.ssh/aliyun_ecs -P "$ALIYUN_ECS_PORT" \
             intake/newly-synced-ids.txt "$ALIYUN_ECS_USER@$ALIYUN_ECS_HOST:/tmp/apple-cookbook-newly-synced-ids.txt"
 
+          printf -v remote_data_dir '%q' "$FEEDBACK_DATA_DIR"
+          printf -v remote_service_user '%q' "$FEEDBACK_SERVICE_USER"
           ssh -i ~/.ssh/aliyun_ecs -p "$ALIYUN_ECS_PORT" "$ALIYUN_ECS_USER@$ALIYUN_ECS_HOST" \
-            "FEEDBACK_DATA_DIR='$FEEDBACK_DATA_DIR' bash -s" <<'REMOTE'
+            "sudo -n -u $remote_service_user env FEEDBACK_DATA_DIR=$remote_data_dir bash -s" <<'REMOTE'
           set -euo pipefail
           umask 077
           mkdir -p "$FEEDBACK_DATA_DIR/feedback"
@@ -358,5 +371,6 @@ jobs:
           sort -u "$synced_path" /tmp/apple-cookbook-newly-synced-ids.txt > "$synced_temp"
           chmod 600 "$synced_temp"
           mv "$synced_temp" "$synced_path"
-          rm -f /tmp/apple-cookbook-newly-synced-ids.txt
           REMOTE
+          ssh -i ~/.ssh/aliyun_ecs -p "$ALIYUN_ECS_PORT" "$ALIYUN_ECS_USER@$ALIYUN_ECS_HOST" \
+            "rm -f /tmp/apple-cookbook-newly-synced-ids.txt"
