@@ -3,6 +3,7 @@
 import { ThumbsUp } from "lucide-react";
 import { useEffect, useState } from "react";
 import type { VerificationLevel } from "@/lib/article-schema";
+import { rankSolutionsByPractice } from "@/lib/solution-ranking";
 
 type VoteableSolution = {
   id: string;
@@ -55,6 +56,7 @@ export function SolutionVotePanel({
   const [votedSolutions, setVotedSolutions] = useState<Set<string>>(new Set());
   const [submittingId, setSubmittingId] = useState<string>();
   const [message, setMessage] = useState("");
+  const rankedSolutions = rankSolutionsByPractice(solutions, counts);
 
   useEffect(() => {
     setVotedSolutions(getLocallyVotedSolutions());
@@ -116,11 +118,11 @@ export function SolutionVotePanel({
         哪些方法实践有效？
       </h2>
       <p className="mt-2 text-sm leading-6 text-zinc-500 dark:text-zinc-400">
-        如果你亲自使用过某个方法并确认有效，可以点一下。每台浏览器对每个方法只记录一次，不公开姓名。
+        Apple 官方方法始终优先；其他方法按实践有效人数从高到低排列。如果你亲自使用过某个方法并确认有效，可以点一下。每台浏览器对每个方法只记录一次，不公开姓名。
       </p>
 
       <div className="mt-5 space-y-3">
-        {solutions.map((solution) => {
+        {rankedSolutions.map((solution) => {
           const key = `${articleId}/${solution.id}`;
           const voted = votedSolutions.has(key);
           const count = counts[solution.id] ?? 0;
