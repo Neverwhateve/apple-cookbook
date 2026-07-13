@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-issue-11",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-14T00:00:00.000Z",
+  "baseCommit": "f70b0811719e3fc0e4e78c60c75a29027f4238e8",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-system-data-storage-too-large.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:ae573a53d4d3b0713faae846dae10943af39f83885958ff7ece0a2d4dc845eae",
+      "reason": "P0 website feedback AC-20260712-C53A2AF6 asks about iPhone System Data using too much storage; existing canonicals cover Mac System Data and iCloud backup/storage, but not iPhone/iPad System Data boundaries and safe cleanup sequence.",
+      "canonicalReview": {
+        "queries": [
+          "iPhone 显示系统数据占据了很多空间",
+          "iPhone 系统数据很大",
+          "iPhone Other storage huge",
+          "iPhone System Data too large",
+          "系统数据 其他 储存空间 iPhone"
+        ],
+        "matchedArticleIds": [
+          "mac-system-data-storage-apfs-snapshots-purgeable-space",
+          "icloud-storage-full-iphone-backup-fails",
+          "iphone-stuck-preparing-verifying-software-update",
+          "iphone-wechat-camera-black-screen-lag"
+        ],
+        "decision": "create-new",
+        "notes": "Mac System Data is device/platform-specific and iCloud storage covers cloud quota, while this feedback asks about local iPhone System Data/Other storage. Existing iPhone articles mention storage only as a branch, so a new canonical avoids conflating iCloud, Mac APFS snapshots, and local iOS cache/system-data boundaries."
+      }
+    }
+  ]
+}
