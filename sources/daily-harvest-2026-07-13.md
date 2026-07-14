@@ -193,6 +193,94 @@
 - Watch for a dedicated `Mac Mail storage too large` recipe because Reddit shows separate customer confusion around Mail using large local storage.
 - Revisit Mac Mail if Apple publishes a Chinese localized update matching the July 7, 2026 English article.
 
+## Harvest Run - 2026-07-13 14:08 CST
+
+### Search Queries
+
+- `site:support.apple.com/en-us iPhone recovery mode buttons not working forgot passcode recovery mode Apple Support`
+- `site:support.apple.com/en-us iPhone won't go into recovery mode Apple Support restore update recovery mode`
+- `site:discussions.apple.com iPhone won't go into recovery mode forgot passcode buttons not working`
+- `site:reddit.com/r/applehelp iPhone won't go into recovery mode forgot passcode buttons not working`
+- `site:xiaohongshu.com iPhone 恢复模式 进不去 忘记密码`
+- `site:xiaohongshu.com iPhone recovery mode 进不了 恢复模式`
+- `site:xiaohongshu.com iPhone 不可用 恢复模式 电脑 没反应`
+
+### Sources Visited
+
+- Apple Support: [If you can't update or restore your iPhone or iPod touch](https://support.apple.com/en-us/118106)
+- Apple Support: [Restore your iPhone or iPad with a nearby device](https://support.apple.com/en-us/121133)
+- Apple Support: [How to reset your iPad passcode using your Mac or PC](https://support.apple.com/en-us/119858)
+- Apple Support: [Restore your iPhone, iPad, or iPod to factory settings using a computer](https://support.apple.com/en-us/118107)
+- Apple Support: [Temporarily use your old passcode when you forget your new passcode on iPhone or iPad](https://support.apple.com/en-us/105039)
+- Apple Support: [If you can't update or restore your iPad](https://support.apple.com/en-us/108925)
+- Apple Support: [If you forgot your iPhone passcode or your iPhone is disabled](https://support.apple.com/en-us/118430)
+- Apple Support: [If you see an iPhone, iPad, or Apple Vision Pro unavailable message or Security Lockout screen](https://support.apple.com/en-us/105090)
+- Apple Support Community: [iPhone SE (1st Gen) won't enter recovery mode to reset passcode](https://www.reddit.com/r/applehelp/comments/1n7e1sy/iphone_se_1st_gen_wont_enter_recovery_mode_to/)
+- Reddit r/applehelp: [iPhone won't go into recovery mode or erase](https://www.reddit.com/r/applehelp/comments/16row5p/iphone_wont_go_into_recovery_mode_or_erase_keeps/)
+
+### Evidence Collected
+
+- Apple's iPhone update/restore article says recovery mode is used when the device is stuck on an Apple logo, the computer does not recognize the device, the device shows the Connect to computer screen, or Recovery Assistant cannot recover it. Source: [Apple Support 118106](https://support.apple.com/en-us/118106).
+- Apple says Mac should be up to date; Windows should use the latest Apple Devices app or iTunes fallback; the device must stay connected by USB while entering recovery mode. Source: [Apple Support 118106](https://support.apple.com/en-us/118106).
+- Apple lists model-specific iPhone recovery-mode buttons and says to keep holding until the Connect to computer screen appears. Source: [Apple Support 118106](https://support.apple.com/en-us/118106).
+- Apple says if the software download takes more than 15 minutes and the device exits the Connect to computer screen, let the download finish, then repeat the recovery-mode steps. Source: [Apple Support 118106](https://support.apple.com/en-us/118106).
+- Apple says service may be needed if the device cannot update or restore with recovery mode, or recovery mode cannot be used because a button does not work or is stuck. Source: [Apple Support 118106](https://support.apple.com/en-us/118106).
+- Apple's nearby-restore article says some iPhone/iPad models can restore during a wireless software update by using another unlocked iPhone or iPad already connected to Wi-Fi and running iOS/iPadOS 18 or later; captive and 802.1X networks are not supported. Source: [Apple Support 121133](https://support.apple.com/en-us/121133).
+- Apple's passcode-reset article says iOS/iPadOS 17 or later gives a 72-hour window to unlock with the previous passcode after a passcode change, and that the "Forgot Passcode?" option requires cellular or Wi-Fi. Source: [Apple Support 105039](https://support.apple.com/en-us/105039).
+- Apple says factory restore with a computer erases information and settings, installs the latest software, and that restoring an iPhone does not delete the eSIM. Source: [Apple Support 118107](https://support.apple.com/en-us/118107).
+- Reddit and Apple Support Community threads show repeated customer confusion around "I can't enter recovery mode," "Forgot Passcode? does not show," old Home-button devices, Diagnostic Mode, and whether broken buttons make recovery impossible.
+
+### Customer Wording
+
+- “按键怎么按都进不了恢复模式。”
+- “电脑没有识别 iPhone。”
+- “一直回到输入密码界面。”
+- “出现 Apple 标志我就松手了，结果没进恢复。”
+- “忘记密码按钮不显示。”
+- “Home 键坏了还能刷机吗？”
+- “手机提示 Restore Nearby iPhone / 靠近另一台设备恢复。”
+- “下载太久了，手机退出恢复模式了。”
+
+### Cross-source Observations
+
+- Recovery-mode failure is a frequent branch inside the existing forgotten-passcode problem, not a separate canonical customer problem yet. Most customers are still trying to solve lockout, disabled-device, or restore-failed intake.
+- The fastest Retail split is: device-side reset available, old-passcode 72-hour reset available, computer recovery available, iCloud.com/find erase available, nearby restore shown, or hardware/button/service boundary.
+- Community threads often recommend "keep holding longer" and different cable/port checks. Those fit Apple's official requirement to keep holding until the Connect to computer screen and to use a working computer/USB path, but they should not be presented as standalone community fixes.
+- Broken buttons are a real service boundary. Apple explicitly names inability to use recovery mode because a button does not work or is stuck as a reason service may be needed.
+- Nearby restore is easy to misread as a password bypass or data-preserving recovery. The recipe now labels it as a wireless software-update recovery flow, not a forgotten-passcode workaround.
+
+### Articles Created, Improved, Merged, or Flagged
+
+- Improved `cookbook/iPhone/iphone-unavailable-security-lockout-forgot-passcode.md`
+  - Added recovery-mode and computer-recognition symptoms.
+  - Added official sources for iPhone recovery mode, nearby restore, temporary old-passcode reset, and factory restore by computer.
+  - Added a dedicated recovery-mode/computer-recognition branch for button order, Apple Devices app/Finder/iTunes readiness, USB path, over-15-minute downloads, stuck/broken buttons, and nearby restore.
+  - Added 72-hour old-passcode reset as a pre-erase check when the customer recently changed the passcode.
+- No new recipe was created; the evidence supports improving the existing canonical unavailable/passcode article instead of creating a duplicate.
+- No duplicate recipes were merged.
+
+### Verification Reasoning
+
+- `iPhone 不可用、安全锁定或忘记锁屏密码` remains `Official` because the added recovery-mode, nearby-restore, old-passcode reset, and computer-restore guidance is directly supported by Apple Support 118106, 121133, 105039, and 118107.
+- Reddit and Apple Support Community were used for customer wording and priority only. Community advice was not promoted beyond Apple's official recovery-mode and service boundaries.
+
+### Unsafe or Rejected Suggestions
+
+- Rejected third-party "unlock without data loss" and unofficial flashing tools because Apple still defines forgotten-passcode recovery as erase/reset unless the narrow old-passcode reset conditions are met.
+- Rejected treating Diagnostic Mode or repeated button combinations as an official workaround; the official instruction is model-specific recovery mode.
+- Rejected telling customers to keep trying random passcodes while troubleshooting recovery mode.
+- Rejected describing nearby restore as a way to bypass a forgotten passcode or preserve local data.
+
+### Blocked Sources
+
+- Xiaohongshu searches returned unrelated account/security-center pages, platform policy pages, or unstable results. No Xiaohongshu evidence was used for factual recipe changes.
+
+### Notes for Future Research
+
+- Continue monitoring whether `iPhone cannot enter recovery mode` becomes frequent enough to deserve a standalone recipe. For now, it is better handled as a branch inside the lockout/passcode article.
+- Research `computer does not recognize iPhone in Finder / Apple Devices app` as a broader cross-device recipe if it appears outside passcode and recovery contexts.
+- Watch for localized Chinese versions of Apple Support 118106, 121133, 105039, and 118107 to replace English references in the Chinese recipe.
+
 ## Harvest Run - 2026-07-13 08:06 CST
 
 ### Search Queries
@@ -486,3 +574,395 @@
 - Monitor whether Apple updates the Chinese Apple Watch compatibility table for the latest watchOS/iOS requirements.
 - Consider a dedicated `Apple Watch cannot update watchOS` recipe if update failure reports continue to appear outside pairing contexts.
 - Revisit `Apple Watch Activation Lock after erase or second-hand purchase`; community frequency remains high, but today's pass kept it as a branch inside the canonical pairing recipe.
+
+## Harvest Run - 2026-07-13 10:08 CST
+
+### Search Queries
+
+- `site:support.apple.com/en-us iPhone charging paused 80 temperature support Apple`
+- `site:support.apple.com/en-us iPhone won't turn on black screen support Apple`
+- `site:support.apple.com/en-us iPad VoiceOver blue box gestures changed support Apple`
+- `site:support.apple.com/en-us iPhone charging hold 80 percent Clean Energy Charging Optimized Battery Charging support Apple`
+- `site:reddit.com/r/iphone "Charging On Hold" "80" iPhone`
+- `site:reddit.com/r/applehelp "Charging On Hold" iPhone 80`
+- `site:discussions.apple.com "Charging On Hold" "80" iPhone`
+- `site:xiaohongshu.com iPhone 充电暂停 80 温度`
+
+### Sources Visited
+
+- Apple Support: [If your iPhone or iPod touch won't charge](https://support.apple.com/en-us/108805)
+- Apple Support China: [如果 iPhone 或 iPod touch 无法充电](https://support.apple.com/zh-cn/108805)
+- Apple Support: [About Charge Limit and Optimized Battery Charging on iPhone](https://support.apple.com/en-us/108055)
+- Apple Support China: [关于 iPhone 的“充电上限”和“优化电池充电”](https://support.apple.com/zh-cn/108055)
+- Apple Support: [About iPhone charge speeds](https://support.apple.com/en-us/120619)
+- Apple Support China: [关于 iPhone 的充电速度](https://support.apple.com/zh-cn/120619)
+- Apple Support: [Charge and maintain your iPhone battery](https://support.apple.com/en-us/105105)
+- Apple Support China: [为 iPhone 电池充电并进行维护](https://support.apple.com/zh-cn/105105)
+- Apple Support: [If your iPhone won't turn on or the screen is black](https://support.apple.com/en-us/116940)
+- Apple Support Community: ["Charging on hold due to iPhone temperature" on iPhone 15](https://discussions.apple.com/thread/256040409)
+- Apple Support Community: [Iphone charging on hold](https://discussions.apple.com/thread/255653029)
+- Reddit r/applehelp: [Charging on Hold Due to Temperature](https://www.reddit.com/r/applehelp/comments/1fm1csv/charging_on_hold_due_to_temperature/)
+- Reddit r/iPhone: [charging will resume when iPhone returns to normal temperature](https://www.reddit.com/r/iphone/comments/12hqqyp/charging_on_hold_charging_will_resume_when_iphone/)
+
+### Evidence Collected
+
+- Apple's iPhone charging article has a dedicated "stopped charging at 80 percent" branch. It separates Optimized Battery Charging, temperature-based charging limits above 80%, and iPhone 15-or-later Charge Limit settings. Source: [Apple Support 108805](https://support.apple.com/en-us/108805).
+- Apple says Optimized Battery Charging can delay charging past 80% when iPhone predicts it will remain connected for an extended period; the lock screen shows when iPhone will be fully charged and offers "Charge Now" when the customer needs a full charge sooner. Source: [Apple Support 108055](https://support.apple.com/en-us/108055).
+- Apple says iPhone 15 models and later can set a charge limit from 80% to 100% in 5% increments, and iPhone will stop near the selected limit. Source: [Apple Support 108055](https://support.apple.com/en-us/108055).
+- Apple says iOS 18 or later may show a Slow Charger message, and iOS 26 may show an Incompatible Charger message in Settings > Battery when a charger is connected but not charging. Source: [Apple Support 120619](https://support.apple.com/en-us/120619).
+- Apple's charge-speed article says charging can be slower with low-wattage chargers, low-power wireless chargers, USB hubs, car ports, multi-port chargers sharing output, pass-through accessories, and high-load apps such as games, camera apps, or high-brightness video streaming. Source: [Apple Support 120619](https://support.apple.com/en-us/120619).
+- Apple says charging may pause temporarily in extreme temperature conditions and resume when the battery returns to its normal operating range; Settings > Battery can show whether charging was on hold. Source: [Apple Support 120619](https://support.apple.com/en-us/120619).
+- Apple's battery-maintenance article says avoiding charging or using iPhone above 35 C / 95 F helps protect battery lifespan, and software may limit charging above 80% when recommended battery temperatures are exceeded. Source: [Apple Support 105105](https://support.apple.com/en-us/105105).
+- Apple Support Community and Reddit threads repeatedly show customers saying the phone does not feel hot, charging pauses at 80%, the issue appears with fast charging or low starting battery, and they are unsure whether it is battery failure, Optimized Battery Charging, or a charger problem.
+
+### Customer Wording
+
+- “iPhone 充到 80% 就不动了。”
+- “Charging On Hold 是不是电池坏了？”
+- “手机摸起来不热，为什么说温度暂停充电？”
+- “优化电池充电关了还是不继续。”
+- “快充到 80% 后暂停，过很久才到 81%。”
+- “电池健康 100%，但每天都提示温度暂停。”
+- “锁屏说几点充满，我现在就想充满。”
+- “显示慢充或充电器不兼容。”
+
+### Cross-source Observations
+
+- Charging pause at 80% is now strong enough for a separate canonical recipe because it has a distinct Retail triage path: check Battery screen and charging options first, then temperature/charger conditions, then only escalate to hardware.
+- The existing wired/liquid charging article remains the right canonical page for complete no-charge, liquid detection, unsupported accessories, port damage, and black-screen/no-power charging intake.
+- Community posts add customer language and frequency, especially the "phone is not hot" concern, but official Apple documentation is sufficient for the troubleshooting order.
+- Slow charging and charging pause overlap but are not identical. iOS 18 Slow Charger and iOS 26 Incompatible Charger wording should be captured so specialists can avoid telling customers every charging alert means a bad battery.
+
+### Articles Created, Improved, Merged, or Flagged
+
+- Created `cookbook/iPhone/iphone-charging-paused-80-temperature-charge-limit.md`
+  - Canonical symptom-first recipe for iPhone charging paused at 80%, Charging On Hold, temperature charging hold, Charge Limit, Optimized Battery Charging, Slow Charger, and Incompatible Charger wording.
+  - Verification set to `Official` because the core troubleshooting order is directly supported by Apple Support 108805, 108055, 120619, 105105, and 118431.
+- Improved `cookbook/iPhone/iphone-battery-drains-after-update.md`
+  - Added related link to the new charging-pause recipe.
+- Improved `cookbook/iPhone/iphone-wont-charge-wired-liquid-detected.md`
+  - Added related link to the new charging-pause recipe so "完全不充" and "80% 暂停" stay separate during intake.
+- Updated `indexes/categories.md`
+  - iPhone count increased from 12 to 13 recipes.
+- Updated `indexes/related.md`
+  - Added charging-pause to the battery/software-update/charging hub.
+- No duplicate recipes were merged.
+
+### Verification Reasoning
+
+- New recipe `iPhone 充电停在 80% 或显示充电暂停` is `Official` because Apple directly documents Optimized Battery Charging, Charge Limit, thermal charging limits above 80%, slow charger messages, incompatible charger messages, and cooler-place charging guidance.
+- Apple Support Community and Reddit were used for customer wording and recurrence only. They were not used to recommend third-party chargers, forced cooling, or disabling battery protections as official advice.
+
+### Unsafe or Rejected Suggestions
+
+- Rejected putting iPhone in a refrigerator, using ice packs, or forcing rapid cooling because condensation and thermal shock can create new risks.
+- Rejected telling customers to permanently disable Optimized Battery Charging as the default fix; Apple says turning off charging optimizations can increase wear and shorten battery lifespan.
+- Rejected treating every 80% stop as battery failure. Apple documents multiple normal or protective reasons for stopping near 80%.
+- Rejected community speculation that a particular third-party high-wattage charger is the universal cause; the recipe uses charger type and heat as evidence, not brand claims.
+
+### Blocked Sources
+
+- Xiaohongshu search for `iPhone 充电暂停 80 温度` did not surface stable, accessible, high-engagement posts from this environment. No recipe fact was based on Xiaohongshu.
+
+### Notes for Future Research
+
+- Review `iPhone cannot power on or black screen after battery drains completely` next; Apple Support 116940 is current and could support a separate no-power recipe.
+- Watch whether iOS 26 "Incompatible Charger" becomes frequent enough for a dedicated accessory/charger alert recipe.
+- Revisit iPad charging pause if tablet-specific 80%/temperature complaints become frequent; Apple has separate iPad battery-maintenance guidance.
+
+## Harvest Run - 2026-07-13 12:08 CST
+
+### Search Queries
+
+- `site:support.apple.com/en-us iPhone won't turn on black screen battery drained Apple Support 2026`
+- `site:support.apple.com/en-us "If your iPhone won't turn on" "Published Date"`
+- `site:discussions.apple.com "iPhone won't turn on" "battery drained" "black screen"`
+- `site:reddit.com/r/applehelp "iPhone won't turn on" "battery died" "black screen"`
+- `site:xiaohongshu.com iPhone 黑屏 开不了机 没电 充不进 2026`
+- `site:xiaohongshu.com 苹果 黑屏 开不了机 强制重启 充电 没反应`
+- `site:discussions.apple.com "iPhone 17 not turning on" "after dying"`
+- `site:reddit.com/r/iphone "iPhone 17" "not turning on" "after dying"`
+
+### Sources Visited
+
+- Apple Support: [If your iPhone won't turn on or the screen is black](https://support.apple.com/en-us/116940)
+- Apple Support: [If your iPhone or iPod touch won't charge](https://support.apple.com/en-us/108805)
+- Apple Support: [If your iPhone is stuck on the Apple logo](https://support.apple.com/en-us/102474)
+- Apple Support: [If your iPhone or iPad gets too hot or too cold](https://support.apple.com/en-us/118431)
+- Apple Support: [About iOS 26 Updates](https://support.apple.com/en-us/123075)
+- Apple Support Community: [iPhone 17 Pro won't turn on after battery drained](https://discussions.apple.com/thread/256308911)
+- Apple Support Community: [iPhone won't turn on after battery died and charging](https://discussions.apple.com/thread/256268415)
+- Apple Support Community: [iPhone not charging or turning on after battery drained](https://discussions.apple.com/thread/256221247)
+- Reddit r/iPhone: [iPhone 17 not turning on or charging after dying](https://www.reddit.com/r/iphone/comments/1ohqv8m/iphone_17_not_turning_on_or_charging_after_dying/)
+- Xiaohongshu home/search result shell: [Xiaohongshu](https://www.xiaohongshu.com/)
+
+### Evidence Collected
+
+- Apple's black-screen/no-power article was published May 11, 2026. It starts with force restart by iPhone type; Face ID models use volume up, volume down, then hold the side button until the Apple logo appears, which might take longer than 10 seconds. Source: [Apple Support 116940](https://support.apple.com/en-us/116940).
+- Apple says if the iPhone does not turn on, charge it for 1 hour and try again; if it shows a low-charge battery icon, check iPhone hardware and then charge for 30 minutes or until it starts. Source: [Apple Support 116940](https://support.apple.com/en-us/116940).
+- Apple's charging article says to test direct power sources, inspect the cable and adapter for damage, use a wall outlet, remove debris from the charging port, charge for half an hour, then force restart; if it still will not power on or charge, service may be needed. Source: [Apple Support 108805](https://support.apple.com/en-us/108805).
+- Apple's Apple-logo article says if a progress bar has not moved for more than 1 hour, connect to a computer, enter recovery mode, and choose Update first; Restore erases the iPhone. Source: [Apple Support 102474](https://support.apple.com/en-us/102474).
+- Apple's temperature article says very cold conditions can temporarily shorten battery life, cause the device to turn off, and may prevent charging or stop charging. Source: [Apple Support 118431](https://support.apple.com/en-us/118431).
+- Apple's iOS 26.5.1 release note says it fixes an issue for a small number of iPhone Air and iPhone 17 users that may prevent wired charging when the battery is nearly drained. Source: [About iOS 26 Updates](https://support.apple.com/en-us/123075).
+- Apple Community and Reddit show repeated wording around iPhone 17 / iPhone Air not showing a charging symbol after being left to die, force restart attempts failing, confusion over the button timing, and whether to wait longer or seek service.
+
+### Customer Wording
+
+- “iPhone 黑屏，怎么按都不开机。”
+- “昨晚没电关机，早上插电没有充电图标。”
+- “iPhone 17 没电后充不起来。”
+- “充了两个小时还是黑屏。”
+- “按音量上、音量下、电源键没有反应。”
+- “显示低电量图标，但一直进不了系统。”
+- “卡在 Apple 标志不动。”
+- “是不是屏幕坏了，还是电池坏了？”
+
+### Cross-source Observations
+
+- This problem deserved its own canonical recipe because customers present it as "black screen" or "dead phone", while the fastest Retail order is force restart, adequate wall-power charging, known-good power path, low-battery icon handling, iPhone Air/iPhone 17 near-depleted wired-charging update branch, then recovery/service.
+- The existing wired/liquid charging recipe remains canonical for full charging failures, port warnings, liquid detection, unsupported accessories, and interface damage. The new no-power recipe links back there but keeps intake symptom-first for black-screen customers.
+- Community posts reinforce that button-sequence timing is a practical failure point, but the article labels that as execution detail for Apple's force-restart step, not as an unofficial workaround.
+- The iOS 26.5.1 fix should not be generalized beyond iPhone Air and iPhone 17 models with near-depleted wired-charging failure.
+
+### Articles Created, Improved, Merged, or Flagged
+
+- Created `cookbook/iPhone/iphone-black-screen-wont-turn-on-after-battery-drained.md`
+  - Canonical symptom-first recipe for iPhone black screen, no power, low-battery icon, dead-after-drain, iPhone Air / iPhone 17 near-depleted wired-charging issue, and Apple-logo/recovery triage.
+  - Verification set to `Official` because the core order is directly supported by Apple Support 116940, 108805, 102474, 118431, and iOS 26 update notes.
+- Improved `cookbook/iPhone/iphone-wont-charge-wired-liquid-detected.md`
+  - Added related link to the new black-screen/no-power recipe.
+  - Updated article date because navigation changed.
+- Improved `cookbook/iPhone/iphone-battery-drains-after-update.md`
+  - Replaced plain-text "iPhone unable to turn on or black screen" with a canonical recipe link.
+  - Updated article date because navigation changed.
+- Updated `indexes/categories.md`
+  - iPhone count increased from 13 to 14 recipes.
+- Updated `indexes/related.md`
+  - Added black-screen/no-power to the battery/software-update/charging hub.
+- No duplicate recipes were merged.
+
+### Verification Reasoning
+
+- New recipe `iPhone 黑屏、无法开机或电量耗尽后没反应` is `Official` because Apple's public support articles directly document force restart, charge-duration expectations, low-battery icon handling, charging hardware checks, recovery-mode update-vs-restore behavior, temperature charging limits, and the iOS 26.5.1 iPhone Air/iPhone 17 near-depleted wired-charging fix.
+- Apple Support Community and Reddit were used only for customer wording, recurrence, and practical intake signals.
+- No verification levels were changed for existing recipes.
+
+### Unsafe or Rejected Suggestions
+
+- Rejected treating every iPhone 17 black-screen/no-power case as the iOS 26.5.1 issue; Apple limits the release note to a small number of iPhone Air and iPhone 17 models when the battery is nearly drained.
+- Rejected endless repeated force-restart attempts. The recipe suggests a few correct attempts, then moves to charging, power-path validation, recovery, or service.
+- Rejected deep DIY port cleaning with metal tools, SIM eject tools, cotton swabs, paper, or aggressive brushing because it can damage USB-C or Lightning contacts.
+- Rejected choosing Restore before Update when a device is stuck on Apple logo and data matters; Apple says Update preserves data while Restore erases the iPhone.
+
+### Blocked Sources
+
+- Xiaohongshu searches for iPhone black screen, cannot power on, no charge after battery drain, and forced restart returned the generic Xiaohongshu home feed or unrelated policy/security pages from this environment. No factual changes were based on Xiaohongshu.
+
+### Notes for Future Research
+
+- Next missing recipe should likely be `iPhone cannot enter recovery mode or buttons do not respond during recovery`, because it branches naturally from black-screen and passcode-lockout workflows.
+- Watch whether iPhone Air/iPhone 17 near-depleted wired-charging reports continue after iOS 26.5.1/26.5.2; if yes, strengthen evidence capture in both charging and black-screen recipes.
+- Continue monitoring Apple Support for localized Chinese updates to Apple Support 116940 and 108805.
+
+## Harvest Run - 2026-07-13 16:08 CST
+
+### Search Queries
+
+- `site:support.apple.com/guide/ipad turn VoiceOver on or off iPad`
+- `site:support.apple.com/guide/ipad use VoiceOver gestures iPad`
+- `site:support.apple.com/guide/ipad Zoom iPad blue box accessibility`
+- `site:support.apple.com/guide/ipad AssistiveTouch iPad turn off`
+- `site:support.apple.com/en-us iPad blue box VoiceOver gestures triple click Accessibility Shortcut Apple Support`
+- `site:reddit.com/r/ipad iPad blue box around everything double tap VoiceOver`
+- `site:reddit.com/r/applehelp iPad blue box double tap VoiceOver accessibility`
+- `site:reddit.com/r/ipad iPad won't respond have to double tap VoiceOver`
+- `site:discussions.apple.com iPad blue box double tap VoiceOver Accessibility`
+- `site:xiaohongshu.com iPad 蓝框 双击 才能 点 VoiceOver 旁白`
+- `site:xiaohongshu.com iPad 屏幕 蓝色 方框 旁白 关闭`
+- `site:xiaohongshu.com iPad 辅助功能 蓝框 键盘 全键盘访问`
+
+### Sources Visited
+
+- Apple Support User Guide: [Turn on and practice VoiceOver on iPad](https://support.apple.com/guide/ipad/turn-on-and-practice-voiceover-ipad9a246898/ipados)
+- Apple Support User Guide: [Operate iPad when VoiceOver is on](https://support.apple.com/guide/ipad/operate-ipad-when-voiceover-is-on-ipad9a24752e/ipados)
+- Apple Support: [About the Accessibility Shortcut for iPhone, iPad, and iPod touch](https://support.apple.com/en-us/111771)
+- Apple Support User Guide: [Control iPad with an external keyboard](https://support.apple.com/guide/ipad/control-ipad-with-an-external-keyboard-ipad5f765d6f/ipados)
+- Apple Support User Guide: [Zoom in on the iPad screen](https://support.apple.com/guide/ipad/zoom-in-ipad9a245e3e/ipados)
+- Apple Support User Guide: [Use AssistiveTouch on iPad](https://support.apple.com/guide/ipad/use-assistivetouch-ipad9a2466d3/ipados)
+- Apple Support: [Use Siri on all your Apple devices](https://support.apple.com/en-us/105020)
+- Reddit r/iPad: [Does anyone know how to turn this blue border off?](https://www.reddit.com/r/ipad/comments/w3wcog/does_anyone_know_how_to_turn_this_blue_border_off/)
+- Reddit r/applehelp: [How to disable that blue box border outline focusing text inputs](https://www.reddit.com/r/applehelp/comments/htbz0s/how_to_disable_that_blue_box_border_outline/)
+- Reddit r/iPad: [Touch screen not working on kid's ipad. I think voice over is on but I can't get it off](https://www.reddit.com/r/ipad/comments/15vh51t/touch_screen_not_working_on_kids_ipad_i_think/)
+- Apple Support Community: [Blue box line](https://discussions.apple.com/thread/251934593)
+- Apple Support Community: [Blue square moving around screen](https://discussions.apple.com/thread/250903861)
+- Apple Support Community: [Blue box appears with magic keyboard on iPad Pro how to remove it?](https://discussions.apple.com/thread/251573259)
+
+### Evidence Collected
+
+- Apple says VoiceOver on iPad has an interactive tutorial and practice area; VoiceOver gestures can be practiced without performing actions on the iPad. Source: [Apple iPad User Guide](https://support.apple.com/guide/ipad/turn-on-and-practice-voiceover-ipad9a246898/ipados).
+- Apple says that when VoiceOver is on, iPad uses special gestures to unlock, go Home, open Control Center, switch apps, and perform other actions. Source: [Apple iPad User Guide](https://support.apple.com/guide/ipad/operate-ipad-when-voiceover-is-on-ipad9a24752e/ipados).
+- Apple says Accessibility Shortcut can add features such as VoiceOver, AssistiveTouch, and Guided Access to quick access, and triple-click can quickly access selected Accessibility features. Source: [Apple Support 111771](https://support.apple.com/en-us/111771).
+- Apple says Full Keyboard Access is under Accessibility > Keyboards & Typing and can control iPad with an external keyboard; Apple also documents customizing the appearance of the Full Keyboard Access highlight. Source: [Apple iPad User Guide](https://support.apple.com/guide/ipad/control-ipad-with-an-external-keyboard-ipad5f765d6f/ipados).
+- Apple says Zoom can be configured under Accessibility > Zoom, including Follow Focus, Smart Typing, keyboard shortcuts, and Zoom Controller. Source: [Apple iPad User Guide](https://support.apple.com/guide/ipad/zoom-in-ipad9a245e3e/ipados).
+- Apple says AssistiveTouch can adapt the touchscreen, replace gestures with taps or alternate gestures, and help with pressing iPad buttons. Source: [Apple iPad User Guide](https://support.apple.com/guide/ipad/use-assistivetouch-ipad9a2466d3/ipados).
+- Apple documents Siri activation on iPad using the Top button or Home button depending on model. Source: [Apple Support 105020](https://support.apple.com/en-us/105020).
+- Reddit and Apple Support Community threads repeatedly describe customer-facing symptoms as "blue box," "blue border," "have to double tap," "iPad not responding," "kid's iPad," "Magic Keyboard blue box," and "weird circle." These were used for wording and prioritization only.
+
+### Customer Wording
+
+- “iPad 屏幕上有蓝框。”
+- “点 App 没反应，要双击才会打开。”
+- “iPad 一直朗读我点到的东西。”
+- “孩子不知道按了哪里，iPad 像坏了一样。”
+- “接键盘以后每个输入框都有蓝色边框。”
+- “屏幕上有个圆点，怎么关？”
+- “屏幕放大了，手势和平时不一样。”
+- “是不是触摸屏坏了？”
+
+### Cross-source Observations
+
+- The same customer phrase "blue box" can refer to different official features: VoiceOver focus, Full Keyboard Access highlight, Switch Control-style focus in community reports, or app-specific focus styling. The recipe therefore starts with feature identification rather than a single one-size fix.
+- VoiceOver double-tap behavior is a high-value Retail triage item because customers often interpret it as broken touch, especially on a child's iPad or a locked device.
+- Full Keyboard Access is a separate branch from the existing iPad floating/split keyboard article. The existing keyboard article covers keyboard shape and position; the new recipe covers focus, selection, VoiceOver, Zoom, and AssistiveTouch.
+- The safest Retail posture is to ask whether the customer intentionally uses Accessibility before changing anything. Community suggestions often jump straight to disabling features, which is risky for customers who rely on them.
+
+### Articles Created, Improved, Merged, or Flagged
+
+- Created `cookbook/iPad/ipad-blue-box-double-tap-voiceover-accessibility.md`
+  - Draft canonical recipe for iPad blue focus boxes, VoiceOver double-tap behavior, Full Keyboard Access highlights, Zoom windows, AssistiveTouch circles, and accidental Accessibility Shortcut activation.
+  - Verification set to `Official` because the troubleshooting branches are backed by Apple Support and Apple iPad User Guide pages.
+- Updated `indexes/categories.md`
+  - iPad count increased from 1 to 2 recipes.
+- Updated `indexes/tags.md`
+  - Added `VoiceOver` and `AssistiveTouch` feature tags.
+- Updated `indexes/related.md`
+  - Added an iPad input/focus cluster and connected the new Accessibility-state recipe to the existing iPad keyboard recipe.
+- No duplicate recipes were merged.
+
+### Verification Reasoning
+
+- New recipe `iPad 出现蓝框、必须双击或触控方式突然改变` is `Official` because VoiceOver, Accessibility Shortcut, Full Keyboard Access, Zoom, AssistiveTouch, and Siri entry points are supported by Apple Support or Apple iPad User Guide URLs on `support.apple.com`.
+- Reddit and Apple Support Community sources were used only to establish repeated symptom language and priority. They were not used to present any community workaround as official Apple guidance.
+
+### Unsafe or Rejected Suggestions
+
+- Rejected "turn off all Accessibility features" as a blanket fix because customers may rely on VoiceOver, Zoom, AssistiveTouch, or keyboard navigation.
+- Rejected reset-all-settings, erase iPad, or restore iPad as early steps because the official sources support checking feature state first.
+- Rejected treating every blue box as VoiceOver. Full Keyboard Access, Zoom, AssistiveTouch, and app-specific focus can look similar to customers.
+- Rejected third-party accessibility helper apps and non-Apple support pages as evidence for Apple troubleshooting order.
+
+### Blocked Sources
+
+- Xiaohongshu searches for iPad blue box, VoiceOver double-tap, and Full Keyboard Access did not return stable accessible troubleshooting posts from this environment. No factual changes were based on Xiaohongshu.
+
+### Notes for Future Research
+
+- Watch for enough evidence to split `Switch Control scanning / blue moving box` into a separate recipe if customer wording continues to differ from VoiceOver and Full Keyboard Access.
+- Consider a cross-device `iPhone/iPad AssistiveTouch circle won't go away` recipe if the floating button appears repeatedly outside iPad contexts.
+- Revisit this recipe when Apple publishes a concise public support article specifically for accidental VoiceOver activation on iPhone/iPad.
+
+## Harvest Run - 2026-07-13 18:09 CST
+
+### Search Queries
+
+- `site:support.apple.com/en-us "Published Date" "July" "2026" "If" "Apple"`
+- `site:support.apple.com/en-us "Published Date: July" "2026" "Apple Support"`
+- `site:support.apple.com/en-us "Published Date: July" "2026" "iPhone" "Apple Support"`
+- `site:support.apple.com/en-us "Published Date: July" "2026" "iPad" "Apple Support"`
+- `site:reddit.com/r/applehelp "Screen Time" "child" "not working" "2026"`
+- `site:reddit.com/r/iphone "Screen Time" "child" "not working" "2026"`
+- `site:discussions.apple.com "Screen Time" "child" "not working" "2026"`
+- `site:discussions.apple.com "Screen Time" "state country region" child Apple Account`
+- `site:xiaohongshu.com 屏幕使用时间 儿童账号 地区 年龄 家人共享`
+- `site:xiaohongshu.com 苹果 屏幕使用时间 家长 收不到 请求 地区`
+- `site:xiaohongshu.com Apple ID 儿童账号 屏幕使用时间 看不到`
+
+### Sources Visited
+
+- Apple Support: [Use Screen Time to manage your child's iPhone or iPad](https://support.apple.com/en-us/108806)
+- Apple Support: [Use parental controls to manage your child's iPhone or iPad](https://support.apple.com/en-us/105121)
+- Apple Support: [If Ask to Buy isn't working](https://support.apple.com/en-us/118233)
+- Apple Support: [How to manage app exceptions for your child](https://support.apple.com/en-us/125399)
+- Apple Support: [Create an Apple Account for your child](https://support.apple.com/en-us/102617)
+- Apple Support: [Region-specific rules for managing an Apple Account](https://support.apple.com/en-us/125666)
+- Apple Support: [How to get Apple Intelligence](https://support.apple.com/en-us/121115)
+- Apple Support: [Use Hold Assist on iPhone](https://support.apple.com/en-us/127521)
+- Apple Support Community: [Apple Screen Time app limits not working](https://discussions.apple.com/thread/254480754)
+- Apple Support Community: [Child changing time zone to avoid downtime on Family Sharing](https://discussions.apple.com/thread/254767506)
+- Apple Support Community: [Screen time limits not working](https://discussions.apple.com/thread/256222441)
+- Reddit r/iPhone: [Kid's app requests not showing up?](https://www.reddit.com/r/iphone/comments/11vvg7y/kids_app_requests_not_showing_up/)
+
+### Evidence Collected
+
+- Apple updated its Screen Time child-management article on July 1, 2026. It says parents can manage a child's Screen Time through Family Sharing when the child account is in the family group, and should update all devices before turning on or changing Screen Time settings. Source: [Apple Support 108806](https://support.apple.com/en-us/108806).
+- Apple says some Apple Account settings and feature requirements for children, teens, and adults vary by state, country, or region; where legally required, an Apple Account created for a child under 18 must be part of Family Sharing. Source: [Apple Support 108806](https://support.apple.com/en-us/108806).
+- Apple says in some places Screen Time, Ask to Buy, and content restrictions for apps cannot be turned off. This is important for Retail because customers may present this as a broken or stuck control. Source: [Apple Support 108806](https://support.apple.com/en-us/108806).
+- Apple says parental controls may be on by default depending on country or region and child age, and Content & Privacy Restrictions must be turned on for many parental controls; turning it off pauses controls inside that section. Source: [Apple Support 105121](https://support.apple.com/en-us/105121).
+- Apple says iOS 26 and iPadOS 26 or later can allow a child to request an exception to a limit or restriction set in Screen Time. Source: [Apple Support 105121](https://support.apple.com/en-us/105121).
+- Apple says app exception requests arrive through Messages, and depending on state, country, or region, a parent may have to approve an app again if it makes a significant change such as a higher age rating or a new feature. Source: [Apple Support 125399](https://support.apple.com/en-us/125399).
+- Apple says if a child exception request does not arrive, check latest software, Apple Account email in iMessage, iMessage use in the last 30 days, Messages notifications, and iCloud Contacts sync. Source: [Apple Support 125399](https://support.apple.com/en-us/125399).
+- Apple says most countries and regions treat under-13 accounts as Child Accounts, but thresholds vary: under 14 in China mainland and several other countries/regions, under 15 in some countries, under 16 in several countries, and under 18 in Brazil and Texas. Source: [Apple Support 125666](https://support.apple.com/en-us/125666).
+- Apple says adults may need age confirmation for certain services or account actions in Singapore, South Korea, the UK, and Texas; credit card or government-ID methods can apply depending on location. Source: [Apple Support 125666](https://support.apple.com/en-us/125666).
+- Apple says when creating a child Apple Account, parents should enter the correct birthday and can use the child's email address, a suggested iCloud address, or Game Center nickname. Source: [Apple Support 102617](https://support.apple.com/en-us/102617).
+
+### Customer Wording
+
+- “孩子已经 13 岁了，为什么还是儿童账号？”
+- “屏幕使用时间开关不能关。”
+- “家长控制自己又打开了。”
+- “App 明明批准过，更新后又要批准。”
+- “一个孩子能限制，另一个孩子完全不生效。”
+- “地区改了以后家庭共享和屏幕时间不一样。”
+- “购买前询问不能关闭。”
+- “孩子改时区绕过停用时间。”
+- “App 限额设置第二天就消失。”
+- “家长端看不到孩子屏幕时间。”
+
+### Cross-source Observations
+
+- Family Sharing and Screen Time remain a strong Retail cluster because customers use one phrase, "Screen Time not working," to mean missing request delivery, limits not blocking, child activity not showing, or legally/regionally non-adjustable controls.
+- The July 2026 official Screen Time articles make region and age rules more important. A specialist should not promise that a child account becomes an ordinary account at age 13 because Apple documents different thresholds by country or region.
+- Community threads often jump to risky actions such as iCloud sign-out, reset all settings, rebuilding limits, or changing account region. The Cookbook should keep those late, unofficial, and risk-labeled.
+- App re-approval after a significant app change is distinct from a failed notification path. The request recipe now splits this before treating every repeated approval as a bug.
+- Xiaohongshu search remained weak from this environment; the previously captured single Xiaohongshu Screen Time article remains a community clue only and was not promoted to official evidence.
+
+### Articles Created, Improved, Merged, or Flagged
+
+- Improved `cookbook/Family Sharing/screen-time-child-usage-not-showing.md`
+  - Added official English sources for Screen Time, child Apple Account creation, and region-specific account rules.
+  - Added symptoms and cause language for age/region confusion.
+  - Added Retail guidance to record child birthday, Apple Account country or region, family organizer region, and the specific setting that cannot be changed.
+  - Strengthened the risk warning against changing birthday or country/region to bypass controls.
+- Improved `cookbook/Family Sharing/screen-time-requests-not-working.md`
+  - Added the official re-approval branch for apps that make significant changes.
+  - Added the region/age branch for controls that cannot be turned off or adjusted.
+  - Kept Messages/iMessage troubleshooting as the official delivery path.
+- Improved `cookbook/Family Sharing/screen-time-limits-not-blocking.md`
+  - Added a split between true limits-not-blocking failures and region/age rules that make controls appear non-adjustable.
+  - Added official references for July 2026 Screen Time and parental-control wording.
+- No new recipes were created.
+- No duplicate recipes were found or merged.
+
+### Verification Reasoning
+
+- The three improved Family Sharing recipes remain `Official` because the added troubleshooting branches are supported by Apple Support 108806, 105121, 125399, 102617, and 125666.
+- Apple Support Community and Reddit were used only for customer wording and frequency signals. No community workaround was promoted to an Apple recommendation.
+- Xiaohongshu did not provide reliable new accessible evidence in this run; no verification level was raised from Xiaohongshu.
+
+### Unsafe or Rejected Suggestions
+
+- Rejected changing a child's Apple Account birthday to escape Screen Time or Ask to Buy behavior. Apple treats birthday as account-critical information, and child-account rules are legal/region-dependent.
+- Rejected changing Apple Account country or region just to unlock a Screen Time or Ask to Buy switch; region changes can affect payments, balances, subscriptions, purchases, and Family Sharing behavior.
+- Rejected iCloud sign-out and reset-all-settings as first-line Screen Time fixes because official Apple guidance starts with Family Sharing membership, latest software, Content & Privacy Restrictions, Messages/iMessage, contacts, notifications, and account/region status.
+- Rejected creating a new Screen Time region/age recipe today because the evidence improves the existing canonical Family Sharing recipes more than it justifies a separate page.
+
+### Blocked Sources
+
+- Xiaohongshu searches returned generic platform pages, unrelated policy/activity pages, or unstable explore pages rather than stable high-engagement Apple troubleshooting posts.
+- Reddit search results included old but still representative request-delivery complaints; they were treated as wording and recurrence signals, not current-proof recommendations.
+
+### Notes for Future Research
+
+- Consider a future canonical recipe for `Child Apple Account Cannot Change Region or Age Settings` if Apple Community and Retail cases keep separating this from ordinary Screen Time failures.
+- Revisit Apple Intelligence availability as a missing recipe if customers repeatedly report “Apple Intelligence unavailable,” especially around language downloads, 7 GB storage, China mainland availability, supported-device eligibility, and Siri/device language mismatch.
+- Monitor Hold Assist support questions before creating a recipe; the July 10, 2026 article is current but not yet a strong troubleshooting cluster.

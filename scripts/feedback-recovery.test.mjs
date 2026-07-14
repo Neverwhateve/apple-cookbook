@@ -112,6 +112,29 @@ describe("feedback recovery CLI", () => {
     assert.equal(result.stdout.includes("测试内容"), false);
   });
 
+  it("accepts content Bugs that are waiting for human review", async () => {
+    const root = await makeTemporaryRoot("apple-cookbook-feedback-review-doctor-");
+    await writeJsonl(path.join(root, "feedback/inbox.jsonl"), [
+      {
+        ...makeSubmission("AC-REVIEW", "needs_review"),
+        kind: "content_bug",
+        automationReview: {
+          outcome: "no_content_change",
+          reviewedAt: "2026-07-14T08:00:00.000Z",
+          summary: "当前内容无需修改。",
+          issueUrl: "https://github.com/example/repo/issues/42"
+        }
+      }
+    ]);
+
+    const result = await runCli(["doctor", "--data-dir", root, "--json"]);
+    const report = JSON.parse(result.stdout);
+
+    assert.equal(result.code, 0, result.stderr);
+    assert.equal(report.ok, true);
+    assert.equal(report.summary.inboxRecords, 1);
+  });
+
   it("keeps doctor side-effect free when the store is completely absent", async () => {
     const root = await makeTemporaryRoot("apple-cookbook-feedback-empty-doctor-");
 

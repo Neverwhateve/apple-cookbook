@@ -23,6 +23,9 @@ jobs:
     name: Sync ECS feedback to GitHub issues
     runs-on: ubuntu-latest
     steps:
+      - name: Check out reconciliation tools
+        uses: actions/checkout@v4
+
       - name: Configure SSH
         env:
           ALIYUN_ECS_HOST: ${{ secrets.ALIYUN_ECS_HOST }}
@@ -85,6 +88,7 @@ jobs:
           gh label create P0 --color B60205 --description "Highest priority feedback intake" || true
           gh label create feedback-intake --color 1D76DB --description "Submitted through Apple Cookbook feedback" || true
           gh label create content-bug --color D93F0B --description "Content accuracy or troubleshooting bug" || true
+          gh label create needs-human-review --color FBCA04 --description "AI found no justified content change; administrator review required" || true
 
       - name: Close archived P0 feedback issues
         env:
@@ -109,10 +113,9 @@ jobs:
                 --state open \
                 --label P0 \
                 --label feedback-intake \
-                --limit 200 \
-                --json number,body \
-                --jq ".[] | select(.body | contains(\"Feedback ID: \`$id\`\")) | .number" \
-                | head -n 1
+                --limit 1000 \
+                --json number,body,createdAt \
+                --jq "[.[] | select(.body | contains(\"Feedback ID: \`$id\`\"))] | sort_by([.createdAt, .number]) | last | .number // empty"
             )
 
             if [[ -z "$issue_number" ]]; then
@@ -122,7 +125,7 @@ jobs:
             gh issue close "$issue_number" --comment "Archived from the admin feedback queue as \`$status\`; removed from active P0 harvest intake."
           done < intake/feedback/archive.jsonl
 
-      - name: Archive active feedback with closed GitHub issues
+      - name: Reconcile active feedback with GitHub Issue outcomes
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
@@ -132,12 +135,20 @@ jobs:
           FEEDBACK_DATA_DIR: ${{ vars.FEEDBACK_DATA_DIR || '/var/lib/apple-cookbook' }}
         run: |
           set -euo pipefail
-          : > intake/closed-feedback-ids.txt
+          : > intake/feedback-reconciliation.jsonl
 
           if [[ ! -s intake/feedback/inbox.jsonl ]]; then
             echo "No active feedback submissions found."
             exit 0
           fi
+
+          gh issue list \
+            --state all \
+            --label P0 \
+            --label feedback-intake \
+            --limit 1000 \
+            --json number,body,state,labels,url,createdAt \
+            > intake/github-feedback-issues.json
 
           while IFS= read -r submission; do
             id=$(jq -r '.id // empty' <<<"$submission")
@@ -145,35 +156,71 @@ jobs:
             status=$(jq -r '.status // "open"' <<<"$submission")
             [[ "$status" == "open" || "$status" == "in_progress" ]] || continue
 
-            issue_state=$(
-              gh issue list \
-                --state all \
-                --label P0 \
-                --label feedback-intake \
-                --limit 200 \
-                --json body,state \
-                --jq ".[] | select(.body | contains(\"Feedback ID: \`$id\`\")) | .state" \
-                | head -n 1
+            issue_marker="Feedback ID: \`$id\`"
+            issue_json=$(
+              jq -c --arg marker "$issue_marker" '
+                [.[] | select((.body // "") | contains($marker))]
+                | sort_by([.createdAt, .number])
+                | last // empty
+              ' intake/github-feedback-issues.json
             )
+            [[ -n "$issue_json" ]] || continue
 
-            if [[ "$issue_state" == "CLOSED" ]]; then
-              echo "$id" >> intake/closed-feedback-ids.txt
+            issue_number=$(jq -r '.number' <<<"$issue_json")
+            issue_state=$(jq -r '.state' <<<"$issue_json")
+            issue_url=$(jq -r '.url // ""' <<<"$issue_json")
+
+            if jq -e '[.labels[].name] | index("needs-human-review") != null' <<<"$issue_json" >/dev/null; then
+              review_json=$(
+                gh issue view "$issue_number" \
+                  --json comments \
+                  --jq '[.comments[] | select(.body | contains("<!-- apple-cookbook-automation-review:no_content_change -->"))] | sort_by(.createdAt) | last // {}'
+              )
+              reviewed_at=$(jq -r '.createdAt // empty' <<<"$review_json")
+              summary=$(jq -r '.body // empty' <<<"$review_json")
+              [[ -n "$reviewed_at" ]] || reviewed_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+              [[ -n "$summary" ]] || summary="自动验证未发现需要发布的内容修改，未提供进一步说明。"
+
+              jq -nc \
+                --arg id "$id" \
+                --arg action "needs_review" \
+                --arg reviewedAt "$reviewed_at" \
+                --arg summary "$summary" \
+                --arg issueUrl "$issue_url" \
+                '{ id: $id, action: $action, reviewedAt: $reviewedAt, summary: $summary, issueUrl: $issueUrl }' \
+                >> intake/feedback-reconciliation.jsonl
+              continue
             fi
+
+            [[ "$issue_state" == "CLOSED" ]] || continue
+            jq -nc \
+              --arg id "$id" \
+              --arg action "resolved" \
+              --arg reviewedAt "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+              --arg issueUrl "$issue_url" \
+              '{ id: $id, action: $action, reviewedAt: $reviewedAt, issueUrl: $issueUrl }' \
+              >> intake/feedback-reconciliation.jsonl
           done < intake/feedback/inbox.jsonl
 
-          if [[ ! -s intake/closed-feedback-ids.txt ]]; then
-            echo "No active feedback has closed GitHub issues."
+          if [[ ! -s intake/feedback-reconciliation.jsonl ]]; then
+            echo "No active feedback has a new GitHub Issue outcome."
             exit 0
           fi
 
           scp -i ~/.ssh/aliyun_ecs -P "$ALIYUN_ECS_PORT" \
-            intake/closed-feedback-ids.txt "$ALIYUN_ECS_USER@$ALIYUN_ECS_HOST:/tmp/apple-cookbook-closed-feedback-ids.txt"
+            intake/feedback-reconciliation.jsonl \
+            scripts/reconcile-feedback-intake.mjs \
+            "$ALIYUN_ECS_USER@$ALIYUN_ECS_HOST:/tmp/"
 
           ssh -i ~/.ssh/aliyun_ecs -p "$ALIYUN_ECS_PORT" "$ALIYUN_ECS_USER@$ALIYUN_ECS_HOST" \
             "FEEDBACK_DATA_DIR='$FEEDBACK_DATA_DIR' bash -s" <<'REMOTE'
           set -euo pipefail
           umask 077
           mkdir -p "$FEEDBACK_DATA_DIR/feedback"
+          touch \
+            "$FEEDBACK_DATA_DIR/feedback/inbox.jsonl" \
+            "$FEEDBACK_DATA_DIR/feedback/archive.jsonl" \
+            "$FEEDBACK_DATA_DIR/feedback/synced-github-issues.txt"
 
           lock_path="$FEEDBACK_DATA_DIR/feedback/.queue.lock"
           lock_token="github-feedback-sync-$(date +%s)-$$-$RANDOM"
@@ -187,53 +234,19 @@ jobs:
           done
           printf '{"token":"%s","pid":%s,"acquiredAt":"%s"}\n' \
             "$lock_token" "$$" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$lock_path/owner.json"
-          release_lock() {
+          cleanup() {
             if grep -Fq "\"token\":\"$lock_token\"" "$lock_path/owner.json" 2>/dev/null; then
               rm -rf "$lock_path"
             fi
+            rm -f \
+              /tmp/feedback-reconciliation.jsonl \
+              /tmp/reconcile-feedback-intake.mjs
           }
-          trap release_lock EXIT
+          trap cleanup EXIT
 
-          node <<'NODE'
-          const fs = require('fs');
-          const crypto = require('crypto');
-          const dir = `${process.env.FEEDBACK_DATA_DIR}/feedback`;
-          const inbox = `${dir}/inbox.jsonl`;
-          const archive = `${dir}/archive.jsonl`;
-          const closedIds = new Set(fs.readFileSync('/tmp/apple-cookbook-closed-feedback-ids.txt', 'utf8').split(/\r?\n/).filter(Boolean));
-          const read = (file) => fs.existsSync(file) ? fs.readFileSync(file, 'utf8').split(/\r?\n/).filter(Boolean).map((line) => JSON.parse(line)) : [];
-          const active = read(inbox);
-          const archived = read(archive);
-          const archivedIds = new Set(archived.map((item) => item.id));
-          const now = new Date().toISOString();
-          const toArchive = [];
-          const nextActive = [];
-
-          for (const item of active) {
-            if (closedIds.has(item.id)) {
-              toArchive.push({ ...item, status: 'resolved', updatedAt: now, adminNote: 'GitHub P0 issue 已关闭，自动归档。' });
-            } else {
-              nextActive.push(item);
-            }
-          }
-
-          const nextArchive = [...toArchive.filter((item) => !archivedIds.has(item.id)), ...archived];
-          const writeAtomic = (file, items) => {
-            const temp = `${dir}/.${file.split('/').pop()}.${process.pid}.${crypto.randomUUID()}.tmp`;
-            const body = items.map((item) => JSON.stringify(item)).join('\n') + (items.length ? '\n' : '');
-            const descriptor = fs.openSync(temp, 'wx', 0o600);
-            try {
-              fs.writeFileSync(descriptor, body, 'utf8');
-              fs.fsyncSync(descriptor);
-            } finally {
-              fs.closeSync(descriptor);
-            }
-            fs.renameSync(temp, file);
-          };
-          writeAtomic(inbox, nextActive);
-          writeAtomic(archive, nextArchive);
-          NODE
-          rm -f /tmp/apple-cookbook-closed-feedback-ids.txt
+          node /tmp/reconcile-feedback-intake.mjs \
+            --data-dir "$FEEDBACK_DATA_DIR" \
+            --decisions-file /tmp/feedback-reconciliation.jsonl
           REMOTE
 
       - name: Create issues for new P0 feedback

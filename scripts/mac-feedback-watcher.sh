@@ -85,6 +85,9 @@ ensure_labels() {
   gh label create codex-failed \
     --repo "$REPOSITORY" --color B60205 \
     --description "Mac mini Codex processing needs attention" --force >/dev/null
+  gh label create needs-human-review \
+    --repo "$REPOSITORY" --color FBCA04 \
+    --description "AI found no justified content change; administrator review required" --force >/dev/null
 }
 
 ensure_workspace() {
@@ -107,7 +110,8 @@ next_issue() {
       map(select(
         ([.labels[].name] | index("codex-processing") | not) and
         ([.labels[].name] | index("codex-published") | not) and
-        ([.labels[].name] | index("codex-failed") | not)
+        ([.labels[].name] | index("codex-failed") | not) and
+        ([.labels[].name] | index("needs-human-review") | not)
       ))
       | sort_by(.createdAt)
       | .[0] // empty
@@ -200,7 +204,7 @@ mark_failed() {
 
 process_issue() {
   local issue_json="$1"
-  local issue_number prompt_file result_file log_file publication_file rc=0 pr_url=""
+  local issue_number feedback_id prompt_file result_file log_file publication_file rc=0 pr_url=""
   issue_number="$(jq -r '.number' <<<"$issue_json")"
   prompt_file="$(mktemp "$STATE_ROOT/prompt.XXXXXX")"
   result_file="$LOG_ROOT/issue-$issue_number-last-message.txt"
@@ -248,13 +252,24 @@ process_issue() {
 
   if (( rc == 10 )); then
     {
+      echo "<!-- apple-cookbook-automation-review:no_content_change -->"
+      echo
       echo "Mac mini 已完成验证，但没有发现需要发布的内容修改。"
       echo
       cat "$result_file" 2>/dev/null || true
     } > "$STATE_ROOT/issue-comment-$issue_number.md"
     gh issue comment "$issue_number" --repo "$REPOSITORY" \
       --body-file "$STATE_ROOT/issue-comment-$issue_number.md" >/dev/null
+    gh issue edit "$issue_number" --repo "$REPOSITORY" \
+      --remove-label codex-processing --add-label needs-human-review >/dev/null
     gh issue close "$issue_number" --repo "$REPOSITORY" --reason completed >/dev/null
+    feedback_id="$(jq -r '.body // ""' <<<"$issue_json" | sed -n 's/^Feedback ID: `\([^`]*\)`$/\1/p' | head -n 1)"
+    if [[ -n "$feedback_id" ]]; then
+      gh workflow run sync-feedback-intake.yml \
+        --repo "$REPOSITORY" \
+        --ref main \
+        -f feedback_id="$feedback_id" >/dev/null 2>&1 || true
+    fi
     rm -f "$STATE_ROOT/issue-comment-$issue_number.md"
     return
   fi

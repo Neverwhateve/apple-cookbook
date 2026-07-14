@@ -17,12 +17,13 @@ const trackedFiles = [
 
 const feedbackKinds = new Set([
   "missing_problem",
+  "content_bug",
   "article_feedback",
   "workflow_request",
   "link_submission",
   "question_submission"
 ]);
-const feedbackStatuses = new Set(["open", "in_progress", "resolved", "dismissed"]);
+const feedbackStatuses = new Set(["open", "in_progress", "needs_review", "resolved", "dismissed"]);
 
 type TrackedFile = (typeof trackedFiles)[number];
 type RecoveryFile = TrackedFile | "manifest.json";
@@ -280,7 +281,7 @@ function analyzeSnapshot(files: SnapshotFile[]): FeedbackDoctorReport {
   }
 
   const activeArchiveCount = archive.filter(
-    (record) => record.status === "open" || record.status === "in_progress"
+    (record) => record.status === "open" || record.status === "in_progress" || record.status === "needs_review"
   ).length;
   if (activeArchiveCount > 0) {
     addIssue(

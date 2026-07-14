@@ -23,7 +23,7 @@ aliases:
   - 手机更新后发热
 verification: Official
 difficulty: Moderate
-updated: 2026-07-12
+updated: 2026-07-13
 official_sources:
   - https://support.apple.com/zh-cn/120745
   - https://support.apple.com/zh-cn/102432
@@ -111,7 +111,9 @@ popular: true
 
 ---
 
-## 补充处理思路
+## 补充处理思路（社区表述仅作频率信号）
+
+以下处理思路仍以 Apple 官方来源为依据。Apple Community、Reddit 等社区来源只用于识别顾客常见表述、出现频率和复查场景，不作为官方修复步骤的证据。
 
 ### 给系统 2 到 3 天完成后台整理
 
@@ -183,7 +185,8 @@ popular: true
 
 - [iPhone 显示 SOS、无服务或正在搜索](/recipes/iPhone/iphone-sos-no-service-searching)
 - [iPhone 设置或更新时卡在正在准备更新、正在验证更新](/recipes/iPhone/iphone-stuck-preparing-verifying-software-update)
-- iPhone 无法开机或黑屏
+- [iPhone 充电停在 80% 或显示充电暂停](/recipes/iPhone/iphone-charging-paused-80-temperature-charge-limit)
+- [iPhone 黑屏、无法开机或电量耗尽后没反应](/recipes/iPhone/iphone-black-screen-wont-turn-on-after-battery-drained)
 - [iPhone 无法充电、有线充电没反应或提示液体检测](/recipes/iPhone/iphone-wont-charge-wired-liquid-detected)
 - Apple 账户验证失败
 - 更新后 App 卡顿或闪退
@@ -206,7 +209,7 @@ popular: true
 
 ## 元信息
 
-- 最后更新：2026-07-12
+- 最后更新：2026-07-13
 - 来源数量：12
 - 验证级别：Apple 官方
 - 支持系统：iOS 18 或更新版本；iOS 26/iPadOS 26 可显示更多电池用量和自适应电量相关信息

@@ -12,12 +12,13 @@ import {
 export type FeedbackStatus = FeedbackSubmission["status"];
 
 export type AdminFeedbackItem = FeedbackSubmission & {
-  priority: "P0";
+  priority: "P0" | null;
   syncedToGithub: boolean;
   queuePosition: number;
 };
 
 export type AdminFeedbackQueues = {
+  review: AdminFeedbackItem[];
   active: AdminFeedbackItem[];
   archived: AdminFeedbackItem[];
 };
@@ -78,14 +79,14 @@ async function readSubmissions(filePath: string) {
 
 export async function getAdminFeedbackItems(root = feedbackDataRoot): Promise<AdminFeedbackItem[]> {
   const queues = await getAdminFeedbackQueues(root);
-  return [...queues.active, ...queues.archived];
+  return [...queues.review, ...queues.active, ...queues.archived];
 }
 
 function toAdminItems(submissions: FeedbackSubmission[], syncedIds: Set<string>) {
   return submissions
     .map((submission, index) => ({
       ...submission,
-      priority: "P0" as const,
+      priority: submission.status === "needs_review" ? null : ("P0" as const),
       syncedToGithub: syncedIds.has(submission.id),
       queuePosition: index + 1
     }))
@@ -93,8 +94,9 @@ function toAdminItems(submissions: FeedbackSubmission[], syncedIds: Set<string>)
       const statusRank: Record<FeedbackStatus, number> = {
         open: 0,
         in_progress: 1,
-        resolved: 2,
-        dismissed: 3
+        needs_review: 2,
+        resolved: 3,
+        dismissed: 4
       };
 
       return statusRank[a.status] - statusRank[b.status] || a.queuePosition - b.queuePosition;
@@ -112,14 +114,16 @@ async function readAdminFeedbackQueues(paths: ReturnType<typeof getAdminStorePat
   );
   const archivedIds = new Set(archiveSubmissions.map((submission) => submission.id));
   const activeSubmissions = inboxSubmissions.filter(
-    (submission) => submission.status !== "resolved" && submission.status !== "dismissed"
+    (submission) => submission.status === "open" || submission.status === "in_progress"
   );
+  const reviewSubmissions = inboxSubmissions.filter((submission) => submission.status === "needs_review");
   const archivedSubmissions = [
     ...legacyArchived.filter((submission) => !archivedIds.has(submission.id)),
     ...archiveSubmissions
   ];
 
   return {
+    review: toAdminItems(reviewSubmissions, syncedIds),
     active: toAdminItems(activeSubmissions, syncedIds),
     archived: toAdminItems(archivedSubmissions, syncedIds)
   };
@@ -150,6 +154,11 @@ export async function getAdminFeedbackQueues(root = feedbackDataRoot): Promise<A
 async function writeSubmissions(filePath: string, submissions: FeedbackSubmission[]) {
   const body = submissions.length ? `${submissions.map((submission) => JSON.stringify(submission)).join("\n")}\n` : "";
   await atomicWriteText(filePath, body);
+}
+
+async function writeSyncedIds(filePath: string, ids: Set<string>) {
+  const body = [...ids].sort().join("\n");
+  await atomicWriteText(filePath, body ? `${body}\n` : "");
 }
 
 export async function updateFeedbackStatus(id: string, status: FeedbackStatus, adminNote = "", root = feedbackDataRoot) {
@@ -226,6 +235,72 @@ export async function moveFeedbackItem(id: string, direction: "first" | "last", 
     }
 
     await writeSubmissions(paths.inboxPath, submissions);
+  });
+}
+
+/**
+ * Promotes a human-reviewed item back into the P0 intake exactly once.
+ *
+ * Removing the synchronization marker makes the next feedback-sync run create
+ * a fresh GitHub Issue. The original AI review Issue stays closed as audit
+ * history instead of being silently reused.
+ */
+export async function queueFeedbackForHarvest(id: string, adminNote = "", root = feedbackDataRoot) {
+  if (!id) throw new Error("Missing feedback id.");
+
+  const storageUnavailableReason = getFeedbackStorageUnavailableReason();
+  if (storageUnavailableReason) throw new Error(storageUnavailableReason);
+
+  const paths = getAdminStorePaths(root);
+
+  return withFileLock(paths.lockPath, async () => {
+    await fs.mkdir(paths.feedbackRoot, { recursive: true });
+    const [activeSubmissions, archivedSubmissions, syncedIds] = await Promise.all([
+      readSubmissions(paths.inboxPath),
+      readSubmissions(paths.archivePath),
+      readSyncedIds(paths.syncedGithubIssuesPath)
+    ]);
+    const activeIndex = activeSubmissions.findIndex((submission) => submission.id === id);
+    const archivedIndex = archivedSubmissions.findIndex((submission) => submission.id === id);
+
+    if (activeIndex === -1 && archivedIndex === -1) {
+      throw new Error(`Feedback item not found: ${id}`);
+    }
+
+    const source = activeIndex === -1 ? archivedSubmissions : activeSubmissions;
+    const sourceIndex = activeIndex === -1 ? archivedIndex : activeIndex;
+    const current = source[sourceIndex];
+
+    // A first promotion already removed the marker and placed the item in the
+    // open queue. Treat retries/double-clicks as idempotent so they cannot
+    // dispatch duplicate P0 work.
+    if (current.status === "open" && !syncedIds.has(id)) {
+      return { queued: false as const };
+    }
+
+    const nextItem: FeedbackSubmission = {
+      ...current,
+      status: "open",
+      adminNote: adminNote.trim() || "管理员复核后确认有效，重新进入 P0。",
+      updatedAt: new Date().toISOString()
+    };
+
+    if (activeIndex !== -1) {
+      activeSubmissions.splice(activeIndex, 1);
+    } else {
+      archivedSubmissions.splice(archivedIndex, 1);
+    }
+
+    activeSubmissions.unshift(nextItem);
+    syncedIds.delete(id);
+
+    await Promise.all([
+      writeSubmissions(paths.inboxPath, activeSubmissions),
+      writeSubmissions(paths.archivePath, archivedSubmissions),
+      writeSyncedIds(paths.syncedGithubIssuesPath, syncedIds)
+    ]);
+
+    return { queued: true as const };
   });
 }
 

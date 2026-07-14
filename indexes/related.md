@@ -7,8 +7,9 @@ Use this index to maintain cross-links between canonical recipes. Links should h
 - iMessage, SIM, SOS, eSIM, and Wi-Fi recipes form the cellular/messaging troubleshooting cluster.
 - Screen Time and Ask to Buy recipes form the Family Sharing controls cluster.
 - Find My location sharing and AirPods Find My setup share location, account, and privacy boundaries.
-- Battery, software update, charging, and iPhone unavailable recipes share backup, power, and service-intake decisions.
+- Battery, software update, charging, charging-pause, black-screen/no-power, and iPhone unavailable recipes share backup, power, temperature, and service-intake decisions.
 - Apple Pay add-card and Apple Pay terminal-payment recipes form the Wallet issuer/merchant/device split.
+- iPad keyboard and iPad accessibility-state recipes form the iPad input/focus troubleshooting cluster.
 
 ## Recipes Updated Today
 
@@ -34,7 +35,12 @@ Use this index to maintain cross-links between canonical recipes. Links should h
   - Best future links: Apple Account payment-method decline, Face ID/Touch ID, and China mainland transit-card issues.
 - `cookbook/iPhone/iphone-battery-drains-after-update.md`
   - Strong links to SOS/no service, software update stuck, and charging.
-  - Future split candidate: temperature-based charging pause if customer frequency keeps rising.
+- `cookbook/iPhone/iphone-charging-paused-80-temperature-charge-limit.md`
+  - Dedicated branch for 80% charge pause, temperature hold, charge limit, Optimized Battery Charging, slow charger, and incompatible-charger wording.
+  - Strong links to wired/liquid charging and battery drain/heat.
+- `cookbook/iPhone/iphone-black-screen-wont-turn-on-after-battery-drained.md`
+  - Dedicated branch for black screen, no power, low-battery icon, dead-after-drain, iPhone Air / iPhone 17 near-depleted wired charging, and Apple-logo recovery triage.
+  - Strong links to wired/liquid charging, charging pause, battery drain/heat, software update stuck, and iCloud backup.
 - `cookbook/iPhone/iphone-imessage-messages-not-sending-green-waiting-activation.md`
   - Strong links to eSIM, SIM, SOS/no service, and Wi-Fi.
   - Also supports Find My and Family Sharing articles when customer wording mentions Messages identity.
@@ -46,7 +52,10 @@ Use this index to maintain cross-links between canonical recipes. Links should h
   - Needs inbound link from a broader iPhone camera black-screen recipe.
 - `cookbook/iPhone/iphone-wont-charge-wired-liquid-detected.md`
   - Should remain the canonical charging article.
-  - Future inbound links should come from battery/update, black screen/no power, repair intake, and iPhone 17/Air charging-specific discussions.
+  - Future inbound links should come from battery/update, charging pause, black screen/no power, repair intake, and iPhone 17/Air charging-specific discussions.
+- `cookbook/iPad/ipad-blue-box-double-tap-voiceover-accessibility.md`
+  - Dedicated branch for blue focus boxes, VoiceOver double-tap behavior, Full Keyboard Access highlights, Zoom windows, and AssistiveTouch circles.
+  - Strong link to the iPad keyboard article because customers often describe both as "keyboard/touch changed."
 
 ## Current Weakly Connected Articles
 

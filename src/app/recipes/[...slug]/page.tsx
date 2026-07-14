@@ -9,6 +9,7 @@ import { ArticleFeedbackWidget } from "@/components/article-feedback-widget";
 import { ArticleCard } from "@/components/article-card";
 import { VerificationBadge } from "@/components/verification-badge";
 import type { ArticleSource } from "@/lib/article-schema";
+import { formatPublicArticleBody } from "@/lib/article-content";
 import {
   getPublishedArticles,
   getPublishedArticleBySlug,
@@ -16,17 +17,6 @@ import {
   isIndexableArticle
 } from "@/lib/cookbook";
 import { difficultyLabels, verificationDescriptions } from "@/lib/labels";
-
-function formatArticleBody(body: string) {
-  const firstSectionIndex = body.search(/^##\s+症状\s*$/m);
-  const content = firstSectionIndex >= 0 ? body.slice(firstSectionIndex) : body;
-  const endMatterIndex = content.search(/^##\s+(相关问题|标签|元信息)\s*$/m);
-  const articleContent = endMatterIndex >= 0 ? content.slice(0, endMatterIndex).trim() : content;
-
-  return articleContent
-    .replace(/^##\s+零售排查流程\s*$/m, "## 排查流程")
-    .replace(/^##\s+升级处理\s*$/m, "## 如果仍未解决");
-}
 
 function getLeadParagraph(body: string) {
   return body
@@ -140,7 +130,7 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
   }
 
   const related = getRelatedArticles(article);
-  const articleBody = formatArticleBody(article.body);
+  const articleBody = formatPublicArticleBody(article.body);
   const lead = article.summary || getLeadParagraph(article.body) || article.excerpt;
   const headings = getArticleHeadings(articleBody);
   const primaryRelated = related.slice(0, 3);

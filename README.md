@@ -74,6 +74,7 @@ Apple Cookbook has three layers:
    - Static knowledge pages remain Vercel-compatible.
    - The writable feedback/admin workflow requires the documented persistent ECS data directory; file feedback fails closed on Vercel instead of acknowledging `/tmp` data as saved.
    - Search is the primary navigation surface.
+   - The authenticated admin keeps AI no-change decisions for human review and provides an all-article editor. Production edits become durable, hash-checked Harvest proposals instead of writes to the disposable standalone bundle.
 
 ## Frontmatter Contract
 
@@ -103,6 +104,7 @@ This is the legacy v1 contract. New structured content may use Article Schema v2
 - `templates/`: Reusable article templates.
 - `sources/`: Source notes and research logs.
 - `feedback/inbox.jsonl`: Local-development feedback source of truth; production stores the same file outside the checkout through `APPLE_COOKBOOK_DATA_DIR`.
+- `article-edits/`: Local-development administrator edit proposals; production stores them under `APPLE_COOKBOOK_DATA_DIR` and publishes them through Harvest pull requests.
 - `todos/daily-work.md`: Rebuildable human-readable projection generated from feedback submissions.
 - `indexes/`: Tag, device, feature, and symptom indexes.
 - `src/`: Next.js website and Markdown indexing code.
