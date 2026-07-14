@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 2,
+  "runId": "iphone-ipad-speaker-microphone-audio-2026-07-14T180000Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-14T18:00:00.000Z",
+  "baseCommit": "94fcb2c1366ad6f503ee3083d9ddff80688594be",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-ipad-speaker-microphone-audio-not-working.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:ed1be4a2077b9e3278b168ab432f1f99d08ca5c5024f929ac258090d12f0b655",
+      "reason": "High-frequency iPhone/iPad audio troubleshooting entry that is distinct from existing AirPods, Face ID, iMessage/FaceTime activation, and Mac camera articles; backed by Apple Support speaker, microphone, privacy, cleaning, and FaceTime documentation.",
+      "canonicalReview": {
+        "queries": [
+          "iPhone 扬声器没有声音",
+          "iPad 扬声器没有声音",
+          "iPhone 通话听不到 对方听不到 麦克风",
+          "语音备忘录 录音没有声音",
+          "speaker button grayed out iPhone",
+          "iPhone speaker not working",
+          "iPhone microphone not working",
+          "FaceTime microphone no sound iPhone",
+          "听筒 声音小 扬声器 麦克风",
+          "蓝牙 音频输出 AirPlay 没声音"
+        ],
+        "matchedArticleIds": [
+          "airpods-one-side-no-sound-volume-low",
+          "iphone-imessage-messages-not-sending-green-waiting-activation",
+          "mac-camera-not-working-permission-facetime",
+          "iphone-sos-no-service-searching"
+        ],
+        "decision": "create-new",
+        "notes": "Existing matches cover AirPods audio balance, iMessage/FaceTime activation, Mac camera permissions, and cellular service; none is a canonical iPhone/iPad built-in speaker, receiver, microphone, audio route, permission, cleaning, and service-boundary article."
+      }
+    }
+  ]
+}
