@@ -80,4 +80,4 @@ jobs:
           PR_URL: ${{ github.event.pull_request.html_url }}
         run: |
           gh pr merge "$PR_URL" --squash --delete-branch
-          gh workflow run deploy-aliyun-ecs.yml --ref main
+          gh workflow run deploy-aliyun-ecs.yml --repo "$GITHUB_REPOSITORY" --ref main
