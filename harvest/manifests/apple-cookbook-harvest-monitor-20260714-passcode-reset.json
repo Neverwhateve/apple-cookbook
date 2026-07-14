@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260714-passcode-reset",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-14T05:10:00.000Z",
+  "baseCommit": "af99c03f27c2b569ba4d61eafee86892e5015729",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-unavailable-security-lockout-forgot-passcode.md",
+      "action": "update",
+      "baseContentHash": "sha256:3806e3e55d52a6b5fc53c31864b79175decbff2c7eaaee7f07249f89a8ed8cd5",
+      "proposedContentHash": "sha256:de802e38af83bf894e49293c9cc53626dfff4f47a4bdfbbdd0babf7cd6590038",
+      "reason": "Move Apple official 72-hour old-passcode reset path earlier in the iPhone unavailable flow to reduce unnecessary erase/data-loss guidance, and replace the English source with the current Chinese Apple Support page.",
+      "canonicalReview": {
+        "queries": [
+          "iPhone 不可用 忘记密码 旧密码 72 小时",
+          "iPhone unavailable forgot passcode old passcode reset",
+          "安全锁定 忘记密码 输入先前密码",
+          "iphone-unavailable-security-lockout-forgot-passcode"
+        ],
+        "matchedArticleIds": [
+          "iphone-unavailable-security-lockout-forgot-passcode"
+        ],
+        "decision": "update-existing",
+        "notes": "The existing canonical covers iPhone unavailable, Security Lockout, forgotten device passcode, eSIM, computer restore, and Activation Lock. The new evidence is a subcase inside the same symptom cluster, so update the existing canonical rather than creating a duplicate."
+      }
+    }
+  ]
+}
