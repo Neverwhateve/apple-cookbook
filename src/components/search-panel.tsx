@@ -146,11 +146,6 @@ export function SearchPanel({ articles }: { articles: SearchDocument[] }) {
                   <span className="rounded-full bg-zinc-100 px-2 py-0.5 text-xs text-zinc-600 dark:bg-zinc-900 dark:text-zinc-300">
                     {difficultyLabels[article.difficulty]}
                   </span>
-                  {article.status === "seed" ? (
-                    <span className="rounded-full bg-amber-50 px-2 py-0.5 text-xs text-amber-800 ring-1 ring-inset ring-amber-200 dark:bg-amber-950/40 dark:text-amber-300 dark:ring-amber-900">
-                      待进一步复核
-                    </span>
-                  ) : null}
                 </div>
                 <p className="mt-2 line-clamp-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
                   <HighlightedText text={hit.snippet || article.summary} terms={terms} />

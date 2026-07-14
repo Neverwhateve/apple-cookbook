@@ -188,20 +188,6 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
           <span className="text-sm text-zinc-500 dark:text-zinc-400">{difficultyLabels[article.difficulty]}难度</span>
         </div>
 
-        {article.status === "seed" ? (
-          <aside
-            aria-labelledby="seed-review-title"
-            className="mt-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-amber-950 dark:border-amber-900 dark:bg-amber-950/30 dark:text-amber-100"
-          >
-            <h2 id="seed-review-title" className="text-base font-semibold">
-              待进一步复核
-            </h2>
-            <p className="mt-1 text-sm leading-6 text-amber-900 dark:text-amber-200">
-              这是一个用于记录尚未完全解决或仍待编辑复核的问题条目。步骤和结论可能继续调整，请优先核对文中的来源、适用版本与风险提示。
-            </p>
-          </aside>
-        ) : null}
-
         <dl className="mt-8 grid gap-x-8 gap-y-4 border-y border-zinc-200 py-5 text-sm dark:border-zinc-800 sm:grid-cols-2">
           <div>
             <dt className="text-zinc-500">适用设备</dt>

@@ -6,7 +6,7 @@ import { useMemo, useState } from "react";
 import { searchDocuments, type SearchDocument } from "@/lib/search";
 
 const statusLabels: Record<SearchDocument["status"], string> = {
-  seed: "待复核",
+  seed: "待人工 / Codex 复核",
   draft: "草稿",
   reviewed: "已审核",
   canonical: "正式",
