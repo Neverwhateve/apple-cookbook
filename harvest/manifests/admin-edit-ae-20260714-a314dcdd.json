@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 2,
+  "runId": "admin-edit-ae-20260714-a314dcdd",
+  "automationId": "admin-article-edit-publisher",
+  "generatedAt": "2026-07-14T05:31:43.525Z",
+  "baseCommit": "d5967591aad5ae1575849197a7ce2577dfe08e65",
+  "changes": [
+    {
+      "path": "cookbook/iCloud/locked-notes-forgot-password.md",
+      "action": "update",
+      "baseContentHash": "sha256:41322f1fe2eaab7e68bfeda4111ddb8598741d837d06b7ab3c88ccc7b5cf974e",
+      "proposedContentHash": "sha256:06a94b6e8c6963b4847327ccdcf2ac1c8c07fda327e123a500a84075ee13e417",
+      "reason": "管理员从内容后台修改文章 locked-notes-forgot-password",
+      "canonicalReview": {
+        "queries": [
+          "website content Bug targeting the current article"
+        ],
+        "matchedArticleIds": [
+          "locked-notes-forgot-password"
+        ],
+        "decision": "update-existing",
+        "notes": "The report targets this existing article; the automation verified and updated that canonical match instead of creating a duplicate."
+      }
+    }
+  ]
+}
