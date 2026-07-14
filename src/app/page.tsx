@@ -24,6 +24,7 @@ import {
   getPublishedSearchDocuments,
   getPublishedTags
 } from "@/lib/cookbook";
+import { compareRecentArticles } from "@/lib/recent-sort";
 
 function AppleWatchIcon({ className }: { className?: string }) {
   return (
@@ -118,10 +119,10 @@ export default function HomePage() {
   const publishedArticles = getIndexableArticles(articles);
   const searchDocuments = getPublishedSearchDocuments(articles);
   const availableCategories = new Set(categories.filter((category) => category.items.length > 0).map((category) => category.name));
-  const recentlyUpdated = [...publishedArticles].sort((a, b) => b.updated.localeCompare(a.updated)).slice(0, 6);
+  const recentlyUpdated = [...publishedArticles].sort(compareRecentArticles).slice(0, 6);
   const popular = publishedArticles
     .filter((article) => article.popular)
-    .sort((a, b) => b.updated.localeCompare(a.updated))
+    .sort(compareRecentArticles)
     .slice(0, 6);
   const quickActions = [
     {

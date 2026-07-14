@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useMemo, useState, type ReactNode } from "react";
 import { VerificationBadge } from "@/components/verification-badge";
 import { difficultyLabels } from "@/lib/labels";
+import { recentArticleSortValue } from "@/lib/recent-sort";
 import { searchDocuments, type SearchDocument, type SearchField, type SearchHit } from "@/lib/search";
 
 const quickQueries = ["看不到家人的位置", "Wi-Fi 连不上", "充电到 80% 暂停", "更新后掉电快"];
@@ -62,7 +63,12 @@ export function SearchPanel({ articles }: { articles: SearchDocument[] }) {
     if (!trimmedQuery) {
       return [...articles]
         .filter((article) => article.verification !== "Unknown")
-        .sort((a, b) => b.updated.localeCompare(a.updated))
+        .sort(
+          (a, b) =>
+            recentArticleSortValue(b) - recentArticleSortValue(a) ||
+            b.updated.localeCompare(a.updated) ||
+            a.title.localeCompare(b.title)
+        )
         .slice(0, 4)
         .map((document) => ({ document, score: 0, termCoverage: 0, matchedFields: [], snippet: document.summary }));
     }

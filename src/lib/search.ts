@@ -38,6 +38,7 @@ export type SearchDocument = {
   readonly verification: SearchVerificationLevel;
   readonly difficulty: SearchDifficulty;
   readonly updated: string;
+  readonly recentSortTimestamp?: number;
   readonly status: SearchDocumentStatus;
 };
 
