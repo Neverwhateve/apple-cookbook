@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260714-rcs-doc",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-14T02:08:46.000Z",
+  "baseCommit": "532146084e91332d61fdd499138cd58835414b79",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-imessage-messages-not-sending-green-waiting-activation.md",
+      "action": "update",
+      "baseContentHash": "sha256:96c5c2a314339394fbf777926c8d6742718f7de0467db65a11b0ab3693037756",
+      "proposedContentHash": "sha256:938064f12c2293112558e765341c26821e93d6350c7390529be8416f8666f329",
+      "reason": "Refresh the canonical iMessage/RCS troubleshooting article with Apple's dedicated RCS support page and current RCS handling guidance.",
+      "canonicalReview": {
+        "queries": [
+          "RCS not activating iPhone",
+          "RCS setting missing iPhone",
+          "iMessage green bubbles",
+          "iPhone 信息发不出去",
+          "iMessage 变绿色"
+        ],
+        "matchedArticleIds": [
+          "iphone-imessage-messages-not-sending-green-waiting-activation"
+        ],
+        "decision": "update-existing",
+        "notes": "The existing canonical already covers iMessage failures, green bubbles, RCS activation, SMS/MMS fallback, carrier support, and the relevant aliases. The correct action is to update this article with Apple's dedicated RCS support page instead of creating a duplicate RCS article."
+      }
+    }
+  ]
+}
