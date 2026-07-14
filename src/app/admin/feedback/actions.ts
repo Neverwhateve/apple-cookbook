@@ -2,6 +2,7 @@
 
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import {
   canUseAdminCredentials,
   canUseAdminSession,
@@ -16,12 +17,12 @@ import { triggerFeedbackProcessing } from "@/lib/feedback-trigger";
 const allowedStatuses = new Set<FeedbackStatus>(["open", "in_progress", "needs_review", "resolved", "dismissed"]);
 const cookieName = "apple-cookbook-admin";
 
-export async function loginAdmin(formData: FormData) {
+export async function loginAdmin(_: { error: string }, formData: FormData): Promise<{ error: string }> {
   const username = String(formData.get("username") ?? "");
   const password = String(formData.get("password") ?? "");
 
   if (!canUseAdminCredentials(username, password)) {
-    throw new Error("用户名或密码不正确。");
+    return { error: "用户名或密码不正确，或管理员认证尚未完成配置。" };
   }
 
   const cookieStore = await cookies();
@@ -34,6 +35,7 @@ export async function loginAdmin(formData: FormData) {
   });
 
   revalidatePath("/admin/feedback");
+  redirect("/admin/feedback");
 }
 
 export async function logoutAdmin() {

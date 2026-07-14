@@ -26,6 +26,12 @@ export type AdminFeedbackQueues = {
 const localDevelopmentSessionSecret = "apple-cookbook-local-development-session";
 const minimumAdminTokenLength = 43;
 const minimumAdminTokenEntropyBits = 128;
+const maximumAdminAccounts = 20;
+
+type AdminAccount = {
+  username: string;
+  password: string;
+};
 
 function parseSubmission(line: string): FeedbackSubmission | null {
   try {
@@ -317,6 +323,56 @@ function getAdminToken() {
   return process.env.APPLE_COOKBOOK_ADMIN_TOKEN || "";
 }
 
+function parseAdminAccounts(value: string): AdminAccount[] | null {
+  try {
+    const parsed = JSON.parse(value) as unknown;
+
+    if (!Array.isArray(parsed) || parsed.length === 0 || parsed.length > maximumAdminAccounts) {
+      return null;
+    }
+
+    const accounts = parsed.map((account) => {
+      if (!account || typeof account !== "object") return null;
+
+      const { username, password } = account as Record<string, unknown>;
+      if (
+        typeof username !== "string" ||
+        typeof password !== "string" ||
+        !/^[A-Za-z0-9][A-Za-z0-9._-]{1,63}$/.test(username) ||
+        password.length < 3 ||
+        password.length > 256
+      ) {
+        return null;
+      }
+
+      return { username, password };
+    });
+
+    const validAccounts = accounts.filter((account): account is AdminAccount => account !== null);
+    if (validAccounts.length !== accounts.length) return null;
+    if (new Set(validAccounts.map((account) => account.username.toLowerCase())).size !== validAccounts.length) return null;
+
+    return validAccounts;
+  } catch {
+    return null;
+  }
+}
+
+function getConfiguredAdminAccounts() {
+  const encoded = process.env.APPLE_COOKBOOK_ADMIN_ACCOUNTS_BASE64?.trim();
+  if (!encoded || !/^[A-Za-z0-9+/]+={0,2}$/.test(encoded)) return null;
+
+  return parseAdminAccounts(Buffer.from(encoded, "base64").toString("utf8"));
+}
+
+function getAdminAccounts() {
+  if (process.env.APPLE_COOKBOOK_ADMIN_ACCOUNTS_BASE64?.trim()) {
+    return getConfiguredAdminAccounts() ?? [];
+  }
+
+  return [{ username: getAdminUsername(), password: getAdminPassword() }];
+}
+
 function estimateEntropyBits(value: string) {
   const counts = new Map<string, number>();
 
@@ -339,7 +395,8 @@ function hasHighEntropyAdminToken(value: string) {
 }
 
 function hasProductionAdminConfiguration() {
-  return Boolean(getAdminPassword()) && hasHighEntropyAdminToken(getAdminToken());
+  const accounts = getAdminAccounts();
+  return accounts.length > 0 && accounts.every((account) => Boolean(account.password)) && hasHighEntropyAdminToken(getAdminToken());
 }
 
 function getSessionSecret() {
@@ -358,17 +415,13 @@ function safeEqual(left: string, right: string) {
 }
 
 export function canUseAdminCredentials(username: string, password: string) {
-  const configuredPassword = getAdminPassword();
-
   if (process.env.NODE_ENV === "production" && !hasProductionAdminConfiguration()) {
     return false;
   }
 
-  if (!configuredPassword) {
-    return username === getAdminUsername();
-  }
-
-  return safeEqual(username, getAdminUsername()) && safeEqual(password, configuredPassword);
+  return getAdminAccounts().some(
+    (account) => safeEqual(username, account.username) && safeEqual(password, account.password)
+  );
 }
 
 export function createAdminSessionToken() {
