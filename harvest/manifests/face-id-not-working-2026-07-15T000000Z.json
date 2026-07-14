@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 2,
+  "runId": "face-id-not-working-2026-07-15T000000Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-15T00:00:00.000Z",
+  "baseCommit": "1df63a2449c2f19cd9267105eee1425c002a4e6e",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-ipad-face-id-not-working-camera-covered-disabled.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:63a3e093d374b8df7dcfeb35f3b91b36dd71f7985b8bc2f282b09e4e1400077f",
+      "reason": "High-value Face ID failure symptom cluster with current Apple Support documentation and no existing canonical coverage.",
+      "canonicalReview": {
+        "queries": [
+          "Face ID not working",
+          "Face ID unavailable disabled camera covered",
+          "面容 ID 无法使用 摄像头被遮挡",
+          "Face ID asks for passcode",
+          "Face ID with mask not working",
+          "TrueDepth camera covered",
+          "iPhone Face ID failed",
+          "iPad Face ID failed"
+        ],
+        "matchedArticleIds": [],
+        "decision": "create-new",
+        "notes": "Searched current canonical title/summary/symptoms/aliases/devices/platforms/error messages for Face ID, TrueDepth, camera covered, passcode requirement, mask unlock, iPhone and iPad variants. Existing articles cover activation, passcode lockout, Stolen Device Protection, Apple Pay card setup, camera app failures, and wallet issues, but none cover Face ID troubleshooting."
+      }
+    }
+  ]
+}
