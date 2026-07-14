@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260714-passcode-date",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-14T06:22:00.000Z",
+  "baseCommit": "e5e718df4fdd858b369d6701656d22159f5de22c",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-unavailable-security-lockout-forgot-passcode.md",
+      "action": "update",
+      "baseContentHash": "sha256:de802e38af83bf894e49293c9cc53626dfff4f47a4bdfbbdd0babf7cd6590038",
+      "proposedContentHash": "sha256:8f8cc4c9b1203a6fb6e6e3c10df9f7b0e144482737f5b8247208aa29c768e01d",
+      "reason": "Synchronize the article frontmatter updated date with the already-published passcode reset guidance refresh so metadata and visible article content agree.",
+      "canonicalReview": {
+        "queries": [
+          "iphone-unavailable-security-lockout-forgot-passcode updated date",
+          "iPhone 不可用 忘记密码 旧密码 72 小时",
+          "安全锁定 输入先前密码"
+        ],
+        "matchedArticleIds": [
+          "iphone-unavailable-security-lockout-forgot-passcode"
+        ],
+        "decision": "update-existing",
+        "notes": "This is the same canonical article and symptom cluster as the passcode reset guidance update; only article metadata is corrected, so no new canonical is needed."
+      }
+    }
+  ]
+}
