@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260714-mac-camera-not-working",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-14T10:30:00.000Z",
+  "baseCommit": "cba4c6c5a9080c5a71c088f4524498b203744fe1",
+  "changes": [
+    {
+      "path": "cookbook/Mac/mac-camera-not-working-permission-facetime.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:02c343d82957aafc10e10612db2ac11dd37bb782d7be892dd87eeaf9d7f72d2b",
+      "reason": "Adds a distinct high-value Mac camera failure article backed by current Apple Support and Mac User Guide sources.",
+      "canonicalReview": {
+        "queries": [
+          "Mac 摄像头打不开 FaceTime 黑屏 Photo Booth 黑屏",
+          "Mac camera not working built-in camera FaceTime Photo Booth",
+          "摄像头权限 隐私与安全性 Mac Safari 网站 摄像头",
+          "连续互通摄像头 iPhone 当 Mac 摄像头 无法连接",
+          "外接摄像头 Mac FaceTime 视频菜单 选择摄像头"
+        ],
+        "matchedArticleIds": [
+          "iphone-wechat-camera-black-screen-lag",
+          "iphone-imessage-messages-not-sending-green-waiting-activation"
+        ],
+        "decision": "create-new",
+        "notes": "Existing matches cover iPhone third-party camera behavior and iMessage/FaceTime activation, not Mac built-in camera, Mac camera permissions, Photo Booth/FaceTime camera selection, external camera selection, or Continuity Camera troubleshooting."
+      }
+    }
+  ]
+}
