@@ -23,6 +23,8 @@ aliases:
   - messages not delivered
   - iPhone not receiving texts
   - RCS not activating iPhone
+  - RCS setting missing iPhone
+  - RCS Business Messages iPhone
   - inactive SIM iMessage activation
   - duplicate phone number iMessage
   - iPhone 信息发不出去
@@ -34,7 +36,7 @@ aliases:
   - iMessage 用邮箱发送不是手机号
 verification: Official
 difficulty: Moderate
-updated: 2026-07-12
+updated: 2026-07-14
 official_sources:
   - https://support.apple.com/zh-cn/118433
   - https://support.apple.com/zh-cn/119859
@@ -42,6 +44,7 @@ official_sources:
   - https://support.apple.com/zh-cn/101744
   - https://support.apple.com/zh-cn/105087
   - https://support.apple.com/zh-cn/104972
+  - https://support.apple.com/zh-cn/122195
   - https://support.apple.com/zh-cn/108758
   - https://support.apple.com/zh-cn/102455
   - https://support.apple.com/zh-cn/guide/iphone/iph3d039b67/ios
@@ -87,7 +90,7 @@ popular: true
 3. **新设备需要更新“信息”设置**
    - Apple 说明，设置新设备后可能需要更新“信息”设置；电话号码没有被选中时，iMessage 可能改用 Apple 账户邮箱或退回短信/RCS。
 4. **运营商短信服务、RCS 或彩信没有正常工作**
-   - Apple 说明，短信、彩信和 RCS 需要运营商短信服务套餐；如果无法发送或接收短信，应联系运营商。
+   - Apple 说明，短信、彩信和 RCS 需要运营商服务支持；RCS 还需要 iOS 18 或更高版本和支持 iPhone RCS 的运营商短信服务套餐。
 5. **iMessage 或 FaceTime 激活未完成**
    - Apple 说明，激活可能需要蜂窝数据或 Wi-Fi，iPhone 使用电话号码激活 iMessage/FaceTime 时可能会通过短信完成，且可能产生运营商费用。
 6. **iOS 26 中存在同号的已失效 SIM 卡**
@@ -113,18 +116,20 @@ popular: true
 4. 如果无法发送或接收普通短信、彩信或 RCS，先联系运营商确认短信服务套餐、号码状态、RCS 支持和彩信支持。
 5. 打开**设置 > App > 信息**，确认**iMessage 信息**已打开。
 6. 轻点**发送与接收**，确认顾客的电话号码和 Apple 账户都在“通过下列方式收发 iMessage 信息”中被选中。
-7. 如果是新 iPhone 或刚转移 eSIM / SIM，等待号码完成 iMessage 激活；期间可临时使用 Apple 账户邮箱收发 iMessage。
-8. 如果 iMessage 不可用时需要自动改发短信，打开**设置 > App > 信息 > 用短信发送**。
-9. 如果看到“正在等待激活”，关闭 iMessage 和 FaceTime，重新启动设备，再重新打开 iMessage 和 FaceTime。
-10. 确认**设置 > 通用 > 日期与时间**中的时区正确。
-11. 如果新信息总是从 Apple 账户邮箱发出，打开**设置 > App > 信息 > 发送与接收**，在**开始新对话时使用**下选择电话号码；如果旧对话最初由邮箱开始，需要开始一条新对话才能改用号码。
-12. 如果设置装有 iOS 26 的新 iPhone 时 eSIM 或 iMessage 没有激活，稍后完成 eSIM 设置后，回到**设置 > App > 信息**，关闭再打开 **iMessage 信息**。
-13. 如果更新至 iOS 26 后电话号码无法激活、信息改用邮箱发送，或同一号码在**设置 > App > 信息 > 发送与接收**中显示两次，先更新到 iOS 26.1 或更高版本。
-14. 如果更新后仍看到同号重复，打开**设置 > 蜂窝网络**，找到已失效的同号 SIM；实体 SIM 直接取出，eSIM 则删除已失效 eSIM，再回到**设置 > App > 信息 > 发送与接收**选择电话号码。
-15. 如果 24 小时后电话号码旁边仍没有勾号，联系运营商确认可以发送和接收国际短信；Apple 说明运营商最长可能需要 24 小时验证电话号码。
-16. 如果 Apple 账户或邮箱登录 iMessage / FaceTime 也失败，按 Apple 的在线激活流程尝试启用账户，或改用已验证的电子邮件地址登录。
-17. 如果某个联系人一直显示绿色，确认对方是否使用 Apple 设备、是否打开 iMessage，以及你发送到的电话号码或邮箱是否在对方 iMessage“发送与接收”中可用。
-18. 如果顾客已经换到非 Apple 手机，把 SIM 卡装回原 iPhone 并连接蜂窝数据，在**设置 > App > 信息**关闭 iMessage，再关闭 FaceTime；如果 iPhone 不在身边，使用 Apple 的在线注销 iMessage 工具。
+7. 如果顾客专门问 RCS，打开**设置 > App > 信息 > RCS 信息**，确认 RCS 已开启；如果看不到这个入口，先判断运营商或地区是否支持 iPhone RCS。
+8. 如果刚打开 RCS 后仍不可用，先告知可能有短暂延迟；不要把所有绿色气泡都当作 iMessage 故障。
+9. 如果是新 iPhone 或刚转移 eSIM / SIM，等待号码完成 iMessage 激活；期间可临时使用 Apple 账户邮箱收发 iMessage。
+10. 如果 iMessage 不可用时需要自动改发短信，打开**设置 > App > 信息 > 用短信发送**。
+11. 如果看到“正在等待激活”，关闭 iMessage 和 FaceTime，重新启动设备，再重新打开 iMessage 和 FaceTime。
+12. 确认**设置 > 通用 > 日期与时间**中的时区正确。
+13. 如果新信息总是从 Apple 账户邮箱发出，打开**设置 > App > 信息 > 发送与接收**，在**开始新对话时使用**下选择电话号码；如果旧对话最初由邮箱开始，需要开始一条新对话才能改用号码。
+14. 如果设置装有 iOS 26 的新 iPhone 时 eSIM 或 iMessage 没有激活，稍后完成 eSIM 设置后，回到**设置 > App > 信息**，关闭再打开 **iMessage 信息**。
+15. 如果更新至 iOS 26 后电话号码无法激活、信息改用邮箱发送，或同一号码在**设置 > App > 信息 > 发送与接收**中显示两次，先更新到 iOS 26.1 或更高版本。
+16. 如果更新后仍看到同号重复，打开**设置 > 蜂窝网络**，找到已失效的同号 SIM；实体 SIM 直接取出，eSIM 则删除已失效 eSIM，再回到**设置 > App > 信息 > 发送与接收**选择电话号码。
+17. 如果 24 小时后电话号码旁边仍没有勾号，联系运营商确认可以发送和接收国际短信；Apple 说明运营商最长可能需要 24 小时验证电话号码。
+18. 如果 Apple 账户或邮箱登录 iMessage / FaceTime 也失败，按 Apple 的在线激活流程尝试启用账户，或改用已验证的电子邮件地址登录。
+19. 如果某个联系人一直显示绿色，确认对方是否使用 Apple 设备、是否打开 iMessage，以及你发送到的电话号码或邮箱是否在对方 iMessage“发送与接收”中可用。
+20. 如果顾客已经换到非 Apple 手机，把 SIM 卡装回原 iPhone 并连接蜂窝数据，在**设置 > App > 信息**关闭 iMessage，再关闭 FaceTime；如果 iPhone 不在身边，使用 Apple 的在线注销 iMessage 工具。
 
 参考来源：
 
@@ -134,6 +139,7 @@ popular: true
 - [Apple 支持：如果你的 iPhone 使用你的电子邮件地址发送短信](https://support.apple.com/zh-cn/101744)
 - [Apple 支持：如果 iPhone 上的信息显示为绿色](https://support.apple.com/zh-cn/105087)
 - [Apple 支持：iMessage 信息、RCS 和短信/彩信有什么区别？](https://support.apple.com/zh-cn/104972)
+- [Apple 支持：在 iPhone 上打开 RCS 信息](https://support.apple.com/zh-cn/122195)
 - [Apple 支持：在“信息”或 FaceTime 通话中添加或移除你的电话号码](https://support.apple.com/zh-cn/108758)
 - [Apple 支持：在 iPhone 上或在线注销 iMessage 信息](https://support.apple.com/zh-cn/102455)
 
@@ -144,14 +150,17 @@ popular: true
 验证级别：Apple 官方
 
 1. 如果是绿色气泡，不要直接判断 iMessage 坏了。Apple 说明绿色气泡代表这条信息通过 RCS、短信或彩信发送，而不是 iMessage。
-2. RCS 需要 iOS 18 和支持 iPhone RCS 的运营商短信服务套餐。
-3. Apple 说明，RCS 激活可能会延迟几个小时。
-4. 如果要在 RCS 对话中使用端到端加密，需要 iOS 26.5 以及支持端到端加密的运营商。
-5. 如果普通短信、彩信或 RCS 失败，优先转运营商确认服务、套餐、号码状态和区域支持；Apple 不提供运营商短信服务。
+2. 在 iPhone 上打开 RCS 的入口是**设置 > App > 信息 > RCS 信息**。
+3. RCS 需要 iOS 18 和支持 iPhone RCS 的运营商短信服务套餐；可用性会因地区和运营商而异。
+4. Apple 说明，刚打开 RCS 后可能会有短暂延迟。如果 **RCS 信息**设置没有出现，RCS 可能不可用。
+5. iOS 26 中可以选择用于短信、彩信和 RCS 的默认信息 App；如果顾客改过默认 App，也要确认当前发送路径。
+6. 如果要在 RCS 对话中使用端到端加密，需要 iOS 26.5 以及支持端到端加密的运营商；Beta 功能会随运营商逐步推出。
+7. 如果普通短信、彩信或 RCS 失败，优先转运营商确认服务、套餐、号码状态和区域支持；Apple 不提供运营商短信服务。
 
 参考来源：
 
 - [Apple 支持：iMessage 信息、RCS 和短信/彩信有什么区别？](https://support.apple.com/zh-cn/104972)
+- [Apple 支持：在 iPhone 上打开 RCS 信息](https://support.apple.com/zh-cn/122195)
 - [Apple 支持：如果你无法在 iPhone 或 iPad 上发送或接收信息](https://support.apple.com/zh-cn/118433)
 
 ---
@@ -297,8 +306,8 @@ popular: true
 
 ## 元信息
 
-- 最后更新：2026-07-12
-- 来源数量：15
+- 最后更新：2026-07-14
+- 来源数量：16
 - 验证级别：Apple 官方
 - 支持系统：当前 iOS、iPadOS、macOS；RCS 取决于 iOS 版本、地区和运营商支持
 - 可信度：高
