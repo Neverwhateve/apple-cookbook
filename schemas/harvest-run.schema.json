@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://apple-cookbook.local/schemas/harvest-run.schema.json",
   "title": "Apple Cookbook Harvest Run Manifest",
-  "description": "Phase-one Harvest conflict guard. Whole-file content hashes intentionally provide a stricter boundary until managed-field merge semantics are implemented.",
+  "description": "Harvest conflict guard v2. Whole-file content hashes remain intentionally strict; v2 also requires an auditable canonical-match decision for every change.",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -15,7 +15,7 @@
   ],
   "properties": {
     "schemaVersion": {
-      "const": 1
+      "const": 2
     },
     "runId": {
       "type": "string",
@@ -37,6 +37,7 @@
     "changes": {
       "type": "array",
       "minItems": 1,
+      "maxItems": 20,
       "items": {
         "$ref": "#/$defs/change"
       }
@@ -54,12 +55,14 @@
         "path",
         "action",
         "baseContentHash",
-        "proposedContentHash"
+        "proposedContentHash",
+        "reason",
+        "canonicalReview"
       ],
       "properties": {
         "path": {
           "type": "string",
-          "pattern": "^cookbook/(?:[^./][^/]*/)*[^/]+\\.md$"
+          "pattern": "^cookbook/(?:[^./][^/]*/)*[^./][^/]*\\.md$"
         },
         "action": {
           "enum": ["create", "update", "redirect"]
@@ -83,6 +86,9 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 1000
+        },
+        "canonicalReview": {
+          "$ref": "#/$defs/canonicalReview"
         }
       },
       "allOf": [
@@ -105,9 +111,89 @@
           },
           "then": {
             "required": ["canonicalArticleId"]
+          },
+          "else": {
+            "not": {
+              "required": ["canonicalArticleId"]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "action": { "const": "create" } },
+            "required": ["action"]
+          },
+          "then": {
+            "properties": {
+              "canonicalReview": {
+                "properties": { "decision": { "const": "create-new" } }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "action": { "const": "update" } },
+            "required": ["action"]
+          },
+          "then": {
+            "properties": {
+              "canonicalReview": {
+                "properties": { "decision": { "const": "update-existing" } }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "action": { "const": "redirect" } },
+            "required": ["action"]
+          },
+          "then": {
+            "properties": {
+              "canonicalReview": {
+                "properties": { "decision": { "const": "redirect-to-existing" } }
+              }
+            }
           }
         }
       ]
+    },
+    "canonicalReview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["queries", "matchedArticleIds", "decision", "notes"],
+      "properties": {
+        "queries": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 20,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          }
+        },
+        "matchedArticleIds": {
+          "type": "array",
+          "maxItems": 50,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 500
+          }
+        },
+        "decision": {
+          "enum": ["create-new", "update-existing", "redirect-to-existing"]
+        },
+        "notes": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1000
+        }
+      }
     }
   }
 }

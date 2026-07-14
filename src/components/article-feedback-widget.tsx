@@ -33,6 +33,7 @@ export function ArticleFeedbackWidget({
   articleUrl: string;
 }) {
   const [open, setOpen] = useState(false);
+  const [reporterVerified, setReporterVerified] = useState(false);
   const [state, formAction] = useActionState(submitFeedback, initialState);
 
   return (
@@ -95,8 +96,31 @@ export function ArticleFeedbackWidget({
                 placeholder="用于记录谁发现了这个 Bug"
                 className="mt-2 w-full rounded-md border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm outline-none transition placeholder:text-zinc-500 focus:border-zinc-500 dark:border-zinc-800 dark:bg-zinc-900"
               />
-              <p className="mt-1.5 text-xs leading-5 text-zinc-500">名字会保存在处理记录中，不在公开页面展示。</p>
+              <p className="mt-1.5 text-xs leading-5 text-zinc-500">
+                {reporterVerified
+                  ? "这条经验会在公开文章中显示为“你的名字 分享”。"
+                  : "名字只保存在处理记录中，不在公开页面展示。"}
+              </p>
             </div>
+
+            <label className="flex cursor-pointer items-start gap-3 rounded-md border border-zinc-200 bg-zinc-50 p-3 dark:border-zinc-800 dark:bg-zinc-900">
+              <input
+                type="checkbox"
+                name="reporterVerified"
+                value="true"
+                checked={reporterVerified}
+                onChange={(event) => setReporterVerified(event.target.checked)}
+                className="mt-1 h-4 w-4 rounded border-zinc-300"
+              />
+              <span>
+                <span className="block text-sm font-medium text-zinc-950 dark:text-zinc-50">
+                  我已亲自验证，愿意署名分享
+                </span>
+                <span className="mt-1 block text-xs leading-5 text-zinc-500">
+                  勾选后，这个方法会以“你的名字 分享”的形式加入相关内容，并与 Apple 官方方案分开显示。
+                </span>
+              </span>
+            </label>
 
             <div className="flex flex-col gap-3 border-t border-zinc-200 pt-3 dark:border-zinc-800">
               <p

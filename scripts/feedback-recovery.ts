@@ -17,13 +17,12 @@ const trackedFiles = [
 
 const feedbackKinds = new Set([
   "missing_problem",
-  "content_bug",
   "article_feedback",
   "workflow_request",
   "link_submission",
   "question_submission"
 ]);
-const feedbackStatuses = new Set(["open", "in_progress", "needs_review", "resolved", "dismissed"]);
+const feedbackStatuses = new Set(["open", "in_progress", "resolved", "dismissed"]);
 
 type TrackedFile = (typeof trackedFiles)[number];
 type RecoveryFile = TrackedFile | "manifest.json";
@@ -226,6 +225,13 @@ function parseQueueFile(file: SnapshotFile, issues: FeedbackRecoveryIssue[]) {
       });
     }
 
+    if (record.reporterVerified !== undefined && typeof record.reporterVerified !== "boolean") {
+      addIssue(issues, "error", "INVALID_REPORTER_VERIFIED", "提交人亲自验证标记必须是 boolean。", {
+        file: file.relativePath,
+        line: lineNumber
+      });
+    }
+
     const firstLine = seen.get(id);
     if (firstLine !== undefined) {
       addIssue(
@@ -281,7 +287,7 @@ function analyzeSnapshot(files: SnapshotFile[]): FeedbackDoctorReport {
   }
 
   const activeArchiveCount = archive.filter(
-    (record) => record.status === "open" || record.status === "in_progress" || record.status === "needs_review"
+    (record) => record.status === "open" || record.status === "in_progress"
   ).length;
   if (activeArchiveCount > 0) {
     addIssue(

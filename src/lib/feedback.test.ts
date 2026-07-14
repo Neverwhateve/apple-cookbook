@@ -33,6 +33,7 @@ function makeSubmission(index: number, status: FeedbackSubmission["status"] = "o
     customerWords: "",
     device: "iPhone",
     reporterName: "测试用户",
+    reporterVerified: false,
     contact: "",
     sourceTitle: "",
     sourceUrl: "",

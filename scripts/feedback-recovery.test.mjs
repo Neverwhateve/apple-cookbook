@@ -25,6 +25,8 @@ function makeSubmission(id, status = "open") {
     description: "测试内容",
     customerWords: "",
     device: "iPhone",
+    reporterName: "测试用户",
+    reporterVerified: false,
     contact: "",
     sourceTitle: "",
     sourceUrl: "",
@@ -112,29 +114,6 @@ describe("feedback recovery CLI", () => {
     assert.equal(result.stdout.includes("测试内容"), false);
   });
 
-  it("accepts content Bugs that are waiting for human review", async () => {
-    const root = await makeTemporaryRoot("apple-cookbook-feedback-review-doctor-");
-    await writeJsonl(path.join(root, "feedback/inbox.jsonl"), [
-      {
-        ...makeSubmission("AC-REVIEW", "needs_review"),
-        kind: "content_bug",
-        automationReview: {
-          outcome: "no_content_change",
-          reviewedAt: "2026-07-14T08:00:00.000Z",
-          summary: "当前内容无需修改。",
-          issueUrl: "https://github.com/example/repo/issues/42"
-        }
-      }
-    ]);
-
-    const result = await runCli(["doctor", "--data-dir", root, "--json"]);
-    const report = JSON.parse(result.stdout);
-
-    assert.equal(result.code, 0, result.stderr);
-    assert.equal(report.ok, true);
-    assert.equal(report.summary.inboxRecords, 1);
-  });
-
   it("keeps doctor side-effect free when the store is completely absent", async () => {
     const root = await makeTemporaryRoot("apple-cookbook-feedback-empty-doctor-");
 
@@ -158,6 +137,18 @@ describe("feedback recovery CLI", () => {
     assert.ok(report.issues.some((issue) => issue.code === "INVALID_JSONL"));
     assert.equal(result.stdout.includes(privateMarker), false);
     assert.equal(result.stderr.includes(privateMarker), false);
+  });
+
+  it("rejects a non-boolean reporter verification marker", async () => {
+    const root = await makeTemporaryRoot("apple-cookbook-feedback-invalid-verification-");
+    const submission = { ...makeSubmission("AC-INVALID-VERIFICATION"), reporterVerified: "yes" };
+    await writeJsonl(path.join(root, "feedback/inbox.jsonl"), [submission]);
+
+    const result = await runCli(["doctor", "--data-dir", root, "--json"]);
+    assert.equal(result.code, 1);
+    const report = JSON.parse(result.stdout);
+
+    assert.ok(report.issues.some((issue) => issue.code === "INVALID_REPORTER_VERIFIED"));
   });
 
   it("detects duplicate ids and inbox/archive partition conflicts", async () => {

@@ -4,6 +4,7 @@ import crypto from "node:crypto";
 import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
+import matter from "gray-matter";
 
 function git(args, options = {}) {
   return execFileSync("git", args, {
@@ -41,10 +42,12 @@ const baseCommit = args.base;
 const runId = args["run-id"];
 const reason = args.reason || "Autonomous verified content maintenance";
 const automationId = args["automation-id"] || "mac-mini-codex-worker";
+const query = args.query || "website content Bug targeting the current article";
 
 if (!/^[0-9a-f]{40,64}$/.test(baseCommit ?? "")) throw new Error("--base must be a full Git commit SHA");
 if (!/^[a-z0-9][a-z0-9._-]{2,99}$/i.test(runId ?? "")) throw new Error("--run-id is invalid");
 if (!/^[a-z0-9][a-z0-9._-]{2,99}$/i.test(automationId)) throw new Error("--automation-id is invalid");
+if (!query.trim() || query.length > 500) throw new Error("--query must contain 1-500 characters");
 
 const changed = [
   ...git(["diff", "--name-only", "--diff-filter=ACMRTUXB", baseCommit, "--", "cookbook"]).split(/\r?\n/),
@@ -56,17 +59,29 @@ if (changed.length === 0) throw new Error("No changed Cookbook files to material
 const changes = changed.map((filePath) => {
   const proposed = fs.readFileSync(path.join(process.cwd(), filePath));
   const previous = baseContent(baseCommit, filePath);
+  if (previous === null) {
+    throw new Error(`Mac feedback automation may update existing articles only: ${filePath}`);
+  }
+  const data = matter(proposed.toString("utf8")).data;
+  const articleId = String(data.id ?? data.slug ?? "").trim();
+  if (!articleId) throw new Error(`Updated article has no id or slug: ${filePath}`);
   return {
     path: filePath,
-    action: previous === null ? "create" : "update",
-    baseContentHash: previous === null ? null : hash(previous),
+    action: "update",
+    baseContentHash: hash(previous),
     proposedContentHash: hash(proposed),
-    reason
+    reason,
+    canonicalReview: {
+      queries: [query.trim()],
+      matchedArticleIds: [articleId],
+      decision: "update-existing",
+      notes: "The report targets this existing article; the automation verified and updated that canonical match instead of creating a duplicate."
+    }
   };
 });
 
 const manifest = {
-  schemaVersion: 1,
+  schemaVersion: 2,
   runId,
   automationId,
   generatedAt: new Date().toISOString(),

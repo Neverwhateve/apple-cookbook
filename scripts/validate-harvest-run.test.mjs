@@ -2,7 +2,8 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { execFileSync } from "node:child_process";
+import { execFileSync, spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import { afterEach, test } from "node:test";
 import {
   HarvestValidationError,
@@ -13,6 +14,7 @@ import {
 } from "./validate-harvest-run.mjs";
 
 const temporaryRepositories = [];
+const validatorPath = fileURLToPath(new URL("./validate-harvest-run.mjs", import.meta.url));
 
 afterEach(() => {
   for (const directory of temporaryRepositories.splice(0)) {
@@ -65,6 +67,10 @@ function setupRepository() {
   temporaryRepositories.push(cwd);
   fs.mkdirSync(path.join(cwd, "cookbook", "iPhone"), { recursive: true });
   fs.writeFileSync(path.join(cwd, "cookbook", "iPhone", "existing-article.md"), article());
+  fs.writeFileSync(
+    path.join(cwd, "cookbook", "iPhone", "canonical-target.md"),
+    article({ title: "Canonical target", slug: "canonical-target" })
+  );
   git(cwd, ["init", "-q"]);
   git(cwd, ["config", "user.email", "harvest-test@example.com"]);
   git(cwd, ["config", "user.name", "Harvest Test"]);
@@ -79,12 +85,29 @@ function hashFile(filePath) {
 
 function manifest(baseCommit, changes) {
   return {
-    schemaVersion: 1,
+    schemaVersion: 2,
     runId: "daily-2026-07-13",
     automationId: "daily-harvest",
     generatedAt: "2026-07-13T10:00:00.000Z",
     baseCommit,
-    changes
+    changes: changes.map((change) => ({
+      reason: "Test Harvest proposal",
+      canonicalReview: {
+        queries: ["test symptom"],
+        matchedArticleIds: change.action === "redirect"
+          ? [change.canonicalArticleId]
+          : change.action === "update"
+            ? ["existing-article"]
+            : [],
+        decision: change.action === "create"
+          ? "create-new"
+          : change.action === "update"
+            ? "update-existing"
+            : "redirect-to-existing",
+        notes: "Compared symptom and alias matches before proposing this change."
+      },
+      ...change
+    }))
   };
 }
 
@@ -103,6 +126,18 @@ test("path validation rejects traversal, absolute paths, and non-Markdown conten
   assert.match(validateCookbookPath("cookbook/../secrets.md"), /normalized|traversal/);
   assert.match(validateCookbookPath("/cookbook/iPhone/safe.md"), /repository-relative/);
   assert.match(validateCookbookPath("cookbook/iPhone/safe.mdx"), /Markdown/);
+  assert.match(validateCookbookPath("cookbook/.hidden/safe.md"), /traversal/);
+});
+
+test("CLI options that require values fail closed when their value is missing", () => {
+  for (const argument of ["--manifest", "--changed-since", "--expected-base", "--expected-branch"]) {
+    const result = spawnSync(process.execPath, [validatorPath, argument], {
+      encoding: "utf8",
+      env: process.env
+    });
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, new RegExp(`${argument} requires a value`));
+  }
 });
 
 test("a valid canonical create matches the base and proposed hashes", () => {
@@ -145,6 +180,27 @@ test("create rejects non-canonical status and Official content without an offici
 
   assert.match(details, /status=canonical/);
   assert.match(details, /verification=Official requires/);
+});
+
+test("create cannot pre-assign canonicalArticleId", () => {
+  const { cwd, baseCommit } = setupRepository();
+  const relativePath = "cookbook/iPhone/unsafe-create.md";
+  const absolutePath = path.join(cwd, relativePath);
+  fs.writeFileSync(
+    absolutePath,
+    article({ title: "Unsafe create", slug: "unsafe-create", status: "canonical", canonicalArticleId: "canonical-target" })
+  );
+
+  const details = errorDetails(() => validateHarvestManifest(
+    manifest(baseCommit, [{
+      path: relativePath,
+      action: "create",
+      baseContentHash: null,
+      proposedContentHash: hashFile(absolutePath)
+    }]),
+    { cwd }
+  ));
+  assert.match(details, /must not assign canonicalArticleId/);
 });
 
 test("v2 verificationLevel Official rejects non-official structured sources", () => {
@@ -254,6 +310,123 @@ test("duplicate paths and redirect metadata mismatches fail", () => {
   assert.match(details, /duplicates/);
 });
 
+test("missing or inconsistent canonical review evidence fails", () => {
+  const { cwd, baseCommit } = setupRepository();
+  const relativePath = "cookbook/iPhone/new-article.md";
+  const absolutePath = path.join(cwd, relativePath);
+  fs.writeFileSync(absolutePath, article({ title: "New article", slug: "new-article", status: "canonical" }));
+
+  const unsafeManifest = manifest(baseCommit, [{
+    path: relativePath,
+    action: "create",
+    baseContentHash: null,
+    proposedContentHash: hashFile(absolutePath)
+  }]);
+  delete unsafeManifest.changes[0].canonicalReview;
+  delete unsafeManifest.changes[0].reason;
+
+  const details = errorDetails(() => validateHarvestManifest(unsafeManifest, { cwd }));
+  assert.match(details, /reason must explain/);
+  assert.match(details, /canonicalReview must be an object/);
+
+  unsafeManifest.changes[0].reason = "Create a distinct symptom article.";
+  unsafeManifest.changes[0].canonicalReview = {
+    queries: ["test symptom"],
+    matchedArticleIds: [],
+    decision: "update-existing",
+    notes: "No equivalent canonical article was found."
+  };
+  const mismatch = errorDetails(() => validateHarvestManifest(unsafeManifest, { cwd }));
+  assert.match(mismatch, /decision must be create-new/);
+});
+
+test("manifest v2 rejects legacy versions, unknown fields, and update identity mismatches", () => {
+  const { cwd, baseCommit } = setupRepository();
+  const relativePath = "cookbook/iPhone/existing-article.md";
+  const absolutePath = path.join(cwd, relativePath);
+  const baseHash = hashFile(absolutePath);
+  fs.appendFileSync(absolutePath, "\nUpdated.\n");
+  const candidate = manifest(baseCommit, [{
+    path: relativePath,
+    action: "update",
+    baseContentHash: baseHash,
+    proposedContentHash: hashFile(absolutePath)
+  }]);
+  candidate.schemaVersion = 1;
+  candidate.unknown = true;
+  candidate.changes[0].canonicalReview.matchedArticleIds = ["another-article"];
+
+  const details = errorDetails(() => validateHarvestManifest(candidate, { cwd }));
+  assert.match(details, /schemaVersion must be 2/);
+  assert.match(details, /manifest contains unknown fields: unknown/);
+  assert.match(details, /must include the updated article id or slug/);
+});
+
+test("Harvest updates cannot promote status, replace identity, or change canonicalArticleId", () => {
+  for (const mutation of ["status", "slug", "canonicalArticleId"]) {
+    const { cwd, baseCommit } = setupRepository();
+    const relativePath = "cookbook/iPhone/existing-article.md";
+    const absolutePath = path.join(cwd, relativePath);
+    const baseHash = hashFile(absolutePath);
+    const proposed = mutation === "status"
+      ? article({ status: "canonical" })
+      : mutation === "slug"
+        ? article({ slug: "changed-identity" })
+        : article({ canonicalArticleId: "canonical-target" });
+    fs.writeFileSync(absolutePath, proposed);
+    const candidate = manifest(baseCommit, [{
+      path: relativePath,
+      action: "update",
+      baseContentHash: baseHash,
+      proposedContentHash: hashFile(absolutePath)
+    }]);
+    if (mutation === "slug") {
+      candidate.changes[0].canonicalReview.matchedArticleIds = ["changed-identity"];
+    }
+
+    const details = errorDetails(() => validateHarvestManifest(candidate, { cwd }));
+    assert.match(
+      details,
+      mutation === "canonicalArticleId"
+        ? /update cannot change canonicalArticleId/
+        : new RegExp(`cannot change ${mutation}`)
+    );
+  }
+});
+
+test("redirect requires an existing non-self canonical target", () => {
+  const { cwd, baseCommit } = setupRepository();
+  const relativePath = "cookbook/iPhone/existing-article.md";
+  const absolutePath = path.join(cwd, relativePath);
+  const baseHash = hashFile(absolutePath);
+  fs.writeFileSync(absolutePath, article({ canonicalArticleId: "canonical-target" }));
+
+  const validManifest = manifest(baseCommit, [{
+    path: relativePath,
+    action: "redirect",
+    baseContentHash: baseHash,
+    proposedContentHash: hashFile(absolutePath),
+    canonicalArticleId: "canonical-target"
+  }]);
+  assert.equal(validateHarvestManifest(validManifest, { cwd }).paths.has(relativePath), true);
+
+  fs.writeFileSync(absolutePath, article({ canonicalArticleId: "existing-article" }));
+  const selfRedirect = manifest(baseCommit, [{
+    path: relativePath,
+    action: "redirect",
+    baseContentHash: baseHash,
+    proposedContentHash: hashFile(absolutePath),
+    canonicalArticleId: "existing-article"
+  }]);
+  const selfDetails = errorDetails(() => validateHarvestManifest(selfRedirect, { cwd }));
+  assert.match(selfDetails, /redirect cannot point an article to itself/);
+
+  selfRedirect.changes[0].canonicalArticleId = "missing-target";
+  selfRedirect.changes[0].canonicalReview.matchedArticleIds = ["missing-target"];
+  const missingDetails = errorDetails(() => validateHarvestManifest(selfRedirect, { cwd }));
+  assert.match(missingDetails, /must identify an article present at baseCommit/);
+});
+
 test("changed-since validates one complete manifest and skips ordinary PRs", () => {
   const { cwd, baseCommit } = setupRepository();
   assert.equal(validateHarvestRun({ cwd }).skipped, true);
@@ -284,4 +457,120 @@ test("changed-since validates one complete manifest and skips ordinary PRs", () 
   });
   assert.equal(result.skipped, false);
   assert.equal(result.changeCount, 1);
+});
+
+test("ordinary code or documentation PRs skip the Harvest-only diff boundary", () => {
+  const { cwd, baseCommit } = setupRepository();
+  fs.mkdirSync(path.join(cwd, "docs"), { recursive: true });
+  fs.writeFileSync(path.join(cwd, "docs", "ordinary-change.md"), "# Ordinary change\n");
+  git(cwd, ["add", "."]);
+  git(cwd, ["commit", "-q", "-m", "ordinary docs change"]);
+
+  const result = validateHarvestRun({ cwd, changedSince: baseCommit });
+  assert.equal(result.skipped, true);
+});
+
+test("run manifest filename must exactly match its runId", () => {
+  const { cwd, baseCommit } = setupRepository();
+  const relativePath = "cookbook/iPhone/new-article.md";
+  const absolutePath = path.join(cwd, relativePath);
+  fs.writeFileSync(absolutePath, article({ title: "New article", slug: "new-article", status: "canonical" }));
+  const manifestPath = "harvest/manifests/wrong-run-id.json";
+  fs.mkdirSync(path.join(cwd, "harvest", "manifests"), { recursive: true });
+  fs.writeFileSync(
+    path.join(cwd, manifestPath),
+    `${JSON.stringify(manifest(baseCommit, [{
+      path: relativePath,
+      action: "create",
+      baseContentHash: null,
+      proposedContentHash: hashFile(absolutePath)
+    }]), null, 2)}\n`
+  );
+
+  const details = errorDetails(() => validateHarvestRun({ cwd, manifestPaths: [manifestPath] }));
+  assert.match(details, /filename must exactly match manifest runId/);
+});
+
+test("run manifest rejects branch mismatches and symlink files", () => {
+  const { cwd, baseCommit } = setupRepository();
+  const relativePath = "cookbook/iPhone/new-article.md";
+  const absolutePath = path.join(cwd, relativePath);
+  fs.writeFileSync(absolutePath, article({ title: "New article", slug: "new-article", status: "canonical" }));
+  const manifestPath = "harvest/manifests/daily-2026-07-13.json";
+  const manifestDirectory = path.join(cwd, "harvest", "manifests");
+  fs.mkdirSync(manifestDirectory, { recursive: true });
+  const realManifestPath = path.join(cwd, "real-manifest.json");
+  fs.writeFileSync(
+    realManifestPath,
+    `${JSON.stringify(manifest(baseCommit, [{
+      path: relativePath,
+      action: "create",
+      baseContentHash: null,
+      proposedContentHash: hashFile(absolutePath)
+    }]), null, 2)}\n`
+  );
+  fs.symlinkSync(realManifestPath, path.join(cwd, manifestPath));
+
+  const symlinkDetails = errorDetails(() => validateHarvestRun({ cwd, manifestPaths: [manifestPath] }));
+  assert.match(symlinkDetails, /regular file, not a symlink/);
+
+  fs.unlinkSync(path.join(cwd, manifestPath));
+  fs.copyFileSync(realManifestPath, path.join(cwd, manifestPath));
+  const branchDetails = errorDetails(() => validateHarvestRun({
+    cwd,
+    manifestPaths: [manifestPath],
+    expectedBranch: "harvest/different-run"
+  }));
+  assert.match(branchDetails, /branch harvest\/different-run must exactly match runId/);
+});
+
+test("changed-since rejects deleted or renamed Cookbook files", () => {
+  for (const change of ["delete", "rename"]) {
+    const { cwd, baseCommit } = setupRepository();
+    const sourcePath = "cookbook/iPhone/existing-article.md";
+    if (change === "delete") fs.unlinkSync(path.join(cwd, sourcePath));
+    else fs.renameSync(path.join(cwd, sourcePath), path.join(cwd, "cookbook/iPhone/renamed-article.md"));
+    git(cwd, ["add", "-A"]);
+    git(cwd, ["commit", "-q", "-m", change]);
+
+    const details = errorDetails(() => validateHarvestRun({
+      cwd,
+      changedSince: baseCommit,
+      requireManifest: true
+    }));
+    assert.match(details, /may only add or modify files/);
+    assert.match(details, change === "delete" ? /D cookbook\/iPhone\/existing-article\.md/ : /R\d*/);
+  }
+});
+
+test("changed-since rejects files outside the Cookbook and run manifest allowlist", () => {
+  const { cwd, baseCommit } = setupRepository();
+  const relativePath = "cookbook/iPhone/new-article.md";
+  const absolutePath = path.join(cwd, relativePath);
+  fs.writeFileSync(absolutePath, article({ title: "New article", slug: "new-article", status: "canonical" }));
+  fs.mkdirSync(path.join(cwd, ".github", "workflows"), { recursive: true });
+  fs.writeFileSync(path.join(cwd, ".github", "workflows", "unsafe.yml"), "name: unsafe\n");
+
+  const manifestPath = "harvest/manifests/daily-2026-07-13.json";
+  fs.mkdirSync(path.join(cwd, "harvest", "manifests"), { recursive: true });
+  fs.writeFileSync(
+    path.join(cwd, manifestPath),
+    `${JSON.stringify(manifest(baseCommit, [{
+      path: relativePath,
+      action: "create",
+      baseContentHash: null,
+      proposedContentHash: hashFile(absolutePath)
+    }]), null, 2)}\n`
+  );
+  git(cwd, ["add", "."]);
+  git(cwd, ["commit", "-q", "-m", "unsafe extra path"]);
+
+  const details = errorDetails(() => validateHarvestRun({
+    cwd,
+    changedSince: baseCommit,
+    expectedBase: baseCommit,
+    requireManifest: true
+  }));
+  assert.match(details, /unexpected paths/);
+  assert.match(details, /\.github\/workflows\/unsafe\.yml/);
 });

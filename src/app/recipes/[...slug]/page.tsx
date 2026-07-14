@@ -7,9 +7,10 @@ import { ArrowRight, ExternalLink, ListChecks } from "lucide-react";
 import { ArticleActions } from "@/components/article-actions";
 import { ArticleFeedbackWidget } from "@/components/article-feedback-widget";
 import { ArticleCard } from "@/components/article-card";
+import { SolutionVotePanel } from "@/components/solution-vote-panel";
 import { VerificationBadge } from "@/components/verification-badge";
 import type { ArticleSource } from "@/lib/article-schema";
-import { formatPublicArticleBody } from "@/lib/article-content";
+import { buildArticleStructuredData, serializeJsonLd } from "@/lib/article-structured-data";
 import {
   getPublishedArticles,
   getPublishedArticleBySlug,
@@ -17,6 +18,17 @@ import {
   isIndexableArticle
 } from "@/lib/cookbook";
 import { difficultyLabels, verificationDescriptions } from "@/lib/labels";
+
+function formatArticleBody(body: string) {
+  const firstSectionIndex = body.search(/^##\s+症状\s*$/m);
+  const content = firstSectionIndex >= 0 ? body.slice(firstSectionIndex) : body;
+  const endMatterIndex = content.search(/^##\s+(相关问题|标签|元信息)\s*$/m);
+  const articleContent = endMatterIndex >= 0 ? content.slice(0, endMatterIndex).trim() : content;
+
+  return articleContent
+    .replace(/^##\s+零售排查流程\s*$/m, "## 排查流程")
+    .replace(/^##\s+升级处理\s*$/m, "## 如果仍未解决");
+}
 
 function getLeadParagraph(body: string) {
   return body
@@ -130,16 +142,27 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
   }
 
   const related = getRelatedArticles(article);
-  const articleBody = formatPublicArticleBody(article.body);
+  const articleBody = formatArticleBody(article.body);
   const lead = article.summary || getLeadParagraph(article.body) || article.excerpt;
   const headings = getArticleHeadings(articleBody);
   const primaryRelated = related.slice(0, 3);
   const officialSources = article.sources.filter((source) => source.official);
   const communitySources = article.sources.filter((source) => !source.official);
   const primaryOfficialSource = officialSources[0];
+  const structuredData = buildArticleStructuredData(article);
+  const voteableSolutions = article.solutions
+    .filter((solution) => solution.kind !== "escalation" && solution.steps.length > 0)
+    .map(({ id, title, verificationLevel }) => ({ id, title, verificationLevel }));
 
   return (
     <main className="bg-white px-4 py-8 dark:bg-zinc-950 sm:px-6 sm:py-12">
+      {structuredData ? (
+        <script
+          id="article-structured-data"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(structuredData) }}
+        />
+      ) : null}
       <article className="mx-auto max-w-[692px]">
         <nav aria-label="文章路径" className="mb-10 flex flex-wrap items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400">
           <Link href="/" className="hover:text-zinc-950 dark:hover:text-zinc-50">
@@ -248,7 +271,12 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
               h1: () => null,
               h2: ({ children }) => {
                 const text = getTextFromChildren(children);
-                const trustClass = text === "Apple 官方方案" ? "official-heading" : /非官方|社区|补充处理思路/.test(text) ? "community-heading" : undefined;
+                const trustClass =
+                  text === "Apple 官方方案"
+                    ? "official-heading"
+                    : /非官方|社区|分享|补充处理思路/.test(text)
+                      ? "community-heading"
+                      : undefined;
 
                 return (
                   <h2 id={headingId(text)} className={trustClass}>
@@ -272,6 +300,8 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
           </ReactMarkdown>
         </div>
 
+        {voteableSolutions.length > 0 ? <SolutionVotePanel articleId={article.id} solutions={voteableSolutions} /> : null}
+
         <section className="mt-14 border-t border-zinc-200 pt-8 dark:border-zinc-800" aria-labelledby="details-title">
           <h2 id="details-title" className="text-2xl font-semibold text-zinc-950 dark:text-zinc-50">
             来源与更多信息
@@ -292,8 +322,8 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
               <SourceList sources={officialSources} emptyMessage="这篇文章暂未登记 Apple 官方来源。" />
             </div>
             <div>
-              <h3 className="text-sm font-semibold text-zinc-950 dark:text-zinc-50">社区经验来源</h3>
-              <SourceList sources={communitySources} emptyMessage="这篇文章暂未登记社区来源。" />
+              <h3 className="text-sm font-semibold text-zinc-950 dark:text-zinc-50">同事分享与其他经验</h3>
+              <SourceList sources={communitySources} emptyMessage="这篇文章暂未登记同事分享或其他经验来源。" />
             </div>
           </div>
           <div className="mt-5 flex flex-wrap gap-2">

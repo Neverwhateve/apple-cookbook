@@ -211,6 +211,7 @@ function FeedbackCard({
           <div className="mt-3 grid gap-2 text-xs text-zinc-500 sm:grid-cols-2">
             <p>设备：{item.device || "未填写"}</p>
             <p>提交人：{item.reporterName || "未填写"}</p>
+            <p>提交人亲自验证：{item.reporterVerified ? "是" : "否"}</p>
             <p>顾客原话：{item.customerWords || "未填写"}</p>
             <p>联系方式：{item.contact || "未填写"}</p>
             <p>更新时间：{item.updatedAt ? new Date(item.updatedAt).toLocaleString("zh-CN", { hour12: false }) : "未更新"}</p>

@@ -19,6 +19,7 @@ export type FeedbackSubmission = {
   customerWords: string;
   device: string;
   reporterName: string;
+  reporterVerified: boolean;
   contact: string;
   sourceTitle: string;
   sourceUrl: string;
@@ -116,6 +117,7 @@ function buildSubmission(formData: FormData): FeedbackSubmission {
     customerWords: normalizeSingleLine(formData.get("customerWords")),
     device: normalizeSingleLine(formData.get("device")),
     reporterName: normalizeSingleLine(formData.get("reporterName")),
+    reporterVerified: formData.get("reporterVerified") === "true",
     contact: normalizeSingleLine(formData.get("contact")),
     sourceTitle: normalizeSingleLine(formData.get("sourceTitle")),
     sourceUrl: normalizeSingleLine(formData.get("sourceUrl")),
@@ -160,6 +162,7 @@ function buildDailyWorkItem(submission: FeedbackSubmission) {
       : []),
     `  - 设备: ${submission.device || "未填写"}`,
     `  - 提交人: ${submission.reporterName || "未填写"}`,
+    `  - 提交人亲自验证: ${submission.reporterVerified ? "是" : "否"}`,
     `  - 顾客原话: ${submission.customerWords || "未填写"}`,
     `  - 联系方式: ${submission.contact || "未填写"}`,
     `  - 下一步: ${nextStep}`,
