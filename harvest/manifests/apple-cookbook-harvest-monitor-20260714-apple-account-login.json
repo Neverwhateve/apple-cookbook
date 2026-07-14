@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260714-apple-account-login",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-14T08:29:00.000Z",
+  "baseCommit": "424c510dbd02e6fb7fa1a898af2456654770c61e",
+  "changes": [
+    {
+      "path": "cookbook/Apple ID/apple-account-verification-failed.md",
+      "action": "update",
+      "baseContentHash": "sha256:b9fc2112939efc5b39ed335c5101a967fdb9d7474d3fdbab3272f64f5d26e2a5",
+      "proposedContentHash": "sha256:a6ef06dcb8ac14bd1803d321a2da18673ecc154c9d0ff0ca17fe146bd1489c3e",
+      "reason": "Refresh Apple Account login and recovery guidance with current Apple Support system-status, verification-code, email, and account-recovery instructions.",
+      "canonicalReview": {
+        "queries": [
+          "Apple 账户验证失败 收不到验证码 iCloud 无法登录",
+          "Apple Account verification failed verification code account recovery",
+          "apple-account-verification-failed"
+        ],
+        "matchedArticleIds": [
+          "apple-account-verification-failed"
+        ],
+        "decision": "update-existing",
+        "notes": "Existing Apple Account article covers the same symptom cluster; update it instead of creating a duplicate canonical."
+      }
+    }
+  ]
+}
