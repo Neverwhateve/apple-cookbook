@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-watch-charging-2026-07-14T140000Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-14T14:00:00.000Z",
+  "baseCommit": "4472eb68212bc23489b1b0597431148e737c231e",
+  "changes": [
+    {
+      "path": "cookbook/Apple Watch/apple-watch-wont-charge-turn-on-red-lightning.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:ab1467e92782d584ecaf87822bc27833ea5fa289b9bc5658112be5145baf8bda",
+      "reason": "Adds a distinct high-value Apple Watch power and charging troubleshooting article below the 100 canonical article target, backed by current Apple Support sources.",
+      "canonicalReview": {
+        "queries": [
+          "Apple Watch 无法充电 不开机 红色闪电",
+          "Apple Watch 充不进电 慢充 80% 优化充电",
+          "Apple Watch won't charge red lightning Slow Charger",
+          "Apple Watch charging cable icon magnetic charger",
+          "WPT charger incompatible Apple Watch"
+        ],
+        "matchedArticleIds": [
+          "apple-watch-wont-connect-pair-iphone",
+          "apple-watch-voice-memos-not-syncing-iphone",
+          "airpods-wont-charge-case-not-working",
+          "iphone-wont-charge-wired-liquid-detected",
+          "iphone-charging-paused-80-temperature-charge-limit"
+        ],
+        "decision": "create-new",
+        "notes": "Existing Apple Watch canonical coverage is pairing and Voice Memos sync. Charging matches for AirPods and iPhone are device-specific and do not cover Apple Watch red lightning, magnetic charger alignment, watchOS Slow Charger, optimized charging, or WPT charger incompatibility."
+      }
+    }
+  ]
+}
