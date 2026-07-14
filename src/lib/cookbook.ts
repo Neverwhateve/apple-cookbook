@@ -122,6 +122,10 @@ export function getAllArticles(): Article[] {
   return readAllArticles();
 }
 
+export function getArticleById(id: string, articles = getAllArticles()) {
+  return articles.find((article) => article.id === id);
+}
+
 /**
  * Public lifecycle boundary for reader-facing routes.
  *

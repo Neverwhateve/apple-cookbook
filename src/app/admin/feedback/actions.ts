@@ -7,11 +7,13 @@ import {
   canUseAdminSession,
   createAdminSessionToken,
   moveFeedbackItem,
+  queueFeedbackForHarvest,
   updateFeedbackStatus,
   type FeedbackStatus
 } from "@/lib/feedback-admin";
+import { triggerFeedbackProcessing } from "@/lib/feedback-trigger";
 
-const allowedStatuses = new Set<FeedbackStatus>(["open", "in_progress", "resolved", "dismissed"]);
+const allowedStatuses = new Set<FeedbackStatus>(["open", "in_progress", "needs_review", "resolved", "dismissed"]);
 const cookieName = "apple-cookbook-admin";
 
 export async function loginAdmin(formData: FormData) {
@@ -74,5 +76,22 @@ export async function moveFeedbackQueueItem(formData: FormData) {
   }
 
   await moveFeedbackItem(id, direction);
+  revalidatePath("/admin/feedback");
+}
+
+export async function promoteFeedbackQueueItem(formData: FormData) {
+  const cookieStore = await cookies();
+
+  if (!canUseAdminSession(cookieStore.get(cookieName)?.value)) {
+    throw new Error("管理员会话已失效，请重新登录。");
+  }
+
+  const id = String(formData.get("id") ?? "");
+  const result = await queueFeedbackForHarvest(id, "管理员复核后确认有效，重新进入 P0，等待下一轮 Harvest。");
+
+  if (result.queued) {
+    await triggerFeedbackProcessing(id);
+  }
+
   revalidatePath("/admin/feedback");
 }

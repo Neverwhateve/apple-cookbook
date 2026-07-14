@@ -23,10 +23,16 @@ export type FeedbackSubmission = {
   contact: string;
   sourceTitle: string;
   sourceUrl: string;
-  status: "open" | "in_progress" | "resolved" | "dismissed";
+  status: "open" | "in_progress" | "needs_review" | "resolved" | "dismissed";
   source: "website";
   adminNote?: string;
   updatedAt?: string;
+  automationReview?: {
+    outcome: "no_content_change";
+    reviewedAt: string;
+    summary: string;
+    issueUrl: string;
+  };
 };
 
 export const feedbackDataRoot = process.env.APPLE_COOKBOOK_DATA_DIR ?? process.cwd();

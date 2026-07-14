@@ -48,8 +48,7 @@ The goal is to create a practical troubleshooting encyclopedia that helps Apple 
 
 - Source harvest and article maintenance work should continue every 2 hours.
 - Every completed automated cycle should open a `harvest/<run-id>` validation pull request; passing checks merge and deploy automatically without waiting for human review.
-- Each Harvest proposal must include the base commit, full-file content hashes, and recorded canonical-match decision described in `docs/HARVEST_WORKFLOW.md`.
-- The local materializer defaults to dry-run and never creates branches, commits, pushes, or pull requests by itself.
+- Each Harvest proposal must include the base commit and full-file content hashes described in `docs/HARVEST_WORKFLOW.md`.
 - Content Bugs, feedback questions, and submitted links are P0 intake. Website submissions are recorded immediately and request an immediate sync; they must be handled before routine source harvest work.
 - Codex runs on the Mac mini using the locally saved ChatGPT/Codex login. ECS remains the website and data host; see `docs/MAC_MINI_AUTOMATION.md`.
 - When multiple priority levels exist, resolve items in priority order before moving to the next level.
@@ -75,6 +74,7 @@ Apple Cookbook has three layers:
    - Static knowledge pages remain Vercel-compatible.
    - The writable feedback/admin workflow requires the documented persistent ECS data directory; file feedback fails closed on Vercel instead of acknowledging `/tmp` data as saved.
    - Search is the primary navigation surface.
+   - The authenticated admin keeps AI no-change decisions for human review and provides an all-article editor. Production edits become durable, hash-checked Harvest proposals instead of writes to the disposable standalone bundle.
 
 ## Frontmatter Contract
 
@@ -104,11 +104,11 @@ This is the legacy v1 contract. New structured content may use Article Schema v2
 - `templates/`: Reusable article templates.
 - `sources/`: Source notes and research logs.
 - `feedback/inbox.jsonl`: Local-development feedback source of truth; production stores the same file outside the checkout through `APPLE_COOKBOOK_DATA_DIR`.
+- `article-edits/`: Local-development administrator edit proposals; production stores them under `APPLE_COOKBOOK_DATA_DIR` and publishes them through Harvest pull requests.
 - `todos/daily-work.md`: Rebuildable human-readable projection generated from feedback submissions.
 - `indexes/`: Tag, device, feature, and symptom indexes.
 - `src/`: Next.js website and Markdown indexing code.
 - `schemas/`: Machine-readable content contracts.
-- `harvest/manifests/`: Immutable per-run proposal evidence; created only when a Harvest run contains a real change.
 - `.github/rulesets/main.json`: Reviewable expected policy for `main`; it is never applied automatically.
 
 ## Local Development
@@ -119,14 +119,13 @@ Use the bundled Codex Node runtime if system Node is unavailable.
 pnpm install
 pnpm dev
 pnpm verify
-pnpm generate:harvest --help
 pnpm preview:content-v2
 pnpm feedback:doctor
 pnpm feedback:verify -- --snapshot /path/to/feedback-snapshot
 pnpm audit:github-governance
 ```
 
-The GitHub governance audit exits `0`: PR #12 registered and passed `Validate pull request`, after which existing ruleset ID `18863035` was updated in place with that exact strict check and an empty bypass list. PR #12 then published the workflow source and its complete dependency closure to `main`. Harvest proposal input must stay outside the checkout; follow `docs/HARVEST_WORKFLOW.md` for dry-run, explicit materialization, local validation, and the ready validation PR. Feedback backups are deliberately opt-in; follow `docs/FEEDBACK_RECOVERY.md` and store snapshots outside both the checkout and live data directory.
+The GitHub governance audit exits `0`: PR #12 registered and passed `Validate pull request`, after which existing ruleset ID `18863035` was updated in place with that exact strict check and an empty bypass list. PR #12 then published the workflow source and its complete dependency closure to `main`. Feedback backups are deliberately opt-in; follow `docs/FEEDBACK_RECOVERY.md` and store snapshots outside both the checkout and live data directory.
 
 In this Codex workspace, Node is available at:
 

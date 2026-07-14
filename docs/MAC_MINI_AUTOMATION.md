@@ -11,18 +11,14 @@ OpenAI API key.
 - `scripts/mac-feedback-watcher.sh` polls GitHub for open Issues carrying `P0`,
   `feedback-intake`, and `content-bug`. Polling does not call a model.
 - A durable website submission dispatches `sync-feedback-intake.yml`. That
-  workflow copies the ECS feedback record into a GitHub Issue. Reporter names
-  remain private unless the reporter explicitly marks a method as personally
-  verified and consents to public attribution.
-- A personally verified content Bug receives the `reporter-verified` label.
-  The Mac mini publishes it under “<name> 分享” as a clearly separated
-  non-official alternative unless the method is unsafe, destructive, or
-  unrelated to the referenced article. Unmarked reports keep the normal
-  evidence-checking path.
+  workflow copies the ECS feedback record into a GitHub Issue without exposing
+  the reporter name.
 - The watcher invokes `codex exec` only after a new content Bug appears.
-- Codex works in a dedicated clean checkout. The immediate Bug lane can update
-  existing `cookbook/*.md` articles only; it cannot create, delete, rename, or
-  redirect articles and cannot edit indexes.
+- If Codex finds no justified content change, the watcher records its conclusion
+  on the Issue, applies `needs-human-review`, and requests an immediate feedback
+  sync instead of treating the report as finally resolved.
+- Codex works in a dedicated clean checkout and can change only
+  `cookbook/*.md` and `indexes/*.md`.
 - A deterministic publisher runs validation, creates the Harvest manifest,
   pushes a `harvest/*` branch, and opens a ready PR after Codex exits.
 - Content-quality CI merges and deploys only after every check passes.
@@ -92,10 +88,22 @@ Do not publish that directory or attach it to a public Issue.
   automation follows CI, deployment, and production verification.
 - `codex-failed`: processing stopped without publication. Inspect the private
   Mac log, correct the cause, then remove this label to retry.
+- `needs-human-review`: Codex found no justified content change. The watcher
+  removes `codex-processing`, posts a structured conclusion, closes the Issue so
+  it is not claimed again, and leaves the final validity decision to an
+  administrator.
 
-When verification finds that no content change is justified, the watcher posts
-the conclusion and closes the Issue. When it creates a PR, the Issue remains
-open until the production result is verified.
+The feedback synchronization workflow recognizes `needs-human-review` on the
+latest Issue for a Feedback ID. While that ID still has its ECS synced marker,
+the workflow keeps the record in `feedback/inbox.jsonl`, changes its status to
+`needs_review`, and saves `automationReview` with the `no_content_change`
+outcome, review time, conclusion, and Issue URL. Removing the synced marker
+while re-queuing an item is the human-decision boundary: a stale closed Issue
+cannot move that item back to review. Closed Issues without
+`needs-human-review` keep the existing resolved/archive behavior.
+
+When verification creates a PR, the Issue remains open until the production
+result is verified.
 
 ## Stop or restart
 

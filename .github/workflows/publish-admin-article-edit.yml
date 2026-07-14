@@ -1,0 +1,394 @@
+name: Publish admin article edit
+
+on:
+  workflow_dispatch:
+    inputs:
+      proposal_id:
+        description: "Exact pending proposal ID to publish (for example AE-20260714-ABC123EF)"
+        required: false
+        type: string
+  schedule:
+    - cron: "23 * * * *"
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: admin-article-edit-publisher
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Publish one pending proposal
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Configure SSH
+        env:
+          ALIYUN_ECS_HOST: ${{ secrets.ALIYUN_ECS_HOST }}
+          ALIYUN_ECS_PORT: ${{ secrets.ALIYUN_ECS_PORT || '22' }}
+          ALIYUN_ECS_SSH_KEY: ${{ secrets.ALIYUN_ECS_SSH_KEY }}
+        run: |
+          set -euo pipefail
+          test -n "$ALIYUN_ECS_HOST"
+          test -n "$ALIYUN_ECS_SSH_KEY"
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+          printf '%s\n' "$ALIYUN_ECS_SSH_KEY" > ~/.ssh/aliyun_ecs
+          chmod 600 ~/.ssh/aliyun_ecs
+          ssh-keyscan -p "$ALIYUN_ECS_PORT" "$ALIYUN_ECS_HOST" >> ~/.ssh/known_hosts
+
+      - name: Fetch oldest pending proposal
+        id: fetch
+        env:
+          ALIYUN_ECS_HOST: ${{ secrets.ALIYUN_ECS_HOST }}
+          ALIYUN_ECS_PORT: ${{ secrets.ALIYUN_ECS_PORT || '22' }}
+          ALIYUN_ECS_USER: ${{ secrets.ALIYUN_ECS_USER }}
+          ARTICLE_EDIT_DATA_DIR: ${{ vars.FEEDBACK_DATA_DIR || '/var/lib/apple-cookbook' }}
+          REQUESTED_PROPOSAL_ID: ${{ inputs.proposal_id || '' }}
+        run: |
+          set -euo pipefail
+          umask 077
+          test -n "$ALIYUN_ECS_USER"
+          if [[ -n "$REQUESTED_PROPOSAL_ID" && ! "$REQUESTED_PROPOSAL_ID" =~ ^AE-[0-9]{8}-[A-Z0-9]{8}$ ]]; then
+            echo "proposal_id must match AE-YYYYMMDD-XXXXXXXX." >&2
+            exit 1
+          fi
+          intake_dir="$RUNNER_TEMP/article-edit"
+          packet_path="$intake_dir/pending.packet"
+          mkdir -p "$intake_dir"
+
+          remote_command=$(printf \
+            'ARTICLE_EDIT_DATA_DIR=%q REQUESTED_PROPOSAL_ID=%q bash -s' \
+            "$ARTICLE_EDIT_DATA_DIR" "$REQUESTED_PROPOSAL_ID")
+          ssh -i ~/.ssh/aliyun_ecs -p "$ALIYUN_ECS_PORT" \
+            "$ALIYUN_ECS_USER@$ALIYUN_ECS_HOST" "$remote_command" > "$packet_path" <<'REMOTE'
+          set -euo pipefail
+          umask 077
+          edit_root="$ARTICLE_EDIT_DATA_DIR/article-edits"
+          pending_dir="$edit_root/pending"
+          lock_path="$edit_root/.proposal.lock"
+          mkdir -p "$pending_dir"
+          if [[ -L "$edit_root" || -L "$pending_dir" ]]; then
+            echo "Article edit queue directories must not be symlinks." >&2
+            exit 1
+          fi
+
+          lock_token="admin-edit-fetch-$(date +%s)-$$-$RANDOM"
+          deadline=$((SECONDS + 15))
+          while ! mkdir -m 700 "$lock_path" 2>/dev/null; do
+            if (( SECONDS >= deadline )); then
+              echo "Timed out waiting for article edit queue lock." >&2
+              exit 1
+            fi
+            sleep 0.1
+          done
+          printf '{"token":"%s","pid":%s,"acquiredAt":"%s"}\n' \
+            "$lock_token" "$$" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$lock_path/owner.json"
+          release_lock() {
+            if grep -Fq "\"token\":\"$lock_token\"" "$lock_path/owner.json" 2>/dev/null; then
+              rm -rf "$lock_path"
+            fi
+          }
+          trap release_lock EXIT
+
+          selected=""
+          if [[ -n "$REQUESTED_PROPOSAL_ID" ]]; then
+            [[ "$REQUESTED_PROPOSAL_ID" =~ ^AE-[0-9]{8}-[A-Z0-9]{8}$ ]]
+            requested_path="$pending_dir/$REQUESTED_PROPOSAL_ID.json"
+            if [[ -f "$requested_path" && ! -L "$requested_path" ]]; then
+              selected="$requested_path"
+            fi
+          else
+            shopt -s nullglob
+            for candidate in "$pending_dir"/*.json; do
+              candidate_name=${candidate##*/}
+              [[ "$candidate_name" =~ ^AE-[0-9]{8}-[A-Z0-9]{8}\.json$ ]] || continue
+              [[ -f "$candidate" && ! -L "$candidate" ]] || continue
+              if [[ -z "$selected" || "$candidate_name" < "${selected##*/}" ]]; then
+                selected="$candidate"
+              fi
+            done
+          fi
+
+          if [[ -n "$selected" ]]; then
+            printf '%s\n' "${selected##*/}"
+            cat -- "$selected"
+          fi
+          REMOTE
+
+          if [[ ! -s "$packet_path" ]]; then
+            echo "found=false" >> "$GITHUB_OUTPUT"
+            echo "No pending administrator article edit proposal."
+            exit 0
+          fi
+
+          IFS= read -r proposal_file < "$packet_path"
+          if [[ ! "$proposal_file" =~ ^AE-[0-9]{8}-[A-Z0-9]{8}\.json$ ]]; then
+            echo "Remote queue returned an invalid proposal filename." >&2
+            exit 1
+          fi
+          proposal_path="$intake_dir/$proposal_file"
+          tail -n +2 "$packet_path" > "$proposal_path"
+          rm -f "$packet_path"
+          test -s "$proposal_path"
+          proposal_sha=$(sha256sum "$proposal_path" | awk '{print $1}')
+          [[ "$proposal_sha" =~ ^[0-9a-f]{64}$ ]]
+
+          echo "found=true" >> "$GITHUB_OUTPUT"
+          echo "proposal_file=$proposal_file" >> "$GITHUB_OUTPUT"
+          echo "proposal_path=$proposal_path" >> "$GITHUB_OUTPUT"
+          echo "proposal_sha=$proposal_sha" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Node.js
+        if: steps.fetch.outputs.found == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+
+      - name: Set up pnpm
+        if: steps.fetch.outputs.found == 'true'
+        run: |
+          corepack enable
+          corepack prepare pnpm@11.7.0 --activate
+
+      - name: Install dependencies
+        if: steps.fetch.outputs.found == 'true'
+        run: pnpm install --frozen-lockfile
+
+      - name: Apply proposal to clean checkout
+        if: steps.fetch.outputs.found == 'true'
+        id: apply
+        env:
+          PROPOSAL_PATH: ${{ steps.fetch.outputs.proposal_path }}
+        run: |
+          set -euo pipefail
+          summary_path="$RUNNER_TEMP/article-edit/applied.json"
+          base_commit=$(git rev-parse HEAD)
+          node scripts/apply-article-edit-proposal.mjs \
+            --proposal "$PROPOSAL_PATH" \
+            --cwd "$GITHUB_WORKSPACE" > "$summary_path"
+          jq -e '.schemaVersion == 1 and (.proposalId | type == "string")' "$summary_path" >/dev/null
+
+          proposal_id=$(jq -r '.proposalId' "$summary_path")
+          branch=$(jq -r '.branch' "$summary_path")
+          run_id=$(jq -r '.runId' "$summary_path")
+          article_path=$(jq -r '.articlePath' "$summary_path")
+          [[ "$proposal_id" =~ ^AE-[0-9]{8}-[A-Z0-9]{8}$ ]]
+          [[ "$branch" =~ ^harvest/admin-edit-ae-[0-9]{8}-[a-z0-9]{8}$ ]]
+          [[ "$run_id" =~ ^admin-edit-ae-[0-9]{8}-[a-z0-9]{8}$ ]]
+          [[ "$article_path" == cookbook/*.md ]]
+
+          echo "summary_path=$summary_path" >> "$GITHUB_OUTPUT"
+          echo "base_commit=$base_commit" >> "$GITHUB_OUTPUT"
+          echo "proposal_id=$proposal_id" >> "$GITHUB_OUTPUT"
+          echo "branch=$branch" >> "$GITHUB_OUTPUT"
+          echo "run_id=$run_id" >> "$GITHUB_OUTPUT"
+          echo "article_path=$article_path" >> "$GITHUB_OUTPUT"
+
+      - name: Validate content and create Harvest manifest
+        if: steps.fetch.outputs.found == 'true'
+        id: manifest
+        env:
+          SUMMARY_PATH: ${{ steps.apply.outputs.summary_path }}
+          BASE_COMMIT: ${{ steps.apply.outputs.base_commit }}
+          RUN_ID: ${{ steps.apply.outputs.run_id }}
+        run: |
+          set -euo pipefail
+          pnpm validate:content
+          reason=$(jq -r '.reason' "$SUMMARY_PATH")
+          manifest_path=$(node scripts/create-harvest-manifest.mjs \
+            --base "$BASE_COMMIT" \
+            --run-id "$RUN_ID" \
+            --reason "$reason" \
+            --automation-id "admin-article-edit-publisher")
+          node scripts/validate-harvest-run.mjs \
+            --manifest "$manifest_path" \
+            --expected-base "$BASE_COMMIT"
+          echo "manifest_path=$manifest_path" >> "$GITHUB_OUTPUT"
+
+      - name: Push branch and open ready pull request
+        if: steps.fetch.outputs.found == 'true'
+        id: publish
+        env:
+          GH_TOKEN: ${{ secrets.ADMIN_ARTICLE_EDIT_PUBLISH_TOKEN }}
+          BRANCH: ${{ steps.apply.outputs.branch }}
+          RUN_ID: ${{ steps.apply.outputs.run_id }}
+          PROPOSAL_ID: ${{ steps.apply.outputs.proposal_id }}
+          ARTICLE_PATH: ${{ steps.apply.outputs.article_path }}
+          SUMMARY_PATH: ${{ steps.apply.outputs.summary_path }}
+          MANIFEST_PATH: ${{ steps.manifest.outputs.manifest_path }}
+        run: |
+          set -euo pipefail
+          test -n "$GH_TOKEN"
+          expected_paths=$(printf '%s\n%s\n' "$ARTICLE_PATH" "$MANIFEST_PATH" | LC_ALL=C sort)
+          actual_paths=$(
+            {
+              git -c core.quotePath=false diff --name-only --diff-filter=ACMRTUXB
+              git -c core.quotePath=false ls-files --others --exclude-standard
+            } | LC_ALL=C sort
+          )
+          if [[ "$actual_paths" != "$expected_paths" ]]; then
+            echo "Refusing to publish unexpected working-tree paths." >&2
+            printf 'Expected:\n%s\nActual:\n%s\n' "$expected_paths" "$actual_paths" >&2
+            exit 1
+          fi
+
+          existing_pr=$(gh pr list \
+            --head "$BRANCH" \
+            --state open \
+            --json url \
+            --jq '.[0].url // empty')
+
+          if [[ -n "$existing_pr" ]]; then
+            git fetch origin "refs/heads/$BRANCH:refs/remotes/origin/$BRANCH"
+            remote_hash="sha256:$(git show "refs/remotes/origin/$BRANCH:$ARTICLE_PATH" | sha256sum | awk '{print $1}')"
+            proposed_hash=$(jq -r '.proposedContentHash' "$SUMMARY_PATH")
+            if [[ "$remote_hash" != "$proposed_hash" ]]; then
+              echo "Existing pull request branch does not contain the proposed article content." >&2
+              exit 1
+            fi
+            merge_base=$(git merge-base origin/main "refs/remotes/origin/$BRANCH")
+            remote_paths=$(git -c core.quotePath=false diff --name-only "$merge_base..refs/remotes/origin/$BRANCH" | LC_ALL=C sort)
+            if [[ "$remote_paths" != "$expected_paths" ]]; then
+              echo "Existing pull request branch contains unexpected paths." >&2
+              exit 1
+            fi
+            pr_url="$existing_pr"
+          else
+            git config user.name "apple-cookbook-admin-edit[bot]"
+            git config user.email "apple-cookbook-admin-edit[bot]@users.noreply.github.com"
+            git switch -c "$BRANCH"
+            git add -- "$ARTICLE_PATH" "$MANIFEST_PATH"
+            staged_paths=$(git -c core.quotePath=false diff --cached --name-only | LC_ALL=C sort)
+            if [[ "$staged_paths" != "$expected_paths" ]]; then
+              echo "Refusing to commit unexpected paths." >&2
+              exit 1
+            fi
+            git commit -m "Admin article edit $PROPOSAL_ID"
+
+            remote_oid=$(git ls-remote --heads origin "refs/heads/$BRANCH" | awk '{print $1}')
+            if [[ -n "$remote_oid" ]]; then
+              git push \
+                --force-with-lease="refs/heads/$BRANCH:$remote_oid" \
+                origin "HEAD:refs/heads/$BRANCH"
+            else
+              git push --set-upstream origin "$BRANCH"
+            fi
+
+            reason=$(jq -r '.reason' "$SUMMARY_PATH")
+            body_path="$RUNNER_TEMP/article-edit/pull-request.md"
+            {
+              printf 'Administrator-approved article edit proposal `%s`.\n\n' "$PROPOSAL_ID"
+              printf -- '- Article: `%s`\n' "$ARTICLE_PATH"
+              printf -- '- Base hash: `%s`\n' "$(jq -r '.baseContentHash' "$SUMMARY_PATH")"
+              printf -- '- Proposed hash: `%s`\n' "$(jq -r '.proposedContentHash' "$SUMMARY_PATH")"
+              printf -- '- Harvest run: `%s`\n\n' "$RUN_ID"
+              printf '## Reason\n\n%s\n\n' "$reason"
+              printf 'This ready PR was generated from the persistent administrator edit queue. Content validation and the Harvest manifest guard passed before publication.\n'
+            } > "$body_path"
+            pr_url=$(gh pr create \
+              --base main \
+              --head "$BRANCH" \
+              --title "Admin article edit: $PROPOSAL_ID" \
+              --body-file "$body_path")
+          fi
+
+          test -n "$pr_url"
+          echo "pr_url=$pr_url" >> "$GITHUB_OUTPUT"
+
+      - name: Move submitted proposal on ECS
+        if: steps.fetch.outputs.found == 'true'
+        env:
+          ALIYUN_ECS_HOST: ${{ secrets.ALIYUN_ECS_HOST }}
+          ALIYUN_ECS_PORT: ${{ secrets.ALIYUN_ECS_PORT || '22' }}
+          ALIYUN_ECS_USER: ${{ secrets.ALIYUN_ECS_USER }}
+          ARTICLE_EDIT_DATA_DIR: ${{ vars.FEEDBACK_DATA_DIR || '/var/lib/apple-cookbook' }}
+          PROPOSAL_FILE: ${{ steps.fetch.outputs.proposal_file }}
+          PROPOSAL_SHA: ${{ steps.fetch.outputs.proposal_sha }}
+        run: |
+          set -euo pipefail
+          [[ "$PROPOSAL_FILE" =~ ^AE-[0-9]{8}-[A-Z0-9]{8}\.json$ ]]
+          [[ "$PROPOSAL_SHA" =~ ^[0-9a-f]{64}$ ]]
+          remote_command=$(printf \
+            'ARTICLE_EDIT_DATA_DIR=%q PROPOSAL_FILE=%q PROPOSAL_SHA=%q bash -s' \
+            "$ARTICLE_EDIT_DATA_DIR" "$PROPOSAL_FILE" "$PROPOSAL_SHA")
+          ssh -i ~/.ssh/aliyun_ecs -p "$ALIYUN_ECS_PORT" \
+            "$ALIYUN_ECS_USER@$ALIYUN_ECS_HOST" "$remote_command" <<'REMOTE'
+          set -euo pipefail
+          umask 077
+          [[ "$PROPOSAL_FILE" =~ ^AE-[0-9]{8}-[A-Z0-9]{8}\.json$ ]]
+          [[ "$PROPOSAL_SHA" =~ ^[0-9a-f]{64}$ ]]
+          edit_root="$ARTICLE_EDIT_DATA_DIR/article-edits"
+          pending_dir="$edit_root/pending"
+          submitted_dir="$edit_root/submitted"
+          lock_path="$edit_root/.proposal.lock"
+          mkdir -p "$pending_dir" "$submitted_dir"
+          if [[ -L "$edit_root" || -L "$pending_dir" || -L "$submitted_dir" ]]; then
+            echo "Article edit queue directories must not be symlinks." >&2
+            exit 1
+          fi
+
+          lock_token="admin-edit-submit-$(date +%s)-$$-$RANDOM"
+          deadline=$((SECONDS + 15))
+          while ! mkdir -m 700 "$lock_path" 2>/dev/null; do
+            if (( SECONDS >= deadline )); then
+              echo "Timed out waiting for article edit queue lock." >&2
+              exit 1
+            fi
+            sleep 0.1
+          done
+          printf '{"token":"%s","pid":%s,"acquiredAt":"%s"}\n' \
+            "$lock_token" "$$" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > "$lock_path/owner.json"
+          release_lock() {
+            if grep -Fq "\"token\":\"$lock_token\"" "$lock_path/owner.json" 2>/dev/null; then
+              rm -rf "$lock_path"
+            fi
+          }
+          trap release_lock EXIT
+
+          source_path="$pending_dir/$PROPOSAL_FILE"
+          destination_path="$submitted_dir/$PROPOSAL_FILE"
+          if [[ -e "$source_path" ]]; then
+            [[ -f "$source_path" && ! -L "$source_path" ]]
+            actual_sha=$(sha256sum "$source_path" | awk '{print $1}')
+            if [[ "$actual_sha" != "$PROPOSAL_SHA" ]]; then
+              echo "Pending proposal changed after it was fetched; refusing to archive it." >&2
+              exit 1
+            fi
+
+            if [[ -e "$destination_path" ]]; then
+              [[ -f "$destination_path" && ! -L "$destination_path" ]]
+              submitted_sha=$(sha256sum "$destination_path" | awk '{print $1}')
+              if [[ "$submitted_sha" != "$PROPOSAL_SHA" ]]; then
+                echo "A different submitted proposal already uses this filename." >&2
+                exit 1
+              fi
+              rm -- "$source_path"
+            else
+              mv -- "$source_path" "$destination_path"
+            fi
+          elif [[ -f "$destination_path" && ! -L "$destination_path" ]]; then
+            submitted_sha=$(sha256sum "$destination_path" | awk '{print $1}')
+            if [[ "$submitted_sha" != "$PROPOSAL_SHA" ]]; then
+              echo "Submitted proposal hash does not match the fetched proposal." >&2
+              exit 1
+            fi
+          else
+            echo "Pending proposal disappeared before it could be archived." >&2
+            exit 1
+          fi
+          REMOTE
+
+      - name: Report publication
+        if: steps.fetch.outputs.found == 'true'
+        env:
+          PR_URL: ${{ steps.publish.outputs.pr_url }}
+          PROPOSAL_ID: ${{ steps.apply.outputs.proposal_id }}
+        run: echo "Submitted $PROPOSAL_ID as $PR_URL"

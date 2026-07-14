@@ -65,7 +65,10 @@ Environment=NODE_ENV=production
 Environment=PORT=3000
 Environment=HOSTNAME=127.0.0.1
 Environment=APPLE_COOKBOOK_DATA_DIR=/var/lib/apple-cookbook
-EnvironmentFile=-/etc/apple-cookbook/runtime.env
+Environment=APPLE_COOKBOOK_ADMIN_TOKEN=replace-with-a-long-random-token
+Environment=APPLE_COOKBOOK_ADMIN_USERNAME=admin
+Environment=APPLE_COOKBOOK_ADMIN_PASSWORD=replace-with-a-long-random-password
+Environment=APPLE_COOKBOOK_GITHUB_TOKEN=replace-with-an-actions-write-token
 ExecStart=/usr/bin/node server.js
 Restart=always
 RestartSec=5
@@ -166,14 +169,6 @@ Add a narrow passwordless sudo rule, replacing `deploy` if your user is differen
 deploy ALL=(root) NOPASSWD: /bin/systemctl restart apple-cookbook, /bin/systemctl status apple-cookbook, /usr/bin/systemctl restart apple-cookbook, /usr/bin/systemctl status apple-cookbook
 ```
 
-The feedback sync job and deploy repair also need to run feedback file operations
-as the service account. If the SSH deploy account is not `root`, grant only the
-corresponding non-interactive commands needed by
-`scripts/repair-feedback-storage.sh` and `sudo -u applecookbook ... bash -s`.
-Do not make `/var/lib/apple-cookbook` world-writable. The deploy repair normalizes
-the data tree to owner-only access by `applecookbook`, and every remote feedback
-writer runs as that same account.
-
 ## Feedback Files
 
 Feedback submissions are written to:
@@ -182,13 +177,14 @@ Feedback submissions are written to:
 /var/lib/apple-cookbook/feedback/inbox.jsonl
 /var/lib/apple-cookbook/feedback/archive.jsonl
 /var/lib/apple-cookbook/feedback/synced-github-issues.txt
-/var/lib/apple-cookbook/solution-votes/votes.json
 /var/lib/apple-cookbook/todos/daily-work.md
+/var/lib/apple-cookbook/article-edits/pending/*.json
+/var/lib/apple-cookbook/article-edits/submitted/*.json
 ```
 
 `inbox.jsonl` is the source of truth. `daily-work.md` is a rebuildable projection for human review; losing that projection must not be treated as losing the original submission.
 
-`solution-votes/votes.json` stores per-solution practice counts. Voter identifiers are hashed before storage; the public page receives counts only. The browser keeps its own anonymous identifier locally so one browser records at most one vote per solution. A solution explicitly published from a colleague's verified share starts with that author as the first practitioner; browser votes are added to that baseline. Include this file in the regular `/var/lib/apple-cookbook` backup.
+Administrator article edits are stored as full-file, hash-bound proposals under `article-edits/pending/`. They are deliberately outside both the Git checkout and `.next/standalone`, so a restart or deployment cannot discard an edit. `publish-admin-article-edit.yml` applies one proposal to a clean `main` checkout, runs content validation, creates a Harvest manifest and ready pull request, and moves the proposal to `submitted/` after the pull request exists. The existing content-quality workflow then validates, merges, and deploys it.
 
 All writers, including `.github/workflows/sync-feedback-intake.yml`, acquire the mkdir-style lock at `/var/lib/apple-cookbook/feedback/.queue.lock`. Do not add a maintenance script that edits inbox, archive, or synced IDs without the same lock. Individual replacements use a same-directory temporary file followed by atomic `rename`.
 
@@ -196,15 +192,11 @@ Back up `/var/lib/apple-cookbook` regularly. Take a queue snapshot under the sha
 
 The current design serializes a single ECS data directory; it is not a multi-host transaction store. Move to SQLite on one host or an external database before running multiple writable application hosts. On Vercel, the file-backed form returns an explicit not-saved error rather than writing to ephemeral `/tmp`.
 
-To start feedback synchronization immediately after submission, add `APPLE_COOKBOOK_GITHUB_TOKEN` as a GitHub Actions secret. Use a fine-grained token limited to Actions write access for this repository. During deployment, the workflow sends the secret over SSH standard input to `scripts/configure-feedback-dispatch-token.sh`; the script stores it in `/etc/apple-cookbook/runtime.env` with mode `0600` and installs a systemd drop-in that loads the file. The secret is never committed or passed in an SSH command argument. The app dispatches `sync-feedback-intake.yml` only after the feedback record is durably stored. If dispatch fails, the record remains safe and the scheduled workflow is the fallback.
+To start feedback synchronization immediately after submission, configure `APPLE_COOKBOOK_GITHUB_TOKEN` with a fine-grained GitHub token limited to Actions write access for this repository. The app dispatches `sync-feedback-intake.yml` only after the feedback record is durably stored. If dispatch fails, the record remains safe and the scheduled workflow is the fallback.
 
-The same runtime file can contain the admin configuration when the feedback review page is enabled:
+The same token dispatches `publish-admin-article-edit.yml` after an administrator submits an article change. Its scheduled fallback checks the pending proposal directory, so a temporary GitHub API failure does not lose the edit.
 
-```text
-APPLE_COOKBOOK_ADMIN_TOKEN=replace-with-a-long-random-token
-APPLE_COOKBOOK_ADMIN_USERNAME=admin
-APPLE_COOKBOOK_ADMIN_PASSWORD=replace-with-a-long-random-password
-```
+The publisher workflow also requires the repository Actions secret `ADMIN_ARTICLE_EDIT_PUBLISH_TOKEN`. Use a dedicated fine-grained personal access token with repository Contents and Pull requests write access. The workflow fails closed when this secret is absent and never falls back to `github.token`: pull requests opened with the automatic workflow token do not trigger another `pull_request` workflow, so that fallback would prevent the content-quality and auto-publish jobs from running. The workflow continues to use the checkout credential only for pushing its dedicated `harvest/admin-edit-*` branch.
 
 ## Admin Feedback Queue
 
@@ -212,6 +204,9 @@ The P0 feedback review page is available at:
 
 ```text
 https://cookbook.wuxiela.fun/admin/feedback
+https://cookbook.wuxiela.fun/admin/articles
 ```
 
 Set `APPLE_COOKBOOK_ADMIN_USERNAME`, `APPLE_COOKBOOK_ADMIN_PASSWORD`, and `APPLE_COOKBOOK_ADMIN_TOKEN` in the systemd service before using this page in production. The token is the cookie session secret and must be a unique high-entropy value of at least 43 characters; production authentication fails closed when the password or token is missing.
+
+AI no-change decisions appear in a dedicated human-review queue. Confirming a report as valid removes its old sync marker and creates a fresh P0 intake on the next synchronization run. Choosing direct article editing records a durable proposal instead; required article sections remain locked, while optional H2 sections can be removed in the editor.

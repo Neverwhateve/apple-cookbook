@@ -4,7 +4,7 @@ import os from "node:os";
 import path from "node:path";
 import { afterEach, describe, it } from "node:test";
 import { withFileLock } from "./file-store.ts";
-import { getAdminFeedbackQueues, updateFeedbackStatus } from "./feedback-admin.ts";
+import { getAdminFeedbackQueues, queueFeedbackForHarvest, updateFeedbackStatus } from "./feedback-admin.ts";
 import { getFeedbackQueueLockPath, saveFeedback, type FeedbackSubmission } from "./feedback.ts";
 
 const temporaryRoots: string[] = [];
@@ -68,17 +68,8 @@ describe("feedback file store", () => {
     assert.match(missingName.error, /名字/);
 
     formData.set("reporterName", "小陈");
-    formData.set("reporterVerified", "true");
     const accepted = await saveFeedback(formData, root);
     assert.equal(accepted.ok, true);
-
-    const inbox = await fs.readFile(path.join(root, "feedback", "inbox.jsonl"), "utf8");
-    const saved = JSON.parse(inbox.trim()) as FeedbackSubmission;
-    assert.equal(saved.reporterVerified, true);
-    assert.equal(saved.reporterName, "小陈");
-
-    const dailyWork = await fs.readFile(path.join(root, "todos", "daily-work.md"), "utf8");
-    assert.match(dailyWork, /提交人亲自验证: 是/);
   });
 
   it("recovers an abandoned stale directory lock", async () => {
@@ -154,8 +145,55 @@ describe("feedback file store", () => {
     assert.equal(after, before);
     assert.equal(afterStat.mtimeMs, beforeStat.mtimeMs);
     assert.deepEqual(queues.active.map((item) => item.id), ["AC-TEST-1"]);
+    assert.deepEqual(queues.review, []);
     assert.deepEqual(queues.archived.map((item) => item.id), ["AC-TEST-2"]);
     await assert.rejects(fs.access(path.join(root, "feedback", "archive.jsonl")), { code: "ENOENT" });
+  });
+
+  it("keeps AI no-change decisions in a separate human review queue", async () => {
+    const root = await makeTemporaryRoot();
+    const reviewItem: FeedbackSubmission = {
+      ...makeSubmission(1, "needs_review"),
+      automationReview: {
+        outcome: "no_content_change",
+        reviewedAt: "2026-07-14T08:00:00.000Z",
+        summary: "现有文章已经包含该步骤。",
+        issueUrl: "https://github.com/example/repo/issues/42"
+      }
+    };
+
+    await writeQueue(path.join(root, "feedback", "inbox.jsonl"), [reviewItem, makeSubmission(2)]);
+    await fs.writeFile(path.join(root, "feedback", "synced-github-issues.txt"), `${reviewItem.id}\n`, "utf8");
+
+    const queues = await getAdminFeedbackQueues(root);
+
+    assert.deepEqual(queues.review.map((item) => item.id), [reviewItem.id]);
+    assert.equal(queues.review[0].priority, null);
+    assert.equal(queues.review[0].automationReview?.summary, "现有文章已经包含该步骤。");
+    assert.deepEqual(queues.active.map((item) => item.id), ["AC-TEST-2"]);
+    assert.equal(queues.active[0].priority, "P0");
+  });
+
+  it("promotes a reviewed item to P0 once and removes its old GitHub sync marker", async () => {
+    const root = await makeTemporaryRoot();
+    const reviewItem = makeSubmission(1, "needs_review");
+    const feedbackRoot = path.join(root, "feedback");
+
+    await writeQueue(path.join(feedbackRoot, "inbox.jsonl"), [reviewItem]);
+    await fs.writeFile(path.join(feedbackRoot, "synced-github-issues.txt"), `${reviewItem.id}\nAC-OTHER\n`, "utf8");
+
+    const first = await queueFeedbackForHarvest(reviewItem.id, "人工确认有效", root);
+    const second = await queueFeedbackForHarvest(reviewItem.id, "重复点击", root);
+    const queues = await getAdminFeedbackQueues(root);
+    const syncedIds = await fs.readFile(path.join(feedbackRoot, "synced-github-issues.txt"), "utf8");
+
+    assert.deepEqual(first, { queued: true });
+    assert.deepEqual(second, { queued: false });
+    assert.deepEqual(queues.review, []);
+    assert.deepEqual(queues.active.map((item) => item.id), [reviewItem.id]);
+    assert.equal(queues.active[0].status, "open");
+    assert.equal(queues.active[0].adminNote, "人工确认有效");
+    assert.equal(syncedIds, "AC-OTHER\n");
   });
 
   it("fails closed on Vercel instead of acknowledging ephemeral storage", async () => {
