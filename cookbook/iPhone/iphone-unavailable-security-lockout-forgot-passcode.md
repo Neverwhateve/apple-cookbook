@@ -29,7 +29,7 @@ aliases:
   - 忘记锁屏密码
 verification: Official
 difficulty: Advanced
-updated: 2026-07-13
+updated: 2026-07-14
 official_sources:
   - https://support.apple.com/zh-cn/105090
   - https://support.apple.com/zh-cn/118430
