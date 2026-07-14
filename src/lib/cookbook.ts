@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { cache } from "react";
 import matter from "gray-matter";
@@ -6,6 +7,7 @@ import {
   normalizeArticleFrontmatter,
   type ArticleMeta
 } from "./article-schema.ts";
+import { dateSortTimestamp, recentArticleSortValue } from "./recent-sort.ts";
 import type { SearchDocument } from "./search.ts";
 
 export type {
@@ -22,10 +24,12 @@ export type Article = ArticleMeta & {
   body: string;
   excerpt: string;
   filePath: string;
+  recentSortTimestamp?: number;
   route: string;
 };
 
 const cookbookRoot = path.join(process.cwd(), "cookbook");
+const gitChangedAtCache = new Map<string, number | undefined>();
 
 function normalizeSlugParts(relativeFilePath: string) {
   return relativeFilePath
@@ -94,6 +98,26 @@ function unique(values: string[]) {
   return Array.from(new Set(values.filter(Boolean)));
 }
 
+function gitChangedAtTimestamp(relativeFilePath: string) {
+  const gitPath = `cookbook/${relativeFilePath.split(path.sep).join("/")}`;
+  if (gitChangedAtCache.has(gitPath)) return gitChangedAtCache.get(gitPath);
+
+  try {
+    const output = execFileSync("git", ["log", "-1", "--format=%ct", "--", gitPath], {
+      cwd: process.cwd(),
+      encoding: "utf8",
+      stdio: ["ignore", "pipe", "ignore"]
+    }).trim();
+    const timestamp = Number(output) * 1000;
+    const result = Number.isFinite(timestamp) && timestamp > 0 ? timestamp : undefined;
+    gitChangedAtCache.set(gitPath, result);
+    return result;
+  } catch {
+    gitChangedAtCache.set(gitPath, undefined);
+    return undefined;
+  }
+}
+
 const readAllArticles = cache((): Article[] => {
   return walkMarkdownFiles(cookbookRoot)
     .map((filePath) => {
@@ -112,6 +136,7 @@ const readAllArticles = cache((): Article[] => {
         body: parsed.content.trim(),
         excerpt: metadata.summary || buildExcerpt(parsed.content),
         filePath: relativeFilePath,
+        recentSortTimestamp: gitChangedAtTimestamp(relativeFilePath) ?? dateSortTimestamp(metadata.updated),
         route: `/recipes/${slugParts.join("/")}`
       };
     })
@@ -289,6 +314,7 @@ export function getSearchDocuments(articles = getAllArticles()): SearchDocument[
       verification: article.verification,
       difficulty: article.difficulty,
       updated: article.updated,
+      recentSortTimestamp: recentArticleSortValue(article),
       status: article.status
     };
   });
