@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260714-iphone-charging-learning",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-14T03:05:00.000Z",
+  "baseCommit": "4631505972b52150920744bb351fa852da1b52ed",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-charging-paused-80-temperature-charge-limit.md",
+      "action": "update",
+      "baseContentHash": "sha256:18243a887b12ca62d924024142adce0cf62b252bf0698ad97c624466b14ec5e5",
+      "proposedContentHash": "sha256:1d0f72dd89e52d14b33c9d574019f9d779db74af50dd18fbac5097bdf2a311b0",
+      "reason": "Update the iPhone 80% charging canonical with current Apple guidance for Optimized Battery Charging learning requirements and iOS 26 charging-time estimates.",
+      "canonicalReview": {
+        "queries": [
+          "iPhone 充电停在 80% 充电暂停",
+          "iPhone charge limit optimized battery charging 80%",
+          "iOS 26 charging estimated time slow charging charger not compatible"
+        ],
+        "matchedArticleIds": [
+          "iphone-charging-paused-80-temperature-charge-limit"
+        ],
+        "decision": "update-existing",
+        "notes": "Existing canonical directly covers the 80% charging pause, charging limit, temperature hold, slow charging, and iOS charging estimate cluster; no duplicate article is needed."
+      }
+    }
+  ]
+}
