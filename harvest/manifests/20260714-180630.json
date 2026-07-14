@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 2,
+  "runId": "20260714-180630",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-14T10:06:30.000Z",
+  "baseCommit": "2be514b0261d4886c079838f3ac6c5329d6e45d7",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-ipad-cant-activate-activation-server-unavailable.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:f7d8aa0911979c7e6b2da575a67fc9e8b1f47fad3717aefde3c0ab67af18e66f",
+      "reason": "Add a distinct canonical activation-failure article while the corpus is below 100 canonical articles; Apple has a current official support path for activation server, network, SIM/eSIM, Activation Lock, and computer recovery branches.",
+      "canonicalReview": {
+        "queries": [
+          "iPhone 无法激活 激活服务器暂时不可用",
+          "iPad 无法激活 激活服务器无法接通",
+          "activation server unavailable activation information was invalid",
+          "SIM 卡或 eSIM 不受支持 无法激活",
+          "iOS 设备激活 系统状态",
+          "Activation Lock 激活锁 无法激活"
+        ],
+        "matchedArticleIds": [
+          "iphone-invalid-sim-no-sim",
+          "iphone-esim-setup-transfer-fails",
+          "iphone-unavailable-security-lockout-forgot-passcode",
+          "iphone-imessage-messages-not-sending-green-waiting-activation",
+          "apple-watch-wont-connect-pair-iphone"
+        ],
+        "decision": "create-new",
+        "notes": "Existing canonical articles mention activation only as adjacent SIM/eSIM, iMessage, passcode/Activation Lock, or Apple Watch pairing branches. None independently covers device activation failure with activation server unavailable, system status, computer activation, and activation-information errors."
+      }
+    }
+  ]
+}
