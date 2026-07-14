@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 2,
+  "runId": "20260714-080744-autocook",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-14T00:07:44.000Z",
+  "baseCommit": "b4439d2fe79e8448d08927c0d249d55ac51fa039",
+  "changes": [
+    {
+      "path": "cookbook/AirPods/airpods-one-side-no-sound-volume-low.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:a6c1e6a8fd10e286164a996356433c8bb851161cfd69fc118d56bcaa2bcfd907",
+      "reason": "Adds a distinct AirPods audio symptom cluster that is currently only listed as a related placeholder and is directly covered by Apple Support.",
+      "canonicalReview": {
+        "queries": [
+          "AirPods 只有一只耳机有声音",
+          "AirPods 左右音量不一样",
+          "one AirPod no sound",
+          "one AirPod louder or quieter",
+          "AirPods balance setting"
+        ],
+        "matchedArticleIds": [
+          "airpods-wont-connect-pair-reset",
+          "airpods-wont-charge-case-not-working",
+          "airpods-firmware-wont-update"
+        ],
+        "decision": "create-new",
+        "notes": "Existing canonical articles cover pairing/reset, charging/case failures, firmware updates, and Find My setup. None provides the official one-side audio test, balance check, cleaning, reset, and replacement-device branch from Apple Support 100494."
+      }
+    }
+  ]
+}
