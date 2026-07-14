@@ -207,6 +207,6 @@ https://cookbook.wuxiela.fun/admin/feedback
 https://cookbook.wuxiela.fun/admin/articles
 ```
 
-Set `APPLE_COOKBOOK_ADMIN_USERNAME`, `APPLE_COOKBOOK_ADMIN_PASSWORD`, and `APPLE_COOKBOOK_ADMIN_TOKEN` in the systemd service before using this page in production. The token is the cookie session secret and must be a unique high-entropy value of at least 43 characters; production authentication fails closed when the password or token is missing.
+Set either the legacy `APPLE_COOKBOOK_ADMIN_USERNAME` and `APPLE_COOKBOOK_ADMIN_PASSWORD` pair, or the preferred `APPLE_COOKBOOK_ADMIN_ACCOUNTS_BASE64` multi-account credential list, plus `APPLE_COOKBOOK_ADMIN_TOKEN` in the systemd service before using this page in production. The token is the cookie session secret and must be a unique high-entropy value of at least 43 characters; production authentication fails closed when the credential list or token is missing. The deployment workflow reads the multi-account list and session token from GitHub Actions secrets, keeping passwords out of the checkout and workflow logs.
 
 AI no-change decisions appear in a dedicated human-review queue. Confirming a report as valid removes its old sync marker and creates a fresh P0 intake on the next synchronization run. Choosing direct article editing records a durable proposal instead; required article sections remain locked, while optional H2 sections can be removed in the editor.
