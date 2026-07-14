@@ -1,6 +1,7 @@
 import { cookies } from "next/headers";
 import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
+import { ShieldAlert } from "lucide-react";
 import { AdminArticleEditor } from "@/components/admin-article-editor";
 import { readAdminArticleSource } from "@/lib/admin-article-edits";
 import { getArticleById } from "@/lib/cookbook";
@@ -46,6 +47,21 @@ export default async function AdminArticleEditorPage({
         <h1 className="mt-2 text-3xl font-semibold text-zinc-950 dark:text-zinc-50">编辑：{article.title}</h1>
         <p className="mt-2 font-mono text-xs text-zinc-500">{article.filePath}</p>
       </div>
+
+      {article.status === "seed" ? (
+        <aside
+          aria-labelledby="seed-review-title"
+          className="mb-6 rounded-lg border border-amber-200 bg-amber-50 p-4 text-amber-950 dark:border-amber-900 dark:bg-amber-950/30 dark:text-amber-100"
+        >
+          <h2 id="seed-review-title" className="flex items-center gap-2 text-base font-semibold">
+            <ShieldAlert className="h-4 w-4" aria-hidden="true" />
+            待进一步复核
+          </h2>
+          <p className="mt-2 text-sm leading-6 text-amber-900 dark:text-amber-200">
+            此提示仅管理员可见。该条目的步骤和结论仍可能调整；请人工核对来源、适用版本与风险提示，或等待 Codex 完成复核后再作为已复核内容处理。
+          </p>
+        </aside>
+      ) : null}
 
       {query.submitted ? (
         <div className="mb-6 rounded-lg border border-emerald-200 bg-emerald-50 p-4 text-sm text-emerald-900 dark:border-emerald-900 dark:bg-emerald-950/30 dark:text-emerald-100">

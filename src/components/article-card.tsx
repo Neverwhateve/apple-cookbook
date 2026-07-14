@@ -11,11 +11,6 @@ export function ArticleCard({ article }: { article: Article }) {
       <div className="flex flex-wrap items-center gap-2">
         <span className="text-sm font-semibold text-zinc-950 dark:text-zinc-50">{article.title}</span>
         <VerificationBadge level={article.verification} compact />
-        {article.status === "seed" ? (
-          <span className="rounded-full bg-amber-50 px-2 py-0.5 text-xs text-amber-800 ring-1 ring-inset ring-amber-200 dark:bg-amber-950/40 dark:text-amber-300 dark:ring-amber-900">
-            待进一步复核
-          </span>
-        ) : null}
       </div>
       <p className="mt-2 line-clamp-3 text-sm text-zinc-600 dark:text-zinc-400">{article.excerpt}</p>
       <div className="mt-4 flex flex-wrap gap-1.5">
