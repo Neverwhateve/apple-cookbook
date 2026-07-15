@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 2,
+  "runId": "app-store-download-update-2026-07-15T060720Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-15T06:07:20.000Z",
+  "baseCommit": "e14762ae41ce222e6a82760d4ebbe2eb3268221f",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/app-store-cant-download-update-apps.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:d7ef2f5af216ebff2b9d79d76a330e9b90dfbaba4279f2ab9a3cdeed0060d69c",
+      "reason": "New high-value App Store download/update failure cluster supported by current Apple China support pages; existing canonical articles only mention adjacent billing, network, storage, or Screen Time cases.",
+      "canonicalReview": {
+        "queries": [
+          "App Store 无法下载 App",
+          "App 一直等待中",
+          "App Store 需要验证",
+          "上一个购买项目有账单问题",
+          "无法连接到 App Store",
+          "App Store 找不到 内容与隐私限制",
+          "Cannot update apps on iPhone",
+          "Verification required App Store"
+        ],
+        "matchedArticleIds": [
+          "iphone-system-data-storage-too-large",
+          "apple-pay-declined-terminal-not-working",
+          "iphone-ipad-wifi-no-internet-unable-to-join",
+          "screen-time-requests-not-working",
+          "ask-to-buy-requests-not-showing"
+        ],
+        "decision": "create-new",
+        "notes": "Matched articles cover storage categories, Apple Pay terminal payment, Wi-Fi connectivity, Screen Time requests, or Ask to Buy. None is the canonical App Store download/update workflow with billing verification, priority download, missing App Store restrictions, and redownload/account routing."
+      }
+    }
+  ]
+}
