@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 2,
+  "runId": "maintenance-2026-07-15T020828Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-15T02:08:28.000Z",
+  "baseCommit": "452ec863e64422240b29641f14437aebebb5130c",
+  "changes": [
+    {
+      "path": "cookbook/Find My/airtag-wont-connect-setup-precision-find.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:0d93248b182eca82b090bf2f36a261d0f9c16f2c65c4f18df28bd4517d1c4b8f",
+      "reason": "Adds a distinct high-value AirTag setup, Find Nearby, location update, battery, and reset troubleshooting canonical article backed by current Apple China support sources.",
+      "canonicalReview": {
+        "queries": [
+          "AirTag 无法添加 查找 连接不上 检测到多个 AirTag",
+          "AirTag 查找附近地点 不显示 精确查找 不可用",
+          "AirTag 离线 找不到位置 位置不更新 电池电量不足",
+          "AirTag reset battery Find My setup precision finding",
+          "rg AirTag 精确查找 查找附近 找不到位置 电池电量不足 cookbook indexes src"
+        ],
+        "matchedArticleIds": [
+          "airpods-find-my-setup-incomplete",
+          "airpods-wont-connect-pair-reset",
+          "location-sharing-not-working"
+        ],
+        "decision": "create-new",
+        "notes": "Existing canonical articles only mention AirTag in AirPods Find My Lock or general location-sharing contexts; none covers AirTag setup failure, Find Nearby/Precision Finding visibility, offline/no location, item limit, battery replacement, and reset as one AirTag troubleshooting flow."
+      }
+    }
+  ]
+}
