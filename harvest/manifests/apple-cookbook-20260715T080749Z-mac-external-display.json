@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-20260715T080749Z-mac-external-display",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-15T08:07:49.000Z",
+  "baseCommit": "69afe1c067000f92851c27a9a63e466b86a15c6f",
+  "changes": [
+    {
+      "path": "cookbook/Mac/mac-external-display-black-screen-low-resolution.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:6a09eec1072c2dd997d0b0f66731c1894e88936f152a067d460571dedd419711",
+      "reason": "Adds a distinct high-value Mac external display troubleshooting article backed by current Apple China Support pages; existing canonical Mac startup/DFU articles mention displays only as a branch and do not cover external display detection, resolution, refresh rate, cables, adapters, docks, or accessory permission.",
+      "canonicalReview": {
+        "queries": [
+          "Mac 外接显示器黑屏",
+          "Mac 检测不到显示器",
+          "外接显示器分辨率低 刷新率不对",
+          "HDMI 显示器无信号 Mac",
+          "USB-C 显示器不亮 Mac",
+          "Detect Displays Mac external monitor not detected",
+          "title summary symptoms aliases devices platforms errorMessages existing canonical Mac display HDMI resolution"
+        ],
+        "matchedArticleIds": [
+          "mac-wont-turn-on-no-power-startup",
+          "mac-dfu-firmware-revive-restore"
+        ],
+        "decision": "create-new",
+        "notes": "Existing matches only route Mac startup, power, and DFU workflows where a display can be a symptom or exclusion. No canonical article covers a Mac that is otherwise working but an external monitor is black, not detected, low resolution, wrong refresh rate, dock-related, HDMI/USB-C related, or waiting for Detect Displays/accessory permission."
+      }
+    }
+  ]
+}
