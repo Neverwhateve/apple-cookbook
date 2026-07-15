@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 2,
+  "runId": "mac-wont-turn-on-20260715T030000Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-15T03:00:00.000Z",
+  "baseCommit": "9ccd3bb872d0bc2fd7aacc5a69d0960090e1e19c",
+  "changes": [
+    {
+      "path": "cookbook/Mac/mac-wont-turn-on-no-power-startup.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:c62c7e071145eee0ece449975d84bc437112346572849e6538ebe1daa8b7e306",
+      "reason": "P0 website feedback #56 reported 'Mac 无法开机'; no existing canonical article covers Mac no-power/startup-screen triage.",
+      "canonicalReview": {
+        "queries": [
+          "Mac 无法开机",
+          "Mac 开不了机",
+          "Mac 黑屏",
+          "Mac 按电源键没反应",
+          "Mac mini 无法开机",
+          "Mac won't turn on",
+          "Mac black screen startup",
+          "support.apple.com/mac/startup"
+        ],
+        "matchedArticleIds": [
+          "mac-dfu-firmware-revive-restore",
+          "mac-forgot-login-password-reset",
+          "mac-camera-not-working-permission-facetime"
+        ],
+        "decision": "create-new",
+        "notes": "Existing Mac canonical articles cover DFU firmware recovery, login password reset, and camera failures. They mention startup or black screen only as related boundaries and do not cover first-line power, display, accessory, startup-screen, and M2 Mac mini service-program triage."
+      }
+    }
+  ]
+}
