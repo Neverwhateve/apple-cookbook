@@ -1,17 +1,33 @@
 ---
+schemaVersion: 2
+id: location-sharing-not-working
 title: “查找”中的位置共享不可用
 slug: location-sharing-not-working
-device:
+summary: 顾客希望看到另一位成员的实时或最近位置，但“查找”显示没有位置、位置很久不更新、提示“位置不可用”，或显示了错误设备的位置。
+symptoms:
+  - “老婆位置看不到。”
+  - “查找里显示找不到位置。”
+  - “只有对方打开 App 才会更新。”
+  - “显示的是家里的 iPad，不是对方的 iPhone。”
+  - “家人共享开着，但位置没有显示。”
+  - “查找里面看不到家人的位置。”
+  - “信息里看不到共享位置。”
+  - “iMessage 也有问题，查找共享是不是就不会正常？”
+devices:
   - iPhone
   - iPad
   - Apple Watch
-category: 查找
+platforms: []
+systemVersions: []
+categories:
+  - 查找
 tags:
   - 查找
   - 位置共享
   - 家人共享
   - Apple ID
   - 隐私
+keywords: []
 aliases:
   - My wife's location cannot be seen
   - Find My not updating
@@ -20,21 +36,126 @@ aliases:
   - I cannot see my family location
   - 老婆位置看不到
   - 查找位置不更新
-verification: Official
+errorMessages: []
+officialTerms: []
+communityTerms: []
 difficulty: Moderate
-updated: 2026-07-12
-official_sources:
-  - https://support.apple.com/zh-cn/guide/iphone/share-your-location-iph01954dc44/ios
-  - https://support.apple.com/zh-cn/105107
-  - https://support.apple.com/zh-cn/105104
-  - https://support.apple.com/zh-cn/guide/personal-safety/find-my-and-location-sharing-ips05ede4573/web
-  - https://support.apple.com/zh-cn/guide/iphone/iph69b192bc2/ios
-  - https://support.apple.com/zh-cn/118433
-  - https://support.apple.com/zh-cn/119859
-community_sources:
-  - https://www.reddit.com/r/applehelp/comments/1rfki1z/solution_no_location_found_in_find_my/
-  - https://discussions.apple.com/thread/256141224
+estimatedTime: null
+verificationLevel: Official
 status: seed
+canonicalArticleId: null
+solutions:
+  - id: solution-f4e4a5dfd4b3
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - 在应该被看到位置的那台设备上，打开查找 我，开启共享我的位置。
+      - 确认共享位置来自下面显示的是预期的 iPhone。
+      - 如有需要，点按使用这台 iPhone 作为我的位置。
+      - 若要直接共享，打开查找 联系人 添加 共享我的位置，选择联系人和共享时长。
+      - 对于家人共享，进入设置 家人 位置共享，确认已为正确的家庭成员开启位置共享。
+      - >-
+        如果顾客是从信息对话里共享或查看位置，打开设置 App 信息 发送与接收，确认用于 iMessage 的电话号码或 Apple
+        账户邮箱正确；如果 iMessage 无法激活或无法收发，先按 iMessage 官方流程排查。
+      - 确认设置 隐私与安全性 定位服务 查找允许访问位置。
+      - 确认设备可以连接网络。
+      - 如果顾客无法访问 Apple 账户或可信设备，先解决账户访问问题，再继续排查“查找”。
+    verificationLevel: Official
+    sourceIds:
+      - official-9048e5a6042c
+      - official-da4f8f8e011c
+      - official-3d43dd13d3ae
+      - official-b2258f2f40fe
+      - official-b09b78a896fd
+      - official-02aaf4af40c5
+      - official-8e5caa164f4c
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-9048e5a6042c
+    title: Apple 支持：在 iPhone 上的“查找”中共享位置
+    url: >-
+      https://support.apple.com/zh-cn/guide/iphone/share-your-location-iph01954dc44/ios
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-da4f8f8e011c
+    title: Apple 支持：与家人共享群组共享位置
+    url: 'https://support.apple.com/zh-cn/105107'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-3d43dd13d3ae
+    title: Apple 支持：通过 iPhone 共享位置
+    url: 'https://support.apple.com/zh-cn/105104'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-b2258f2f40fe
+    title: Apple 个人安全使用手册：“查找”和位置共享
+    url: >-
+      https://support.apple.com/zh-cn/guide/personal-safety/find-my-and-location-sharing-ips05ede4573/web
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-b09b78a896fd
+    title: iPhone 使用手册：在“信息”中共享你的位置
+    url: 'https://support.apple.com/zh-cn/guide/iphone/iph69b192bc2/ios'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-02aaf4af40c5
+    title: Apple 支持：如果你无法在 iPhone 或 iPad 上发送或接收信息
+    url: 'https://support.apple.com/zh-cn/118433'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-8e5caa164f4c
+    title: Apple 支持：如果你无法在 iPhone 上打开或登录 iMessage 信息或 FaceTime 通话
+    url: 'https://support.apple.com/zh-cn/119859'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-094c1635c876
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/applehelp/comments/1rfki1z/solution_no_location_found_in_find_my/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-f269d5baca35
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/256141224'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-12'
+lastUpdatedAt: '2026-07-12'
+createdAt: null
+relatedArticles:
+  - airpods-find-my-setup-incomplete
+  - apple-account-verification-failed
 popular: false
 ---
 

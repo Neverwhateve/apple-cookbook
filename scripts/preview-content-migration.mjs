@@ -8,8 +8,51 @@ import matter from "gray-matter";
 const projectRoot = process.cwd();
 const cookbookRoot = path.join(projectRoot, "cookbook");
 
+const featuredArticleIds = new Set([
+  "airpods-wont-charge-case-not-working",
+  "locked-notes-forgot-password",
+  "iphone-ipad-wifi-no-internet-unable-to-join",
+  "iphone-sos-no-service-searching",
+  "iphone-unavailable-security-lockout-forgot-passcode",
+  "iphone-wont-charge-wired-liquid-detected"
+]);
+const legacyOfficialArticleIds = new Set([
+  "airpods-find-my-setup-incomplete",
+  "airpods-firmware-wont-update",
+  "airpods-wont-charge-case-not-working",
+  "airpods-wont-connect-pair-reset",
+  "apple-account-verification-failed",
+  "apple-watch-wont-connect-pair-iphone",
+  "airdrop-keeps-waiting",
+  "ask-to-buy-requests-not-showing",
+  "icloud-storage-full-iphone-backup-fails",
+  "iphone-battery-drains-after-update",
+  "iphone-black-screen-wont-turn-on-after-battery-drained",
+  "iphone-charging-paused-80-temperature-charge-limit",
+  "iphone-esim-setup-transfer-fails",
+  "iphone-imessage-messages-not-sending-green-waiting-activation",
+  "iphone-invalid-sim-no-sim",
+  "iphone-personal-hotspot-not-working-greyed-out",
+  "iphone-sos-no-service-searching",
+  "iphone-stolen-device-protection-security-delay",
+  "iphone-stuck-preparing-verifying-software-update",
+  "iphone-unavailable-security-lockout-forgot-passcode",
+  "iphone-wechat-camera-black-screen-lag",
+  "iphone-wont-charge-wired-liquid-detected",
+  "apple-pay-declined-terminal-not-working",
+  "apple-wallet-cant-add-card-apple-pay",
+  "location-sharing-not-working",
+  "screen-time-child-usage-not-showing",
+  "screen-time-limits-not-blocking",
+  "screen-time-requests-not-working",
+  "homekit-matter-accessories-no-response",
+  "homepod-not-responding-network-problem",
+  "mac-dfu-firmware-revive-restore",
+  "mac-forgot-login-password-reset"
+]);
+
 function parseArguments(argv) {
-  const options = { json: false, file: undefined, help: false };
+  const options = { json: false, file: undefined, help: false, applyV1Official: false, repairV1OfficialSteps: false };
 
   for (let index = 0; index < argv.length; index += 1) {
     const argument = argv[index];
@@ -20,6 +63,10 @@ function parseArguments(argv) {
       continue;
     } else if (argument === "--json") {
       options.json = true;
+    } else if (argument === "--apply-v1-official") {
+      options.applyV1Official = true;
+    } else if (argument === "--repair-v1-official-steps") {
+      options.repairV1OfficialSteps = true;
     } else if (argument === "--help" || argument === "-h") {
       options.help = true;
     } else if (argument === "--file") {
@@ -38,19 +85,26 @@ function parseArguments(argv) {
 }
 
 function printHelp() {
-  console.log(`Apple Cookbook v1 → v2 迁移预览（只读）
+  console.log(`Apple Cookbook v1 → v2 迁移预览
 
 用法：
   node scripts/preview-content-migration.mjs
   node scripts/preview-content-migration.mjs --json
   node scripts/preview-content-migration.mjs --file cookbook/iPhone/example.md --json
+  node scripts/preview-content-migration.mjs --apply-v1-official
+  node scripts/preview-content-migration.mjs --repair-v1-official-steps
 
 参数：
   --file <path>  只预览一个 cookbook Markdown 文件
   --json         输出完整、可机器读取的候选数据
+  --apply-v1-official
+                  仅迁移 v1 Official 文章；保留正文、路由和全部原 URL，
+                  将主方案只关联到 Apple 官方来源，并重置首页精选为 6 篇
+  --repair-v1-official-steps
+                  仅重建受控迁移文章的官方步骤列表；不会改动正文或来源
   --help, -h     显示帮助
 
-脚本只读取文章并输出到 stdout，不会创建或修改文件。`);
+未带 --apply-v1-official 时，脚本只读取文章并输出到 stdout，不会创建或修改文件。`);
 }
 
 function walkMarkdownFiles(directory) {
@@ -158,7 +212,7 @@ function symptomLines(content) {
 
 function officialSteps(content) {
   return Array.from(
-    sectionBody(content, /^(Apple 官方方案|Official Apple Solution)$/i).matchAll(/^\s*\d+\.\s+(.+)$/gm),
+    sectionBody(content, /^(Apple 官方方案|Official Apple Solution)$/i).matchAll(/^[\t ]*\d+\.\s+(.+)$/gm),
     (match) => cleanMarkdown(match[1])
   ).filter(Boolean);
 }
@@ -209,7 +263,7 @@ function previewSource(url, official, linkTitles, issues) {
 
   return {
     id,
-    title: title || `${publisher} 来源（待补充标题）`,
+    title: title || `${publisher} 旧版引文（原始标题未记录）`,
     url,
     publisher,
     sourceType: sourceTypeForUrl(url, official),
@@ -217,6 +271,49 @@ function previewSource(url, official, linkTitles, issues) {
     publishedAt: null,
     official
   };
+}
+
+function migrationFrontmatter(preview, originalData) {
+  const proposed = preview.proposedFrontmatter;
+  if (!proposed) throw new Error(`${preview.filePath} 已是 v2，不能作为 v1 迁移写入`);
+
+  const officialSourceIds = proposed.sources.filter((source) => source.official).map((source) => source.id);
+  if (!officialSourceIds.length) throw new Error(`${preview.filePath} 缺少可用于 Official 主方案的 Apple 来源`);
+  if (!proposed.solutions.length) throw new Error(`${preview.filePath} 无法从“Apple 官方方案”提取编号步骤`);
+
+  // The v1 date is an article review snapshot, not proof of an individual
+  // source access. Preserve that distinction by keeping source accessedAt
+  // unknown while retaining the established article review date.
+  return {
+    ...proposed,
+    // Tags are taxonomy, not evidence of a user’s canonical search intent.
+    // Leave editorial keywords empty until they are reviewed individually.
+    keywords: [],
+    canonicalArticleId: proposed.status === "canonical" ? proposed.id : null,
+    solutions: proposed.solutions.map((solution) => ({
+      ...solution,
+      verificationLevel: "Official",
+      sourceIds: officialSourceIds
+    })),
+    sources: proposed.sources.map((source) => ({ ...source, accessedAt: null, publishedAt: null })),
+    lastVerifiedAt: stringValue(originalData.updated),
+    lastUpdatedAt: stringValue(originalData.updated),
+    popular: featuredArticleIds.has(proposed.id)
+  };
+}
+
+function assertMigrationPreservesEvidence(article, migrated) {
+  const originalOfficial = stringArray(article.data.official_sources);
+  const originalCommunity = stringArray(article.data.community_sources);
+  const migratedOfficial = migrated.sources.filter((source) => source.official).map((source) => source.url);
+  const migratedCommunity = migrated.sources.filter((source) => !source.official).map((source) => source.url);
+
+  if (JSON.stringify(originalOfficial) !== JSON.stringify(migratedOfficial)) {
+    throw new Error(`${path.relative(projectRoot, article.filePath)} 的 Apple 官方 URL 未按原顺序保留`);
+  }
+  if (JSON.stringify(originalCommunity) !== JSON.stringify(migratedCommunity)) {
+    throw new Error(`${path.relative(projectRoot, article.filePath)} 的社区 URL 未按原顺序保留`);
+  }
 }
 
 function systemVersions(values) {
@@ -399,6 +496,58 @@ function loadArticle(filePath) {
   return { filePath, raw, data: parsed.data, content: parsed.content };
 }
 
+function applyV1OfficialMigrations(articles, routeToId) {
+  const applied = [];
+
+  for (const article of articles) {
+    const preview = buildPreview(article, routeToId);
+    if (preview.sourceVersion !== 1 || preview.proposedFrontmatter?.verificationLevel !== "Official") continue;
+
+    const migrated = migrationFrontmatter(preview, article.data);
+    assertMigrationPreservesEvidence(article, migrated);
+    const nextRaw = matter.stringify(article.content, migrated);
+    const nextParsed = matter(nextRaw);
+    if (nextParsed.content !== article.content) {
+      throw new Error(`${path.relative(projectRoot, article.filePath)} 的正文在迁移中发生变化；已中止`);
+    }
+
+    fs.writeFileSync(article.filePath, nextRaw, "utf8");
+    applied.push(path.relative(projectRoot, article.filePath));
+  }
+
+  return applied;
+}
+
+function repairV1OfficialSteps(articles) {
+  const repaired = [];
+
+  for (const article of articles) {
+    const id = stringValue(article.data.id, article.data.slug);
+    if (Number(article.data.schemaVersion) !== 2 || !legacyOfficialArticleIds.has(id)) continue;
+
+    const steps = officialSteps(article.content);
+    if (!steps.length) throw new Error(`${path.relative(projectRoot, article.filePath)} 无法提取官方编号步骤`);
+    const solutions = Array.isArray(article.data.solutions) ? article.data.solutions : [];
+    const recommendedIndex = solutions.findIndex((solution) => solution?.kind === "recommended");
+    if (recommendedIndex < 0) throw new Error(`${path.relative(projectRoot, article.filePath)} 缺少推荐方案`);
+
+    const nextData = {
+      ...article.data,
+      keywords: [],
+      solutions: solutions.map((solution, index) => (index === recommendedIndex ? { ...solution, steps } : solution))
+    };
+    const nextRaw = matter.stringify(article.content, nextData);
+    if (matter(nextRaw).content !== article.content) {
+      throw new Error(`${path.relative(projectRoot, article.filePath)} 的正文在步骤修复中发生变化；已中止`);
+    }
+
+    fs.writeFileSync(article.filePath, nextRaw, "utf8");
+    repaired.push(path.relative(projectRoot, article.filePath));
+  }
+
+  return repaired;
+}
+
 function printText(result) {
   console.log("Article Schema v2 migration preview (read-only)");
   console.log(`Articles: ${result.summary.total}; v1: ${result.summary.v1}; already v2: ${result.summary.v2}`);
@@ -440,23 +589,33 @@ if (options?.help) {
     const selectedArticles = selectedFiles.map((filePath) =>
       allArticles.find((article) => article.filePath === filePath) ?? loadArticle(filePath)
     );
-    const articles = selectedArticles.map((article) => buildPreview(article, routeToId));
-    const result = {
-      readOnly: true,
-      schema: "schemas/article-v2.schema.json",
-      summary: {
-        total: articles.length,
-        v1: articles.filter((article) => article.sourceVersion === 1).length,
-        v2: articles.filter((article) => article.sourceVersion === 2).length,
-        reviewIssues: articles.reduce((total, article) => total + article.reviewIssues.length, 0)
-      },
-      articles
-    };
-
-    if (options.json) {
-      console.log(JSON.stringify(result, null, 2));
+    if (options.applyV1Official) {
+      const applied = applyV1OfficialMigrations(selectedArticles, routeToId);
+      console.log(`Migrated ${applied.length} v1 Official articles to v2.`);
+      for (const filePath of applied) console.log(`MIGRATED ${filePath}`);
+    } else if (options.repairV1OfficialSteps) {
+      const repaired = repairV1OfficialSteps(selectedArticles);
+      console.log(`Rebuilt official steps for ${repaired.length} migrated articles.`);
+      for (const filePath of repaired) console.log(`REPAIRED ${filePath}`);
     } else {
-      printText(result);
+      const articles = selectedArticles.map((article) => buildPreview(article, routeToId));
+      const result = {
+        readOnly: true,
+        schema: "schemas/article-v2.schema.json",
+        summary: {
+          total: articles.length,
+          v1: articles.filter((article) => article.sourceVersion === 1).length,
+          v2: articles.filter((article) => article.sourceVersion === 2).length,
+          reviewIssues: articles.reduce((total, article) => total + article.reviewIssues.length, 0)
+        },
+        articles
+      };
+
+      if (options.json) {
+        console.log(JSON.stringify(result, null, 2));
+      } else {
+        printText(result);
+      }
     }
   } catch (error) {
     console.error(error instanceof Error ? error.message : String(error));

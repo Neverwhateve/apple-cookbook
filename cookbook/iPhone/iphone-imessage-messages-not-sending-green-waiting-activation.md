@@ -1,11 +1,36 @@
 ---
+schemaVersion: 2
+id: iphone-imessage-messages-not-sending-green-waiting-activation
 title: iPhone 无法发送或接收信息，iMessage 变绿色或等待激活
 slug: iphone-imessage-messages-not-sending-green-waiting-activation
-device:
+summary: >-
+  顾客看到“尚未送达”、收不到短信、iMessage 变成绿色气泡，或“信息”一直显示正在等待激活时，先分清楚是
+  iMessage、RCS、短信/彩信，还是电话号码激活问题。最快路径是先保证网络和运营商短信服务可用，再检查 iMessage
+  登录、发送与接收地址、“开始新对话时使用”的号码选择和新机号码激活。
+symptoms:
+  - “蓝色 iMessage 突然变成绿色。”
+  - “一直显示尚未送达。”
+  - “换新 iPhone 后 iMessage 等待激活。”
+  - “别人能发给我，我发不出去。”
+  - “只能用 Apple 账户邮箱发，手机号不能用。”
+  - “更新 iOS 26 后，同一个手机号在发送与接收里出现两次。”
+  - “验证码短信收不到。”
+  - “RCS 一直激活不了。”
+  - “换到安卓后收不到 iPhone 朋友发来的短信。”
+  - “新信息总是从邮箱发出去，不是手机号。”
+  - “设置新 iPhone 时 eSIM 没激活，后来信息一直是绿色。”
+devices:
   - iPhone
   - iPad
   - Mac
-category: iPhone
+platforms: []
+systemVersions:
+  - iOS 26
+  - iOS 18
+  - iOS 26.1
+  - iOS 26.5
+categories:
+  - iPhone
 tags:
   - iPhone
   - iPad
@@ -16,6 +41,7 @@ tags:
   - SMS
   - Carrier
   - Apple Account
+keywords: []
 aliases:
   - iMessage not sending
   - iMessage waiting for activation
@@ -34,29 +60,214 @@ aliases:
   - iPhone 收不到验证码短信
   - 同一手机号显示两次
   - iMessage 用邮箱发送不是手机号
-verification: Official
+errorMessages: []
+officialTerms: []
+communityTerms: []
 difficulty: Moderate
-updated: 2026-07-14
-official_sources:
-  - https://support.apple.com/zh-cn/118433
-  - https://support.apple.com/zh-cn/119859
-  - https://support.apple.com/zh-cn/125367
-  - https://support.apple.com/zh-cn/101744
-  - https://support.apple.com/zh-cn/105087
-  - https://support.apple.com/zh-cn/104972
-  - https://support.apple.com/zh-cn/122195
-  - https://support.apple.com/zh-cn/108758
-  - https://support.apple.com/zh-cn/102455
-  - https://support.apple.com/zh-cn/guide/iphone/iph3d039b67/ios
-community_sources:
-  - https://discussions.apple.com/thread/255954997
-  - https://discussions.apple.com/thread/255870381
-  - https://discussions.apple.com/thread/256201662
-  - https://discussionschinese.apple.com/thread/254643097
-  - https://www.reddit.com/r/iphone/comments/1swc6ny/got_new_phones_for_me_and_my_wife_imessage_isnt/
-  - https://www.reddit.com/r/iphone/comments/1tes8ma/rcs_messaging_wont_activate_on_my_iphone_what_is_going_on/
+estimatedTime: null
+verificationLevel: Official
 status: canonical
-popular: true
+canonicalArticleId: iphone-imessage-messages-not-sending-green-waiting-activation
+solutions:
+  - id: solution-079608cb4ff8
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - 先看气泡颜色和错误文字。蓝色是 iMessage；绿色是 RCS、短信或彩信；“尚未送达”“等待激活”“需要验证”分别走不同分支。
+      - 确认 iPhone 或 iPad 可以使用 Wi-Fi 或蜂窝数据访问互联网。
+      - 如果看到红色感叹号和“尚未送达”，先轻点感叹号并选择重试；如果仍失败，再轻点感叹号并选择用短信发送。
+      - 如果无法发送或接收普通短信、彩信或 RCS，先联系运营商确认短信服务套餐、号码状态、RCS 支持和彩信支持。
+      - 打开设置 App 信息，确认iMessage 信息已打开。
+      - 轻点发送与接收，确认顾客的电话号码和 Apple 账户都在“通过下列方式收发 iMessage 信息”中被选中。
+      - >-
+        如果顾客专门问 RCS，打开设置 App 信息 RCS 信息，确认 RCS 已开启；如果看不到这个入口，先判断运营商或地区是否支持 iPhone
+        RCS。
+      - 如果刚打开 RCS 后仍不可用，先告知可能有短暂延迟；不要把所有绿色气泡都当作 iMessage 故障。
+      - >-
+        如果是新 iPhone 或刚转移 eSIM / SIM，等待号码完成 iMessage 激活；期间可临时使用 Apple 账户邮箱收发
+        iMessage。
+      - 如果 iMessage 不可用时需要自动改发短信，打开设置 App 信息 用短信发送。
+      - 如果看到“正在等待激活”，关闭 iMessage 和 FaceTime，重新启动设备，再重新打开 iMessage 和 FaceTime。
+      - 确认设置 通用 日期与时间中的时区正确。
+      - >-
+        如果新信息总是从 Apple 账户邮箱发出，打开设置 App 信息
+        发送与接收，在开始新对话时使用下选择电话号码；如果旧对话最初由邮箱开始，需要开始一条新对话才能改用号码。
+      - >-
+        如果设置装有 iOS 26 的新 iPhone 时 eSIM 或 iMessage 没有激活，稍后完成 eSIM 设置后，回到设置 App
+        信息，关闭再打开 iMessage 信息。
+      - >-
+        如果更新至 iOS 26 后电话号码无法激活、信息改用邮箱发送，或同一号码在设置 App 信息 发送与接收中显示两次，先更新到 iOS 26.1
+        或更高版本。
+      - >-
+        如果更新后仍看到同号重复，打开设置 蜂窝网络，找到已失效的同号 SIM；实体 SIM 直接取出，eSIM 则删除已失效 eSIM，再回到设置
+        App 信息 发送与接收选择电话号码。
+      - 如果 24 小时后电话号码旁边仍没有勾号，联系运营商确认可以发送和接收国际短信；Apple 说明运营商最长可能需要 24 小时验证电话号码。
+      - >-
+        如果 Apple 账户或邮箱登录 iMessage / FaceTime 也失败，按 Apple
+        的在线激活流程尝试启用账户，或改用已验证的电子邮件地址登录。
+      - >-
+        如果某个联系人一直显示绿色，确认对方是否使用 Apple 设备、是否打开 iMessage，以及你发送到的电话号码或邮箱是否在对方
+        iMessage“发送与接收”中可用。
+      - >-
+        如果顾客已经换到非 Apple 手机，把 SIM 卡装回原 iPhone 并连接蜂窝数据，在设置 App 信息关闭 iMessage，再关闭
+        FaceTime；如果 iPhone 不在身边，使用 Apple 的在线注销 iMessage 工具。
+    verificationLevel: Official
+    sourceIds:
+      - official-02aaf4af40c5
+      - official-8e5caa164f4c
+      - official-669feede652b
+      - official-6cbaad3b0736
+      - official-b1a4935f9255
+      - official-c37876046c62
+      - official-b6abc525eaf0
+      - official-1799b9b92fb4
+      - official-c476076362b4
+      - official-83aa71e3c4ea
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-02aaf4af40c5
+    title: Apple 支持：如果你无法在 iPhone 或 iPad 上发送或接收信息
+    url: 'https://support.apple.com/zh-cn/118433'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-8e5caa164f4c
+    title: Apple 支持：如果你无法在 iPhone 上打开或登录 iMessage 信息或 FaceTime 通话
+    url: 'https://support.apple.com/zh-cn/119859'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-669feede652b
+    title: Apple 支持：如果无法在 iOS 26 中用你的电话号码激活 iMessage 信息
+    url: 'https://support.apple.com/zh-cn/125367'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-6cbaad3b0736
+    title: Apple 支持：如果你的 iPhone 使用你的电子邮件地址发送短信
+    url: 'https://support.apple.com/zh-cn/101744'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-b1a4935f9255
+    title: Apple 支持：如果 iPhone 上的信息显示为绿色
+    url: 'https://support.apple.com/zh-cn/105087'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-c37876046c62
+    title: Apple 支持：iMessage 信息、RCS 和短信/彩信有什么区别？
+    url: 'https://support.apple.com/zh-cn/104972'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-b6abc525eaf0
+    title: Apple 支持：在 iPhone 上打开 RCS 信息
+    url: 'https://support.apple.com/zh-cn/122195'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-1799b9b92fb4
+    title: Apple 支持：在“信息”或 FaceTime 通话中添加或移除你的电话号码
+    url: 'https://support.apple.com/zh-cn/108758'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-c476076362b4
+    title: Apple 支持：在 iPhone 上或在线注销 iMessage 信息
+    url: 'https://support.apple.com/zh-cn/102455'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-83aa71e3c4ea
+    title: Apple 旧版引文（原始标题未记录）
+    url: 'https://support.apple.com/zh-cn/guide/iphone/iph3d039b67/ios'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-06d6f0d727e4
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/255954997'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-f34b559e2c52
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/255870381'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-384736fbb4e4
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/256201662'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-d632f4004f95
+    title: discussionschinese.apple.com 旧版引文（原始标题未记录）
+    url: 'https://discussionschinese.apple.com/thread/254643097'
+    publisher: discussionschinese.apple.com
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-2abe61cc3d4d
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/iphone/comments/1swc6ny/got_new_phones_for_me_and_my_wife_imessage_isnt/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-8a76c3be8c7d
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/iphone/comments/1tes8ma/rcs_messaging_wont_activate_on_my_iphone_what_is_going_on/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-14'
+lastUpdatedAt: '2026-07-14'
+createdAt: null
+relatedArticles:
+  - iphone-esim-setup-transfer-fails
+  - iphone-invalid-sim-no-sim
+  - iphone-sos-no-service-searching
+  - iphone-ipad-wifi-no-internet-unable-to-join
+popular: false
 ---
 
 # iPhone 无法发送或接收信息，iMessage 变绿色或等待激活

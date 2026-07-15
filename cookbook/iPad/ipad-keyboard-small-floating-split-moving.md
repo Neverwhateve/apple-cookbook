@@ -180,7 +180,7 @@ createdAt: null
 relatedArticles:
   - iphone-stuck-preparing-verifying-software-update
   - iphone-ipad-wifi-no-internet-unable-to-join
-popular: true
+popular: false
 ---
 
 # iPad 键盘变小、悬浮、分成两半或位置乱跳

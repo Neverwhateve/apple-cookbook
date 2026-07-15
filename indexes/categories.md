@@ -4,16 +4,16 @@ Use categories for the primary customer entry point. Use tags for secondary devi
 
 ## Active Categories
 
-- AirPods: 4 recipes
+- AirPods: 5 recipes
 - Apple ID: 1 recipe
-- Apple Watch: 1 recipe
-- Family Sharing: 4 recipes
+- Apple Watch: 3 recipes
+- Family Sharing: 5 recipes
 - HomePod: 2 recipes
 - iPad: 2 recipes
-- Mac: 3 recipes
+- Mac: 5 recipes
 - Networking: 2 recipes
-- iCloud: 1 recipe
-- iPhone: 14 recipes
+- iCloud: 2 recipes
+- iPhone: 17 recipes
 - 查找: 1 recipe
 - 连续互通: 1 recipe
 

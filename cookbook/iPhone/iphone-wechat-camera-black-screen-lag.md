@@ -1,9 +1,25 @@
 ---
+schemaVersion: 2
+id: iphone-wechat-camera-black-screen-lag
 title: iPhone 微信拍照黑屏或卡顿
 slug: iphone-wechat-camera-black-screen-lag
-device:
+summary: >-
+  微信里点拍照、扫码或发图时，取景画面变黑、卡住、闪退，或必须退出微信后才恢复。先判断问题只在微信出现，还是系统“相机”和其他 App 也会黑屏；这决定是按
+  App 权限和 App 故障处理，还是尽快转入相机硬件/系统检查。
+symptoms:
+  - “微信拍照会黑屏卡顿。”
+  - “微信相机一打开就是黑的，退出后台再进才好。”
+  - “扫码时画面卡住，不能退出。”
+  - “系统相机正常，只有微信拍照黑屏。”
+  - “微信、抖音、银行 App 调相机都会黑屏。”
+  - “相机 App 也黑屏，前后摄像头都不行。”
+devices:
   - iPhone
-category: iPhone
+platforms:
+  - iOS
+systemVersions: []
+categories:
+  - iPhone
 tags:
   - iPhone
   - iOS
@@ -11,6 +27,7 @@ tags:
   - App
   - WeChat
   - Privacy
+keywords: []
 aliases:
   - WeChat camera black screen iPhone
   - WeChat camera freezes on iPhone
@@ -19,24 +36,146 @@ aliases:
   - 微信相机卡顿
   - 微信拍照卡死
   - iPhone 微信拍照卡顿
-verification: Official
+errorMessages: []
+officialTerms: []
+communityTerms: []
 difficulty: Moderate
-updated: 2026-07-12
-official_sources:
-  - https://support.apple.com/zh-cn/guide/iphone/iph168c4bbd5/ios
-  - https://support.apple.com/zh-cn/102514
-  - https://support.apple.com/zh-cn/119876
-  - https://support.apple.com/zh-cn/102598
-  - https://support.apple.com/zh-cn/108429
-  - https://support.apple.com/zh-cn/102435
-community_sources:
-  - https://discussionschinese.apple.com/thread/256216511
-  - https://discussions.apple.com/thread/256222848
-  - https://discussions.apple.com/thread/252226379
-  - https://www.reddit.com/r/applehelp/comments/1ffd8sn/camera_is_not_working_on_any_apps/
-  - https://www.reddit.com/r/applehelp/comments/1l83hp8/camera_doesnt_work_in_multiple_apps/
+estimatedTime: null
+verificationLevel: Official
 status: canonical
-popular: true
+canonicalArticleId: iphone-wechat-camera-black-screen-lag
+solutions:
+  - id: solution-b9fb99420ce9
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - 先打开 Apple 的相机 App，分别测试拍照、录像、前置相机和后置相机。
+      - 如果 Apple“相机”App 也黑屏或无法拍照，取下可能遮挡相机或闪光灯、在相机附近带有磁铁的保护壳、保护膜、镜头或其他配件，再重新测试。
+      - 如果只有微信异常，打开设置 隐私与安全性 相机，确认微信已允许访问相机。也可检查“麦克风”和“照片”权限是否符合实际使用需求。
+      - 强制关闭微信，再重新打开微信测试拍照或扫码。
+      - 重新启动 iPhone。
+      - 打开 App Store，检查微信是否有更新；如果微信没有可用更新，再检查 iOS 是否已更新到当前可用版本。
+      - 打开设置 通用 iPhone 储存空间，确认设备有足够可用空间。若空间紧张，优先移除不需要的视频、App 或大文件后再测试。
+      - 如果设备明显发热、过冷、正在低电量模式，或多个 App 同时卡顿，先让设备回到正常温度并关闭低电量模式后复测。
+      - >-
+        如果微信仍然黑屏，按 Apple 的 App
+        故障流程删除微信并重新下载。操作前先确认微信聊天记录、文件和登录方式已经按微信自己的机制备份或可恢复。
+      - 如果只有微信仍异常，使用 App Store 中的“App 支持”联系微信开发者。
+      - >-
+        如果 Apple“相机”App 和多个第三方 App 都持续黑屏、前后摄像头都异常，或闪光灯也无法正常测试，联系 Apple
+        支持或安排服务检测。
+    verificationLevel: Official
+    sourceIds:
+      - official-f61e325fd9e2
+      - official-7f1eecca28ea
+      - official-49e9b4c16202
+      - official-abd8ea900123
+      - official-e0eb650a97e5
+      - official-0a41a2fbea8d
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-f61e325fd9e2
+    title: Apple 支持：在 iPhone 上控制硬件功能使用权限
+    url: 'https://support.apple.com/zh-cn/guide/iphone/iph168c4bbd5/ios'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-7f1eecca28ea
+    title: Apple 支持：如果 iPhone、iPad 或 iPod touch 上的相机或闪光灯无法正常工作
+    url: 'https://support.apple.com/zh-cn/102514'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-49e9b4c16202
+    title: Apple 支持：如果 iPhone 或 iPad 上的某个 App 停止响应、意外关闭或无法打开
+    url: 'https://support.apple.com/zh-cn/119876'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-abd8ea900123
+    title: Apple 支持：如果你的 iPhone 或 iPad 运行缓慢
+    url: 'https://support.apple.com/zh-cn/102598'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-e0eb650a97e5
+    title: Apple 支持：如何检查 iPhone 和 iPad 上的储存空间
+    url: 'https://support.apple.com/zh-cn/108429'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-0a41a2fbea8d
+    title: Apple 支持：如何联系 App 开发者
+    url: 'https://support.apple.com/zh-cn/102435'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-4a2584393d9a
+    title: discussionschinese.apple.com 旧版引文（原始标题未记录）
+    url: 'https://discussionschinese.apple.com/thread/256216511'
+    publisher: discussionschinese.apple.com
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-8e78661e29f9
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/256222848'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-c07ea0173b36
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/252226379'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-d3d136d18eb1
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/applehelp/comments/1ffd8sn/camera_is_not_working_on_any_apps/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-b9a572a18415
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/applehelp/comments/1l83hp8/camera_doesnt_work_in_multiple_apps/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-12'
+lastUpdatedAt: '2026-07-12'
+createdAt: null
+relatedArticles:
+  - iphone-battery-drains-after-update
+  - iphone-ipad-wifi-no-internet-unable-to-join
+  - icloud-storage-full-iphone-backup-fails
+popular: false
 ---
 
 # iPhone 微信拍照黑屏或卡顿

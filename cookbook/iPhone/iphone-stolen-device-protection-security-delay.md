@@ -1,9 +1,26 @@
 ---
+schemaVersion: 2
+id: iphone-stolen-device-protection-security-delay
 title: iPhone 显示安全延迟，无法立即更改 Apple 账户或关闭失窃设备保护
 slug: iphone-stolen-device-protection-security-delay
-device:
+summary: >-
+  “安全延迟”通常不是故障，而是 iPhone 的“失窃设备保护”在保护 Apple
+  账户和关键设置。最快路径是确认顾客要做的操作、是否在熟悉地点，以及是否能完成 Face ID 或 Touch
+  ID；多数情况下需要等待一小时后再次完成生物识别认证。
+symptoms:
+  - “iPhone 提示安全延迟，要等一小时。”
+  - “我在改 Apple ID 密码，为什么不能马上改？”
+  - “想关闭失窃设备保护，但一直要求等。”
+  - “人在家里也显示安全延迟。”
+  - “回收、换机、折抵时卡在安全延迟。”
+  - “Face ID 坏了，能不能用密码跳过？”
+  - “安全延迟是不是账号被盗了？”
+devices:
   - iPhone
-category: iPhone
+platforms: []
+systemVersions: []
+categories:
+  - iPhone
 tags:
   - iPhone
   - Stolen Device Protection
@@ -12,6 +29,7 @@ tags:
   - Touch ID
   - Apple Account
   - Find My
+keywords: []
 aliases:
   - iPhone security delay
   - Stolen Device Protection security delay
@@ -22,24 +40,142 @@ aliases:
   - 被盗设备保护
   - 关闭失窃设备保护
   - Apple ID 安全延迟
-verification: Official
+errorMessages:
+  - “iPhone 提示安全延迟，要等一小时。”
+officialTerms: []
+communityTerms: []
 difficulty: Moderate
-updated: 2026-07-12
-official_sources:
-  - https://support.apple.com/zh-cn/120340
-  - https://support.apple.com/zh-cn/guide/iphone/iph17105538b/ios
-  - https://support.apple.com/zh-cn/101567
-  - https://support.apple.com/zh-cn/102656
-  - https://support.apple.com/zh-cn/109511
-  - https://support.apple.com/zh-cn/125690
-community_sources:
-  - https://discussions.apple.com/thread/255525962
-  - https://discussions.apple.com/thread/255534136
-  - https://discussions.apple.com/thread/255479405
-  - https://www.reddit.com/r/iphone/comments/1fktnhn/psa_turn_off_stolen_device_protection_if_youre/
-  - https://www.reddit.com/r/iphone/comments/1l1xdo7/stupid_one_hour_delay/
+estimatedTime: null
+verificationLevel: Official
 status: canonical
-popular: true
+canonicalArticleId: iphone-stolen-device-protection-security-delay
+solutions:
+  - id: solution-206bf93188db
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - 先确认顾客正在做什么：更改 Apple 账户密码、关闭失窃设备保护、改设备密码、关闭“查找”、抹掉设备、访问已存储密码，还是锁定 App。
+      - 如果 iPhone 显示安全延迟，向顾客说明这是失窃设备保护的正常安全要求，不要把它当作系统卡死。
+      - 按屏幕提示完成第一次 Face ID 或 Touch ID 认证。
+      - 让 iPhone 保持可用，等待一小时。不要反复改定位、重启、退出登录或抹掉设备来尝试绕过。
+      - 一小时后回到同一项操作，再完成第二次 Face ID 或 Touch ID 认证。
+      - 如果操作目的是更改 Apple 账户密码，按 Apple 的更改 Apple 账户密码流程继续。
+      - 如果操作目的是出售、赠送、折抵或送修，完成安全延迟后再关闭失窃设备保护、关闭“查找”或抹掉设备。
+      - >-
+        如果 Face ID 或 Touch ID 无法工作，先修复生物识别问题或联系 Apple
+        支持；失窃设备保护下的相关操作不能简单用设备密码替代。
+      - 如果 iPhone 已丢失或失窃，优先在 iCloud.com 或另一台受信任设备上使用“查找”标记为丢失，并保护 Apple 账户。
+      - 如果 Apple 账户密码也忘记，按 Apple 账户密码重设或账户恢复路径处理；安全延迟和账户恢复等待时间是两个不同问题。
+    verificationLevel: Official
+    sourceIds:
+      - official-2478910e9ba5
+      - official-b36db9f44308
+      - official-34b060c18db5
+      - official-c72b5b264334
+      - official-50397deefe61
+      - official-40e87534fea6
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-2478910e9ba5
+    title: Apple 支持：关于 iPhone 的“失窃设备保护”
+    url: 'https://support.apple.com/zh-cn/120340'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-b36db9f44308
+    title: iPhone 使用手册：在 iPhone 上使用“失窃设备保护”
+    url: 'https://support.apple.com/zh-cn/guide/iphone/iph17105538b/ios'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-34b060c18db5
+    title: Apple 支持：更改 Apple 账户密码
+    url: 'https://support.apple.com/zh-cn/101567'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-c72b5b264334
+    title: Apple 支持：如果你忘记了自己的 Apple 账户密码
+    url: 'https://support.apple.com/zh-cn/102656'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-50397deefe61
+    title: Apple 支持：出售、赠送或折抵 iPhone 或 iPad 前该怎么做
+    url: 'https://support.apple.com/zh-cn/109511'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-40e87534fea6
+    title: Apple 支持：将锁定的 App 与“失窃设备保护”搭配使用
+    url: 'https://support.apple.com/zh-cn/125690'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-4e97e3f8a29e
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/255525962'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-b8081415e8d0
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/255534136'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-c2867fa41cab
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/255479405'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-e4a226bb98a1
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/iphone/comments/1fktnhn/psa_turn_off_stolen_device_protection_if_youre/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-7f7f59f1fa6c
+    title: Reddit 旧版引文（原始标题未记录）
+    url: 'https://www.reddit.com/r/iphone/comments/1l1xdo7/stupid_one_hour_delay/'
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-12'
+lastUpdatedAt: '2026-07-12'
+createdAt: null
+relatedArticles:
+  - iphone-unavailable-security-lockout-forgot-passcode
+  - apple-account-verification-failed
+popular: false
 ---
 
 # iPhone 显示安全延迟，无法立即更改 Apple 账户或关闭失窃设备保护

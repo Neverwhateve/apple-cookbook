@@ -1,13 +1,30 @@
 ---
+schemaVersion: 2
+id: apple-pay-declined-terminal-not-working
 title: Apple Pay 付款被拒绝或靠近读卡器没有反应
 slug: apple-pay-declined-terminal-not-working
-device:
+summary: >-
+  顾客已经把卡加进 Apple 钱包，但在商店、App、网页或交通场景付款失败时，先把问题分成三类：读卡器或商户不支持、发卡机构拒绝交易、设备或卡片没有完成
+  Apple Pay 条件。Apple 明确说明，Apple Pay 交易会路由到发卡机构审批；如果付款卡被拒绝，应联系银行或发卡机构。
+symptoms:
+  - “卡已经在钱包里，但付款被拒绝。”
+  - “靠近 POS 机没有任何反应。”
+  - “双击侧边按钮后显示卡片，但刷不出去。”
+  - “Apple Watch 能显示卡片，但终端不响。”
+  - “同一家店有时能用，有时不能用。”
+  - “App 或网页里 Apple Pay 付款失败。”
+  - “交易记录里看不到这笔，银行也没扣款。”
+  - “交通卡 / 快捷交通卡没有按预期扣费。”
+devices:
   - iPhone
   - Apple Watch
   - iPad
   - Mac
   - Vision Pro
-category: iPhone
+platforms: []
+systemVersions: []
+categories:
+  - iPhone
 tags:
   - iPhone
   - Apple Watch
@@ -20,6 +37,7 @@ tags:
   - NFC
   - Face ID
   - Touch ID
+keywords: []
 aliases:
   - Apple Pay declined
   - Apple Pay not working at terminal
@@ -31,28 +49,197 @@ aliases:
   - Apple Pay 被拒绝
   - Apple Pay 刷不出来
   - Apple Pay 终端无反应
-verification: Official
+errorMessages: []
+officialTerms: []
+communityTerms: []
 difficulty: Moderate
-updated: 2026-07-13
-official_sources:
-  - https://support.apple.com/en-us/120002
-  - https://support.apple.com/en-us/120364
-  - https://support.apple.com/en-us/104954
-  - https://support.apple.com/en-us/108398
-  - https://support.apple.com/en-us/108792
-  - https://support.apple.com/en-us/102896
-  - https://support.apple.com/en-us/102897
-  - https://support.apple.com/en-us/109524
-  - https://support.apple.com/en-us/101554
-community_sources:
-  - https://discussions.apple.com/thread/255229880
-  - https://discussions.apple.com/thread/256044368
-  - https://discussions.apple.com/thread/256144406
-  - https://discussions.apple.com/thread/256128657
-  - https://www.reddit.com/r/iphone/comments/1ifo3af/any_way_to_stop_iphone_from_immediately_opening/
-  - https://www.reddit.com/r/applehelp/comments/1lu75h4/apple_pay_wont_let_me_add_my_debit_card/
+estimatedTime: null
+verificationLevel: Official
 status: canonical
-popular: true
+canonicalArticleId: apple-pay-declined-terminal-not-working
+solutions:
+  - id: solution-2522ff4e508c
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - 先问清楚失败位置：实体店读卡器、App、网页、Mac 上确认付款、Apple Watch，还是交通卡 / 快捷模式。
+      - >-
+        如果屏幕明确显示“declined / 被拒绝 / payment not completed”，优先让顾客联系银行或发卡机构。说明这是
+        Apple Pay 交易授权失败，不等同于 Apple ID 付款方式失败。
+      - 如果是在店内付款，确认商户是否支持 Apple Pay 或非接触式付款；Apple 建议联系商户确认可使用位置。
+      - >-
+        观察读卡器是否显示 Apple Pay、contactless、QuickPass、EMV
+        Contactless、iD、QUICPay、Suica、PASMO 等当地适用标志，但不要只凭贴纸判断；Apple 说明终端仍可能未启用
+        contactless。
+      - >-
+        确认商户接受这张卡的支付网络。例如商户支持 contactless 不代表支持该
+        Visa、Mastercard、UnionPay、JCB、American Express 或本地网络场景。
+      - 打开 Wallet，确认卡片没有等待验证、过期、被移除或显示需要联系发卡机构。
+      - 确认设备支持 Apple Pay，并更新到最新系统版本。
+      - 确认设备已登录 iCloud，已设置设备密码以及 Face ID、Touch ID、Optic ID 或 Apple Watch 密码。
+      - >-
+        对 Mac 付款，确认 Mac 是否带 Touch ID；没有内建 Touch ID 的 Mac 需要通过兼容 iPhone 或 Apple
+        Watch 完成付款，并在 iPhone 的 Wallet 与 Apple Pay 设置中允许 Mac 付款。
+      - 查看 Wallet 交易记录。Apple 说明交易记录可能包含 Apple Pay 和实体卡交易，最准确记录仍应以发卡机构为准。
+      - 如果顾客对 Apple Pay 扣款有疑问，联系银行或发卡机构；不要只凭 Wallet 交易列表判断是否最终入账。
+      - 如果同一张卡在多家商户都被拒绝，联系发卡机构检查卡片状态、风险控制、移动钱包令牌、地区限制、设备数量限制和支付网络。
+      - >-
+        如果多张卡、多个商户、iPhone 与 Apple Watch 都失败，再联系 Apple 支持做设备、系统、Wallet、NFC
+        或生物识别相关诊断。
+    verificationLevel: Official
+    sourceIds:
+      - official-b22cf9aff92c
+      - official-a7ef3588e30c
+      - official-2a88fd20b842
+      - official-781de6ef2565
+      - official-52b2f2f9cc35
+      - official-0de1e2cb2491
+      - official-0d0e35d52e3e
+      - official-4ee2430dbd73
+      - official-bc2b87094c7e
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-b22cf9aff92c
+    title: 'Apple Support: If a payment card that you use with Apple Pay is declined'
+    url: 'https://support.apple.com/en-us/120002'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-a7ef3588e30c
+    title: 'Apple Support: Learn where to use Apple Pay'
+    url: 'https://support.apple.com/en-us/120364'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-2a88fd20b842
+    title: 'Apple Support: See your Apple Pay transaction history'
+    url: 'https://support.apple.com/en-us/104954'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-781de6ef2565
+    title: 'Apple Support: Set up Apple Pay'
+    url: 'https://support.apple.com/en-us/108398'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-52b2f2f9cc35
+    title: >-
+      Apple Support: If you can't add a card to Apple Wallet to use with Apple
+      Pay
+    url: 'https://support.apple.com/en-us/108792'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-0de1e2cb2491
+    title: 'Apple Support: Devices compatible with Apple Pay'
+    url: 'https://support.apple.com/en-us/102896'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-0d0e35d52e3e
+    title: >-
+      Apple Support: Apple Pay participating banks and card issuers in
+      Asia-Pacific
+    url: 'https://support.apple.com/en-us/102897'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-4ee2430dbd73
+    title: >-
+      Apple Support: Apple Pay participating banks in Canada, Latin America, and
+      the United States
+    url: 'https://support.apple.com/en-us/109524'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-bc2b87094c7e
+    title: 'Apple Support: Apple Pay security and privacy overview'
+    url: 'https://support.apple.com/en-us/101554'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-f019436f6899
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/255229880'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-417c7af941b6
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/256044368'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-3cb1e26f35ee
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/256144406'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-9ad067cc9adc
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/256128657'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-1f7f91029b3d
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/iphone/comments/1ifo3af/any_way_to_stop_iphone_from_immediately_opening/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-c075ea04367d
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/applehelp/comments/1lu75h4/apple_pay_wont_let_me_add_my_debit_card/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-13'
+lastUpdatedAt: '2026-07-13'
+createdAt: null
+relatedArticles:
+  - apple-wallet-cant-add-card-apple-pay
+  - apple-account-verification-failed
+  - iphone-invalid-sim-no-sim
+  - iphone-sos-no-service-searching
+popular: false
 ---
 
 # Apple Pay 付款被拒绝或靠近读卡器没有反应

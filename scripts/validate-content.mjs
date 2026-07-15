@@ -270,7 +270,9 @@ function validateV2Sources(filePath, value) {
     if (typeof source.publisher !== "string" || !source.publisher.trim()) report(errors, filePath, `${label}.publisher 必须是非空字符串`);
     if (!sourceTypes.has(source.sourceType)) report(errors, filePath, `${label}.sourceType 无效：${String(source.sourceType)}`);
     if (typeof source.official !== "boolean") report(errors, filePath, `${label}.official 必须是 boolean`);
-    if (!isIsoDate(source.accessedAt)) report(errors, filePath, `${label}.accessedAt 必须是 ISO 日期`);
+    if (source.accessedAt !== null && !isIsoDate(source.accessedAt)) {
+      report(errors, filePath, `${label}.accessedAt 必须是 ISO 日期或 null`);
+    }
     if (source.publishedAt !== null && !isIsoDate(source.publishedAt)) {
       report(errors, filePath, `${label}.publishedAt 必须是 ISO 日期或 null`);
     }

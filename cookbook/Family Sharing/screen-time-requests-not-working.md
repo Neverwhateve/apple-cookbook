@@ -1,12 +1,27 @@
 ---
+schemaVersion: 2
+id: screen-time-requests-not-working
 title: 屏幕使用时间请求收不到或批准后不生效
 slug: screen-time-requests-not-working
-device:
+summary: 孩子点了“请求更多时间”或请求 App 例外后，家长没有收到信息或通知；也可能家长已经批准，但孩子设备仍然打不开 App。
+symptoms:
+  - “孩子请求更多时间，我这边没有弹窗。”
+  - “信息里收到了请求，但点批准后孩子那边还是锁着。”
+  - “以前 Apple Watch 可以批准，现在点了没反应。”
+  - “请求只在信息里出现，不再像屏幕时间通知那样弹出。”
+  - “App 限额能限制，但批准更多时间不生效。”
+  - “孩子那边一直显示等待批准。”
+  - “批准过的 App 更新后又要重新批准。”
+  - “有些 App 限制或购买前询问开关不能关。”
+devices:
   - iPhone
   - iPad
   - Mac
   - Apple Watch
-category: Family Sharing
+platforms: []
+systemVersions: []
+categories:
+  - Family Sharing
 tags:
   - Family Sharing
   - Screen Time
@@ -14,6 +29,7 @@ tags:
   - Messages
   - Apple ID
   - Notifications
+keywords: []
 aliases:
   - Screen Time approvals not working
   - Screen Time requests not showing
@@ -23,22 +39,129 @@ aliases:
   - 屏幕使用时间请求收不到
   - 屏幕时间批准后没反应
   - 孩子请求更多时间家长收不到
-verification: Official
+errorMessages: []
+officialTerms: []
+communityTerms: []
 difficulty: Moderate
-updated: 2026-07-13
-official_sources:
-  - https://support.apple.com/zh-cn/125399
-  - https://support.apple.com/en-us/125399
-  - https://support.apple.com/zh-cn/108806
-  - https://support.apple.com/en-us/105121
-  - https://support.apple.com/en-us/125666
-  - https://support.apple.com/zh-cn/118233
-community_sources:
-  - https://discussions.apple.com/thread/254278383
-  - https://discussions.apple.com/thread/255204888
-  - https://www.reddit.com/r/applehelp/comments/1l87ca5/screen_time_approvals_not_working/
+estimatedTime: null
+verificationLevel: Official
 status: canonical
-popular: true
+canonicalArticleId: screen-time-requests-not-working
+solutions:
+  - id: solution-f93a837586e5
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - 先确认孩子发起的是哪一种请求：购买或下载请求、App 年龄分级例外，还是 App 限额后的更多时间请求。
+      - 将家长设备和孩子设备都更新到当前可用的最新系统版本。
+      - 在家长设备上打开“信息”，确认是否已经收到孩子的请求信息。
+      - 在“设置” “信息”中确认 iMessage 信息可用，并且家长的 Apple 账户电子邮件地址可以用于发送和接收。
+      - 如果家长长期没有用过 iMessage 信息，先用 iMessage 信息正常发送和接收一条信息，再让孩子重新发送请求。
+      - 打开“信息”的通知，避免请求到了但没有提醒。
+      - 确认 iCloud 通讯录已经同步到家长想接收请求的设备。
+      - 如果孩子在身边，可在孩子设备上打开 App Store 或对应请求页面，使用“亲自批准”完成 App 例外请求。
+      - >-
+        如果批准后 App 仍被限制，打开设置 屏幕时间 内容与隐私限制 App Store、媒体、网页与游戏 App，查看已批准的 App
+        例外是否仍在列表中；必要时移除后让孩子重新请求。
+      - >-
+        如果同一个 App 已批准后又重新要求批准，检查该 App
+        是否出现年龄分级或功能变化，并记录孩子账户所在国家或地区；不要把所有重复批准都当作通知故障。
+      - 如果问题其实是购买或下载 App 请求收不到，改按“购买前询问”流程检查家人共享、专注模式、设备名称、联系人名片和购买账户。
+    verificationLevel: Official
+    sourceIds:
+      - official-1ed321e2dd47
+      - official-60caaa43a8cd
+      - official-f033970b8746
+      - official-7cb5dd994782
+      - official-da55f7f2503e
+      - official-895778b43d2e
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-1ed321e2dd47
+    title: Apple 支持：如何管理孩子的 App 例外请求
+    url: 'https://support.apple.com/zh-cn/125399'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-60caaa43a8cd
+    title: 'Apple Support: How to manage app exceptions for your child'
+    url: 'https://support.apple.com/en-us/125399'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-f033970b8746
+    title: Apple 支持：使用“屏幕时间”来管理孩子的 iPhone 或 iPad
+    url: 'https://support.apple.com/zh-cn/108806'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-7cb5dd994782
+    title: 'Apple Support: Use parental controls to manage your child''s iPhone or iPad'
+    url: 'https://support.apple.com/en-us/105121'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-da55f7f2503e
+    title: 'Apple Support: Region-specific rules for managing an Apple Account'
+    url: 'https://support.apple.com/en-us/125666'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-895778b43d2e
+    title: Apple 支持：如果“购买前询问”无法正常使用
+    url: 'https://support.apple.com/zh-cn/118233'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-df1d0f6ba0a3
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/254278383'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-340b5ab1cecb
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/255204888'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-9e03b4e931a0
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/applehelp/comments/1l87ca5/screen_time_approvals_not_working/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-13'
+lastUpdatedAt: '2026-07-13'
+createdAt: null
+relatedArticles:
+  - ask-to-buy-requests-not-showing
+  - screen-time-child-usage-not-showing
+  - screen-time-limits-not-blocking
+popular: false
 ---
 
 # 屏幕使用时间请求收不到或批准后不生效

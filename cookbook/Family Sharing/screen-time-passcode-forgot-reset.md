@@ -168,7 +168,7 @@ relatedArticles:
   - screen-time-limits-not-blocking
   - screen-time-requests-not-working
   - apple-account-verification-failed
-popular: true
+popular: false
 ---
 
 # 忘记屏幕使用时间密码，无法修改限制

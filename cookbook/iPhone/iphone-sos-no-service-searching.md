@@ -1,10 +1,26 @@
 ---
+schemaVersion: 2
+id: iphone-sos-no-service-searching
 title: iPhone 显示 SOS、无服务或正在搜索
 slug: iphone-sos-no-service-searching
-device:
+summary: >-
+  iPhone 或蜂窝版 iPad 状态栏显示“SOS”“无服务”或“正在搜索”时，设备没有正常接入运营商蜂窝网络。先用 Apple
+  的官方顺序重新接入网络、检查运营商账户和设置，再判断是否需要运营商处理或 Apple 服务。
+symptoms:
+  - “右上角一直显示 SOS。”
+  - “手机有 Wi-Fi，但没有蜂窝网络。”
+  - “更新后变成无服务。”
+  - “信号满格一会儿又掉到 SOS。”
+  - “插了 SIM 卡还是正在搜索。”
+  - “出国回来以后 eSIM / SIM 线路没有服务。”
+devices:
   - iPhone
   - iPad
-category: iPhone
+platforms: []
+systemVersions:
+  - iOS 18
+categories:
+  - iPhone
 tags:
   - iPhone
   - iPad
@@ -13,6 +29,7 @@ tags:
   - eSIM
   - Carrier
   - Network
+keywords: []
 aliases:
   - iPhone SOS only
   - iPhone No Service
@@ -23,19 +40,123 @@ aliases:
   - iPhone 显示 SOS
   - iPhone 一直正在搜索
   - iPhone 没有蜂窝网络
-verification: Official
+errorMessages:
+  - “右上角一直显示 SOS。”
+  - “更新后变成无服务。”
+  - “信号满格一会儿又掉到 SOS。”
+  - iPhone SOS only
+  - iPhone No Service
+  - iPhone keeps dropping to SOS
+  - iPhone 更新后无服务
+  - iPhone 显示 SOS
+officialTerms: []
+communityTerms: []
 difficulty: Moderate
-updated: 2026-07-13
-official_sources:
-  - https://support.apple.com/zh-cn/120000
-  - https://support.apple.com/en-us/120000
-  - https://support.apple.com/zh-cn/118569
-community_sources:
-  - https://discussions.apple.com/thread/255375639
-  - https://discussions.apple.com/thread/255491162
-  - https://www.reddit.com/r/applehelp/comments/1t9h19j/iphone_with_no_service_but_connects_with_wifi/
-  - https://www.reddit.com/r/iphone/comments/1nqbsm8/who_is_still_having_cellular_connectivity_issues/
+estimatedTime: null
+verificationLevel: Official
 status: canonical
+canonicalArticleId: iphone-sos-no-service-searching
+solutions:
+  - id: solution-a30547b91be0
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - 打开“设置”，开启“飞行模式”至少 15 秒，然后关闭“飞行模式”，让设备重新尝试接入蜂窝网络。
+      - 重新启动 iPhone 或蜂窝版 iPad。
+      - 如果看到“SOS”或“SOS only”，先说明设备未连接到自己的运营商网络；在澳大利亚、加拿大和美国，仍可能通过其他运营商网络拨打紧急电话。
+      - >-
+        如果 iPhone 运行 iOS 18 或更高版本，下载最新版本的“Apple 支持”App
+        并运行蜂窝网络相关诊断，帮助判断问题更像运营商、账户、软件设置还是硬件方向。
+      - 联系运营商确认账户处于活跃状态、所在区域有覆盖、没有服务中断、设备没有被阻止，并且数据套餐正确。
+      - 如果 iPhone 最初购买于其他国家或地区，向运营商确认当地政府是否要求注册 IMEI 才能使用。
+      - 将 iPhone 或 iPad 更新到最新版本的 iOS 或 iPadOS。
+      - 连接 Wi-Fi，打开设置 通用 关于本机，查看是否出现运营商设置更新。
+      - 如果插入了新的 SIM 卡，下载适用于新运营商的运营商设置。
+      - 如果使用双 SIM 或 eSIM，打开设置 蜂窝网络，点进对应线路，确认号码已经启用。
+      - 如果看不到蜂窝号码，联系运营商设置 eSIM，或确认实体 SIM 已正确插入。
+      - 如果使用实体 SIM，取出后重新放入。若 SIM 损坏、尺寸不合适或来自旧设备，请让运营商提供新的 SIM。
+      - 如果正在国外旅行，打开对应线路的“数据漫游”。
+      - 如果运营商确认账户和网络没有问题，但怀疑硬件问题，安排 Apple 支持或服务检测。
+    verificationLevel: Official
+    sourceIds:
+      - official-f2c651734c37
+      - official-126958f0c892
+      - official-f4de63858b53
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-f2c651734c37
+    title: Apple 支持：如果你在 iPhone 或 iPad 上看到“SOS”、“无服务”或“正在搜索”
+    url: 'https://support.apple.com/zh-cn/120000'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-126958f0c892
+    title: >-
+      Apple Support: If you see SOS, No Service, or Searching on your iPhone or
+      iPad
+    url: 'https://support.apple.com/en-us/120000'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-f4de63858b53
+    title: Apple 支持：了解你的 iPhone 或 iPad 使用哪种类型的 SIM 卡
+    url: 'https://support.apple.com/zh-cn/118569'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-d0b74bfdb6ea
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/255375639'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-d32ee3179033
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/255491162'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-53ebce321e83
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/applehelp/comments/1t9h19j/iphone_with_no_service_but_connects_with_wifi/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-cf57daf30587
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/iphone/comments/1nqbsm8/who_is_still_having_cellular_connectivity_issues/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-13'
+lastUpdatedAt: '2026-07-13'
+createdAt: null
+relatedArticles:
+  - iphone-imessage-messages-not-sending-green-waiting-activation
+  - iphone-invalid-sim-no-sim
+  - iphone-esim-setup-transfer-fails
+  - iphone-ipad-wifi-no-internet-unable-to-join
+  - iphone-battery-drains-after-update
 popular: true
 ---
 

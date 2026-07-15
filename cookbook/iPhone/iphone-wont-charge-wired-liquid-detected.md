@@ -1,9 +1,28 @@
 ---
+schemaVersion: 2
+id: iphone-wont-charge-wired-liquid-detected
 title: iPhone 无法充电、有线充电没反应或提示液体检测
 slug: iphone-wont-charge-wired-liquid-detected
-device:
+summary: >-
+  iPhone
+  插上线缆没有反应、只能无线充电、提示配件不受支持，或显示“液体检测”时，先把问题分成供电路径、接口/线缆、液体警告、系统版本和硬件服务。不要用尖锐工具清理接口，也不要在液体检测后反复强制有线充电。
+symptoms:
+  - “iPhone 插线不充电。”
+  - “无线充可以，有线充没反应。”
+  - “提示 USB-C 接口或 Lightning 接口检测到液体。”
+  - “显示这个配件可能不受支持。”
+  - “iPhone 17 / iPhone Air 电量耗尽后插线充不起来。”
+  - “充电很慢，电池里显示慢充。”
+  - “换了很多线还是不充。”
+  - “手机黑屏，插电也不开机。”
+devices:
   - iPhone
-category: iPhone
+platforms: []
+systemVersions:
+  - iOS 26
+  - iOS 26.5.1
+categories:
+  - iPhone
 tags:
   - iPhone
   - 充电
@@ -12,6 +31,7 @@ tags:
   - Lightning
   - 液体检测
   - 软件更新
+keywords: []
 aliases:
   - iPhone won't charge
   - iPhone wired charging not working
@@ -23,24 +43,163 @@ aliases:
   - iPhone 充电口进水
   - iPhone Air 不能有线充电
   - iPhone 17 不能有线充电
-verification: Official
+errorMessages:
+  - “提示 USB-C 接口或 Lightning 接口检测到液体。”
+  - iPhone 提示液体检测
+officialTerms: []
+communityTerms: []
 difficulty: Moderate
-updated: 2026-07-13
-official_sources:
-  - https://support.apple.com/zh-cn/108805
-  - https://support.apple.com/zh-cn/102643
-  - https://support.apple.com/zh-cn/guide/iphone/iph63eecc618/ios
-  - https://support.apple.com/zh-cn/116940
-  - https://support.apple.com/zh-cn/123075
-  - https://support.apple.com/zh-cn/100100
-community_sources:
-  - https://discussions.apple.com/thread/256308911
-  - https://discussions.apple.com/thread/256191213
-  - https://discussions.apple.com/thread/256296619
-  - https://www.reddit.com/r/iphone/comments/1ttyzdk/ios_2651_out/
-  - https://www.reddit.com/r/iphone/comments/1tvcnrt/ios_2651_stopped_my_charging/
-  - https://www.reddit.com/r/applehelp/comments/1h2bnpr/there_is_no_liquid_in_my_phone_and_its_saying_this/
+estimatedTime: null
+verificationLevel: Official
 status: canonical
+canonicalArticleId: iphone-wont-charge-wired-liquid-detected
+solutions:
+  - id: solution-c6c4a0ec8296
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - 先确认是哪一种问题：完全不充、有线不充但无线能充、液体检测、配件不受支持、慢充，还是黑屏无法开机。
+      - 将 iPhone 直接连接到墙壁电源插座上的充电器。不要先通过键盘、扩展坞、集线器或转接头判断。
+      - 检查充电线和 USB 电源适配器是否有断裂、弯曲插脚、烧蚀、松动或明显损坏。不要继续使用损坏配件。
+      - 换一条已知正常的线缆、另一个电源适配器和另一个插座。USB-C 机型也要确认线缆确实支持充电。
+      - 如果显示“配件可能不受支持”，先移除设备与充电配件之间的转接头或其他设备，再重新连接。
+      - 查看 iPhone 底部接口是否有明显碎屑或损坏。只做目视检查；不要把尖锐工具、棉签或纸巾插入接口。
+      - 重新启动 iPhone，然后再次尝试充电。
+      - 如果 iPhone 仍能开机，进入设置 通用 软件更新，确认已安装适用于该机型的最新 iOS。
+      - >-
+        如果是 iPhone Air 或 iPhone 17 机型，并且问题发生在电量几乎耗尽后有线充电无法开始，优先更新到 iOS 26.5.1
+        或更新版本；Apple 已在 iOS 26.5.1 说明中记录这个修复。
+      - 如果看到液体检测提醒，立即拔下线缆。将 iPhone 接口朝下轻拍以排出多余液体，然后放在通风、干燥区域。
+      - 等待至少 30 分钟后，再尝试使用线缆充电或连接配件。
+      - 如果再次出现液体检测，继续让 iPhone 在通风、干燥区域放置。Apple 说明完全干燥最长可能需要 24 小时。
+      - 液体检测期间如果必须给 iPhone 供电，优先使用兼容的无线充电；不要为了速度反复点按紧急忽略。
+      - 如果显示“慢充”，打开设置 电池查看充电信息。低功率充电器会延长充电时间；改用适合 iPhone 的更高功率充电器和合格线缆再测试。
+      - 如果 iPhone 黑屏或无法开机，按 Apple 的机型步骤强制重新启动，然后接入电源继续充电。
+      - >-
+        完成供电、线缆、适配器、接口、重启、更新和液体检测处理后仍无法充电，联系 Apple 支持或前往 Apple Store / Apple
+        授权服务提供商检查接口、电池或主板相关问题。
+    verificationLevel: Official
+    sourceIds:
+      - official-a16810fd1611
+      - official-ee9d9e750d4a
+      - official-8cdf08822f08
+      - official-8b29754fbb8d
+      - official-bddd81d53bad
+      - official-58a583e5b184
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-a16810fd1611
+    title: Apple 支持：如果 iPhone 或 iPod touch 无法充电
+    url: 'https://support.apple.com/zh-cn/108805'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-ee9d9e750d4a
+    title: Apple 支持：如果 iPhone 上出现液体检测提醒
+    url: 'https://support.apple.com/zh-cn/102643'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-8cdf08822f08
+    title: iPhone 使用手册：给 iPhone 电池充电
+    url: 'https://support.apple.com/zh-cn/guide/iphone/iph63eecc618/ios'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-8b29754fbb8d
+    title: Apple 支持：如果 iPhone 无法开机或黑屏
+    url: 'https://support.apple.com/zh-cn/116940'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-bddd81d53bad
+    title: Apple 支持：关于 iOS 26 更新
+    url: 'https://support.apple.com/zh-cn/123075'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-58a583e5b184
+    title: Apple 支持：Apple 安全性发布
+    url: 'https://support.apple.com/zh-cn/100100'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-1598ef77a507
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/256308911'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-63b725a546b0
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/256191213'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-a430d9e9ce65
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/256296619'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-5971798b7cbd
+    title: Reddit 旧版引文（原始标题未记录）
+    url: 'https://www.reddit.com/r/iphone/comments/1ttyzdk/ios_2651_out/'
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-add92732e937
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/iphone/comments/1tvcnrt/ios_2651_stopped_my_charging/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-aeb44827406e
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/applehelp/comments/1h2bnpr/there_is_no_liquid_in_my_phone_and_its_saying_this/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-13'
+lastUpdatedAt: '2026-07-13'
+createdAt: null
+relatedArticles:
+  - iphone-charging-paused-80-temperature-charge-limit
+  - iphone-black-screen-wont-turn-on-after-battery-drained
+  - iphone-battery-drains-after-update
+  - iphone-stuck-preparing-verifying-software-update
+  - iphone-sos-no-service-searching
+  - icloud-storage-full-iphone-backup-fails
 popular: true
 ---
 

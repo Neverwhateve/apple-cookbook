@@ -197,7 +197,7 @@ relatedArticles:
   - iphone-invalid-sim-no-sim
   - iphone-esim-setup-transfer-fails
   - iphone-unavailable-security-lockout-forgot-passcode
-popular: true
+popular: false
 ---
 
 # iPhone 或 iPad 无法激活，提示激活服务器不可用

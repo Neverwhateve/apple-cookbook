@@ -46,12 +46,15 @@ Use these tags consistently across articles.
 - Apple Pay
 - Payments
 - NFC
+- Notes
 - Mail
 - Email
 - Keyboard
 - VoiceOver
 - AssistiveTouch
 - Battery
+- Power
+- Audio
 - Software Update
 - Personal Hotspot
 - Firmware
@@ -64,6 +67,7 @@ Use these tags consistently across articles.
 - FaceTime
 - Photos
 - Camera
+- Setup
 - WeChat
 - HomeKit
 - Home App
@@ -113,11 +117,13 @@ Use these tags consistently across articles.
 - Activation Lock
 - Security Lockout
 - Passcode
+- Password
 - Recovery
 - Reset
 - Backup
 - Transfer
 - Storage
+- End-to-end encryption
 - Update
 - VPN
 - Router

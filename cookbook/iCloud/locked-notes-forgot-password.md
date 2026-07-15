@@ -1,7 +1,7 @@
 ---
 schemaVersion: 2
 id: locked-notes-forgot-password
-title: "备忘录密码"
+title: "忘记备忘录密码，锁定备忘录打不开"
 slug: locked-notes-forgot-password
 summary: "忘记“备忘录”自定义密码时，先分清是设备密码/登录密码锁定，还是自定义备忘录密码锁定；重设密码只能用于以后锁定的新备忘录，不能打开已经用旧密码锁住的内容。"
 symptoms:
@@ -189,7 +189,7 @@ relatedArticles:
 popular: true
 ---
 
-# 备忘录密码
+# 忘记备忘录密码，锁定备忘录打不开
 
 顾客说“备忘录 app 有上锁的内容，密码忘记了”时，第一句话要先分清密码类型。Apple 的“备忘录”可以用 iPhone/iPad 设备密码、Mac 登录密码，或单独的自定义备忘录密码来锁定。忘记自定义备忘录密码时，重设密码只能用于以后锁定的新备忘录，不能打开已经用旧密码锁住的内容。
 

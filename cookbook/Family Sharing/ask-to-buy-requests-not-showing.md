@@ -1,17 +1,30 @@
 ---
+schemaVersion: 2
+id: ask-to-buy-requests-not-showing
 title: 购买前询问请求不显示
 slug: ask-to-buy-requests-not-showing
-device:
+summary: 孩子点了购买、下载 App 或请求更多权限后，家长设备没有弹出“购买前询问”通知，或者请求只出现在某一台设备上。
+symptoms:
+  - “孩子已经点了请求，但我手机没有通知。”
+  - “购买前询问以前能收到，最近突然收不到。”
+  - “请求只到 Mac，不到 iPhone。”
+  - “孩子说已经发送了，家长端没有任何弹窗。”
+  - “关掉购买前询问就能下载，打开后请求卡住。”
+devices:
   - iPhone
   - iPad
   - Mac
-category: Family Sharing
+platforms: []
+systemVersions: []
+categories:
+  - Family Sharing
 tags:
   - Family Sharing
   - Ask to Buy
   - Screen Time
   - Apple ID
   - Notifications
+keywords: []
 aliases:
   - Ask to Buy requests not showing
   - Ask to Buy not working
@@ -19,19 +32,94 @@ aliases:
   - 家人共享购买前询问收不到
   - 孩子下载 App 请求收不到
   - 家长收不到购买请求
-verification: Official
+errorMessages: []
+officialTerms: []
+communityTerms: []
 difficulty: Moderate
-updated: 2026-07-09
-official_sources:
-  - https://support.apple.com/zh-cn/118233
-  - https://support.apple.com/zh-cn/guide/iphone/iph00ba7d632/ios
-  - https://support.apple.com/zh-cn/guide/ipad/ipad02e876e6/ipados
-community_sources:
-  - https://discussions.apple.com/thread/8444829
-  - https://discussions.apple.com/thread/254521556
-  - https://discussions.apple.com/thread/254509339
+estimatedTime: null
+verificationLevel: Official
 status: canonical
-popular: true
+canonicalArticleId: ask-to-buy-requests-not-showing
+solutions:
+  - id: solution-80e195e38701
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - 在家长设备上确认已经设置“家人共享”，并且孩子在家庭成员列表里。
+      - 在家长设备上进入“设置” 家庭成员 孩子姓名，确认“购买前询问”已打开。
+      - 将家长设备和孩子设备都更新到当前可用的最新系统版本。
+      - 如果家长设备打开了专注模式，检查允许的通知，或临时关闭专注模式后重新发送请求。
+      - 检查家长设备和孩子设备名称是否不同。必要时进入“设置” “通用” “关于本机”修改名称。
+      - 检查孩子的联系人名片，确认姓名、Apple 账户电子邮件地址或电话号码正确。
+      - 在家长设备的“信息”或通知中心里查找请求。Apple 说明购买请求也可能通过“信息”显示。
+      - 检查孩子用于购买项目的 Apple 账户是否属于这个家人共享群组。
+    verificationLevel: Official
+    sourceIds:
+      - official-895778b43d2e
+      - official-91444c50a550
+      - official-4f9cc102619e
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-895778b43d2e
+    title: Apple 支持：如果“购买前询问”无法正常使用
+    url: 'https://support.apple.com/zh-cn/118233'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-91444c50a550
+    title: iPhone 使用手册：在 iPhone 上使用“家人共享”设置家长控制
+    url: 'https://support.apple.com/zh-cn/guide/iphone/iph00ba7d632/ios'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-4f9cc102619e
+    title: iPad 使用手册：在 iPad 上使用“家人共享”设置家长控制
+    url: 'https://support.apple.com/zh-cn/guide/ipad/ipad02e876e6/ipados'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-6712114f7206
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/8444829'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-03365b23ff8b
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/254521556'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-1d7f453e324c
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/254509339'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-09'
+lastUpdatedAt: '2026-07-09'
+createdAt: null
+relatedArticles:
+  - screen-time-requests-not-working
+  - screen-time-child-usage-not-showing
+  - apple-account-verification-failed
+popular: false
 ---
 
 # 购买前询问请求不显示

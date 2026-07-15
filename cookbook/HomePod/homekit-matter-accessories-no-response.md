@@ -1,13 +1,30 @@
 ---
+schemaVersion: 2
+id: homekit-matter-accessories-no-response
 title: 家庭 App 中 HomeKit 或 Matter 配件显示无响应
 slug: homekit-matter-accessories-no-response
-device:
+summary: >-
+  “家庭”App 里一个或多个智能家居配件显示“无响应”时，先判断是单个品牌、单个桥接器、Thread/Matter
+  网络，还是家居中枢和家庭网络整体失联。最快路径不是立刻删除家庭或重置所有配件，而是按影响范围从配件、厂商 App、桥接器、家居中枢、路由器和
+  VPN/安全软件逐层排查。
+symptoms:
+  - “家庭 App 里灯全都显示无响应。”
+  - “Aqara / Hue / IKEA 在自己的 App 里能控制，HomeKit 里不行。”
+  - “更新后所有 Matter 配件无响应。”
+  - “HomePod 可以播音乐，但不能控制灯。”
+  - “家居中枢未响应，出门后控制不了家里。”
+  - “Thread 设备一会儿正在更新，一会儿无响应。”
+  - “添加 Matter 配件时提示网络不兼容。”
+devices:
   - iPhone
   - iPad
   - Mac
   - HomePod
   - Apple TV
-category: HomePod
+platforms: []
+systemVersions: []
+categories:
+  - HomePod
 tags:
   - HomeKit
   - Matter
@@ -16,6 +33,7 @@ tags:
   - HomePod
   - Apple TV
   - Wi-Fi
+keywords: []
 aliases:
   - Home app No Response
   - HomeKit accessories not responding
@@ -25,22 +43,133 @@ aliases:
   - HomeKit 未响应
   - Matter 配件无响应
   - 家居中枢未响应
-verification: Official
+errorMessages:
+  - “家居中枢未响应，出门后控制不了家里。”
+  - “添加 Matter 配件时提示网络不兼容。”
+  - HomeKit accessories not responding
+  - Matter accessories not responding
+  - Home hub not responding
+  - HomeKit 未响应
+  - 家居中枢未响应
+officialTerms: []
+communityTerms: []
 difficulty: Moderate
-updated: 2026-07-10
-official_sources:
-  - https://support.apple.com/zh-cn/102056
-  - https://support.apple.com/zh-cn/102557
-  - https://support.apple.com/zh-cn/126198
-  - https://support.apple.com/zh-cn/105031
-community_sources:
-  - https://www.reddit.com/r/HomeKit/comments/1rb4r2i/all_my_hue_devices_suddenly_stopped_responding/
-  - https://www.reddit.com/r/HomeKit/comments/191sioc/all_devices_show_no_response/
-  - https://discussions.apple.com/thread/254933864
-  - https://discussionschinese.apple.com/thread/255057541
-  - https://discussionschinese.apple.com/thread/255013516
+estimatedTime: null
+verificationLevel: Official
 status: canonical
-popular: true
+canonicalArticleId: homekit-matter-accessories-no-response
+solutions:
+  - id: solution-bcf5697f0e67
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - 先确认影响范围：只有一个配件、同一品牌的一组配件，还是多家生产企业的多个配件同时显示“无响应”。
+      - 如果只影响同一生产企业的多个配件，在 iPhone、iPad 或 Mac 上打开蓝牙。
+      - 重启无响应配件。电池供电配件可能需要取出电池再放回。
+      - 打开生产企业 App，检查这些配件是否也无响应，以及是否有固件更新。若厂商 App 也无法控制，按厂商说明处理或重置配件。
+      - 为任何第三方桥接器和所有家居中枢断电后重新接电，包括 HomePod、HomePod mini 和 Apple TV。
+      - 如果是第三方 Thread 配件，断电 5 分钟，再重新接入电源或电池，并等待 10 分钟让 Thread 网络稳定。
+      - >-
+        如果同一生产企业的配件仍无响应，从“家庭”App 中移除无响应配件；如果“家庭”App 没有移除选项，通过生产企业 App
+        移除。然后按生产企业说明重置配件，并重新添加到“家庭”App。
+      - 如果多家生产企业的多个配件同时无响应，将 iPhone、iPad 或 Mac 更新到最新软件，然后关闭并重新打开“家庭”App。
+      - 确认 iPhone、iPad 或 Mac 已连接到配件所在的同一无线局域网；如果要远程控制配件，确认已经设置家居中枢。
+      - 如果仍无响应，按顺序重启调制解调器和路由器、第三方桥接器、所有家居中枢、无响应配件，以及 iPhone、iPad 或 Mac。
+      - 检查 VPN 和第三方安全软件，排除它们造成的网络连接问题。
+      - 如果配件仍然无响应，按影响范围联系生产企业或 Apple 支持。
+    verificationLevel: Official
+    sourceIds:
+      - official-e7c2001390fa
+      - official-e938301f495e
+      - official-62a304f0c570
+      - official-151616311abe
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-e7c2001390fa
+    title: Apple 支持：如果 HomeKit 或 Matter 配件在“家庭”App 中没有响应
+    url: 'https://support.apple.com/zh-cn/102056'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-e938301f495e
+    title: Apple 支持：将 HomePod、HomePod mini 或 Apple TV 设置为家居中枢
+    url: 'https://support.apple.com/zh-cn/102557'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-62a304f0c570
+    title: Apple 支持：如果无法将智能家居配件添加到“家庭”App 中
+    url: 'https://support.apple.com/zh-cn/126198'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-151616311abe
+    title: Apple 支持：如果 HomePod 或 HomePod mini 没有响应
+    url: 'https://support.apple.com/zh-cn/105031'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-cf871fd086a3
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/HomeKit/comments/1rb4r2i/all_my_hue_devices_suddenly_stopped_responding/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-330f1b6b4a27
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/HomeKit/comments/191sioc/all_devices_show_no_response/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-da850bda1198
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/254933864'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-c9e8a1743201
+    title: discussionschinese.apple.com 旧版引文（原始标题未记录）
+    url: 'https://discussionschinese.apple.com/thread/255057541'
+    publisher: discussionschinese.apple.com
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-d2eaedbef48c
+    title: discussionschinese.apple.com 旧版引文（原始标题未记录）
+    url: 'https://discussionschinese.apple.com/thread/255013516'
+    publisher: discussionschinese.apple.com
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-10'
+lastUpdatedAt: '2026-07-10'
+createdAt: null
+relatedArticles:
+  - iphone-ipad-wifi-no-internet-unable-to-join
+  - homepod-not-responding-network-problem
+popular: false
 ---
 
 # 家庭 App 中 HomeKit 或 Matter 配件显示无响应

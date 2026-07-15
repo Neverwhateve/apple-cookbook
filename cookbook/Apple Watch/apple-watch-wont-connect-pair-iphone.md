@@ -1,10 +1,36 @@
 ---
+schemaVersion: 2
+id: apple-watch-wont-connect-pair-iphone
 title: Apple Watch 无法连接或无法与 iPhone 配对
 slug: apple-watch-wont-connect-pair-iphone
-device:
+summary: >-
+  Apple Watch 显示红色 iPhone 图标、收不到通知，新 iPhone 配对时卡住，或配对过程中一直要求更新时，先把手表和 iPhone
+  放近，检查飞行模式、蓝牙、无线局域网、电量、充电器和系统兼容性。不要一开始就抹掉手表；只有在重新连接失败、配对过程停滞、更新文件损坏，或手表仍绑定旧
+  iPhone 时，才进入取消配对、抹掉和重新配对流程。
+symptoms:
+  - “Apple Watch 上有红色 iPhone 图标。”
+  - “换新 iPhone 后手表配不上。”
+  - “配对动画一直转，找不到 i 图标。”
+  - “iPhone 说无法连接到 Apple Watch。”
+  - “手表已经显示表盘，但新手机还是要我开始配对。”
+  - “配对时要求更新，然后一直失败。”
+  - “Apple Watch 更新卡在正在验证、正在准备或无法验证更新。”
+  - “提示无法验证更新，因为没有连接互联网。”
+  - “手表储存空间不够，更新不了，所以配对也继续不了。”
+  - “新 iPhone 提示 iPhone 版本过旧，不能配对手表。”
+  - “手表装了新版 watchOS，iPhone 还在旧版 iOS。”
+  - “二手 Apple Watch 配对时出现激活锁。”
+  - “蜂窝版 Apple Watch 抹掉后套餐会不会丢？”
+devices:
   - Apple Watch
   - iPhone
-category: Apple Watch
+platforms: []
+systemVersions:
+  - iOS 26
+  - iOS 18
+  - watchOS 26
+categories:
+  - Apple Watch
 tags:
   - Apple Watch
   - iPhone
@@ -12,6 +38,7 @@ tags:
   - Bluetooth
   - Wi-Fi
   - Activation Lock
+keywords: []
 aliases:
   - Apple Watch won't connect to iPhone
   - Apple Watch won't pair
@@ -22,30 +49,238 @@ aliases:
   - Apple Watch 连接不上 iPhone
   - Apple Watch 红色 iPhone 图标
   - Apple Watch 配对卡住
-verification: Official
+errorMessages:
+  - “提示无法验证更新，因为没有连接互联网。”
+  - “新 iPhone 提示 iPhone 版本过旧，不能配对手表。”
+officialTerms: []
+communityTerms: []
 difficulty: Moderate
-updated: 2026-07-13
-official_sources:
-  - https://support.apple.com/zh-cn/108360
-  - https://support.apple.com/zh-cn/111821
-  - https://support.apple.com/zh-cn/104956
-  - https://support.apple.com/zh-cn/108372
-  - https://support.apple.com/zh-cn/109015
-  - https://support.apple.com/zh-cn/118490
-  - https://support.apple.com/zh-cn/108926
-  - https://support.apple.com/zh-cn/111816
-community_sources:
-  - https://www.reddit.com/r/AppleWatch/comments/1tr0nix/older_watch_wont_sync_with_ios_26/
-  - https://www.reddit.com/r/AppleWatch/comments/1ll2ylp/watchos_26_doesnt_pair_with_ios_18/
-  - https://www.reddit.com/r/AppleWatch/comments/1ne2v40/iphone_out_of_date_cant_pair_brand_new_apple/
-  - https://www.reddit.com/r/AppleWatch/comments/1s3xpzv/after_updating_both_iphone_and_watch_to_264_both/
-  - https://www.reddit.com/r/AppleWatch/comments/1qz1pqh/apple_watch_se_wont_pair_with_new_iphone_stuck_in/
-  - https://discussions.apple.com/thread/256187585
-  - https://discussions.apple.com/thread/254957544
-  - https://discussions.apple.com/thread/255889406
-  - https://discussions.apple.com/thread/256124607
+estimatedTime: null
+verificationLevel: Official
 status: canonical
-popular: true
+canonicalArticleId: apple-watch-wont-connect-pair-iphone
+solutions:
+  - id: solution-28d55f32630c
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - 先确认屏幕状态：是红色 iPhone 图标、红色 X、找不到 i 图标、配对动画卡住、已经显示表盘，还是激活锁。
+      - 将 Apple Watch 和已配对的 iPhone 放近，确保在通信范围内。
+      - 在 iPhone 上关闭飞行模式，并确认 Wi-Fi 和蓝牙已打开。
+      - 在 Apple Watch 控制中心确认飞行模式已关闭。
+      - 重新启动 Apple Watch，然后重新启动 iPhone。
+      - 如果只是短暂断连，完成以上步骤后检查红色 iPhone 图标或红色 X 是否消失。
+      - 如果 Apple Watch 仍无法连接，使用 Apple Watch App 取消配对，然后重新配对。
+      - >-
+        如果配对过程要求更新 Apple Watch，先确认 iPhone 已更新到最新 iOS，Apple Watch 电量不低于 50%，并且
+        Apple Watch 正确连接到充电器。
+      - >-
+        如果 Apple Watch 更新无法开始，按 Apple 顺序重新启动 Apple Watch、重新启动已配对的
+        iPhone，然后再次尝试更新。
+      - >-
+        如果更新仍无法开始，在 iPhone 上打开 Apple Watch App，进入通用 储存空间，删除已下载的 watchOS
+        更新文件，然后重新尝试更新。
+      - >-
+        如果更新时显示“无法验证更新”或提示未连接互联网，先确认 Apple Watch 可通过
+        iPhone、无线局域网或蜂窝网络连接到互联网，再重新启动 Apple Watch 后重试。
+      - 如果仍然无法验证更新，先移除已同步到 Apple Watch 的音乐或照片；仍不够时再移除部分 App，以释放更新所需储存空间。
+      - >-
+        如果删除媒体和 App 后仍无法更新，把 Apple Watch 和 iPhone 放近，在 Apple Watch App
+        中取消配对。蜂窝版选择保留蜂窝套餐，输入 Apple 账户密码以停用激活锁；重新设置时先选择设置为新 Apple
+        Watch，完成更新后如需恢复数据，再取消配对并从最近备份恢复。
+      - >-
+        如果 iPhone 或 Apple Watch 装有 Beta 版或开发者种子版，先按 Apple 指引移除 Beta
+        描述文件，重新启动两台设备，再检查正式更新。
+      - >-
+        如果要把 Apple Watch 转移到新 iPhone，先准备 Apple 账户密码、Apple Watch 密码、无线局域网连接，并确认
+        Apple Watch 和新 iPhone 至少有 50% 电量。
+      - 在新 iPhone 上设置并恢复最新备份。Apple 说明，备份 iPhone 时 Apple Watch 也会随之备份。
+      - 在新 iPhone 上打开 Apple Watch App，让 Apple Watch 保持解锁并戴在手腕上，再按屏幕步骤完成设置。
+      - 如果新 iPhone 提示“开始配对”，先取消配对 Apple Watch，然后再次设置。
+      - >-
+        如果你有配对的 iPhone，优先从 iPhone 的 Apple Watch App 中取消配对；这会抹掉 Apple
+        Watch、恢复出厂设置，并移除激活锁。
+      - >-
+        如果没有配对的 iPhone，可以在 Apple Watch 上打开设置 通用 还原
+        抹掉所有内容和设置。注意：这样会抹掉手表，但不会移除激活锁。
+      - >-
+        如果忘记 Apple Watch 密码，先把 Apple Watch 放在充电器上，再按 Apple 的无密码还原步骤操作；还原后仍需要原
+        Apple 账户和密码才能重新配对。
+      - 如果配对动画持续显示数分钟，在 Apple Watch 处于配对模式时按住数码表冠，轻点“还原”，还原后重新配对。
+      - >-
+        如果是蜂窝版 Apple Watch，取消配对或抹掉时根据用途选择保留或移除蜂窝套餐。未来还要与 iPhone
+        配对时保留套餐；出售或赠送时移除套餐，并按需联系运营商取消订阅。
+      - >-
+        如果提示需要更新 iPhone、iPhone 版本过旧或 Apple Watch 软件不兼容，先查看 Apple 的 Apple Watch 与
+        iPhone 兼容性表，再决定是更新 iPhone、换兼容 iPhone，还是保留原配对。
+      - >-
+        如果设置新款 Apple Watch，确认 iPhone 机型和 iOS 版本符合要求。Apple Watch Ultra 3、Apple
+        Watch Series 11 和 Apple Watch SE 3 需要装有 iOS 26 或更高版本的 iPhone 11 或更新机型。
+      - 如果相机无法读取配对动画，或看不到配对动画，轻点“手动配对 Apple Watch”，再按屏幕提示操作。
+    verificationLevel: Official
+    sourceIds:
+      - official-9ec407537c69
+      - official-e20e5b7cd0f3
+      - official-13165ae1ba5e
+      - official-122af5b0071d
+      - official-c3126607a45a
+      - official-5b6d846feea3
+      - official-be9f76dfb5ab
+      - official-82224c426a1e
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-9ec407537c69
+    title: Apple 支持：如果 Apple Watch 无法与 iPhone 连接或配对
+    url: 'https://support.apple.com/zh-cn/108360'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-e20e5b7cd0f3
+    title: Apple 支持：如果你无法将 Apple Watch 与 iPhone 配对
+    url: 'https://support.apple.com/zh-cn/111821'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-13165ae1ba5e
+    title: Apple 支持：将 Apple Watch 与新 iPhone 配对
+    url: 'https://support.apple.com/zh-cn/104956'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-122af5b0071d
+    title: Apple 支持：取消配对并抹掉 Apple Watch
+    url: 'https://support.apple.com/zh-cn/108372'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-c3126607a45a
+    title: Apple 支持：设置你的 Apple Watch
+    url: 'https://support.apple.com/zh-cn/109015'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-5b6d846feea3
+    title: Apple 支持：Apple Watch 和 iPhone 兼容性
+    url: 'https://support.apple.com/zh-cn/118490'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-be9f76dfb5ab
+    title: Apple 支持：更新 Apple Watch
+    url: 'https://support.apple.com/zh-cn/108926'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-82224c426a1e
+    title: Apple 支持：如果在更新 Apple Watch 时显示“无法验证更新”
+    url: 'https://support.apple.com/zh-cn/111816'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-7075214aa831
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/AppleWatch/comments/1tr0nix/older_watch_wont_sync_with_ios_26/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-5db332e7f727
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/AppleWatch/comments/1ll2ylp/watchos_26_doesnt_pair_with_ios_18/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-2f60240a8dfc
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/AppleWatch/comments/1ne2v40/iphone_out_of_date_cant_pair_brand_new_apple/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-f7743e79848c
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/AppleWatch/comments/1s3xpzv/after_updating_both_iphone_and_watch_to_264_both/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-6821a597fd9f
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/AppleWatch/comments/1qz1pqh/apple_watch_se_wont_pair_with_new_iphone_stuck_in/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-65d620254e84
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/256187585'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-08d3cc85c10e
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/254957544'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-e25836cb823f
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/255889406'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-3672156a8b0d
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/256124607'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-13'
+lastUpdatedAt: '2026-07-13'
+createdAt: null
+relatedArticles:
+  - iphone-ipad-wifi-no-internet-unable-to-join
+  - iphone-stuck-preparing-verifying-software-update
+popular: false
 ---
 
 # Apple Watch 无法连接或无法与 iPhone 配对

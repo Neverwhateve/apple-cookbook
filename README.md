@@ -96,7 +96,7 @@ status:
 popular:
 ```
 
-This is the legacy v1 contract. New structured content may use Article Schema v2 through the non-breaking dual-read adapter. Networking Wi-Fi, Mac Mail, and iPad onscreen keyboard are the first three manually reviewed migration pilots; Mac System Data is the first native v2 canonical. See `docs/ARTICLE_SCHEMA_V2.md` and do not bulk-migrate existing articles.
+This is the legacy v1 contract. New structured content uses Article Schema v2 through the non-breaking dual-read adapter. The former v1 Official articles are migrated with the controlled trust-boundary procedure in `docs/ARTICLE_SCHEMA_V2.md`; source facts that v1 never recorded remain explicit unknowns rather than inferred metadata.
 
 ## Folders
 

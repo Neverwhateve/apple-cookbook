@@ -1,11 +1,38 @@
 ---
+schemaVersion: 2
+id: iphone-unavailable-security-lockout-forgot-passcode
 title: iPhone 不可用、安全锁定或忘记锁屏密码
 slug: iphone-unavailable-security-lockout-forgot-passcode
-device:
+summary: >-
+  顾客看到“iPhone 不可用”“安全锁定”或“已停用”，通常是设备密码输错太多次。最快路径是先确认顾客是否仍记得正确密码；如果忘记密码，Apple
+  的官方恢复路径会抹掉设备，然后只能从已有备份恢复。
+symptoms:
+  - “iPhone 显示不可用，下面只有紧急情况。”
+  - “安全锁定了，忘记密码按钮不见了。”
+  - “孩子把密码输错太多次，手机已停用。”
+  - “能不能不抹掉资料解锁？”
+  - “还剩几次输入机会？”
+  - “我知道 Apple ID 密码，但忘了锁屏密码。”
+  - “刚改完锁屏密码就忘了新密码，旧密码还能不能用？”
+  - “抹掉后 eSIM 会不会没了？”
+  - “刷机能不能保留数据？”
+  - “按键怎么按都进不了恢复模式。”
+  - “电脑没有识别 iPhone。”
+  - “一直回到输入密码界面，没有出现连接电脑图标。”
+  - “手机提示靠近另一台设备恢复。”
+devices:
   - iPhone
   - iPad
   - Apple Vision Pro
-category: iPhone
+platforms: []
+systemVersions:
+  - iOS 17
+  - iPadOS 17
+  - iOS 16
+  - iOS 15.2
+  - iPadOS 18
+categories:
+  - iPhone
 tags:
   - iPhone
   - iPad
@@ -16,6 +43,7 @@ tags:
   - Activation Lock
   - Backup
   - eSIM
+keywords: []
 aliases:
   - iPhone unavailable
   - iPhone Security Lockout
@@ -27,26 +55,201 @@ aliases:
   - iPhone 忘记密码
   - iPhone 已停用
   - 忘记锁屏密码
-verification: Official
+errorMessages:
+  - “iPhone 显示不可用，下面只有紧急情况。”
+  - “手机提示靠近另一台设备恢复。”
+  - iPhone unavailable
+  - iPhone unavailable forgot password
+  - iPhone 不可用
+officialTerms: []
+communityTerms: []
 difficulty: Advanced
-updated: 2026-07-14
-official_sources:
-  - https://support.apple.com/zh-cn/105090
-  - https://support.apple.com/zh-cn/118430
-  - https://support.apple.com/zh-cn/108934
-  - https://support.apple.com/zh-cn/108794
-  - https://support.apple.com/zh-cn/102421
-  - https://support.apple.com/zh-cn/guide/iphone/iph3ecf67d29/ios
-  - https://support.apple.com/zh-cn/118105
-  - https://support.apple.com/en-us/118106
-  - https://support.apple.com/en-us/121133
-  - https://support.apple.com/zh-cn/105039
-  - https://support.apple.com/en-us/118107
-community_sources:
-  - https://discussions.apple.com/thread/256313485
-  - https://discussions.apple.com/thread/253635299
-  - https://www.reddit.com/r/applehelp/comments/1qt6bqg/iphone_unavailable_how_many_password_attempts_do/
+estimatedTime: null
+verificationLevel: Official
 status: canonical
+canonicalArticleId: iphone-unavailable-security-lockout-forgot-passcode
+solutions:
+  - id: solution-063b99809c7d
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - 先问清楚顾客是否仍确定记得正确的设备密码。如果屏幕显示倒计时，并且顾客确信密码正确，等待倒计时结束后再输入一次。
+      - >-
+        如果顾客是最近 72 小时内刚改过密码，并且设备运行 iOS 17、iPadOS 17
+        或更高版本，先在“忘记密码？”里检查是否有输入先前密码入口；这是避免不必要抹掉的第一分流。
+      - >-
+        如果没有旧密码入口、旧密码也忘记，或已经超出 72 小时，再说明结果：恢复设备会永久删除本机数据和设置；之后只能从已有 iCloud
+        或电脑备份恢复。
+      - 如果设备使用 eSIM，先确认 iOS 版本。iOS 16 或更早版本应先联系运营商，请运营商提供重新设置 eSIM 的二维码。
+      - 在锁定屏幕继续尝试输入设备密码，直到显示“iPhone 不可用”或“安全锁定”屏幕。
+      - 如果看到忘记密码？，轻点它；若屏幕提供输入先前密码，先按 Apple 的“密码重设”流程用旧密码解锁并立即设置新密码。
+      - >-
+        如果没有旧密码重设入口，或顾客无法输入先前密码，再在“安全锁定”屏幕轻点开始还原 iPhone确认。Apple
+        说明，这个入口需要设备有有效蜂窝网络或无线局域网连接，并且之前已经启用“查找”。
+      - 输入 Apple 账户密码，让设备退出登录 Apple 账户。
+      - >-
+        轻点抹掉 iPhone。如果设备运行 iOS 17 或更高版本并使用 eSIM，根据顾客后续使用计划选择保留 eSIM 并抹掉数据，或删除
+        eSIM 并抹掉数据。
+      - 等设备重新启动后，按照屏幕说明重新设置设备。
+      - 如果有备份，从 iCloud 或电脑备份恢复数据和设置；如果没有备份，只能设置为新的 iPhone。
+      - >-
+        如果无法在设备上完成还原，预留最多约 60 分钟，使用 Mac 的访达或 Windows 的 Apple 设备 App 通过电脑还原
+        iPhone；如果下载超过 15 分钟且设备退出恢复模式，等下载完成后再重新进入恢复模式。
+      - >-
+        如果进入恢复模式失败，按机型重新确认按键顺序：iPhone 8
+        或更新机型是快速按下调高音量、快速按下调低音量，然后按住侧边按钮直到出现连接电脑画面；iPhone 7
+        系列按住侧边/顶部按钮和调低音量按钮；iPhone 6s 或更早机型按住主屏幕按钮和顶部/侧边按钮。
+      - >-
+        如果电脑没有识别设备，先确认 Mac、Apple 设备 App 或 iTunes 已更新，并更换可靠的 USB
+        线缆、电脑端口和供电环境；如果按钮损坏、卡住，或恢复模式仍无法使用，按 Apple 指引进入服务路径。
+      - >-
+        如果设备在无线更新后显示“靠近另一台设备恢复”的动画，并且属于 Apple 支持的机型，可连接电源，把它靠近另一台已解锁、已连接 Wi-Fi
+        且运行 iOS/iPadOS 18 或更高版本的 iPhone 或
+        iPad，按屏幕提示完成附近恢复。不要把这个流程解释为忘记密码时可保留本机数据。
+      - 如果电脑还原也无法完成，并且“查找”已开启，可在另一台设备上前往 iCloud.com/find，选择这台 iPhone 并抹掉，然后重新设置。
+      - 重新设置或恢复后，设置一个新的设备密码，并确认 iCloud 云备份已开启。
+    verificationLevel: Official
+    sourceIds:
+      - official-a7803bb973da
+      - official-8ae84c2d5fe1
+      - official-820c5305926c
+      - official-9feea82428f1
+      - official-aaf7da28848b
+      - official-cc10bcd7171c
+      - official-4a9c2a558305
+      - official-3f34d4a16991
+      - official-94fbbad99794
+      - official-08b5b41f3670
+      - official-ee280b5aa145
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-a7803bb973da
+    title: Apple 支持：如果你看到 iPhone、iPad 或 Apple Vision Pro 不可用信息或安全锁定屏幕
+    url: 'https://support.apple.com/zh-cn/105090'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-8ae84c2d5fe1
+    title: Apple 支持：如果你忘记了 iPhone 密码或 iPhone 被停用了
+    url: 'https://support.apple.com/zh-cn/118430'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-820c5305926c
+    title: Apple 支持：如何解除激活锁
+    url: 'https://support.apple.com/zh-cn/108934'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-9feea82428f1
+    title: Apple 支持：iPhone 和 iPad 的激活锁
+    url: 'https://support.apple.com/zh-cn/108794'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-aaf7da28848b
+    title: Apple 支持：如何抹掉 iPhone 或 iPad 上的 eSIM
+    url: 'https://support.apple.com/zh-cn/102421'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-cc10bcd7171c
+    title: iPhone 使用手册：备份 iPhone
+    url: 'https://support.apple.com/zh-cn/guide/iphone/iph3ecf67d29/ios'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-4a9c2a558305
+    title: Apple 支持：从备份恢复 iPhone、iPad 或 iPod touch
+    url: 'https://support.apple.com/zh-cn/118105'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-3f34d4a16991
+    title: 'Apple Support: If you can''t update or restore your iPhone or iPod touch'
+    url: 'https://support.apple.com/en-us/118106'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-94fbbad99794
+    title: 'Apple Support: Restore your iPhone or iPad with a nearby device'
+    url: 'https://support.apple.com/en-us/121133'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-08b5b41f3670
+    title: Apple 支持：在忘记 iPhone 或 iPad 新密码的情况下暂时使用旧密码
+    url: 'https://support.apple.com/zh-cn/105039'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-ee280b5aa145
+    title: >-
+      Apple Support: Restore your iPhone, iPad, or iPod to factory settings
+      using a computer
+    url: 'https://support.apple.com/en-us/118107'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-1d575b4b4b19
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/256313485'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-6959378790a6
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/253635299'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-5dfdc915fb6e
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/applehelp/comments/1qt6bqg/iphone_unavailable_how_many_password_attempts_do/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-14'
+lastUpdatedAt: '2026-07-14'
+createdAt: null
+relatedArticles:
+  - iphone-esim-setup-transfer-fails
+  - iphone-sos-no-service-searching
+  - iphone-stuck-preparing-verifying-software-update
+  - apple-account-verification-failed
 popular: true
 ---
 

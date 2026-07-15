@@ -185,7 +185,7 @@ createdAt: 2026-07-14
 relatedArticles:
   - icloud-storage-full-iphone-backup-fails
   - iphone-stuck-preparing-verifying-software-update
-popular: true
+popular: false
 ---
 
 # iPhone 系统数据占用很大，储存空间快满

@@ -1,9 +1,31 @@
 ---
+schemaVersion: 2
+id: iphone-esim-setup-transfer-fails
 title: iPhone 无法设置或转移 eSIM
 slug: iphone-esim-setup-transfer-fails
-device:
+summary: >-
+  顾客在新 iPhone 上添加 eSIM、从旧 iPhone 转移号码、扫描二维码或从安卓设备转移 eSIM
+  时失败。先确认机型、地区、运营商支持方式和原设备条件，再处理激活错误；不要先删除旧 eSIM 或抹掉设备。
+symptoms:
+  - “新机转移 eSIM 失败。”
+  - “添加 eSIM 时一直转圈。”
+  - “旧 iPhone 上点了转移，新 iPhone 没激活。”
+  - “扫描二维码以后没有蜂窝网络。”
+  - “显示完成运营商蜂窝套餐设置，但点进去失败。”
+  - “国行 iPhone Air / iPhone 17e 不能写入 eSIM。”
+  - “换 eSIM 后 iMessage 只能用邮箱发。”
+  - “发送与接收里同一个手机号出现两次。”
+  - “删除 eSIM 后号码回不来了。”
+devices:
   - iPhone
-category: iPhone
+platforms: []
+systemVersions:
+  - iOS 18.4
+  - iOS 26
+  - iOS 18
+  - iOS 26.1
+categories:
+  - iPhone
 tags:
   - iPhone
   - eSIM
@@ -11,6 +33,7 @@ tags:
   - Carrier
   - Activation
   - Transfer
+keywords: []
 aliases:
   - iPhone eSIM setup failed
   - iPhone eSIM transfer failed
@@ -23,24 +46,152 @@ aliases:
   - iPhone 添加 eSIM 失败
   - eSIM 后 iMessage 用邮箱发送
   - iMessage 同一个手机号显示两次
-verification: Official
+errorMessages: []
+officialTerms: []
+communityTerms: []
 difficulty: Moderate
-updated: 2026-07-10
-official_sources:
-  - https://support.apple.com/zh-cn/118669
-  - https://support.apple.com/zh-cn/102478
-  - https://support.apple.com/zh-cn/123879
-  - https://support.apple.com/zh-cn/123878
-  - https://support.apple.com/zh-cn/101569
-  - https://support.apple.com/zh-cn/guide/iphone/iph7a2a9399b/ios
-  - https://support.apple.com/zh-cn/125367
-community_sources:
-  - https://discussions.apple.com/thread/255768471
-  - https://discussions.apple.com/thread/255207618
-  - https://discussions.apple.com/thread/256210119
-  - https://www.reddit.com/r/applehelp/comments/1oee9kg/cellular_data_option_is_greyed_out_saying_no_sim/
+estimatedTime: null
+verificationLevel: Official
 status: canonical
-popular: true
+canonicalArticleId: iphone-esim-setup-transfer-fails
+solutions:
+  - id: solution-3750d6167c54
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - 先确认顾客要做哪一种操作：从旧 iPhone 快速转移、运营商激活、扫描二维码、运营商 App / 链接、手动输入，还是从安卓设备转移。
+      - 如果是 iPhone 到 iPhone 快速转移，确认运营商支持 eSIM 快速转移。
+      - 确认两台 iPhone 使用顾客自己的同一 Apple 账户登录，旧 iPhone 已用设备密码解锁。
+      - 将两台 iPhone 放在附近，打开蓝牙，并确认两台设备都运行 iOS 18.4 或更高版本。
+      - >-
+        在新 iPhone 上打开设置 蜂窝网络 设置蜂窝号码或添加 eSIM，选择要从另一台 iPhone 转移的号码；如果没有看到号码，选择从附近
+        iPhone 转移。
+      - 在旧 iPhone 上按照提示确认转移；如果要求输入验证码，输入新 iPhone 上显示的代码。
+      - 等待新 iPhone 上的蜂窝号码激活。Apple 说明，新 iPhone 激活后，旧 SIM 会停用。
+      - 如果新 iPhone 出现完成运营商蜂窝套餐设置横幅，轻点横幅并按运营商网页继续；需要协助时联系运营商。
+      - 如果使用二维码、运营商链接、运营商 App 或手动输入，请按运营商提供的资料完成；确认码必须使用运营商提供的号码。
+      - 如果从安卓设备转移 eSIM，将两台手机并排放置；无法扫描二维码时，使用 Apple 提供的“其他选项”流程输入会话 ID 和配对代码。
+      - 如果 eSIM 设置失败，打开再关闭飞行模式。
+      - 打开设置 蜂窝网络，检查要激活的号码是否出现；如果出现，将该号码关闭再重新打开。
+      - 重新启动 iPhone。
+      - 打开设置 通用 关于本机，在 eSIM 部分检查运营商设置版本；如果出现运营商设置更新，选择“好”或“更新”。
+      - 如果仍无法设置 eSIM，联系运营商，并准备电话号码、运营商账户密码或 PIN、iPhone 的 IMEI 和 EID。
+      - 在 iOS 18 或更高版本上，可以使用最新版 Apple 支持 App 运行其他诊断，帮助区分设备问题和运营商配置问题。
+      - >-
+        如果 eSIM 设置后蜂窝网络可用，但 iMessage 只能用邮箱发送，或同一电话号码在设置 App 信息 发送与接收中显示两次，按
+        Apple 的 iOS 26 同号已失效 SIM 流程处理：更新到 iOS 26.1 或更高版本，或移除/删除已失效的同号 SIM。
+    verificationLevel: Official
+    sourceIds:
+      - official-87e65a54792d
+      - official-2d64ce443428
+      - official-03705b188103
+      - official-b2d41643e484
+      - official-b56cae0183c5
+      - official-2284e2f4140c
+      - official-669feede652b
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-87e65a54792d
+    title: Apple 支持：在 iPhone 上设置 eSIM
+    url: 'https://support.apple.com/zh-cn/118669'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-2d64ce443428
+    title: Apple 支持：如果你无法在 iPhone 上设置 eSIM
+    url: 'https://support.apple.com/zh-cn/102478'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-03705b188103
+    title: Apple 支持：在中国大陆将 eSIM 与 iPhone 搭配使用
+    url: 'https://support.apple.com/zh-cn/123879'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-b2d41643e484
+    title: Apple 支持：将 eSIM 从安卓设备转移到 iPhone
+    url: 'https://support.apple.com/zh-cn/123878'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-b56cae0183c5
+    title: Apple 支持：查找在 iPhone 上提供 eSIM 服务的无线运营商和全球服务提供商
+    url: 'https://support.apple.com/zh-cn/101569'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-2284e2f4140c
+    title: Apple 旧版引文（原始标题未记录）
+    url: 'https://support.apple.com/zh-cn/guide/iphone/iph7a2a9399b/ios'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-669feede652b
+    title: Apple 支持：如果无法在 iOS 26 中用你的电话号码激活 iMessage 信息
+    url: 'https://support.apple.com/zh-cn/125367'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-be58633c17ef
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/255768471'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-2caa8ff16427
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/255207618'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-9fc50ce8f4f7
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/256210119'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-bc228ca9b077
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/applehelp/comments/1oee9kg/cellular_data_option_is_greyed_out_saying_no_sim/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-10'
+lastUpdatedAt: '2026-07-10'
+createdAt: null
+relatedArticles:
+  - iphone-imessage-messages-not-sending-green-waiting-activation
+  - iphone-invalid-sim-no-sim
+  - iphone-sos-no-service-searching
+popular: false
 ---
 
 # iPhone 无法设置或转移 eSIM

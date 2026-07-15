@@ -1,37 +1,144 @@
 ---
+schemaVersion: 2
+id: screen-time-child-usage-not-showing
 title: 家长看不到儿童账号屏幕使用时间明细
 slug: screen-time-child-usage-not-showing
-device:
+summary: >-
+  家长已经通过“家人共享”管理儿童 Apple 账户，但在家长设备上看不到孩子的“屏幕使用时间”摘要或 App
+  使用明细。这个问题常见于儿童账号、家人共享、购买前询问和屏幕时间设置混在一起排查的场景。
+symptoms:
+  - 家长端能看到孩子在家庭成员列表里，但看不到屏幕使用时间明细。
+  - “屏幕时间”里没有孩子的活动摘要，或摘要长期为空。
+  - 孩子设备可以正常使用，但家长端无法查看 App 和网站使用情况。
+  - 家长已经开启家人共享和屏幕时间，但同步结果不稳定。
+  - 同时伴随“购买前询问”请求收不到、儿童账号设置异常，或无法从家庭共享移除旧儿童账号。
+  - “孩子已经 13 岁 / 14 岁 / 16 岁，为什么还是儿童账号？”
+  - “换了国家或地区以后，屏幕使用时间规则不一样。”
+devices:
   - iPhone
   - iPad
   - Mac
-category: Family Sharing
+platforms: []
+systemVersions: []
+categories:
+  - Family Sharing
 tags:
   - Family Sharing
   - Screen Time
   - Apple ID
   - iCloud
   - Privacy
+keywords: []
 aliases:
   - 儿童账号屏幕使用时间不显示
   - 家庭共享看不到孩子屏幕时间
   - 家长端看不到孩子使用明细
   - Screen Time child activity not showing
   - Family Sharing Screen Time not showing child usage
-verification: Official
+errorMessages: []
+officialTerms: []
+communityTerms: []
 difficulty: Moderate
-updated: 2026-07-13
-official_sources:
-  - https://support.apple.com/zh-cn/108806
-  - https://support.apple.com/en-us/108806
-  - https://support.apple.com/zh-cn/118233
-  - https://support.apple.com/zh-cn/105121
-  - https://support.apple.com/en-us/102617
-  - https://support.apple.com/en-us/125666
-community_sources:
-  - https://www.xiaohongshu.com/discovery/item/680d8999000000001c01d41f
+estimatedTime: null
+verificationLevel: Official
 status: canonical
-popular: true
+canonicalArticleId: screen-time-child-usage-not-showing
+solutions:
+  - id: solution-53b1a7570376
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - 在家长设备上打开“设置”，进入“家人共享”，确认孩子的 Apple 账户已经在家庭成员列表中。
+      - 将家长设备和孩子设备都更新到当前可用的最新系统版本。
+      - 在家长设备上进入“设置” “屏幕时间”，在“家人”下轻点孩子姓名，并按屏幕提示打开和管理“屏幕时间”。
+      - 如果需要在孩子设备上设置，进入孩子设备的“设置” “屏幕时间”，打开“App 与网站活动”，这样系统才会生成活动摘要。
+      - 等孩子正常使用设备一段时间后，再回到家长设备查看摘要。
+      - 如果家长还需要管理购买、下载、网页内容、隐私或 App 设置，确认内容与隐私限制已打开；关闭它会暂停其中的家长控制。
+      - >-
+        如果同时收不到“购买前询问”请求，检查家人共享设置、专注模式通知、设备名称、孩子联系人名片，以及 App Store/购买项目使用的 Apple
+        账户是否与家人共享关联。
+      - >-
+        如果顾客认为孩子年龄到了但仍受管控，或某个开关不能关闭，先确认 Apple 账户所在国家或地区和孩子生日。不要承诺“到 13
+        岁就一定自动解除”：Apple 的儿童账户年龄和默认管控要求按地区变化。
+    verificationLevel: Official
+    sourceIds:
+      - official-f033970b8746
+      - official-bd0e69c44cd2
+      - official-895778b43d2e
+      - official-539a38b5b739
+      - official-45b71d78c3b5
+      - official-da55f7f2503e
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-f033970b8746
+    title: Apple 支持：使用“屏幕时间”来管理孩子的 iPhone 或 iPad
+    url: 'https://support.apple.com/zh-cn/108806'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-bd0e69c44cd2
+    title: 'Apple Support: Use Screen Time to manage your child''s iPhone or iPad'
+    url: 'https://support.apple.com/en-us/108806'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-895778b43d2e
+    title: Apple 支持：如果“购买前询问”无法正常使用
+    url: 'https://support.apple.com/zh-cn/118233'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-539a38b5b739
+    title: Apple 支持：使用家长控制来管理你孩子的 iPhone 或 iPad
+    url: 'https://support.apple.com/zh-cn/105121'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-45b71d78c3b5
+    title: 'Apple Support: Create an Apple Account for your child'
+    url: 'https://support.apple.com/en-us/102617'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-da55f7f2503e
+    title: 'Apple Support: Region-specific rules for managing an Apple Account'
+    url: 'https://support.apple.com/en-us/125666'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-7c5447bc1b71
+    title: xiaohongshu.com 旧版引文（原始标题未记录）
+    url: 'https://www.xiaohongshu.com/discovery/item/680d8999000000001c01d41f'
+    publisher: xiaohongshu.com
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-13'
+lastUpdatedAt: '2026-07-13'
+createdAt: null
+relatedArticles:
+  - apple-account-verification-failed
+  - ask-to-buy-requests-not-showing
+  - screen-time-requests-not-working
+  - screen-time-limits-not-blocking
+popular: false
 ---
 
 # 家长看不到儿童账号屏幕使用时间明细

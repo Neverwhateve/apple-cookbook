@@ -4,7 +4,7 @@ Apple Cookbook articles are Obsidian-compatible Markdown files with YAML frontma
 
 Article bodies must remain in Markdown. Do not store article bodies in a database.
 
-This document describes the legacy v1 contract used by the current article set. The runtime and content validator also accept the additive structured v2 contract in [`ARTICLE_SCHEMA_V2.md`](./ARTICLE_SCHEMA_V2.md). Existing articles must not be bulk-converted; use the read-only `pnpm preview:content-v2` report and migrate one reviewed article at a time.
+This document describes the legacy v1 contract. New structured content uses the additive v2 contract in [`ARTICLE_SCHEMA_V2.md`](./ARTICLE_SCHEMA_V2.md). The controlled v1 Official migration is documented there; new or materially revised articles must use v2.
 
 ## Required Frontmatter
 

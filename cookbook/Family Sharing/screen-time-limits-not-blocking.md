@@ -1,17 +1,34 @@
 ---
+schemaVersion: 2
+id: screen-time-limits-not-blocking
 title: 屏幕使用时间限额到时仍能继续使用
 slug: screen-time-limits-not-blocking
-device:
+summary: >-
+  家长设置了停用时间或 App 限额，但孩子到时间后还能点“忽略限额”、继续打开 App，或某些 App
+  一直不受限制。最快路径是先确认限制对象、阻止开关、始终允许列表和内容与隐私限制，再判断是不是请求批准或同步问题。
+symptoms:
+  - “App 限额到了，孩子还是能继续用。”
+  - “停用时间只把 App 变灰，点进去还能忽略。”
+  - “只限制游戏没问题，但信息、FaceTime 或电话不受限制。”
+  - “我设了 1 小时，孩子说点一下就能继续。”
+  - “家长端看起来设置成功，孩子设备没有生效。”
+  - “删除重装 App 后好像又能用了。”
+  - “某些家长控制默认打开，不能关。”
+devices:
   - iPhone
   - iPad
   - Mac
-category: Family Sharing
+platforms: []
+systemVersions: []
+categories:
+  - Family Sharing
 tags:
   - Family Sharing
   - Screen Time
   - App Limits
   - Downtime
   - Privacy
+keywords: []
 aliases:
   - Screen Time limits not working
   - App Limits not blocking
@@ -21,23 +38,135 @@ aliases:
   - App 限额到时间还能用
   - 停用时间还能打开 App
   - 孩子绕过屏幕时间
-verification: Official
+errorMessages: []
+officialTerms: []
+communityTerms: []
 difficulty: Moderate
-updated: 2026-07-13
-official_sources:
-  - https://support.apple.com/zh-cn/108806
-  - https://support.apple.com/en-us/108806
-  - https://support.apple.com/zh-cn/105121
-  - https://support.apple.com/en-us/105121
-  - https://support.apple.com/en-us/125666
-  - https://support.apple.com/zh-cn/guide/iphone/iphb0c7313c9/ios
-  - https://support.apple.com/zh-cn/125399
-community_sources:
-  - https://discussions.apple.com/thread/254480754
-  - https://discussions.apple.com/thread/255716772
-  - https://discussions.apple.com/thread/255044171
+estimatedTime: null
+verificationLevel: Official
 status: canonical
-popular: true
+canonicalArticleId: screen-time-limits-not-blocking
+solutions:
+  - id: solution-4ba4bb930c29
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - 在家长设备上打开设置 屏幕时间，在“家人”下轻点孩子姓名，确认正在修改的是孩子的设置，不是家长自己的设备限制。
+      - 轻点App 与网站活动，确认已经打开；如果没有打开，先打开后再设置限制。
+      - 轻点锁定屏幕时间设置，设置或确认屏幕时间密码，避免孩子直接更改限制。
+      - 如果问题发生在停用时间，进入停用时间，确认日程正确，并打开停用期间阻止使用设备。
+      - 如果问题发生在某个 App，进入App 限额 添加限额，展开对应类别，确认选中了具体 App，或确认整个类别限额覆盖该 App。
+      - 检查自定义每日时长，确认当天不是被设置成更长时间或没有限额。
+      - 打开始终允许，确认这个 App 没有被放在“允许的 App”中；同时确认孩子在停用期间允许通信的联系人是否符合家长预期。
+      - 打开内容与隐私限制，确认它处于开启状态；如果它关闭，相关家长控制会暂停。
+      - 将家长设备和孩子设备都更新到当前可用的最新系统版本，再重新测试一次限额。
+      - 如果孩子是通过“请求更多时间”或 App 例外获得访问权限，改按请求批准流程检查“信息”、通知和例外列表。
+      - >-
+        如果顾客抱怨某些控制不能关闭或会自动打开，先确认孩子生日、Apple 账户国家或地区和家庭组织者地区；按 Apple
+        地区规则解释，不要建议改生日或改区来绕过限制。
+    verificationLevel: Official
+    sourceIds:
+      - official-f033970b8746
+      - official-bd0e69c44cd2
+      - official-539a38b5b739
+      - official-7cb5dd994782
+      - official-da55f7f2503e
+      - official-a35839d8338f
+      - official-1ed321e2dd47
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-f033970b8746
+    title: Apple 支持：使用“屏幕时间”来管理孩子的 iPhone 或 iPad
+    url: 'https://support.apple.com/zh-cn/108806'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-bd0e69c44cd2
+    title: 'Apple Support: Use Screen Time to manage your child''s iPhone or iPad'
+    url: 'https://support.apple.com/en-us/108806'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-539a38b5b739
+    title: Apple 支持：使用家长控制来管理你孩子的 iPhone 或 iPad
+    url: 'https://support.apple.com/zh-cn/105121'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-7cb5dd994782
+    title: 'Apple Support: Use parental controls to manage your child''s iPhone or iPad'
+    url: 'https://support.apple.com/en-us/105121'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-da55f7f2503e
+    title: 'Apple Support: Region-specific rules for managing an Apple Account'
+    url: 'https://support.apple.com/en-us/125666'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-a35839d8338f
+    title: iPhone 使用手册：在 iPhone 上通过“屏幕时间”设置定时
+    url: 'https://support.apple.com/zh-cn/guide/iphone/iphb0c7313c9/ios'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-1ed321e2dd47
+    title: Apple 支持：如何管理孩子的 App 例外请求
+    url: 'https://support.apple.com/zh-cn/125399'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-a55f4f9887d2
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/254480754'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-f4df971cae6f
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/255716772'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-6c987b9cf7c5
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/255044171'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-13'
+lastUpdatedAt: '2026-07-13'
+createdAt: null
+relatedArticles:
+  - screen-time-requests-not-working
+  - screen-time-child-usage-not-showing
+  - ask-to-buy-requests-not-showing
+popular: false
 ---
 
 # 屏幕使用时间限额到时仍能继续使用

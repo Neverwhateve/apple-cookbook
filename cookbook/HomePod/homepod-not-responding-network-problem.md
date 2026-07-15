@@ -1,12 +1,30 @@
 ---
+schemaVersion: 2
+id: homepod-not-responding-network-problem
 title: HomePod 或 HomePod mini 在家庭 App 中显示未响应
 slug: homepod-not-responding-network-problem
-device:
+summary: >-
+  “家庭”App 里 HomePod 或 HomePod mini 显示“未响应”“网络问题”“无互联网”，或者 Siri 说无法连接到网络时，先看提醒内容和
+  Wi-Fi 状态。最快顺序是确认同一无线局域网、信号强度、路由器和家居中枢通信，再重启 HomePod；不要一开始就还原家庭或重置所有智能家居配件。
+symptoms:
+  - “家庭 App 里 HomePod 显示未响应。”
+  - “HomePod 可以播放音乐，但家庭 App 里显示离线。”
+  - “Siri 说无法连接到互联网。”
+  - “HomePod 设置里 Wi-Fi 旁边有感叹号。”
+  - “提示 HomePod 和 iPhone 不在同一个无线局域网。”
+  - “HomePod mini 一直正在配置。”
+  - “更新后 HomePod 不能控制灯，也不能作为家居中枢。”
+devices:
   - HomePod
   - iPhone
   - iPad
   - Mac
-category: HomePod
+platforms: []
+systemVersions:
+  - iOS 16.3
+  - iPadOS 16.3
+categories:
+  - HomePod
 tags:
   - HomePod
   - HomePod mini
@@ -15,6 +33,7 @@ tags:
   - Siri
   - Home Hub
   - AirPlay
+keywords: []
 aliases:
   - HomePod not responding
   - HomePod mini not responding
@@ -25,24 +44,154 @@ aliases:
   - HomePod 无互联网
   - HomePod 网络不匹配
   - HomePod 无线局域网不兼容
-verification: Official
+errorMessages:
+  - “家庭 App 里 HomePod 显示未响应。”
+  - “提示 HomePod 和 iPhone 不在同一个无线局域网。”
+  - HomePod not responding
+  - HomePod mini not responding
+  - HomePod 未响应
+officialTerms: []
+communityTerms: []
 difficulty: Moderate
-updated: 2026-07-10
-official_sources:
-  - https://support.apple.com/zh-cn/105031
-  - https://support.apple.com/zh-cn/105043
-  - https://support.apple.com/zh-cn/122539
-  - https://support.apple.com/zh-cn/108389
-  - https://support.apple.com/zh-cn/111109
-  - https://support.apple.com/zh-cn/111110
-  - https://support.apple.com/zh-cn/102557
-community_sources:
-  - https://discussions.apple.com/thread/254669625
-  - https://discussions.apple.com/thread/255509299
-  - https://discussionschinese.apple.com/thread/255530131
-  - https://www.reddit.com/r/HomeKit/comments/1uhqo6e/homepod_mini_cannot_handle_any_siri_requests_but/
+estimatedTime: null
+verificationLevel: Official
 status: canonical
-popular: true
+canonicalArticleId: homepod-not-responding-network-problem
+solutions:
+  - id: solution-bdb5baff51be
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - 在 iPhone、iPad 或 Mac 上打开“家庭”App，轻点或点按 HomePod，先查看是否有具体提醒。
+      - 如果提醒显示 HomePod 无法接入家庭无线局域网、无法访问 Apple 账户或其他问题，按提醒详情处理，不要先重置整个家庭。
+      - 打开 HomePod 设置，向下滚动到“无线局域网”，查看网络名称和信号强度。
+      - 如果信号强度只有两格或更少，把 HomePod 移近路由器或接入点，并移除可能的无线干扰源。
+      - 如果 Wi-Fi 指示器显示感叹号，按“网络问题”或“无互联网”路径处理。
+      - 确认 HomePod 和 iPhone 都连接到同一个首选无线局域网。
+      - '如果“家庭”App 显示“HomePod 网络不匹配”，轻点或点按“查看详细信息”，再选择“将 HomePod 移到 [无线局域网]”。'
+      - >-
+        重新启动 HomePod：在 HomePod 设置中选择“还原 HomePod”，然后选择“重新启动
+        HomePod”。如果是立体声组合，选择“重新启动 HomePod”。
+      - 如果没有看到重新启动选项，断开 HomePod 电源，再重新接入电源后重试。
+      - 如果“家庭”App 显示“网络问题”或“无互联网”，确认调制解调器和路由器已接入电源，然后重新启动调制解调器和路由器。
+      - 如果所有设备都在同一网络，但活跃家居中枢无法接通，检查路由器的防火墙规则和其他可能阻止家居中枢通信的设置。
+      - 检查网络中是否只有一台 DHCP 服务器、DNS 配置是否正确、是否阻止点对点流量，以及是否存在双 NAT。
+      - 如果 HomePod 仍然没有响应，按 Apple 指引将 HomePod 还原为出厂设置。
+      - >-
+        对 HomePod mini，如果无法还原，可以用随附 USB-C 线缆连接 Mac 或 PC，选择“恢复
+        HomePod”，这会还原并更新到最新软件。
+      - 如果完成以上步骤后仍有问题，联系 Apple 支持或安排服务。
+    verificationLevel: Official
+    sourceIds:
+      - official-151616311abe
+      - official-22058635713d
+      - official-9d46af828848
+      - official-c8258cba62f7
+      - official-cf0cd77da462
+      - official-05c729a0cd26
+      - official-e938301f495e
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-151616311abe
+    title: Apple 支持：如果 HomePod 或 HomePod mini 没有响应
+    url: 'https://support.apple.com/zh-cn/105031'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-22058635713d
+    title: Apple 支持：如果 HomePod 上的 Siri 提示 HomePod 无法连接到互联网
+    url: 'https://support.apple.com/zh-cn/105043'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-9d46af828848
+    title: Apple 支持：如果 HomePod 存在“网络问题”或“无互联网”
+    url: 'https://support.apple.com/zh-cn/122539'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-c8258cba62f7
+    title: Apple 支持：还原 HomePod 或 HomePod mini
+    url: 'https://support.apple.com/zh-cn/108389'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-cf0cd77da462
+    title: Apple 支持：如果你无法设置 HomePod 或 HomePod mini
+    url: 'https://support.apple.com/zh-cn/111109'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-05c729a0cd26
+    title: Apple 支持：设置 HomePod 或 HomePod mini
+    url: 'https://support.apple.com/zh-cn/111110'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-e938301f495e
+    title: Apple 支持：将 HomePod、HomePod mini 或 Apple TV 设置为家居中枢
+    url: 'https://support.apple.com/zh-cn/102557'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-192f5dcd4dcd
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/254669625'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-eb136a9003e0
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/255509299'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-4bf629ca6389
+    title: discussionschinese.apple.com 旧版引文（原始标题未记录）
+    url: 'https://discussionschinese.apple.com/thread/255530131'
+    publisher: discussionschinese.apple.com
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-b305b422bf32
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/HomeKit/comments/1uhqo6e/homepod_mini_cannot_handle_any_siri_requests_but/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-10'
+lastUpdatedAt: '2026-07-10'
+createdAt: null
+relatedArticles:
+  - homekit-matter-accessories-no-response
+  - iphone-ipad-wifi-no-internet-unable-to-join
+popular: false
 ---
 
 # HomePod 或 HomePod mini 在家庭 App 中显示未响应

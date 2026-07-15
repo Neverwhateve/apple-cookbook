@@ -1,17 +1,33 @@
 ---
+schemaVersion: 2
+id: airpods-find-my-setup-incomplete
 title: AirPods 在“查找”中显示设置未完成
 slug: airpods-find-my-setup-incomplete
-device:
+summary: >-
+  顾客在“查找”App 中看到 AirPods 显示“设置未完成”或部分“查找”功能不可用。先确认 AirPods 已完成配对、iPhone 或 iPad
+  的“查找”网络和账户安全功能已打开，再移除并重新连接 AirPods。
+symptoms:
+  - “查找里提示 AirPods 设置未完成。”
+  - “AirPods 能连接听歌，但不能定位。”
+  - “显示 Some features aren't available。”
+  - “找不到位置，也不能播放声音。”
+  - “换手机以后 AirPods 一直没完成设置。”
+  - “二手 AirPods 配对成功，但查找功能不完整。”
+devices:
   - AirPods
   - iPhone
   - iPad
-category: AirPods
+platforms: []
+systemVersions: []
+categories:
+  - AirPods
 tags:
   - AirPods
   - Find My
   - Bluetooth
   - Apple ID
   - iCloud
+keywords: []
 aliases:
   - AirPods Setup Incomplete
   - AirPods Find My setup incomplete
@@ -20,20 +36,109 @@ aliases:
   - AirPods 查找设置未完成
   - AirPods 查找网络打不开
   - AirPods 找不到位置
-verification: Official
+errorMessages:
+  - “查找里提示 AirPods 设置未完成。”
+officialTerms: []
+communityTerms: []
 difficulty: Moderate
-updated: 2026-07-09
-official_sources:
-  - https://support.apple.com/zh-cn/104960
-  - https://support.apple.com/zh-cn/guide/airpods/dev8e8b93d71/web
-  - https://support.apple.com/zh-cn/102648
-  - https://support.apple.com/zh-cn/109020
-  - https://support.apple.com/zh-cn/guide/icloud/mmfc0f0c67/icloud
-community_sources:
-  - https://discussions.apple.com/thread/254229614?page=3
-  - https://www.reddit.com/r/airpods/comments/1s96d46/lost_airpods_displaying_setup_incomplete/
+estimatedTime: null
+verificationLevel: Official
 status: canonical
-popular: true
+canonicalArticleId: airpods-find-my-setup-incomplete
+solutions:
+  - id: solution-3f6299280f70
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - 让 AirPods 保持在充电盒附近，打开盒盖后等待几分钟，确认配对流程是否自动完成。
+      - 将配对的 iPhone 或 iPad 更新到当前可用的最新 iOS 或 iPadOS 版本。
+      - 打开设置 你的姓名 查找 查找我的 iPhone，确认查找我的 iPhone和“查找”网络都已打开。
+      - 打开设置 蓝牙，确认蓝牙已打开，轻点 AirPods 旁边的更多信息按钮，确认 AirPods 的“查找”网络已打开。
+      - 确认 Apple 账户已经打开双重认证。
+      - 确认 iCloud 钥匙串已打开。
+      - 如果“设置”顶部出现更新 Apple 账户设置提醒，按提示完成账户设置。
+      - 合上 AirPods 充电盒盒盖，等待片刻，再打开盒盖，等待约一分钟看提醒是否消失。
+      - 如果仍无法完成配对，将 AirPods 放入充电盒并合上盒盖。
+      - 打开查找 设备 AirPods，选择移除或移除此设备。
+      - 回到 iPhone 或 iPad 主屏幕，打开 AirPods 充电盒盒盖，并按屏幕提示重新连接。
+      - 如果提示 AirPods、AirTag 或其他“查找”网络配件已与另一个 Apple 账户配对，按该提示处理，不要把它当作普通配对失败。
+    verificationLevel: Official
+    sourceIds:
+      - official-68d0c0a050db
+      - official-67add3c05ef4
+      - official-4ea70e8f36d7
+      - official-9373e0ce45d0
+      - official-28d62570406f
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-68d0c0a050db
+    title: Apple 支持：如果你在“查找”App 中收到有关 AirPods 设置未完成的提醒
+    url: 'https://support.apple.com/zh-cn/104960'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-67add3c05ef4
+    title: Apple 支持：查找 AirPods
+    url: 'https://support.apple.com/zh-cn/guide/airpods/dev8e8b93d71/web'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-4ea70e8f36d7
+    title: Apple 支持：如何在 iPhone、iPad 或 Mac 上打开“查找”
+    url: 'https://support.apple.com/zh-cn/102648'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-9373e0ce45d0
+    title: Apple 支持：使用“查找”查找丢失的 AirPods
+    url: 'https://support.apple.com/zh-cn/109020'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-28d62570406f
+    title: iCloud 使用手册：在你的所有设备上设置“查找”
+    url: 'https://support.apple.com/zh-cn/guide/icloud/mmfc0f0c67/icloud'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-fb4b8f3f1dda
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/254229614?page=3'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-93b451d25830
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/airpods/comments/1s96d46/lost_airpods_displaying_setup_incomplete/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-09'
+lastUpdatedAt: '2026-07-09'
+createdAt: null
+relatedArticles:
+  - airpods-wont-connect-pair-reset
+  - location-sharing-not-working
+popular: false
 ---
 
 # AirPods 在“查找”中显示设置未完成

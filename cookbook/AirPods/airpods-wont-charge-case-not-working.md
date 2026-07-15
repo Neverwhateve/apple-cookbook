@@ -1,13 +1,30 @@
 ---
+schemaVersion: 2
+id: airpods-wont-charge-case-not-working
 title: AirPods 无法充电或充电盒没有反应
 slug: airpods-wont-charge-case-not-working
-device:
+summary: >-
+  AirPods 放进盒子没有充电、一只耳机电量不涨、充电盒没有指示灯，或 AirPods Max
+  插线后没有反应时，先确认供电路径，再检查充电状态、清洁和干燥情况，最后再重置或安排服务。不要一开始就判断为电池坏了。
+symptoms:
+  - “AirPods 放回盒子没有充电。”
+  - “只有左耳 / 右耳不充电。”
+  - “充电盒插线没有灯。”
+  - “无线充电放上去没有反应。”
+  - “电量一直停在 0% / 1%。”
+  - “要把耳机重新放好几次才开始充。”
+  - “运动出汗后就充不上。”
+  - “AirPods Max 插线五分钟还是开不了机。”
+devices:
   - AirPods
   - AirPods Max
   - iPhone
   - iPad
   - Mac
-category: AirPods
+platforms: []
+systemVersions: []
+categories:
+  - AirPods
 tags:
   - AirPods
   - AirPods Max
@@ -15,6 +32,7 @@ tags:
   - Battery
   - Case
   - Cleaning
+keywords: []
 aliases:
   - AirPods won't charge
   - AirPods case not charging
@@ -26,29 +44,206 @@ aliases:
   - AirPods 充电盒没反应
   - AirPods 充电盒不亮灯
   - AirPods 放进盒子没有充电
-verification: Official
+errorMessages: []
+officialTerms: []
+communityTerms: []
 difficulty: Moderate
-updated: 2026-07-11
-official_sources:
-  - https://support.apple.com/zh-cn/102593
-  - https://support.apple.com/zh-cn/119912
-  - https://support.apple.com/zh-cn/102672
-  - https://support.apple.com/zh-cn/120409
-  - https://support.apple.com/zh-cn/105046
-  - https://support.apple.com/zh-cn/100494
-  - https://support.apple.com/zh-cn/118531
-  - https://support.apple.com/zh-cn/119838
-community_sources:
-  - https://discussions.apple.com/thread/7794211
-  - https://discussions.apple.com/thread/7948985
-  - https://discussions.apple.com/thread/254905911
-  - https://discussionschinese.apple.com/thread/250491235
-  - https://discussionschinese.apple.com/thread/250757465
-  - https://discussionschinese.apple.com/thread/254537361
-  - https://www.reddit.com/r/airpods/comments/1mmo0hk/if_your_airpods_wont_charge_on_one_side_its/
-  - https://www.reddit.com/r/airpods/comments/1qf52x9/charging_issues/
-  - https://www.reddit.com/r/airpods/comments/1py6vpf/airpod_pros_3_case_no_longer_charging_at_all/
+estimatedTime: null
+verificationLevel: Official
 status: canonical
+canonicalArticleId: airpods-wont-charge-case-not-working
+solutions:
+  - id: solution-db81c7f9a6d8
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - 先判断是哪一种充电问题：两只耳机都不充、只有一只不充、充电盒不充、无线充电不亮灯，还是 AirPods Max 不充。
+      - >-
+        如果是 AirPods 或 AirPods Pro，将两只 AirPods 放入充电盒，合上盒盖，用 Lightning 或 USB-C
+        线连接充电盒和 USB 电源适配器，至少充电 15 分钟。
+      - 如果是 AirPods Max，使用随附充电线至少充电 5 分钟。不使用时放入智能耳机套，帮助耳机进入超低电量模式。
+      - 检查线缆两端是否牢固连接，USB 电源适配器是否插入正常供电的插座。必要时换一条线、换一个适配器或换一个插座做对照。
+      - >-
+        如果使用无线充电盒，把状态指示灯朝上放在兼容 Qi 充电器、MagSafe 充电器或支持的 Apple Watch
+        充电器上，并合上盒盖。指示灯应亮起几秒后熄灭并继续充电。
+      - 如果无线充电没有亮灯，重新摆放充电盒。仍不充电时，改用兼容线缆连接充电盒和 USB 电源适配器。
+      - 在 iPhone、iPad、Mac 或充电盒上查看 AirPods 电量，确认是 AirPods 没充、充电盒没充，还是显示电量延迟。
+      - >-
+        如果是 AirPods Pro 3 只能充到上限，打开 iPhone 或 iPad 上的 AirPods
+        设置，按需关闭“优化充电上限”来充满电。
+      - 清洁充电盒前，先断开充电线。用干净、干燥的软毛小刷子清除充电端口中的碎屑；不要把任何物体放入充电端口内，以免损坏金属接触点。
+      - 使用柔软、干燥的无绒布清洁充电盒；必要时可以用异丙醇轻微蘸湿布块，并让充电盒自然晾干。不要让液体进入充电端口。
+      - >-
+        如果 AirPods、AirPods Pro、AirPods 3 或 AirPods 4 接触汗水或水，先用柔软、干燥、无绒布擦干，并至少等待
+        2 小时完全晾干后再放入充电盒。不要使用加热或压缩空气。
+      - >-
+        如果是一只 AirPod 无法正常工作，将两只 AirPods 放入充电盒内充电 30 秒，然后在 iPhone 或 iPad
+        附近打开充电盒并测试两只耳机。
+      - >-
+        如果仍无法充电，按 Apple 指引重置 AirPods 或 AirPods Max。重置会清除 AirPods
+        自定义设置，之后需要重新连接并恢复设置。
+      - 清洁、确认供电、查看充电状态和重置后仍无法充电时，通过 Apple 支持获取下一步建议或安排服务。
+    verificationLevel: Official
+    sourceIds:
+      - official-fd369d57d044
+      - official-c4d4a04e2950
+      - official-d4af18e92adb
+      - official-2cbe01ea223c
+      - official-88431d5a5dff
+      - official-073359d4a60b
+      - official-b96d842084bc
+      - official-b1a82eb67efc
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-fd369d57d044
+    title: Apple 支持：如果你的 AirPods 无法充电
+    url: 'https://support.apple.com/zh-cn/102593'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-c4d4a04e2950
+    title: Apple 支持：为 AirPods 充电
+    url: 'https://support.apple.com/zh-cn/119912'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-d4af18e92adb
+    title: Apple 支持：如何清洁 AirPods
+    url: 'https://support.apple.com/zh-cn/102672'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-2cbe01ea223c
+    title: Apple 支持：如何清洁 AirPods Pro
+    url: 'https://support.apple.com/zh-cn/120409'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-88431d5a5dff
+    title: Apple 支持：关于 AirPods Pro、AirPods 3 和 AirPods 4 的抗汗抗水性能
+    url: 'https://support.apple.com/zh-cn/105046'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-073359d4a60b
+    title: Apple 支持：如果左侧或右侧 AirPod 无法正常使用
+    url: 'https://support.apple.com/zh-cn/100494'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-b96d842084bc
+    title: Apple 支持：如何重置 AirPods 和 AirPods Pro
+    url: 'https://support.apple.com/zh-cn/118531'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-b1a82eb67efc
+    title: Apple 支持：如何重新启动或重置 AirPods Max
+    url: 'https://support.apple.com/zh-cn/119838'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-3f29129ac0d9
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/7794211'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-36ea02dc73b8
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/7948985'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-0b3e5dd7f17e
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/254905911'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-d7b103259d13
+    title: discussionschinese.apple.com 旧版引文（原始标题未记录）
+    url: 'https://discussionschinese.apple.com/thread/250491235'
+    publisher: discussionschinese.apple.com
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-980794611469
+    title: discussionschinese.apple.com 旧版引文（原始标题未记录）
+    url: 'https://discussionschinese.apple.com/thread/250757465'
+    publisher: discussionschinese.apple.com
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-4daf5f53ebad
+    title: discussionschinese.apple.com 旧版引文（原始标题未记录）
+    url: 'https://discussionschinese.apple.com/thread/254537361'
+    publisher: discussionschinese.apple.com
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-db297ac232d3
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/airpods/comments/1mmo0hk/if_your_airpods_wont_charge_on_one_side_its/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-31384bd63341
+    title: Reddit 旧版引文（原始标题未记录）
+    url: 'https://www.reddit.com/r/airpods/comments/1qf52x9/charging_issues/'
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-3e8fa5784d23
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/airpods/comments/1py6vpf/airpod_pros_3_case_no_longer_charging_at_all/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-11'
+lastUpdatedAt: '2026-07-11'
+createdAt: null
+relatedArticles:
+  - airpods-wont-connect-pair-reset
+  - airpods-firmware-wont-update
+  - airpods-find-my-setup-incomplete
 popular: true
 ---
 

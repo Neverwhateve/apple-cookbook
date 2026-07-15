@@ -1,9 +1,29 @@
 ---
+schemaVersion: 2
+id: iphone-black-screen-wont-turn-on-after-battery-drained
 title: iPhone 黑屏、无法开机或电量耗尽后没反应
 slug: iphone-black-screen-wont-turn-on-after-battery-drained
-device:
+summary: >-
+  iPhone
+  黑屏、按电源键没反应、耗尽电量后插电不开机，或只显示低电量图标时，先按机型做强制重新启动，再给足充电时间并验证供电路径。不要把“黑屏”直接当作屏幕坏，也不要在只用同一套充电器测试后就判定主板故障。
+symptoms:
+  - “iPhone 黑屏，怎么按都不开机。”
+  - “昨晚没电关机，早上插电没有充电图标。”
+  - “显示低电量图标，但一直进不了系统。”
+  - “电量耗尽后充了一个小时还是没反应。”
+  - “iPhone 17 / iPhone Air 没电后有线充不起来。”
+  - “按音量上、音量下、电源键没有 Apple 标志。”
+  - “卡在 Apple 标志或进度条不动。”
+  - “手机黑屏但我不确定是不是还在运行。”
+devices:
   - iPhone
-category: iPhone
+platforms:
+  - iOS
+systemVersions:
+  - iOS 26.5.1
+  - iOS 26
+categories:
+  - iPhone
 tags:
   - iPhone
   - iOS
@@ -14,6 +34,7 @@ tags:
   - Startup
   - Recovery
   - Repair
+keywords: []
 aliases:
   - iPhone won't turn on
   - iPhone black screen
@@ -24,22 +45,133 @@ aliases:
   - iPhone 没电后开不了机
   - iPhone 插电没反应
   - iPhone 17 电量耗尽后无法开机
-verification: Official
+errorMessages: []
+officialTerms: []
+communityTerms: []
 difficulty: Moderate
-updated: 2026-07-13
-official_sources:
-  - https://support.apple.com/zh-cn/116940
-  - https://support.apple.com/zh-cn/108805
-  - https://support.apple.com/zh-cn/102474
-  - https://support.apple.com/zh-cn/118431
-  - https://support.apple.com/zh-cn/123075
-community_sources:
-  - https://discussions.apple.com/thread/256308911
-  - https://discussions.apple.com/thread/256268415
-  - https://discussions.apple.com/thread/256221247
-  - https://www.reddit.com/r/iphone/comments/1ohqv8m/iphone_17_not_turning_on_or_charging_after_dying/
+estimatedTime: null
+verificationLevel: Official
 status: canonical
-popular: true
+canonicalArticleId: iphone-black-screen-wont-turn-on-after-battery-drained
+solutions:
+  - id: solution-bb6c8e8ca30e
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - 先确认屏幕状态：完全黑屏、低电量图标、Apple 标志、进度条、恢复模式画面，还是液体检测/配件警告。
+      - >-
+        按机型强制重新启动。Face ID 机型和 iPhone 8 或更新机型：快速按下调高音量、快速按下调低音量，然后按住侧边按钮直到看到
+        Apple 标志。Apple 说明这可能超过 10 秒。
+      - 如果是 iPhone 7 / 7 Plus，同时按住侧边按钮和调低音量按钮直到看到 Apple 标志。
+      - 如果是 iPhone 6s 或更早机型，同时按住主屏幕按钮和侧边或顶部按钮直到看到 Apple 标志。
+      - 如果 iPhone 仍不开机，接入墙壁电源充电 1 小时，再重复对应机型的强制重新启动。
+      - 如果屏幕显示低电量图标，检查充电器、线缆、插座、接口是否明显损坏或松动，然后继续充电 30 分钟或直到设备启动。
+      - 使用已知正常的电源适配器、线缆和墙壁插座测试。不要只通过电脑、车载 USB、键盘、扩展坞或集线器判断。
+      - 目视检查接口是否有明显碎屑、液体、烧蚀或变形。不要用金属针、取卡针、棉签或纸巾深入接口。
+      - >-
+        如果是 iPhone Air 或 iPhone 17 系列，且问题发生在电量几乎耗尽后有线充电无法开始，设备能开机后立即更新到 iOS
+        26.5.1 或更新版本。
+      - 如果设备可无线充电但有线不充，先用无线充电把设备充到可开机、可备份、可更新，再转入有线充电/接口排查。
+      - >-
+        如果 iPhone 卡在 Apple 标志和进度条，确认进度条超过 1 小时没有移动后，把 iPhone 连接电脑进入恢复模式；在
+        Finder、Apple Devices App 或 iTunes 中优先选择更新。选择恢复会抹掉 iPhone。
+      - 如果 iPhone 仍无法开机或无法充电，联系 Apple 支持或安排服务。
+    verificationLevel: Official
+    sourceIds:
+      - official-8b29754fbb8d
+      - official-a16810fd1611
+      - official-77812d55cc1e
+      - official-652e4800d38c
+      - official-bddd81d53bad
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-8b29754fbb8d
+    title: Apple 支持：如果 iPhone 无法开机或黑屏
+    url: 'https://support.apple.com/zh-cn/116940'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-a16810fd1611
+    title: Apple 支持：如果 iPhone 或 iPod touch 无法充电
+    url: 'https://support.apple.com/zh-cn/108805'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-77812d55cc1e
+    title: Apple 支持：如果 iPhone 卡在 Apple 标志
+    url: 'https://support.apple.com/zh-cn/102474'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-652e4800d38c
+    title: Apple 支持：如果 iPhone 或 iPad 温度过高或过低
+    url: 'https://support.apple.com/zh-cn/118431'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-bddd81d53bad
+    title: Apple 支持：关于 iOS 26 更新
+    url: 'https://support.apple.com/zh-cn/123075'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-1598ef77a507
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/256308911'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-636110f9adff
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/256268415'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-999837433db5
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/256221247'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-a1d52b2e6f17
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/iphone/comments/1ohqv8m/iphone_17_not_turning_on_or_charging_after_dying/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-13'
+lastUpdatedAt: '2026-07-13'
+createdAt: null
+relatedArticles:
+  - iphone-wont-charge-wired-liquid-detected
+  - iphone-charging-paused-80-temperature-charge-limit
+  - iphone-battery-drains-after-update
+  - iphone-stuck-preparing-verifying-software-update
+  - icloud-storage-full-iphone-backup-fails
+popular: false
 ---
 
 # iPhone 黑屏、无法开机或电量耗尽后没反应

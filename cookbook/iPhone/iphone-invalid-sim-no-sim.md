@@ -1,10 +1,27 @@
 ---
+schemaVersion: 2
+id: iphone-invalid-sim-no-sim
 title: iPhone 显示无 SIM 卡或无效 SIM 卡
 slug: iphone-invalid-sim-no-sim
-device:
+summary: >-
+  iPhone 或蜂窝版 iPad 弹出“无 SIM 卡”“未安装 SIM 卡”“无效 SIM 卡”或类似提醒时，先判断是实体 SIM 没被识别、eSIM
+  需要运营商处理、运营商锁限制，还是激活流程没有完成。不要先擦除设备或反复还原；最快路径通常是检查套餐、运营商锁、运营商设置和 SIM / eSIM 状态。
+symptoms:
+  - “手机突然提示无 SIM 卡。”
+  - “更新后显示 No SIM / Invalid SIM。”
+  - “插了卡还是说未安装 SIM 卡。”
+  - “换了一张卡以后提示无效 SIM 卡。”
+  - “控制中心运营商位置显示 No SIM。”
+  - “实体卡能放进去，但没有蜂窝网络。”
+  - “eSIM 掉了，提示 SIM Failure。”
+devices:
   - iPhone
   - iPad
-category: iPhone
+platforms: []
+systemVersions:
+  - iOS 18
+categories:
+  - iPhone
 tags:
   - iPhone
   - iPad
@@ -13,6 +30,7 @@ tags:
   - eSIM
   - Carrier
   - Activation
+keywords: []
 aliases:
   - iPhone No SIM
   - iPhone Invalid SIM
@@ -22,21 +40,118 @@ aliases:
   - iPhone 显示无 SIM 卡
   - iPhone 提示无效 SIM 卡
   - iPhone SIM 卡故障
-verification: Official
+errorMessages:
+  - “手机突然提示无 SIM 卡。”
+  - “换了一张卡以后提示无效 SIM 卡。”
+  - “eSIM 掉了，提示 SIM Failure。”
+  - iPhone 提示无效 SIM 卡
+officialTerms: []
+communityTerms: []
 difficulty: Moderate
-updated: 2026-07-09
-official_sources:
-  - https://support.apple.com/zh-cn/108914
-  - https://support.apple.com/zh-cn/118569
-  - https://support.apple.com/zh-cn/109316
-  - https://support.apple.com/zh-cn/109326
-  - https://support.apple.com/zh-cn/120000
-community_sources:
-  - https://discussions.apple.com/thread/256207821
-  - https://discussions.apple.com/thread/255917033
-  - https://discussions.apple.com/thread/256147014
+estimatedTime: null
+verificationLevel: Official
 status: canonical
-popular: true
+canonicalArticleId: iphone-invalid-sim-no-sim
+solutions:
+  - id: solution-7e3431f730c4
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - 确认顾客的无线运营商套餐处于活跃状态，号码没有停机、欠费、换卡未完成或 eSIM 未配置。
+      - 如果刚换运营商或使用外地/二手设备，打开设置 通用 关于本机，查看运营商锁。如果显示不是“无 SIM 卡限制”，让顾客联系当前运营商处理解锁。
+      - 重新启动 iPhone 或蜂窝版 iPad。
+      - 连接 Wi-Fi，打开设置 通用 关于本机，如果出现运营商设置更新，选择“好”或“更新”。
+      - 如果设备使用 eSIM，联系运营商确认 eSIM 是否仍然有效，是否需要重新下发、重新激活或转移套餐。
+      - 如果设备使用实体 SIM，取出 SIM 卡，再正确放回同一台设备的原配 SIM 卡托架。
+      - 确认 SIM 卡托架完全闭合且没有松动。不要使用其他 iPhone、iPad 或其他手机的卡托替代。
+      - 如果 SIM 卡损坏、不贴合、弯折、被裁剪或修改过，请联系运营商更换新的 SIM 卡。
+      - 如果仍显示“无 SIM 卡”或“无效 SIM 卡”，联系 Apple 支持进一步检测。
+      - 如果问题发生在新机激活期间，同时查看 Apple 系统状态中的 iOS 设备激活状态；如果激活服务不可用，稍后再试。
+    verificationLevel: Official
+    sourceIds:
+      - official-a8436154451f
+      - official-f4de63858b53
+      - official-80f7bf32d3d8
+      - official-e3af0af0831e
+      - official-f2c651734c37
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-a8436154451f
+    title: Apple 支持：如果你在 iPhone 或 iPad 上看到“无效 SIM 卡”或“无 SIM 卡”
+    url: 'https://support.apple.com/zh-cn/108914'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-f4de63858b53
+    title: Apple 支持：了解你的 iPhone 或 iPad 使用哪种类型的 SIM 卡
+    url: 'https://support.apple.com/zh-cn/118569'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-80f7bf32d3d8
+    title: Apple 支持：如何解锁 iPhone 以使用其他运营商
+    url: 'https://support.apple.com/zh-cn/109316'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-e3af0af0831e
+    title: Apple 支持：如果无法激活 iPhone 或 iPad（无线局域网 + 蜂窝网络）
+    url: 'https://support.apple.com/zh-cn/109326'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-f2c651734c37
+    title: Apple 旧版引文（原始标题未记录）
+    url: 'https://support.apple.com/zh-cn/120000'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-6a7c259bf005
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/256207821'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-d9fb2c921adb
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/255917033'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-3a921ef6fc6b
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/256147014'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-09'
+lastUpdatedAt: '2026-07-09'
+createdAt: null
+relatedArticles:
+  - iphone-imessage-messages-not-sending-green-waiting-activation
+  - iphone-esim-setup-transfer-fails
+  - iphone-sos-no-service-searching
+popular: false
 ---
 
 # iPhone 显示无 SIM 卡或无效 SIM 卡

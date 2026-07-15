@@ -1,18 +1,38 @@
 ---
+schemaVersion: 2
+id: airpods-wont-connect-pair-reset
 title: AirPods 无法连接或重新配对
 slug: airpods-wont-connect-pair-reset
-device:
+summary: >-
+  AirPods 没有弹出设置动画、蓝牙列表里找不到、显示“连接不成功”或重置后仍无法配对时，先确认设备系统版本、两只耳机充电、蓝牙和音频输出，再按
+  AirPods 型号使用正确的配对或重置动作。不要把二手 AirPods 的 Apple 账户归属问题当作普通蓝牙故障处理。
+symptoms:
+  - “打开盒盖没有弹窗。”
+  - “蓝牙里找不到 AirPods。”
+  - “点连接后提示连接不成功 / 不在范围内。”
+  - “AirPods 一直闪白灯，但手机连不上。”
+  - “按住按钮没有琥珀色灯。”
+  - “重置以后还是配对失败。”
+  - “提示不是你的 AirPods。”
+  - “换了单只耳机或充电盒以后无法配对。”
+devices:
   - AirPods
   - iPhone
   - iPad
   - Mac
-category: AirPods
+platforms: []
+systemVersions:
+  - iOS 18
+  - iOS 26
+categories:
+  - AirPods
 tags:
   - AirPods
   - Bluetooth
   - Pairing
   - Reset
   - Find My
+keywords: []
 aliases:
   - AirPods won't connect
   - AirPods not pairing
@@ -22,22 +42,141 @@ aliases:
   - AirPods 没有弹窗
   - AirPods 一直闪白灯
   - 不是你的 AirPods
-verification: Official
+errorMessages:
+  - “点连接后提示连接不成功 / 不在范围内。”
+  - “提示不是你的 AirPods。”
+officialTerms: []
+communityTerms: []
 difficulty: Moderate
-updated: 2026-07-10
-official_sources:
-  - https://support.apple.com/zh-cn/118576
-  - https://support.apple.com/zh-cn/104989
-  - https://support.apple.com/zh-cn/118531
-  - https://support.apple.com/zh-cn/102620
-  - https://support.apple.com/zh-cn/102520
-community_sources:
-  - https://discussionschinese.apple.com/thread/254751817
-  - https://discussionschinese.apple.com/thread/255726508
-  - https://discussions.apple.com/thread/252396052
-  - https://www.reddit.com/r/airpods/comments/t0ahse/airpod_pros_wont_show_up_in_any_of_my_devices/
+estimatedTime: null
+verificationLevel: Official
 status: canonical
-popular: true
+canonicalArticleId: airpods-wont-connect-pair-reset
+solutions:
+  - id: solution-9080a00e8f9e
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - 将 iPhone、iPad 或 Mac 更新到当前可用的最新系统版本。
+      - >-
+        确认 AirPods 机型和最低系统要求。特别注意 AirPods 4 需要 iOS 18 或更高版本，AirPods Pro 3 需要 iOS
+        26 或更高版本。
+      - 将两只 AirPods 都放入充电盒，并确认两只 AirPods 都在充电。
+      - 在 iPhone 或 iPad 上打开设置 蓝牙；在 Mac 上打开系统设置 蓝牙，确认蓝牙已打开。
+      - 打开控制中心并查看音频输出。如果 AirPods 已出现在设备列表中，先选择它们并播放音频测试，同时调高音量。
+      - 如果 AirPods 没有出现，或出现但无法连接，合上盒盖，等待 15 秒，再打开盒盖。
+      - 对于 AirPods 4 和 AirPods Pro 3，轻点两下充电盒正面，直到状态指示灯呈白色闪烁。
+      - 对于其他 AirPods 或 AirPods Pro 机型，按住充电盒背面的设置按钮，直到状态指示灯呈白色闪烁。
+      - 保持盒盖打开，将充电盒靠近要连接的设备，并按照屏幕上的步骤操作。
+      - 如果仍无法连接，重置 AirPods。
+      - >-
+        重置 AirPods 1、2、3、AirPods Pro 1 或 AirPods Pro 2 时，将 AirPods 放入充电盒，合上盒盖等待
+        30 秒；在蓝牙设置中忽略此设备；打开盒盖后按住背面设置按钮约 15 秒，直到状态指示灯先后呈琥珀色和白色闪烁。
+      - >-
+        重置 AirPods 4 或 AirPods Pro 3 时，将 AirPods 放入充电盒，合上盒盖等待 30
+        秒；在蓝牙设置中忽略此设备；打开盒盖后按 Apple 指示连续轻点充电盒正面，直到状态指示灯先后呈琥珀色和白色闪烁。
+      - 如果重置时状态指示灯没有呈白色闪烁，将 AirPods 放入充电盒，合上盒盖等待 20 秒，再按对应机型重复重置动作。
+      - >-
+        如果是别人用过的 AirPods，或屏幕提示已关联到另一个 Apple 账户，请让上一位所有者从查找App 或 iCloud.com 移除
+        AirPods。Apple 说明必须先移除“查找锁定”，才能与另一个 Apple 账户配对。
+      - >-
+        如果是更换单只 AirPods 或更换充电盒，将两只 AirPods 放入充电盒，接入电源，合上盒盖等待 20 分钟，再按 Apple
+        的更换件设置步骤重新连接。
+    verificationLevel: Official
+    sourceIds:
+      - official-2ec9addb7f78
+      - official-a1d3fdab2d70
+      - official-b96d842084bc
+      - official-246b0510c12c
+      - official-d6c2eeea3ab5
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-2ec9addb7f78
+    title: Apple 支持：如果 AirPods 或 AirPods Pro 无法连接
+    url: 'https://support.apple.com/zh-cn/118576'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-a1d3fdab2d70
+    title: Apple 支持：将 AirPods 和 AirPods Pro 连接到 iPhone
+    url: 'https://support.apple.com/zh-cn/104989'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-b96d842084bc
+    title: Apple 支持：如何重置 AirPods 和 AirPods Pro
+    url: 'https://support.apple.com/zh-cn/118531'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-246b0510c12c
+    title: Apple 支持：如果某个物品或设备已关联到另一个 Apple 账户
+    url: 'https://support.apple.com/zh-cn/102620'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-d6c2eeea3ab5
+    title: Apple 支持：设置 AirPods 更换件或充电盒更换件
+    url: 'https://support.apple.com/zh-cn/102520'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-d7ee7ed353dd
+    title: discussionschinese.apple.com 旧版引文（原始标题未记录）
+    url: 'https://discussionschinese.apple.com/thread/254751817'
+    publisher: discussionschinese.apple.com
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-262a744be188
+    title: discussionschinese.apple.com 旧版引文（原始标题未记录）
+    url: 'https://discussionschinese.apple.com/thread/255726508'
+    publisher: discussionschinese.apple.com
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-d6141fcb0df3
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/252396052'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-8205c7091fa4
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/airpods/comments/t0ahse/airpod_pros_wont_show_up_in_any_of_my_devices/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-10'
+lastUpdatedAt: '2026-07-10'
+createdAt: null
+relatedArticles:
+  - airpods-wont-charge-case-not-working
+  - airpods-firmware-wont-update
+  - airpods-find-my-setup-incomplete
+  - location-sharing-not-working
+popular: false
 ---
 
 # AirPods 无法连接或重新配对

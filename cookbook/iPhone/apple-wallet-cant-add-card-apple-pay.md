@@ -1,13 +1,31 @@
 ---
+schemaVersion: 2
+id: apple-wallet-cant-add-card-apple-pay
 title: Apple 钱包无法添加银行卡或 Apple Pay 卡片
 slug: apple-wallet-cant-add-card-apple-pay
-device:
+summary: >-
+  顾客看到“无法添加卡片”“卡片无效”“Card Device Limit”“请联系发卡机构”，或新 iPhone 转移后 Apple Pay
+  卡片不能重新加入时，先确认设备、地区、系统版本、双重认证和安全设置，再判断是否需要发卡银行处理。Apple 明确说明：Apple 不批准或拒绝卡片用于
+  Apple Pay；卡片被拒绝或验证失败时，通常要联系银行或发卡机构。
+symptoms:
+  - “Apple Pay 添加银行卡失败。”
+  - “钱包提示请联系发卡机构。”
+  - “提示 Card Device Limit / 已达到设备数量限制。”
+  - “同一张卡在旧 iPhone 能用，新 iPhone 加不上。”
+  - “卡片无效，银行说卡没问题。”
+  - “Apple Watch 不能添加同一张银行卡。”
+  - “添加卡片时验证短信、银行 App 或电话验证过不去。”
+  - “换地区、换手机或恢复备份后 Apple Pay 不能用了。”
+devices:
   - iPhone
   - Apple Watch
   - iPad
   - Mac
   - Vision Pro
-category: iPhone
+platforms: []
+systemVersions: []
+categories:
+  - iPhone
 tags:
   - iPhone
   - Apple Watch
@@ -18,6 +36,7 @@ tags:
   - Apple Pay
   - Apple Account
   - Payments
+keywords: []
 aliases:
   - Apple Pay card not added
   - Cannot add card to Apple Wallet
@@ -29,25 +48,159 @@ aliases:
   - 联系发卡机构
   - 卡片无效
   - Apple Pay 验证失败
-verification: Official
+errorMessages:
+  - “钱包提示请联系发卡机构。”
+  - “提示 Card Device Limit / 已达到设备数量限制。”
+  - Apple Wallet unable to verify card
+officialTerms: []
+communityTerms: []
 difficulty: Moderate
-updated: 2026-07-12
-official_sources:
-  - https://support.apple.com/en-us/108792
-  - https://support.apple.com/zh-cn/108792
-  - https://support.apple.com/zh-cn/108398
-  - https://support.apple.com/zh-cn/guide/iphone/iph9b7f53382/ios
-  - https://support.apple.com/zh-cn/102775
-  - https://support.apple.com/zh-cn/102896
-  - https://support.apple.com/zh-cn/101554
-community_sources:
-  - https://discussions.apple.com/thread/255504499
-  - https://discussions.apple.com/thread/255058994
-  - https://discussions.apple.com/thread/254157665
-  - https://www.reddit.com/r/applehelp/comments/1lu75h4/apple_pay_wont_let_me_add_my_debit_card/
-  - https://www.reddit.com/r/iphone/comments/1hslx1j/hi_guys_ive_just_got_an_iphone_14_pro_and_ive/
+estimatedTime: null
+verificationLevel: Official
 status: canonical
-popular: true
+canonicalArticleId: apple-wallet-cant-add-card-apple-pay
+solutions:
+  - id: solution-4633b7fa9a1d
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - 先记录屏幕上的准确提示：是“无法添加卡片”“卡片无效”“请联系发卡机构”，还是银行验证环节失败。
+      - 确认设备支持 Apple Pay，并更新到最新版本的 iOS、iPadOS、watchOS、macOS 或 visionOS。
+      - 确认设备已登录 Apple 账户，Apple 账户已开启双重认证，并已设置面容 ID、触控 ID、视控 ID 或设备密码。
+      - 确认所在国家或地区支持 Apple Pay，且这张卡由参加 Apple Pay 计划的银行或发卡机构发行。
+      - >-
+        在 iPhone 上打开钱包，轻点添加，选择借记卡或信用卡，优先使用银行 App 的“添加到 Apple 钱包 / Apple
+        Pay”入口；失败时再手动输入卡片信息。
+      - 如果是 Apple Watch，打开 iPhone 上的 Apple Watch App 我的手表 钱包与 Apple Pay 添加卡片。
+      - 如果银行要求验证，按屏幕提示完成短信、电话、银行 App 或额外资料验证。
+      - >-
+        如果提示“无法添加卡片”“卡片无效”“Card Device Limit”或“请联系发卡机构”，联系银行或发卡机构，明确说明是“Apple
+        Pay / Apple Wallet token provisioning、card verification 或 device limit
+        失败”，不要只问实体卡是否正常。
+      - 如果卡片在旧设备可用、新设备不可用，告诉发卡机构这是新设备 Apple Pay 添加失败，可能需要重新批准或重置移动钱包令牌。
+      - >-
+        如果顾客刚退出 iCloud、移除密码、抹掉设备或更换设备，说明 Apple Pay
+        卡片从设备移除是预期安全行为，需要重新添加并通过发卡机构验证。
+    verificationLevel: Official
+    sourceIds:
+      - official-52b2f2f9cc35
+      - official-87113fbcbe96
+      - official-a488f341d846
+      - official-1418ea2581a5
+      - official-70f423c18fff
+      - official-d52c4cef837b
+      - official-d0233aa7b2bf
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-52b2f2f9cc35
+    title: >-
+      Apple Support: If you can't add a card to Apple Wallet to use with Apple
+      Pay
+    url: 'https://support.apple.com/en-us/108792'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-87113fbcbe96
+    title: Apple 支持：如果你无法向 Apple 钱包中添加卡片以与 Apple Pay 搭配使用
+    url: 'https://support.apple.com/zh-cn/108792'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-a488f341d846
+    title: Apple 支持：设置 Apple Pay
+    url: 'https://support.apple.com/zh-cn/108398'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-1418ea2581a5
+    title: iPhone 使用手册：在 iPhone 上的“钱包”中设置 Apple Pay
+    url: 'https://support.apple.com/zh-cn/guide/iphone/iph9b7f53382/ios'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-70f423c18fff
+    title: Apple 支持：支持 Apple Pay 的国家和地区
+    url: 'https://support.apple.com/zh-cn/102775'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-d52c4cef837b
+    title: Apple 支持：与 Apple Pay 兼容的设备
+    url: 'https://support.apple.com/zh-cn/102896'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-d0233aa7b2bf
+    title: Apple 支持：Apple Pay 安全性与隐私政策概览
+    url: 'https://support.apple.com/zh-cn/101554'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-651f3efc6004
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/255504499'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-40dfc239a153
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/255058994'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-28faf13fcb7a
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/254157665'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-c075ea04367d
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/applehelp/comments/1lu75h4/apple_pay_wont_let_me_add_my_debit_card/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-44018b8f5975
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/iphone/comments/1hslx1j/hi_guys_ive_just_got_an_iphone_14_pro_and_ive/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-12'
+lastUpdatedAt: '2026-07-12'
+createdAt: null
+relatedArticles: []
+popular: false
 ---
 
 # Apple 钱包无法添加银行卡或 Apple Pay 卡片

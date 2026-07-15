@@ -1,17 +1,33 @@
 ---
+schemaVersion: 2
+id: apple-account-verification-failed
 title: Apple 账户验证失败
 slug: apple-account-verification-failed
-device:
+summary: >-
+  顾客无法完成 Apple 账户或 iCloud 登录，常见表现是验证失败、收不到验证码、验证码被拒、反复要求输入密码，或设备无法连接 Apple
+  账户服务。先确认 Apple 系统状态、网络和蜂窝数据权限，再分流双重认证、验证邮件、账户锁定和账户恢复；不要承诺可以跳过双重认证或加快账户恢复等待期。
+symptoms:
+  - “Apple ID 一直验证失败。”
+  - “提示无法连接服务器。”
+  - “一直收不到验证码。”
+  - “验证码发到旧手机号了。”
+  - “iCloud 一直要求重新登录。”
+  - “密码明明对，但就是登录不上。”
+devices:
   - iPhone
   - iPad
   - Mac
-category: Apple ID
+platforms: []
+systemVersions: []
+categories:
+  - Apple ID
 tags:
   - Apple ID
   - Apple 账户
   - iCloud
   - 网络
   - 账号安全
+keywords: []
 aliases:
   - Apple ID verification failed
   - Apple Account verification failed
@@ -23,16 +39,89 @@ aliases:
   - 忘记 Apple 账户密码
   - Apple ID 密码忘了
   - Forgot Apple ID password
-verification: Official
+errorMessages:
+  - “提示无法连接服务器。”
+officialTerms: []
+communityTerms: []
 difficulty: Moderate
-updated: 2026-07-14
-official_sources:
-  - https://support.apple.com/zh-cn/102606
-  - https://support.apple.com/zh-cn/102409
-  - https://support.apple.com/zh-cn/118446
-  - https://support.apple.com/zh-cn/118574
-community_sources: []
+estimatedTime: null
+verificationLevel: Official
 status: seed
+canonicalArticleId: null
+solutions:
+  - id: solution-42bc7b88b48c
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - 先查看 Apple 的“系统状态”页面，确认 iCloud、Apple 账户或相关服务没有中断或计划维护。
+      - 确认顾客正在所有设备上使用同一个 Apple 账户；如果忘记账户邮箱、电话号码或密码，先走 Apple 的账户查找或重设流程。
+      - 将 iPhone、iPad、Apple Vision Pro 或 Mac 更新到最新可用系统版本，再重新尝试登录。
+      - >-
+        如果提示连接或服务器问题，换到确认可用的 Wi-Fi 或蜂窝网络；如果离开 Wi-Fi 后登录 iPhone 或 iPad，确认“设置
+        蜂窝网络/蜂窝数据”允许使用蜂窝数据。
+      - >-
+        如果需要双重认证验证码，优先查看受信任设备上的登录通知并点按“允许”；如果没有受信任设备，在验证码界面选择“没有收到验证码？”或“无法访问设备？”，改用受信任电话号码接收短信或电话。
+      - 如果启用了“信息”的未知发件人过滤，检查 Apple 验证码是否被放到未知发件人相关位置，并按 Apple 的信息通知设置确认验证码通知可见。
+      - >-
+        如果问题来自验证邮件或密码重设邮件，搜索所有与 Apple 账户关联的邮箱，检查垃圾邮件、废纸篓、已删除邮件或归档文件夹，并允许来自
+        email.apple.com 的邮件。
+      - 如果邮箱地址拼写错误或没有收到验证邮件，登录 Apple 账户网站，检查登记的邮箱地址并重新发送验证邮件。
+      - 如果账户被锁定、停用，或顾客忘记密码，按 Apple 账户解锁、密码重设或账户恢复流程处理；不要尝试通过设备还原来绕过账户安全流程。
+      - >-
+        如果进入账户恢复，先确认顾客已尝试受信任设备、家庭成员设备上的 Apple 支持 App、Apple Store
+        可用设备或账户恢复联系人等替代路径。
+      - >-
+        说明账户恢复可能需要数天或更长时间，Apple 支持无法缩短等待期；账户恢复开始后，避免继续使用其他已登录该 Apple
+        账户的设备，以免恢复请求被取消或延迟。
+    verificationLevel: Official
+    sourceIds:
+      - official-e71b0d021a6a
+      - official-56705eb21913
+      - official-5c14eefba20f
+      - official-0ae629630d5c
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-e71b0d021a6a
+    title: Apple 支持：获取验证码并通过双重认证登录
+    url: 'https://support.apple.com/zh-cn/102606'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-56705eb21913
+    title: Apple 支持：没有收到 Apple 账户验证邮件或密码重置邮件
+    url: 'https://support.apple.com/zh-cn/102409'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-5c14eefba20f
+    title: Apple 支持：无法连接或登录 iCloud
+    url: 'https://support.apple.com/zh-cn/118446'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-0ae629630d5c
+    title: Apple 支持：无法重设 Apple 账户密码时如何使用账户恢复
+    url: 'https://support.apple.com/zh-cn/118574'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+lastVerifiedAt: '2026-07-14'
+lastUpdatedAt: '2026-07-14'
+createdAt: null
+relatedArticles:
+  - location-sharing-not-working
 popular: false
 ---
 

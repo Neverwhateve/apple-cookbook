@@ -1,15 +1,34 @@
 ---
+schemaVersion: 2
+id: mac-dfu-firmware-revive-restore
 title: Mac 需要修复或恢复固件
 slug: mac-dfu-firmware-revive-restore
-device:
+summary: >-
+  搭载 Apple 芯片或 Apple T2 安全芯片的 Mac，在极少数情况下可能需要用另一台 Mac
+  修复或恢复固件。先确认这不是普通启动、显示器、恢复模式或登录问题；如果确实进入固件分支，优先选择“修复 Mac”，因为修复不会抹掉 Mac。
+symptoms:
+  - “Mac 更新断电后开不了机。”
+  - “开机只有圆圈里面一个感叹号。”
+  - “Mac 可以通电，但一直黑屏。”
+  - “Mac Studio 指示灯一直琥珀色闪烁。”
+  - “Finder 看不到 DFU 模式。”
+  - “Apple Configurator / 访达恢复失败。”
+  - “修复和恢复有什么区别，会不会抹掉资料？”
+  - “我没有第二台 Mac，能不能自己做 DFU？”
+devices:
   - Mac
-category: Mac
+platforms: []
+systemVersions:
+  - macOS 14
+categories:
+  - Mac
 tags:
   - Mac
   - Firmware
   - DFU
   - Startup
   - Repair
+keywords: []
 aliases:
   - Mac DFU revive restore
   - Mac firmware revive
@@ -21,23 +40,149 @@ aliases:
   - Mac 固件恢复
   - Mac 修复固件
   - Mac 恢复固件
-verification: Official
+errorMessages: []
+officialTerms: []
+communityTerms: []
 difficulty: Advanced
-updated: 2026-07-11
-official_sources:
-  - https://support.apple.com/zh-cn/108900
-  - https://support.apple.com/en-us/108900
-  - https://support.apple.com/zh-cn/102675
-  - https://support.apple.com/en-us/102768
-  - https://support.apple.com/zh-cn/102541
-community_sources:
-  - https://discussions.apple.com/thread/255460941
-  - https://discussions.apple.com/thread/255062128
-  - https://discussions.apple.com/thread/256101935
-  - https://www.reddit.com/r/mac/comments/1rgfu3l/macbookair_will_not_enter_dfu_mode_what_am_i/
-  - https://www.reddit.com/r/mac/comments/1twjjxs/cant_get_into_dfu_mode_but_still_this_shows/
+estimatedTime: null
+verificationLevel: Official
 status: canonical
-popular: true
+canonicalArticleId: mac-dfu-firmware-revive-restore
+solutions:
+  - id: solution-91a4c07598b8
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - >-
+        先读取屏幕或状态灯：圆圈围绕的感叹号、无法通过空白屏幕方案解决的黑屏、固件恢复模式状态灯，或 macOS
+        安装错误无法用其他方法解决，才进入固件修复/恢复分支。
+      - 如果是问号、禁止符号、锁形图标、激活锁、恢复助理、目标磁盘模式或普通登录窗口，先按对应启动屏幕处理，不要直接恢复固件。
+      - 确认受影响 Mac 是搭载 Apple 芯片或 Apple T2 安全芯片的 Mac。其他 Mac 机型不适用这条固件修复/恢复流程。
+      - 准备另一台运行 macOS 14 或更高版本的 Mac，连接互联网，并预留足够储存空间下载修复或恢复所需数据。
+      - >-
+        准备一根同时支持数据传输和充电的 USB-C 至 USB-C 线缆，例如部分 Apple 产品随附的 USB-C 充电线。不要使用雷雳 3
+        充电线。
+      - >-
+        将受影响 Mac 接到 Apple 指定的 DFU 端口；主机 Mac 的另一端可接任一 USB-C 端口。不要通过 USB
+        集线器或其他设备转接。
+      - >-
+        如果是 Mac 笔记本电脑，确保两台 Mac 都接入电源；如有 MagSafe，受影响 Mac 用 MagSafe 供电，USB-C 口只用于
+        DFU 线缆。
+      - >-
+        按 Apple 对应机型的按键步骤让受影响 Mac 进入 DFU 模式。进入 DFU 后，受影响 Mac 应显示空白屏幕，主机 Mac
+        的访达应显示 DFU 窗口。
+      - 在访达的 DFU 窗口中，先选择修复 Mac。修复通常更快，并且不会抹掉 Mac。
+      - 修复期间让主机 Mac 保持唤醒；如果提示先更新主机 Mac 软件，按提示更新后再继续。
+      - 如果修复完成后受影响 Mac 自动重新启动，按提示选择启动宗卷、输入已知用户密码或选择启动磁盘。
+      - 只有在修复失败或 Apple 支持要求时，才选择恢复 Mac。恢复会抹掉 Mac 并恢复为出厂设置。
+      - >-
+        恢复后，如果系统提示登录，请使用之前在这台 Mac 上使用的 Apple 账户。T2 Mac 可能还需要从 macOS 恢复重新安装
+        macOS。
+      - >-
+        如果访达没有显示 DFU 窗口，检查访达边栏设置是否显示“CD、DVD 和 iOS 设备”，重新连接 DFU
+        端口，重新把握按键时机，并尝试另一根符合要求的 USB-C 线缆。
+      - 如果使用网页代理、防火墙、VPN 或安全软件，确认主机 Mac 可以访问 Apple 网络；必要时关闭 VPN 或安全软件后再试。
+    verificationLevel: Official
+    sourceIds:
+      - official-6b7595b8f04f
+      - official-b4cbb61d8ae5
+      - official-d33c52595b40
+      - official-11b45f207ba9
+      - official-1299d9feaa62
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-6b7595b8f04f
+    title: Apple 支持：如何修复或恢复 Mac 固件
+    url: 'https://support.apple.com/zh-cn/108900'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-b4cbb61d8ae5
+    title: 'Apple Support: How to revive or restore Mac firmware'
+    url: 'https://support.apple.com/en-us/108900'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-d33c52595b40
+    title: Apple 支持：如果你的 Mac 无法顺利完成启动
+    url: 'https://support.apple.com/zh-cn/102675'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-11b45f207ba9
+    title: 'Apple Support: Mac computer status indicator light behavior'
+    url: 'https://support.apple.com/en-us/102768'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-1299d9feaa62
+    title: Apple 支持：Mac 激活锁
+    url: 'https://support.apple.com/zh-cn/102541'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-33df85e0f890
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/255460941'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-18d2d7e93edc
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/255062128'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-b408e30ee1c1
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/256101935'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-d18fd80f5ddf
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/mac/comments/1rgfu3l/macbookair_will_not_enter_dfu_mode_what_am_i/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-b86e623aafa9
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/mac/comments/1twjjxs/cant_get_into_dfu_mode_but_still_this_shows/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-11'
+lastUpdatedAt: '2026-07-11'
+createdAt: null
+relatedArticles:
+  - iphone-stuck-preparing-verifying-software-update
+popular: false
 ---
 
 # Mac 需要修复或恢复固件

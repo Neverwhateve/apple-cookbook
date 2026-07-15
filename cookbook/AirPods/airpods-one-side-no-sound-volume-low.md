@@ -200,7 +200,7 @@ relatedArticles:
   - airpods-wont-charge-case-not-working
   - airpods-wont-connect-pair-reset
   - airpods-firmware-wont-update
-popular: true
+popular: false
 ---
 
 # AirPods 只有一只耳机有声音或左右音量不一样

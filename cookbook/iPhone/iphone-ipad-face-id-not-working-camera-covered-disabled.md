@@ -206,7 +206,7 @@ relatedArticles:
   - iphone-stolen-device-protection-security-delay
   - iphone-unavailable-security-lockout-forgot-passcode
   - apple-wallet-cant-add-card-apple-pay
-popular: true
+popular: false
 ---
 
 # iPhone 或 iPad Face ID 无法使用、识别失败或提示摄像头被遮挡

@@ -153,11 +153,11 @@ Every `sourceId` on an `Official` solution must resolve to an explicitly officia
 Every source records:
 
 - `id`: Stable ID referenced by solutions. It must be unique within the article; duplicates are ambiguous and cannot support Official trust.
-- `title`: The actual page, document, test record, or case title.
+- `title`: The actual page, document, test record, or case title. A v1 migration may use an explicit “旧版引文（原始标题未记录）” label until the original page title is reviewed.
 - `url`: HTTPS URL.
 - `publisher`: Responsible organization or community.
 - `sourceType`: One of `official-support`, `official-guide`, `official-policy`, `community`, `documentation`, `test`, or `other`.
-- `accessedAt`: Date the source was checked.
+- `accessedAt`: Date the source was checked, or `null` when the legacy record does not preserve that fact. `null` must not be replaced with an inferred date.
 - `publishedAt`: Source publication date when known; otherwise `null`.
 - `official`: Explicit trust declaration. It is treated as official only when it is `true` and the URL also passes the official-content host allowlist.
 
@@ -173,12 +173,12 @@ An article marked `Official` must include at least one `https://support.apple.co
    ```
 
 2. Review every flagged field. The preview intentionally leaves dates or editorial meaning unresolved when the v1 source cannot prove them.
-3. Migrate one canonical article at a time in a dedicated pull request.
+3. For a legacy-wide trust-boundary repair, run `pnpm preview:content-v2 -- --apply-v1-official`. It only migrates v1 `Official` articles, leaves the Markdown body, route, and every source URL unchanged, keeps unknown source access and publication dates as `null`, and binds the recommended Official solution exclusively to allowlisted Apple source IDs. The v1 `updated` date becomes the article-level review snapshot (`lastVerifiedAt` and `lastUpdatedAt`); it is never copied into `sources[].accessedAt`.
 4. Validate the new frontmatter against `schemas/article-v2.schema.json`.
 5. Run content validation, tests, type checking, and the production build.
 6. Compare the old and new route, trust badge, source grouping, search results, and related-article behavior before merging.
 
-Do not bulk-convert source titles, access dates, `lastVerifiedAt`, or solution-level verification without editorial review. Those values are evidence, not formatting details.
+Never infer a source title, access date, publication date, or a non-Official solution’s verification level. The controlled migration only carries forward the existing v1 `Official` article decision to its already-labelled Apple-official primary section; unrecorded source facts remain explicit unknowns.
 
 ## Pilot Acceptance Record
 

@@ -1,17 +1,41 @@
 ---
+schemaVersion: 2
+id: airdrop-keeps-waiting
 title: 隔空投送一直等待或找不到设备
 slug: airdrop-keeps-waiting
-device:
+summary: >-
+  顾客尝试用隔空投送发送照片、文件或联系人，但收件设备没有出现、传输一直显示等待，或在对方接受前就失败。先确认两台设备在 10 米内、Wi-Fi
+  和蓝牙已打开、个人热点已断开、接收设置允许发现，再处理联系人身份、隔空投送代码、VPN 或 Mac 防火墙这类边界问题。
+symptoms:
+  - “隔空投送一直等待。”
+  - “对方手机不显示。”
+  - “刚才能看到，过一会又没了。”
+  - “明明没拒绝，却提示被拒绝。”
+  - “Mac 能看到 iPhone，但 iPhone 看不到 Mac。”
+  - “隔空投送找不到人。”
+  - “对方让我输入隔空投送代码。”
+  - “显示 No People Found。”
+  - “换成所有人 10 分钟才偶尔能传。”
+  - “离开 Wi-Fi 后担心会不会走蜂窝数据。”
+devices:
   - iPhone
   - iPad
   - Mac
-category: 连续互通
+platforms: []
+systemVersions:
+  - iOS 26.2
+  - iPadOS 26.2
+  - macOS 26.2
+  - iOS 17
+categories:
+  - 连续互通
 tags:
   - 隔空投送
   - 连续互通
   - 蓝牙
   - Wi-Fi
   - 网络
+keywords: []
 aliases:
   - AirDrop keeps waiting
   - AirDrop cannot find device
@@ -24,24 +48,154 @@ aliases:
   - 隔空投送找不到人
   - 隔空投送没有找到任何人
   - 隔空投送代码
-verification: Official
+errorMessages:
+  - “明明没拒绝，却提示被拒绝。”
+  - “对方让我输入隔空投送代码。”
+  - 隔空投送代码
+officialTerms: []
+communityTerms: []
 difficulty: Quick
-updated: 2026-07-12
-official_sources:
-  - https://support.apple.com/zh-cn/119857
-  - https://support.apple.com/zh-cn/guide/iphone/iphcd8b9f0af/ios
-  - https://support.apple.com/zh-cn/guide/mac-help/mh35868/mac
-  - https://support.apple.com/zh-cn/guide/personal-safety/secure-airdrop-ips7d84d2cdc/web
-  - https://support.apple.com/zh-cn/120421
-community_sources:
-  - https://discussions.apple.com/thread/256209185
-  - https://discussions.apple.com/thread/252044315
-  - https://discussions.apple.com/thread/255160349
-  - https://www.reddit.com/r/iphone/comments/1ppd6u7/air_drop_no_longer_works_after_the_ios_262_update/
-  - https://www.reddit.com/r/applehelp/comments/1erllle/iphone_to_mac_airdrop_no_people_found/
-  - https://www.reddit.com/r/applehelp/comments/v0h2w4/airdrop_not_working_make_sure_to_have_their_email/
+estimatedTime: null
+verificationLevel: Official
 status: canonical
-popular: true
+canonicalArticleId: airdrop-keeps-waiting
+solutions:
+  - id: solution-6becab77fd1d
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - 让两台设备保持唤醒、解锁，并放在彼此附近。
+      - 确认两台设备距离在 10 米（30 英尺）范围内。
+      - 确认两台设备都已开启 Wi-Fi 和蓝牙。
+      - 测试期间断开个人热点。
+      - 在接收设备上，将隔空投送接收设置临时改为所有人，10 分钟进行测试。
+      - 如果使用仅限联系人，确认双方都已登录 Apple 账户，并且发送方的 Apple 账户邮箱或电话号码已保存在接收方联系人名片中。
+      - >-
+        如果对方不在通讯录中，且双方设备运行 iOS 26.2、iPadOS 26.2、macOS 26.2
+        或更新版本，让接收方点按“获取隔空投送代码”，发送方输入该代码后再传输。代码通过后，Apple 说明双方可在 30
+        天内继续共享和接收项目；不想继续共享时，可在“通讯录”的“其他已知联系人”中忽略此人。
+      - >-
+        如果两台设备都运行 iOS 17 或更高版本，可以尝试把两台 iPhone
+        放在一起发起隔空投送；如果这个近距离入口误导顾客以为只能碰一碰才能传，也可以回到分享面板中的普通隔空投送列表。
+      - 如果使用同一个 Apple 账户在自己的设备之间传输，Apple 说明项目会自动接受并保存；如果不是同一账户，则仍需要接收方接受。
+      - 如果涉及 Mac，打开 Finder 中的“隔空投送”，或从控制中心打开隔空投送，并确认接收设置。
+      - 如果 Mac 或 iPhone 安装了 VPN 或第三方安全软件，确认它没有阻止局域联网；Mac 防火墙不应设置为阻止所有传入连接。
+      - 重新打开分享面板，再次尝试隔空投送。
+      - >-
+        如果设备已开始传输后离开蓝牙或 Wi-Fi 覆盖范围，Apple 说明传输可能通过互联网继续。出差或漫游时如不想产生蜂窝数据费用，可在设置 通用
+        隔空投送关闭“使用蜂窝数据”。
+      - 如果仍无法正常使用隔空投送，重新启动两台设备后再试。
+    verificationLevel: Official
+    sourceIds:
+      - official-fb7b53ce28b4
+      - official-8b2e77f37cc3
+      - official-7aad3e14ac6c
+      - official-5f6df42ab608
+      - official-5e44a347409b
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-fb7b53ce28b4
+    title: Apple 支持：在 iPhone 和 iPad 上使用隔空投送
+    url: 'https://support.apple.com/zh-cn/119857'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-8b2e77f37cc3
+    title: iPhone 使用手册：使用隔空投送向附近 Apple 设备发送项目
+    url: 'https://support.apple.com/zh-cn/guide/iphone/iphcd8b9f0af/ios'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-7aad3e14ac6c
+    title: Mac 使用手册：使用隔空投送向附近 Apple 设备发送项目
+    url: 'https://support.apple.com/zh-cn/guide/mac-help/mh35868/mac'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-5f6df42ab608
+    title: Apple 个人安全使用手册：安全使用隔空投送
+    url: >-
+      https://support.apple.com/zh-cn/guide/personal-safety/secure-airdrop-ips7d84d2cdc/web
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-5e44a347409b
+    title: Apple 支持：iPhone 镜像：通过 Mac 使用 iPhone
+    url: 'https://support.apple.com/zh-cn/120421'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-87088821abed
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/256209185'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-fac57ef266b0
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/252044315'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-01470c00ae5e
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/255160349'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-a8755937542e
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/iphone/comments/1ppd6u7/air_drop_no_longer_works_after_the_ios_262_update/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-2e8c86e6bf9c
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/applehelp/comments/1erllle/iphone_to_mac_airdrop_no_people_found/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-ab2c9412bd14
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/applehelp/comments/v0h2w4/airdrop_not_working_make_sure_to_have_their_email/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-12'
+lastUpdatedAt: '2026-07-12'
+createdAt: null
+relatedArticles:
+  - iphone-ipad-wifi-no-internet-unable-to-join
+popular: false
 ---
 
 # 隔空投送一直等待或找不到设备

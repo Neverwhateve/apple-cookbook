@@ -1,10 +1,34 @@
 ---
+schemaVersion: 2
+id: iphone-battery-drains-after-update
 title: iPhone 更新后掉电快或发热
 slug: iphone-battery-drains-after-update
-device:
+summary: 顾客刚更新 iOS 或 iPadOS 后，感觉电池明显不耐用、机身发热、待机掉电增加，或担心新系统损坏了电池。
+symptoms:
+  - “更新完 iOS 以后掉电特别快。”
+  - “手机没怎么用也发热。”
+  - “电池健康还有 88%，但升级后续航变差。”
+  - “刚升级完是不是要换电池？”
+  - “iOS 26 更新后发热、卡顿、耗电。”
+  - “以前一天一充，现在半天就没电。”
+  - “iOS 26.5.2 后充到 80% 就暂停，说温度恢复后继续。”
+  - “为了安全更新 iOS，但更新后手机变热。”
+  - “是不是 iOS 26.5.2 有问题，还是电池坏了？”
+devices:
   - iPhone
   - iPad
-category: iPhone
+platforms:
+  - iOS
+  - iPadOS
+systemVersions:
+  - iOS 26
+  - iOS 26.5.2
+  - iPadOS 26.5.2
+  - iOS 26.5
+  - iOS 18
+  - iPadOS 26
+categories:
+  - iPhone
 tags:
   - iPhone
   - iPad
@@ -13,6 +37,7 @@ tags:
   - 电池
   - 发热
   - 软件更新
+keywords: []
 aliases:
   - iPhone battery drain after update
   - iOS update battery drain
@@ -21,26 +46,161 @@ aliases:
   - iPhone 更新后掉电快
   - iOS 26 掉电快
   - 手机更新后发热
-verification: Official
+errorMessages:
+  - “iOS 26.5.2 后充到 80% 就暂停，说温度恢复后继续。”
+officialTerms: []
+communityTerms: []
 difficulty: Moderate
-updated: 2026-07-13
-official_sources:
-  - https://support.apple.com/zh-cn/120745
-  - https://support.apple.com/zh-cn/102432
-  - https://support.apple.com/zh-cn/101575
-  - https://support.apple.com/zh-cn/123075
-  - https://support.apple.com/zh-cn/118431
-  - https://support.apple.com/en-us/126776
-  - https://support.apple.com/en-us/127594
-  - https://support.apple.com/en-us/100100
-community_sources:
-  - https://discussions.apple.com/thread/256320852
-  - https://discussions.apple.com/thread/256316863
-  - https://discussions.apple.com/thread/256320221
-  - https://www.reddit.com/r/iphone/comments/1no3phg/psa_for_anyone_having_performance_issues_or/
-  - https://www.reddit.com/r/iphone/comments/1tzlvzz/anybody_elses_iphone_13_running_like_absolute_dog/
+estimatedTime: null
+verificationLevel: Official
 status: canonical
-popular: true
+canonicalArticleId: iphone-battery-drains-after-update
+solutions:
+  - id: solution-0ba253246b2b
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - 先确认更新时间。如果刚更新完成，让顾客等待几天后再复查续航表现。
+      - 打开设置 电池，查看是否出现电池建议、Insight 或“正在进行的 iOS 更新”等提示。
+      - 查看日用量和查看所有电池用量，找出今天明显高于过去 7 天的 App 或系统活动。
+      - 如果处在弱信号环境，优先测试 Wi-Fi、强蜂窝信号位置，或短时间启用飞行模式验证是否与网络搜索有关。
+      - 在支持的机型上，考虑使用自适应电量；需要临时延长续航时，开启低电量模式。
+      - 如果看到暂停充电或设备明显发烫，先移除保护壳、停止高负载使用、让设备远离阳光直射并冷却。Apple 说明温度恢复正常后充电会继续。
+      - 检查设置 通用 软件更新。如果设备没有最新安全更新，解释安全更新的重要性并按正常更新流程处理；不要把“等待后台整理”解释为拒绝安全更新的理由。
+      - 检查电池健康。如果显示“维修”或电池健康显著下降，引导顾客考虑电池服务。
+      - 如果出现无法开机、异常重启、充电异常或电池鼓包等安全/硬件症状，停止软件层面反复排查并转入服务路径。
+    verificationLevel: Official
+    sourceIds:
+      - official-f11103721be3
+      - official-71be42459c96
+      - official-9554d984e750
+      - official-bddd81d53bad
+      - official-652e4800d38c
+      - official-9f7a19d4382f
+      - official-b9830157917a
+      - official-51c6e44ea274
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-f11103721be3
+    title: Apple 支持：如果 iPhone 或 iPad 电池耗电过快
+    url: 'https://support.apple.com/zh-cn/120745'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-71be42459c96
+    title: Apple 支持：检查 iPhone 电池用量
+    url: 'https://support.apple.com/zh-cn/102432'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-9554d984e750
+    title: Apple 支持：iPhone 电池和性能
+    url: 'https://support.apple.com/zh-cn/101575'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-bddd81d53bad
+    title: Apple 支持：关于 iOS 26 更新
+    url: 'https://support.apple.com/zh-cn/123075'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-652e4800d38c
+    title: Apple 支持：如果 iPhone 或 iPad 温度过高或过低
+    url: 'https://support.apple.com/zh-cn/118431'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-9f7a19d4382f
+    title: 'Apple Support: Update iOS to protect your iPhone from web attacks'
+    url: 'https://support.apple.com/en-us/126776'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-b9830157917a
+    title: 'Apple Support: About the security content of iOS 26.5.2 and iPadOS 26.5.2'
+    url: 'https://support.apple.com/en-us/127594'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-51c6e44ea274
+    title: 'Apple Support: Apple security releases'
+    url: 'https://support.apple.com/en-us/100100'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-cb93b15154a3
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/256320852'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-6fd885cd1a5d
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/256316863'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-f27915996b81
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/256320221'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-bb07e198131d
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/iphone/comments/1no3phg/psa_for_anyone_having_performance_issues_or/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-c3449019aac7
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/iphone/comments/1tzlvzz/anybody_elses_iphone_13_running_like_absolute_dog/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-13'
+lastUpdatedAt: '2026-07-13'
+createdAt: null
+relatedArticles:
+  - iphone-sos-no-service-searching
+  - iphone-stuck-preparing-verifying-software-update
+  - iphone-charging-paused-80-temperature-charge-limit
+  - iphone-black-screen-wont-turn-on-after-battery-drained
+  - iphone-wont-charge-wired-liquid-detected
+popular: false
 ---
 
 # iPhone 更新后掉电快或发热

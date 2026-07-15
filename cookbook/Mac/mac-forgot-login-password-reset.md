@@ -1,9 +1,25 @@
 ---
+schemaVersion: 2
+id: mac-forgot-login-password-reset
 title: Mac 忘记登录密码，无法进入 macOS
 slug: mac-forgot-login-password-reset
-device:
+summary: >-
+  顾客说“忘记电脑开机密码”时，先确认这是 Mac 的本机登录密码，不是 Apple 账户密码。最快路径是先尝试登录窗口的重设入口；如果没有入口，再从
+  macOS 恢复使用“忘记所有密码？”或恢复密钥重设。
+symptoms:
+  - “我忘记电脑开机密码。”
+  - “Mac 开机后进不去系统。”
+  - “Apple ID 密码知道，但 Mac 密码不记得。”
+  - “输错几次后没有重设密码按钮。”
+  - “进入恢复模式后要我输入文件保险箱恢复密钥。”
+  - “能不能不抹掉资料重设密码？”
+  - “二手 Mac 要输入别人的 Apple ID。”
+devices:
   - Mac
-category: Mac
+platforms: []
+systemVersions: []
+categories:
+  - Mac
 tags:
   - Mac
   - Login Password
@@ -11,6 +27,7 @@ tags:
   - Apple Account
   - Recovery
   - Backup
+keywords: []
 aliases:
   - Mac forgot login password
   - forgot Mac password
@@ -22,23 +39,135 @@ aliases:
   - 忘记电脑开机密码
   - Mac 登录密码重设
   - 文件保险箱恢复密钥
-verification: Official
+errorMessages: []
+officialTerms: []
+communityTerms: []
 difficulty: Advanced
-updated: 2026-07-12
-official_sources:
-  - https://support.apple.com/zh-cn/102633
-  - https://support.apple.com/zh-cn/guide/mac-help/mchlp1550/mac
-  - https://support.apple.com/zh-cn/102675
-  - https://support.apple.com/zh-cn/guide/security/sec4c6dc1b6e/web
-  - https://support.apple.com/zh-cn/102664
-  - https://support.apple.com/zh-cn/118574
-community_sources:
-  - https://discussions.apple.com/thread/256117235
-  - https://discussions.apple.com/thread/254527949
-  - https://www.reddit.com/r/mac/comments/17u1tn4/forgot_mac_password_and_dont_have_the_recovery/
-  - https://www.reddit.com/r/mac/comments/1bm8jm7/i_have_an_m1_macbook_air_but_i_forgot_my_new/
+estimatedTime: null
+verificationLevel: Official
 status: canonical
-popular: true
+canonicalArticleId: mac-forgot-login-password-reset
+solutions:
+  - id: solution-be1aae530c5b
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - 确认顾客看到的是登录窗口。让顾客重新启动 Mac 后再判断；如果只是锁定屏幕，先尝试切换输入法、键盘布局或外接键盘。
+      - 询问是否有近期 Time Machine、iCloud Drive、桌面与文稿同步或重要 App 的云端备份。
+      - 在登录窗口连续尝试输入密码，直到看到密码提示、使用 Apple 账户重设或使用恢复密钥重设等入口。
+      - 如果登录窗口出现重设选项，按屏幕提示使用 Apple 账户或文件保险箱恢复密钥重设登录密码。
+      - 如果登录窗口没有可用重设选项，按照 Apple 指引从 macOS 恢复启动。
+      - 在“恢复”中选择一个知道密码的用户时，如果不知道任何用户密码，点按忘记所有密码？。
+      - >-
+        按照屏幕说明继续。系统可能要求登录 Apple 账户、输入发送到受信任设备的验证码、输入文件保险箱恢复密钥、选择启动宗卷，或临时取消激活这台
+        Mac。
+      - 重设成功后，重新启动 Mac，用新密码登录。
+      - 登录后立即确认 Apple 账户、恢复联系人、FileVault 设置、备份状态和密码提示是否准确。
+      - 如果无法使用 Apple 账户、恢复密钥或任何管理员账户重设密码，先说明数据边界：加密数据可能无法保留。
+      - 只有在顾客接受数据风险并确认备份后，才按 Apple 的“抹掉 Mac 并还原为出厂设置”路径处理。
+      - 如果开始 Apple 账户恢复，提醒顾客 Apple 说明账户恢复可能需要数天或更长时间，Apple 支持无法缩短等待时间。
+    verificationLevel: Official
+    sourceIds:
+      - official-0a0d63a670ec
+      - official-ec094e3f0123
+      - official-d33c52595b40
+      - official-663c9e67e515
+      - official-fca627fe4b3c
+      - official-0ae629630d5c
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-0a0d63a670ec
+    title: Apple 支持：如果你忘记了 Mac 登录密码
+    url: 'https://support.apple.com/zh-cn/102633'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-ec094e3f0123
+    title: Mac 使用手册：在 Mac 上更改登录密码
+    url: 'https://support.apple.com/zh-cn/guide/mac-help/mchlp1550/mac'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-d33c52595b40
+    title: Apple 支持：如果你的 Mac 无法顺利完成启动
+    url: 'https://support.apple.com/zh-cn/102675'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-663c9e67e515
+    title: Apple 平台安全：macOS 中的文件保险箱恢复
+    url: 'https://support.apple.com/zh-cn/guide/security/sec4c6dc1b6e/web'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-fca627fe4b3c
+    title: Apple 支持：抹掉 Mac 并还原为出厂设置
+    url: 'https://support.apple.com/zh-cn/102664'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-0ae629630d5c
+    title: Apple 支持：无法重设 Apple 账户密码时如何使用账户恢复
+    url: 'https://support.apple.com/zh-cn/118574'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-c2f0e6f063a7
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/256117235'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-41ebf9b8e445
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/254527949'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-cbd51f18c7ef
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/mac/comments/17u1tn4/forgot_mac_password_and_dont_have_the_recovery/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-d3da039a7058
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/mac/comments/1bm8jm7/i_have_an_m1_macbook_air_but_i_forgot_my_new/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-12'
+lastUpdatedAt: '2026-07-12'
+createdAt: null
+relatedArticles:
+  - mac-dfu-firmware-revive-restore
+popular: false
 ---
 
 # Mac 忘记登录密码，无法进入 macOS

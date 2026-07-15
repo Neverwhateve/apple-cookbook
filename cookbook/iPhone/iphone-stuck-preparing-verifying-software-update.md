@@ -1,10 +1,29 @@
 ---
+schemaVersion: 2
+id: iphone-stuck-preparing-verifying-software-update
 title: iPhone 设置或更新时卡在正在准备更新、正在验证更新
 slug: iphone-stuck-preparing-verifying-software-update
-device:
+summary: >-
+  新 iPhone 设置、快速开始迁移、无线更新或电脑更新时，设备可能长时间停在“软件更新”“正在准备更新”“正在验证更新”或 Apple
+  标志进度条。先判断它是在正常安装、下载文件损坏、储存空间不足、网络不稳定，还是需要改用电脑更新或恢复。
+symptoms:
+  - “新 iPhone 设置到软件更新就不动了。”
+  - “快速开始传输数据前卡在正在准备更新。”
+  - “iOS 26 正在验证更新一个小时。”
+  - “更新进度条看起来完全没有动。”
+  - “设置助理没有跳过更新的按钮。”
+  - “旧手机已经转移 eSIM，新手机还卡在更新。”
+  - “删除更新在哪里？还没进主屏幕怎么办？”
+devices:
   - iPhone
   - iPad
-category: iPhone
+platforms:
+  - iOS
+  - iPadOS
+systemVersions:
+  - iOS 26
+categories:
+  - iPhone
 tags:
   - iPhone
   - iPad
@@ -13,6 +32,7 @@ tags:
   - 软件更新
   - 设置助理
   - 数据迁移
+keywords: []
 aliases:
   - iPhone stuck preparing update
   - iPhone stuck verifying update
@@ -24,29 +44,197 @@ aliases:
   - iPhone 卡在正在准备更新
   - iPhone 卡在正在验证更新
   - iPhone 传输数据卡在更新
-verification: Official
+errorMessages: []
+officialTerms: []
+communityTerms: []
 difficulty: Moderate
-updated: 2026-07-11
-official_sources:
-  - https://support.apple.com/zh-cn/108905
-  - https://support.apple.com/zh-cn/118575
-  - https://support.apple.com/zh-cn/118106
-  - https://support.apple.com/zh-cn/102317
-  - https://support.apple.com/zh-cn/108969
-  - https://support.apple.com/zh-cn/109057
-  - https://support.apple.com/zh-cn/109046
-  - https://support.apple.com/zh-cn/102659
-  - https://support.apple.com/zh-cn/120001
-  - https://support.apple.com/zh-cn/102421
-community_sources:
-  - https://discussions.apple.com/thread/256189818
-  - https://discussions.apple.com/thread/255571796
-  - https://discussions.apple.com/thread/255531482
-  - https://www.reddit.com/r/iphone/comments/1nj8v4t/stuck_on_verifying_update_screen_upgrading_to/
-  - https://www.reddit.com/r/applehelp/comments/1kzc9rm/new_iphone_16_plus_stuck_in_the_software_update/
-  - https://www.reddit.com/r/iphone/comments/1c2f2an/solution_for_new_iphone_stuck_updating_ios_during/
+estimatedTime: null
+verificationLevel: Official
 status: canonical
-popular: true
+canonicalArticleId: iphone-stuck-preparing-verifying-software-update
+solutions:
+  - id: solution-e34c14ef4205
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - 先确认屏幕状态：是在设置助理的“软件更新”，主屏幕后“正在准备更新 / 正在验证更新”，Apple 标志加进度条，还是“连接电脑”恢复屏幕。
+      - 如果看到 Apple 标志和进度条，先接入电源并等待。Apple 说明进度条可能缓慢或看似静止；如果出现“正在更新”信息，表示更新仍在进行。
+      - '如果设备可进入主屏幕，打开设置 通用 [设备] 储存空间，确认有足够空间。需要时启用“卸载未使用的 App”或手动删除可重新下载的内容。'
+      - '如果无线更新仍无法安装，打开设置 通用 [设备] 储存空间，在 App 列表中找到更新，轻点更新并选择删除更新。'
+      - 回到设置 通用 软件更新，重新下载并安装最新更新。
+      - 如果列表中没有更新，或问题再次发生，改用 Mac、Apple 设备 App 或 iTunes 更新设备。
+      - >-
+        用电脑更新时，先更新 Mac、Apple 设备 App 或 iTunes；将 iPhone 或 iPad 直接连接到电脑 USB
+        端口，不要通过键盘或 USB 集线器。
+      - >-
+        如果电脑更新时出现错误，按 Apple 顺序更换线缆或 USB 端口，重启电脑和设备，并检查第三方安全软件是否阻止连接 Apple
+        软件更新服务器。
+      - >-
+        如果设备显示“连接电脑”屏幕、电脑提示恢复模式、设备长时间停在 Apple
+        标志且没有进度条，或恢复助理反复失败，将设备置于恢复模式并优先选择更新。更新会尝试重新安装系统而不抹掉数据。
+      - 如果恢复模式“更新”失败，或 Apple 支持要求恢复，再选择恢复。恢复会抹掉设备，之后只能从可用备份恢复。
+      - >-
+        如果新机设置期间已经转移或激活 eSIM，不要在没有运营商准备的情况下删除 eSIM；需要抹掉或重新设置前，确认是否保留
+        eSIM，或先联系运营商确认重新激活路径。
+    verificationLevel: Official
+    sourceIds:
+      - official-0627ba690fd6
+      - official-d27daf642c3a
+      - official-20a114edd6dc
+      - official-898ca93eac0f
+      - official-b22fd9a48dfc
+      - official-eb3a9e638e92
+      - official-8e75b70e952b
+      - official-4dfee00f5c68
+      - official-c2e35d3020fe
+      - official-aaf7da28848b
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-0627ba690fd6
+    title: Apple 支持：如果 iPhone 或 iPad 无法更新
+    url: 'https://support.apple.com/zh-cn/108905'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-d27daf642c3a
+    title: Apple 支持：更新你的 iPhone 或 iPad
+    url: 'https://support.apple.com/zh-cn/118575'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-20a114edd6dc
+    title: Apple 支持：如果你无法更新或恢复 iPhone 或 iPod touch
+    url: 'https://support.apple.com/zh-cn/118106'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-898ca93eac0f
+    title: Apple 支持：更新或恢复后出现 Apple 标志和进度条
+    url: 'https://support.apple.com/zh-cn/102317'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-b22fd9a48dfc
+    title: Apple 支持：如果 iPhone、iPad 或 iPod touch 上出现恢复屏幕
+    url: 'https://support.apple.com/zh-cn/108969'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-eb3a9e638e92
+    title: Apple 支持：如果更新或恢复时看到错误信息
+    url: 'https://support.apple.com/zh-cn/109057'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-8e75b70e952b
+    title: Apple 支持：使用“访达”更新 iPhone、iPad 或 iPod touch
+    url: 'https://support.apple.com/zh-cn/109046'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-4dfee00f5c68
+    title: Apple 支持：使用“快速开始”将数据传输到新的 iPhone 或 iPad
+    url: 'https://support.apple.com/zh-cn/102659'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-c2e35d3020fe
+    title: Apple 支持：使用“访达”、Apple 设备 App 或 iTunes 将数据从旧 iOS 设备传输到新设备
+    url: 'https://support.apple.com/zh-cn/120001'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-aaf7da28848b
+    title: Apple 支持：如何抹掉 iPhone 或 iPad 上的 eSIM
+    url: 'https://support.apple.com/zh-cn/102421'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-6c6bea75c73b
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/256189818'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-83ff479433f4
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/255571796'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-9fb922f0cbc9
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/255531482'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-fc76d8102695
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/iphone/comments/1nj8v4t/stuck_on_verifying_update_screen_upgrading_to/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-c90dd1caabe1
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/applehelp/comments/1kzc9rm/new_iphone_16_plus_stuck_in_the_software_update/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-0cfe73a60606
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/iphone/comments/1c2f2an/solution_for_new_iphone_stuck_updating_ios_during/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-11'
+lastUpdatedAt: '2026-07-11'
+createdAt: null
+relatedArticles:
+  - iphone-battery-drains-after-update
+  - iphone-unavailable-security-lockout-forgot-passcode
+  - iphone-esim-setup-transfer-fails
+  - iphone-sos-no-service-searching
+  - iphone-ipad-wifi-no-internet-unable-to-join
+popular: false
 ---
 
 # iPhone 设置或更新时卡在正在准备更新、正在验证更新

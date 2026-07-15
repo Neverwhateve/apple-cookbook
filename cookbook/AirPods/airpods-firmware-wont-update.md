@@ -1,18 +1,35 @@
 ---
+schemaVersion: 2
+id: airpods-firmware-wont-update
 title: AirPods 固件无法更新
 slug: airpods-firmware-wont-update
-device:
+summary: >-
+  AirPods 固件不是手动点按安装的更新。先确认固件是否真的落后，再把 AirPods 放回充电盒、接入电源、合上盒盖，并让它在已联网的
+  iPhone、iPad 或 Mac 蓝牙范围内等待至少 30 分钟。
+symptoms:
+  - “AirPods 固件一直不更新。”
+  - “网上说有新版，但我的版本号还是旧的。”
+  - “AirPods Pro 3 固件显示 8A357 / 0A0，怎么强制更新？”
+  - “AirPods 放回盒子就断开，固件没法更新。”
+  - “等了半小时还是没变化。”
+  - “没有 Apple 设备，能不能更新 AirPods 固件？”
+  - “怀疑 AirPods 是假的，因为一直更新不了。”
+devices:
   - AirPods
   - iPhone
   - iPad
   - Mac
-category: AirPods
+platforms: []
+systemVersions: []
+categories:
+  - AirPods
 tags:
   - AirPods
   - Firmware
   - Bluetooth
   - Charging
   - Update
+keywords: []
 aliases:
   - AirPods firmware won't update
   - AirPods stuck on old firmware
@@ -22,22 +39,136 @@ aliases:
   - AirPods 固件版本太旧
   - AirPods Pro 3 固件无法更新
   - AirPods 怎么强制更新固件
-verification: Official
+errorMessages: []
+officialTerms: []
+communityTerms: []
 difficulty: Moderate
-updated: 2026-07-11
-official_sources:
-  - https://support.apple.com/zh-cn/106340
-  - https://support.apple.com/zh-cn/118531
-  - https://support.apple.com/zh-cn/119838
-  - https://support.apple.com/zh-cn/guide/airpods/iph561965261/web
-community_sources:
-  - https://discussions.apple.com/thread/256243599
-  - https://discussions.apple.com/thread/255016226
-  - https://discussions.apple.com/thread/253707372
-  - https://www.reddit.com/r/airpods/comments/1rswmsy/firmware_will_not_update/
-  - https://www.reddit.com/r/airpods/comments/1ouciuv/air_pods_pro_3_not_updating_firmware/?tl=zh-hans
+estimatedTime: null
+verificationLevel: Official
 status: canonical
-popular: true
+canonicalArticleId: airpods-firmware-wont-update
+solutions:
+  - id: solution-7bd4de29a8ed
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - >-
+        先确认 AirPods 机型。不要把 AirPods Pro、AirPods Pro 2、AirPods Pro 3、AirPods 4 和
+        AirPods Max 的版本号互相比较。
+      - >-
+        在 Apple 的 AirPods 固件页面查看对应机型的最新版本。Apple 在 2026 年 6 月 18 日发布的页面中列出了各
+        AirPods 机型的当前固件版本。
+      - 在 iPhone 或 iPad 上，打开设置 蓝牙，轻点 AirPods 旁边的信息按钮，向下滚动到“关于”查看固件版本。
+      - 在 Mac 上，打开系统设置 蓝牙，点按 AirPods 旁边的信息按钮，查看固件版本。
+      - 如果固件已经是对应机型的最新版本，不需要继续更新。
+      - >-
+        如果 AirPods 或 AirPods Pro 不是最新版本，将 iPhone、iPad 或 Mac
+        更新到最新系统，打开蓝牙，并接入无线局域网。
+      - 确认 AirPods 已通过蓝牙连接到这台 iPhone、iPad 或 Mac。
+      - 将充电盒接入电源。
+      - 将 AirPods 放入充电盒并盖上盒盖，让充电盒保持闭合，同时保持在这台 Apple 设备的蓝牙范围内。
+      - 等待至少 30 分钟。
+      - 打开充电盒盒盖，让 AirPods 重新连接，再次检查固件版本。
+      - 如果仍无法更新，按 Apple 指引重置 AirPods，然后重新执行固件更新步骤。
+      - >-
+        如果是 AirPods Max，将 iPhone、iPad 或 Mac 更新到最新系统并接入无线局域网，确认 AirPods Max
+        已通过蓝牙连接；把充电线插入右侧耳机底部并接入电源，让 AirPods Max 保持在蓝牙范围内至少 30 分钟，再重新连接并检查版本。
+      - 如果 AirPods Max 仍无法更新，按 Apple 指引重置 AirPods Max，然后再次尝试更新。
+      - 如果身边没有 iPhone、iPad 或 Mac，预约 Apple Store 或 Apple 授权服务提供商更新固件。
+    verificationLevel: Official
+    sourceIds:
+      - official-ee14a590518a
+      - official-b96d842084bc
+      - official-b1a82eb67efc
+      - official-4cbe41c953e8
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-ee14a590518a
+    title: Apple 支持：关于 AirPods 固件更新
+    url: 'https://support.apple.com/zh-cn/106340'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-b96d842084bc
+    title: Apple 支持：如何重置 AirPods 和 AirPods Pro
+    url: 'https://support.apple.com/zh-cn/118531'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-b1a82eb67efc
+    title: Apple 支持：如何重新启动或重置 AirPods Max
+    url: 'https://support.apple.com/zh-cn/119838'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-4cbe41c953e8
+    title: AirPods 使用手册：重新启动、取消配对或还原 AirPods
+    url: 'https://support.apple.com/zh-cn/guide/airpods/iph561965261/web'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-e97222ffe212
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/256243599'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-37749224a1e2
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/255016226'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-7f22d01d6c0f
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/253707372'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-02e52559dccb
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/airpods/comments/1rswmsy/firmware_will_not_update/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-833997d47aa1
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/airpods/comments/1ouciuv/air_pods_pro_3_not_updating_firmware/?tl=zh-hans
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-11'
+lastUpdatedAt: '2026-07-11'
+createdAt: null
+relatedArticles:
+  - airpods-wont-charge-case-not-working
+  - airpods-wont-connect-pair-reset
+  - airpods-find-my-setup-incomplete
+popular: false
 ---
 
 # AirPods 固件无法更新

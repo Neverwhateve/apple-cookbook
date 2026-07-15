@@ -191,6 +191,12 @@ test("content validator accepts a complete v2 canonical article", () => {
   assert.match(result.stdout, /1 articles \(0 v1, 1 v2\), 0 errors/);
 });
 
+test("content validator permits an unknown source access date", () => {
+  const result = runValidator(v2Article().replace("accessedAt: 2026-07-13", "accessedAt: null"));
+
+  assert.equal(result.status, 0, result.stderr);
+});
+
 test("content validator rejects an Official v2 article without an Official recommended solution", () => {
   for (const article of [
     v2Article({ solutionKind: "alternative" }),

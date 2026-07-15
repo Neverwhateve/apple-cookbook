@@ -1,10 +1,27 @@
 ---
+schemaVersion: 2
+id: iphone-personal-hotspot-not-working-greyed-out
 title: iPhone 个人热点无法使用、变灰或连不上
 slug: iphone-personal-hotspot-not-working-greyed-out
-device:
+summary: >-
+  iPhone 或蜂窝版 iPad 的“个人热点”变灰、找不到、无法打开，或其他设备看得到热点但连不上。先确认蜂窝数据和运营商套餐支持，再按连接方式排查
+  Wi-Fi、USB、智能热点和家庭共享；不要一开始就抹掉设备或把问题归咎于系统更新。
+symptoms:
+  - “个人热点是灰色，点不了。”
+  - “更新后热点不能用了。”
+  - “允许其他人加入打不开。”
+  - “电脑找不到 iPhone 热点。”
+  - “连热点一直提示密码错误。”
+  - “Mac 可以自动连，Windows / 安卓连不上。”
+  - “热点连一会儿就断开。”
+  - “控制中心里的热点按钮是灰的。”
+devices:
   - iPhone
   - iPad
-category: Networking
+platforms: []
+systemVersions: []
+categories:
+  - Networking
 tags:
   - iPhone
   - iPad
@@ -14,6 +31,7 @@ tags:
   - Bluetooth
   - Carrier
   - Network
+keywords: []
 aliases:
   - iPhone Personal Hotspot not working
   - iPhone hotspot greyed out
@@ -24,24 +42,141 @@ aliases:
   - iPhone 个人热点点不了
   - iPhone 热点连不上
   - iPhone 更新后热点不能用
-verification: Official
+errorMessages:
+  - “连热点一直提示密码错误。”
+officialTerms: []
+communityTerms: []
 difficulty: Moderate
-updated: 2026-07-11
-official_sources:
-  - https://support.apple.com/zh-cn/119837
-  - https://support.apple.com/en-us/119837
-  - https://support.apple.com/zh-cn/111785
-  - https://support.apple.com/zh-cn/109321
-  - https://support.apple.com/en-us/109321
-  - https://support.apple.com/zh-cn/guide/iphone/iph45447ca6/ios
-community_sources:
-  - https://discussions.apple.com/thread/256254848
-  - https://discussions.apple.com/thread/256144998
-  - https://discussionschinese.apple.com/thread/256200432
-  - https://www.reddit.com/r/iphone/comments/1nji5go/personal_hotspot_not_working_after_updating_to/
-  - https://www.reddit.com/r/applehelp/comments/1p6j3b6/control_center_greyed_out_hotspot_after_ios/
+estimatedTime: null
+verificationLevel: Official
 status: canonical
-popular: true
+canonicalArticleId: iphone-personal-hotspot-not-working-greyed-out
+solutions:
+  - id: solution-3572d331d765
+    title: Apple 官方方案
+    summary: null
+    kind: recommended
+    steps:
+      - 在提供热点的 iPhone 或蜂窝版 iPad 上，打开设置 蜂窝网络，确认蜂窝数据已开启。
+      - 打开设置 个人热点，确认可以看到个人热点设置。
+      - 如果“个人热点”变灰、不可用、找不到或无法打开，先联系运营商确认套餐支持个人热点，且该号码已启用这项服务。
+      - 如果要让 Windows PC、安卓设备、其他人的设备或未登录同一 Apple 账户的设备连接，打开允许其他人加入。
+      - 重新启动提供热点的 iPhone 或 iPad，也重新启动需要连接热点的设备。
+      - 确认提供热点的设备和连接设备都已安装最新可用系统更新。
+      - '如果仍无法使用，在提供热点的设备上打开设置 通用 传输或还原 [设备] 还原 还原网络设置。'
+      - 操作前提醒顾客：还原网络设置会移除 Wi-Fi 网络和密码、蜂窝网络设置，以及之前使用过的 VPN 和 APN 设置。
+    verificationLevel: Official
+    sourceIds:
+      - official-31960ccbc96e
+      - official-803877fa9f49
+      - official-81dce1aa3dd2
+      - official-e3a3dad25449
+      - official-223b75113692
+      - official-2d8cc237ae50
+    warnings: []
+    limitations: []
+warnings: []
+limitations: []
+sources:
+  - id: official-31960ccbc96e
+    title: Apple 支持：如果无法在 iPhone 或 iPad（无线局域网 + 蜂窝网络）上正常使用“个人热点”
+    url: 'https://support.apple.com/zh-cn/119837'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-803877fa9f49
+    title: 'Apple Support: If Personal Hotspot is not working on your iPhone or iPad'
+    url: 'https://support.apple.com/en-us/119837'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-81dce1aa3dd2
+    title: Apple 支持：连接到 iPhone 或 iPad 的个人热点
+    url: 'https://support.apple.com/zh-cn/111785'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-e3a3dad25449
+    title: Apple 支持：使用智能热点连接到你的个人热点
+    url: 'https://support.apple.com/zh-cn/109321'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-223b75113692
+    title: 'Apple Support: Use Instant Hotspot to connect to your Personal Hotspot'
+    url: 'https://support.apple.com/en-us/109321'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: official-2d8cc237ae50
+    title: iPhone 使用手册：共享 iPhone 的互联网连接
+    url: 'https://support.apple.com/zh-cn/guide/iphone/iph45447ca6/ios'
+    publisher: Apple
+    sourceType: official-support
+    accessedAt: null
+    publishedAt: null
+    official: true
+  - id: community-aef493924e2f
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/256254848'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-89595db99182
+    title: Apple Support Community 旧版引文（原始标题未记录）
+    url: 'https://discussions.apple.com/thread/256144998'
+    publisher: Apple Support Community
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-5529805051d1
+    title: discussionschinese.apple.com 旧版引文（原始标题未记录）
+    url: 'https://discussionschinese.apple.com/thread/256200432'
+    publisher: discussionschinese.apple.com
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-d6968a83d436
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/iphone/comments/1nji5go/personal_hotspot_not_working_after_updating_to/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+  - id: community-e4a904a52e3e
+    title: Reddit 旧版引文（原始标题未记录）
+    url: >-
+      https://www.reddit.com/r/applehelp/comments/1p6j3b6/control_center_greyed_out_hotspot_after_ios/
+    publisher: Reddit
+    sourceType: community
+    accessedAt: null
+    publishedAt: null
+    official: false
+lastVerifiedAt: '2026-07-11'
+lastUpdatedAt: '2026-07-11'
+createdAt: null
+relatedArticles:
+  - iphone-ipad-wifi-no-internet-unable-to-join
+  - iphone-sos-no-service-searching
+  - iphone-invalid-sim-no-sim
+  - iphone-esim-setup-transfer-fails
+popular: false
 ---
 
 # iPhone 个人热点无法使用、变灰或连不上
