@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 2,
+  "runId": "camera-flash-not-working-2026-07-15T100610Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-15T10:06:10.000Z",
+  "baseCommit": "dc737951ea1fb437ffea16c30a15f25f832cc06e",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-ipad-camera-flash-not-working-black-screen.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:ab7f94bed7ccd8178b49fa0ec0988a08bba89e48b7e017aae1ef1716afaaa845",
+      "reason": "Adds a distinct high-value canonical troubleshooting cluster for system Camera, front/back camera, flash/flashlight, permission, temperature, and service-boundary failures. Existing WeChat article covers a third-party-app subcase only.",
+      "canonicalReview": {
+        "queries": [
+          "相机黑屏",
+          "iPhone 相机黑屏",
+          "iPad 相机黑屏",
+          "闪光灯无法使用",
+          "手电筒按钮变灰",
+          "第三方 App 调用相机失败",
+          "camera black screen",
+          "flashlight not working",
+          "cookbook rg 相机 闪光 手电筒 camera flash black screen"
+        ],
+        "matchedArticleIds": [
+          "iphone-wechat-camera-black-screen-lag",
+          "iphone-ipad-face-id-not-working-camera-covered-disabled",
+          "iphone-ipad-speaker-microphone-audio-not-working",
+          "iphone-black-screen-wont-turn-on-after-battery-drained"
+        ],
+        "decision": "create-new",
+        "notes": "Matched articles are adjacent but not duplicates: WeChat article is scoped to one third-party app path; Face ID covers TrueDepth authentication; audio covers microphone/speaker; black-screen article covers device power/display. No existing canonical article covers Apple Camera App black screen/blur, front-back camera isolation, flash/flashlight testing, temperature-disablement, and service escalation together."
+      }
+    }
+  ]
+}
