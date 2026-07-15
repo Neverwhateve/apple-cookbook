@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "runId": "maintenance-20260715T120612Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-15T12:06:12.000Z",
+  "baseCommit": "f06fa4d723ad155c786c9938053669620c10a532",
+  "changes": [
+    {
+      "path": "cookbook/Mac/mac-printer-offline-cant-print-airprint.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:d006be866917227a60500334e24a767a3b7660b61b1a955202d4c920a0d294cb",
+      "reason": "Distinct high-value Mac printing symptom cluster supported by current Apple China Mac Help and AirPrint sources.",
+      "canonicalReview": {
+        "queries": [
+          "打印 打印机 离线 找不到 AirPrint 打印队列 还原打印系统",
+          "Mac printer offline can't print AirPrint queue reset printing system",
+          "cookbook title summary symptoms aliases devices platforms errorMessages: 打印机 AirPrint printer print queue"
+        ],
+        "matchedArticleIds": [
+          "mac-wont-turn-on-no-power-startup"
+        ],
+        "decision": "create-new",
+        "notes": "Only existing match mentions unplugging printers during Mac no-power troubleshooting; no canonical article covers printing queues, AirPrint discovery, printer offline, re-adding queues, drivers, or reset printing system."
+      }
+    }
+  ]
+}
