@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "runId": "iphone-ipad-touch-screen-not-responding-2026-07-15T004700Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-15T00:47:00.000Z",
+  "baseCommit": "6e07a0eb53b2b17ae72d5b987f6ba41030cef5b8",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-ipad-touch-screen-not-responding-ghost-touch.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:f474c9df93a31ee5adf818b65f652596cb2734a5631c500d9ece74d8072a7422",
+      "reason": "High-frequency iPhone/iPad hardware-software boundary symptom with current Apple Support troubleshooting and service guidance; no existing canonical article independently covers touch screen non-response, intermittent touch, ghost touch, or partial touch failure.",
+      "canonicalReview": {
+        "queries": [
+          "触控失灵 触摸没反应 屏幕乱跳 断触 鬼触",
+          "iPhone screen not working iPad screen too sensitive intermittent touch",
+          "touch screen unresponsive accessory screen protector case",
+          "Touch Accommodations Hold Duration Ignore Repeat",
+          "existing black screen unavailable password accessibility keyboard touch"
+        ],
+        "matchedArticleIds": [
+          "ipad-blue-box-double-tap-voiceover-accessibility",
+          "ipad-keyboard-small-floating-split-moving",
+          "iphone-black-screen-wont-turn-on-after-battery-drained",
+          "iphone-unavailable-security-lockout-forgot-passcode"
+        ],
+        "decision": "create-new",
+        "notes": "Existing matches mention touch only as adjacent context: accessibility focus/double-tap behavior, iPad keyboard layout issues, black-screen power failures, or passcode workflows. None covers general iPhone/iPad touchscreen non-response, intermittent touch, over-sensitive touch, ghost touch, accessory/screen-protector isolation, and service escalation as the primary canonical intent."
+      }
+    }
+  ]
+}
