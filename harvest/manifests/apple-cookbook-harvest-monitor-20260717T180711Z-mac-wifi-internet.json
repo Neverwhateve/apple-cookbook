@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260717T180711Z-mac-wifi-internet",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-16T18:11:15.871Z",
+  "baseCommit": "fd422b28426586ee00adaa78cfb4ec053580cb0b",
+  "changes": [
+    {
+      "path": "cookbook/Networking/mac-wifi-no-internet-cant-join.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:f95b6c792c88583db7f823d13f3c9e321bc673a30978676cad105d7ed3ab8531",
+      "reason": "Add a distinct Mac Wi-Fi and no-internet troubleshooting canonical article supported by Apple China official sources; existing canonical coverage is limited to iPhone/iPad and device-specific network symptoms.",
+      "canonicalReview": {
+        "queries": [
+          "Mac 连上 Wi-Fi 但不能上网",
+          "Mac 无法加入 Wi-Fi 网络",
+          "Mac 显示无互联网连接",
+          "Mac Wi-Fi no internet",
+          "无法通过 Wi-Fi 接入互联网",
+          "无线诊断 Wi-Fi 建议 Mac",
+          "私有无线局域网地址 Mac 无法访问互联网"
+        ],
+        "matchedArticleIds": [
+          "iphone-ipad-wifi-no-internet-unable-to-join",
+          "mac-printer-offline-cant-print-airprint",
+          "homepod-not-responding-network-problem"
+        ],
+        "decision": "create-new",
+        "notes": "Existing canonical articles cover iPhone/iPad Wi-Fi, AirPrint discovery, and HomePod network symptoms; none provides a Mac-specific join-vs-internet flow with Wi-Fi Suggestions, Wireless Diagnostics, DHCP renewal, VPN/security software, router settings, and private Wi-Fi address boundaries."
+      }
+    }
+  ]
+}
