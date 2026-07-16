@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260717T220650Z-notifications",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-17T22:06:50.000Z",
+  "baseCommit": "a483886b9d33f05a40aa67ba6fecb77015fcd65d",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-notifications-not-working-focus-summary-watch.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:e9daeb44177fb7014c3225943c9e96f68400a1190c5136332fb94dff535dafc5",
+      "reason": "Adds a distinct high-value notification troubleshooting cluster covering app notification settings, Focus/Do Not Disturb, scheduled summaries, Apple Intelligence notification presentation, Apple Watch routing, and Messages filtering with reviewed Apple China sources.",
+      "canonicalReview": {
+        "queries": [
+          "iPhone 收不到通知",
+          "iPhone 通知没有声音",
+          "通知只在 Apple Watch 上出现",
+          "通知延迟到摘要才出现",
+          "专注模式 收不到通知",
+          "App 图标没有红点",
+          "iPhone notifications not working",
+          "notifications only on Apple Watch",
+          "scheduled summary notifications",
+          "Focus mode silencing notifications"
+        ],
+        "matchedArticleIds": [
+          "iphone-ipad-speaker-microphone-audio-not-working",
+          "iphone-imessage-messages-not-sending-green-waiting-activation",
+          "ask-to-buy-requests-not-showing",
+          "screen-time-requests-not-working",
+          "apple-watch-wont-connect-pair-iphone"
+        ],
+        "decision": "create-new",
+        "notes": "Existing canonical articles mention notification symptoms only inside audio, Messages, Family Sharing approval, Screen Time request, or Apple Watch pairing flows. None covers the general notification settings plus Focus, summaries, Apple Watch routing, and Messages filtering troubleshooting intent."
+      }
+    }
+  ]
+}
