@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260716T160614Z-bluetooth-accessory",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-17T00:06:14.000Z",
+  "baseCommit": "62b5a932646d405e7092c00205e1c3936cfe50a1",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-ipad-bluetooth-accessory-wont-connect.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:131b78b2b1df33c0e1aa136edc02eaa6481a0da788e12cb3918bc01385a1ca93",
+      "reason": "Add a distinct high-value canonical article for generic iPhone/iPad Bluetooth accessory pairing failures, backed by current Apple China support pages.",
+      "canonicalReview": {
+        "queries": [
+          "蓝牙配件无法连接 iPhone iPad",
+          "蓝牙搜不到设备 iPhone",
+          "Bluetooth accessory won't connect iPhone iPad",
+          "发现模式 忽略此设备 蓝牙权限",
+          "rg 蓝牙 Bluetooth 配件 无法连接 无法配对 忽略此设备 发现模式"
+        ],
+        "matchedArticleIds": [
+          "airpods-wont-connect-pair-reset",
+          "iphone-ipad-speaker-microphone-audio-not-working",
+          "iphone-personal-hotspot-not-working-greyed-out"
+        ],
+        "decision": "create-new",
+        "notes": "Existing matches cover AirPods-specific pairing, audio routing, and Personal Hotspot Bluetooth dependency; none cover generic third-party Bluetooth accessory discovery, app Bluetooth permission, forget-device, compatibility, and Apple Support escalation for iPhone/iPad."
+      }
+    }
+  ]
+}
