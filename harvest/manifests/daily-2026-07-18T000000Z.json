@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "runId": "daily-2026-07-18T000000Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-18T00:00:00.000Z",
+  "baseCommit": "e2d578323d7174f2ed9c75b88c449a7d70588553",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-cant-make-receive-calls.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:74243cf9ae02a19ba9e2fceda68760e3fa56b8cd14fcd2a7d22bfa9379c5fa9b",
+      "reason": "新增独立覆盖 iPhone 无法拨打、无法接听及来电不响的高价值官方排障问题。",
+      "canonicalReview": {
+        "queries": [
+          "iPhone 无法拨打电话",
+          "iPhone 无法接听电话",
+          "来电不响",
+          "呼叫失败",
+          "无服务",
+          "静音未知来电"
+        ],
+        "matchedArticleIds": [],
+        "decision": "create-new",
+        "notes": "已匹配现有 title、summary、symptoms、aliases、devices、platforms、错误信息和 canonical 文章；现有文章仅覆盖无服务/SIM专项、音频或通知，不覆盖电话连接与来电过滤的完整问题意图，因此新增。"
+      }
+    }
+  ]
+}
