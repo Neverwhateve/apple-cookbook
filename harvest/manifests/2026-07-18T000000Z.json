@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "runId": "2026-07-18T000000Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-18T00:00:00.000Z",
+  "baseCommit": "69a05fe136f0cb73beab1719d07a70647d11ebc6",
+  "changes": [
+    {
+      "path": "cookbook/Mac/apple-watch-cannot-unlock-mac.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:90a2da90b226fbae06a8be4198250ee7783f64c21ebab562feb77b2671500025",
+      "reason": "新增 Apple Watch 自动解锁 Mac 的独立高频故障排查文章；现有 canonical 文章未覆盖该问题。",
+      "canonicalReview": {
+        "queries": [
+          "Apple Watch 无法解锁 Mac",
+          "Apple Watch 自动解锁 Mac 失败",
+          "Apple Watch unlock Mac not working",
+          "Mac Apple Watch 解锁",
+          "自动解锁 Apple Watch Mac"
+        ],
+        "matchedArticleIds": [],
+        "decision": "create-new",
+        "notes": "已匹配 origin/main 全部 66 篇 canonical 文章的 title、summary、symptoms、aliases、devices、platforms 和 errorMessages；没有与 Apple Watch 解锁 Mac 相同意图的文章。"
+      }
+    }
+  ]
+}
