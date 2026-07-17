@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260717T160623Z-carplay",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-17T08:06:23.000Z",
+  "baseCommit": "8c18c6ef8d8d28c80e7b8729fcabc3d94f8218cd",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-carplay-wont-connect-not-detected.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:7270921b18c84ba91fc0883957d07a1792c47e64a90845598ccae3acecff3ff7",
+      "reason": "New high-value CarPlay connection troubleshooting article; no existing canonical CarPlay coverage in cookbook title, symptoms, aliases, devices, platforms, or indexes.",
+      "canonicalReview": {
+        "queries": [
+          "CarPlay 车载无法连接",
+          "iPhone 插到车上没有 CarPlay",
+          "无线 CarPlay 连不上",
+          "车机检测不到 iPhone",
+          "USB-C 转闪电转换器 CarPlay 断开",
+          "CarPlay won't connect",
+          "iPhone not detected by CarPlay"
+        ],
+        "matchedArticleIds": [
+          "iphone-ipad-bluetooth-accessory-wont-connect",
+          "iphone-ipad-wifi-no-internet-unable-to-join",
+          "iphone-personal-hotspot-not-working-greyed-out"
+        ],
+        "decision": "create-new",
+        "notes": "Existing matches cover Bluetooth accessories, Wi-Fi, and Personal Hotspot. None cover CarPlay-specific vehicle compatibility, Siri, Screen Time restrictions, CarPlay vehicle records, or USB-C adapter interruption."
+      }
+    }
+  ]
+}
