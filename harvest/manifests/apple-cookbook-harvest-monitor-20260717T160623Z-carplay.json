@@ -9,7 +9,7 @@
       "path": "cookbook/iPhone/iphone-carplay-wont-connect-not-detected.md",
       "action": "create",
       "baseContentHash": null,
-      "proposedContentHash": "sha256:d264587526095ab78c2e34226b4f786cd93b2b5aed7b53228f9451cc8dc18dfe",
+      "proposedContentHash": "sha256:7270921b18c84ba91fc0883957d07a1792c47e64a90845598ccae3acecff3ff7",
       "reason": "New high-value CarPlay connection troubleshooting article; no existing canonical CarPlay coverage in cookbook title, symptoms, aliases, devices, platforms, or indexes.",
       "canonicalReview": {
         "queries": [
