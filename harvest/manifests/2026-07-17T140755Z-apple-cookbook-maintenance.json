@@ -9,7 +9,7 @@
       "path": "cookbook/iPhone/iphone-ipad-app-crashes-not-opening.md",
       "action": "create",
       "baseContentHash": null,
-      "proposedContentHash": "sha256:e903d5c4d3f9f68f503e99cf958ce00cbd863ad8c2ee875534b5e05648048c24",
+      "proposedContentHash": "sha256:b4400c040352351a3c4da9ca3b858c575f39dbcc7b3787e35f02a7a06ec2a35d",
       "reason": "New high-value iPhone/iPad App crash and not-opening symptom cluster with current Apple China support sources; no existing canonical article covers this intent.",
       "canonicalReview": {
         "queries": [
