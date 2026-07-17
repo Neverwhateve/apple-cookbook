@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-watch-battery-drain-2026-07-17T000731Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-17T00:07:31.000Z",
+  "baseCommit": "fd99007deef39e272e3ebe68bd68a229bd3a8d3d",
+  "changes": [
+    {
+      "path": "cookbook/Apple Watch/apple-watch-battery-drains-fast.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:960693ebc636580b178335378099da9deb3eed4bd1aa236e73e775c3ee10b3a2",
+      "reason": "New high-value Apple Watch battery drain canonical article backed by current Apple China support pages.",
+      "canonicalReview": {
+        "queries": [
+          "Apple Watch 电池耗电太快 续航 低电量模式 全天候显示",
+          "Apple Watch 更新后掉电快 电池健康 最大容量",
+          "Apple Watch 蜂窝网络 体能训练 耗电 快",
+          "Apple Watch optimized battery charging low power mode battery health",
+          "rg 电池 耗电 续航 低电量 Apple Watch cookbook"
+        ],
+        "matchedArticleIds": [
+          "apple-watch-wont-charge-turn-on-red-lightning",
+          "apple-watch-wont-connect-pair-iphone",
+          "iphone-battery-drains-after-update",
+          "iphone-notifications-not-working-focus-summary-watch"
+        ],
+        "decision": "create-new",
+        "notes": "Existing canonical articles cover charging failure, pairing, iPhone battery drain, and notification routing. None covers Apple Watch daily battery drain, post-watchOS drain, low power mode tradeoffs, cellular/workout drain, and battery health service triage as the primary intent."
+      }
+    }
+  ]
+}
