@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "runId": "2026-07-17T120652Z-auto",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-17T12:06:52.000Z",
+  "baseCommit": "12d4071b87197b43e7180b5c41c1bb2f072beb0e",
+  "changes": [
+    {
+      "path": "cookbook/AirPods/airpods-anc-transparency-not-working.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:5a1cf94d82ba8d5fd808434eec830fe27613027f689dcd6646bd2368f9b50273",
+      "reason": "Adds a distinct high-value AirPods ANC/transparency troubleshooting article supported by current Apple China Chinese official sources.",
+      "canonicalReview": {
+        "queries": [
+          "AirPods 主动降噪 没有效果 通透模式 异常",
+          "AirPods Pro 降噪变弱 啸叫 反馈声 外部麦克风",
+          "AirPods 4 ANC 降噪不明显 自适应音频",
+          "AirPods Pro 入耳式贴合度测试 主动降噪",
+          "ANC transparency noise control AirPods Pro not working"
+        ],
+        "matchedArticleIds": [
+          "airpods-one-side-no-sound-volume-low",
+          "airpods-firmware-wont-update",
+          "airpods-wont-connect-pair-reset",
+          "airpods-wont-charge-case-not-working"
+        ],
+        "decision": "create-new",
+        "notes": "Existing AirPods canonical articles cover one-side audio, firmware update, connection/reset, and charging. They mention noise control only as related context and do not cover ANC/transparency mode switching, external microphone obstruction, ear tip fit, adaptive audio, or transparency customization as the primary symptom cluster."
+      }
+    }
+  ]
+}
