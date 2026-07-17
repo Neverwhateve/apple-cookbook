@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260717T100645Z-safari",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-17T10:06:45.000Z",
+  "baseCommit": "1843dab95c4349d79968a680ad9c1aeb3494a73b",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-ipad-safari-cant-load-websites-crashes.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:608cab37e091071f902d8defba246c45c3c4bf1e2e1f334b2550a5da6e6a8000",
+      "reason": "Add a distinct high-frequency Safari loading/crash troubleshooting article supported by Chinese Apple Support sources.",
+      "canonicalReview": {
+        "queries": [
+          "Safari 无法载入网站",
+          "iPhone Safari 打不开网页",
+          "iPad Safari 页面空白",
+          "Safari 意外退出",
+          "网站提示 Safari 过时",
+          "清除历史记录与网站数据 灰色",
+          "VPN Safari 无法载入",
+          "JavaScript Safari iPhone",
+          "site:support.apple.com/zh-cn Safari 无法载入网站 iPhone iPad"
+        ],
+        "matchedArticleIds": [
+          "iphone-ipad-wifi-no-internet-unable-to-join",
+          "mac-wifi-no-internet-cant-join",
+          "app-store-cant-download-update-apps"
+        ],
+        "decision": "create-new",
+        "notes": "Existing canonical matches cover general Wi-Fi/internet failures and App Store connectivity, but none cover Safari-specific website loading, JavaScript, website data, iCloud Private Relay, Cookie/content blocker, or site-compatibility triage."
+      }
+    }
+  ]
+}
