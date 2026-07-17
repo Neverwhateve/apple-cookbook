@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 2,
+  "runId": "2026-07-17T040642Z-auto",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-17T04:06:42.000Z",
+  "baseCommit": "2789735ab7f8103829e3023e00e635af6751793a",
+  "changes": [
+    {
+      "path": "cookbook/Mac/mac-bluetooth-devices-wont-connect.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:bea975041600edb8d8c35eff7cd965663ef8d2f9305e8c98cd5be2ea0fc4a38f",
+      "reason": "Canonical count is below 100 and Mac Bluetooth accessory connection failures are a high-value distinct symptom cluster not covered by existing Mac or iPhone/iPad Bluetooth articles.",
+      "canonicalReview": {
+        "queries": [
+          "Mac 蓝牙设备无法连接 配对失败 频繁断开",
+          "妙控键盘 妙控鼠标 妙控板 无法连接 Mac",
+          "Mac 蓝牙耳机 已连接 没有声音",
+          "Mac Bluetooth device won't connect Magic Keyboard Magic Mouse Magic Trackpad",
+          "cookbook 蓝牙 Bluetooth Mac Magic Keyboard Mouse Trackpad"
+        ],
+        "matchedArticleIds": [
+          "iphone-ipad-bluetooth-accessory-wont-connect",
+          "airpods-wont-connect-pair-reset",
+          "mac-external-display-black-screen-low-resolution"
+        ],
+        "decision": "create-new",
+        "notes": "Existing canonical Bluetooth coverage is for iPhone/iPad accessories and AirPods. Mac external display mentions accessories only for display connections. No canonical article covers Mac Bluetooth pairing, Magic accessories, Bluetooth audio routing, keyboard response, and interference/service boundaries."
+      }
+    }
+  ]
+}
