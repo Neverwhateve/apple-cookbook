@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "runId": "daily-2026-07-18T020000Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-18T02:00:00.000Z",
+  "baseCommit": "0f5fa4b449f90ea8f437c69d2b1c4bbd58e000a4",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-cannot-delete-app-restriction.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:a8185d4a3bdcb373d7834b4cd475d096ab640cf792f62ac7d0416d3682be7c68",
+      "reason": "新增高频 iPhone/App 删除受限问题；现有文章只覆盖 App 闪退、App Store 下载和储存空间，未覆盖删除菜单缺失与家长控制限制。",
+      "canonicalReview": {
+        "queries": [
+          "iPhone 无法删除 App",
+          "按住 App 没有删除 App",
+          "delete app option missing",
+          "家长控制 删除 App 不允许",
+          "内建 Apple App 不能删除"
+        ],
+        "matchedArticleIds": [
+          "iphone-ipad-app-crashes-not-opening",
+          "app-store-cant-download-update-apps",
+          "iphone-system-data-storage-too-large",
+          "screen-time-limits-not-blocking"
+        ],
+        "decision": "create-new",
+        "notes": "已匹配全量 canonical 的标题、摘要、症状、别名、设备、平台和错误词。现有文章涉及删除 App 作为其他流程中的一步，但没有以删除菜单缺失、家长控制禁止删除或内建 App 可删除性为主要意图；因此新增独立文章。"
+      }
+    }
+  ]
+}
