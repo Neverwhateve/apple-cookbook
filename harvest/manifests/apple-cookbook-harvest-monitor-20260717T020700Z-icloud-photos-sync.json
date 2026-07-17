@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260717T020700Z-icloud-photos-sync",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-17T02:07:00.000Z",
+  "baseCommit": "ffc0252e397fc007093a64ee2a9ed8f5480345dd",
+  "changes": [
+    {
+      "path": "cookbook/iCloud/icloud-photos-not-syncing-paused-unable-to-upload.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:ac1ec39950b7260948a5433c390e2d4d5a94c92837175bc9b2e908e3a730d592",
+      "reason": "New high-value iCloud Photos sync failure symptom cluster supported by current Apple China official sources.",
+      "canonicalReview": {
+        "queries": [
+          "iCloud 照片无法同步 已暂停 无法上传",
+          "照片 App 无法上传 iCloud 同步 暂停",
+          "iCloud Photos not syncing sync paused unable to upload",
+          "优化储存空间 下载原片 iCloud 照片",
+          "共享图库 将照片移至个人图库以继续同步"
+        ],
+        "matchedArticleIds": [
+          "icloud-storage-full-iphone-backup-fails",
+          "iphone-system-data-storage-too-large",
+          "app-store-cant-download-update-apps",
+          "locked-notes-forgot-password"
+        ],
+        "decision": "create-new",
+        "notes": "Existing canonical articles mention iCloud Photos only as storage/backup context or unrelated iCloud data; none cover Photos library status, sync-paused causes, Unable to Upload album recovery, shared library view, or original-download boundaries as the primary intent."
+      }
+    }
+  ]
+}
