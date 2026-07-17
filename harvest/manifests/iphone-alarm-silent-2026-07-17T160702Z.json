@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 2,
+  "runId": "iphone-alarm-silent-2026-07-17T160702Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-17T16:07:02.000Z",
+  "baseCommit": "14b94d85bd28a9c609b3a956b2adb4f17742eec0",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-alarm-silent-low-volume.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:90cb5b2d4e91c42b238945e780769de723dd07dfd008f0b155e6e62b4e1c2253",
+      "reason": "Distinct high-value iPhone Clock alarm failure cluster with current Apple China official support and guide sources.",
+      "canonicalReview": {
+        "queries": [
+          "闹钟 不响 声音太小 只振动",
+          "iPhone alarm not going off no sound low volume",
+          "铃声和提醒 闹钟 音量",
+          "待机显示 闹钟 触感",
+          "site:support.apple.com/zh-cn iPhone 闹钟 不响 音量 低 静音",
+          "rg 闹钟 alarm 铃声和提醒 待机显示 cookbook"
+        ],
+        "matchedArticleIds": [
+          "iphone-notifications-not-working-focus-summary-watch",
+          "iphone-ipad-speaker-microphone-audio-not-working"
+        ],
+        "decision": "create-new",
+        "notes": "Existing notification article covers app notifications, Focus, summary, and Apple Watch routing. Existing speaker article mentions alarm only as an audio test. No canonical article covers Clock alarm volume, ringtone set to None, silent/Do Not Disturb behavior, headphones, StandBy haptic behavior, and manual time risk."
+      }
+    }
+  ]
+}
