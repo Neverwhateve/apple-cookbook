@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 2,
+  "runId": "2026-07-17T140755Z-apple-cookbook-maintenance",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-17T14:10:57.311Z",
+  "baseCommit": "9d6b22629e24272e657f5a6c25755b09e48ce028",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-ipad-app-crashes-not-opening.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:e903d5c4d3f9f68f503e99cf958ce00cbd863ad8c2ee875534b5e05648048c24",
+      "reason": "New high-value iPhone/iPad App crash and not-opening symptom cluster with current Apple China support sources; no existing canonical article covers this intent.",
+      "canonicalReview": {
+        "queries": [
+          "iPhone App 闪退",
+          "iPad App 无法打开",
+          "App 停止响应 意外关闭 无法打开",
+          "app crashing not opening iPhone iPad",
+          "App 点开就退回桌面",
+          "App 卡在启动页"
+        ],
+        "matchedArticleIds": [
+          "app-store-cant-download-update-apps",
+          "iphone-ipad-safari-cant-load-websites-crashes",
+          "iphone-ipad-touch-screen-not-responding-ghost-touch",
+          "iphone-ipad-wifi-no-internet-unable-to-join"
+        ],
+        "decision": "create-new",
+        "notes": "Existing canonical articles cover App Store download/update failures, Safari, device touch unresponsiveness, and network failures. They do not cover a single iPhone/iPad app stopping responding, quitting unexpectedly, or failing to open; this article links to those adjacent topics for triage."
+      }
+    }
+  ]
+}
