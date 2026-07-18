@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260718T100636Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-18T10:06:36.000Z",
+  "baseCommit": "71a43e19c344850cc815d68f23dbbc423ee34172",
+  "changes": [
+    {
+      "path": "cookbook/Apple Watch/apple-watch-cellular-not-working.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:9f8bdf6c8430a52d83924e38b54a098646a5a195f301c9d18eb8cde378d149e6",
+      "reason": "Apple Watch 蜂窝服务是独立且高频的故障意图，现有 canonical 仅在配对、耗电等文章中旁及，未覆盖激活、无服务、运营商套餐和换表转移。",
+      "canonicalReview": {
+        "queries": [
+          "蜂窝网络",
+          "Apple Watch 无服务",
+          "Apple Watch 蜂窝",
+          "Apple Watch cellular",
+          "运营商",
+          "LTE",
+          "亲子设置",
+          "移动网络",
+          "Apple Watch 蜂窝网络无法激活",
+          "Apple Watch 显示无服务"
+        ],
+        "matchedArticleIds": [
+          "apple-watch-battery-drains-fast",
+          "apple-watch-wont-connect-pair-iphone",
+          "iphone-sos-no-service-searching",
+          "iphone-esim-setup-transfer-fails",
+          "iphone-ipad-cant-activate-activation-server-unavailable"
+        ],
+        "decision": "create-new",
+        "notes": "已匹配 title、summary、symptoms、aliases、devices、platforms、错误信息及所有 canonical 正文。上述文章分别覆盖耗电、蓝牙/配对、iPhone 蜂窝无服务、iPhone eSIM 和设备激活；没有一篇以 Apple Watch 蜂窝套餐激活、手表独立联网、运营商资格或新旧手表号码转移为主意图。新文不处理 iPhone 通用无服务、普通配对或单纯耗电。"
+      }
+    }
+  ]
+}
