@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260718T142000Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-18T14:20:00.000Z",
+  "baseCommit": "308f1820b4351675171e0c640c08280967795fb0",
+  "changes": [
+    {
+      "path": "cookbook/AirPods/airpods-microphone-not-working-call-unclear.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:7b7af25c7dea0133bfcad4374787c2e3d4bea25370511c06662fb34c4552eac6",
+      "reason": "AirPods 麦克风失效、通话中对方听不清以及 Mac 使用麦克风后音质降低是独立且高频的使用问题；现有 canonical 文章没有覆盖麦克风位置、通话输入和蓝牙麦克风模式排查。",
+      "canonicalReview": {
+        "queries": [
+          "AirPods 麦克风没有声音",
+          "AirPods 通话对方听不清",
+          "AirPods 录音没有声音",
+          "AirPods microphone not working",
+          "AirPods Mac 麦克风 音质降低",
+          "AirPods 麦克风位置 左右切换"
+        ],
+        "matchedArticleIds": [
+          "airpods-one-side-no-sound-volume-low",
+          "airpods-wont-connect-pair-reset",
+          "airpods-firmware-wont-update",
+          "iphone-ipad-speaker-microphone-audio-not-working"
+        ],
+        "decision": "create-new",
+        "notes": "逐项匹配 origin/main 中所有 cookbook canonical 的 title、summary、symptoms、aliases、devices、platforms、errorMessages 和文件路径后，命中的是单耳播放无声、蓝牙连接、固件更新以及 iPhone/iPad 内置扬声器或麦克风等相邻意图；没有覆盖 AirPods 麦克风输入、通话中对方听不清或 Mac 蓝牙麦克风模式导致的音质问题。"
+      }
+    }
+  ]
+}
