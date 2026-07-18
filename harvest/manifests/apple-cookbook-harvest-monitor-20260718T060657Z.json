@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260718T060657Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-18T06:06:57.000Z",
+  "baseCommit": "fd5a16569340b171cafabf4df562e97760590e6a",
+  "changes": [
+    {
+      "path": "cookbook/Mac/mac-activation-lock-after-erase-transfer.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:23c0881d2fedf0ef87d7cfa6382e5312b8c91850839c30a612f3959d74a0ffd5",
+      "reason": "Distinct high-value Mac ownership and activation-lock symptom cluster is not covered by an existing canonical article.",
+      "canonicalReview": {
+        "queries": [
+          "Mac 抹掉后出现激活锁",
+          "二手 Mac 要前任 Apple 账户",
+          "Mac activation lock after erase",
+          "Mac 激活锁",
+          "mac-forgot-login-password-reset",
+          "mac-dfu-firmware-revive-restore",
+          "iphone-ipad-cant-activate-activation-server-unavailable",
+          "Activation Lock",
+          "Find My Mac",
+          "Apple Account"
+        ],
+        "matchedArticleIds": [
+          "mac-forgot-login-password-reset",
+          "mac-dfu-firmware-revive-restore",
+          "iphone-ipad-cant-activate-activation-server-unavailable"
+        ],
+        "decision": "create-new",
+        "notes": "Existing matches mention activation lock only as a branch of login-password, DFU, or iPhone/iPad activation troubleshooting. No canonical article is dedicated to Mac activation-lock ownership, resale, remote removal, or post-repair account lock symptoms."
+      }
+    }
+  ]
+}
