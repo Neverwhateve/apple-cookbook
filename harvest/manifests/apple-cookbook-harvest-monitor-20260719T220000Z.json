@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260719T220000Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-19T22:00:00.000Z",
+  "baseCommit": "1e4d39e08225cd2332cf8c089297e14636f1bb9b",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-ipad-photos-missing-hidden-not-syncing.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:c1e850e518682ced57f63094bf8047439c7ea9916b2f39f01f7033e7441f3d09",
+      "reason": "Distinct high-value iPhone/iPad photo-loss symptom cluster: missing, hidden, shared-library, account/sync-view, and unable-to-upload branches are not covered as the primary intent by existing canonical articles.",
+      "canonicalReview": {
+        "queries": [
+          "照片不见",
+          "照片视频丢失",
+          "相册空了",
+          "iPhone photos missing",
+          "iPad photos missing",
+          "已隐藏 最近删除 共享图库",
+          "iCloud 照片无法同步 无法上传"
+        ],
+        "matchedArticleIds": [
+          "icloud-photos-not-syncing-paused-unable-to-upload",
+          "iphone-system-data-storage-too-large"
+        ],
+        "decision": "create-new",
+        "notes": "Reviewed all 77 canonical article IDs/titles/summaries/symptoms/aliases/devices/platforms/errorMessages/keywords and full-text adjacent matches. Existing iCloud sync article primarily covers paused/sync failure; the new article's primary intent is missing or invisible photos/videos and systematically distinguishes Recently Deleted, Hidden, Shared Library, account/view mismatch, and Unable to Upload. No same-intent canonical exists."
+      }
+    }
+  ]
+}
