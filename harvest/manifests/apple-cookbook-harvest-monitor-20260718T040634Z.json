@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260718T040634Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-18T04:06:34Z",
+  "baseCommit": "4601e7461b16cd427ec873025d650691176ec156",
+  "changes": [
+    {
+      "path": "cookbook/iPad/apple-pencil-not-pairing-charging.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:523b85eeac8256bc95730050afeb072896919c868429ac5472de5012c65040f4",
+      "reason": "Apple Pencil pairing and charging failures are a high-value iPad support intent not covered by the current canonical corpus.",
+      "canonicalReview": {
+        "queries": [
+          "Apple Pencil 无法配对",
+          "Apple Pencil 不充电",
+          "Apple Pencil 不显示",
+          "iPad 手写笔连接不上",
+          "Apple Pencil compatibility charging pairing"
+        ],
+        "matchedArticleIds": [
+          "ipad-keyboard-small-floating-split-moving",
+          "iphone-ipad-bluetooth-accessory-wont-connect",
+          "iphone-ipad-touch-screen-not-responding-ghost-touch"
+        ],
+        "decision": "create-new",
+        "notes": "The matched articles cover iPad keyboard state, generic Bluetooth accessories, or touch-screen symptoms; none covers Apple Pencil model compatibility, pairing prompts, charging paths, and escalation as one intent. No existing title, summary, symptom, alias, device, platform, or error-message match is canonical for this Apple Pencil-specific problem."
+      }
+    }
+  ]
+}
