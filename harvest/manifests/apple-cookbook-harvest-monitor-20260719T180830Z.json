@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260719T180830Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-19T18:08:30.000Z",
+  "baseCommit": "94040c42f32080d3bd37265b315715e48d03e08a",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-ipad-camera-flashlight-not-working.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:940a57371be06a2cfb95c6c8fc7c984d3c9088512f7deb19e25dc7807b5af97c",
+      "reason": "Distinct device-level camera and flashlight failure cluster supported by a current China Mainland Chinese Apple Support article; existing canonical review found only WeChat-specific camera, Face ID, and Mac camera coverage.",
+      "canonicalReview": {
+        "queries": [
+          "iPhone iPad 相机 黑屏 闪光灯 无法工作",
+          "iPhone camera black screen",
+          "iPad camera not working",
+          "相机模糊 视觉失真 镜头眩光",
+          "闪光灯无法正常工作",
+          "微信相机黑屏",
+          "Face ID 摄像头无法使用",
+          "Mac 摄像头无法使用"
+        ],
+        "matchedArticleIds": [
+          "iphone-wechat-camera-black-screen-lag",
+          "iphone-ipad-face-id-not-working-camera-covered-disabled",
+          "mac-camera-not-working-permission-facetime"
+        ],
+        "decision": "create-new",
+        "notes": "The matched articles cover a third-party WeChat entry, Face ID/TrueDepth authentication, and Mac camera permissions respectively. None is a canonical troubleshooting article for the built-in iPhone/iPad Camera app plus LED flash symptoms such as black preview, blur, distortion, glare, or flashlight failure. The proposed title, summary, symptoms, aliases, devices, platforms, error messages, and article body were checked against all canonical cookbook files on base 94040c42f32080d3bd37265b315715e48d03e08a; no same-intent canonical was found. The source is the accessible China Mainland Chinese Apple page https://support.apple.com/zh-cn/102514 titled “如果 iPhone、iPad 或 iPod touch 上的相机或闪光灯无法正常工作”."
+      }
+    }
+  ]
+}
