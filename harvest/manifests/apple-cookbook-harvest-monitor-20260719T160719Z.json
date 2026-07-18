@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260719T160719Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-19T16:07:19.000Z",
+  "baseCommit": "dee6352f22329b021d62b757f1553d41b049bc1d",
+  "changes": [
+    {
+      "path": "cookbook/Mac/mac-app-cannot-open-developer-unverified-damaged.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:85649d69b9aec5d7f7277d987d798830302c2b34d0947a670d2609980e071188",
+      "reason": "Distinct Mac App launch-security symptom cluster supported by current China Mainland Chinese Apple documentation.",
+      "canonicalReview": {
+        "queries": [
+          "Mac App 无法打开",
+          "开发者无法验证",
+          "App 已损坏",
+          "Apple 无法检查恶意软件",
+          "Mac app cannot be opened",
+          "unidentified developer Mac app"
+        ],
+        "matchedArticleIds": [],
+        "decision": "create-new",
+        "notes": "Reviewed all 74 canonical articles by title, summary, symptoms, aliases, devices, platforms, error messages, keywords, and full-text matches. Existing Mac articles cover startup, login password, camera, Bluetooth, Wi-Fi, mail, printer, storage, display, firmware, and Apple Watch unlock; iPhone/iPad App articles cover crashes and App Store issues. No article covers macOS Gatekeeper/source-signature/notarization/damaged-App launch warnings as the primary intent."
+      }
+    }
+  ]
+}
