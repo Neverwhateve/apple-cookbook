@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-maintenance-20260718T001000Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-18T00:10:00.000Z",
+  "baseCommit": "48838972d791e2915bb10b70c51a902fb7a13dbd",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-screen-recording-no-sound.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:fab9dd428be0da5d8cf455a72723bdce9493de2f95c54c2e4e822983948b3936",
+      "reason": "Distinct high-value iPhone screen-recording audio symptom cluster; no existing canonical article covers recording audio, microphone toggle, app restrictions, or screen mirroring conflicts.",
+      "canonicalReview": {
+        "queries": [
+          "iPhone 录屏没有声音",
+          "iPhone 屏幕录制无声音",
+          "iPhone 录屏麦克风打不开",
+          "iPhone screen recording no sound"
+        ],
+        "matchedArticleIds": [],
+        "decision": "create-new",
+        "notes": "Reviewed all canonical title, summary, symptoms, aliases, devices, platforms, errorMessages and officialTerms on origin/main; no duplicate. Apple China pages 102653 and iph52f6e1987 cover screen-recording audio, microphone activation, App restrictions and screen-mirroring conflicts. Related articles cover general microphone failure but not screen-recording audio capture."
+      }
+    }
+  ]
+}
