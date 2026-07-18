@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260718T081500Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-18T08:15:00.000Z",
+  "baseCommit": "ece884d638616c8ed762c497a155d2ff60089e57",
+  "changes": [
+    {
+      "path": "cookbook/Apple TV/apple-tv-wifi-network-not-working.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:5a353e8391ebd4d25d76ba5e935edeaa37d874a60caa87a1c65d85f33810fde5",
+      "reason": "Apple TV 网络连接与播放是独立且高频的设备故障意图，当前 canonical 语料未覆盖 Apple TV；中国大陆中文 Apple 官方页面提供了完整的排查路径。",
+      "canonicalReview": {
+        "queries": [
+          "Apple TV 无法连接 Wi-Fi",
+          "Apple TV 网络问题 无互联网连接",
+          "Apple TV 无法播放",
+          "Apple TV Wi-Fi cannot connect"
+        ],
+        "matchedArticleIds": [],
+        "decision": "create-new",
+        "notes": "逐篇匹配 origin/main 的 canonical 文章 title、summary、symptoms、aliases、devices、platforms 和 errorMessages；现有 iPhone/iPad/Mac Wi-Fi 文章不覆盖 Apple TV，语料中也没有 Apple TV canonical。"
+      }
+    }
+  ]
+}
