@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260718T120716Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-18T12:07:16.000Z",
+  "baseCommit": "496ab2ea3a1dbae23d1172d3b4ca8987f5c37366",
+  "changes": [
+    {
+      "path": "cookbook/Apple Watch/apple-watch-update-fails-verification.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:743fb2e5e8bc4c30810038011428605aeb0567d771113f9f93a54666fb8f9a5f",
+      "reason": "Apple Watch watchOS 更新失败、无法验证更新或储存空间不足是独立且高频的设备维护问题；现有 canonical 文章没有覆盖更新流程。",
+      "canonicalReview": {
+        "queries": [
+          "Apple Watch 更新失败",
+          "Apple Watch 无法验证更新",
+          "Apple Watch 不能安装更新",
+          "Apple Watch watchOS update stuck",
+          "Apple Watch 储存空间不足 更新"
+        ],
+        "matchedArticleIds": [
+          "apple-watch-wont-connect-pair-iphone",
+          "apple-watch-battery-drains-fast",
+          "apple-watch-wont-charge-turn-on-red-lightning"
+        ],
+        "decision": "create-new",
+        "notes": "逐项匹配现有 canonical 的 title、summary、symptoms、aliases、devices、platforms、errorMessages 与文件路径后，仅发现配对、续航、充电等相邻文章；没有覆盖 watchOS 更新失败、无法验证更新、不能安装更新或更新文件占用空间的 Apple Watch canonical。"
+      }
+    }
+  ]
+}
