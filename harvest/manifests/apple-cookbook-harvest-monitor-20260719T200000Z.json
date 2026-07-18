@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260719T200000Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-19T20:00:00.000Z",
+  "baseCommit": "cd4f2153287bf66d29f59a298d777f4ae10f5e01",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-keyboard-not-working-not-appearing.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:5630dc146ad8761478fc576c018d87edf04ba04aef3e918bab1f503d3ef0cecd",
+      "reason": "iPhone 屏幕键盘不出现、不能输入或第三方键盘异常是独立且高频的输入问题；现有 canonical 仅覆盖 iPad 键盘形态、触屏总体异常和辅助功能焦点，未覆盖该主意图。",
+      "canonicalReview": {
+        "queries": [
+          "iPhone 键盘不显示",
+          "iPhone 键盘无法输入",
+          "iPhone keyboard not working",
+          "iPhone 第三方键盘无法使用",
+          "屏幕键盘不弹出"
+        ],
+        "matchedArticleIds": [
+          "iphone-ipad-touch-screen-not-responding-ghost-touch",
+          "ipad-keyboard-small-floating-split-moving",
+          "ipad-blue-box-double-tap-voiceover-accessibility"
+        ],
+        "decision": "create-new",
+        "notes": "已对 canonical 文章的 title、summary、symptoms、aliases、devices、platforms、errorMessages、keywords 及正文做全量匹配。上述文章是相邻排查入口，但没有以 iPhone 屏幕键盘不出现/无法输入/第三方键盘异常为主意图的 canonical。"
+      }
+    }
+  ]
+}
