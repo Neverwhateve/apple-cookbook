@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260719T160700Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-19T16:07:00.000Z",
+  "baseCommit": "dd108ceec84a23044e45158b80790cfd9134e3e6",
+  "changes": [
+    {
+      "path": "cookbook/Mac/mac-app-not-responding-quits-cannot-open.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:43c90eff509053c4bf3b4725c1b01a1cf6b971d146ccc2ca94ad1d192bc91e97",
+      "reason": "覆盖 Mac App 运行中无响应、意外退出、强制退出和更新/外围设备隔离；与现有仅处理开发者无法验证或 App 已损坏的文章是不同故障意图。",
+      "canonicalReview": {
+        "queries": [
+          "Mac App 无响应",
+          "Mac 应用程序意外退出",
+          "Mac app not responding",
+          "Mac 程序卡死 强制退出",
+          "Mac App 无法打开"
+        ],
+        "matchedArticleIds": [
+          "mac-app-cannot-open-developer-unverified-damaged"
+        ],
+        "decision": "create-new",
+        "notes": "完整匹配 title、summary、symptoms、aliases、devices、platforms、errorMessages、officialTerms 和 communityTerms。唯一相邻命中只处理开发者无法验证、来源不明或 App 已损坏等 Gatekeeper 问题；本提案处理 App 已打开后无响应/意外退出、访达重新开启、更新、外围设备和插件隔离，故不是重复意图。"
+      }
+    }
+  ]
+}
