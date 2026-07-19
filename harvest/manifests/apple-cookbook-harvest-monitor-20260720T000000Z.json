@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260720T000000Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-20T00:00:00.000Z",
+  "baseCommit": "cb69a1595180c6e04e734782693148e9cccb47a1",
+  "changes": [
+    {
+      "path": "cookbook/Mac/mac-safari-cant-load-websites-crashes.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:1bbb80af7a230f738ed5363c102857b99284f04c2b11a52750986621b9d23d4e",
+      "reason": "Mac Safari 网页无法载入、空白、无法登录或意外退出是高频且与已有 iPhone/iPad Safari、Mac 网络连接和 Mac App 故障不同的设备与应用意图。",
+      "canonicalReview": {
+        "queries": [
+          "Mac Safari 网页打不开",
+          "Mac Safari 页面空白",
+          "Mac Safari 无法登录网站",
+          "Mac Safari 扩展 Cookie 专用代理 VPN DNS 意外退出",
+          "mac safari can't load websites crashes"
+        ],
+        "matchedArticleIds": [
+          "iphone-ipad-safari-cant-load-websites-crashes",
+          "mac-wifi-no-internet-cant-join",
+          "mac-app-not-responding-quits-cannot-open"
+        ],
+        "decision": "create-new",
+        "notes": "移动 Safari、Mac Wi-Fi 和通用 Mac App 文章均不覆盖 Mac Safari 的扩展、网站数据、浏览器设置、专用代理与报告网站问题路径。"
+      }
+    }
+  ]
+}
