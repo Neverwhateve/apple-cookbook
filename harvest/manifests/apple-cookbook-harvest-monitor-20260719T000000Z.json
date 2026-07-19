@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260719T000000Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-19T00:00:00.000Z",
+  "baseCommit": "2f3b5c968801184cb45b2c8730c6e44ce3f19443",
+  "changes": [
+    {
+      "path": "cookbook/iCloud/icloud-contacts-calendar-reminders-not-syncing.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:3f385ff013c3d64771e58ec1184e747280c6a89cd80016319ec5228bb156c75d",
+      "reason": "Distinct high-value iCloud contacts, calendar, and reminders synchronization symptom cluster supported by current Mainland China Chinese Apple documentation.",
+      "canonicalReview": {
+        "queries": [
+          "iCloud 通讯录 日历 提醒事项 不同步",
+          "iCloud contacts calendar reminders not syncing",
+          "通讯录没有同步 日历不显示 提醒事项不同步",
+          "site:support.apple.com/zh-cn iCloud 通讯录 日历 提醒事项"
+        ],
+        "matchedArticleIds": [
+          "icloud-photos-not-syncing-paused-unable-to-upload",
+          "icloud-storage-full-iphone-backup-fails"
+        ],
+        "decision": "create-new",
+        "notes": "Reviewed all 78 canonical article titles, summaries, symptoms, aliases, devices, platforms, error messages, keywords, and full text on origin/main. The matched articles cover iCloud Photos synchronization and iCloud storage/backup failure, not iCloud Contacts, Calendar, or Reminders synchronization. No same-intent canonical exists. Used only accessible Mainland China Chinese Apple sources; no English fallback or community source was needed."
+      }
+    }
+  ]
+}
