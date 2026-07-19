@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260719T140632Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-19T14:06:32.000Z",
+  "baseCommit": "91bf036ae62299e7ed6ccd785cf0567c6d429ab2",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-location-services-not-working-inaccurate.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:049fa48b44c5a243e10df1406cd7a9f510b14803530e7d260859f9f6ff07727b",
+      "reason": "Distinct, high-value iPhone location-services failure cluster with official mainland-China evidence and no matching canonical intent.",
+      "canonicalReview": {
+        "queries": [
+          "iPhone 定位服务无法使用",
+          "iPhone 位置不准确",
+          "iPhone GPS 不准",
+          "精确位置失效",
+          "地图无法获取当前位置",
+          "查找位置不更新"
+        ],
+        "matchedArticleIds": [],
+        "decision": "create-new",
+        "notes": "Full canonical corpus matched title, summary, symptoms, aliases, devices, platforms, error messages, officialTerms and communityTerms. Existing Wi-Fi, cellular-data, Find My and touch-screen articles are adjacent but do not cover the system/App location permission and precise-location diagnostic intent."
+      }
+    }
+  ]
+}
