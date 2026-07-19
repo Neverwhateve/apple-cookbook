@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260719T060822Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-19T06:08:22.000Z",
+  "baseCommit": "c2521172e228d3bf3f141a971add255a46494fc4",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-screen-wont-rotate-landscape.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:51f6e45dbe05a0e682598b4e69dabdcc4e7bc1b5f5b44ddbbdf335e2b1b051aa",
+      "reason": "高频且与现有触屏、Safari、通知文章不同的 iPhone 横屏/方向锁定故障；中国大陆中文 Apple 官方页面提供了方向锁定、App 支持性、水平仪和重启的完整排查路径。",
+      "canonicalReview": {
+        "queries": [
+          "iPhone 屏幕无法旋转",
+          "iPhone 横屏不生效",
+          "iPhone 竖排方向锁定",
+          "屏幕方向不变",
+          "iPhone 传感器横屏"
+        ],
+        "matchedArticleIds": [],
+        "decision": "create-new",
+        "notes": "已匹配现有 canonical 的 title、summary、symptoms、aliases、devices、platforms 和错误信息；现有内容覆盖触屏失灵、Safari、通知、相机和显示问题，但没有屏幕方向/横屏不生效意图。"
+      }
+    }
+  ]
+}
