@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260719T180558Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-19T18:08:23.000Z",
+  "baseCommit": "6b2c4bb7bfa3f77b582f74bfb058bc3e25bc4743",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-battery-health-low-unknown-service.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:ef089fde479729eac98d5e66b79865c836ff8ca0bce8d561993644dec1fb2b4b",
+      "reason": "New high-value symptom cluster for battery health deterioration, service prompts, and battery verification failures; distinct from existing battery-drain-after-update and charging-paused articles.",
+      "canonicalReview": {
+        "queries": [
+          "iPhone 电池健康下降",
+          "电池健康显示维修",
+          "无法验证此 iPhone 电池是正品 Apple 电池",
+          "电池健康不准确",
+          "iPhone battery health service",
+          "iPhone battery unknown part",
+          "iPhone 电池鼓包"
+        ],
+        "matchedArticleIds": [
+          "iphone-battery-drains-after-update",
+          "iphone-charging-paused-80-temperature-charge-limit",
+          "iphone-wont-charge-wired-liquid-detected"
+        ],
+        "decision": "create-new",
+        "notes": "Full-corpus matching covered title, summary, symptoms, aliases, devices, platforms, errorMessages, officialTerms, communityTerms, and existing canonical articles. The matched articles cover post-update drain, temperature/80% charging protection, and charging/port faults; none covers battery-health interpretation, unknown/unverified replacement batteries, or service/safety escalation."
+      }
+    }
+  ]
+}
