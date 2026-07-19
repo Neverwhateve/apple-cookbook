@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260720T200706Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-20T20:07:06.000Z",
+  "baseCommit": "3e3ec901ec0cc31d6418e7de9dc5b8139af325f3",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-overheating-temperature-warning-too-hot.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:2a65bf0abcb56aed7992a8ddf5df783c74885c1f00607e573e149b37a9c81c65",
+      "reason": "新增高频且有明确官方处置路径的温度管理问题，覆盖过热、过冷、温度警告和暂停充电；与电池老化、80% 充电限制及普通充电故障文章意图不同。",
+      "canonicalReview": {
+        "queries": [
+          "iPhone 过热 温度警告 需要降温",
+          "iPhone 温度过高 充电暂停 黑屏",
+          "iPhone 太热 太冷 无法充电",
+          "iPhone overheating temperature warning",
+          "温度：iPhone 需要降温"
+        ],
+        "matchedArticleIds": [
+          "iphone-battery-drains-after-update",
+          "iphone-charging-paused-80-temperature-charge-limit",
+          "iphone-wont-charge-wired-liquid-detected",
+          "iphone-battery-health-low-unknown-service"
+        ],
+        "decision": "create-new",
+        "notes": "全量匹配 title、summary、symptoms、aliases、devices、platforms、errorMessages、officialTerms、communityTerms 和 canonical 文件后，已有文章只覆盖续航变化、80% 充电限制、有线充电/液体检测或电池健康；没有一篇覆盖温度警告屏幕、过热功能保护、过冷暂停充电和恢复步骤，因此创建独立 canonical 文章。"
+      }
+    }
+  ]
+}
