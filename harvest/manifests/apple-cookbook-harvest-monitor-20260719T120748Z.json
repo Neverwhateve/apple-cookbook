@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260719T120748Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-19T12:07:48.000Z",
+  "baseCommit": "4d96308c4c99e7330ebc097edb83ebfe497c93b7",
+  "changes": [
+    {
+      "path": "cookbook/Mac/mac-keyboard-not-working-keys-unresponsive.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:645c0a1bf2aef7c8d515d8dcef3fd17bc6db415d260668f8144606e1d921f7f1",
+      "reason": "Distinct high-value Mac keyboard symptom cluster supported by current mainland-China Chinese Apple sources; no canonical article covers the same intent.",
+      "canonicalReview": {
+        "queries": [
+          "Mac 键盘按键无响应",
+          "MacBook 键盘不能输入",
+          "妙控键盘无法使用",
+          "external keyboard not working on Mac",
+          "键盘输入异常 慢速键 鼠标键"
+        ],
+        "matchedArticleIds": [
+          "mac-bluetooth-devices-wont-connect",
+          "mac-trackpad-not-moving-clicking"
+        ],
+        "decision": "create-new",
+        "notes": "Full corpus matching covered title, summary, symptoms, aliases, devices, platforms, errorMessages, officialTerms and communityTerms. The adjacent Bluetooth and trackpad articles do not cover keyboard input, key response, keyboard layout or accessibility settings. No duplicate canonical intent found."
+      }
+    }
+  ]
+}
