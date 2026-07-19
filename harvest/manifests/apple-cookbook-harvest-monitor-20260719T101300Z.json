@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260719T101300Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-19T10:13:00.000Z",
+  "baseCommit": "801c6335481ae93d470e3dd123c4ea38d1766fe6",
+  "changes": [
+    {
+      "path": "cookbook/Mac/mac-trackpad-not-moving-clicking.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:de36c87f1fa45176168e19171bdfefe3be3c5a880626e23aa768951ccd9b33e2",
+      "reason": "Distinct high-value Mac input-device symptom cluster: pointer movement, clicking, gestures, low-power boundary, and service escalation; full-corpus match found no canonical article with this intent.",
+      "canonicalReview": {
+        "queries": [
+          "Mac 触控板无法移动指针",
+          "MacBook 触控板无法点按",
+          "Magic Trackpad not working",
+          "Mac cursor not moving",
+          "触控板 手势失效",
+          "Mac 触控板 低电量提醒"
+        ],
+        "matchedArticleIds": [
+          "mac-bluetooth-devices-wont-connect"
+        ],
+        "decision": "create-new",
+        "notes": "Matched mac-bluetooth-devices-wont-connect only as an adjacent Bluetooth pairing article; it does not cover the distinct pointer movement/clicking/gesture failure intent. Full corpus title, summary, symptoms, aliases, devices, platforms, and error-message review found no duplicate canonical article."
+      }
+    }
+  ]
+}
