@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260719T020000Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-19T02:00:00.000Z",
+  "baseCommit": "b4ac3291f4103e02c7b85908a55546f749d49cbb",
+  "changes": [
+    {
+      "path": "cookbook/Apple TV/apple-tv-remote-not-working-pairing.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:ff025a755602b10334aae52d17be53d2eb0dc294b630e86d180ddcb67e7ba87e",
+      "reason": "Apple TV 遥控器无法使用、配对或反复断开是独立且高价值的设备控制故障；全量 canonical 匹配只找到相邻的 Apple TV 网络文章。",
+      "canonicalReview": {
+        "queries": [
+          "Apple TV 遥控器无法使用 配对 断开",
+          "Siri Remote 无法正常工作",
+          "Apple TV Remote not working pairing",
+          "遥控器未连接 音量按钮"
+        ],
+        "matchedArticleIds": [
+          "apple-tv-wifi-network-not-working"
+        ],
+        "decision": "create-new",
+        "notes": "已匹配所有现有 canonical 的 title、summary、symptoms、aliases、devices、platforms、errorMessages、keywords 与正文；唯一相邻文章 apple-tv-wifi-network-not-working 只处理网络连接和播放，未覆盖遥控器配对、重启、蓝牙信号或音量控制，因此创建新 canonical。"
+      }
+    }
+  ]
+}
