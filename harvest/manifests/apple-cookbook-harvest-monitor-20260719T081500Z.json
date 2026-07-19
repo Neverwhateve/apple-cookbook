@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260719T081500Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-19T08:15:00.000Z",
+  "baseCommit": "2fa324d492443aa802651de438b80b3902d08617",
+  "changes": [
+    {
+      "path": "cookbook/Networking/iphone-cellular-data-not-working-no-internet.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:898fcf0a4367b876e5dc756dd104479b9cc8b35289a3338d7675b459db927ed4",
+      "reason": "Distinct high-value symptom cluster: cellular data is enabled but webpages or apps cannot connect; neighboring canonical articles cover Wi-Fi, personal hotspot, and SOS/no-service states.",
+      "canonicalReview": {
+        "queries": [
+          "iPhone 蜂窝数据无法上网",
+          "iPhone 移动数据打开但没有网络",
+          "iPhone cellular data not working",
+          "iPhone app cannot use cellular data",
+          "iPhone 仅 SOS 无服务 正在搜索"
+        ],
+        "matchedArticleIds": [
+          "iphone-ipad-wifi-no-internet-unable-to-join",
+          "iphone-personal-hotspot-not-working-greyed-out",
+          "iphone-sos-no-service-searching"
+        ],
+        "decision": "create-new",
+        "notes": "Matched articles cover Wi-Fi association, sharing the iPhone connection, or total cellular registration states. This proposal is limited to cellular-data access after separating those neighboring intents, including per-app permission and dual-SIM data-line selection."
+      }
+    }
+  ]
+}
