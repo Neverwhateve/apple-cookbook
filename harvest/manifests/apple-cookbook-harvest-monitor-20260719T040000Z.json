@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260719T040000Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-19T04:00:00.000Z",
+  "baseCommit": "f1ba7a4fa4fb1e53cbf46a6edccb90c3afbd0225",
+  "changes": [
+    {
+      "path": "cookbook/Apple Watch/apple-watch-heart-rate-not-reading.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:0e523ed4d1da222e0a550fde2b3b52998d19460586265f1aec3a86516aaa47fe",
+      "reason": "新增 Apple Watch 心率无法读取、心率 App 无数据和体能训练不显示心率的独立高频故障入口；现有 canonical 仅在续航文章中提及心率，不覆盖同一主要意图。",
+      "canonicalReview": {
+        "queries": [
+          "Apple Watch 心率测不到",
+          "Apple Watch 不显示心率",
+          "Apple Watch 心率 App 没有数据",
+          "Apple Watch heart rate not reading",
+          "Apple Watch heart rate sensor not working",
+          "Apple Watch workout no heart rate"
+        ],
+        "matchedArticleIds": [
+          "apple-watch-battery-drains-fast"
+        ],
+        "decision": "create-new",
+        "notes": "对 cookbook/**/*.md 的 title、summary、symptoms、aliases、devices、platforms、errorMessages、keywords 和正文做完整匹配。唯一明显命中是 apple-watch-battery-drains-fast，但其主意图是耗电；本文章聚焦心率传感器无读数、设置和佩戴条件，非重复。"
+      }
+    }
+  ]
+}
