@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260720T080000Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-20T08:00:00.000Z",
+  "baseCommit": "d8c0922003794b4f99e0018879ee3897905ca6c4",
+  "changes": [
+    {
+      "path": "cookbook/Mac/mac-audio-no-sound-microphone-not-working.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:df94abb75a6a715211e684b0f568c17f02ccb7cd29fb837850aab22eba325ecf",
+      "reason": "新增 Mac 音频输出与输入故障的高价值 canonical 文章；现有 corpus 仅覆盖 iPhone/iPad、AirPods 与 Mac 蓝牙/显示器等相邻意图，未覆盖 Mac 本机声音和麦克风分流。",
+      "canonicalReview": {
+        "queries": [
+          "Mac 没有声音",
+          "Mac 扬声器无声",
+          "Mac 麦克风无法使用",
+          "Mac audio output not working",
+          "Mac microphone not working",
+          "无法访问音频输入",
+          "内置扬声器"
+        ],
+        "matchedArticleIds": [
+          "mac-bluetooth-devices-wont-connect",
+          "mac-external-display-black-screen-low-resolution",
+          "iphone-ipad-speaker-microphone-audio-not-working",
+          "airpods-microphone-not-working-call-unclear"
+        ],
+        "decision": "create-new",
+        "notes": "已匹配 title、summary、symptoms、aliases、devices、platforms、errorMessages、officialTerms、communityTerms 与现有 canonical；相邻文章分别处理蓝牙连接、外接显示器、iPhone/iPad 内建音频和 AirPods 麦克风，未覆盖本 Mac 音频输入/输出故障。"
+      }
+    }
+  ]
+}
