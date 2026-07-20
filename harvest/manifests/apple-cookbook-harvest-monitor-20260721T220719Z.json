@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260721T220719Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-21T22:07:19.000Z",
+  "baseCommit": "af499d8b0362af79ffba3e56f6fc6693d5d1679c",
+  "changes": [
+    {
+      "path": "cookbook/Apple ID/apple-account-verification-failed.md",
+      "action": "update",
+      "baseContentHash": "sha256:a6ef06dcb8ac14bd1803d321a2da18673ecc154c9d0ff0ca17fe146bd1489c3e",
+      "proposedContentHash": "sha256:4976bfac7a59ca723b4d43b1314b5e44c8c05ccf7d9b1a21cf434b3dbc00be6b",
+      "reason": "实质更新高价值 Apple 账户登录与验证排查，按当前中国大陆中文 Apple 官方页面重分流网络、验证码、密码、锁定和账户恢复边界。",
+      "canonicalReview": {
+        "queries": [
+          "Apple 账户验证失败",
+          "Apple ID 一直验证失败",
+          "无法连接或登录 iCloud",
+          "Apple 账户验证码收不到",
+          "Apple 账户被锁定或停用",
+          "忘记 Apple 账户密码",
+          "account recovery",
+          "verification code not received",
+          "iCloud sign in failed"
+        ],
+        "matchedArticleIds": [
+          "apple-account-verification-failed"
+        ],
+        "decision": "update-existing",
+        "notes": "现有 seed 文章已覆盖同一 Apple 账户登录问题，不能新建重复 canonical；本次以当前中文官方来源实质更新步骤、分流和安全边界，保留原 id、slug 与 status。"
+      }
+    }
+  ]
+}
