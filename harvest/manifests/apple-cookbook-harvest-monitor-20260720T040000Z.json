@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260720T040000Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-20T04:00:00.000Z",
+  "baseCommit": "febb5bfa6509139fa7db65e5c38a2d6792f055aa",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-computer-backup-fails-device-not-found.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:e08825b7174ffe5d215f89b4a153a63e8887ceada5edac61180e4d56e8509ccd",
+      "reason": "Distinct high-value failure cluster for local Mac or Windows backups and computer restores; existing canonical iCloud-storage article does not cover this primary intent.",
+      "canonicalReview": {
+        "queries": [
+          "iPhone 无法备份到电脑",
+          "iPad 电脑备份失败",
+          "iPhone 电脑不显示",
+          "信任此电脑不出现",
+          "computer backup corrupted incompatible"
+        ],
+        "matchedArticleIds": [
+          "icloud-storage-full-iphone-backup-fails",
+          "iphone-ipad-computer-not-recognized-trust-alert-missing"
+        ],
+        "decision": "create-new",
+        "notes": "The iCloud canonical is centered on cloud capacity; the computer-recognition canonical is centered on device discovery and Trust alerts. This article covers the full local-backup and restore failure path after distinguishing recognition, trust, software, storage, security software, and compatibility branches. Full title, summary, symptoms, aliases, devices, platforms, errorMessages, officialTerms, communityTerms, and canonical corpus matching found no duplicate intent."
+      }
+    }
+  ]
+}
