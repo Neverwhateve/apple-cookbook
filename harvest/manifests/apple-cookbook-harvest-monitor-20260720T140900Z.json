@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260720T140900Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-20T14:09:00.000Z",
+  "baseCommit": "212ca12db8e45517232f41d152ecbdf53d2975ff",
+  "changes": [
+    {
+      "path": "cookbook/Apple Watch/apple-watch-notifications-not-showing.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:cd6105fe8be8dcc36a8fa8d5470c8517378f521523405c56ee3e4c177ad1c9e7",
+      "reason": "为 Apple Watch 通知不显示、只显示在 iPhone、某个 App 被静音或连接中断这一独立高频故障建立 canonical 文章。",
+      "canonicalReview": {
+        "queries": [
+          "Apple Watch 通知不显示",
+          "Apple Watch 收不到通知",
+          "Apple Watch 只有 iPhone 收到通知",
+          "Apple Watch notifications not showing",
+          "Apple Watch notification settings connection lock focus"
+        ],
+        "matchedArticleIds": [
+          "iphone-notifications-not-working-focus-summary-watch",
+          "apple-watch-wont-connect-pair-iphone",
+          "apple-watch-cellular-not-working",
+          "apple-watch-voice-memos-not-syncing-iphone"
+        ],
+        "decision": "create-new",
+        "notes": "已匹配 canonical 文章的 title、summary、symptoms、aliases、devices、platforms、errorMessages、officialTerms、communityTerms 和正文。iPhone 通知文章覆盖手机端通知与专注模式，Apple Watch 配对文章覆盖连接/配对，蜂窝文章覆盖蜂窝服务，语音备忘录文章覆盖同步；没有一篇覆盖 Apple Watch 通知归属、锁定/勿扰、单 App 镜像设置和第三方 App 网络条件的完整排查。"
+      }
+    }
+  ]
+}
