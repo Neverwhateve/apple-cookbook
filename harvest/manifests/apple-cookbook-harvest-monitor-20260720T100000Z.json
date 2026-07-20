@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260720T100000Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-20T10:00:00.000Z",
+  "baseCommit": "7501dcfff1c6b38063ff74ceff25c77a41154882",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-camera-not-working-black-screen-flash.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:74fb27f8f219d7793855139aad5ad97f7f39329b3e5b6cb866bc0bc5fd635534",
+      "reason": "新增高价值、独立于 Face ID 和第三方 App 的 iPhone 系统相机黑屏、无法拍摄和闪光灯故障排查文章。",
+      "canonicalReview": {
+        "queries": [
+          "iPhone 相机黑屏",
+          "iPhone 无法拍照",
+          "iPhone 闪光灯不亮",
+          "iPhone camera not working",
+          "iPhone flashlight not working",
+          "摄像头黑屏",
+          "相机无法拍照"
+        ],
+        "matchedArticleIds": [
+          "iphone-ipad-face-id-not-working-camera-covered-disabled",
+          "iphone-wechat-camera-black-screen-lag",
+          "mac-camera-not-working-permission-facetime"
+        ],
+        "decision": "create-new",
+        "notes": "全面匹配了 title、summary、symptoms、aliases、devices、platforms、errorMessages、officialTerms、communityTerms 以及现有 canonical 文章。Face ID 文章处理 TrueDepth/面容识别；微信文章处理单一第三方 App；Mac 文章处理 macOS 摄像头权限，均不覆盖 iPhone/iPad 系统相机与闪光灯故障。"
+      }
+    }
+  ]
+}
