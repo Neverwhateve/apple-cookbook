@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260720T180634Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-20T18:06:34.000Z",
+  "baseCommit": "cdac931aba38d0f929f764dec7c83755ce48f267",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-ipad-mail-cant-send-receive-email.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:c9e8eed3630b72ff122522e25bde9638de4f8d4ebf763fe712958cbc2dc5866b",
+      "reason": "新增 iPhone/iPad 系统邮件无法收发的高频故障文章，覆盖发件箱、账户密码/授权、网络与重新添加账户的安全边界。",
+      "canonicalReview": {
+        "queries": [
+          "iPhone 邮件无法发送",
+          "iPhone 邮件无法接收",
+          "iPad 邮件发件箱",
+          "Mail password incorrect iPhone",
+          "iCloud 邮件无法收发",
+          "iphone-ipad-mail-cant-send-receive-email"
+        ],
+        "matchedArticleIds": [
+          "mac-mail-cant-send-receive-email",
+          "iphone-imessage-messages-not-sending-green-waiting-activation",
+          "icloud-contacts-calendar-reminders-not-syncing"
+        ],
+        "decision": "create-new",
+        "notes": "全库匹配后，现有 mac-mail-cant-send-receive-email 仅覆盖 Mac；iMessage 文章覆盖信息而非邮件；iCloud 通讯录/日历/提醒事项文章不覆盖邮件收发。新文章限定 iPhone/iPad 邮件 App 与 iCloud 邮件收发，意图不重复。"
+      }
+    }
+  ]
+}
