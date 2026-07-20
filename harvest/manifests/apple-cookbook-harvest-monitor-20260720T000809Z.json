@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260720T000809Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-20T00:08:09.000Z",
+  "baseCommit": "e8cc45477ad2aa1c695eb5516915f6fab938d443",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-screenshot-not-working-missing-save.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:4ffd9297e6965b21ccecd6fb981c5d683f827150e5c20dba67056f16bfaa91f9",
+      "reason": "新增高频 iPhone 截屏失败症状的独立排查文章；在 canonical 全量匹配后未发现相同意图，且中国大陆中文 Apple 官方来源可支撑按键、辅助功能、保存位置和屏幕捕捉设置。",
+      "canonicalReview": {
+        "queries": [
+          "iPhone 截屏失败",
+          "iPhone 截屏不见",
+          "iPhone 截屏无法保存",
+          "iPhone screenshot not working",
+          "截屏 按钮 不响应",
+          "屏幕捕捉 截屏 照片"
+        ],
+        "matchedArticleIds": [
+          "iphone-ipad-touch-screen-not-responding-ghost-touch",
+          "iphone-screen-recording-no-sound",
+          "iphone-system-data-storage-too-large"
+        ],
+        "decision": "create-new",
+        "notes": "上述匹配分别是触屏硬件、录屏音频和储存空间邻近问题；没有现有 canonical 同时覆盖 iPhone 截屏触发失败、替代触发方式、截屏查找和保存结果分流。标题、summary、symptoms、aliases、devices、platforms、errorMessages 与现有 canonical 均已匹配。"
+      }
+    }
+  ]
+}
