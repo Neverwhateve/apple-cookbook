@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260721T000000Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-21T00:00:00.000Z",
+  "baseCommit": "686249e57b71574f86a8e0e6ab2655ca63e850f2",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-facetime-calls-not-working.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:02a444a396068555f3e853ea8cb435b91ad68d24cf5fb78de32657dcc24c619d",
+      "reason": "新增独立的 FaceTime 无法拨打、接听、等待激活和网络连接问题文章；与普通电话、相机和蜂窝数据文章意图不同。",
+      "canonicalReview": {
+        "queries": [
+          "FaceTime 无法使用",
+          "FaceTime 无法拨打 接听",
+          "FaceTime 正在等待激活",
+          "FaceTime 黑屏 掉线",
+          "iPhone iPad FaceTime not working",
+          "FaceTime video call cannot connect"
+        ],
+        "matchedArticleIds": [
+          "iphone-cant-make-receive-calls",
+          "iphone-cellular-data-not-working-no-internet",
+          "iphone-ipad-camera-flash-not-working-black-screen"
+        ],
+        "decision": "create-new",
+        "notes": "已匹配全量 canonical 的 title、summary、symptoms、aliases、devices、platforms、errorMessages、officialTerms、communityTerms 和正文。普通电话文章明确不覆盖 FaceTime；蜂窝数据文章覆盖通用上网而非 FaceTime 激活/通话；相机文章覆盖相机硬件症状而非 FaceTime 服务连接。未发现同一意图的 canonical 文章。"
+      }
+    }
+  ]
+}
