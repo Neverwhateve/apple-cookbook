@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260720T200836Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-20T20:08:36.821Z",
+  "baseCommit": "9bef38bf0cc7fc676e3a8f200c9acedaf93ecab5",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-voicemail-not-working.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:d42d00caed76827e9bdc8dcfc7dd333936ab866d8e55e419e72af6b60b0aaa3a",
+      "reason": "New high-value canonical coverage for iPhone voicemail and Visual Voicemail failures; no existing canonical article covers the same intent.",
+      "canonicalReview": {
+        "queries": [
+          "语音留言不可用",
+          "语音信箱不显示",
+          "可视化语音信箱无法设置",
+          "实时语音留言不工作",
+          "iPhone voicemail not working",
+          "Visual Voicemail unavailable",
+          "运营商语音信箱"
+        ],
+        "matchedArticleIds": [],
+        "decision": "create-new",
+        "notes": "Full corpus match reviewed title, summary, symptoms, aliases, devices, platforms, errorMessages, officialTerms, communityTerms, body, and existing canonical articles. Adjacent phone-call, audio, cellular-data, FaceTime, and iCloud articles do not cover voicemail availability, setup, playback, or carrier boundary as the primary intent."
+      }
+    }
+  ]
+}
