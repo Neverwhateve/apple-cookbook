@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260720T120721Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-20T12:07:21.000Z",
+  "baseCommit": "0eb88978bd131143316dfc8947b11d9b7a7fe357",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-storage-full-cannot-install-apps-update.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:68bda3e220594c20fc29e52d233c482b02f5b82d46061ad960782e6509f0b8a2",
+      "reason": "本机设备储存空间不足是 iPhone/iPad 无法安装 App、更新系统、保存下载内容和继续拍摄的高频独立故障入口；现有文章分别处理系统数据分类、iCloud 空间或 App Store 队列，未覆盖这一完整排查路径。",
+      "canonicalReview": {
+        "queries": [
+          "iPhone 储存空间已满 无法安装 App 更新 保存照片",
+          "iPad storage full cannot install update apps",
+          "空间不足 卸载未使用的 App iPhone",
+          "系统数据很大",
+          "iCloud 储存空间已满 iPhone 备份失败",
+          "App Store 无法下载或更新 App"
+        ],
+        "matchedArticleIds": [
+          "iphone-system-data-storage-too-large",
+          "icloud-storage-full-iphone-backup-fails",
+          "app-store-cant-download-update-apps",
+          "iphone-computer-backup-fails-device-not-found",
+          "icloud-photos-not-syncing-paused-unable-to-upload"
+        ],
+        "decision": "create-new",
+        "notes": "全量匹配了现有 canonical 的 title、summary、symptoms、aliases、devices、platforms、errorMessages、officialTerms、communityTerms 和正文。系统数据文章聚焦分类异常，iCloud 文章聚焦云端备份容量，App Store 文章聚焦队列/账单/服务且仅将设备空间作为分支；本文章聚焦设备本机空间耗尽后的确认、低风险释放、更新/下载复测和数据安全边界，意图不同。"
+      }
+    }
+  ]
+}
