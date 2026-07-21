@@ -23,16 +23,16 @@ aliases:
   - 手机更新后发热
 verification: Official
 difficulty: Moderate
-updated: 2026-07-13
+updated: 2026-07-21
 official_sources:
   - https://support.apple.com/zh-cn/120745
   - https://support.apple.com/zh-cn/102432
   - https://support.apple.com/zh-cn/101575
   - https://support.apple.com/zh-cn/123075
   - https://support.apple.com/zh-cn/118431
-  - https://support.apple.com/en-us/126776
-  - https://support.apple.com/en-us/127594
-  - https://support.apple.com/en-us/100100
+  - https://support.apple.com/zh-cn/126776
+  - https://support.apple.com/zh-cn/127594
+  - https://support.apple.com/zh-cn/100100
 community_sources:
   - https://discussions.apple.com/thread/256320852
   - https://discussions.apple.com/thread/256316863
@@ -78,7 +78,7 @@ popular: true
 6. **温度保护导致暂停充电或性能变化**
    - Apple 说明，如果设备温度过高或过低，iPhone/iPad 可能暂时停止充电，并显示“暂停充电”提示；这和电池故障不是同一个分支。
 7. **安全更新与性能抱怨同时出现**
-   - Apple 已发布 iOS/iPadOS 26.5.2 安全更新，并强调保持软件最新是保护 Apple 产品安全的重要措施。不要因为社区抱怨发热或掉电就建议顾客长期停留在旧系统。
+   - 截至 2026 年 7 月 21 日，Apple 安全性发布页列出 iOS/iPadOS 26.5.2；Apple 强调保持软件最新是保护 Apple 产品安全的重要措施。不要因为社区抱怨发热或掉电就建议顾客长期停留在旧系统。
 
 ---
 
@@ -105,9 +105,9 @@ popular: true
 - [Apple 支持：iPhone 电池和性能](https://support.apple.com/zh-cn/101575)
 - [Apple 支持：关于 iOS 26 更新](https://support.apple.com/zh-cn/123075)
 - [Apple 支持：如果 iPhone 或 iPad 温度过高或过低](https://support.apple.com/zh-cn/118431)
-- [Apple Support: Update iOS to protect your iPhone from web attacks](https://support.apple.com/en-us/126776)
-- [Apple Support: About the security content of iOS 26.5.2 and iPadOS 26.5.2](https://support.apple.com/en-us/127594)
-- [Apple Support: Apple security releases](https://support.apple.com/en-us/100100)
+- [Apple 支持：更新 iOS 以保护你的 iPhone 免受网页攻击](https://support.apple.com/zh-cn/126776)
+- [Apple 支持：关于 iOS 26.5.2 和 iPadOS 26.5.2 的安全性内容](https://support.apple.com/zh-cn/127594)
+- [Apple 支持：Apple 安全性发布](https://support.apple.com/zh-cn/100100)
 
 ---
 

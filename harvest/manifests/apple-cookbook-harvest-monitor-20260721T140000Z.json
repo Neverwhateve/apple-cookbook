@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260721T140000Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-21T14:00:00.000Z",
+  "baseCommit": "e1f47505d6e62f963070f62606a7602e1d63ca45",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-battery-drains-after-update.md",
+      "action": "update",
+      "baseContentHash": "sha256:8d32e3c81da87dbcaef48df7e93e1ab970aee7aa30812eb28593df8ef02f670e",
+      "proposedContentHash": "sha256:fa9f0416ccade4d5b8e42f6162a1734c71d317e720074d290ba876b355419f26",
+      "reason": "Localize three verified Apple security references to mainland-China Chinese official pages and refresh the article verification date/current security-version wording.",
+      "canonicalReview": {
+        "queries": [
+          "iPhone 更新后掉电快",
+          "iPhone 更新后发热耗电",
+          "iOS 更新后电池消耗快",
+          "iPhone battery drains after update"
+        ],
+        "matchedArticleIds": [
+          "iphone-battery-drains-after-update"
+        ],
+        "decision": "update-existing",
+        "notes": "Existing canonical article covers the same symptom cluster; no new article created. Verified the zh-cn equivalents by opening the linked Chinese Apple pages, including the security release index link to the localized iOS 26.5.2 security-content page."
+      }
+    }
+  ]
+}
