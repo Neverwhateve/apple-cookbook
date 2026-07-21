@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260721T072000Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-21T07:20:00.000Z",
+  "baseCommit": "382bc3399d420d9641c7e60617bb22cb5b503acd",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-auto-lock-not-working-screen-stays-on.md",
+      "action": "create",
+      "baseContentHash": null,
+      "proposedContentHash": "sha256:1f20ad6ea209782b8d7505982360ded7b01dd80fc69b94df8d3a02abdd61dacd",
+      "reason": "新增覆盖 iPhone 闲置后不自动锁定、屏幕一直亮及自动锁定选项异常的独立高频问题；现有 canonical 仅在电池文章中提及自动锁定，未覆盖该故障排查意图。",
+      "canonicalReview": {
+        "queries": [
+          "自动锁定",
+          "屏幕一直亮",
+          "屏幕不自动关闭",
+          "iPhone auto lock not working",
+          "iPhone screen stays on",
+          "注视感知",
+          "全天候显示屏"
+        ],
+        "matchedArticleIds": [],
+        "decision": "create-new",
+        "notes": "全库匹配未发现同一意图的 canonical 文章；iphone-battery-drains-after-update 仅将自动锁定列为耗电相关设置，非自动锁定故障指南；现有锁屏、面容 ID、专注模式和屏幕旋转文章也不覆盖此症状。"
+      }
+    }
+  ]
+}
