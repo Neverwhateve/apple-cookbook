@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260721T120000Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-21T12:00:00.000Z",
+  "baseCommit": "7eba4ade0fa30d91a35376d8a6d647f651206a5a",
+  "changes": [
+    {
+      "path": "cookbook/Family Sharing/screen-time-passcode-forgot-reset.md",
+      "action": "update",
+      "baseContentHash": "sha256:4cf58acbdc182b1eca328158f78cab9a9526bdf9d248d6cb76319a172507b551",
+      "proposedContentHash": "sha256:fbe3a69395338f9b8c4ff6a54720993fdc21be22f6e8fb42374f5a083fcb8450",
+      "reason": "将涉及儿童设备和账户恢复的高价值文章中已核实等价的 Apple 官方英文来源，替换为中国大陆中文官方页面并重新记录访问日期。",
+      "canonicalReview": {
+        "queries": [
+          "忘记屏幕使用时间密码",
+          "屏幕时间密码重设",
+          "孩子屏幕时间密码忘记",
+          "Screen Time passcode forgotten"
+        ],
+        "matchedArticleIds": [
+          "screen-time-passcode-forgot-reset"
+        ],
+        "decision": "update-existing",
+        "notes": "现有 canonical 已覆盖同一问题；本轮不新增文章。已核实中文官方页 102677、126533、iPhone 用户手册、Mac 用户手册及 102656，内容适用于中国大陆用户。"
+      }
+    }
+  ]
+}
