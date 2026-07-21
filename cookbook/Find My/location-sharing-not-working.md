@@ -22,18 +22,15 @@ aliases:
   - 查找位置不更新
 verification: Official
 difficulty: Moderate
-updated: 2026-07-12
+updated: 2026-07-21
 official_sources:
-  - https://support.apple.com/zh-cn/guide/iphone/share-your-location-iph01954dc44/ios
+  - https://support.apple.com/zh-cn/guide/iphone/iph01954dc44/26/ios/26
   - https://support.apple.com/zh-cn/105107
   - https://support.apple.com/zh-cn/105104
   - https://support.apple.com/zh-cn/guide/personal-safety/find-my-and-location-sharing-ips05ede4573/web
-  - https://support.apple.com/zh-cn/guide/iphone/iph69b192bc2/ios
-  - https://support.apple.com/zh-cn/118433
-  - https://support.apple.com/zh-cn/119859
-community_sources:
-  - https://www.reddit.com/r/applehelp/comments/1rfki1z/solution_no_location_found_in_find_my/
-  - https://discussions.apple.com/thread/256141224
+  - https://support.apple.com/zh-cn/guide/iphone/iph6231f621a/ios
+  - https://support.apple.com/zh-cn/108380
+community_sources: []
 status: seed
 popular: false
 ---
@@ -60,13 +57,13 @@ popular: false
 ## 可能原因
 
 1. **对方并没有向这个 Apple 账户共享位置**
-   - 加入家人共享并不等于自动向每位家庭成员共享位置。
+   - 加入家人共享不等于每位成员都已同意共享自己的位置；家庭成员仍可单独关闭共享。
 2. **共享位置的设备选错了**
    - 顾客同时拥有 iPhone 和 iPad 时很常见，“查找”可能正在共享“我的位置”中选择的那台设备。
 3. **定位服务、“查找”或“共享我的位置”已关闭**
-   - 隐私设置会直接阻止设备发送位置。
-4. **网络、电量或设备状态导致无法更新**
-   - 离线、低电量、无蜂窝网络或 Wi-Fi、关机等状态都无法报告当前位置。
+   - 共享者设备上的隐私设置会直接阻止设备发送位置；查看者只打开自己的定位服务不能代替共享者授权。
+4. **网络或设备状态导致无法更新**
+   - 设备离线、没有可用网络或关机时，通常只能看到旧位置或离线状态；不要把“最后位置”误认为实时位置。
 5. **Apple 账户或家人共享关系发生变化**
    - 退出登录、切换账户，或家庭成员关系变化，都可能打破原有共享预期。
 6. **通过“信息”共享时，iMessage 身份或发送接收设置不一致**
@@ -80,55 +77,29 @@ popular: false
 
 步骤：
 
-1. 在应该被看到位置的那台设备上，打开**查找 > 我**，开启**共享我的位置**。
-2. 确认**共享位置来自**下面显示的是预期的 iPhone。
-3. 如有需要，点按**使用这台 iPhone 作为我的位置**。
-4. 若要直接共享，打开**查找 > 联系人 > 添加 > 共享我的位置**，选择联系人和共享时长。
-5. 对于家人共享，进入**设置 > 家人 > 位置共享**，确认已为正确的家庭成员开启位置共享。
-6. 如果顾客是从**信息**对话里共享或查看位置，打开**设置 > App > 信息 > 发送与接收**，确认用于 iMessage 的电话号码或 Apple 账户邮箱正确；如果 iMessage 无法激活或无法收发，先按 iMessage 官方流程排查。
-7. 确认**设置 > 隐私与安全性 > 定位服务 > 查找**允许访问位置。
-8. 确认设备可以连接网络。
-9. 如果顾客无法访问 Apple 账户或可信设备，先解决账户访问问题，再继续排查“查找”。
+1. 在应该被看到位置的那台设备上，打开**查找 > 我**，开启**共享我的位置**，并确认“共享来源”是当前使用的 iPhone 或预期设备。
+2. 如有需要，点按**使用此 iPhone 作为我的位置**。如果从 Apple Watch 共享，先确认它与 iPhone 的配对和通信条件正常。
+3. 打开**查找 > 联系人 > 添加 > 共享我的位置**，选择联系人和共享时长；查看者也应在“联系人”中打开对方条目确认共享状态。
+4. 对于家人共享，进入**设置 > [你的姓名] > 家人共享 > 位置共享**，确认正确的家庭成员已被选中。家庭成员必须各自同意共享，不能用共享 iCloud 或订阅代替位置授权。
+5. 在共享者设备上确认**设置 > 隐私与安全性 > 定位服务**已开启，并允许“查找”使用定位服务；必要时确认“查找我的 iPhone”仍开启。
+6. 确认共享者设备已解锁过、能连接 Wi‑Fi 或蜂窝网络，且没有处于关机、飞行模式或无服务状态；重新打开“查找”只能刷新可用数据，不能让离线设备产生实时位置。
+7. 如果问题只发生在**信息**对话里，再单独检查 iMessage 的登录和发送/接收地址；不要把“信息”里的身份问题当成“查找”定位服务故障。
+8. 如果顾客无法访问 Apple 账户或可信设备，先解决账户访问问题，再继续排查“查找”；不要为了修复位置共享而抹掉设备或退出仍可用的账户。
 
 参考来源：
 
-- [Apple 支持：在 iPhone 上的“查找”中共享位置](https://support.apple.com/zh-cn/guide/iphone/share-your-location-iph01954dc44/ios)
+- [Apple 支持：在 iPhone 上的“查找”中共享你的位置](https://support.apple.com/zh-cn/guide/iphone/iph01954dc44/26/ios/26)
 - [Apple 支持：与家人共享群组共享位置](https://support.apple.com/zh-cn/105107)
 - [Apple 支持：通过 iPhone 共享位置](https://support.apple.com/zh-cn/105104)
 - [Apple 个人安全使用手册：“查找”和位置共享](https://support.apple.com/zh-cn/guide/personal-safety/find-my-and-location-sharing-ips05ede4573/web)
-- [iPhone 使用手册：在“信息”中共享你的位置](https://support.apple.com/zh-cn/guide/iphone/iph69b192bc2/ios)
-- [Apple 支持：如果你无法在 iPhone 或 iPad 上发送或接收信息](https://support.apple.com/zh-cn/118433)
-- [Apple 支持：如果你无法在 iPhone 上打开或登录 iMessage 信息或 FaceTime 通话](https://support.apple.com/zh-cn/119859)
+- [iPhone 使用手册：在 iPhone 上与家庭成员共享位置和定位其丢失设备](https://support.apple.com/zh-cn/guide/iphone/iph6231f621a/ios)
+- [Apple 支持：如何在 iPhone、iPad 或 Mac 上设置“家人共享”](https://support.apple.com/zh-cn/108380)
 
 ---
 
-## 已验证的非官方处理思路
+## 可选的低风险复测
 
-非官方
-
-### 重置“位置与隐私”，再重新允许“查找”定位
-
-- 来源：Reddit r/applehelp 与 Apple Support Community 中 2026 年反复出现的“No Location Found / Off Network”讨论；多名用户反馈在官方共享设置正确但仍无位置时有效。
-- 成功概率：中等。适合共享关系、共享设备、网络和定位服务都已确认无误后使用。
-- 风险：会重置 App 的位置和隐私授权，之后其他 App 可能需要重新授权定位、相机、照片等权限。
-- 备注：这不是 Apple Support 文章中的首选官方步骤，不能替代先检查共享对象、共享设备和定位服务。路径：**设置 > 通用 > 传输或还原 iPhone > 还原 > 还原位置与隐私**。
-- 验证级别：较可能
-
-### 停止共享后，从正确设备重新共享
-
-- 来源：社区和零售场景中反复出现的排查模式。
-- 成功概率：当共享关系存在但“联系人”页面状态异常时，中到高。
-- 风险：对方可能收到新的共享通知。
-- 备注：先确认 Apple 账户和共享设备正确，再执行这一步。
-- 验证级别：已验证
-
-### 将“我的位置”切换到 iPhone
-
-- 来源：Apple 官方设置说明，以及真实场景中反复出现的问题模式。
-- 成功概率：当“查找”显示 iPad、旧手机或家中位置时较高。
-- 风险：低。
-- 备注：当顾客说“位置不对”而不是“完全没有位置”时，这通常是最快的修复方向。
-- 验证级别：Apple 官方
+只有在共享关系、共享设备、定位服务和网络都已确认正确后，才可停止并重新发起一次位置共享。这样可能会再次发送共享通知，也不能绕过 Apple 账户、家人共享或设备离线问题；若涉及人身安全或被跟踪担忧，应优先停止共享并联系 Apple 支持或当地紧急服务。
 
 ---
 
@@ -141,7 +112,7 @@ popular: false
 5. 确认查看者已出现在“联系人”或家人共享的位置共享设置中。
 6. 如果顾客反馈集中在“信息”对话里，先确认 iMessage 已启用，并且电话号码/邮箱与对方联系人里保存的身份一致；不要把所有“查找”共享问题都归因于 iMessage。
 7. 检查网络、低电量状态、定位服务和 VPN/过滤配置，确认设备能稳定向 Apple 服务报告位置。
-8. 如果以上都正确但仍显示“No Location Found / Off Network”，可在说明风险后尝试重置“位置与隐私”，再打开“查找”重新授权定位。
+8. 如果以上都正确但仍显示“No Location Found / Off Network”，记录共享者设备的网络、时间和完整提示，等待设备恢复在线后再复测；不要把社区中的重置建议写成 Apple 官方修复。
 9. 如果账户访问本身异常，转到 Apple 账户恢复流程，不要继续在“查找”里反复排查。
 
 ---
@@ -190,8 +161,8 @@ popular: false
 
 ## 元信息
 
-- 最后更新：2026-07-12
-- 来源数量：9
+- 最后更新：2026-07-21
+- 来源数量：6
 - 验证级别：Apple 官方
 - 支持系统：当前支持“查找”的 iOS、iPadOS、watchOS 版本
 - 可信度：高

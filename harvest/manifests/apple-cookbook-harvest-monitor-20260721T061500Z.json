@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260721T061500Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-21T06:15:00.000Z",
+  "baseCommit": "e028a2ad342f9680f73a181e77f6f7d2d2d8c9d7",
+  "changes": [
+    {
+      "path": "cookbook/Find My/location-sharing-not-working.md",
+      "action": "update",
+      "baseContentHash": "sha256:f359078f376ed3401697a140f024cfe8492064de0886105975b16002c1db19fa",
+      "proposedContentHash": "sha256:93725229ef023bc12ee044688dcdce1ce728cc7c32977302ad701ae6b0b6239f",
+      "reason": "实质更新位置共享故障的共享者/查看者分流、设备来源、家人共享同意、离线边界与安全升级，并移除未能作为当前证据的社区来源。",
+      "canonicalReview": {
+        "queries": [
+          "位置共享不可用",
+          "查找位置不更新",
+          "No Location Found",
+          "老婆位置看不到",
+          "Family location not showing",
+          "Find My not updating",
+          "共享我的位置",
+          "共享来源",
+          "家人共享 位置共享"
+        ],
+        "matchedArticleIds": [
+          "location-sharing-not-working",
+          "airtag-find-my-setup-incomplete",
+          "iphone-location-services-not-working-inaccurate",
+          "apple-account-verification-failed"
+        ],
+        "decision": "update-existing",
+        "notes": "目标是现有 seed slug location-sharing-not-working；已匹配 title、summary、symptoms、aliases、devices、platforms、错误信息、Find My/家人共享术语及全部现有 canonical。相邻 AirTag 设置、iPhone 定位服务和 Apple 账户文章分别处理物品添加、系统定位权限和账户访问，不是同一意图。保留 status: seed，未执行身份迁移。"
+      }
+    }
+  ]
+}
