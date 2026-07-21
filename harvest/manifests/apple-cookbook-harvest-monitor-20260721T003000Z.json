@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260721T003000Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-21T00:30:00.000Z",
+  "baseCommit": "9a3d95a9ba4b34c86b344229f1da78ab02e4acc8",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/apple-pay-declined-terminal-not-working.md",
+      "action": "update",
+      "baseContentHash": "sha256:ca25d6b70eb10bf4304906670c48fc3ac886f42bc16cb633641cbca112587bd9",
+      "proposedContentHash": "sha256:98ae485e020fc7dc5825c5f4eadbdb48660dc6c3c46fc8f7c884184e46bbc1a6",
+      "reason": "将 Apple Pay 文章的地区敏感内容和公开参考来源校正为中国大陆中文 Apple 官方页面，补充中国大陆 Safari、第三方浏览器、银联/交通联合和交通卡边界。",
+      "canonicalReview": {
+        "queries": [
+          "Apple Pay 付款被拒绝",
+          "Apple Pay 靠近读卡器没反应",
+          "Apple Pay 终端无反应",
+          "Apple Pay 中国大陆 Safari",
+          "Apple Pay 交通卡",
+          "Apple Pay declined",
+          "Apple Pay not working at terminal"
+        ],
+        "matchedArticleIds": [
+          "apple-pay-declined-terminal-not-working",
+          "apple-wallet-cant-add-card-apple-pay",
+          "iphone-screenshot-not-working-missing-save",
+          "iphone-ipad-mail-cant-send-receive-email"
+        ],
+        "decision": "update-existing",
+        "notes": "全文匹配 title、summary、symptoms、aliases、devices、platforms、errorMessages、officialTerms、communityTerms 与现有 canonical。目标文章覆盖已加入钱包但付款被拒/终端无响应；钱包无法添加卡片是相邻且不同的设置意图。更新只保留同一文章身份与 canonical 状态，实质修正中国大陆适用性与官方证据边界。"
+      }
+    }
+  ]
+}
