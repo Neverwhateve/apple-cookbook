@@ -35,15 +35,12 @@ verification: Official
 difficulty: Moderate
 updated: 2026-07-13
 official_sources:
-  - https://support.apple.com/en-us/120002
-  - https://support.apple.com/en-us/120364
-  - https://support.apple.com/en-us/104954
-  - https://support.apple.com/en-us/108398
-  - https://support.apple.com/en-us/108792
-  - https://support.apple.com/en-us/102896
-  - https://support.apple.com/en-us/102897
-  - https://support.apple.com/en-us/109524
-  - https://support.apple.com/en-us/101554
+  - https://support.apple.com/zh-cn/108398
+  - https://support.apple.com/zh-cn/120364
+  - https://support.apple.com/zh-cn/102626
+  - https://support.apple.com/zh-cn/102897
+  - https://support.apple.com/zh-cn/118219
+  - https://support.apple.com/zh-cn/guide/iphone/iphbd4cf42b4/ios
 community_sources:
   - https://discussions.apple.com/thread/255229880
   - https://discussions.apple.com/thread/256044368
@@ -81,7 +78,7 @@ popular: true
 2. **发卡机构拒绝交易**
    - Apple 说明，Apple Pay 交易会发送给发卡机构审批；拒绝原因可能来自发卡机构的规则、风险控制、卡片状态、额度或账户状态。
 3. **卡片、银行或地区不支持当前 Apple Pay 场景**
-   - Apple Pay 需要受支持设备、受支持卡片、参加 Apple Pay 的发卡机构，并且功能并非在所有市场或所有卡种可用。
+   - Apple Pay 需要受支持设备、受支持卡片、参加 Apple Pay 的发卡机构，并且功能并非在所有市场或所有卡种可用；中国大陆的网页、第三方浏览器和交通场景还有单独限制。
 4. **设备安全条件或验证状态不完整**
    - Apple Pay 需要已登录 iCloud、设备密码以及 Face ID、Touch ID、Optic ID 或 Apple Watch 密码。部分卡片还需要银行进一步验证。
 5. **交易场景不同**
@@ -98,30 +95,27 @@ popular: true
 步骤：
 
 1. 先问清楚失败位置：实体店读卡器、App、网页、Mac 上确认付款、Apple Watch，还是交通卡 / 快捷模式。
-2. 如果屏幕明确显示“declined / 被拒绝 / payment not completed”，优先让顾客联系银行或发卡机构。说明这是 Apple Pay 交易授权失败，不等同于 Apple ID 付款方式失败。
+2. 如果屏幕明确显示“被拒绝”或付款未完成，优先让顾客联系银行或发卡机构确认卡片、账户和支付网络状态；这不等同于 App Store 或 Apple 账户付款方式失败。
 3. 如果是在店内付款，确认商户是否支持 Apple Pay 或非接触式付款；Apple 建议联系商户确认可使用位置。
-4. 观察读卡器是否显示 Apple Pay、contactless、QuickPass、EMV Contactless、iD、QUICPay、Suica、PASMO 等当地适用标志，但不要只凭贴纸判断；Apple 说明终端仍可能未启用 contactless。
+4. 在中国大陆，先确认商户和终端接受 Apple Pay、银联或交通联合等适用标志；不要只凭贴纸判断，Apple 说明终端仍可能未启用 NFC 免接触式付款。
 5. 确认商户接受这张卡的支付网络。例如商户支持 contactless 不代表支持该 Visa、Mastercard、UnionPay、JCB、American Express 或本地网络场景。
 6. 打开 Wallet，确认卡片没有等待验证、过期、被移除或显示需要联系发卡机构。
 7. 确认设备支持 Apple Pay，并更新到最新系统版本。
 8. 确认设备已登录 iCloud，已设置设备密码以及 Face ID、Touch ID、Optic ID 或 Apple Watch 密码。
-9. 对 Mac 付款，确认 Mac 是否带 Touch ID；没有内建 Touch ID 的 Mac 需要通过兼容 iPhone 或 Apple Watch 完成付款，并在 iPhone 的 Wallet 与 Apple Pay 设置中允许 Mac 付款。
+9. 对中国大陆 Safari 网页付款，使用兼容的 iPhone 或 iPad 和最新可用系统；中国大陆不能将 Apple Pay 与第三方浏览器搭配使用。对 Mac 付款，确认 Mac 是否带 Touch ID；没有内建 Touch ID 的 Mac 需要通过兼容 iPhone 或 Apple Watch 完成付款。
 10. 查看 Wallet 交易记录。Apple 说明交易记录可能包含 Apple Pay 和实体卡交易，最准确记录仍应以发卡机构为准。
 11. 如果顾客对 Apple Pay 扣款有疑问，联系银行或发卡机构；不要只凭 Wallet 交易列表判断是否最终入账。
 12. 如果同一张卡在多家商户都被拒绝，联系发卡机构检查卡片状态、风险控制、移动钱包令牌、地区限制、设备数量限制和支付网络。
-13. 如果多张卡、多个商户、iPhone 与 Apple Watch 都失败，再联系 Apple 支持做设备、系统、Wallet、NFC 或生物识别相关诊断。
+13. 如果多张卡、多个商户、iPhone 与 Apple Watch 都失败，再联系 Apple 支持做设备、系统、Wallet、NFC 或生物识别相关诊断；中国大陆交通卡还应按当地交通卡和公共交通公司的兼容性要求分流。
 
 参考来源：
 
-- [Apple Support: If a payment card that you use with Apple Pay is declined](https://support.apple.com/en-us/120002)
-- [Apple Support: Learn where to use Apple Pay](https://support.apple.com/en-us/120364)
-- [Apple Support: See your Apple Pay transaction history](https://support.apple.com/en-us/104954)
-- [Apple Support: Set up Apple Pay](https://support.apple.com/en-us/108398)
-- [Apple Support: If you can't add a card to Apple Wallet to use with Apple Pay](https://support.apple.com/en-us/108792)
-- [Apple Support: Devices compatible with Apple Pay](https://support.apple.com/en-us/102896)
-- [Apple Support: Apple Pay participating banks and card issuers in Asia-Pacific](https://support.apple.com/en-us/102897)
-- [Apple Support: Apple Pay participating banks in Canada, Latin America, and the United States](https://support.apple.com/en-us/109524)
-- [Apple Support: Apple Pay security and privacy overview](https://support.apple.com/en-us/101554)
+- [Apple 支持：设置 Apple Pay](https://support.apple.com/zh-cn/108398)
+- [Apple 支持：了解 Apple Pay 的适用范围](https://support.apple.com/zh-cn/120364)
+- [Apple 支持：使用 Apple Pay 购物](https://support.apple.com/zh-cn/102626)
+- [Apple 支持：亚太地区参加 Apple Pay 计划的银行和发卡机构](https://support.apple.com/zh-cn/102897)
+- [Apple 支持：更改或移除与 Apple Pay 搭配使用的付款卡](https://support.apple.com/zh-cn/118219)
+- [iPhone 使用手册：在 iPhone 上使用 Apple Pay 进行免接触式支付](https://support.apple.com/zh-cn/guide/iphone/iphbd4cf42b4/ios)
 
 ---
 
@@ -217,7 +211,7 @@ popular: true
 
 ## 元信息
 
-- 最后更新：2026-07-13
+- 最后更新：2026-07-21
 - 来源数量：15
 - 验证级别：Apple 官方
 - 支持系统：当前 iOS、watchOS、iPadOS、macOS、visionOS；取决于地区、设备、银行、卡种、商户和支付网络支持
