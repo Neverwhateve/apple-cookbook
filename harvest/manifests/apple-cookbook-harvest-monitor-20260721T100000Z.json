@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260721T100000Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-21T10:00:00.000Z",
+  "baseCommit": "5ea760222ca897b2b169ae4baac36bc7a586921b",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-ipad-touch-screen-not-responding-ghost-touch.md",
+      "action": "update",
+      "baseContentHash": "sha256:f474c9df93a31ee5adf818b65f652596cb2734a5631c500d9ece74d8072a7422",
+      "proposedContentHash": "sha256:537390bd9a19c78d36d03a3272dbd5e4e5be64e954c8f9dbd0357f2d6ef05903",
+      "reason": "将触屏故障文章的英文 Apple 来源和参考链接替换为已核实、适用于中国大陆用户的中文官方页面，并同步更新来源标题、访问日期和中国大陆屏幕维修入口。",
+      "canonicalReview": {
+        "queries": [
+          "iPhone 触屏没反应",
+          "iPad 触屏无响应",
+          "屏幕局部失灵",
+          "鬼触 断触",
+          "iPhone iPad screen unresponsive",
+          "iphone-ipad-touch-screen-not-responding-ghost-touch"
+        ],
+        "matchedArticleIds": [
+          "iphone-ipad-touch-screen-not-responding-ghost-touch"
+        ],
+        "decision": "update-existing",
+        "notes": "title、summary、symptoms、aliases、devices、platforms、errorMessages 与现有 canonical 匹配后，确认本次是同一触屏故障意图的实质来源校正；未创建重复文章。原英文页面均有已核实的 zh-cn 对应页，因此不再保留英文 Apple URL。"
+      }
+    }
+  ]
+}

@@ -156,43 +156,43 @@ limitations:
   - 本文不提供绕过锁屏密码、拆机维修或第三方屏幕校准方法。
 sources:
   - id: apple-screen-not-working
-    title: If the screen isn't working on your iPhone or iPad
-    url: https://support.apple.com/en-us/102567
+    title: 如果 iPhone 或 iPad 上的屏幕无法正常工作
+    url: https://support.apple.com/zh-cn/102567
     publisher: Apple
     sourceType: official-support
-    accessedAt: 2026-07-15
-    publishedAt: 2024-10-15
+    accessedAt: 2026-07-21
+    publishedAt: 2024-10-24
     official: true
   - id: apple-force-restart-iphone
-    title: Force restart iPhone
-    url: https://support.apple.com/guide/iphone/force-restart-iphone-iph8903c3ee6/ios
+    title: 强制重新启动 iPhone
+    url: https://support.apple.com/zh-cn/guide/iphone/iph8903c3ee6/ios
     publisher: Apple
     sourceType: official-guide
-    accessedAt: 2026-07-15
+    accessedAt: 2026-07-21
     publishedAt: null
     official: true
   - id: apple-ipad-wont-turn-on-frozen
-    title: If your iPad won't turn on or is frozen
-    url: https://support.apple.com/en-us/102642
+    title: 如果 iPad 无法开机或死机
+    url: https://support.apple.com/zh-cn/102642
     publisher: Apple
     sourceType: official-support
-    accessedAt: 2026-07-15
-    publishedAt: null
+    accessedAt: 2026-07-21
+    publishedAt: 2026-05-11
     official: true
   - id: apple-touch-accommodations
-    title: Adjust how iPhone responds to your touch
-    url: https://support.apple.com/guide/iphone/adjust-how-iphone-responds-to-your-touch-iph77bcdd132/ios
+    title: 调整 iPhone 对触控的响应方式
+    url: https://support.apple.com/zh-cn/guide/iphone/iph77bcdd132/ios
     publisher: Apple
     sourceType: official-guide
-    accessedAt: 2026-07-15
+    accessedAt: 2026-07-21
     publishedAt: null
     official: true
   - id: apple-iphone-screen-service
-    title: Apple Service and Repair for iPhone Screens
-    url: https://support.apple.com/iphone/repair/screen-replacement
+    title: 适用于 iPhone 屏幕的 Apple 服务和维修
+    url: https://support.apple.com/zh-cn/iphone/repair/screen-replacement
     publisher: Apple
     sourceType: official-support
-    accessedAt: 2026-07-15
+    accessedAt: 2026-07-21
     publishedAt: null
     official: true
 lastVerifiedAt: 2026-07-15
@@ -256,10 +256,10 @@ popular: true
 
 参考来源：
 
-- [Apple Support: If the screen isn't working on your iPhone or iPad](https://support.apple.com/en-us/102567)
-- [Apple Support: Force restart iPhone](https://support.apple.com/guide/iphone/force-restart-iphone-iph8903c3ee6/ios)
-- [Apple Support: If your iPad won't turn on or is frozen](https://support.apple.com/en-us/102642)
-- [Apple Support: Adjust how iPhone responds to your touch](https://support.apple.com/guide/iphone/adjust-how-iphone-responds-to-your-touch-iph77bcdd132/ios)
+- [Apple 支持：如果 iPhone 或 iPad 上的屏幕无法正常工作](https://support.apple.com/zh-cn/102567)
+- [Apple 支持：强制重新启动 iPhone](https://support.apple.com/zh-cn/guide/iphone/iph8903c3ee6/ios)
+- [Apple 支持：如果 iPad 无法开机或死机](https://support.apple.com/zh-cn/102642)
+- [Apple 支持：调整 iPhone 对触控的响应方式](https://support.apple.com/zh-cn/guide/iphone/iph77bcdd132/ios)
 
 ---
 
