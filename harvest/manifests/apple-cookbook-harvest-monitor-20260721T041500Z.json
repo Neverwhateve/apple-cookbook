@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 2,
+  "runId": "apple-cookbook-harvest-monitor-20260721T041500Z",
+  "automationId": "apple-cookbook-harvest-monitor",
+  "generatedAt": "2026-07-21T04:15:00Z",
+  "baseCommit": "a18251401f024a755002e8877ffe6cc023a59548",
+  "changes": [
+    {
+      "path": "cookbook/iPhone/iphone-sos-no-service-searching.md",
+      "action": "update",
+      "baseContentHash": "sha256:33d03aba33d5ba46050ca3d5f9c9dfa81938dbc3aa1ff0ccd57b9ca117c555ed",
+      "proposedContentHash": "sha256:b9ea2e3738d093fb95c97904ea8a7a15013cd3964fca8e11b901f9cb05490a10",
+      "reason": "用已核实的中国大陆中文 Apple 官方页面替换英文兜底来源，移除其他地区紧急呼叫说明，并补充运营商设置与 eSIM 的当前官方分流；文章身份和 canonical 状态保持不变。",
+      "canonicalReview": {
+        "queries": [
+          "iPhone 显示 SOS 无服务 正在搜索",
+          "iPhone 蜂窝网络 运营商设置 eSIM 无服务",
+          "iPhone SOS no service searching",
+          "iphone-sos-no-service-searching",
+          "SIM eSIM 运营商 蜂窝网络"
+        ],
+        "matchedArticleIds": [
+          "iphone-sos-no-service-searching",
+          "iphone-invalid-sim-no-sim",
+          "iphone-esim-setup-transfer-fails",
+          "iphone-ipad-wifi-no-internet-unable-to-join",
+          "iphone-cant-make-receive-calls"
+        ],
+        "decision": "update-existing",
+        "notes": "完整匹配了 title、summary、symptoms、aliases、devices、platforms、错误信息、蜂窝网络术语及现有 canonical；相邻 SIM 识别、eSIM 设置、Wi-Fi 和电话文章是不同意图。仅更新现有 SOS/无服务 canonical，未创建重复文章。"
+      }
+    }
+  ]
+}
