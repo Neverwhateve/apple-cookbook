@@ -122,47 +122,47 @@ limitations:
   - 菜单名称可能随 iOS、iPadOS 或 macOS 版本变化。
 sources:
   - id: apple-forgot-screen-time-passcode
-    title: If you forgot the Screen Time passcode for an iPhone or iPad
-    url: https://support.apple.com/en-us/102677
+    title: 如果你忘记了 iPhone 或 iPad 的屏幕时间密码
+    url: https://support.apple.com/zh-cn/102677
     publisher: Apple
     sourceType: official-support
-    accessedAt: 2026-07-14
+    accessedAt: 2026-07-21
     publishedAt: null
     official: true
   - id: apple-iphone-screen-time-passcode-guide
-    title: Create, manage, and keep track of a Screen Time passcode on iPhone
-    url: https://support.apple.com/guide/iphone/create-manage-track-a-screen-time-passcode-iph272b4c4bd/ios
+    title: 在 iPhone 上创建、管理和跟踪屏幕时间密码
+    url: https://support.apple.com/zh-cn/guide/iphone/iph272b4c4bd/ios
     publisher: Apple
     sourceType: official-guide
-    accessedAt: 2026-07-14
+    accessedAt: 2026-07-21
     publishedAt: null
     official: true
   - id: apple-mac-screen-time-passcode-guide
-    title: Set, change or remove a Screen Time passcode on Mac
-    url: https://support.apple.com/guide/mac-help/set-change-remove-a-screen-time-passcode-mac-mchl336af525/mac
+    title: 在 Mac 上设置、更改或移除“屏幕时间”密码
+    url: https://support.apple.com/zh-cn/guide/mac-help/mchl336af525/mac
     publisher: Apple
     sourceType: official-guide
-    accessedAt: 2026-07-14
+    accessedAt: 2026-07-21
     publishedAt: null
     official: true
   - id: apple-set-screen-time-passcode
-    title: How to set a Screen Time passcode on an iPhone or iPad
-    url: https://support.apple.com/en-us/126533
+    title: 如何在 iPhone 或 iPad 上设置屏幕时间密码
+    url: https://support.apple.com/zh-cn/126533
     publisher: Apple
     sourceType: official-support
-    accessedAt: 2026-07-14
+    accessedAt: 2026-07-21
     publishedAt: 2026-06-12
     official: true
   - id: apple-forgot-apple-account-password
-    title: If you forgot your Apple Account password
-    url: https://support.apple.com/en-us/102656
+    title: 如果你忘记了自己的 Apple 账户密码
+    url: https://support.apple.com/zh-cn/102656
     publisher: Apple
     sourceType: official-support
-    accessedAt: 2026-07-14
+    accessedAt: 2026-07-21
     publishedAt: null
     official: true
-lastVerifiedAt: 2026-07-14
-lastUpdatedAt: 2026-07-14
+lastVerifiedAt: 2026-07-21
+lastUpdatedAt: 2026-07-21
 createdAt: 2026-07-14
 relatedArticles:
   - screen-time-limits-not-blocking
@@ -220,11 +220,11 @@ popular: true
 
 参考来源：
 
-- [Apple Support: If you forgot the Screen Time passcode for an iPhone or iPad](https://support.apple.com/en-us/102677)
-- [iPhone User Guide: Create, manage, and keep track of a Screen Time passcode](https://support.apple.com/guide/iphone/create-manage-track-a-screen-time-passcode-iph272b4c4bd/ios)
-- [Mac User Guide: Set, change or remove a Screen Time passcode on Mac](https://support.apple.com/guide/mac-help/set-change-remove-a-screen-time-passcode-mac-mchl336af525/mac)
-- [Apple Support: How to set a Screen Time passcode on an iPhone or iPad](https://support.apple.com/en-us/126533)
-- [Apple Support: If you forgot your Apple Account password](https://support.apple.com/en-us/102656)
+- [Apple Support: 如果你忘记了 iPhone 或 iPad 的屏幕时间密码](https://support.apple.com/zh-cn/102677)
+- [iPhone 用户手册：在 iPhone 上创建、管理和跟踪屏幕时间密码](https://support.apple.com/zh-cn/guide/iphone/iph272b4c4bd/ios)
+- [Mac 用户手册：在 Mac 上设置、更改或移除“屏幕时间”密码](https://support.apple.com/zh-cn/guide/mac-help/mchl336af525/mac)
+- [Apple Support: 如何在 iPhone 或 iPad 上设置屏幕时间密码](https://support.apple.com/zh-cn/126533)
+- [Apple Support: 如果你忘记了自己的 Apple 账户密码](https://support.apple.com/zh-cn/102656)
 
 ---
 
