@@ -24,7 +24,7 @@ aliases:
   - 文件保险箱恢复密钥
 verification: Official
 difficulty: Advanced
-updated: 2026-07-12
+updated: 2026-07-23
 official_sources:
   - https://support.apple.com/zh-cn/102633
   - https://support.apple.com/zh-cn/guide/mac-help/mchlp1550/mac
@@ -32,6 +32,7 @@ official_sources:
   - https://support.apple.com/zh-cn/guide/security/sec4c6dc1b6e/web
   - https://support.apple.com/zh-cn/102664
   - https://support.apple.com/zh-cn/118574
+  - https://support.apple.com/zh-cn/105034
 community_sources:
   - https://discussions.apple.com/thread/256117235
   - https://discussions.apple.com/thread/254527949
@@ -87,6 +88,8 @@ popular: true
 5. 如果登录窗口没有可用重设选项，按照 Apple 指引从 macOS 恢复启动。
 6. 在“恢复”中选择一个知道密码的用户时，如果不知道任何用户密码，点按**忘记所有密码？**。
 7. 按照屏幕说明继续。系统可能要求登录 Apple 账户、输入发送到受信任设备的验证码、输入文件保险箱恢复密钥、选择启动宗卷，或临时取消激活这台 Mac。
+   - 如果系统要求登录 Apple 账户，Apple 当前说明可输入 Apple 账户电子邮件地址或电话号码，然后输入对应密码；不要把手机号账户一概判断为不能用于 Mac 登录密码重设。
+   - 如果基于电话号码的 Apple 账户在这一步无法继续，先核对是否输入完整的 Apple 账户电话号码（中国大陆通常为 +86 手机号，印度通常为 +91 手机号）以及对应的 Apple 账户密码。若问题是收不到 Apple 发送的信息，Apple 说明这类账户可能通过“信息”App 接收 Apple 信息；没有对应 SIM 卡时可能收不到这些信息。此时按 Apple 账户恢复或更改主要电话号码/电子邮件地址的路径处理，而不是改走非官方绕过。
 8. 重设成功后，重新启动 Mac，用新密码登录。
 9. 登录后立即确认 Apple 账户、恢复联系人、FileVault 设置、备份状态和密码提示是否准确。
 10. 如果无法使用 Apple 账户、恢复密钥或任何管理员账户重设密码，先说明数据边界：加密数据可能无法保留。
@@ -101,6 +104,7 @@ popular: true
 - [Apple 平台安全：macOS 中的文件保险箱恢复](https://support.apple.com/zh-cn/guide/security/sec4c6dc1b6e/web)
 - [Apple 支持：抹掉 Mac 并还原为出厂设置](https://support.apple.com/zh-cn/102664)
 - [Apple 支持：无法重设 Apple 账户密码时如何使用账户恢复](https://support.apple.com/zh-cn/118574)
+- [Apple 支持：将电话号码而非电子邮件地址用于 Apple 账户](https://support.apple.com/zh-cn/105034)
 
 ---
 
@@ -128,17 +132,19 @@ popular: true
 
 ---
 
-## 已验证的非官方处理思路
-
-非官方
+## Apple 官方补充路径
 
 ### 通过“终端 resetpassword”打开重设助理
 
-- 来源：Reddit 和 Apple Support Community 中常见建议。
+- 来源：Apple 当前支持文章在“恢复”中的重设选项无法完成时列出此路径；Reddit 和 Apple Support Community 也常见类似建议。
 - 成功概率：中等，取决于 Mac 机型、FileVault、恢复环境和账户设置。
-- 风险：中等。Apple 当前中文支持文章优先描述登录窗口和恢复助理中的重设入口；不要把终端命令作为首选路径。
-- 备注：如果 Apple 官方界面没有显示入口，且顾客具备操作能力，可作为理解恢复助理的一种社区线索，但最终仍按 Apple 屏幕提示执行。
-- 验证级别：较可能
+- 风险：中等。Apple 当前中文支持文章优先描述登录窗口和恢复助理中的重设入口；只有在没有收到密码重设步骤或无法完成这些步骤时，再从“实用工具”菜单打开“终端”并输入 `resetpassword`。
+- 备注：最终仍按 Apple 屏幕提示执行。
+- 验证级别：Apple 官方
+
+## 已验证的非官方处理思路
+
+非官方
 
 ### 直接抹盘重装
 
@@ -211,8 +217,8 @@ popular: true
 
 ## 元信息
 
-- 最后更新：2026-07-12
-- 来源数量：10
+- 最后更新：2026-07-23
+- 来源数量：11
 - 验证级别：Apple 官方
 - 支持系统：当前 macOS；具体重设入口取决于 Mac 机型、FileVault、Apple 账户和管理状态
 - 可信度：高
