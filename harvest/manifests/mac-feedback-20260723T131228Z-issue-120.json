@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 2,
+  "runId": "mac-feedback-20260723T131228Z-issue-120",
+  "automationId": "mac-mini-feedback-watcher",
+  "generatedAt": "2026-07-23T13:12:56.165Z",
+  "baseCommit": "f93f4c7236ffff6bd785b061640e9f2ac52209ef",
+  "changes": [
+    {
+      "path": "cookbook/Mac/mac-forgot-login-password-reset.md",
+      "action": "update",
+      "baseContentHash": "sha256:35fd69f7794ed5e03f308c697f4cfa53274921da38b5ed0a3dd77c39a0186a82",
+      "proposedContentHash": "sha256:6a08302f79a887cfc6ca4e6048c3e74cc800c6742457dfb01f127475472d4eef",
+      "reason": "Verified website content Bug #120",
+      "canonicalReview": {
+        "queries": [
+          "P0 feedback: 内容 Bug：《Mac 忘记登录密码，无法进入 macOS》"
+        ],
+        "matchedArticleIds": [
+          "mac-forgot-login-password-reset"
+        ],
+        "decision": "update-existing",
+        "notes": "The report targets this existing article; the automation verified and updated that canonical match instead of creating a duplicate."
+      }
+    }
+  ]
+}
