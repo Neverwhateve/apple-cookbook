@@ -330,6 +330,8 @@ jobs:
           ALIYUN_ECS_PORT: ${{ secrets.ALIYUN_ECS_PORT || '22' }}
           ALIYUN_ECS_USER: ${{ secrets.ALIYUN_ECS_USER }}
           FEEDBACK_DATA_DIR: ${{ vars.FEEDBACK_DATA_DIR || '/var/lib/apple-cookbook' }}
+          FEEDBACK_SERVICE_USER: ${{ vars.FEEDBACK_SERVICE_USER || 'applecookbook' }}
+          FEEDBACK_SERVICE_GROUP: ${{ vars.FEEDBACK_SERVICE_GROUP || 'applecookbook' }}
         run: |
           if [[ ! -s intake/newly-synced-ids.txt ]]; then
             echo "No new feedback IDs synced."
@@ -340,7 +342,7 @@ jobs:
             intake/newly-synced-ids.txt "$ALIYUN_ECS_USER@$ALIYUN_ECS_HOST:/tmp/apple-cookbook-newly-synced-ids.txt"
 
           ssh -i ~/.ssh/aliyun_ecs -p "$ALIYUN_ECS_PORT" "$ALIYUN_ECS_USER@$ALIYUN_ECS_HOST" \
-            "FEEDBACK_DATA_DIR='$FEEDBACK_DATA_DIR' bash -s" <<'REMOTE'
+            "FEEDBACK_DATA_DIR='$FEEDBACK_DATA_DIR' FEEDBACK_SERVICE_USER='$FEEDBACK_SERVICE_USER' FEEDBACK_SERVICE_GROUP='$FEEDBACK_SERVICE_GROUP' bash -s" <<'REMOTE'
           set -euo pipefail
           umask 077
           mkdir -p "$FEEDBACK_DATA_DIR/feedback"
@@ -368,6 +370,7 @@ jobs:
           synced_temp=$(mktemp "$FEEDBACK_DATA_DIR/feedback/.synced-github-issues.XXXXXX.tmp")
           touch "$synced_path"
           sort -u "$synced_path" /tmp/apple-cookbook-newly-synced-ids.txt > "$synced_temp"
+          chown "$FEEDBACK_SERVICE_USER:$FEEDBACK_SERVICE_GROUP" "$synced_temp"
           chmod 600 "$synced_temp"
           mv "$synced_temp" "$synced_path"
           rm -f /tmp/apple-cookbook-newly-synced-ids.txt
