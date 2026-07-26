@@ -8,8 +8,8 @@ OpenAI API key.
 ## Runtime split
 
 - The Codex app automation runs one routine Harvest cycle every two hours.
-- `scripts/mac-feedback-watcher.sh` polls GitHub for open Issues carrying `P0`,
-  `feedback-intake`, and `content-bug`. Polling does not call a model.
+- `scripts/mac-feedback-watcher.sh` polls every open Issue carrying `P0` and
+  `feedback-intake`. Polling does not call a model.
 - A durable website submission dispatches `sync-feedback-intake.yml`. That
   workflow copies the ECS feedback record into a GitHub Issue without exposing
   the reporter name.
@@ -18,7 +18,7 @@ OpenAI API key.
   on the Issue, applies `needs-human-review`, and requests an immediate feedback
   sync instead of treating the report as finally resolved.
 - Codex works in a dedicated clean checkout and can change only
-  `cookbook/*.md` and `indexes/*.md`.
+  `cookbook/*.md`.
 - A deterministic publisher runs validation, creates the Harvest manifest,
   pushes a `harvest/*` branch, and opens a ready PR after Codex exits.
 - Content-quality CI merges and deploys only after every check passes.

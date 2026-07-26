@@ -48,8 +48,8 @@ export async function submitAdminArticleEdit(formData: FormData) {
     if (feedbackId) {
       await updateFeedbackStatus(
         feedbackId,
-        "resolved",
-        `管理员已提交文章修改 ${proposal.proposalId}；通过内容校验后自动发布。`
+        "in_progress",
+        `管理员已提交文章修改 ${proposal.proposalId}；等待内容校验、合并、部署和生产验证后再解决。`
       );
     }
 

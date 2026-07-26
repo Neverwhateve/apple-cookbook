@@ -170,6 +170,29 @@ jobs:
             issue_state=$(jq -r '.state' <<<"$issue_json")
             issue_url=$(jq -r '.url // ""' <<<"$issue_json")
 
+            if jq -e '[.labels[].name] | index("codex-failed") != null' <<<"$issue_json" >/dev/null; then
+              review_json=$(
+                gh issue view "$issue_number" \
+                  --json comments \
+                  --jq '[.comments[] | select(.body | contains("<!-- apple-cookbook-automation-review:processing_failed -->"))] | sort_by(.createdAt) | last // {}'
+              )
+              reviewed_at=$(jq -r '.createdAt // empty' <<<"$review_json")
+              summary=$(jq -r '.body // empty' <<<"$review_json")
+              [[ -n "$reviewed_at" ]] || reviewed_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+              [[ -n "$summary" ]] || summary="自动验证未能完成，未提供进一步说明。"
+
+              jq -nc \
+                --arg id "$id" \
+                --arg action "needs_review" \
+                --arg outcome "processing_failed" \
+                --arg reviewedAt "$reviewed_at" \
+                --arg summary "$summary" \
+                --arg issueUrl "$issue_url" \
+                '{ id: $id, action: $action, outcome: $outcome, reviewedAt: $reviewedAt, summary: $summary, issueUrl: $issueUrl }' \
+                >> intake/feedback-reconciliation.jsonl
+              continue
+            fi
+
             if jq -e '[.labels[].name] | index("needs-human-review") != null' <<<"$issue_json" >/dev/null; then
               review_json=$(
                 gh issue view "$issue_number" \
@@ -184,10 +207,11 @@ jobs:
               jq -nc \
                 --arg id "$id" \
                 --arg action "needs_review" \
+                --arg outcome "no_content_change" \
                 --arg reviewedAt "$reviewed_at" \
                 --arg summary "$summary" \
                 --arg issueUrl "$issue_url" \
-                '{ id: $id, action: $action, reviewedAt: $reviewedAt, summary: $summary, issueUrl: $issueUrl }' \
+                '{ id: $id, action: $action, outcome: $outcome, reviewedAt: $reviewedAt, summary: $summary, issueUrl: $issueUrl }' \
                 >> intake/feedback-reconciliation.jsonl
               continue
             fi

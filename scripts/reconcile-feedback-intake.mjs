@@ -6,7 +6,9 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const reviewMarker = "<!-- apple-cookbook-automation-review:no_content_change -->";
+const failureMarker = "<!-- apple-cookbook-automation-review:processing_failed -->";
 const noChangeHeading = "Mac mini 已完成验证，但没有发现需要发布的内容修改。";
+const failureHeading = "Mac mini 自动验证未能安全完成，已停止发布，需管理员复核或重新进入 P0。";
 const activeStatuses = new Set(["open", "in_progress"]);
 const decisionActions = new Set(["needs_review", "resolved"]);
 
@@ -39,7 +41,9 @@ function normalizeTimestamp(value, fallback) {
 export function normalizeAutomationReviewSummary(value) {
   const summary = String(value ?? "")
     .replaceAll(reviewMarker, "")
+    .replaceAll(failureMarker, "")
     .replace(noChangeHeading, "")
+    .replace(failureHeading, "")
     .trim()
     .slice(0, 4000);
 
@@ -59,6 +63,7 @@ function normalizeDecision(value, now) {
   return {
     id,
     action,
+    outcome: value.outcome === "processing_failed" ? "processing_failed" : "no_content_change",
     reviewedAt: normalizeTimestamp(value.reviewedAt, now),
     summary: normalizeAutomationReviewSummary(value.summary),
     issueUrl: typeof value.issueUrl === "string" ? value.issueUrl.trim().slice(0, 500) : ""
@@ -106,7 +111,7 @@ export function reconcileFeedbackRecords({
         status: "needs_review",
         updatedAt: normalizedNow,
         automationReview: {
-          outcome: "no_content_change",
+          outcome: decision.outcome,
           reviewedAt: decision.reviewedAt,
           summary: decision.summary,
           issueUrl: decision.issueUrl
