@@ -61,7 +61,7 @@ function SourceList({ sources, emptyMessage }: { sources: ArticleSource[]; empty
 
   return (
     <ul className="mt-3 space-y-3 text-sm">
-      {sources.map((source, index) => (
+      {sources.map((source) => (
         <li key={source.id}>
           <a
             href={source.url}
@@ -70,7 +70,7 @@ function SourceList({ sources, emptyMessage }: { sources: ArticleSource[]; empty
             className="group block rounded-xl border border-zinc-200 p-3 transition hover:border-blue-300 hover:bg-blue-50/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:border-zinc-800 dark:hover:border-blue-800 dark:hover:bg-blue-950/20"
           >
             <span className="flex items-start gap-2 font-medium text-blue-600 group-hover:underline dark:text-blue-400">
-              <span>{source.id.startsWith("legacy-") ? `${source.title} ${index + 1}` : source.title}</span>
+              <span>{source.title}</span>
               <ExternalLink aria-hidden="true" className="mt-0.5 h-3.5 w-3.5 flex-none" />
               <span className="sr-only">（在新窗口打开）</span>
             </span>
