@@ -60,6 +60,37 @@ test("keeps AI no-change feedback active for human review with a structured summ
   assert.equal(result.inboxRecords[0].updatedAt, now);
 });
 
+test("keeps failed automation in the human review queue instead of resolving it", () => {
+  const result = reconcileFeedbackRecords({
+    inboxRecords: [submission("AC-FAILED")],
+    archiveRecords: [],
+    syncedIds: new Set(["AC-FAILED"]),
+    decisions: [
+      {
+        id: "AC-FAILED",
+        action: "needs_review",
+        outcome: "processing_failed",
+        reviewedAt: "2026-07-14T07:30:00Z",
+        summary:
+          "<!-- apple-cookbook-automation-review:processing_failed -->\n" +
+          "Mac mini 自动验证未能安全完成，已停止发布，需管理员复核或重新进入 P0。\n\n验证环境不可用。",
+        issueUrl: "https://github.com/example/repo/issues/43"
+      }
+    ],
+    now
+  });
+
+  assert.equal(result.needsReviewCount, 1);
+  assert.equal(result.resolvedCount, 0);
+  assert.equal(result.inboxRecords[0].status, "needs_review");
+  assert.deepEqual(result.inboxRecords[0].automationReview, {
+    outcome: "processing_failed",
+    reviewedAt: "2026-07-14T07:30:00.000Z",
+    summary: "验证环境不可用。",
+    issueUrl: "https://github.com/example/repo/issues/43"
+  });
+});
+
 test("archives an ordinarily closed synced feedback Issue as resolved", () => {
   const result = reconcileFeedbackRecords({
     inboxRecords: [submission("AC-RESOLVED")],

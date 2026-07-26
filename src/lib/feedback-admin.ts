@@ -96,18 +96,7 @@ function toAdminItems(submissions: FeedbackSubmission[], syncedIds: Set<string>)
       priority: submission.status === "needs_review" ? null : ("P0" as const),
       syncedToGithub: syncedIds.has(submission.id),
       queuePosition: index + 1
-    }))
-    .sort((a, b) => {
-      const statusRank: Record<FeedbackStatus, number> = {
-        open: 0,
-        in_progress: 1,
-        needs_review: 2,
-        resolved: 3,
-        dismissed: 4
-      };
-
-      return statusRank[a.status] - statusRank[b.status] || a.queuePosition - b.queuePosition;
-    });
+    }));
 }
 
 async function readAdminFeedbackQueues(paths: ReturnType<typeof getAdminStorePaths>): Promise<AdminFeedbackQueues> {

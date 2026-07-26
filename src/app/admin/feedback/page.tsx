@@ -141,7 +141,11 @@ function FeedbackCard({
 
           {item.automationReview ? (
             <aside className="mt-4 rounded-md border border-violet-200 bg-violet-50 p-3 dark:border-violet-900 dark:bg-violet-950/30">
-              <p className="text-xs font-semibold text-violet-800 dark:text-violet-200">AI 初审认为无需修改，请人工二次审核</p>
+              <p className="text-xs font-semibold text-violet-800 dark:text-violet-200">
+                {item.automationReview.outcome === "processing_failed"
+                  ? "自动处理未完成，请人工复核或重新进入 P0"
+                  : "AI 初审认为无需修改，请人工二次审核"}
+              </p>
               <p className="mt-2 whitespace-pre-wrap text-sm leading-6 text-violet-950 dark:text-violet-100">
                 {item.automationReview.summary}
               </p>
@@ -294,7 +298,7 @@ export default async function AdminFeedbackPage() {
       <section className="mt-10 border-t border-zinc-200 pt-6 dark:border-zinc-800" aria-labelledby="review-queue-title">
         <div className="mb-4">
           <h2 id="review-queue-title" className="text-xl font-semibold text-zinc-950 dark:text-zinc-50">待人工复核</h2>
-          <p className="mt-2 text-sm text-zinc-500">AI 未发现应发布的修改时会停在这里；确认有效后会进入 P0 队列，也可直接修正关联文章。</p>
+          <p className="mt-2 text-sm text-zinc-500">AI 未发现应发布的修改，或自动处理失败时会停在这里；确认有效后会进入 P0 队列，也可直接修正关联文章。</p>
         </div>
         {queues.review.length ? (
           <div className="space-y-3">

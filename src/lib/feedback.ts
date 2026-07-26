@@ -28,7 +28,7 @@ export type FeedbackSubmission = {
   adminNote?: string;
   updatedAt?: string;
   automationReview?: {
-    outcome: "no_content_change";
+    outcome: "no_content_change" | "processing_failed";
     reviewedAt: string;
     summary: string;
     issueUrl: string;

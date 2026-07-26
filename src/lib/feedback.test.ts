@@ -174,6 +174,19 @@ describe("feedback file store", () => {
     assert.equal(queues.active[0].priority, "P0");
   });
 
+  it("preserves the administrator queue order across active statuses", async () => {
+    const root = await makeTemporaryRoot();
+    const first = makeSubmission(1, "in_progress");
+    const second = makeSubmission(2, "open");
+
+    await writeQueue(path.join(root, "feedback", "inbox.jsonl"), [first, second]);
+
+    const queues = await getAdminFeedbackQueues(root);
+
+    assert.deepEqual(queues.active.map((item) => item.id), [first.id, second.id]);
+    assert.deepEqual(queues.active.map((item) => item.queuePosition), [1, 2]);
+  });
+
   it("promotes a reviewed item to P0 once and removes its old GitHub sync marker", async () => {
     const root = await makeTemporaryRoot();
     const reviewItem = makeSubmission(1, "needs_review");
