@@ -54,6 +54,14 @@ const statusClasses: Record<FeedbackStatus, string> = {
   dismissed: "bg-zinc-100 text-zinc-600 ring-zinc-200 dark:bg-zinc-900 dark:text-zinc-300 dark:ring-zinc-800"
 };
 
+const statusHints: Record<FeedbackStatus, string> = {
+  open: "已进入 P0，等待同步与自动领取",
+  in_progress: "自动处理进行中；完成后会自动归档",
+  needs_review: "自动处理未能完成或未发现可发布修改，需要人工决定",
+  resolved: "已完成并归档",
+  dismissed: "已确认无需继续处理"
+};
+
 const secondaryButtonClass =
   "inline-flex min-h-9 items-center justify-center gap-1.5 rounded-md border border-zinc-200 bg-white px-3 py-2 text-xs font-medium text-zinc-800 transition hover:border-zinc-400 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:hover:border-zinc-600 dark:hover:bg-zinc-900";
 
@@ -139,6 +147,8 @@ function FeedbackCard({
           </p>
           <p className="mt-3 whitespace-pre-wrap text-sm leading-6 text-zinc-700 dark:text-zinc-300">{item.description}</p>
 
+          <p className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">{statusHints[item.status]}</p>
+
           {item.automationReview ? (
             <aside className="mt-4 rounded-md border border-violet-200 bg-violet-50 p-3 dark:border-violet-900 dark:bg-violet-950/30">
               <p className="text-xs font-semibold text-violet-800 dark:text-violet-200">
@@ -178,6 +188,17 @@ function FeedbackCard({
             >
               <ExternalLink className="h-4 w-4" />
               {item.sourceTitle || item.sourceUrl}
+            </a>
+          ) : null}
+          {item.workflowUrl ? (
+            <a
+              href={item.workflowUrl}
+              className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <ExternalLink className="h-4 w-4" />
+              查看 GitHub 处理单
             </a>
           ) : null}
           {item.adminNote ? <p className="mt-3 text-sm text-zinc-500">管理员备注：{item.adminNote}</p> : null}
@@ -281,7 +302,7 @@ export default async function AdminFeedbackPage() {
               {queues.active.length} 项活跃
             </span>
           </div>
-          <p className="mt-2 text-sm text-zinc-500">按队列顺序优先处理。可调整优先级、更新状态，或带着该需求直接编辑现有文章。</p>
+          <p className="mt-2 text-sm text-zinc-500">按队列顺序优先处理。状态会随 GitHub 处理单自动更新；已关闭的处理单会归档，不再停留在 P0。</p>
         </div>
         {queues.active.length ? (
           <div className="space-y-3">

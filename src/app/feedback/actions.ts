@@ -7,6 +7,7 @@ export type FeedbackState = {
   ok: boolean;
   message: string;
   id?: string;
+  processing?: "starting" | "queued";
 };
 
 export async function submitFeedback(_state: FeedbackState, formData: FormData): Promise<FeedbackState> {
@@ -25,10 +26,11 @@ export async function submitFeedback(_state: FeedbackState, formData: FormData):
     return {
       ok: true,
       id: result.id,
+      processing: trigger.status === "dispatched" ? "starting" : "queued",
       message:
         trigger.status === "dispatched"
-          ? `已记录为 ${result.id}，自动验证流程已启动。`
-          : `已记录为 ${result.id}，已进入最高优先级处理队列。`
+          ? `已记录为 ${result.id}，已进入 P0 队列，正在启动自动处理。`
+          : `已记录为 ${result.id}，已进入 P0 队列，等待同步处理。`
     };
   } catch (error) {
     console.error("Feedback submission could not be persisted.", { error });

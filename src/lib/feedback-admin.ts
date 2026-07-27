@@ -280,6 +280,10 @@ export async function queueFeedbackForHarvest(id: string, adminNote = "", root =
       adminNote: adminNote.trim() || "管理员复核后确认有效，重新进入 P0。",
       updatedAt: new Date().toISOString()
     };
+    // Re-queuing starts a new processing cycle. Do not carry a conclusion or
+    // Issue URL from the previous cycle into the new P0 item.
+    delete nextItem.automationReview;
+    delete nextItem.workflowUrl;
 
     if (activeIndex !== -1) {
       activeSubmissions.splice(activeIndex, 1);

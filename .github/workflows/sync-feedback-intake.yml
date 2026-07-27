@@ -216,14 +216,43 @@ jobs:
               continue
             fi
 
-            [[ "$issue_state" == "CLOSED" ]] || continue
-            jq -nc \
-              --arg id "$id" \
-              --arg action "resolved" \
-              --arg reviewedAt "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
-              --arg issueUrl "$issue_url" \
-              '{ id: $id, action: $action, reviewedAt: $reviewedAt, issueUrl: $issueUrl }' \
-              >> intake/feedback-reconciliation.jsonl
+            # A published feedback Issue is normally closed after its PR is
+            # merged. Resolve closed Issues before inspecting processing labels:
+            # otherwise codex-published keeps completed P0 items active.
+            if [[ "$issue_state" == "CLOSED" ]]; then
+              jq -nc \
+                --arg id "$id" \
+                --arg action "resolved" \
+                --arg reviewedAt "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+                --arg issueUrl "$issue_url" \
+                '{ id: $id, action: $action, reviewedAt: $reviewedAt, issueUrl: $issueUrl }' \
+                >> intake/feedback-reconciliation.jsonl
+              continue
+            fi
+
+            if jq -e '[.labels[].name] | index("codex-processing") != null' <<<"$issue_json" >/dev/null; then
+              jq -nc \
+                --arg id "$id" \
+                --arg action "in_progress" \
+                --arg reviewedAt "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+                --arg summary "Mac mini Codex 已领取，正在验证原文和证据。" \
+                --arg issueUrl "$issue_url" \
+                '{ id: $id, action: $action, reviewedAt: $reviewedAt, summary: $summary, issueUrl: $issueUrl }' \
+                >> intake/feedback-reconciliation.jsonl
+              continue
+            fi
+
+            if jq -e '[.labels[].name] | index("codex-published") != null' <<<"$issue_json" >/dev/null; then
+              jq -nc \
+                --arg id "$id" \
+                --arg action "in_progress" \
+                --arg reviewedAt "$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+                --arg summary "内容调整已发布，正在等待生产验证。" \
+                --arg issueUrl "$issue_url" \
+                '{ id: $id, action: $action, reviewedAt: $reviewedAt, summary: $summary, issueUrl: $issueUrl }' \
+                >> intake/feedback-reconciliation.jsonl
+              continue
+            fi
           done < intake/feedback/inbox.jsonl
 
           if [[ ! -s intake/feedback-reconciliation.jsonl ]]; then
