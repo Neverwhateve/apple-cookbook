@@ -107,6 +107,26 @@ test("archives an ordinarily closed synced feedback Issue as resolved", () => {
   assert.equal(result.archiveRecords[0].adminNote, "GitHub P0 issue 已关闭，自动归档。");
 });
 
+test("marks a claimed or published synced feedback Issue as in progress", () => {
+  const result = reconcileFeedbackRecords({
+    inboxRecords: [submission("AC-PROCESSING")],
+    archiveRecords: [],
+    syncedIds: new Set(["AC-PROCESSING"]),
+    decisions: [{
+      id: "AC-PROCESSING",
+      action: "in_progress",
+      reviewedAt: now,
+      summary: "内容调整已发布，正在等待生产验证。",
+      issueUrl: "https://github.com/example/repo/issues/43"
+    }],
+    now
+  });
+
+  assert.equal(result.inProgressCount, 1);
+  assert.equal(result.inboxRecords[0].status, "in_progress");
+  assert.equal(result.inboxRecords[0].workflowUrl, "https://github.com/example/repo/issues/43");
+});
+
 test("ignores a stale closed Issue after an administrator removes the synced marker", () => {
   const result = reconcileFeedbackRecords({
     inboxRecords: [

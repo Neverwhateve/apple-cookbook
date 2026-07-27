@@ -10,7 +10,7 @@ const failureMarker = "<!-- apple-cookbook-automation-review:processing_failed -
 const noChangeHeading = "Mac mini 已完成验证，但没有发现需要发布的内容修改。";
 const failureHeading = "Mac mini 自动验证未能安全完成，已停止发布，需管理员复核或重新进入 P0。";
 const activeStatuses = new Set(["open", "in_progress"]);
-const decisionActions = new Set(["needs_review", "resolved"]);
+const decisionActions = new Set(["in_progress", "needs_review", "resolved"]);
 
 function parseJsonLines(raw, label) {
   return raw
@@ -85,6 +85,7 @@ export function reconcileFeedbackRecords({
   const currentSyncedIds = syncedIds instanceof Set ? syncedIds : new Set(syncedIds);
   const nextInbox = [];
   const resolvedItems = [];
+  let inProgressCount = 0;
   let needsReviewCount = 0;
   let resolvedCount = 0;
   let skippedUnsyncedCount = 0;
@@ -102,6 +103,24 @@ export function reconcileFeedbackRecords({
     if (!currentSyncedIds.has(item.id)) {
       skippedUnsyncedCount += 1;
       nextInbox.push(item);
+      continue;
+    }
+
+    if (decision.action === "in_progress") {
+      const nextAdminNote = decision.summary;
+      const nextWorkflowUrl = decision.issueUrl || item.workflowUrl;
+      nextInbox.push(
+        item.status === "in_progress" && item.adminNote === nextAdminNote && item.workflowUrl === nextWorkflowUrl
+          ? item
+          : {
+              ...item,
+              status: "in_progress",
+              updatedAt: normalizedNow,
+              adminNote: nextAdminNote,
+              workflowUrl: nextWorkflowUrl
+            }
+      );
+      inProgressCount += 1;
       continue;
     }
 
@@ -125,7 +144,8 @@ export function reconcileFeedbackRecords({
       ...item,
       status: "resolved",
       updatedAt: normalizedNow,
-      adminNote: "GitHub P0 issue 已关闭，自动归档。"
+      adminNote: "GitHub P0 issue 已关闭，自动归档。",
+      workflowUrl: decision.issueUrl || item.workflowUrl
     });
     resolvedCount += 1;
   }
@@ -139,6 +159,7 @@ export function reconcileFeedbackRecords({
   return {
     inboxRecords: nextInbox,
     archiveRecords: nextArchive,
+    inProgressCount,
     needsReviewCount,
     resolvedCount,
     skippedUnsyncedCount
@@ -207,7 +228,7 @@ if (executedPath === fileURLToPath(import.meta.url)) {
       decisionsFile: path.resolve(decisionsFile)
     });
     console.log(
-      `Feedback reconciliation: ${result.needsReviewCount} awaiting human review, ` +
+      `Feedback reconciliation: ${result.inProgressCount} in progress, ${result.needsReviewCount} awaiting human review, ` +
       `${result.resolvedCount} resolved, ${result.skippedUnsyncedCount} stale decisions skipped.`
     );
   } catch (error) {

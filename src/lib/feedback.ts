@@ -27,6 +27,8 @@ export type FeedbackSubmission = {
   source: "website";
   adminNote?: string;
   updatedAt?: string;
+  /** GitHub Issue used to track the current P0 processing cycle. */
+  workflowUrl?: string;
   automationReview?: {
     outcome: "no_content_change" | "processing_failed";
     reviewedAt: string;
