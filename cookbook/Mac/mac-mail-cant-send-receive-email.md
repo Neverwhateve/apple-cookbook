@@ -78,6 +78,8 @@ communityTerms:
   - 邮箱迁移到 Yahoo 后失效
   - 邮件同步混乱
   - 发件箱卡住
+  - Mac 邮件账户不在线
+  - Mac 邮件提示需要重新认证
 difficulty: Moderate
 estimatedTime: null
 verificationLevel: Official
@@ -147,6 +149,24 @@ solutions:
     limitations:
       - 社区案例只能证明部分 Cox 到 Yahoo 迁移场景，不能代表所有邮箱迁移。
       - 迁移细节和 App 专用密码要求必须以邮箱服务商当前说明为准。
+  - id: verify-icloud-account-and-outgoing-server
+    title: iCloud Mail 账户在线但发件箱卡住时检查发件账户
+    summary: iCloud Mail 能收不能发或邮件停在发件箱时，先确认 Mail 中的 iCloud 账户已启用且在线，再确认 iCloud 是当前发件账户。
+    kind: alternative
+    steps:
+      - 在 Mail 的账户设置中选择 iCloud 账户，确认账户已启用并显示在线。
+      - 检查 iCloud Mail 系统状态、iCloud 储存空间、邮箱大小限制和邮件发送限制。
+      - 在 Mail 的服务器设置中确认 iCloud 是发件账户；不要用非 iCloud SMTP 服务器发送带有 @icloud.com 发件地址的邮件。
+      - 用 iCloud.com/mail 收发一封小测试邮件，并记录网页端与 Mail 的差异。
+      - 如果仍然只能收不能发，保留发件箱、草稿、退信和完整错误文字，联系 Apple 支持或网络服务商。
+    verificationLevel: Official
+    sourceIds:
+      - apple-mail-send-receive-mac
+      - apple-icloud-mail-not-working
+    warnings:
+      - 不要为了清空发件箱而删除邮件；先确认邮件是否已经在“已发送”或网页端存在。
+    limitations:
+      - SMTP 流量也可能被互联网服务商或公司网络阻止，Apple Mail 设置正确不代表网络允许外发。
   - id: rebuild-exchange-or-imap-display
     title: Exchange 或 IMAP 本地显示不同步时谨慎重建
     summary: 网页邮箱或其他设备显示正确、只有 Mac 本地内容不一致时，可先重建受影响的邮箱。
@@ -207,43 +227,43 @@ limitations:
   - Apple Support Community 和 Reddit 内容是用户案例，不代表 Apple 官方保证，也不能证明适用于所有系统版本。
 sources:
   - id: apple-mail-send-receive-mac
-    title: If you can’t send or receive email on Mac
-    url: https://support.apple.com/en-us/102422
+    title: 如果你在 Mac 上无法发送或接收电子邮件
+    url: https://support.apple.com/zh-cn/102422
     publisher: Apple
     sourceType: official-support
-    accessedAt: 2026-07-13
-    publishedAt: 2026-07-07
+    accessedAt: 2026-07-28
+    publishedAt: 2026-07-21
     official: true
   - id: apple-mail-missing-messages-mac
-    title: "If you can't see email messages in Mail on Mac"
-    url: https://support.apple.com/en-us/117379
+    title: 如果你在 Mac 上的“邮件”中看不到电子邮件
+    url: https://support.apple.com/zh-cn/117379
     publisher: Apple
     sourceType: official-support
-    accessedAt: 2026-07-13
-    publishedAt: 2026-05-12
+    accessedAt: 2026-07-28
+    publishedAt: 2026-05-14
     official: true
   - id: apple-mail-password-mac
-    title: If Mail on your Mac keeps asking for your password
-    url: https://support.apple.com/en-us/102413
+    title: 如果 Mac 上的“邮件”不断提示输入密码
+    url: https://support.apple.com/zh-cn/102413
     publisher: Apple
     sourceType: official-support
-    accessedAt: 2026-07-13
-    publishedAt: 2025-12-08
+    accessedAt: 2026-07-28
+    publishedAt: 2026-07-20
     official: true
   - id: apple-icloud-mail-not-working
-    title: "If iCloud Mail isn't working"
-    url: https://support.apple.com/en-us/102562
+    title: 如果 iCloud 邮件无法正常使用
+    url: https://support.apple.com/zh-cn/102562
     publisher: Apple
     sourceType: official-support
-    accessedAt: 2026-07-13
+    accessedAt: 2026-07-28
     publishedAt: 2026-06-08
     official: true
   - id: apple-choose-email-provider
-    title: Choose the correct email provider when adding an account to Mail
-    url: https://support.apple.com/en-us/102088
+    title: 向“邮件”添加账户时选取正确的电子邮件提供商
+    url: https://support.apple.com/zh-cn/102088
     publisher: Apple
     sourceType: official-support
-    accessedAt: 2026-07-13
+    accessedAt: 2026-07-28
     publishedAt: 2026-04-24
     official: true
   - id: community-yahoo-migration-mac
@@ -251,7 +271,7 @@ sources:
     url: https://discussions.apple.com/thread/255584918
     publisher: Apple Support Community
     sourceType: community
-    accessedAt: 2026-07-13
+    accessedAt: 2026-07-28
     publishedAt: 2024-04-20
     official: false
   - id: community-exchange-sync-mac
@@ -259,7 +279,7 @@ sources:
     url: https://discussions.apple.com/thread/255182550
     publisher: Apple Support Community
     sourceType: community
-    accessedAt: 2026-07-13
+    accessedAt: 2026-07-28
     publishedAt: 2023-10-05
     official: false
   - id: community-smtp-error-mac
@@ -267,7 +287,7 @@ sources:
     url: https://discussions.apple.com/thread/252678597
     publisher: Apple Support Community
     sourceType: community
-    accessedAt: 2026-07-13
+    accessedAt: 2026-07-28
     publishedAt: 2021-04-19
     official: false
   - id: community-reddit-old-mail-limit
@@ -275,11 +295,11 @@ sources:
     url: https://www.reddit.com/r/applehelp/comments/1rv7hif/mail_app_wont_show_me_older_emails_and_even_apple/
     publisher: Reddit r/applehelp
     sourceType: community
-    accessedAt: 2026-07-13
+    accessedAt: 2026-07-28
     publishedAt: null
     official: false
-lastVerifiedAt: 2026-07-13
-lastUpdatedAt: 2026-07-13
+lastVerifiedAt: 2026-07-28
+lastUpdatedAt: 2026-07-28
 createdAt: null
 relatedArticles:
   - iphone-ipad-wifi-no-internet-unable-to-join
@@ -337,21 +357,21 @@ Mac 上“邮件”App 发不出、收不到、账户离线、一直要求输入
 3. 如果 Mail 显示网络离线或无法连接服务器，暂时关闭 VPN、代理、安全软件或网络过滤工具后复测。
 4. 用网页邮箱测试同一账户：iCloud 用 iCloud.com/mail，Gmail、Outlook、Yahoo 或公司邮箱用对应网页入口。
 5. 如果网页邮箱也不能登录、收发或显示服务异常，联系邮箱服务商或等待服务恢复；这时更可能是账户或服务端问题，不要先归因于 Mac 硬件。
-6. 如果 Mail 反复要求密码，先退出 Mail，到**系统设置 > 互联网账户**检查该邮箱账户；如有密码字段，重新输入当前正确密码。
-7. 如果邮箱服务商启用了两步验证、App 专用密码或新的认证方式，按服务商要求更新认证；必要时移除账户后重新添加。
+6. 如果 Mail 反复要求密码，先退出 Mail，到**系统设置 > 互联网账户**检查该邮箱账户；如有密码字段，重新输入当前正确密码。Apple 的当前指引还要求考虑服务商暂停账户、App 专用密码或认证方式变更。
+7. 如果邮箱服务商启用了两步验证、App 专用密码或新的认证方式，先在网页邮箱确认账户状态，再按服务商要求更新认证；必要时移除账户后重新添加。
 8. 如果能收到不能发送，检查发件箱、收件人地址、退信内容、SMTP / outgoing server 状态和服务商发送限制。
 9. 如果是 iCloud Mail，确认 Mac 上 iCloud Mail 已启用且账户在线；检查 iCloud Mail 系统状态、iCloud 储存空间、邮箱大小和发送限制。发件箱卡住时，确认 iCloud 是发件服务器。
 10. 如果以为邮件丢失，先检查侧边栏是否显示目标邮箱、账户是否启用、邮件过滤是否开启、邮件分类是否只显示某一类、垃圾邮件、已屏蔽发件人和邮件规则。
 11. 如果搜索异常，选择对应邮箱，从**邮箱 > 重建**重建邮箱。
-12. 如果没有其他方案奏效，移除该邮箱账户再重新添加；添加时按 Apple 的提供商列表选择正确服务商，或向邮箱服务商索取 IMAP / POP / SMTP 设置。
+12. 如果没有其他方案奏效，且已确认服务器端邮件存在、顾客知道密码或认证方式，才移除该邮箱账户再重新添加；添加时按 Apple 的提供商列表选择正确服务商，或向邮箱服务商索取 IMAP / POP / SMTP 设置。
 
 参考来源：
 
-- [Apple Support: If you can't send or receive email on Mac](https://support.apple.com/en-us/102422)
-- [Apple Support: If you can't see email messages in Mail on Mac](https://support.apple.com/en-us/117379)
-- [Apple Support: If Mail on your Mac keeps asking for your password](https://support.apple.com/en-us/102413)
-- [Apple Support: If iCloud Mail isn't working](https://support.apple.com/en-us/102562)
-- [Apple Support: Choose the correct email provider when adding an account to Mail](https://support.apple.com/en-us/102088)
+- [Apple 支持：如果你在 Mac 上无法发送或接收电子邮件](https://support.apple.com/zh-cn/102422)
+- [Apple 支持：如果你在 Mac 上的“邮件”中看不到电子邮件](https://support.apple.com/zh-cn/117379)
+- [Apple 支持：如果 Mac 上的“邮件”不断提示输入密码](https://support.apple.com/zh-cn/102413)
+- [Apple 支持：如果 iCloud 邮件无法正常使用](https://support.apple.com/zh-cn/102562)
+- [Apple 支持：向“邮件”添加账户时选取正确的电子邮件提供商](https://support.apple.com/zh-cn/102088)
 
 ---
 
@@ -386,6 +406,16 @@ Mac 上“邮件”App 发不出、收不到、账户离线、一直要求输入
 3. 在 Mail 的账户服务器设置中确认 iCloud 是发件服务器。
 4. 如果使用非 iCloud SMTP 服务器，不要用 iCloud 邮箱地址作为发件地址。
 5. 如果对方未收到且无退信，可能被 iCloud Mail 或收件方服务器过滤；让收件人检查垃圾邮件，必要时联系 Apple 支持或邮件管理员。
+
+### 邮箱已连接，但列表里看不到应有的邮箱
+
+验证级别：Apple 官方
+
+1. 在 Mail 设置中确认账户已启用；在侧边栏展开被折叠的账户和邮箱分区。
+2. 关闭邮件过滤，取消只显示“主要”“交易”“更新”或“推广”等单一类别。
+3. 检查垃圾邮件、废纸篓、屏蔽发件人和规则，再用发件人或主题搜索。
+4. 只有搜索索引异常时才对具体邮箱执行**邮箱 > 重建**，重建前先确认服务器端邮件仍然存在。
+5. 更新 macOS 后复测；“邮件”能否收到邮件与“邮件”是否把已收到的邮件显示出来是两个不同分支。
 
 ---
 
@@ -428,9 +458,10 @@ Mac 上“邮件”App 发不出、收不到、账户离线、一直要求输入
 5. 密码问题先用网页邮箱验证，再看服务商是否需要 App 专用密码或重新授权。
 6. iCloud Mail 按 iCloud 专属流程检查：iCloud Mail 开关、系统状态、iCloud 储存空间、发送限制和发件服务器。
 7. 缺失邮件先关闭过滤、分类和规则，查垃圾邮件/废纸篓/屏蔽发件人，再搜索和重建邮箱。
-8. 只有在确认服务器端邮件安全、顾客知道密码或认证方式后，才移除并重新添加账户。
-9. POP 邮箱、公司邮箱、迁移邮箱和本机归档邮箱要特别谨慎，先确认邮件是否只保存在这台 Mac。
-10. 不要把“重装 macOS”“清空 Mail 文件夹”“删除所有邮件数据库”作为常规首选步骤。
+8. 如果只有列表显示异常，先确认账户启用、邮箱分区展开、macOS 版本和具体邮箱，再重建；不要把显示索引问题升级成删除账户。
+9. 只有在确认服务器端邮件安全、顾客知道密码或认证方式后，才移除并重新添加账户。
+10. POP 邮箱、公司邮箱、迁移邮箱和本机归档邮箱要特别谨慎，先确认邮件是否只保存在这台 Mac。
+11. 不要把“重装 macOS”“清空 Mail 文件夹”“删除所有邮件数据库”作为常规首选步骤。
 
 ---
 
@@ -481,7 +512,7 @@ Mac 上“邮件”App 发不出、收不到、账户离线、一直要求输入
 
 ## 元信息
 
-- 最后更新：2026-07-13
+- 最后更新：2026-07-28
 - 来源数量：9
 - 验证级别：Apple 官方
 - 支持系统：当前 macOS；Mail 分类分支适用于 macOS Sequoia 15.4 或更新版本
