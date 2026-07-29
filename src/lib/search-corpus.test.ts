@@ -42,8 +42,8 @@ const rankedCases: readonly RankedCorpusCase[] = [
   },
   {
     query: "我的 iPhone 很烫",
-    expectedTopId: "iphone-battery-drains-after-update",
-    expectedRoute: "/recipes/iPhone/iphone-battery-drains-after-update"
+    expectedTopId: "iphone-overheating-temperature-warning-too-hot",
+    expectedRoute: "/recipes/iPhone/iphone-overheating-temperature-warning-too-hot"
   },
   {
     query: "微信收不到通知",

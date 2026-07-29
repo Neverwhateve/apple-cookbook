@@ -21,7 +21,7 @@ const screenTimeChoices = [
 const heatChoices = [
   { label: "只在充电时发热／停在 80%", href: "/recipes/iPhone/iphone-charging-paused-80-temperature-charge-limit" },
   { label: "更新后持续发热或掉电快", href: "/recipes/iPhone/iphone-battery-drains-after-update" },
-  { label: "异常高温、鼓包或无法安全使用", href: "/service" }
+  { label: "温度警告、异常发烫或无法安全使用", href: "/recipes/iPhone/iphone-overheating-temperature-warning-too-hot" }
 ];
 
 const fieldLabels: Record<SearchField, string> = {
