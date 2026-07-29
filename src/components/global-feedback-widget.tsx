@@ -2,9 +2,10 @@
 
 import { MessageSquarePlus, SendHorizonal, X } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useActionState, useState } from "react";
+import { useActionState, useCallback, useEffect, useRef, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { submitFeedback, type FeedbackState } from "@/app/feedback/actions";
+import { useFeedbackDialog } from "@/components/use-feedback-dialog";
 
 const initialState: FeedbackState = {
   ok: false,
@@ -18,7 +19,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex min-h-10 items-center justify-center gap-2 rounded-md bg-zinc-950 px-3 py-2 text-sm font-semibold text-white transition hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200"
+      className="inline-flex min-h-11 items-center justify-center gap-2 rounded-md bg-zinc-950 px-3 py-2 text-sm font-semibold text-white transition hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200"
     >
       <SendHorizonal className="h-4 w-4" />
       {pending ? "提交中" : "提交"}
@@ -30,7 +31,23 @@ export function GlobalFeedbackWidget() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [kind, setKind] = useState<"question_submission" | "link_submission">("question_submission");
+  const [content, setContent] = useState("");
   const [state, formAction] = useActionState(submitFeedback, initialState);
+  const dialogRef = useRef<HTMLElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const closeDialog = useCallback(() => setOpen(false), []);
+
+  useFeedbackDialog({
+    open,
+    onClose: closeDialog,
+    dialogRef,
+    triggerRef,
+    initialFocusSelector: "#global-feedback-content"
+  });
+
+  useEffect(() => {
+    if (state.ok) setContent("");
+  }, [state.id, state.ok]);
 
   if (pathname.startsWith("/feedback") || pathname.startsWith("/admin") || pathname.startsWith("/recipes")) {
     return null;
@@ -47,18 +64,23 @@ export function GlobalFeedbackWidget() {
       {open ? (
         <section
           id="global-feedback-panel"
+          ref={dialogRef}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="global-feedback-title"
+          aria-describedby="global-feedback-description"
+          tabIndex={-1}
           className="w-[min(380px,calc(100vw-2rem))] rounded-lg border border-zinc-200 bg-white p-4 shadow-lg dark:border-zinc-800 dark:bg-zinc-950"
-          aria-label="提交反馈"
         >
           <div className="flex items-start justify-between gap-3">
             <div>
-              <h2 className="text-base font-semibold text-zinc-950 dark:text-zinc-50">提交链接或问题</h2>
-              <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">会进入 P0 待办队列。</p>
+              <h2 id="global-feedback-title" className="text-base font-semibold text-zinc-950 dark:text-zinc-50">提交链接或问题</h2>
+              <p id="global-feedback-description" className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">会进入内容复核队列。</p>
             </div>
             <button
               type="button"
-              onClick={() => setOpen(false)}
-              className="inline-flex h-8 w-8 flex-none items-center justify-center rounded-full text-zinc-500 transition hover:bg-zinc-100 hover:text-zinc-950 dark:hover:bg-zinc-900 dark:hover:text-zinc-50"
+              onClick={closeDialog}
+              className="inline-flex h-11 w-11 flex-none items-center justify-center rounded-full text-zinc-500 transition hover:bg-zinc-100 hover:text-zinc-950 dark:hover:bg-zinc-900 dark:hover:text-zinc-50"
               aria-label="关闭反馈浮窗"
               title="关闭"
             >
@@ -73,7 +95,7 @@ export function GlobalFeedbackWidget() {
               <button
                 type="button"
                 onClick={() => setKind("question_submission")}
-                className={`rounded-md border px-3 py-2 text-sm font-medium transition ${
+                className={`min-h-11 rounded-md border px-3 py-2 text-sm font-medium transition ${
                   kind === "question_submission"
                     ? "border-zinc-950 bg-zinc-100 text-zinc-950 dark:border-zinc-50 dark:bg-zinc-900 dark:text-zinc-50"
                     : "border-zinc-200 text-zinc-600 hover:bg-zinc-50 dark:border-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-900"
@@ -85,7 +107,7 @@ export function GlobalFeedbackWidget() {
               <button
                 type="button"
                 onClick={() => setKind("link_submission")}
-                className={`rounded-md border px-3 py-2 text-sm font-medium transition ${
+                className={`min-h-11 rounded-md border px-3 py-2 text-sm font-medium transition ${
                   kind === "link_submission"
                     ? "border-zinc-950 bg-zinc-100 text-zinc-950 dark:border-zinc-50 dark:bg-zinc-900 dark:text-zinc-50"
                     : "border-zinc-200 text-zinc-600 hover:bg-zinc-50 dark:border-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-900"
@@ -103,6 +125,8 @@ export function GlobalFeedbackWidget() {
               <textarea
                 id="global-feedback-content"
                 name="content"
+                value={content}
+                onChange={(event) => setContent(event.target.value)}
                 required
                 minLength={3}
                 maxLength={4000}
@@ -123,7 +147,7 @@ export function GlobalFeedbackWidget() {
                     : "text-zinc-500 dark:text-zinc-400"
                 }`}
               >
-                {state.message || "提交后会优先进入 P0 队列。"}
+                {state.message || "提交后会进入内容复核队列。"}
               </p>
               <SubmitButton />
             </div>
@@ -134,9 +158,11 @@ export function GlobalFeedbackWidget() {
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
+        ref={triggerRef}
         className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm font-semibold text-zinc-900 shadow-lg transition hover:border-zinc-400 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-50 dark:hover:border-zinc-600 dark:hover:bg-zinc-900"
         aria-expanded={open}
         aria-controls="global-feedback-panel"
+        aria-haspopup="dialog"
       >
         <MessageSquarePlus className="h-4 w-4" />
         提交反馈

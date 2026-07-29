@@ -1,5 +1,5 @@
 import type { VerificationLevel } from "@/lib/cookbook";
-import { verificationDescriptions, verificationLabels } from "@/lib/labels";
+import { verificationActionLabels, verificationDescriptions, verificationLabels } from "@/lib/labels";
 
 const levelClasses: Record<VerificationLevel, string> = {
   Official: "bg-blue-50 text-blue-700 ring-blue-200 dark:bg-blue-950/40 dark:text-blue-300 dark:ring-blue-900",
@@ -13,11 +13,13 @@ export function VerificationBadge({ level, compact = false }: { level: Verificat
   return (
     <span
       className={`inline-flex items-center rounded-full font-medium ring-1 ring-inset ${levelClasses[level]} ${
-        compact ? "px-2 py-0.5 text-xs" : "px-2.5 py-1 text-sm"
+        compact ? "px-2 py-0.5 text-xs" : "gap-1.5 px-2.5 py-1 text-sm"
       }`}
-      title={verificationDescriptions[level]}
+      title={`${verificationDescriptions[level]} ${verificationActionLabels[level]}。`}
+      aria-label={`${verificationLabels[level]}：${verificationActionLabels[level]}`}
     >
       {verificationLabels[level]}
+      {!compact ? <span className="font-normal opacity-85">· {verificationActionLabels[level]}</span> : null}
     </span>
   );
 }

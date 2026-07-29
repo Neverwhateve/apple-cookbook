@@ -43,7 +43,7 @@ export const feedbackQueueLockName = ".queue.lock";
 
 export function getFeedbackStorageUnavailableReason() {
   return process.env.VERCEL
-    ? "当前部署环境不提供持久化反馈存储，本次内容未保存。请稍后重试或通过项目维护渠道提交。"
+    ? "当前部署环境不提供持久化反馈存储，本次内容未保存；输入内容仍保留在此页。请稍后重试或通过项目维护渠道提交。"
     : null;
 }
 

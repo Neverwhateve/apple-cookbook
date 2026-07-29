@@ -2,169 +2,212 @@ import Link from "next/link";
 import {
   ArrowRight,
   BatteryCharging,
-  Cable,
+  BellRing,
+  CircleHelp,
+  ClipboardCheck,
   FilePlus2,
-  Folder,
   Headphones,
   Laptop,
-  Layers3,
   LockKeyhole,
-  Router,
-  ShieldCheck,
+  ShieldAlert,
   Smartphone,
   Tablet,
-  Tags
+  Wifi
 } from "lucide-react";
 import { ArticleCard } from "@/components/article-card";
+import { CaseShelf } from "@/components/case-shelf";
 import { SearchPanel } from "@/components/search-panel";
 import {
   getIndexableArticles,
   getPublishedArticles,
   getPublishedCategories,
-  getPublishedSearchDocuments,
-  getPublishedTags
+  getPublishedSearchDocuments
 } from "@/lib/cookbook";
 import { compareRecentArticles } from "@/lib/recent-sort";
-
-function AppleWatchIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 32 32"
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2.2"
-      aria-hidden="true"
-    >
-      <path d="M12.5 4.5h7l1 5h-9z" />
-      <rect x="8.75" y="9" width="14.5" height="14.5" rx="4.25" />
-      <path d="M11.5 23.5h9l-1 4h-7z" />
-      <path d="M23.5 14.25h1.75v3.5H23.5" />
-      <path d="M14.25 13.75h3.5" />
-      <path d="M14.25 18.75h3.5" />
-    </svg>
-  );
-}
-
-function VisionIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      className={className}
-      viewBox="0 0 32 32"
-      fill="none"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2.2"
-      aria-hidden="true"
-    >
-      <path d="M5 15.5c1.2-4.2 4.4-6.5 8.6-6.5h4.8c4.2 0 7.4 2.3 8.6 6.5" />
-      <path d="M5 15.5v3.25A4.25 4.25 0 0 0 9.25 23h3.1a4.2 4.2 0 0 0 3.65-2.1A4.2 4.2 0 0 0 19.65 23h3.1A4.25 4.25 0 0 0 27 18.75V15.5" />
-      <path d="M8.75 17.5h4.5" />
-      <path d="M18.75 17.5h4.5" />
-    </svg>
-  );
-}
 
 const productItems = [
   { label: "iPhone", category: "iPhone", icon: Smartphone },
   { label: "Mac", category: "Mac", icon: Laptop },
   { label: "iPad", category: "iPad", icon: Tablet },
-  { label: "Watch", category: "Apple Watch", icon: AppleWatchIcon },
-  { label: "Vision", category: "Vision Pro", icon: VisionIcon },
+  { label: "Apple Watch", category: "Apple Watch", icon: BellRing },
   { label: "AirPods", category: "AirPods", icon: Headphones }
 ];
 
-const topicGroups = [
+const symptomShortcuts = [
+  { label: "设备发热", query: "我的 iPhone 很烫", icon: BatteryCharging },
+  { label: "电池不耐用", query: "电池耗电很快", icon: BatteryCharging },
+  { label: "无法连接", query: "无法连接", icon: Wifi },
+  { label: "收不到通知", query: "收不到通知", icon: BellRing },
+  { label: "Mac 很慢", query: "我的 Mac 很慢", icon: Laptop },
+  { label: "账户或密码", query: "忘记密码 无法登录", icon: LockKeyhole }
+];
+
+const workingModes = [
   {
-    name: "家庭共享",
-    description: "屏幕使用时间、购买前询问和儿童账号",
-    href: "/categories/Family%20Sharing",
-    match: ["Family Sharing"],
-    facet: "category" as const,
-    icon: LockKeyhole
+    title: "解决一个问题",
+    description: "从顾客原话开始，找到下一个安全动作。",
+    href: "#site-search",
+    icon: CircleHelp
   },
   {
-    name: "网络与热点",
-    description: "Wi-Fi 无法联网、加入网络和个人热点",
-    href: "/categories/Networking",
-    match: ["Networking"],
-    facet: "category" as const,
-    icon: Router
+    title: "判断是否需要服务",
+    description: "先识别安全、硬件、账户与数据风险。",
+    href: "/service",
+    icon: ShieldAlert
   },
   {
-    name: "连续互通",
-    description: "隔空投送、设备发现和跨设备连接",
-    href: "/categories/%E8%BF%9E%E7%BB%AD%E4%BA%92%E9%80%9A",
-    match: ["连续互通"],
-    facet: "category" as const,
-    icon: Cable
+    title: "设置新设备",
+    description: "迁移、更新、配对和开始使用。",
+    href: "/paths#setup",
+    icon: ClipboardCheck
   },
   {
-    name: "电池问题",
-    description: "耗电、发热、电池健康和续航异常",
-    href: "/tags/%E7%94%B5%E6%B1%A0",
-    match: ["电池"],
-    facet: "tag" as const,
-    icon: BatteryCharging
+    title: "提交新问题",
+    description: "没有确定答案时，留下真实的顾客表述。",
+    href: "/feedback",
+    icon: FilePlus2
   }
 ];
 
 export default function HomePage() {
   const articles = getPublishedArticles();
   const categories = getPublishedCategories(articles);
-  const tags = getPublishedTags(articles);
   const publishedArticles = getIndexableArticles(articles);
   const searchDocuments = getPublishedSearchDocuments(articles);
   const availableCategories = new Set(categories.filter((category) => category.items.length > 0).map((category) => category.name));
-  const recentlyUpdated = [...publishedArticles].sort(compareRecentArticles).slice(0, 6);
-  const popular = publishedArticles
-    .filter((article) => article.popular)
-    .sort(compareRecentArticles)
-    .slice(0, 6);
-  const quickActions = [
-    {
-      title: "查看全部分类",
-      href: "/categories",
-      icon: Folder
-    },
-    {
-      title: "浏览热门标签",
-      href: "/tags",
-      icon: Tags
-    },
-    {
-      title: "提交新问题",
-      href: "/feedback",
-      icon: FilePlus2
-    }
-  ];
-  const topicCounts = topicGroups.map((topic) => ({
-    ...topic,
-    count: publishedArticles.filter((article) =>
-      topic.facet === "category" ? topic.match.includes(article.category) : article.tags.some((tag) => topic.match.includes(tag))
-    ).length
-  }));
+  const featuredArticles = publishedArticles.filter((article) => article.popular).sort(compareRecentArticles).slice(0, 3);
+  const priorityArticles = (featuredArticles.length ? featuredArticles : [...publishedArticles].sort(compareRecentArticles)).slice(0, 3);
 
   return (
     <main className="bg-zinc-50 dark:bg-zinc-950">
       <section className="bg-white dark:bg-zinc-950">
-        <div className="mx-auto max-w-6xl px-4 pb-10 pt-12 text-center sm:px-6 sm:pb-14 sm:pt-20">
-          <h1 className="text-4xl font-semibold leading-tight tracking-normal text-zinc-950 dark:text-zinc-50 sm:text-6xl">
-            用你遇到的现象，找到解决办法
-          </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-zinc-700 dark:text-zinc-300 sm:text-xl">
-            搜索症状、错误提示、设备或功能名称。Apple 官方步骤优先，社区经验会明确标注。
-          </p>
+        <div className="mx-auto max-w-6xl px-4 pb-10 pt-10 sm:px-6 sm:pb-14 sm:pt-16">
+          <div className="mx-auto max-w-4xl text-center">
+            <p className="text-sm font-semibold tracking-wide text-blue-700 dark:text-blue-300">Apple Cookbook · 现场问题处理</p>
+            <h1 className="mt-3 text-4xl font-semibold leading-tight tracking-normal text-zinc-950 dark:text-zinc-50 sm:text-6xl">
+              顾客在等。先找到下一步。
+            </h1>
+            <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-zinc-700 dark:text-zinc-300 sm:text-xl">
+              输入顾客说的话、看到的提示或设备现象。Cookbook 会先给出最可能的安全路径，再带你完成处理。
+            </p>
+          </div>
 
           <div id="site-search" className="mx-auto mt-8 max-w-4xl scroll-mt-24 text-left">
             <SearchPanel articles={searchDocuments} />
           </div>
 
-          <h2 className="mt-12 text-lg font-semibold text-zinc-950 dark:text-zinc-50">按设备浏览</h2>
-          <nav aria-label="产品支持" className="mx-auto mt-6 grid max-w-4xl grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3">
+          <nav aria-label="现场快捷入口" className="mx-auto mt-5 grid max-w-4xl grid-cols-2 gap-2 sm:grid-cols-3">
+            {symptomShortcuts.map((shortcut) => {
+              const Icon = shortcut.icon;
+
+              return (
+                <Link
+                  key={shortcut.label}
+                  href={`/?q=${encodeURIComponent(shortcut.query)}#site-search`}
+                  className="group inline-flex min-h-11 items-center gap-2 rounded-xl border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm font-medium text-zinc-700 transition hover:border-zinc-300 hover:bg-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:border-zinc-700 dark:hover:bg-zinc-800"
+                >
+                  <Icon className="h-4 w-4 flex-none text-zinc-500 transition group-hover:text-blue-700 dark:group-hover:text-blue-300" aria-hidden="true" />
+                  {shortcut.label}
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
+      </section>
+
+      <section aria-labelledby="mode-title" className="border-y border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950">
+        <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12">
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <p className="text-sm font-semibold text-blue-700 dark:text-blue-300">选择你的工作方式</p>
+              <h2 id="mode-title" className="mt-1 text-3xl font-semibold tracking-normal text-zinc-950 dark:text-zinc-50">
+                先处理，再阅读
+              </h2>
+            </div>
+            <p className="max-w-md text-sm leading-6 text-zinc-600 dark:text-zinc-400">不同问题有不同边界。先进入正确的工作方式，避免随机尝试。</p>
+          </div>
+          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {workingModes.map((mode) => {
+              const Icon = mode.icon;
+
+              return (
+                <Link
+                  key={mode.title}
+                  href={mode.href}
+                  className="group rounded-2xl bg-white p-5 transition hover:bg-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:bg-zinc-900 dark:hover:bg-zinc-800"
+                >
+                  <Icon className="h-5 w-5 text-blue-700 dark:text-blue-300" aria-hidden="true" />
+                  <h3 className="mt-5 text-base font-semibold text-zinc-950 dark:text-zinc-50">{mode.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">{mode.description}</p>
+                  <span className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-blue-700 dark:text-blue-300">
+                    开始
+                    <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" aria-hidden="true" />
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <CaseShelf />
+
+      <section aria-labelledby="priority-title" className="bg-white dark:bg-zinc-950">
+        <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <p className="text-sm font-semibold text-blue-700 dark:text-blue-300">从常见案例开始</p>
+              <h2 id="priority-title" className="mt-1 text-3xl font-semibold tracking-normal text-zinc-950 dark:text-zinc-50">
+                常用现场路径
+              </h2>
+            </div>
+            <Link href="/categories" className="inline-flex min-h-11 items-center gap-1 text-sm font-medium text-blue-700 hover:underline dark:text-blue-300">
+              按设备浏览
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
+            </Link>
+          </div>
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
+            {priorityArticles.map((article) => (
+              <ArticleCard key={article.route} article={article} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="service-title" className="border-y border-zinc-200 bg-amber-50/70 dark:border-zinc-800 dark:bg-amber-950/10">
+        <div className="mx-auto grid max-w-6xl gap-6 px-4 py-10 sm:px-6 sm:py-12 lg:grid-cols-[1fr_auto] lg:items-center">
+          <div className="flex gap-4">
+            <span className="inline-flex h-11 w-11 flex-none items-center justify-center rounded-full bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-200">
+              <ShieldAlert className="h-5 w-5" aria-hidden="true" />
+            </span>
+            <div>
+              <p className="text-sm font-semibold text-amber-800 dark:text-amber-200">需要服务判断？</p>
+              <h2 id="service-title" className="mt-1 text-2xl font-semibold text-zinc-950 dark:text-zinc-50">先识别红灯，而不是继续试错。</h2>
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-zinc-700 dark:text-zinc-300">
+                出现安全警告、无法稳定使用、账户或数据风险时，先从最接近的案例进入服务与进一步支持路径。
+              </p>
+            </div>
+          </div>
+          <Link
+            href="/service"
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-zinc-950 px-5 text-sm font-medium text-white transition hover:bg-zinc-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:bg-zinc-50 dark:text-zinc-950 dark:hover:bg-zinc-200 dark:focus-visible:ring-offset-zinc-950"
+          >
+            开始服务判断
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
+        </div>
+      </section>
+
+      <section aria-labelledby="products-title" className="bg-white dark:bg-zinc-950">
+        <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
+          <div className="flex flex-wrap items-end justify-between gap-3">
+            <div>
+              <p className="text-sm font-semibold text-blue-700 dark:text-blue-300">需要按设备缩小范围时</p>
+              <h2 id="products-title" className="mt-1 text-3xl font-semibold tracking-normal text-zinc-950 dark:text-zinc-50">浏览产品</h2>
+            </div>
+            <p className="text-sm text-zinc-600 dark:text-zinc-400">设备是筛选条件，不是现场处理的第一步。</p>
+          </div>
+          <nav aria-label="产品支持" className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
             {productItems.filter((product) => availableCategories.has(product.category)).map((product) => {
               const Icon = product.icon;
 
@@ -172,145 +215,19 @@ export default function HomePage() {
                 <Link
                   key={product.category}
                   href={`/categories/${encodeURIComponent(product.category)}`}
-                  className="group flex flex-col items-center gap-3 text-sm font-medium text-zinc-800 transition hover:text-zinc-950 dark:text-zinc-200 dark:hover:text-white"
+                  className="group flex min-h-28 flex-col justify-between rounded-2xl bg-zinc-50 p-4 transition hover:bg-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:bg-zinc-900 dark:hover:bg-zinc-800"
                 >
-                  <span className="inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-zinc-100 text-zinc-700 transition group-hover:bg-zinc-200 dark:bg-zinc-900 dark:text-zinc-200 dark:group-hover:bg-zinc-800">
-                    <Icon className="h-8 w-8" />
-                  </span>
-                  <span>{product.label}</span>
+                  <Icon className="h-6 w-6 text-zinc-600 transition group-hover:text-blue-700 dark:text-zinc-300 dark:group-hover:text-blue-300" aria-hidden="true" />
+                  <span className="text-sm font-semibold text-zinc-950 dark:text-zinc-50">{product.label}</span>
                 </Link>
               );
             })}
           </nav>
-
-          <div className="mx-auto mt-10 grid max-w-3xl gap-3 text-left sm:grid-cols-3">
-            {quickActions.map((action) => {
-              const Icon = action.icon;
-
-              return (
-                <Link
-                  key={action.title}
-                  href={action.href}
-                  className="group flex items-center gap-3 rounded-lg bg-zinc-50 px-4 py-4 text-sm font-medium text-zinc-800 transition hover:bg-zinc-100 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
-                >
-                  <Icon className="h-5 w-5 flex-none text-zinc-500 transition group-hover:text-zinc-950 dark:group-hover:text-white" />
-                  <span>{action.title}</span>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section aria-labelledby="topics-title" className="border-t border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950">
-        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
-          <h2 id="topics-title" className="text-center text-3xl font-semibold tracking-normal text-zinc-950 dark:text-zinc-50">
-            按问题类型浏览
-          </h2>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {topicCounts.map((topic) => {
-              const Icon = topic.icon;
-
-              return (
-                <Link
-                  key={topic.name}
-                  href={topic.href}
-                  className="group rounded-lg bg-white p-5 transition hover:bg-zinc-100 dark:bg-zinc-900 dark:hover:bg-zinc-800"
-                >
-                  <Icon className="h-6 w-6 text-zinc-500 transition group-hover:text-zinc-950 dark:group-hover:text-white" />
-                  <h3 className="mt-4 text-base font-semibold text-zinc-950 dark:text-zinc-50">{topic.name}</h3>
-                  <p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">{topic.description}</p>
-                  <p className="mt-4 text-sm text-zinc-500">{topic.count} 篇文章</p>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section aria-labelledby="popular-title" className="bg-white dark:bg-zinc-950">
-        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
-          <div className="flex items-center justify-between gap-4">
-            <h2 id="popular-title" className="flex items-center gap-2 text-3xl font-semibold tracking-normal text-zinc-950 dark:text-zinc-50">
-              <Layers3 className="h-6 w-6" />
-              常见问题
-            </h2>
-            <Link href="/categories" className="hidden text-sm text-zinc-500 hover:text-zinc-950 dark:hover:text-zinc-50 sm:inline-flex">
-              查看全部
+          <div className="mt-6 flex justify-end">
+            <Link href="/feedback" className="inline-flex min-h-11 items-center gap-2 text-sm font-medium text-zinc-600 hover:text-zinc-950 dark:text-zinc-400 dark:hover:text-zinc-50">
+              没有找到确定答案？提交真实顾客问题
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
-          </div>
-          <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {popular.map((article) => (
-              <ArticleCard key={article.route} article={article} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section aria-labelledby="recent-title" className="border-t border-zinc-200 bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950">
-        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
-          <div className="flex items-center justify-between gap-4">
-            <h2 id="recent-title" className="flex items-center gap-2 text-3xl font-semibold tracking-normal text-zinc-950 dark:text-zinc-50">
-              <ShieldCheck className="h-6 w-6" />
-              最近更新
-            </h2>
-            <Link href="/tags" className="hidden text-sm text-zinc-500 hover:text-zinc-950 dark:hover:text-zinc-50 sm:inline-flex">
-              浏览标签
-            </Link>
-          </div>
-          <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {recentlyUpdated.map((article) => (
-              <ArticleCard key={article.route} article={article} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section aria-labelledby="explore-title" className="bg-white dark:bg-zinc-950">
-        <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
-          <h2 id="explore-title" className="text-center text-3xl font-semibold tracking-normal text-zinc-950 dark:text-zinc-50">
-            探索更多内容
-          </h2>
-          <div className="mt-8 grid gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-            <div className="rounded-lg bg-zinc-50 p-6 dark:bg-zinc-900">
-              <h3 className="flex items-center gap-2 text-lg font-semibold text-zinc-950 dark:text-zinc-50">
-                <Tags className="h-5 w-5" />
-                热门标签
-              </h3>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {tags.slice(0, 16).map((tag) => (
-                  <Link
-                    key={tag}
-                    href={`/tags/${encodeURIComponent(tag)}`}
-                    className="rounded-full bg-white px-3 py-1.5 text-xs text-zinc-700 transition hover:bg-zinc-100 dark:bg-zinc-950 dark:text-zinc-300 dark:hover:bg-zinc-800"
-                  >
-                    {tag}
-                  </Link>
-                ))}
-              </div>
-            </div>
-
-            <div className="rounded-lg bg-zinc-50 p-6 dark:bg-zinc-900">
-              <h3 className="flex items-center gap-2 text-lg font-semibold text-zinc-950 dark:text-zinc-50">
-                <Folder className="h-5 w-5" />
-                全部分类
-              </h3>
-              <div className="mt-4 grid gap-2 sm:grid-cols-2">
-                {categories.slice(0, 8).map((category) => (
-                  <Link
-                    key={category.name}
-                    href={`/categories/${encodeURIComponent(category.name)}`}
-                    className="group flex items-center justify-between rounded-md bg-white px-3 py-2 text-sm transition hover:bg-zinc-100 dark:bg-zinc-950 dark:hover:bg-zinc-800"
-                  >
-                    <span>{category.name}</span>
-                    <span className="inline-flex items-center gap-1 text-zinc-500">
-                      {category.items.length}
-                      <ArrowRight className="h-3.5 w-3.5 opacity-0 transition group-hover:opacity-100" />
-                    </span>
-                  </Link>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
       </section>

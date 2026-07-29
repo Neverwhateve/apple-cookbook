@@ -1,7 +1,7 @@
 "use client";
 
 import { ThumbsUp } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { VerificationLevel } from "@/lib/article-schema";
 import { rankSolutionsByPractice } from "@/lib/solution-ranking";
 
@@ -53,13 +53,19 @@ export function SolutionVotePanel({
 }) {
   const [counts, setCounts] = useState<Record<string, number>>({});
   const [countsStatus, setCountsStatus] = useState<"loading" | "ready" | "error">("loading");
+  const [votingAvailable, setVotingAvailable] = useState(false);
   const [votedSolutions, setVotedSolutions] = useState<Set<string>>(new Set());
   const [submittingId, setSubmittingId] = useState<string>();
   const [message, setMessage] = useState("");
+  const submissionLock = useRef(false);
   const rankedSolutions = rankSolutionsByPractice(solutions, counts);
 
   useEffect(() => {
     setVotedSolutions(getLocallyVotedSolutions());
+    setCountsStatus("loading");
+    setVotingAvailable(false);
+    setMessage("");
+    submissionLock.current = false;
 
     const controller = new AbortController();
     fetch(`/api/solution-votes?articleId=${encodeURIComponent(articleId)}`, {
@@ -68,9 +74,13 @@ export function SolutionVotePanel({
     })
       .then(async (response) => {
         if (!response.ok) throw new Error("count request failed");
-        const data = (await response.json()) as { counts?: Record<string, number> };
+        const data = (await response.json()) as { counts?: Record<string, number>; available?: boolean; reason?: string };
         setCounts(data.counts ?? {});
+        setVotingAvailable(data.available !== false);
         setCountsStatus("ready");
+        if (data.available === false) {
+          setMessage(data.reason ?? "当前站点暂不支持记录实践反馈。");
+        }
       })
       .catch((error: unknown) => {
         if (error instanceof DOMException && error.name === "AbortError") return;
@@ -83,8 +93,9 @@ export function SolutionVotePanel({
 
   async function recordVote(solutionId: string) {
     const key = `${articleId}/${solutionId}`;
-    if (votedSolutions.has(key) || submittingId) return;
+    if (votedSolutions.has(key) || submittingId || submissionLock.current || countsStatus !== "ready" || !votingAvailable) return;
 
+    submissionLock.current = true;
     setSubmittingId(solutionId);
     setMessage("");
 
@@ -108,6 +119,7 @@ export function SolutionVotePanel({
     } catch (error) {
       setMessage(error instanceof Error && error.message.includes("暂时") ? error.message : "暂时无法记录，请稍后重试。");
     } finally {
+      submissionLock.current = false;
       setSubmittingId(undefined);
     }
   }
@@ -126,6 +138,7 @@ export function SolutionVotePanel({
           const key = `${articleId}/${solution.id}`;
           const voted = votedSolutions.has(key);
           const count = counts[solution.id] ?? 0;
+          const canVote = countsStatus === "ready" && votingAvailable && !voted && !submittingId;
 
           return (
             <div
@@ -139,23 +152,39 @@ export function SolutionVotePanel({
                 <h3 className="mt-1 text-sm font-semibold leading-6 text-zinc-950 dark:text-zinc-50">{solution.title}</h3>
                 <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
                   {countsStatus === "loading"
-                    ? "正在读取实践反馈"
+                    ? "正在确认是否可记录实践反馈"
                     : countsStatus === "error"
                       ? "实践人数暂不可用"
-                      : count > 0
+                      : !votingAvailable
+                        ? "当前站点暂不支持记录实践反馈"
+                        : count > 0
                         ? `${count} 人实践有效`
                         : "还没有同事实践反馈"}
                 </p>
               </div>
               <button
                 type="button"
-                disabled={voted || Boolean(submittingId)}
+                disabled={!canVote}
                 aria-pressed={voted}
                 onClick={() => recordVote(solution.id)}
-                className="inline-flex min-h-10 flex-none items-center justify-center gap-2 rounded-full border border-zinc-300 px-4 text-sm font-medium text-zinc-800 transition hover:border-blue-500 hover:text-blue-600 disabled:cursor-default disabled:border-emerald-300 disabled:bg-emerald-50 disabled:text-emerald-700 dark:border-zinc-700 dark:text-zinc-200 dark:disabled:border-emerald-900 dark:disabled:bg-emerald-950/30 dark:disabled:text-emerald-300"
+                className={`inline-flex min-h-11 flex-none items-center justify-center gap-2 rounded-full border border-zinc-300 px-4 text-sm font-medium text-zinc-800 transition hover:border-blue-500 hover:text-blue-600 disabled:cursor-not-allowed disabled:opacity-60 dark:border-zinc-700 dark:text-zinc-200 ${
+                  voted
+                    ? "border-emerald-300 bg-emerald-50 text-emerald-700 dark:border-emerald-900 dark:bg-emerald-950/30 dark:text-emerald-300"
+                    : ""
+                }`}
               >
                 <ThumbsUp aria-hidden="true" className="h-4 w-4" />
-                {submittingId === solution.id ? "记录中" : voted ? "已实践有效" : "我也实践有效"}
+                {submittingId === solution.id
+                  ? "记录中"
+                  : voted
+                    ? "已实践有效"
+                    : countsStatus === "loading"
+                      ? "确认中"
+                      : countsStatus === "error"
+                        ? "暂不可用"
+                        : !votingAvailable
+                          ? "当前不可记录"
+                          : "我也实践有效"}
               </button>
             </div>
           );

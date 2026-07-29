@@ -1,7 +1,7 @@
 "use client";
 
 import { SendHorizonal } from "lucide-react";
-import { useActionState, useId, useState } from "react";
+import { useActionState, useEffect, useId, useState } from "react";
 import { useFormStatus } from "react-dom";
 import { submitFeedback, type FeedbackState } from "@/app/feedback/actions";
 
@@ -28,12 +28,20 @@ function SubmitButton() {
 export function FeedbackForm({ initialTitle = "" }: { initialTitle?: string }) {
   const contentId = useId();
   const [kind, setKind] = useState<"link_submission" | "question_submission">("question_submission");
+  // A no-results search passes its original wording as initialTitle. Keep that
+  // wording in the visible field too, so the "submit this problem" path does
+  // not make someone type their query a second time.
+  const [content, setContent] = useState(() => initialTitle.slice(0, 4000));
   const [state, formAction] = useActionState(submitFeedback, initialState);
   const contentLabel = kind === "link_submission" ? "链接" : "问题";
   const placeholder =
     kind === "link_submission"
       ? "粘贴 Apple 支持、社区讨论、新闻、论坛或其他参考链接。"
       : "写下遇到的问题、顾客问法，或你觉得知识库缺少的主题。";
+
+  useEffect(() => {
+    if (state.ok) setContent("");
+  }, [state.id, state.ok]);
 
   return (
     <form action={formAction} className="space-y-5 rounded-lg border border-zinc-200 bg-white p-5 shadow-soft dark:border-zinc-800 dark:bg-zinc-950">
@@ -53,7 +61,7 @@ export function FeedbackForm({ initialTitle = "" }: { initialTitle?: string }) {
             aria-pressed={kind === "question_submission"}
           >
             <span className="block text-sm font-semibold text-zinc-950 dark:text-zinc-50">问题</span>
-            <span className="mt-1 block text-sm leading-5 text-zinc-600 dark:text-zinc-400">一句话也可以，我之后分析整理。</span>
+            <span className="mt-1 block text-sm leading-5 text-zinc-600 dark:text-zinc-400">一句话也可以，后续会查证并整理。</span>
           </button>
           <button
             type="button"
@@ -66,7 +74,7 @@ export function FeedbackForm({ initialTitle = "" }: { initialTitle?: string }) {
             aria-pressed={kind === "link_submission"}
           >
             <span className="block text-sm font-semibold text-zinc-950 dark:text-zinc-50">链接</span>
-            <span className="mt-1 block text-sm leading-5 text-zinc-600 dark:text-zinc-400">发来源链接，我之后分析整理。</span>
+            <span className="mt-1 block text-sm leading-5 text-zinc-600 dark:text-zinc-400">发来源链接，后续会查证并整理。</span>
           </button>
         </div>
       </div>
@@ -75,9 +83,16 @@ export function FeedbackForm({ initialTitle = "" }: { initialTitle?: string }) {
         <label htmlFor={contentId} className="text-sm font-medium text-zinc-950 dark:text-zinc-50">
           {contentLabel}
         </label>
+        {initialTitle && kind === "question_submission" ? (
+          <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+            已带入未找到的搜索内容；可以直接提交，或补充设备、系统版本和屏幕提示。
+          </p>
+        ) : null}
         <textarea
           id={contentId}
           name="content"
+          value={content}
+          onChange={(event) => setContent(event.target.value)}
           required
           minLength={3}
           maxLength={4000}
@@ -98,7 +113,7 @@ export function FeedbackForm({ initialTitle = "" }: { initialTitle?: string }) {
               : "text-zinc-500 dark:text-zinc-400"
           }`}
         >
-          {state.message || "提交后会加入待办事项，由我后续分析整理。"}
+          {state.message || "提交后会进入内容复核队列；原文会保留，方便后续查证。"}
         </p>
         <SubmitButton />
       </div>

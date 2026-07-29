@@ -2,9 +2,9 @@ import type { MetadataRoute } from "next";
 import {
   getIndexableArticles,
   getPublishedArticles,
-  getPublishedCategories,
-  getPublishedTags
+  getPublishedCategories
 } from "@/lib/cookbook";
+import { getTagTopics } from "@/lib/tag-presentation";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://cookbook.wuxiela.fun";
 
@@ -34,8 +34,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "weekly" as const,
       priority: 0.7
     })),
-    ...getPublishedTags(publicArticles).map((tag) => ({
-      url: absoluteUrl(`/tags/${encodeURIComponent(tag)}`),
+    ...getTagTopics(publicArticles).map((topic) => ({
+      url: absoluteUrl(`/tags/${encodeURIComponent(topic.slug)}`),
       lastModified: latestModified,
       changeFrequency: "weekly" as const,
       priority: 0.5

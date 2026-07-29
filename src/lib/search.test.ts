@@ -227,6 +227,48 @@ describe("searchDocuments", () => {
     assert.deepEqual(searchDocuments(pairingOnly, "AirPods盒子充不了电"), []);
   });
 
+  it("ranks a specific AirPods single-side audio symptom above a generic pairing article", () => {
+    const oneSideAudio = makeDocument({
+      id: "airpods-one-side-audio",
+      title: "AirPods 只有一只耳机有声音或左右音量不一样",
+      summary: "先确认单侧 AirPod 的充电状态，再测试声音和左右平衡。",
+      symptoms: ["一边 AirPod 没有声音", "左右音量不一样"],
+      keywords: ["AirPods", "声音", "音量"],
+      devices: ["AirPods"],
+      category: "AirPods"
+    });
+    const pairing = documents.find((document) => document.id === "airpods-pairing");
+
+    assert.ok(pairing);
+    assert.equal(searchDocuments([pairing, oneSideAudio], "AirPods 只有一边有声音")[0]?.document.id, "airpods-one-side-audio");
+  });
+
+  it("does not treat an incidental iPhone mention as an iPhone troubleshooting result", () => {
+    const watchPairing = makeDocument({
+      id: "watch-pairing",
+      title: "Apple Watch 无法与 iPhone 配对",
+      summary: "将 Apple Watch 与 iPhone 配对时出现问题。",
+      devices: ["Apple Watch"],
+      category: "Apple Watch"
+    });
+
+    assert.deepEqual(searchDocuments([watchPairing], "我的 iPhone 运行很慢"), []);
+  });
+
+  it("does not substitute a generic Mac article when the requested symptom is slow performance", () => {
+    const macStorage = makeDocument({
+      id: "mac-storage",
+      title: "Mac 系统数据很大",
+      summary: "检查 Mac 储存空间和可清理的内容。",
+      symptoms: ["Mac 储存空间快满"],
+      keywords: ["系统数据", "储存空间"],
+      devices: ["Mac"],
+      category: "Mac"
+    });
+
+    assert.deepEqual(searchDocuments([macStorage], "Mac 很慢"), []);
+  });
+
   it("does not substitute usage reporting for a Screen Time limits failure", () => {
     const usageReporting = makeDocument({
       id: "screen-time-usage",
