@@ -9,9 +9,9 @@ export const metadata = {
 
 export default function PathsPage() {
   return (
-    <main className="bg-zinc-50 dark:bg-zinc-950">
-      <section className="border-b border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-950">
-        <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
+    <main className="min-h-[calc(100vh-4rem)] bg-[#f5f5f7] px-3 py-3 dark:bg-zinc-950 sm:px-6 sm:py-6">
+      <section className="mx-auto max-w-6xl rounded-[24px] bg-white shadow-[0_8px_28px_rgba(0,0,0,0.035)] dark:bg-zinc-900">
+        <div className="px-5 py-9 sm:px-8 sm:py-12">
           <p className="text-sm font-semibold tracking-wide text-blue-700 dark:text-blue-300">现场入口 · Retail Paths</p>
           <h1 className="mt-3 text-4xl font-semibold tracking-normal text-zinc-950 dark:text-zinc-50 sm:text-5xl">
             先选顾客现在要完成的事。
@@ -29,7 +29,7 @@ export default function PathsPage() {
         </div>
       </section>
 
-      <div className="mx-auto max-w-6xl space-y-12 px-4 py-10 sm:px-6 sm:py-14">
+      <div className="mx-auto max-w-6xl space-y-10 py-8 sm:py-10">
         {retailPathGroups.map((group) => (
           <section key={group.id} id={group.id} className="scroll-mt-24" aria-labelledby={`${group.id}-title`}>
             <div className="flex flex-wrap items-end justify-between gap-3">
@@ -43,14 +43,14 @@ export default function PathsPage() {
               </div>
               <p className="max-w-xl text-sm leading-6 text-zinc-600 dark:text-zinc-400">{group.description}</p>
             </div>
-            <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {group.paths.map((path) => (
                 <Link
                   key={path.id}
                   href={retailPathHref(path)}
                   className={group.id === "service"
-                    ? "group rounded-2xl border border-amber-200 bg-amber-50/70 p-5 transition hover:border-amber-300 hover:bg-amber-100/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:border-amber-900/70 dark:bg-amber-950/15 dark:hover:bg-amber-950/30"
-                    : "group rounded-2xl bg-white p-5 transition hover:bg-zinc-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:bg-zinc-900 dark:hover:bg-zinc-800"}
+                    ? "group rounded-[20px] bg-amber-50 p-5 shadow-[0_5px_18px_rgba(146,64,14,0.06)] transition hover:-translate-y-0.5 hover:bg-amber-100/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:bg-amber-950/25 dark:hover:bg-amber-950/40"
+                    : "group rounded-[20px] bg-white p-5 shadow-[0_5px_18px_rgba(0,0,0,0.035)] transition hover:-translate-y-0.5 hover:bg-zinc-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:bg-zinc-900 dark:hover:bg-zinc-800"}
                 >
                   {group.id === "service" ? <ShieldAlert className="h-5 w-5 text-amber-800 dark:text-amber-200" aria-hidden="true" /> : null}
                   <h3 className={group.id === "service" ? "mt-4 text-base font-semibold text-zinc-950 dark:text-zinc-50" : "text-base font-semibold text-zinc-950 dark:text-zinc-50"}>
