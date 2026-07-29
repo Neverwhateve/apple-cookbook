@@ -47,12 +47,21 @@ export async function GET(request: NextRequest) {
     return noStoreJson({ error: "Article or voteable solutions not found." }, 404);
   }
 
+  const storageUnavailableReason = getSolutionVoteStorageUnavailableReason();
+  if (storageUnavailableReason) {
+    return noStoreJson({
+      counts: addShareAuthorBaselines({}, solutions),
+      available: false,
+      reason: storageUnavailableReason
+    });
+  }
+
   try {
     const counts = await getSolutionVoteCounts(
       articleId,
       solutions.map((solution) => solution.id)
     );
-    return noStoreJson({ counts: addShareAuthorBaselines(counts, solutions) });
+    return noStoreJson({ counts: addShareAuthorBaselines(counts, solutions), available: true });
   } catch (error) {
     console.error("Solution vote counts could not be read.", { error });
     return noStoreJson({ error: "暂时无法读取实践反馈。" }, 500);

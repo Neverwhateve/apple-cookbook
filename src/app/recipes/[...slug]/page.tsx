@@ -7,8 +7,13 @@ import { ArrowRight, ExternalLink, ListChecks } from "lucide-react";
 import { ArticleActions } from "@/components/article-actions";
 import { ArticleFeedbackWidget } from "@/components/article-feedback-widget";
 import { ArticleCard } from "@/components/article-card";
+import { CustomerMomentCard } from "@/components/customer-moment";
+import { ArticleQuickStart } from "@/components/article-quick-start";
+import { ArticleSymptomMatch } from "@/components/article-symptom-match";
+import { SearchResultBackLink } from "@/components/search-result-back-link";
 import { SolutionVotePanel } from "@/components/solution-vote-panel";
 import { VerificationBadge } from "@/components/verification-badge";
+import { formatArticleBody } from "@/lib/article-body";
 import type { ArticleSource } from "@/lib/article-schema";
 import { buildArticleStructuredData, serializeJsonLd } from "@/lib/article-structured-data";
 import {
@@ -18,17 +23,10 @@ import {
   isIndexableArticle
 } from "@/lib/cookbook";
 import { difficultyLabels, verificationDescriptions } from "@/lib/labels";
-
-function formatArticleBody(body: string) {
-  const firstSectionIndex = body.search(/^##\s+症状\s*$/m);
-  const content = firstSectionIndex >= 0 ? body.slice(firstSectionIndex) : body;
-  const endMatterIndex = content.search(/^##\s+(相关问题|标签|元信息)\s*$/m);
-  const articleContent = endMatterIndex >= 0 ? content.slice(0, endMatterIndex).trim() : content;
-
-  return articleContent
-    .replace(/^##\s+零售排查流程\s*$/m, "## 排查流程")
-    .replace(/^##\s+升级处理\s*$/m, "## 如果仍未解决");
-}
+import { categoryPresentation } from "@/lib/category-presentation";
+import { getCustomerMoment } from "@/lib/customer-moments";
+import { getSolutionVoteStorageUnavailableReason } from "@/lib/solution-votes";
+import { getArticleTagTopics } from "@/lib/tag-presentation";
 
 function getLeadParagraph(body: string) {
   return body
@@ -45,6 +43,10 @@ function getTextFromChildren(children: ReactNode): string {
 }
 
 function headingId(text: string) {
+  // Retain existing shared links that pointed at the formerly generic
+  // "排查流程" section while making its trust label explicit in the UI.
+  if (text === "零售排查流程（同事实践）") return "排查流程";
+
   return (
     text
       .trim()
@@ -145,14 +147,24 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
   const articleBody = formatArticleBody(article.body);
   const lead = article.summary || getLeadParagraph(article.body) || article.excerpt;
   const headings = getArticleHeadings(articleBody);
+  const officialStepsHeading = headings.find((heading) => heading.title === "Apple 官方方案");
+  const recommendedSolution = article.solutions.find(
+    (solution) => solution.kind === "recommended" && solution.steps.length > 0
+  );
+  const escalationSteps = article.solutions
+    .filter((solution) => solution.kind === "escalation")
+    .flatMap((solution) => solution.steps);
   const primaryRelated = related.slice(0, 3);
   const officialSources = article.sources.filter((source) => source.official);
   const communitySources = article.sources.filter((source) => !source.official);
   const primaryOfficialSource = officialSources[0];
+  const category = categoryPresentation(article.category);
+  const customerMoment = getCustomerMoment(article.tags);
   const structuredData = buildArticleStructuredData(article);
   const voteableSolutions = article.solutions
     .filter((solution) => solution.kind !== "escalation" && solution.steps.length > 0)
     .map(({ id, title, verificationLevel }) => ({ id, title, verificationLevel }));
+  const canCollectPracticeFeedback = !getSolutionVoteStorageUnavailableReason() && voteableSolutions.length > 1;
 
   return (
     <main className="bg-white px-4 py-8 dark:bg-zinc-950 sm:px-6 sm:py-12">
@@ -164,18 +176,21 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
         />
       ) : null}
       <article className="mx-auto max-w-[692px]">
-        <nav aria-label="文章路径" className="mb-10 flex flex-wrap items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400">
-          <Link href="/" className="hover:text-zinc-950 dark:hover:text-zinc-50">
-            支持
-          </Link>
-          <span aria-hidden="true">/</span>
-          <Link
-            href={`/categories/${encodeURIComponent(article.category)}`}
-            className="hover:text-zinc-950 dark:hover:text-zinc-50"
-          >
-            {article.category}
-          </Link>
-        </nav>
+        <div className="mb-10">
+          <nav aria-label="文章路径" className="flex flex-wrap items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400">
+            <Link href="/" className="inline-flex min-h-11 items-center hover:text-zinc-950 dark:hover:text-zinc-50">
+              支持
+            </Link>
+            <span aria-hidden="true">/</span>
+            <Link
+              href={`/categories/${encodeURIComponent(article.category)}`}
+              className="inline-flex min-h-11 items-center hover:text-zinc-950 dark:hover:text-zinc-50"
+            >
+              {category.label}
+            </Link>
+          </nav>
+          <SearchResultBackLink />
+        </div>
 
         <h1 className="text-4xl font-semibold leading-tight tracking-normal text-zinc-950 dark:text-zinc-50 sm:text-5xl">
           {article.title}
@@ -186,9 +201,24 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
         <div className="mt-6 flex flex-wrap items-center gap-3">
           <VerificationBadge level={article.verification} />
           <span className="text-sm text-zinc-500 dark:text-zinc-400">{difficultyLabels[article.difficulty]}难度</span>
+          {article.estimatedTime ? <span className="text-sm text-zinc-500 dark:text-zinc-400">预计 {article.estimatedTime}</span> : null}
         </div>
 
-        <dl className="mt-8 grid gap-x-8 gap-y-4 border-y border-zinc-200 py-5 text-sm dark:border-zinc-800 sm:grid-cols-2">
+        <ArticleSymptomMatch symptoms={article.symptoms} />
+
+        {recommendedSolution ? (
+          <ArticleQuickStart
+            solution={recommendedSolution}
+            detailsHref={officialStepsHeading ? `#${officialStepsHeading.id}` : undefined}
+            title={article.title}
+            articleSummary={article.summary}
+            tags={article.tags}
+            symptoms={article.symptoms}
+            escalationSteps={escalationSteps}
+          />
+        ) : null}
+
+        <dl className="mt-8 grid gap-x-8 gap-y-4 border-y border-zinc-200 py-5 text-sm dark:border-zinc-800 sm:grid-cols-2 lg:grid-cols-3">
           <div>
             <dt className="text-zinc-500">适用设备</dt>
             <dd className="mt-1 font-medium text-zinc-950 dark:text-zinc-50">{article.device.join(", ")}</dd>
@@ -214,6 +244,15 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
         </p>
 
         <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+          {officialStepsHeading ? (
+            <a
+              href={`#${officialStepsHeading.id}`}
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-blue-200 bg-blue-50 px-4 text-sm font-medium text-blue-700 transition hover:border-blue-300 hover:bg-blue-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:border-blue-900 dark:bg-blue-950/30 dark:text-blue-300 dark:hover:border-blue-800 dark:hover:bg-blue-950/50 dark:focus-visible:ring-offset-zinc-950"
+            >
+              <ListChecks aria-hidden="true" className="h-4 w-4" />
+              跳到 Apple 官方步骤
+            </a>
+          ) : null}
           {primaryOfficialSource ? (
             <a
               href={primaryOfficialSource.url}
@@ -226,7 +265,7 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
               <span className="sr-only">（在新窗口打开）</span>
             </a>
           ) : null}
-          <ArticleActions title={article.title} />
+          <ArticleActions title={article.title} route={article.route} />
         </div>
 
         {headings.length > 0 ? (
@@ -240,7 +279,7 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
                 <a
                   key={heading.id}
                   href={`#${heading.id}`}
-                  className="inline-flex items-center gap-1 text-sm text-blue-600 hover:underline dark:text-blue-400"
+                  className="inline-flex min-h-11 items-center gap-1 text-sm text-blue-600 hover:underline dark:text-blue-400"
                 >
                   {heading.title}
                   <ArrowRight className="h-3 w-3" />
@@ -260,6 +299,8 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
                 const trustClass =
                   text === "Apple 官方方案"
                     ? "official-heading"
+                    : text === "零售排查流程（同事实践）"
+                      ? "retail-heading"
                     : /非官方|社区|分享|补充处理思路/.test(text)
                       ? "community-heading"
                       : undefined;
@@ -286,7 +327,9 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
           </ReactMarkdown>
         </div>
 
-        {voteableSolutions.length > 0 ? <SolutionVotePanel articleId={article.id} solutions={voteableSolutions} /> : null}
+        {customerMoment ? <CustomerMomentCard moment={customerMoment} /> : null}
+
+        {canCollectPracticeFeedback ? <SolutionVotePanel articleId={article.id} solutions={voteableSolutions} /> : null}
 
         <section className="mt-14 border-t border-zinc-200 pt-8 dark:border-zinc-800" aria-labelledby="details-title">
           <h2 id="details-title" className="text-2xl font-semibold text-zinc-950 dark:text-zinc-50">
@@ -312,13 +355,17 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
               <SourceList sources={communitySources} emptyMessage="这篇文章暂未登记同事分享或其他经验来源。" />
             </div>
           </div>
-          <div className="mt-5 flex flex-wrap gap-2">
-            {article.tags.map((tag) => (
-              <span key={tag} className="rounded-full bg-zinc-100 px-2.5 py-1 text-xs text-zinc-700 dark:bg-zinc-900 dark:text-zinc-300">
-                {tag}
-              </span>
+          <nav className="mt-5 flex flex-wrap gap-2" aria-label="相关主题">
+            {getArticleTagTopics(article.tags).slice(0, 4).map((topic) => (
+              <Link
+                key={topic.slug}
+                href={`/tags/${encodeURIComponent(topic.slug)}`}
+                className="inline-flex min-h-11 items-center rounded-full bg-zinc-100 px-3 py-1 text-xs text-zinc-700 transition hover:bg-zinc-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:bg-zinc-900 dark:text-zinc-300 dark:hover:bg-zinc-800"
+              >
+                {topic.label}
+              </Link>
             ))}
-          </div>
+          </nav>
         </section>
 
         {primaryRelated.length > 0 ? (
@@ -329,9 +376,9 @@ export default async function RecipePage({ params }: { params: Promise<{ slug: s
               </h2>
               <Link
                 href={`/categories/${encodeURIComponent(article.category)}`}
-                className="inline-flex items-center gap-1 text-sm text-blue-600 hover:underline dark:text-blue-400"
+                className="inline-flex min-h-11 items-center gap-1 text-sm text-blue-600 hover:underline dark:text-blue-400"
               >
-                查看 {article.category}
+                查看 {category.label}
                 <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </div>

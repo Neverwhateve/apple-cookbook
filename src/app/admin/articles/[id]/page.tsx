@@ -6,6 +6,7 @@ import { AdminArticleEditor } from "@/components/admin-article-editor";
 import { readAdminArticleSource } from "@/lib/admin-article-edits";
 import { getArticleById } from "@/lib/cookbook";
 import { canUseAdminSession } from "@/lib/feedback-admin";
+import { statusLabels, verificationLabels } from "@/lib/labels";
 
 export const dynamic = "force-dynamic";
 
@@ -31,6 +32,8 @@ export default async function AdminArticleEditorPage({
   if (!article) notFound();
 
   const source = await readAdminArticleSource(article);
+  const officialSourceCount = article.sources.filter((item) => item.official).length;
+  const communitySourceCount = article.sources.length - officialSourceCount;
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6">
@@ -47,6 +50,41 @@ export default async function AdminArticleEditorPage({
         <h1 className="mt-2 text-3xl font-semibold text-zinc-950 dark:text-zinc-50">编辑：{article.title}</h1>
         <p className="mt-2 font-mono text-xs text-zinc-500">{article.filePath}</p>
       </div>
+
+      <section
+        className="mb-6 rounded-lg border border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-950"
+        aria-labelledby="article-maintenance-details-title"
+      >
+        <h2 id="article-maintenance-details-title" className="text-base font-semibold text-zinc-950 dark:text-zinc-50">
+          维护概览
+        </h2>
+        <dl className="mt-3 grid gap-x-6 gap-y-4 text-sm sm:grid-cols-2 lg:grid-cols-3">
+          <div>
+            <dt className="text-zinc-500 dark:text-zinc-400">发布状态</dt>
+            <dd className="mt-1 font-medium text-zinc-950 dark:text-zinc-50">{statusLabels[article.status]}</dd>
+          </div>
+          <div>
+            <dt className="text-zinc-500 dark:text-zinc-400">主方案可信度</dt>
+            <dd className="mt-1 font-medium text-zinc-950 dark:text-zinc-50">{verificationLabels[article.verification]}</dd>
+          </div>
+          <div>
+            <dt className="text-zinc-500 dark:text-zinc-400">最后验证</dt>
+            <dd className="mt-1 font-medium text-zinc-950 dark:text-zinc-50">{article.lastVerifiedAt ?? "尚未单独记录"}</dd>
+          </div>
+          <div>
+            <dt className="text-zinc-500 dark:text-zinc-400">内容更新</dt>
+            <dd className="mt-1 font-medium text-zinc-950 dark:text-zinc-50">{article.updated}</dd>
+          </div>
+          <div>
+            <dt className="text-zinc-500 dark:text-zinc-400">Apple 官方来源</dt>
+            <dd className="mt-1 font-medium text-zinc-950 dark:text-zinc-50">{officialSourceCount} 条</dd>
+          </div>
+          <div>
+            <dt className="text-zinc-500 dark:text-zinc-400">社区与其他来源</dt>
+            <dd className="mt-1 font-medium text-zinc-950 dark:text-zinc-50">{communitySourceCount} 条</dd>
+          </div>
+        </dl>
+      </section>
 
       {article.status === "seed" ? (
         <aside

@@ -36,7 +36,7 @@ export async function submitFeedback(_state: FeedbackState, formData: FormData):
     console.error("Feedback submission could not be persisted.", { error });
     return {
       ok: false,
-      message: "暂时无法保存反馈，本次内容未记录。请保留原文并稍后重试。"
+      message: "暂时无法保存反馈，本次内容未记录；输入内容仍保留在此页。请稍后重试。"
     };
   }
 }

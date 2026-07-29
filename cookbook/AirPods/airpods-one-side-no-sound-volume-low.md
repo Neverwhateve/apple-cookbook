@@ -150,7 +150,7 @@ sources:
     url: https://support.apple.com/zh-cn/100494
     publisher: Apple
     sourceType: official-support
-    accessedAt: 2026-07-14
+    accessedAt: 2026-07-23
     publishedAt: 2026-01-15
     official: true
   - id: apple-clean-airpods
@@ -158,7 +158,7 @@ sources:
     url: https://support.apple.com/zh-cn/102672
     publisher: Apple
     sourceType: official-support
-    accessedAt: 2026-07-14
+    accessedAt: 2026-07-23
     publishedAt: null
     official: true
   - id: apple-clean-airpods-pro
@@ -166,7 +166,7 @@ sources:
     url: https://support.apple.com/zh-cn/120409
     publisher: Apple
     sourceType: official-support
-    accessedAt: 2026-07-14
+    accessedAt: 2026-07-23
     publishedAt: 2026-02-02
     official: true
   - id: apple-airpods-not-charging
@@ -174,7 +174,7 @@ sources:
     url: https://support.apple.com/zh-cn/102593
     publisher: Apple
     sourceType: official-support
-    accessedAt: 2026-07-14
+    accessedAt: 2026-07-23
     publishedAt: null
     official: true
   - id: apple-reset-airpods
@@ -182,7 +182,7 @@ sources:
     url: https://support.apple.com/zh-cn/118531
     publisher: Apple
     sourceType: official-support
-    accessedAt: 2026-07-14
+    accessedAt: 2026-07-23
     publishedAt: null
     official: true
   - id: apple-set-up-replacement-airpods
@@ -190,11 +190,11 @@ sources:
     url: https://support.apple.com/zh-cn/102520
     publisher: Apple
     sourceType: official-support
-    accessedAt: 2026-07-14
+    accessedAt: 2026-07-23
     publishedAt: null
     official: true
-lastVerifiedAt: 2026-07-14
-lastUpdatedAt: 2026-07-14
+lastVerifiedAt: 2026-07-23
+lastUpdatedAt: 2026-07-23
 createdAt: 2026-07-14
 relatedArticles:
   - airpods-wont-charge-case-not-working
@@ -282,6 +282,20 @@ AirPods 只响一边、某一侧声音很小，或左右音量明显不一致时
 
 - [Apple 支持：如何清洁 AirPods](https://support.apple.com/zh-cn/102672)
 - [Apple 支持：如何清洁 AirPods Pro](https://support.apple.com/zh-cn/120409)
+
+---
+
+## Community Discoveries
+
+验证级别：社区观察，不是 Apple 官方建议
+
+- **Likely：如果某一侧显示已连接但始终无声，跨设备测试能帮助区分设置问题与耳机本体问题。** 2026 年 7 月的多条 Reddit 帖子中，用户在完成重新配对、充电和重置后，继续建议把故障侧连接到另一台手机或设备；有用户反馈同一侧在多台设备上都无声，最后更像是扬声器、触点或耳机本体故障。这个现象只能作为升级判断线索，不能单凭社区经验诊断硬件。
+- **Experimental：社区有人建议用“吸气”等非标准方法处理网罩堵塞。** 该类做法没有 Apple 支持依据，可能带来卫生、液体或网罩损坏风险，本文不将其列为解决步骤。
+
+社区来源：
+
+- [Reddit：Left AirPod no audio（2026-07-06，含评论）](https://www.reddit.com/r/airpods/comments/1unpmvw/left_airpod_no_audio/)
+- [Reddit：Left Airpod no audio（2026-07-05，含评论）](https://www.reddit.com/r/AirpodsPro/comments/1uo00zb/left_airpod_no_audio/)
 
 ---
 

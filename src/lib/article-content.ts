@@ -104,6 +104,6 @@ export function formatPublicArticleBody(body: string) {
   const articleContent = endMatterIndex >= 0 ? content.slice(0, endMatterIndex).trim() : content;
 
   return articleContent
-    .replace(/^##\s+零售排查流程\s*$/m, "## 排查流程")
+    .replace(/^##\s+零售排查流程\s*$/m, "## 零售排查流程（同事实践）")
     .replace(/^##\s+升级处理\s*$/m, "## 如果仍未解决");
 }

@@ -65,6 +65,7 @@ body {
 }
 
 .article-body h2.official-heading,
+.article-body h2.retail-heading,
 .article-body h2.community-heading {
   border-left: 4px solid;
   padding: 0.75rem 1rem;
@@ -77,6 +78,12 @@ body {
   color: #1d4ed8;
 }
 
+.article-body h2.retail-heading {
+  border-color: #64748b;
+  background: #f8fafc;
+  color: #334155;
+}
+
 .article-body h2.community-heading {
   border-color: #d97706;
   background: #fffbeb;
@@ -87,6 +94,12 @@ body {
   border-color: #60a5fa;
   background: rgb(23 37 84 / 0.45);
   color: #93c5fd;
+}
+
+.dark .article-body h2.retail-heading {
+  border-color: #94a3b8;
+  background: rgb(30 41 59 / 0.5);
+  color: #cbd5e1;
 }
 
 .dark .article-body h2.community-heading {

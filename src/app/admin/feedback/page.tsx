@@ -63,7 +63,7 @@ const statusHints: Record<FeedbackStatus, string> = {
 };
 
 const secondaryButtonClass =
-  "inline-flex min-h-9 items-center justify-center gap-1.5 rounded-md border border-zinc-200 bg-white px-3 py-2 text-xs font-medium text-zinc-800 transition hover:border-zinc-400 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:hover:border-zinc-600 dark:hover:bg-zinc-900";
+  "inline-flex min-h-11 items-center justify-center gap-1.5 rounded-md border border-zinc-200 bg-white px-3 py-2 text-xs font-medium text-zinc-800 transition hover:border-zinc-400 hover:bg-zinc-50 dark:border-zinc-800 dark:bg-zinc-950 dark:text-zinc-100 dark:hover:border-zinc-600 dark:hover:bg-zinc-900";
 
 function StatusButton({ id, status, children }: { id: string; status: FeedbackStatus; children: React.ReactNode }) {
   return (
@@ -103,7 +103,7 @@ function PromoteButton({ id, archived }: { id: string; archived?: boolean }) {
       <input type="hidden" name="id" value={id} />
       <button
         type="submit"
-        className="inline-flex min-h-9 items-center justify-center gap-1.5 rounded-md bg-red-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-red-700"
+        className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-md bg-red-600 px-3 py-2 text-xs font-semibold text-white transition hover:bg-red-700"
       >
         {archived ? <RotateCcw className="h-4 w-4" /> : <UserCheck className="h-4 w-4" />}
         判定有效，进入 P0

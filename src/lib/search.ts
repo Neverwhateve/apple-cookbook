@@ -257,6 +257,26 @@ const RAW_SYNONYM_GROUPS: readonly RawSynonymGroup[] = [
     terms: ["掉电快", "耗电快", "电池掉得快", "续航变差", "battery drain", "draining fast"]
   },
   {
+    id: "device-performance-slow",
+    terms: [
+      "运行很慢",
+      "手机很慢",
+      "设备很慢",
+      "系统很慢",
+      "iphone 很慢",
+      "iphone 运行很慢",
+      "mac 很慢",
+      "mac 运行很慢",
+      "mac 变慢",
+      "电脑很慢",
+      "电脑运行很慢",
+      "电脑变慢",
+      "running slow",
+      "phone running slow",
+      "device running slow"
+    ]
+  },
+  {
     id: "system-data",
     terms: ["系统数据", "其他储存空间", "其他存储空间", "system data", "other storage"]
   },
@@ -378,6 +398,7 @@ const RAW_SYNONYM_GROUPS: readonly RawSynonymGroup[] = [
  */
 const REQUIRED_QUERY_CONCEPTS = new Set([
   "system-data",
+  "device-performance-slow",
   "charge-at-eighty",
   "charging-case-failure",
   "screen-time-limits",
@@ -385,6 +406,22 @@ const REQUIRED_QUERY_CONCEPTS = new Set([
   "wallet-add-card",
   "apple-account-password-reset"
 ]);
+
+/**
+ * A device named by the customer is diagnostic context, not a loose keyword.
+ * This prevents an article that merely mentions an iPhone (for example, while
+ * pairing an Apple Watch) from answering an iPhone-only symptom.
+ */
+const DEVICE_QUERY_TERMS = [
+  "iphone",
+  "ipad",
+  "mac",
+  "apple watch",
+  "airpods",
+  "apple tv",
+  "homepod",
+  "vision pro"
+] as const;
 
 type PreparedSynonymTerm = {
   readonly original: string;
@@ -418,6 +455,7 @@ type PreparedDocument = {
   readonly fields: readonly PreparedField[];
   readonly errorCodes: ReadonlySet<string>;
   readonly intentConcepts: ReadonlySet<string>;
+  readonly deviceTerms: readonly string[];
 };
 
 type PreparedQuery = {
@@ -427,6 +465,7 @@ type PreparedQuery = {
   readonly cjkNgrams: ReadonlyMap<string, number>;
   readonly concepts: readonly ConceptMatch[];
   readonly errorCodes: readonly string[];
+  readonly deviceTerms: readonly string[];
   readonly hasMeaningfulSignal: boolean;
 };
 
@@ -608,7 +647,8 @@ function prepareDocument(document: SearchDocument): PreparedDocument {
     document,
     fields: FIELD_CONFIGURATIONS.map((configuration) => prepareField(document, configuration)),
     errorCodes: new Set(document.errorMessages.flatMap((message) => [...extractErrorCodes(message)])),
-    intentConcepts
+    intentConcepts,
+    deviceTerms: getDeviceTerms(normalizeSearchText([...document.devices, document.category].join(" ")))
   };
 
   documentCache.set(document, prepared);
@@ -636,9 +676,14 @@ function prepareQuery(query: string): PreparedQuery {
     cjkNgrams,
     concepts,
     errorCodes,
+    deviceTerms: getDeviceTerms(normalized),
     hasMeaningfulSignal:
       concepts.length > 0 || englishTerms.length > 0 || cjkNgrams.size > 0 || errorCodes.length > 0
   };
+}
+
+function getDeviceTerms(normalized: string) {
+  return DEVICE_QUERY_TERMS.filter((term) => normalized.includes(term));
 }
 
 /**
@@ -763,6 +808,12 @@ type MutableFieldMatch = {
 function scoreDocument(prepared: PreparedDocument, query: PreparedQuery): SearchHit | null {
   // A code in the query is a hard constraint: 4013 must never fuzzily return 4014.
   if (query.errorCodes.some((code) => !prepared.errorCodes.has(code))) return null;
+
+  // Treat an explicitly named device as a safe applicability boundary. A
+  // multi-device request can still match an article for any named device.
+  if (query.deviceTerms.length > 0 && !query.deviceTerms.some((term) => prepared.deviceTerms.includes(term))) {
+    return null;
+  }
 
   const matchedConcepts = new Set<string>();
   const matchedEnglishTerms = new Set<string>();
@@ -938,7 +989,14 @@ function scoreDocument(prepared: PreparedDocument, query: PreparedQuery): Search
     snippetFieldPreference
       .map((field) => matchedFields.find((match) => match.field === field)?.snippet)
       .find(Boolean) ?? truncateSnippet(prepared.document.summary || prepared.document.title, []);
-  const finalScore = rawScore * (0.72 + termCoverage * 0.58) + termCoverage * 12 + qualityBoost(prepared.document);
+  // Device names such as "AirPods" often occur across many metadata fields.
+  // Give symptom-language coverage an explicit boost so a specific Chinese
+  // symptom outranks a generic article that only matches the device name.
+  const finalScore =
+    rawScore * (0.72 + termCoverage * 0.58) +
+    termCoverage * 12 +
+    cjkCoverage * 24 +
+    qualityBoost(prepared.document);
 
   return {
     document: prepared.document,

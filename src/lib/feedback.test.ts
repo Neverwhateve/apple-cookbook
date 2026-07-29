@@ -189,7 +189,16 @@ describe("feedback file store", () => {
 
   it("promotes a reviewed item to P0 once and removes its old GitHub sync marker", async () => {
     const root = await makeTemporaryRoot();
-    const reviewItem = makeSubmission(1, "needs_review");
+    const reviewItem: FeedbackSubmission = {
+      ...makeSubmission(1, "needs_review"),
+      workflowUrl: "https://github.com/example/repo/issues/42",
+      automationReview: {
+        outcome: "no_content_change",
+        reviewedAt: "2026-07-14T08:00:00.000Z",
+        summary: "旧的自动结论",
+        issueUrl: "https://github.com/example/repo/issues/42"
+      }
+    };
     const feedbackRoot = path.join(root, "feedback");
 
     await writeQueue(path.join(feedbackRoot, "inbox.jsonl"), [reviewItem]);
@@ -206,6 +215,8 @@ describe("feedback file store", () => {
     assert.deepEqual(queues.active.map((item) => item.id), [reviewItem.id]);
     assert.equal(queues.active[0].status, "open");
     assert.equal(queues.active[0].adminNote, "人工确认有效");
+    assert.equal(queues.active[0].workflowUrl, undefined);
+    assert.equal(queues.active[0].automationReview, undefined);
     assert.equal(syncedIds, "AC-OTHER\n");
   });
 

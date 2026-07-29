@@ -26,9 +26,34 @@ const rankedCases: readonly RankedCorpusCase[] = [
     expectedRoute: "/recipes/Mac/mac-mail-cant-send-receive-email"
   },
   {
+    query: "二手 Mac 锁定到所有者",
+    expectedTopId: "mac-activation-lock-erase-resale-transfer",
+    expectedRoute: "/recipes/Mac/mac-activation-lock-erase-resale-transfer"
+  },
+  {
     query: "系统数据很大",
     expectedTopId: "mac-system-data-storage-apfs-snapshots-purgeable-space",
     expectedRoute: "/recipes/Mac/mac-system-data-storage-apfs-snapshots-purgeable-space"
+  },
+  {
+    query: "我的 iPhone 运行很慢",
+    expectedTopId: "iphone-running-slow-performance-lag",
+    expectedRoute: "/recipes/iPhone/iphone-running-slow-performance-lag"
+  },
+  {
+    query: "我的 iPhone 很烫",
+    expectedTopId: "iphone-overheating-temperature-warning-too-hot",
+    expectedRoute: "/recipes/iPhone/iphone-overheating-temperature-warning-too-hot"
+  },
+  {
+    query: "微信收不到通知",
+    expectedTopId: "iphone-app-notifications-wechat-not-working",
+    expectedRoute: "/recipes/iPhone/iphone-app-notifications-wechat-not-working"
+  },
+  {
+    query: "我的 Mac 很慢",
+    expectedTopId: "mac-running-slow-performance-lag",
+    expectedRoute: "/recipes/Mac/mac-running-slow-performance-lag"
   },
   {
     query: "隔空投送一直等待",
@@ -49,6 +74,11 @@ const rankedCases: readonly RankedCorpusCase[] = [
     query: "AirPods盒子充不了电",
     expectedTopId: "airpods-wont-charge-case-not-working",
     expectedRoute: "/recipes/AirPods/airpods-wont-charge-case-not-working"
+  },
+  {
+    query: "AirPods 总是断开连接",
+    expectedTopId: "airpods-keep-disconnecting-audio-cutting-out",
+    expectedRoute: "/recipes/AirPods/airpods-keep-disconnecting-audio-cutting-out"
   },
   {
     query: "屏幕时间限制没用",
@@ -152,6 +182,13 @@ describe("real cookbook search corpus", () => {
     );
 
     assert.deepEqual(searchDocuments(withoutCanonical, "屏幕时间限制没用"), []);
+  });
+
+  it("routes a Mac performance symptom to its canonical case", () => {
+    const hit = searchDocuments(documents, "Mac 很慢")[0]?.document;
+
+    assert.equal(hit?.id, "mac-running-slow-performance-lag");
+    assert.equal(hit?.route, "/recipes/Mac/mac-running-slow-performance-lag");
   });
 
   it("keeps taxonomy tags searchable without treating them as canonical intent", () => {
