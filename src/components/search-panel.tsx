@@ -162,7 +162,7 @@ export function SearchPanel({ articles }: { articles: SearchDocument[] }) {
   };
 
   return (
-    <section className="rounded-2xl border border-zinc-200 bg-white p-4 shadow-soft dark:border-zinc-800 dark:bg-zinc-950 sm:p-5">
+    <section className="h-full rounded-[24px] bg-white p-5 shadow-[0_1px_2px_rgba(0,0,0,0.035)] dark:bg-zinc-900 sm:p-6">
       <form
         role="search"
         onSubmit={(event) => {
@@ -176,7 +176,7 @@ export function SearchPanel({ articles }: { articles: SearchDocument[] }) {
         <p id="cookbook-search-help" className="mb-3 text-sm text-zinc-600 dark:text-zinc-400">
           可以输入口语化症状、中英文功能名、设备、系统版本或完整错误提示。
         </p>
-        <div className="flex min-h-12 items-center gap-3 rounded-xl border border-zinc-300 bg-zinc-50 px-3 transition focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/20 dark:border-zinc-700 dark:bg-zinc-900">
+        <div className="flex min-h-12 items-center gap-3 rounded-xl bg-[#f5f5f7] px-3 transition focus-within:ring-2 focus-within:ring-blue-500/30 dark:bg-zinc-800">
           <Search className="h-5 w-5 flex-none text-zinc-500" aria-hidden="true" />
           <input
             id="cookbook-search"

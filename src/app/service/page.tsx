@@ -21,8 +21,8 @@ const triageChecks = [
 
 export default function ServicePage() {
   return (
-    <main className="min-h-[calc(100vh-4rem)] bg-zinc-50 px-4 py-10 dark:bg-zinc-950 sm:px-6 sm:py-16">
-      <section className="mx-auto max-w-4xl">
+    <main className="min-h-[calc(100vh-4rem)] bg-[#f5f5f7] px-3 py-3 dark:bg-zinc-950 sm:px-6 sm:py-6">
+      <section className="mx-auto max-w-4xl rounded-[24px] bg-white p-5 shadow-[0_8px_28px_rgba(0,0,0,0.035)] dark:bg-zinc-900 sm:p-8">
         <p className="text-sm font-semibold tracking-wide text-amber-800 dark:text-amber-200">服务判断 · Service Triage</p>
         <h1 className="mt-3 text-4xl font-semibold tracking-normal text-zinc-950 dark:text-zinc-50 sm:text-5xl">
           先识别红灯，再决定下一步。
@@ -31,7 +31,7 @@ export default function ServicePage() {
           这不是替代诊断的服务清单。它帮助你在顾客面前先停止不安全的尝试、保护账户和数据，并带着清楚的事实进入下一条路径。
         </p>
 
-        <section className="mt-10 rounded-2xl border border-amber-200 bg-amber-50 p-6 dark:border-amber-900/70 dark:bg-amber-950/20" aria-labelledby="stop-title">
+        <section className="mt-9 rounded-[20px] bg-amber-50 p-5 dark:bg-amber-950/20 sm:p-6" aria-labelledby="stop-title">
           <div className="flex gap-3">
             <ShieldAlert className="mt-1 h-6 w-6 flex-none text-amber-800 dark:text-amber-200" aria-hidden="true" />
             <div>
@@ -45,12 +45,12 @@ export default function ServicePage() {
           </div>
         </section>
 
-        <section className="mt-8 grid gap-4 sm:grid-cols-3" aria-label="服务判断原则">
+        <section className="mt-6 grid gap-3 sm:grid-cols-3" aria-label="服务判断原则">
           {triageChecks.map((check) => {
             const Icon = check.icon;
 
             return (
-              <div key={check.title} className="rounded-2xl bg-white p-5 dark:bg-zinc-900">
+              <div key={check.title} className="rounded-[20px] bg-[#f5f5f7] p-5 dark:bg-zinc-800">
                 <Icon className="h-5 w-5 text-amber-800 dark:text-amber-200" aria-hidden="true" />
                 <h2 className="mt-4 text-base font-semibold text-zinc-950 dark:text-zinc-50">{check.title}</h2>
                 <p className="mt-2 text-sm leading-6 text-zinc-600 dark:text-zinc-400">{check.description}</p>
@@ -59,7 +59,7 @@ export default function ServicePage() {
           })}
         </section>
 
-        <section className="mt-10 rounded-2xl bg-white p-6 dark:bg-zinc-900" aria-labelledby="next-title">
+        <section className="mt-8 rounded-[20px] bg-[#f5f5f7] p-5 dark:bg-zinc-800 sm:p-6" aria-labelledby="next-title">
           <h2 id="next-title" className="text-2xl font-semibold text-zinc-950 dark:text-zinc-50">接下来怎么做</h2>
           <ol className="mt-4 space-y-3 text-sm leading-6 text-zinc-700 dark:text-zinc-300">
             <li><span className="font-semibold text-zinc-950 dark:text-zinc-50">1.</span> 用顾客实际看到的现象和提示搜索最接近的案例。</li>
