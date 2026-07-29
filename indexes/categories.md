@@ -10,7 +10,7 @@ Use categories for the primary customer entry point. Use tags for secondary devi
 - Family Sharing: 4 recipes
 - HomePod: 2 recipes
 - iPad: 2 recipes
-- Mac: 3 recipes
+- Mac: 4 recipes
 - Networking: 2 recipes
 - iCloud: 1 recipe
 - iPhone: 14 recipes
