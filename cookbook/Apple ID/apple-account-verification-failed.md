@@ -1,5 +1,5 @@
 ---
-title: Apple 账户验证失败
+title: Apple 账户验证失败、无法登录或反复要求密码
 slug: apple-account-verification-failed
 device:
   - iPhone
@@ -23,9 +23,12 @@ aliases:
   - 忘记 Apple 账户密码
   - Apple ID 密码忘了
   - Forgot Apple ID password
+  - "Verification Failed: An unknown error occurred"
+  - Apple Account locked
+  - Apple 账户被停用
 verification: Official
 difficulty: Moderate
-updated: 2026-07-21
+updated: 2026-07-29
 official_sources:
   - https://support.apple.com/zh-cn/118446
   - https://support.apple.com/zh-cn/111001
@@ -33,14 +36,17 @@ official_sources:
   - https://support.apple.com/zh-cn/102640
   - https://support.apple.com/zh-cn/118574
   - https://support.apple.com/zh-cn/102409
-community_sources: []
+  - https://support.apple.com/zh-cn/111760
+community_sources:
+  - https://discussions.apple.com/thread/256242157
+  - https://discussions.apple.com/thread/256140816
 status: seed
 popular: false
 ---
 
-# Apple 账户验证失败
+# Apple 账户验证失败、无法登录或反复要求密码
 
-Apple 账户或 iCloud 登录失败，可能表现为“验证失败”、验证码收不到或被拒、登录界面一直转圈、反复要求输入密码，或者提示账户被锁定。先区分服务或网络连接、双重认证、密码和账户状态问题；不要通过抹掉设备、刷机或删除配置来绕过账户安全流程。
+“验证失败”只是一个症状，不足以直接判断密码错误或账户被锁。Apple 账户或 iCloud 登录失败，可能表现为“验证失败：发生未知错误”、验证码收不到或被拒、登录界面一直转圈、反复要求输入密码，或者提示账户被锁定。先区分服务/网络、双重认证、密码、账户状态，以及 Windows 上的安全软件拦截；不要通过抹掉设备、刷机或删除配置来绕过账户安全流程。
 
 ## 症状
 
@@ -50,6 +56,7 @@ Apple 账户或 iCloud 登录失败，可能表现为“验证失败”、验证
 - 密码正确却反复要求登录，尤其是在改过密码、恢复备份或更新系统后。
 - 提示 Apple 账户被锁定、处于非活跃状态或被停用。
 - 忘记 Apple 账户密码，或没有可用的受信任设备和电话号码。
+- 在 Windows 版 iCloud 或 iTunes 中看到“验证失败：发生未知错误”或“认证过程中发生错误”。
 
 ## 可能原因
 
@@ -57,7 +64,8 @@ Apple 账户或 iCloud 登录失败，可能表现为“验证失败”、验证
 2. **验证码问题**：密码可以接受，但双重认证要求验证码；重点检查受信任设备、受信任电话号码和“没有收到验证码？”入口。
 3. **密码问题**：忘记密码、密码被拒或账户因输入错误过多而锁定；走受信任设备上的重设流程，不要反复试密码。
 4. **账户恢复问题**：没有可用的受信任方式，或常规重设路径都失败；账户恢复可能需要等待数天或更长时间。
-5. **第三方 App 问题**：只有某个支持 iCloud 的第三方 App 拒绝密码；分流到 App 专用密码和 App 开发者。
+5. **Windows 安全软件或系统时间问题**：Windows 版 iCloud/iTunes 的安全软件、主机文件、日期时间或软件版本可能阻止它连接 Apple 服务器；这条分支不应套用到所有 iPhone 或 Mac 登录失败。
+6. **第三方 App 问题**：只有某个支持 iCloud 的第三方 App 拒绝密码；分流到 App 专用密码和 App 开发者。
 
 ## Apple 官方方案
 
@@ -77,7 +85,18 @@ Apple 账户或 iCloud 登录失败，可能表现为“验证失败”、验证
 4. 如果验证码通过“信息”到达但没有明显通知，检查“信息”中的未知发件人或过滤位置；这不能替代受信任设备或号码验证。
 5. 旧号码、受信任设备均不可用时，停止反复尝试，转到账户恢复或 Apple 官方账户访问流程。
 
-### 3. 忘记密码、被锁定或被停用
+### 3. Windows 版 iCloud 或 iTunes 显示未知验证错误
+
+仅当问题发生在 Windows 版 iCloud 或 iTunes 时执行这一分支：
+
+1. 记录完整错误文本，并检查电脑的日期、时间和时区是否正确；确认使用的是管理员账户而不是访客账户。
+2. 将 Windows 版 iCloud、iTunes（如仍在使用）以及 Windows 更新到 Apple 支持的最新版本。
+3. 确认电脑没有同时运行多套安全软件；如果安全软件可能拦截 Apple 服务器连接，先按该软件供应商的文档临时允许 Apple 产品所需的连接，不要盲目卸载或删除防护配置。
+4. 如果只有 Windows 版 iCloud/iTunes 失败，而浏览器、iPhone 或 Mac 可以登录，优先把它当作 Windows 客户端连接分支；保留错误截图和安全软件名称后联系相应供应商或 Apple 支持。
+
+Apple 明确把“验证失败：发生未知错误”和“认证过程中发生错误”列为 Windows 版 iCloud 可能受到第三方安全软件干扰的表现。它不是“密码一定错误”的证明。
+
+### 4. 忘记密码、被锁定或被停用
 
 1. 优先在已登录 Apple 账户的受信任 iPhone、iPad 或 Mac 上重设密码；设备密码或 Mac 登录密码用于确认设备身份。
 2. 没有自己的受信任设备时，可在家人或朋友的设备上使用“Apple 支持”App 的“重设密码”>“协助其他人”，也可访问 [iforgot.apple.com](https://iforgot.apple.com/)。
@@ -85,14 +104,21 @@ Apple 账户或 iCloud 登录失败，可能表现为“验证失败”、验证
 4. 账户恢复开始后，按 Apple 发送的预计日期和时间等待。Apple 说明支持人员不能缩短等待期；继续使用其他已登录设备可能取消或延迟恢复请求。
 5. 如果设置过账户恢复联系人或恢复密钥，按对应官方流程使用；恢复密钥是敏感凭据，不要截图上传或发送给第三方。
 
-## 非官方但低风险的网络分流
+## 社区证据（非官方）
 
-如果错误明确指向连接或服务器，且没有企业管理要求，可以暂时断开 VPN、代理或 DNS 过滤后，用可靠的 Wi-Fi 或蜂窝网络重试。此方法不是 Apple 官方账户恢复方案；不要自行删除企业配置描述文件、安装来历不明的证书，或要求他人提供账户凭据。
+Apple 支持社区的顾客发帖反复使用“Verification Failed”“Your Apple account or password is incorrect”或“unknown error”等词，场景包括新设备设置、Apple Music/Windows 登录和恢复后重新验证。它们适合帮助顾客复述现象和帮助专员收集完整错误文本，但不能单独证明账户被锁、密码错误或 Apple 服务中断；不要把社区回复中的重置、改 DNS 或安全软件操作写成 Apple 官方方案。
+
+- [Apple 支持社区：Verification failed message](https://discussions.apple.com/thread/256242157)
+- [Apple 支持社区：Unable to Login to Apple Account on New iPhone](https://discussions.apple.com/thread/256140816)
+
+## 连接分流（非官方补充）
+
+如果错误明确指向连接或服务器，且没有企业管理要求，可以在记录当前配置后暂时断开 VPN、代理或 DNS 过滤，用可靠的 Wi-Fi 或蜂窝网络重试。此方法不是 Apple 官方账户恢复方案；不要自行删除企业配置描述文件、安装来历不明的证书，或要求他人提供账户凭据。
 
 ## 零售排查流程
 
 1. 记录完整提示、出现位置、设备型号、系统版本、账户使用的邮箱或电话号码类型，以及是否刚改过密码、换过 SIM/eSIM 或恢复过备份。
-2. 先做系统状态和网络分流，再判断是验证码、密码、锁定、账户恢复还是第三方 App 专用密码。
+2. 先做系统状态和网络分流，再判断是验证码、密码、锁定、账户恢复、Windows 客户端连接还是第三方 App 专用密码。
 3. 能访问受信任设备或号码时，优先完成验证码或密码重设；不要在仍可用的设备上贸然退出 Apple 账户。
 4. 账户被锁定、停用，或无法访问任何受信任方式时，停止抹掉、刷机和反复登录，转入 Apple 的解锁、密码重设或账户恢复流程。
 5. 只有第三方 App 无法登录时，确认该 App 是否支持 App 专用密码，并将兼容性问题交给开发者。
@@ -119,6 +145,7 @@ Apple 账户或 iCloud 登录失败，可能表现为“验证失败”、验证
 - [如果你的 Apple 账户被锁定、处于非活跃状态或被停用](https://support.apple.com/zh-cn/102640)
 - [无法重设 Apple 账户密码时如何使用账户恢复](https://support.apple.com/zh-cn/118574)
 - [没有收到 Apple 账户验证邮件或密码重置邮件](https://support.apple.com/zh-cn/102409)
+- [解决 Windows 版 iCloud 或 iTunes 与第三方安全软件之间的问题](https://support.apple.com/zh-cn/111760)
 
 ## 标签
 
@@ -130,8 +157,8 @@ Apple 账户或 iCloud 登录失败，可能表现为“验证失败”、验证
 
 ## 元信息
 
-- 最后更新：2026-07-21
-- 来源数量：6
+- 最后更新：2026-07-29
+- 来源数量：7 个 Apple 官方来源，2 个社区证据来源
 - 验证级别：Apple 官方
 - 支持系统：当前 iOS、iPadOS、macOS 版本
 - 可信度：高

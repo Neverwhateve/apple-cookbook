@@ -100,6 +100,7 @@ Use these tags consistently across articles.
 - Accessory
 - Heat
 - Charging
+- Power
 - USB-C
 - Lightning
 - Cleaning
