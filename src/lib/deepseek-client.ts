@@ -53,6 +53,10 @@ export async function requestDeepSeekJson(system: string, user: string) {
           // structured response cannot be cut off mid-object.
           max_tokens: 1_000,
           response_format: { type: "json_object" },
+          // V4 Flash may otherwise spend its whole completion budget on
+          // reasoning_content and leave message.content empty. We only need
+          // the JSON result for this deterministic classification request.
+          thinking: { type: "disabled" },
           messages: [
             { role: "system", content: system },
             { role: "user", content: user }
