@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, FilePlus2, Search, Sparkles, X } from "lucide-react";
+import { AlertTriangle, ArrowRight, FilePlus2, Search, Sparkles, X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
@@ -85,11 +85,45 @@ function nextQuestionFor(query: string) {
   return "它从什么时候开始？是所有场景都会发生，还是只影响一个 App、设备或配件？";
 }
 
-export function SearchPanel({ articles }: { articles: SearchDocument[] }) {
+type AssistantResult = {
+  question_id: string;
+  analysis: {
+    devices: string[];
+    symptoms: string[];
+    need_clarification: boolean;
+    clarifying_questions: string[];
+    risk_level: "low" | "medium" | "high";
+  };
+  summary: string;
+  recommended_articles: {
+    article_id: string;
+    title: string;
+    route: string;
+    verification: SearchDocument["verification"];
+    updated: string;
+    reason: string;
+  }[];
+  suggested_steps: { text: string; source_article_id: string }[];
+  clarification_answers: string[];
+  fallback: boolean;
+  feedback_enabled: boolean;
+};
+
+function looksLikeQuestionDescription(query: string) {
+  const compact = query.replace(/[\s,.，。！？!?]/g, "");
+  return compact.length >= 10 || /为什么|怎么办|无法|不能|看不到|忘记|突然|一直|但是|一边/.test(query);
+}
+
+export function SearchPanel({ articles, aiEnabled }: { articles: SearchDocument[]; aiEnabled: boolean }) {
   const [query, setQuery] = useState("");
+  const [assistantResult, setAssistantResult] = useState<AssistantResult | null>(null);
+  const [assistantStatus, setAssistantStatus] = useState<"idle" | "loading" | "error">("idle");
+  const [clarificationValues, setClarificationValues] = useState<string[]>([]);
+  const [feedbackStatus, setFeedbackStatus] = useState<"idle" | "saved" | "error">("idle");
   const router = useRouter();
   const hasReadUrlQuery = useRef(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const assistantSessionRef = useRef<string | null>(null);
   const trimmedQuery = query.trim();
   const showScreenTimeChoices = isAmbiguousScreenTimeQuery(trimmedQuery);
   const showHeatChoices = isAmbiguousHeatQuery(trimmedQuery);
@@ -153,10 +187,57 @@ export function SearchPanel({ articles }: { articles: SearchDocument[] }) {
 
   const resultHref = (route: string) => (trimmedQuery ? `${route}?q=${encodeURIComponent(trimmedQuery)}` : route);
 
+  const runAssistant = async (newAnswers = clarificationValues) => {
+    if (!trimmedQuery || !aiEnabled) return;
+    assistantSessionRef.current ??= crypto.randomUUID();
+    const answers = [...(assistantResult?.clarification_answers ?? []), ...newAnswers.filter(Boolean)].slice(0, 3);
+    setAssistantStatus("loading");
+    setFeedbackStatus("idle");
+    try {
+      const response = await fetch("/api/ai/search", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ question: trimmedQuery, clarification_answers: answers, session_id: assistantSessionRef.current })
+      });
+      const payload = (await response.json()) as AssistantResult;
+      if (!response.ok || !payload.question_id) throw new Error("AI response unavailable");
+      setAssistantResult(payload);
+      setClarificationValues([]);
+      setAssistantStatus("idle");
+    } catch {
+      setAssistantStatus("error");
+    }
+  };
+
+  const submitFeedback = async (helpful: boolean, solved: boolean) => {
+    if (!assistantResult) return;
+    try {
+      const response = await fetch("/api/ai/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          question_id: assistantResult.question_id,
+          article_id: assistantResult.recommended_articles[0]?.article_id ?? "",
+          helpful,
+          solved,
+          session_id: assistantSessionRef.current
+        })
+      });
+      setFeedbackStatus(response.ok ? "saved" : "error");
+    } catch {
+      setFeedbackStatus("error");
+    }
+  };
+
   const openBestResult = () => {
     // A broad Screen Time complaint needs one more symptom before ranking can
     // safely stand in for the Specialist's judgment.
-    if (!trimmedQuery || results.length === 0 || needsDisambiguation) return;
+    if (!trimmedQuery || needsDisambiguation) return;
+    if (aiEnabled && looksLikeQuestionDescription(trimmedQuery)) {
+      void runAssistant();
+      return;
+    }
+    if (results.length === 0) return;
 
     router.push(resultHref(results[0].document.route));
   };
@@ -174,7 +255,7 @@ export function SearchPanel({ articles }: { articles: SearchDocument[] }) {
           搜索 Apple 故障排查文章
         </label>
         <p id="cookbook-search-help" className="mb-3 text-sm text-zinc-600 dark:text-zinc-400">
-          可以输入口语化症状、中英文功能名、设备、系统版本或完整错误提示。
+          可以搜索文章，或直接描述遇到的问题。完整问题可由 AI 帮助整理并查找已有文章。
         </p>
         <div className="flex min-h-12 items-center gap-3 rounded-xl bg-[#f5f5f7] px-3 transition focus-within:ring-2 focus-within:ring-blue-500/30 dark:bg-zinc-800">
           <Search className="h-5 w-5 flex-none text-zinc-500" aria-hidden="true" />
@@ -190,7 +271,7 @@ export function SearchPanel({ articles }: { articles: SearchDocument[] }) {
               event.preventDefault();
               openBestResult();
             }}
-            placeholder="例如：为什么看不到家人的位置"
+            placeholder="搜索文章，或直接描述你遇到的问题……"
             aria-describedby="cookbook-search-help cookbook-search-status"
             autoComplete="off"
             enterKeyHint="search"
@@ -208,6 +289,10 @@ export function SearchPanel({ articles }: { articles: SearchDocument[] }) {
           ) : null}
         </div>
       </form>
+
+      <p className="mt-2 text-xs leading-5 text-zinc-500 dark:text-zinc-400">
+        请勿输入顾客姓名、电话号码、Apple ID、密码、序列号、IMEI、订单号、维修编号或其他个人信息。
+      </p>
 
       <div className="mt-3 flex flex-wrap gap-2" aria-label="热门症状示例">
         {quickQueries.map((item) => (
@@ -231,6 +316,35 @@ export function SearchPanel({ articles }: { articles: SearchDocument[] }) {
             : "没有找到匹配结果"
           : `最近更新 · ${results.length} 篇`}
       </p>
+
+      {assistantStatus === "loading" ? (
+        <p className="mt-3 rounded-xl bg-blue-50 p-3 text-sm text-blue-800 dark:bg-blue-950/40 dark:text-blue-200" role="status">正在理解问题、查找 Cookbook 并整理相关方案…</p>
+      ) : null}
+      {assistantStatus === "error" ? (
+        <p className="mt-3 rounded-xl bg-amber-50 p-3 text-sm text-amber-900 dark:bg-amber-950/40 dark:text-amber-100">AI 分析暂时不可用，已为你切换到 Cookbook 文章搜索。</p>
+      ) : null}
+
+      {assistantResult ? (
+        <section className="mt-3 rounded-xl border border-blue-200 bg-blue-50/70 p-4 dark:border-blue-900 dark:bg-blue-950/25" aria-label="Cookbook 排查辅助">
+          <div className="flex flex-wrap items-center gap-2">
+            <h2 className="text-sm font-semibold text-zinc-950 dark:text-zinc-50">Cookbook 排查辅助</h2>
+            {assistantResult.analysis.risk_level === "high" ? <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-medium text-amber-900 dark:bg-amber-950 dark:text-amber-100"><AlertTriangle className="h-3.5 w-3.5" />高风险：优先官方内容</span> : null}
+          </div>
+          {assistantResult.fallback ? <p className="mt-2 text-sm text-zinc-700 dark:text-zinc-300">AI 分析暂时不可用，以下为 Cookbook 本地搜索结果。</p> : null}
+          <p className="mt-2 text-sm leading-6 text-zinc-700 dark:text-zinc-300">{assistantResult.summary}</p>
+          {assistantResult.analysis.devices.length || assistantResult.analysis.symptoms.length ? <p className="mt-2 text-xs text-zinc-600 dark:text-zinc-400">识别到：{[...assistantResult.analysis.devices, ...assistantResult.analysis.symptoms].join("、")}</p> : null}
+          {assistantResult.analysis.need_clarification ? (
+            <form className="mt-3 rounded-lg bg-white/80 p-3 dark:bg-zinc-950/60" onSubmit={(event) => { event.preventDefault(); void runAssistant(clarificationValues); }}>
+              <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100">还需要确认</p>
+              {assistantResult.analysis.clarifying_questions.slice(0, 2).map((question, index) => <label key={question} className="mt-2 block text-sm text-zinc-700 dark:text-zinc-300">{question}<input value={clarificationValues[index] ?? ""} onChange={(event) => setClarificationValues((current) => { const next = [...current]; next[index] = event.target.value; return next; })} maxLength={600} className="mt-1 min-h-10 w-full rounded-md border border-zinc-300 bg-white px-3 text-sm outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 dark:border-zinc-700 dark:bg-zinc-900" /></label>)}
+              <button type="submit" className="mt-3 min-h-10 rounded-full bg-zinc-950 px-3 text-xs font-semibold text-white dark:bg-zinc-50 dark:text-zinc-950">继续分析</button>
+            </form>
+          ) : null}
+          {assistantResult.recommended_articles.length ? <div className="mt-3 space-y-2">{assistantResult.recommended_articles.map((article) => <Link key={article.article_id} href={resultHref(article.route)} className="block rounded-lg border border-zinc-200 bg-white p-3 hover:border-zinc-400 dark:border-zinc-800 dark:bg-zinc-950"><div className="flex flex-wrap items-center gap-2"><span className="text-sm font-semibold text-zinc-950 dark:text-zinc-50">{article.title}</span><VerificationBadge level={article.verification} compact /><span className="text-xs text-zinc-500">更新于 {article.updated}</span></div><p className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">{article.reason}</p></Link>)}</div> : null}
+          {assistantResult.suggested_steps.length ? <ol className="mt-3 list-decimal space-y-1 pl-5 text-sm leading-6 text-zinc-700 dark:text-zinc-300">{assistantResult.suggested_steps.map((step) => <li key={`${step.source_article_id}-${step.text}`}>{step.text}</li>)}</ol> : null}
+          {assistantResult.feedback_enabled ? <div className="mt-3 flex flex-wrap items-center gap-2 border-t border-blue-100 pt-3 dark:border-blue-900"><span className="text-sm text-zinc-700 dark:text-zinc-300">这些文章解决问题了吗？</span><button type="button" onClick={() => void submitFeedback(true, true)} className="min-h-10 rounded-full border border-zinc-300 px-3 text-xs font-medium dark:border-zinc-700">解决了</button><button type="button" onClick={() => void submitFeedback(false, false)} className="min-h-10 rounded-full border border-zinc-300 px-3 text-xs font-medium dark:border-zinc-700">还没有</button>{feedbackStatus === "saved" ? <span className="text-xs text-zinc-500">已匿名记录反馈。</span> : null}</div> : null}
+        </section>
+      ) : null}
 
       {showScreenTimeChoices ? (
         <section className="mt-3 rounded-xl border border-blue-200 bg-blue-50 p-4 dark:border-blue-900 dark:bg-blue-950/30" aria-labelledby="screen-time-choice-title">

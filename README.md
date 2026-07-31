@@ -132,3 +132,9 @@ In this Codex workspace, Node is available at:
 ```bash
 PATH="/Users/calvinchen/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/bin:$PATH" /Users/calvinchen/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/pnpm dev
 ```
+
+### Cookbook AI 排查助手 V1
+
+首页保留一个搜索入口：短关键词使用本地 Cookbook 搜索；完整问题在服务端已配置 DeepSeek 且 `AI_ASSISTANT_ENABLED=true` 时进行有限的结构化理解与文章推荐。AI 默认关闭，所有模型请求只经由后端，失败时保留普通搜索。
+
+配置、隐私、测试、部署和回滚步骤见 `docs/cookbook-ai-v1.md`。

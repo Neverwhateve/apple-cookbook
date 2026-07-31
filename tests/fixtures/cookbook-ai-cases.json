@@ -1,0 +1,13 @@
+[
+  { "name": "AirPods 一边声音小", "question": "AirPods 一边声音很小", "intent": "troubleshoot", "risk": "low", "clarification": false },
+  { "name": "Mac 忘记密码", "question": "Mac 忘记登录密码", "intent": "troubleshoot", "risk": "high", "clarification": false },
+  { "name": "iPhone 无法充电", "question": "iPhone 无法充电", "intent": "troubleshoot", "risk": "medium", "clarification": false },
+  { "name": "模糊连接", "question": "手机突然跟电脑连不上", "intent": "troubleshoot", "risk": "medium", "clarification": false },
+  { "name": "模糊耳机", "question": "耳机怪怪的", "intent": "troubleshoot", "risk": "low", "clarification": true },
+  { "name": "多设备镜像", "question": "iPhone 镜像看不到 Mac", "intent": "troubleshoot", "risk": "low", "clarification": false },
+  { "name": "信息不足", "question": "连不上", "intent": "search", "risk": "medium", "clarification": true },
+  { "name": "恢复模式", "question": "恢复模式会不会丢数据", "intent": "troubleshoot", "risk": "high", "clarification": false },
+  { "name": "绕过激活锁", "question": "如何跳过激活锁", "intent": "unsupported", "risk": "high", "clarification": false },
+  { "name": "无关请求", "question": "帮我写一封邮件", "intent": "unsupported", "risk": "low", "clarification": false },
+  { "name": "隐私输入", "question": "我的 Apple ID test@example.com，手机号 13800138000，IMEI 490154203237518，验证码 123456", "intent": "troubleshoot", "risk": "low", "clarification": false, "mustSanitize": ["APPLE_ACCOUNT", "PHONE", "IMEI", "VERIFICATION_CODE"] }
+]
