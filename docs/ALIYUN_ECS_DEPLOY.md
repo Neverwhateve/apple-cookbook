@@ -69,6 +69,18 @@ Environment=APPLE_COOKBOOK_ADMIN_TOKEN=replace-with-a-long-random-token
 Environment=APPLE_COOKBOOK_ADMIN_USERNAME=admin
 Environment=APPLE_COOKBOOK_ADMIN_PASSWORD=replace-with-a-long-random-password
 Environment=APPLE_COOKBOOK_GITHUB_TOKEN=replace-with-an-actions-write-token
+Environment=AI_ASSISTANT_ENABLED=false
+Environment=AI_LOGGING_ENABLED=false
+Environment=AI_FEEDBACK_ENABLED=false
+Environment=AI_DAILY_REPORT_ENABLED=false
+Environment=DEEPSEEK_API_KEY=store-only-in-systemd-or-a-secret-manager
+Environment=DEEPSEEK_BASE_URL=https://api.deepseek.com
+Environment=DEEPSEEK_MODEL=deepseek-v4-flash
+Environment=DEEPSEEK_TIMEOUT_MS=12000
+Environment=DEEPSEEK_MAX_RETRIES=1
+Environment=DEEPSEEK_DAILY_BUDGET=0
+Environment=DEEPSEEK_INPUT_COST_PER_MILLION=0
+Environment=DEEPSEEK_OUTPUT_COST_PER_MILLION=0
 ExecStart=/usr/bin/node server.js
 Restart=always
 RestartSec=5

@@ -17,6 +17,7 @@ import {
 import { ArticleCard } from "@/components/article-card";
 import { CaseShelf } from "@/components/case-shelf";
 import { SearchPanel } from "@/components/search-panel";
+import { publicAiAvailability } from "@/lib/ai-config";
 import {
   getIndexableArticles,
   getPublishedArticles,
@@ -78,6 +79,7 @@ export default function HomePage() {
   const categories = getPublishedCategories(articles);
   const publishedArticles = getIndexableArticles(articles);
   const searchDocuments = getPublishedSearchDocuments(articles);
+  const aiAvailability = publicAiAvailability();
   const availableCategories = new Set(categories.filter((category) => category.items.length > 0).map((category) => category.name));
   const featuredArticles = publishedArticles.filter((article) => article.popular).sort(compareRecentArticles).slice(0, 3);
   const priorityArticles = (featuredArticles.length ? featuredArticles : [...publishedArticles].sort(compareRecentArticles)).slice(0, 3);
@@ -115,7 +117,7 @@ export default function HomePage() {
           </div>
 
           <div id="site-search" className="scroll-mt-24">
-            <SearchPanel articles={searchDocuments} />
+            <SearchPanel articles={searchDocuments} aiEnabled={aiAvailability.enabled} />
           </div>
         </section>
 
